@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics — Index | SSLC Study Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Noto+Sans+Malayalam:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F6FB;
+    --panel:#FFFFFF;
+    --ink:#1A1E36;
+    --ink-soft:#6E7391;
+    --ring:#E7E9F5;
+    --physics:#4C6EF5;
+    --physics-soft:#EEF1FF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    min-height:100vh;
+  }
+  a{ color:inherit; text-decoration:none; }
+  .ml{ font-family:'Noto Sans Malayalam', sans-serif; }
+
+  .topbar{
+    position:sticky; top:0; z-index:10;
+    background:rgba(245,246,251,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--ring);
+  }
+  .topbar-inner{
+    max-width:820px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px;
+  }
+  .back-link{
+    display:flex; align-items:center; gap:8px;
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:14px;
+    color:var(--ink-soft);
+  }
+  .back-link:hover{ color:var(--physics); }
+  .badge-year{
+    font-size:12px; font-weight:600; color:var(--physics);
+    background:var(--physics-soft); padding:6px 14px; border-radius:20px;
+  }
+
+  header{
+    max-width:820px; margin:0 auto;
+    padding:44px 28px 10px 28px;
+    text-align:center;
+  }
+  .kicker{
+    font-family:'Poppins',sans-serif; font-weight:700; font-size:12px;
+    letter-spacing:1px; text-transform:uppercase;
+    color:var(--physics); background:var(--physics-soft);
+    padding:6px 16px; border-radius:20px;
+  }
+  h1{
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size:36px;
+    margin-top:14px;
+    letter-spacing:-0.5px;
+  }
+  .h1-ml{
+    font-family:'Noto Sans Malayalam', sans-serif;
+    font-weight:700;
+    font-size:28px;
+    color:var(--physics);
+    margin-top:6px;
+  }
+  .subtitle{
+    margin:12px auto 0 auto;
+    font-size:15px;
+    color:var(--ink-soft);
+    max-width:460px;
+  }
+
+  main{
+    max-width:820px; margin:0 auto;
+    padding:30px 28px 60px 28px;
+  }
+
+  .toc-list{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .toc-row{
+    display:grid;
+    grid-template-columns:44px 1fr auto;
+    align-items:center;
+    gap:16px;
+    background:var(--panel);
+    border:1px solid var(--ring);
+    border-radius:18px;
+    padding:16px 18px;
+    box-shadow:0 4px 14px -9px rgba(30,35,80,0.14);
+    transition:transform 0.18s cubic-bezier(.34,1.56,.64,1), box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .toc-row:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 22px -10px rgba(76,110,245,0.35);
+    border-color:#C8D3FF;
+  }
+  .num{
+    width:34px; height:34px;
+    border-radius:50%;
+    background:var(--physics);
+    color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:14px;
+  }
+  .unit-title{
+    font-family:'Noto Sans Malayalam', sans-serif;
+    font-weight:600;
+    font-size:16.5px;
+    color:var(--ink);
+  }
+  .unit-title-en{
+    font-size:11.5px;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+  .dots{
+    display:none;
+  }
+  .pageno{
+    width:38px; height:38px;
+    border-radius:50%;
+    border:2px solid var(--physics);
+    color:var(--physics);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:13px;
+  }
+  .go{
+    font-size:13px;
+    color:var(--physics);
+    font-weight:600;
+  }
+
+  @media (max-width:560px){
+    .toc-row{ grid-template-columns:34px 1fr; }
+    .go{ display:none; }
+    h1{ font-size:28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="back-link" href="sslc_study_portal.html">&#8592; Back to Study Portal</a>
+    <span class="badge-year">Batch 2026&ndash;27</span>
+  </div>
+</div>
+
+<header>
+  <span class="kicker">Physics &middot; Class 10</span>
+  <h1>Physics</h1>
+  <div class="h1-ml">ഉള്ളടക്കം</div>
+  <p class="subtitle">7 units &middot; tap a unit to start studying</p>
+</header>
+
+<main>
+  <div class="toc-list">
+
+    <a class="toc-row" href="physics-unit1.html">
+      <span class="num">1</span>
+      <div>
+        <div class="unit-title ml">ശബ്ദതരംഗങ്ങൾ</div>
+        <div class="unit-title-en">Sound Waves</div>
+      </div>
+      <span class="go">Start &#8594;</span>
+    </a>
+
+    <a class="toc-row" href="physics-unit2.html">
+      <span class="num">2</span>
+      <div>
+        <div class="unit-title ml">ലെൻസുകൾ</div>
+        <div class="unit-title-en">Lenses</div>
+      </div>
+      <span class="go">Start &#8594;</span>
+    </a>
+
+    <a class="toc-row" href="physics-unit3.html">
+      <span class="num">3</span>
+      <div>
+        <div class="unit-title ml">കാഴ്ചയും വർണ്ണങ്ങളുടെ ലോകവും</div>
+        <div class="unit-title-en">Vision and the World of Colours</div>
+      </div>
+      <span class="go">Start &#8594;</span>
+    </a>
+
+    <a class="toc-row" href="physics-unit4.html">
+      <span class="num">4</span>
+      <div>
+        <div class="unit-title ml">വൈദ്യുതിയുടെ കാന്തികഫലം</div>
+        <div class="unit-title-en">Magnetic Effect of Electricity</div>
+      </div>
+      <span class="go">Start &#8594;</span>
+    </a>
+
+    <a class="toc-row" href="physics-unit5.html">
+      <span class="num">5</span>
+      <div>
+        <div class="unit-title ml">വൈദ്യുതോർജം : ഉപഭോഗവും സംരക്ഷണവും</div>
+        <div class="unit-title-en">Electric Energy: Consumption and Conservation</div>
+      </div>
+      <span class="go">Start &#8594;</span>
+    </a>
+
+    <a class="toc-row" href="physics-unit6.html">
+      <span class="num">6</span>
+      <div>
+        <div class="unit-title ml">വൈദ്യുതകാന്തികപ്രേരണം നിത്യജീവിതത്തിൽ</div>
+        <div class="unit-title-en">Electromagnetic Induction in Daily Life</div>
+      </div>
+      <span class="go">Start &#8594;</span>
+    </a>
+
+    <a class="toc-row" href="physics-unit7.html">
+      <span class="num">7</span>
+      <div>
+        <div class="unit-title ml">യാന്ത്രികലാഭം പ്രയോഗത്തിൽ</div>
+        <div class="unit-title-en">Mechanical Advantage in Practice</div>
+      </div>
+      <span class="go">Start &#8594;</span>
+    </a>
+
+  </div>
+</main>
+
+</body>
+</html>

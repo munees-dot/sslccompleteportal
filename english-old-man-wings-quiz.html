@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz — A Very Old Man with Enormous Wings</title>
+<meta name="description" content="Take this quiz on 'A Very Old Man with Enormous Wings' (Class X English, Unit 1) and test what you know!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#FBF3E4;
+    --parchment-dark:#F0E4CC;
+    --ink:#2B1E14;
+    --ink-soft:#5A4632;
+    --rust:#A63D2F;
+    --amber:#E8934A;
+    --teal:#1E6E67;
+    --gold:#C9932F;
+    --card-shadow: 0 10px 30px rgba(43,30,20,0.12);
+    --radius: 14px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    min-height:100vh;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(232,147,74,0.15), transparent 40%),
+      radial-gradient(circle at 90% 10%, rgba(30,110,103,0.10), transparent 40%),
+      var(--parchment);
+    color:var(--ink);
+    font-family:'Source Serif 4', serif;
+    line-height:1.65;
+  }
+  header.hero{
+    position:relative;
+    padding:40px 24px 28px;
+    text-align:center;
+    overflow:hidden;
+    background:linear-gradient(180deg, #FDEBD3 0%, var(--parchment) 100%);
+    border-bottom:2px solid var(--parchment-dark);
+  }
+  .eyebrow{
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--teal);
+    font-weight:600;
+  }
+  h1.title{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    color:var(--rust);
+    font-size:clamp(24px, 5vw, 38px);
+    margin:8px 0 6px;
+  }
+  .subtitle{
+    font-style:italic;
+    color:var(--ink-soft);
+    font-size:15px;
+    margin:0;
+  }
+  .back-link{
+    display:inline-block;
+    margin-top:14px;
+    font-size:13px;
+    color:var(--teal);
+    text-decoration:none;
+    border-bottom:1px dashed var(--teal);
+  }
+  .back-link:hover{ color:var(--rust); border-color:var(--rust); }
+
+  main{ max-width:680px; margin:0 auto; padding:32px 20px 80px; }
+
+  .card{
+    background:#fff;
+    border:1px solid var(--parchment-dark);
+    border-radius:var(--radius);
+    box-shadow:var(--card-shadow);
+    padding:24px 26px;
+    margin-bottom:22px;
+  }
+
+  .quiz-q{ margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--parchment-dark);}
+  .quiz-options label{
+    display:block; padding:8px 12px; margin:6px 0;
+    border:1.5px solid var(--parchment-dark); border-radius:8px;
+    cursor:pointer; transition:all .15s;
+  }
+  .quiz-options label:hover{ border-color:var(--amber); }
+  .quiz-options input{ margin-right:8px; }
+  .btn{
+    background:var(--rust); color:#fff; border:none; padding:12px 22px;
+    border-radius:999px; font-size:15px; cursor:pointer; font-family:'Source Serif 4',serif;
+  }
+  .btn:hover{ background:#8B3226; }
+  .btn:disabled{ opacity:0.4; cursor:not-allowed; }
+  .btn-outline{ background:transparent; color:var(--rust); border:1.5px solid var(--rust); }
+  .btn-outline:hover{ background:var(--rust); color:#fff; }
+  #quiz-result{
+    font-family:'Playfair Display',serif; font-size:20px; color:var(--teal); margin-top:16px;
+  }
+
+  .quiz-progress{
+    display:flex; gap:6px; justify-content:center; margin-bottom:20px; flex-wrap:wrap;
+  }
+  .quiz-dot{
+    width:10px; height:10px; border-radius:50%;
+    background:var(--parchment-dark); transition:all .2s;
+  }
+  .quiz-dot.done{ background:var(--gold); }
+  .quiz-dot.active{ background:var(--rust); transform:scale(1.3); }
+  .quiz-nav{ display:flex; justify-content:space-between; margin-top:18px; }
+  .quiz-final-actions{ display:flex; gap:12px; margin-top:14px; flex-wrap:wrap; }
+  #share-fallback{
+    margin-top:12px; font-size:13.5px; color:var(--ink-soft);
+  }
+  #share-fallback textarea{
+    width:100%; min-height:70px; margin-top:6px; padding:10px;
+    border:1px solid var(--parchment-dark); border-radius:8px;
+    font-family:'Source Serif 4',serif; font-size:13.5px; background:#FBF6EA;
+  }
+  footer{
+    text-align:center; padding:20px; font-size:12.5px; color:var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">Class X English · Unit 1</div>
+  <h1 class="title">Quiz Time</h1>
+  <p class="subtitle">A Very Old Man with Enormous Wings</p>
+  <a class="back-link" href="english-old-man-wings.html">&larr; Back to full Chapter Page</a>
+</header>
+
+<main>
+  <section class="panel" id="quiz">
+    <div class="card">
+      <div id="quiz-progress" class="quiz-progress"></div>
+      <div id="quiz-active">
+        <div id="quiz-question-wrap" class="quiz-q"></div>
+        <div class="quiz-nav">
+          <button id="quiz-prev" class="btn btn-outline" type="button">Previous</button>
+          <button id="quiz-next" class="btn" type="button">Next</button>
+        </div>
+      </div>
+      <div id="quiz-final" style="display:none;">
+        <div id="quiz-result"></div>
+        <div class="quiz-final-actions">
+          <button id="quiz-restart" class="btn btn-outline" type="button">Retake Quiz</button>
+          <button id="quiz-share" class="btn" type="button">Share Result</button>
+        </div>
+        <div id="share-fallback"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>Study Portal · Class X English · Unit 1 — A Very Old Man with Enormous Wings</footer>
+
+<script>
+const quizData = [
+  {
+    q: "1. Who does Pelayo find lying face down in the mud of his courtyard?",
+    options: ["A shipwrecked sailor", "A very old man with enormous wings", "A wounded soldier", "A lost child"],
+    answer: 1
+  },
+  {
+    q: "2. Who declares that the old man is an angel?",
+    options: ["Pelayo", "The doctor", "The neighbour woman", "Elisenda"],
+    answer: 2
+  },
+  {
+    q: "3. Where do Pelayo and Elisenda lock up the old man?",
+    options: ["A wooden shed", "The chicken coop", "A rabbit warren", "The cellar"],
+    answer: 1
+  },
+  {
+    q: "4. What made the couple begin to feel 'magnanimous' toward the old man?",
+    options: ["He spoke to them kindly", "Their sick child recovered", "He gave them money", "He helped with chores"],
+    answer: 1
+  },
+  {
+    q: "5. How did Pelayo and Elisenda make their fortune?",
+    options: ["By selling the old man's feathers", "By farming rabbits", "By charging an admission fee to see the 'angel'", "By selling the chicken coop"],
+    answer: 2
+  },
+  {
+    q: "6. What was the old man's 'only supernatural virtue'?",
+    options: ["Flight", "Patience", "Wisdom", "Healing power"],
+    answer: 1
+  },
+  {
+    q: "7. What rival attraction draws the crowds away from the old man?",
+    options: ["A fire-eater", "A giant snake", "A woman turned into a spider", "A talking parrot"],
+    answer: 2
+  },
+  {
+    q: "8. What food did the old man finally eat, refusing mothballs?",
+    options: ["Eggplant mush", "Bread and milk", "Rice and fish", "Fruit"],
+    answer: 0
+  },
+  {
+    q: "9. What did the doctor find most surprising about the old man?",
+    options: ["His heartbeat", "The logic of his wings", "His age", "His silence"],
+    answer: 1
+  },
+  {
+    q: "10. What does the old man do at the end of the story?",
+    options: ["He dies peacefully", "He is sold to a circus", "He flies away and disappears", "He is set free by Pelayo"],
+    answer: 2
+  }
+];
+
+let currentQ = 0;
+const userAnswers = new Array(quizData.length).fill(null);
+
+const progressEl = document.getElementById('quiz-progress');
+const qWrap = document.getElementById('quiz-question-wrap');
+const prevBtn = document.getElementById('quiz-prev');
+const nextBtn = document.getElementById('quiz-next');
+const activeBlock = document.getElementById('quiz-active');
+const finalBlock = document.getElementById('quiz-final');
+
+function buildProgress(){
+  progressEl.innerHTML = '';
+  quizData.forEach((_, i)=>{
+    const dot = document.createElement('div');
+    dot.className = 'quiz-dot';
+    dot.id = `dot-${i}`;
+    progressEl.appendChild(dot);
+  });
+}
+
+function updateProgress(){
+  quizData.forEach((_, i)=>{
+    const dot = document.getElementById(`dot-${i}`);
+    dot.classList.remove('active','done');
+    if(i === currentQ) dot.classList.add('active');
+    else if(userAnswers[i] !== null) dot.classList.add('done');
+  });
+}
+
+function renderQuestion(){
+  const item = quizData[currentQ];
+  const optsHtml = item.options.map((opt, j)=>{
+    const checked = userAnswers[currentQ] === j ? 'checked' : '';
+    return `<label data-opt="${j}">
+      <input type="radio" name="qcurrent" value="${j}" ${checked}> ${opt}
+    </label>`;
+  }).join('');
+  qWrap.innerHTML = `<div><strong>${item.q}</strong></div><div class="quiz-options">${optsHtml}</div>`;
+
+  qWrap.querySelectorAll('input[name="qcurrent"]').forEach(input=>{
+    input.addEventListener('change', (e)=>{
+      userAnswers[currentQ] = parseInt(e.target.value);
+      updateProgress();
+    });
+  });
+
+  prevBtn.disabled = currentQ === 0;
+  nextBtn.textContent = currentQ === quizData.length - 1 ? 'Finish' : 'Next';
+  updateProgress();
+}
+
+prevBtn.addEventListener('click', ()=>{
+  if(currentQ > 0){ currentQ--; renderQuestion(); }
+});
+
+nextBtn.addEventListener('click', ()=>{
+  if(currentQ < quizData.length - 1){
+    currentQ++;
+    renderQuestion();
+  } else {
+    finishQuiz();
+  }
+});
+
+function finishQuiz(){
+  let score = 0;
+  quizData.forEach((item, i)=>{ if(userAnswers[i] === item.answer) score++; });
+  activeBlock.style.display = 'none';
+  finalBlock.style.display = 'block';
+  document.getElementById('quiz-result').textContent = `You scored ${score} out of ${quizData.length}!`;
+  document.getElementById('share-fallback').innerHTML = '';
+  document.getElementById('quiz-share').dataset.score = score;
+}
+
+document.getElementById('quiz-restart').addEventListener('click', ()=>{
+  currentQ = 0;
+  userAnswers.fill(null);
+  activeBlock.style.display = 'block';
+  finalBlock.style.display = 'none';
+  document.getElementById('share-fallback').innerHTML = '';
+  renderQuestion();
+});
+
+document.getElementById('quiz-share').addEventListener('click', async ()=>{
+  const score = document.getElementById('quiz-share').dataset.score;
+  const quizUrl = window.location.origin + window.location.pathname;
+  const shareText = `I scored ${score}/${quizData.length} on the "A Very Old Man with Enormous Wings" quiz! 🪶 Try it yourself.`;
+  const fallback = document.getElementById('share-fallback');
+
+  if(navigator.share){
+    try{
+      await navigator.share({ title: 'Enormous Wings Quiz Result', text: shareText, url: quizUrl });
+      return;
+    }catch(err){ /* user cancelled or unsupported, fall through */ }
+  }
+
+  try{
+    await navigator.clipboard.writeText(`${shareText}\n${quizUrl}`);
+    fallback.innerHTML = `Result copied to clipboard! You can paste it anywhere.<br><textarea readonly>${shareText}\n${quizUrl}</textarea>`;
+  }catch(err){
+    fallback.innerHTML = `<textarea readonly>${shareText}\n${quizUrl}</textarea>`;
+  }
+});
+
+buildProgress();
+renderQuestion();
+</script>
+</body>
+</html>

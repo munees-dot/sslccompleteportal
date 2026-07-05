@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Very Old Man with Enormous Wings — Study Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#FBF3E4;
+    --parchment-dark:#F0E4CC;
+    --ink:#2B1E14;
+    --ink-soft:#5A4632;
+    --rust:#A63D2F;
+    --amber:#E8934A;
+    --teal:#1E6E67;
+    --gold:#C9932F;
+    --card-shadow: 0 10px 30px rgba(43,30,20,0.12);
+    --radius: 14px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(232,147,74,0.15), transparent 40%),
+      radial-gradient(circle at 90% 10%, rgba(30,110,103,0.10), transparent 40%),
+      var(--parchment);
+    color:var(--ink);
+    font-family:'Source Serif 4', serif;
+    line-height:1.65;
+  }
+  .malayalam{font-family:'Noto Sans Malayalam','Source Serif 4',serif;}
+
+  /* HERO */
+  header.hero{
+    position:relative;
+    padding:56px 24px 40px;
+    text-align:center;
+    overflow:hidden;
+    background:linear-gradient(180deg, #FDEBD3 0%, var(--parchment) 100%);
+    border-bottom:2px solid var(--parchment-dark);
+  }
+  header.hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(ellipse at 50% 120%, rgba(166,61,47,0.10), transparent 60%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--teal);
+    font-weight:600;
+    font-family:'Source Serif 4',serif;
+  }
+  h1.title{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    color:var(--rust);
+    font-size:clamp(28px, 5vw, 48px);
+    margin:8px 0 6px;
+  }
+  .subtitle{
+    font-style:italic;
+    color:var(--ink-soft);
+    font-size:16px;
+    margin:0 0 4px;
+  }
+  .byline{color:var(--ink-soft); font-size:14px;}
+  .feather-divider{
+    width:120px; height:28px; margin:18px auto 0;
+    opacity:0.85;
+  }
+
+  /* NAV TABS */
+  nav.tabs{
+    position:sticky; top:0; z-index:50;
+    display:flex; flex-wrap:wrap; gap:6px;
+    justify-content:center;
+    padding:12px 16px;
+    background:rgba(251,243,228,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--parchment-dark);
+  }
+  nav.tabs button{
+    font-family:'Source Serif 4', serif;
+    font-size:14px;
+    padding:9px 16px;
+    border-radius:999px;
+    border:1.5px solid transparent;
+    background:transparent;
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:all .2s ease;
+  }
+  nav.tabs button:hover{ border-color:var(--gold); color:var(--ink); }
+  nav.tabs button.active{
+    background:var(--rust);
+    color:#fff;
+    border-color:var(--rust);
+    box-shadow:0 4px 10px rgba(166,61,47,0.3);
+  }
+
+  main{ max-width:920px; margin:0 auto; padding:32px 20px 80px; }
+  .panel{ display:none; animation:fade .35s ease; }
+  .panel.active{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  .card{
+    background:#fff;
+    border:1px solid var(--parchment-dark);
+    border-radius:var(--radius);
+    box-shadow:var(--card-shadow);
+    padding:24px 26px;
+    margin-bottom:22px;
+  }
+  h2.section-title{
+    font-family:'Playfair Display', serif;
+    color:var(--teal);
+    font-size:24px;
+    margin-top:0;
+    border-bottom:2px solid var(--parchment-dark);
+    padding-bottom:10px;
+  }
+  h3{ color:var(--rust); font-family:'Playfair Display', serif; font-size:18px;}
+
+  /* torn-paper letter card, echoes the letter in the unit */
+  .torn-card{
+    background:#F5F0E4;
+    border-radius:2px;
+    padding:22px 26px;
+    position:relative;
+    box-shadow:var(--card-shadow);
+    margin-bottom:22px;
+  }
+  .torn-card::after{
+    content:"";
+    position:absolute; right:-2px; top:0; bottom:0; width:14px;
+    background:repeating-linear-gradient(-45deg, var(--parchment) 0 6px, transparent 6px 12px);
+  }
+
+  table{ width:100%; border-collapse:collapse; margin:14px 0; font-size:15px;}
+  th, td{ border:1px solid var(--parchment-dark); padding:10px 12px; text-align:left; vertical-align:top;}
+  th{ background:var(--teal); color:#fff; font-family:'Playfair Display',serif; font-weight:600;}
+  tr:nth-child(even) td{ background:#FBF6EA; }
+
+  .glossary-term{ font-weight:700; color:var(--rust); }
+  .glossary-item{ padding:10px 0; border-bottom:1px dashed var(--parchment-dark); }
+  .glossary-item:last-child{ border-bottom:none; }
+
+  /* Quiz */
+  .quiz-q{ margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--parchment-dark);}
+  .quiz-options label{
+    display:block; padding:8px 12px; margin:6px 0;
+    border:1.5px solid var(--parchment-dark); border-radius:8px;
+    cursor:pointer; transition:all .15s;
+  }
+  .quiz-options label:hover{ border-color:var(--amber); }
+  .quiz-options input{ margin-right:8px; }
+  .quiz-options label.correct{ background:#E4F3E0; border-color:#5A9A4A; }
+  .quiz-options label.incorrect{ background:#F8E1DD; border-color:var(--rust); }
+  .btn{
+    background:var(--rust); color:#fff; border:none; padding:12px 22px;
+    border-radius:999px; font-size:15px; cursor:pointer; font-family:'Source Serif 4',serif;
+  }
+  .btn:hover{ background:#8B3226; }
+  .btn:disabled{ opacity:0.4; cursor:not-allowed; }
+  .btn-outline{ background:transparent; color:var(--rust); border:1.5px solid var(--rust); }
+  .btn-outline:hover{ background:var(--rust); color:#fff; }
+  #quiz-result{
+    font-family:'Playfair Display',serif; font-size:20px; color:var(--teal); margin-top:16px;
+  }
+
+  .quiz-progress{
+    display:flex; gap:6px; justify-content:center; margin-bottom:20px; flex-wrap:wrap;
+  }
+  .quiz-header-row{
+    display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    margin-bottom:14px;
+  }
+  .quiz-invite-btn{ font-size:13px; padding:8px 16px; white-space:nowrap; }
+  #quiz-invite-fallback{
+    max-width:420px; margin:0 0 14px; font-size:13px; color:var(--ink-soft);
+  }
+  #quiz-invite-fallback textarea{
+    width:100%; min-height:60px; margin-top:6px; padding:10px;
+    border:1px solid var(--parchment-dark); border-radius:8px;
+    font-family:'Source Serif 4',serif; font-size:13px; background:#FBF6EA;
+  }
+  .quiz-dot{
+    width:10px; height:10px; border-radius:50%;
+    background:var(--parchment-dark); transition:all .2s;
+  }
+  .quiz-dot.done{ background:var(--gold); }
+  .quiz-dot.active{ background:var(--rust); transform:scale(1.3); }
+  .quiz-nav{ display:flex; justify-content:space-between; margin-top:18px; }
+  .quiz-final-actions{ display:flex; gap:12px; margin-top:14px; flex-wrap:wrap; }
+  #share-fallback{
+    margin-top:12px; font-size:13.5px; color:var(--ink-soft);
+  }
+  #share-fallback textarea{
+    width:100%; min-height:70px; margin-top:6px; padding:10px;
+    border:1px solid var(--parchment-dark); border-radius:8px;
+    font-family:'Source Serif 4',serif; font-size:13.5px; background:#FBF6EA;
+  }
+
+  .qa-item{ margin-bottom:14px; }
+  .qa-item .q{ font-weight:600; color:var(--rust); }
+  .qa-item .a{ margin-top:4px; color:var(--ink-soft); }
+
+  /* Exam Practice */
+  .ep-group{ margin-bottom:26px; }
+  .ep-tag{
+    display:inline-block; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+    background:var(--teal); color:#fff; padding:3px 10px; border-radius:999px; margin-bottom:8px;
+  }
+  .ep-marks{ float:right; color:var(--ink-soft); font-size:13px; font-style:italic; }
+  .ep-passage{
+    background:#F5F0E4; border-left:4px solid var(--gold);
+    padding:12px 16px; margin:10px 0; font-style:italic; font-size:14.5px; border-radius:4px;
+  }
+  .ep-q{ margin:10px 0 6px; }
+  .ep-options{ margin:6px 0 6px 18px; color:var(--ink-soft); font-size:14.5px; }
+  .ep-options div{ margin:2px 0; }
+  .reveal-btn{
+    background:transparent; border:1.5px solid var(--teal); color:var(--teal);
+    padding:5px 14px; border-radius:999px; font-size:13px; cursor:pointer; margin-top:6px;
+  }
+  .reveal-btn:hover{ background:var(--teal); color:#fff; }
+  .ep-answer{
+    display:none; margin-top:10px; padding:10px 14px; background:#EAF3E9;
+    border-left:4px solid #5A9A4A; border-radius:4px; font-size:14.5px; color:var(--ink);
+  }
+  .ep-answer.show{ display:block; }
+  .ep-table{ width:100%; border-collapse:collapse; font-size:14px; margin:10px 0; }
+  .ep-table td, .ep-table th{ border:1px solid var(--parchment-dark); padding:6px 10px; }
+
+  footer{ text-align:center; padding:24px; color:var(--ink-soft); font-size:13px; }
+
+  @media (max-width:600px){
+    nav.tabs{ justify-content:flex-start; overflow-x:auto; flex-wrap:nowrap; }
+    nav.tabs button{ flex:0 0 auto; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">Class X · English · Unit 1 — Trials and Triumphs</div>
+  <h1 class="title">A Very Old Man with Enormous Wings</h1>
+  <p class="subtitle">Gabriel García Márquez</p>
+  <p class="byline">Short story · Magical Realism</p>
+  <svg class="feather-divider" viewBox="0 0 120 28" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10,20 Q35,0 60,14 Q85,0 110,20" stroke="#C9932F" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="60" cy="14" r="3" fill="#A63D2F"/>
+  </svg>
+  <a href="english.html" style="display:inline-block; margin-top:14px; font-size:13px; color:var(--teal); text-decoration:none; border-bottom:1px dashed var(--teal);">&larr; Back to English</a>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button data-tab="overview">Overview</button>
+  <button data-tab="summary">Summary</button>
+  <button data-tab="malayalam">മലയാളം സംഗ്രഹം</button>
+  <button data-tab="characters">Characters</button>
+  <button data-tab="glossary">Glossary</button>
+  <button data-tab="devices">Literary Devices</button>
+  <button data-tab="qa">Q &amp; A</button>
+  <button data-tab="examprep">Exam Practice</button>
+  <button data-tab="quiz">Quiz</button>
+</nav>
+
+<main>
+
+  <!-- OVERVIEW -->
+  <section class="panel" id="overview">
+    <div class="card">
+      <h2 class="section-title">About the Chapter</h2>
+      <p>This story opens Unit 1, <em>Trials and Triumphs</em>, whose theme is compassion, kindness, and resilience amid hardship. It uses <strong>magical realism</strong> — a style in which fantastical events are described in a completely matter-of-fact, everyday tone — to hold up a mirror to human indifference and exploitation.</p>
+      <p>A very old man with enormous wings falls into Pelayo's courtyard during a storm. Instead of being cared for, he is caged, put on display for money, and treated as a curiosity — until, one ordinary morning, he simply flies away.</p>
+    </div>
+    <div class="card">
+      <h2 class="section-title">About the Author</h2>
+      <p><strong>Gabriel García Márquez</strong> (1927–2014) was a Colombian novelist, one of the most celebrated writers of the 20th century and a pioneer of magical realism. He won the <strong>Nobel Prize for Literature in 1982</strong>. His best-known works include <em>One Hundred Years of Solitude</em>, <em>Love in the Time of Cholera</em>, and <em>No One Writes to the Colonel</em>.</p>
+    </div>
+    <div class="card">
+      <h2 class="section-title">Key Vocabulary Note</h2>
+      <p>Magical realism blurs the line between fantasy and reality, much like a fairy tale — but the "magic" (an angel, a spider-woman) is treated as an ordinary, almost inconvenient fact of life rather than a miracle.</p>
+    </div>
+  </section>
+
+  <!-- ENGLISH SUMMARY -->
+  <section class="panel" id="summary">
+    <div class="card">
+      <h2 class="section-title">Summary (English)</h2>
+      <p>During days of heavy rain, Pelayo finds a strange old man lying face down in the mud of his courtyard — a man with enormous, dirty wings tangled in filth. He and his wife Elisenda are baffled by the creature, who speaks in an unintelligible dialect. A neighbour who claims to know everything about life and death takes one look and declares him to be an angel, fallen from the sky, likely on his way to take their sick child.</p>
+      <p>Rather than caring for him, the couple locks the old man in the chicken coop. Word spreads quickly, and crowds gather to gawk at him, poking, plucking his feathers, and even branding him with a hot iron to see if he will react. Sensing an opportunity, Pelayo and Elisenda begin charging an entrance fee, and soon grow wealthy from the endless stream of curious visitors and desperate invalids hoping for a miracle cure.</p>
+      <p>Through it all, the winged old man endures every indignity with strange, silent patience — his only apparent "supernatural" trait. Their sick child recovers and grows up alongside the deteriorating captive, largely ignoring him once a travelling show brings a woman-turned-spider to town as a more fashionable attraction. The old man grows weaker, nearly dies over a hard winter, but survives — and slowly, unnoticed, new feathers begin to grow.</p>
+      <p>One morning, Elisenda finds him clumsily attempting to fly from the courtyard. After several failed, undignified attempts, he finally lifts off and disappears over the horizon. Elisenda watches him go with quiet relief — he had become, by then, not a wonder but a mere <em>"annoyance in her life."</em></p>
+      <p><strong>Theme:</strong> The story is a gentle, ironic critique of human indifference, greed, and the failure of compassion toward those who are old, weak, or simply different — even when they may be extraordinary.</p>
+    </div>
+  </section>
+
+  <!-- MALAYALAM SUMMARY -->
+  <section class="panel malayalam" id="malayalam">
+    <div class="card malayalam">
+      <h2 class="section-title malayalam">മലയാളം സംഗ്രഹം</h2>
+      <p>കനത്ത മഴ പെയ്യുന്ന ദിവസങ്ങളിൽ, തന്റെ മുറ്റത്ത് ചെളിയിൽ കമിഴ്ന്നു കിടക്കുന്ന ഒരു വിചിത്ര വൃദ്ധനെ പെലായോ കണ്ടെത്തുന്നു — വലിയ, അഴുക്കുപിടിച്ച ചിറകുകളുള്ള ഒരു മനുഷ്യൻ. അയാൾക്കും ഭാര്യ എലിസെൻഡയ്ക്കും ഇയാൾ ആരാണെന്ന് മനസ്സിലാകുന്നില്ല; അയാൾ സംസാരിക്കുന്നത് മനസ്സിലാകാത്ത ഒരു ഭാഷയിലാണ്. ജീവിതത്തെയും മരണത്തെയും കുറിച്ച് എല്ലാം അറിയാമെന്ന് അവകാശപ്പെടുന്ന ഒരു അയൽക്കാരി ഒറ്റനോട്ടത്തിൽ അയാൾ സ്വർഗ്ഗത്തിൽ നിന്ന് വീണ ഒരു മാലാഖയാണെന്നും, രോഗിയായ കുട്ടിയെ കൊണ്ടുപോകാൻ വന്നതാണെന്നും പ്രഖ്യാപിക്കുന്നു.</p>
+      <p>വൃദ്ധനെ പരിചരിക്കുന്നതിനു പകരം, ദമ്പതികൾ അയാളെ കോഴിക്കൂട്ടിൽ പൂട്ടിയിടുന്നു. വാർത്ത വേഗം പരക്കുകയും, ആളുകൾ അയാളെ കാണാൻ കൂട്ടം കൂടുകയും ചെയ്യുന്നു — അവർ അയാളെ കുത്തുകയും, തൂവലുകൾ പറിക്കുകയും, ചൂടുള്ള ഇരുമ്പ് കൊണ്ട് പൊള്ളിക്കുകയും ചെയ്യുന്നു, അയാൾ പ്രതികരിക്കുമോ എന്ന് നോക്കാൻ. ഇതൊരു അവസരമായി കണ്ട്, പെലായോയും എലിസെൻഡയും പ്രവേശന ഫീസ് ഈടാക്കാൻ തുടങ്ങുന്നു, കാഴ്ചക്കാരുടെയും അത്ഭുതരോഗശാന്തി പ്രതീക്ഷിക്കുന്ന രോഗികളുടെയും തിരക്കിൽ അവർ പെട്ടെന്ന് സമ്പന്നരാകുന്നു.</p>
+      <p>ഇതിനിടയിലും, ചിറകുള്ള വൃദ്ധൻ എല്ലാ അപമാനങ്ങളും വിചിത്രമായ ക്ഷമയോടെ സഹിക്കുന്നു — അതാണ് അയാളുടെ ഒരേയൊരു "അമാനുഷിക" ഗുണം. രോഗിയായിരുന്ന കുട്ടി സുഖം പ്രാപിച്ച് വളരുന്നു, വൃദ്ധൻ ക്ഷയിച്ചുകൊണ്ടിരിക്കുമ്പോൾ. ഒരു ചിലന്തി സ്ത്രീയുടെ പ്രദർശനം നാട്ടിലെത്തിയതോടെ ആളുകൾ വൃദ്ധനെ അവഗണിക്കാൻ തുടങ്ങുന്നു. കടുത്ത ശൈത്യകാലത്ത് അയാൾ മരണത്തിനരികിലെത്തുന്നു, എങ്കിലും അതിജീവിക്കുന്നു — പതിയെ, ആരും ശ്രദ്ധിക്കാതെ, പുതിയ തൂവലുകൾ മുളയ്ക്കാൻ തുടങ്ങുന്നു.</p>
+      <p>ഒരു പ്രഭാതത്തിൽ, മുറ്റത്ത് നിന്ന് പറന്നുയരാൻ വൃദ്ധൻ വിഫലശ്രമം നടത്തുന്നത് എലിസെൻഡ കാണുന്നു. പല പരാജയപ്പെട്ട ശ്രമങ്ങൾക്കൊടുവിൽ, അയാൾ ഒടുവിൽ പറന്നുയർന്ന് ചക്രവാളത്തിനപ്പുറം അപ്രത്യക്ഷനാകുന്നു. ആശ്വാസത്തോടെ എലിസെൻഡ അയാൾ പോകുന്നത് നോക്കിനിൽക്കുന്നു — അപ്പോഴേക്കും അയാൾ അവൾക്ക് ഒരു അത്ഭുതമല്ല, മറിച്ച് ജീവിതത്തിലെ ഒരു ശല്യം മാത്രമായി മാറിയിരുന്നു.</p>
+      <p><strong>ആശയം:</strong> പ്രായമായവരോടും ദുർബലരോടും വ്യത്യസ്തരായവരോടും മനുഷ്യർ കാണിക്കുന്ന നിസ്സംഗതയെയും ദയയില്ലായ്മയെയും അത്യാഗ്രഹത്തെയും കുറിച്ചുള്ള മൃദുവായ, വിരോധാഭാസപൂർണ്ണമായ വിമർശനമാണ് ഈ കഥ.</p>
+    </div>
+  </section>
+
+  <!-- CHARACTERS -->
+  <section class="panel" id="characters">
+    <div class="card">
+      <h2 class="section-title">Character Sketches</h2>
+      <table>
+        <tr><th>Trait Type</th><th>Old Man</th><th>Pelayo</th><th>Elisenda</th></tr>
+        <tr>
+          <td>Physical</td>
+          <td>Old, frail, enormous buzzard wings, bald with few teeth, dressed like a ragpicker</td>
+          <td>A poor bailiff, works hard in his courtyard</td>
+          <td>A working mother tending her sick child</td>
+        </tr>
+        <tr>
+          <td>Personality</td>
+          <td>Mysterious, silent, patient, indifferent to his own spectacle</td>
+          <td>Practical, responsible, initially fearful, later opportunistic</td>
+          <td>Loving mother, shrewd, becomes calculating about money</td>
+        </tr>
+        <tr>
+          <td>Significance</td>
+          <td>Represents the weak, the vulnerable, and the misunderstood "other"</td>
+          <td>Represents the ordinary person who fails to recognise the extraordinary in front of him</td>
+          <td>Represents how compassion can be overtaken by greed and self-interest</td>
+        </tr>
+      </table>
+      <p style="margin-top:14px;"><strong>Note:</strong> The old man never explains himself and never resists his captivity — his patience is his only visible "supernatural virtue." Pelayo and Elisenda move from fear, to curiosity, to exploitation, to indifference — a arc that mirrors how society often treats the vulnerable.</p>
+    </div>
+  </section>
+
+  <!-- GLOSSARY -->
+  <section class="panel" id="glossary">
+    <div class="card">
+      <h2 class="section-title">Glossary (My Words)</h2>
+      <div class="glossary-item"><span class="glossary-term">Impeded</span> — hindered, obstructed. <span class="malayalam">(തടസ്സപ്പെടുത്തി)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Compresses</span> — cloth pads pressed on the body, usually to reduce fever or swelling. <span class="malayalam">(ഈറൻ തുണിക്കെട്ട്)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Ragpicker</span> — a person who collects and sells discarded rags/waste for a living. <span class="malayalam">(തുണിക്കഷ്ണങ്ങൾ പെറുക്കുന്നയാൾ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Drenched</span> — thoroughly soaked/wet. <span class="malayalam">(നനഞ്ഞുകുതിർന്ന)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Grandeur</span> — impressiveness, majesty, dignity. <span class="malayalam">(മഹത്വം)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Buzzard</span> — a large bird of prey (vulture-like). <span class="malayalam">(ഒരു ഇര പിടിയൻ പക്ഷി)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Incomprehensible dialect</span> — a form of speech that cannot be understood. <span class="malayalam">(മനസ്സിലാകാത്ത ഭാഷ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Castaway</span> — a person stranded, usually after a shipwreck. <span class="malayalam">(കപ്പൽ ചേതത്തിൽ അകപ്പെട്ടയാൾ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Bailiff's (club)</span> — relating to a bailiff, an official who enforces court orders; here, a club he carries for his duties. <span class="malayalam">(ബെയിലിഫിന്റെ വടി)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Magnanimous</span> — generous and forgiving, especially toward a rival or less powerful person. <span class="malayalam">(ഉദാരമനസ്കത)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Invalids</span> — people who are ill or disabled. <span class="malayalam">(രോഗികൾ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Mothballs</span> — small balls of chemical used to repel moths, here fed to the old man mistakenly. <span class="malayalam">(പുഴു അകറ്റാൻ ഉപയോഗിക്കുന്ന ഗുളികകൾ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Senile</span> — showing weakness or decline due to old age. <span class="malayalam">(വാർദ്ധക്യസഹജമായ ബലക്ഷയം)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Rabbit warren</span> — a network of burrows where rabbits live; here, a rabbit farm Pelayo builds. <span class="malayalam">(മുയൽ വളർത്തൽ കേന്ദ്രം)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Pumps</span> — light, low-cut shoes, often for women. <span class="malayalam">(ലഘുവായ ചെരിപ്പുകൾ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Iridescent</span> — showing shifting, rainbow-like colours. <span class="malayalam">(മഴവില്ലുനിറമുള്ള തിളക്കം)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Scarecrow</span> — a stuffed figure set up to frighten birds away from crops. <span class="malayalam">(പക്ഷികളെ ഓടിക്കാൻ വയലിൽ വയ്ക്കുന്ന പാവ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Montage</span> — a picture, film, or piece of music made by combining several different elements. <span class="malayalam">(പല ഘടകങ്ങൾ ചേർത്തുണ്ടാക്കുന്ന ദൃശ്യസംയോജനം)</span></div>
+    </div>
+  </section>
+
+  <!-- LITERARY DEVICES -->
+  <section class="panel" id="devices">
+    <div class="card">
+      <h2 class="section-title">Literary Devices &amp; Magical Realism</h2>
+      <table>
+        <tr><th>Imagery</th><th>Simile</th><th>Magical Elements</th></tr>
+        <tr>
+          <td>enormous wings</td>
+          <td>dressed like a ragpicker</td>
+          <td>a man with wings</td>
+        </tr>
+        <tr>
+          <td>huge buzzard wings, dirty and half-plucked, entangled in the mud</td>
+          <td>held himself up with the risky flapping of a senile vulture</td>
+          <td>a woman turned into a spider by lightning</td>
+        </tr>
+        <tr>
+          <td>bald skull with a few faded hairs and very few teeth</td>
+          <td>as if he weren't a supernatural creature but a circus animal</td>
+          <td>the old man's wings and eventual flight</td>
+        </tr>
+        <tr>
+          <td>large, stiff feathers growing on his wings "like the feathers of a scarecrow"</td>
+          <td>his pitiful condition seemed that of a drenched great-grandfather</td>
+          <td>his survival of near-death illness followed by sudden recovery</td>
+        </tr>
+      </table>
+      <div class="torn-card" style="margin-top:20px;">
+        <h3>What is Magical Realism?</h3>
+        <p>A narrative style, closely associated with Latin American writers like García Márquez (and also Salman Rushdie, Angela Carter), where fantastical or magical events are presented within an otherwise realistic, everyday setting — described in the same matter-of-fact tone as ordinary events. Like a fairy tale, it blurs the line between fantasy and reality.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Q&A -->
+  <section class="panel" id="qa">
+    <div class="card">
+      <h2 class="section-title">While We Read — Q &amp; A</h2>
+      <div class="qa-item"><div class="q">a. Why does the sight of the old man frighten Pelayo?</div><div class="a">He is unfamiliar and strange — a man with enormous wings lying face down in the mud, groaning, is something Pelayo has never encountered.</div></div>
+      <div class="qa-item"><div class="q">b. Why was the old man unable to get up?</div><div class="a">His enormous wings were impeded/tangled in the mud, making it impossible for him to rise despite his efforts.</div></div>
+      <div class="qa-item"><div class="q">c. Why do the couple consider the old man a "lonely castaway"?</div><div class="a">He spoke in an incomprehensible dialect with a sailor's voice, so they assumed he was a shipwrecked sailor from a foreign ship.</div></div>
+      <div class="qa-item"><div class="q">d. Why was the neighbour woman sure that the old man was an angel?</div><div class="a">She claimed to know everything about life and death, and declared at a glance that he was an angel who had come for the sick child but was too old and weak from the rain to succeed.</div></div>
+      <div class="qa-item"><div class="q">e. Why did Pelayo arm himself with a club?</div><div class="a">He kept watch over the "captive angel" out of caution/fear, in case the mysterious being posed a threat.</div></div>
+      <div class="qa-item"><div class="q">f. What made the couple suddenly decide to treat the man with some kindness?</div><div class="a">Their sick child recovered and woke up with an appetite that same night, which they attributed to the old man's presence, making them feel grateful ("magnanimous").</div></div>
+      <div class="qa-item"><div class="q">g. Why does Pelayo lock the old man in the chicken coop?</div><div class="a">He did not know what else to do with the strange, captive being, so he treated him like livestock rather than a person.</div></div>
+      <div class="qa-item"><div class="q">h. Why do people treat the old man like a "circus animal"?</div><div class="a">Crowds gathered to gawk at him, tossed food through the coop's openings, and treated the spectacle as entertainment rather than recognising his dignity.</div></div>
+      <div class="qa-item"><div class="q">i. Do you think Elisenda is shrewd and clever? Why?</div><div class="a">Yes — she quickly turns the chaotic crowd into a business opportunity by fencing the yard and charging an admission fee, showing practical, business-minded thinking.</div></div>
+      <div class="qa-item"><div class="q">j. "His only supernatural virtue seemed to be patience." Why does the author say so?</div><div class="a">Despite being pecked, having his feathers pulled, and being pelted with stones, the old man never reacted or resisted — an almost impossible calm that seemed his only remarkable, "angelic" quality.</div></div>
+      <div class="qa-item"><div class="q">k. Why do more people flock to see the woman turned into a spider rather than the old man?</div><div class="a">Her show was cheaper to see, allowed visitors to ask questions about her "absurd state," and offered fresher, more sensational novelty than the now-familiar old man.</div></div>
+      <div class="qa-item"><div class="q">l. Why is the doctor surprised by the "logic" of the wings?</div><div class="a">The wings seemed so naturally suited to the old man's completely human body/organism that the doctor couldn't understand why every human being didn't have them too.</div></div>
+      <div class="qa-item"><div class="q">m. Why does Elisenda let out a sigh of relief?</div><div class="a">Watching the old man finally fly away and disappear meant she was free of the burden and "annoyance" he had become in her life.</div></div>
+    </div>
+  </section>
+
+  <!-- EXAM PRACTICE -->
+  <section class="panel" id="examprep">
+    <div class="card">
+      <h2 class="section-title">Exam-Pattern Practice Questions</h2>
+      <p style="color:var(--ink-soft); font-size:14.5px;">Modelled on the SSLC Term I Summative Assessment pattern — every question type (comprehension, MCQ, appreciation, review, character sketch, functional writing, grammar-in-context) rebuilt around this chapter. Tap <strong>Show Answer</strong> to check your response.</p>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Comprehension</span><span class="ep-marks">5×1=5</span>
+      <div class="ep-passage">"The chicken coop was the only thing that didn't receive any attention. The dung-heap stench from the coop was turning the new house into an old one. At first, when the child learned to walk, they were careful that he did not get too close to the coop. But then they began to lose their fears and got used to the smell."</div>
+      <div class="ep-q">1. What detail shows that the family neglected the old man despite their new wealth?</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">The chicken coop, where the old man lived, was the only part of the property left unrenovated and stinking — everything else was upgraded with their new money.</div>
+
+      <div class="ep-q">2. Why were the parents careful about the child at first?</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">They were afraid of the coop's stench and dirt affecting the child, so they kept him away from it initially.</div>
+
+      <div class="ep-q">3. Why does the author say "the new house was turning into an old one"?</div>
+      <div class="ep-options">
+        <div>A. The house was poorly built</div>
+        <div>B. The stench from the coop had spread everywhere</div>
+        <div>C. The family stopped cleaning any part of the house</div>
+        <div>D. The house was very old already</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Correct answer: B</div>
+
+      <div class="ep-q">4. What does the family's changing attitude towards the smell suggest about human nature?</div>
+      <div class="ep-options">
+        <div>A. They became more caring over time</div>
+        <div>B. People eventually grow indifferent to ongoing suffering nearby</div>
+        <div>C. They moved out of the house</div>
+        <div>D. They tried harder to help the old man</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Correct answer: B</div>
+
+      <div class="ep-q">5. Identify the Noun Phrase in the subject position and the Verb Phrase in: "The dung-heap stench from the coop was turning the new house into an old one."</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Noun Phrase (subject): <em>The dung-heap stench from the coop</em>. Verb Phrase: <em>was turning</em>.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Statement-based MCQ</span><span class="ep-marks">2×1=2</span>
+      <div class="ep-q">6. Which of the following statements are <strong>NOT TRUE</strong> about the old man's treatment in the story?</div>
+      <div class="ep-options">
+        <div>A. He was locked in the chicken coop.</div>
+        <div>B. He was given medical care immediately.</div>
+        <div>C. People paid money to see him.</div>
+        <div>D. He was pelted with stones by some visitors.</div>
+      </div>
+      <div class="ep-options">
+        <div>i. A and C are false &nbsp; ii. B only is false &nbsp; iii. A and D are false &nbsp; iv. B and D are false</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Correct answer: ii. B only is false (medical care was <em>not</em> given immediately; the others are all true).</div>
+
+      <div class="ep-q">7. Which of the following are true about the old man's "supernatural" nature?</div>
+      <div class="ep-options">
+        <div>A. He could speak fluently in the local language.</div>
+        <div>B. His only apparent virtue was patience.</div>
+        <div>C. He ate mothballs happily.</div>
+        <div>D. He eventually grew new feathers and flew away.</div>
+      </div>
+      <div class="ep-options"><div>i. A and C are true &nbsp; ii. B and D are true &nbsp; iii. A, B and C are true &nbsp; iv. All are true</div></div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Correct answer: ii. B and D are true.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Appreciation</span><span class="ep-marks">1×5=5</span>
+      <div class="ep-q">8. Read the lines: <em>"He was no longer an annoyance in her life but an imaginary dot on the horizon of the sea."</em> Prepare an <strong>appreciation</strong>, focusing on imagery, tone, and the shift in Elisenda's feelings toward the old man.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer / Guidance</button>
+      <div class="ep-answer">Cover: (i) the visual imagery of the old man shrinking into "a dot" — suggesting distance and fading significance; (ii) the tone of relief and quiet detachment, not warmth; (iii) how "annoyance" reveals Elisenda's long-held resentment, contrasted with the calm, almost poetic final image; (iv) the irony that something once miraculous ends as barely noticeable.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Review / Write-up (choice)</span><span class="ep-marks">1×7=7</span>
+      <div class="ep-q">9. <strong>[A]</strong> Prepare a <strong>review</strong> of the story focusing on how magical realism is used to comment on human cruelty and indifference.<br><strong>OR [B]</strong> Prepare a <strong>write-up</strong> on 'Compassion costs nothing, but means everything' based on the story.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Guidance</button>
+      <div class="ep-answer"><strong>[A] Review points:</strong> the ordinary tone used for a fantastical event (magical realism) → couple's fear turns to exploitation → crowd's fleeting curiosity → the old man's endurance → theme of indifference to the weak/different → ironic, hopeful ending.<br><strong>[B] Write-up points:</strong> define compassion → contrast the family's neglect with what kindness could have looked like → link to the old man's suffering being worsened by indifference, not just circumstance → conclude with the value of small acts of care.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Character Sketch (choice)</span><span class="ep-marks">1×6=6</span>
+      <div class="ep-q">10. <strong>[A]</strong> Prepare a <strong>character sketch of Elisenda</strong>, highlighting how she changes from a fearful, sympathetic mother to a shrewd, profit-driven woman.<br><strong>OR [B]</strong> Prepare a <strong>character sketch of Pelayo</strong>, focusing on his practicality and his failure to see beyond the old man's usefulness.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Guidance</button>
+      <div class="ep-answer"><strong>[A] Elisenda:</strong> initially caring for her sick child → fear and confusion at the old man → grows business-minded, fencing the yard and charging fees → becomes desensitised to his suffering → ends with quiet relief, not compassion, when he leaves.<br><strong>[B] Pelayo:</strong> a hardworking bailiff → armed himself out of fear → locks the old man away without a second thought → profits from him but never truly wonders at the miracle in his courtyard → gives up his job once wealthy, showing his practical, material focus.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">News Report / Email (choice)</span><span class="ep-marks">1×6=6</span>
+      <div class="ep-q">11. <strong>[A]</strong> Imagine you are a journalist reporting on the crowds gathering to see the "angel." Write the likely <strong>news report</strong>.<br><strong>OR [B]</strong> Draft an <strong>email</strong> to a friend describing your visit to Pelayo's courtyard to see the "angel," and your feelings about what you witnessed.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Guidance</button>
+      <div class="ep-answer"><strong>[A] News report:</strong> headline → dateline → what was found and where → couple's reaction and decision to charge admission → crowd behaviour and cruelty → quote from a witness/neighbour → closing note on public concern.<br><strong>[B] Email:</strong> greeting → describe the scene at the coop → your emotional reaction (pity, discomfort) → criticism of how he's treated → closing thoughts on compassion.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Paragraph</span><span class="ep-marks">1×4=4</span>
+      <div class="ep-q">12. The old man never resists his captivity throughout the story. Prepare a <strong>paragraph</strong> on what this reveals about the character's inner strength and dignity.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Guidance</button>
+      <div class="ep-answer">Mention: his silent endurance of pecking, plucking, stone-throwing → patience as his "only supernatural virtue" → dignity maintained without protest or explanation → contrast with the cruelty around him → suggests strength doesn't always look like resistance — sometimes it is quiet survival.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Descriptive Sketch (table-based)</span><span class="ep-marks">1×6=6</span>
+      <div class="ep-q">13. Using the details below, prepare a <strong>descriptive sketch</strong> of the old man as understood by the doctor who examines him.</div>
+      <table class="ep-table">
+        <tr><td>First impression</td><td>wings tangled in mud, dressed like a ragpicker</td></tr>
+        <tr><td>Physical condition</td><td>whistling in the heart, sounds in the kidneys</td></tr>
+        <tr><td>Unusual feature</td><td>wings seemed perfectly natural on a human body</td></tr>
+        <tr><td>Behaviour</td><td>patient despite mistreatment</td></tr>
+        <tr><td>Final state</td><td>grows new feathers, regains strength to fly</td></tr>
+      </table>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Event Invitation</span><span class="ep-marks">1×4=4</span>
+      <div class="ep-q">14. The local church decides to organise an <strong>awareness talk</strong> on "Kindness towards the Elderly," inspired by the story. Prepare an <strong>event invitation</strong> with purpose, date, time, venue, and chief guest details.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Question Framing</span><span class="ep-marks">1×4=4</span>
+      <div class="ep-q">15. Read the passage and frame <strong>four appropriate questions</strong> based on it:</div>
+      <div class="ep-passage">"The doctor who took care of the child couldn't resist the temptation to listen to the angel's heart. He found so much whistling in the heart and so many sounds in the kidneys. What surprised him most, however, was the logic of his wings."</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Editing</span><span class="ep-marks">6×½=3</span>
+      <div class="ep-q">16. Edit the passage. Errors are given in bold.</div>
+      <div class="ep-passage">The old man <strong>were</strong> (a) found lying in the mud. He <strong>don't</strong> (b) speak a language anyone understood. The couple <strong>decide</strong> (c) to lock him in the coop. Crowds <strong>comes</strong> (d) from far away to see him. He <strong>remain</strong> (e) patient throughout his suffering. Eventually he <strong>fly</strong> (f) away.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">(a) was &nbsp; (b) doesn't &nbsp; (c) decided &nbsp; (d) came &nbsp; (e) remained &nbsp; (f) flew</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Phrasal Verbs</span><span class="ep-marks">5×1=5</span>
+      <div class="ep-q">17. Complete the paragraph using appropriate forms of the phrasal verbs given in brackets: <em>(look after, put up with, give up, come across, take off)</em></div>
+      <div class="ep-passage">Pelayo and Elisenda were expected to ……(a)…… the old man properly, but instead they ……(b)…… his mistreatment for the sake of money. The crowds who ……(c)…… the strange visitor treated him like an attraction. Despite everything, the old man never ……(d)…… hope, and one day, he finally ……(e)…… into the sky.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">(a) look after &nbsp; (b) put up with &nbsp; (c) came across &nbsp; (d) gave up &nbsp; (e) took off</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Prepositions / Articles</span><span class="ep-marks">6×½=3</span>
+      <div class="ep-q">18. Complete the passage choosing the right words from the bracket: <em>(in, a, the, of, on, without)</em></div>
+      <div class="ep-passage">……(a)…… very old man appeared ……(b)…… the courtyard ……(c)…… one rainy morning. He was treated ……(d)…… any kindness by the crowd. His wings, tangled ……(e)…… mud, made him look pitiful. He remained ……(f)…… patience throughout his ordeal.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">(a) A &nbsp; (b) in &nbsp; (c) on &nbsp; (d) without &nbsp; (e) in &nbsp; (f) of</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Dialogue Completion</span><span class="ep-marks">5×1=5</span>
+      <div class="ep-q">19. Complete the conversation between the neighbour woman and another villager.</div>
+      <div class="ep-passage">
+        Neighbour woman: I'm certain he's an angel, ……(a)……?<br>
+        Villager: ……(b)……………………?<br>
+        Neighbour woman: Because he looked so weak and old, the rain must have knocked him down before he could reach the child.<br>
+        Villager: But Pelayo has locked him in the chicken coop! ……(c)……………<br>
+        Neighbour woman: I agree, it isn't right. ……(d)……………<br>
+        Villager: ……(e)……………?
+      </div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Sample Answer</button>
+      <div class="ep-answer">(a) aren't I / isn't he &nbsp; (b) How can you be so sure &nbsp; (c) That's terrible treatment for an angel &nbsp; (d) We should tell Pelayo to treat him better &nbsp; (e) Will you speak to Pelayo about it</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Reported Speech</span><span class="ep-marks">2×1=2</span>
+      <div class="ep-q">20. Report the following dialogue.</div>
+      <div class="ep-passage">Elisenda: We should charge people to see the angel.<br>Pelayo: That's a brilliant idea; we could really use the money.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Elisenda said that they should charge people to see the angel. Pelayo replied that it was a brilliant idea and that they could really use the money.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Caption Writing</span><span class="ep-marks">2×1=2</span>
+      <div class="ep-q">21. Create pairs using the words given in the box to provide apt captions for scenes from the story: <em>(captive, exploited, indifferent, freedom, patience, spectacle)</em></div>
+      <div class="ep-options">
+        <div>a. A scene of the old man locked in the chicken coop with crowds watching → ……………</div>
+        <div>b. A scene of the old man finally flying over the sea → ……………</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Sample Answer</button>
+      <div class="ep-answer">a. "A captive spectacle, exploited for coin" &nbsp;&nbsp; b. "Patience rewarded with freedom"</div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="panel" id="quiz">
+    <div class="card">
+      <div class="quiz-header-row">
+        <h2 class="section-title" style="border:none; margin:0; padding:0;">Quiz Time</h2>
+        <button id="quiz-invite-share" class="btn btn-outline quiz-invite-btn" type="button">↗ Share Quiz</button>
+      </div>
+      <div id="quiz-invite-fallback"></div>
+      <div id="quiz-progress" class="quiz-progress"></div>
+      <div id="quiz-active">
+        <div id="quiz-question-wrap" class="quiz-q"></div>
+        <div class="quiz-nav">
+          <button id="quiz-prev" class="btn btn-outline" type="button">Previous</button>
+          <button id="quiz-next" class="btn" type="button">Next</button>
+        </div>
+      </div>
+      <div id="quiz-final" style="display:none;">
+        <div id="quiz-result"></div>
+        <div class="quiz-final-actions">
+          <button id="quiz-restart" class="btn btn-outline" type="button">Retake Quiz</button>
+          <button id="quiz-share" class="btn" type="button">Share Result</button>
+        </div>
+        <div id="share-fallback"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>Study Portal · Class X English · Unit 1 — A Very Old Man with Enormous Wings</footer>
+
+<script>
+function toggleAns(btn){
+  const ans = btn.nextElementSibling;
+  ans.classList.toggle('show');
+  btn.textContent = ans.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+}
+
+const tabs = document.querySelectorAll('nav.tabs button');
+const panels = document.querySelectorAll('.panel');
+
+function activateTab(tabId, scroll=true){
+  const targetBtn = Array.from(tabs).find(b => b.dataset.tab === tabId);
+  if(!targetBtn) return;
+  tabs.forEach(b=>b.classList.remove('active'));
+  panels.forEach(p=>p.classList.remove('active'));
+  targetBtn.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+  if(scroll) window.scrollTo({top:0, behavior:'smooth'});
+}
+
+tabs.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    activateTab(btn.dataset.tab);
+    window.location.hash = btn.dataset.tab;
+  });
+});
+
+// If the page is opened with a link like ...#quiz, jump straight to that tab.
+// Otherwise, show Overview by default.
+const initialHash = window.location.hash.replace('#','');
+if(initialHash && document.getElementById(initialHash)){
+  activateTab(initialHash, false);
+} else {
+  activateTab('overview', false);
+}
+
+const quizData = [
+  {
+    q: "1. Who does Pelayo find lying face down in the mud of his courtyard?",
+    options: ["A shipwrecked sailor", "A very old man with enormous wings", "A wounded soldier", "A lost child"],
+    answer: 1
+  },
+  {
+    q: "2. Who declares that the old man is an angel?",
+    options: ["Pelayo", "The doctor", "The neighbour woman", "Elisenda"],
+    answer: 2
+  },
+  {
+    q: "3. Where do Pelayo and Elisenda lock up the old man?",
+    options: ["A wooden shed", "The chicken coop", "A rabbit warren", "The cellar"],
+    answer: 1
+  },
+  {
+    q: "4. What made the couple begin to feel 'magnanimous' toward the old man?",
+    options: ["He spoke to them kindly", "Their sick child recovered", "He gave them money", "He helped with chores"],
+    answer: 1
+  },
+  {
+    q: "5. How did Pelayo and Elisenda make their fortune?",
+    options: ["By selling the old man's feathers", "By farming rabbits", "By charging an admission fee to see the 'angel'", "By selling the chicken coop"],
+    answer: 2
+  },
+  {
+    q: "6. What was the old man's 'only supernatural virtue'?",
+    options: ["Flight", "Patience", "Wisdom", "Healing power"],
+    answer: 1
+  },
+  {
+    q: "7. What rival attraction draws the crowds away from the old man?",
+    options: ["A fire-eater", "A giant snake", "A woman turned into a spider", "A talking parrot"],
+    answer: 2
+  },
+  {
+    q: "8. What food did the old man finally eat, refusing mothballs?",
+    options: ["Eggplant mush", "Bread and milk", "Rice and fish", "Fruit"],
+    answer: 0
+  },
+  {
+    q: "9. What did the doctor find most surprising about the old man?",
+    options: ["His heartbeat", "The logic of his wings", "His age", "His silence"],
+    answer: 1
+  },
+  {
+    q: "10. What does the old man do at the end of the story?",
+    options: ["He dies peacefully", "He is sold to a circus", "He flies away and disappears", "He is set free by Pelayo"],
+    answer: 2
+  }
+];
+
+// ---- Quiz engine: one question at a time ----
+let currentQ = 0;
+const userAnswers = new Array(quizData.length).fill(null);
+
+const progressEl = document.getElementById('quiz-progress');
+const qWrap = document.getElementById('quiz-question-wrap');
+const prevBtn = document.getElementById('quiz-prev');
+const nextBtn = document.getElementById('quiz-next');
+const activeBlock = document.getElementById('quiz-active');
+const finalBlock = document.getElementById('quiz-final');
+
+function buildProgress(){
+  progressEl.innerHTML = '';
+  quizData.forEach((_, i)=>{
+    const dot = document.createElement('div');
+    dot.className = 'quiz-dot';
+    dot.id = `dot-${i}`;
+    progressEl.appendChild(dot);
+  });
+}
+
+function updateProgress(){
+  quizData.forEach((_, i)=>{
+    const dot = document.getElementById(`dot-${i}`);
+    dot.classList.remove('active','done');
+    if(i === currentQ) dot.classList.add('active');
+    else if(userAnswers[i] !== null) dot.classList.add('done');
+  });
+}
+
+function renderQuestion(){
+  const item = quizData[currentQ];
+  const optsHtml = item.options.map((opt, j)=>{
+    const checked = userAnswers[currentQ] === j ? 'checked' : '';
+    return `<label data-opt="${j}">
+      <input type="radio" name="qcurrent" value="${j}" ${checked}> ${opt}
+    </label>`;
+  }).join('');
+  qWrap.innerHTML = `<div><strong>${item.q}</strong></div><div class="quiz-options">${optsHtml}</div>`;
+
+  qWrap.querySelectorAll('input[name="qcurrent"]').forEach(input=>{
+    input.addEventListener('change', (e)=>{
+      userAnswers[currentQ] = parseInt(e.target.value);
+      updateProgress();
+    });
+  });
+
+  prevBtn.disabled = currentQ === 0;
+  nextBtn.textContent = currentQ === quizData.length - 1 ? 'Finish' : 'Next';
+  updateProgress();
+}
+
+prevBtn.addEventListener('click', ()=>{
+  if(currentQ > 0){ currentQ--; renderQuestion(); }
+});
+
+nextBtn.addEventListener('click', ()=>{
+  if(currentQ < quizData.length - 1){
+    currentQ++;
+    renderQuestion();
+  } else {
+    finishQuiz();
+  }
+});
+
+function finishQuiz(){
+  let score = 0;
+  quizData.forEach((item, i)=>{ if(userAnswers[i] === item.answer) score++; });
+  activeBlock.style.display = 'none';
+  finalBlock.style.display = 'block';
+  document.getElementById('quiz-result').textContent = `You scored ${score} out of ${quizData.length}!`;
+  document.getElementById('share-fallback').innerHTML = '';
+  document.getElementById('quiz-share').dataset.score = score;
+}
+
+document.getElementById('quiz-restart').addEventListener('click', ()=>{
+  currentQ = 0;
+  userAnswers.fill(null);
+  activeBlock.style.display = 'block';
+  finalBlock.style.display = 'none';
+  document.getElementById('share-fallback').innerHTML = '';
+  renderQuestion();
+});
+
+document.getElementById('quiz-share').addEventListener('click', async ()=>{
+  const score = document.getElementById('quiz-share').dataset.score;
+  const quizUrl = new URL('english-old-man-wings-quiz.html', window.location.href).href;
+  const shareText = `I scored ${score}/${quizData.length} on the "A Very Old Man with Enormous Wings" quiz! 🪶 Try it yourself.`;
+  const fallback = document.getElementById('share-fallback');
+
+  if(navigator.share){
+    try{
+      await navigator.share({ title: 'Enormous Wings Quiz Result', text: shareText, url: quizUrl });
+      return;
+    }catch(err){ /* user cancelled or unsupported, fall through */ }
+  }
+
+  // Fallback: copy to clipboard + show text box
+  try{
+    await navigator.clipboard.writeText(`${shareText}\n${quizUrl}`);
+    fallback.innerHTML = `Result copied to clipboard! You can paste it anywhere.<br><textarea readonly>${shareText}\n${quizUrl}</textarea>`;
+  }catch(err){
+    fallback.innerHTML = `<textarea readonly>${shareText}\n${quizUrl}</textarea>`;
+  }
+});
+
+buildProgress();
+renderQuestion();
+
+document.getElementById('quiz-invite-share').addEventListener('click', async ()=>{
+  const quizUrl = new URL('english-old-man-wings-quiz.html', window.location.href).href;
+  const shareData = {
+    title: 'Enormous Wings Quiz',
+    text: 'Take this quiz on "A Very Old Man with Enormous Wings" (Class X English, Unit 1) and test what you know!',
+    url: quizUrl
+  };
+  const fallback = document.getElementById('quiz-invite-fallback');
+
+  if(navigator.share){
+    try{
+      await navigator.share(shareData);
+      return;
+    }catch(err){ /* cancelled, fall through */ }
+  }
+
+  try{
+    await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
+    fallback.innerHTML = `Quiz link copied! Paste it to invite others.<br><textarea readonly>${shareData.text}\n${shareData.url}</textarea>`;
+  }catch(err){
+    fallback.innerHTML = `<textarea readonly>${shareData.text}\n${shareData.url}</textarea>`;
+  }
+});
+</script>
+</body>
+</html>
