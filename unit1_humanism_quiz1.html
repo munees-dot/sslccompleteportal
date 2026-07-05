@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz 1 (20 Questions) | Unit 1: Humanism - SSLC Study Portal</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+  :root{
+    --brown1:#7a4a26; --brown2:#4a2c17; --gold:#c9932f; --cream:#fbf3e6;
+    --blue:#2596be; --lightblue:#e6f6fb; --ink:#2b2119; --green:#2e8b57; --red:#c0392b;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:'Poppins',sans-serif; background:var(--cream); color:var(--ink);}
+  .ml{font-family:'Manjari','Poppins',sans-serif;}
+  header{
+    background:linear-gradient(135deg,var(--brown2),var(--brown1) 60%,var(--gold));
+    color:#fff; padding:22px 16px; text-align:center;
+  }
+  header h1{margin:0 0 4px; font-size:1.4rem;}
+  header h2{margin:0; font-weight:400; font-size:.95rem; opacity:.9;}
+  .topbar{display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:14px;}
+  button.pillbtn{
+    background:#fff; color:var(--brown2); border:none; border-radius:20px;
+    padding:8px 16px; font-size:.85rem; font-weight:600; cursor:pointer; box-shadow:0 2px 5px rgba(0,0,0,.2);
+  }
+  button.pillbtn.active{background:var(--gold); color:#fff;}
+  main{max-width:700px; margin:0 auto; padding:18px 14px 60px;}
+  .card{
+    background:#fff; border:1px solid #eadfce; border-radius:14px; padding:16px 18px;
+    margin-bottom:14px; box-shadow:0 2px 8px rgba(0,0,0,.05);
+  }
+  .lang-en, .lang-ml{display:none;}
+  body.show-en .lang-en{display:block;}
+  body.show-en span.lang-en{display:inline;}
+  body.show-ml .lang-ml{display:block;}
+  body.show-ml span.lang-ml{display:inline;}
+  .quiz-q{background:#fff; border:1px solid #eadfce; border-radius:12px; padding:14px; margin-bottom:14px;}
+  .quiz-q p.qtext{font-weight:600; margin-bottom:10px;}
+  .opt{
+    display:block; width:100%; text-align:left; padding:9px 12px; margin-bottom:6px;
+    border:1px solid #ddd; border-radius:8px; background:#faf9f7; cursor:pointer; font-size:.92rem;
+  }
+  .opt.selected-opt{border-color:var(--gold); background:#fff6e6; outline:3px solid var(--gold);}
+  .quiz-progress{text-align:center; font-weight:700; color:var(--brown1); margin-bottom:10px; font-size:.9rem;}
+  .quiz-nav{display:flex; justify-content:space-between; gap:10px; margin-top:6px;}
+  .actionbtn{
+    background:var(--brown1); color:#fff; border:none; padding:10px 18px; border-radius:24px;
+    font-weight:600; cursor:pointer; font-size:.9rem; display:flex; align-items:center; gap:6px; justify-content:center; flex:1;
+  }
+  .actionbtn.green{background:var(--green);}
+  .actionbtn.blue{background:var(--blue);}
+  .actionbtn[disabled]{opacity:.4; cursor:not-allowed;}
+  .actionbar{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin:16px 0;}
+  .quiz-locked{background:var(--lightblue); border-radius:14px; padding:22px 16px; text-align:center;}
+  .quiz-locked p{margin:4px 0;}
+  .quiz-locked #quizResult_locked{font-size:1.15rem; font-weight:700; margin-top:10px;}
+  footer{text-align:center; padding:16px; color:#8a7a63; font-size:.8rem;}
+  a.backlink{display:inline-block; margin-top:10px; color:var(--blue); font-weight:600; text-decoration:none;}
+</style>
+</head>
+<body class="show-en">
+
+<header>
+  <h1>Quiz 1 (20 Questions) <span class="ml">| മാനവികത ക്വിസ്</span></h1>
+  <h2>Unit 1: Humanism — SSLC Social Science I — Standard X</h2>
+  <div class="topbar">
+    <button class="pillbtn active" id="enBtn" onclick="setLang('en')">English</button>
+    <button class="pillbtn" id="mlBtn" onclick="setLang('ml')">മലയാളം</button>
+  </div>
+</header>
+
+<main>
+  <div class="card">
+    <p class="lang-en">Answer each question, then move to the next. This quiz can be attempted only once per device.</p>
+    <p class="lang-ml">ഓരോ ചോദ്യത്തിനും ഉത്തരം നൽകി അടുത്തതിലേക്ക് പോകുക. ഈ ക്വിസ് ഒരു ഡിവൈസിൽ ഒരിക്കൽ മാത്രമേ അറ്റന്റ് ചെയ്യാൻ കഴിയൂ.</p>
+  </div>
+
+  <div id="quizBody_quiz1"></div>
+
+  <div class="card">
+    <a class="backlink" href="unit1_humanism_portal.html">⬅ Back to Study Portal / പഠന പോർട്ടലിലേക്ക്</a>
+  </div>
+</main>
+
+<footer>
+  <span class="lang-en">Unit 1: Humanism — SSLC Study Portal</span>
+  <span class="lang-ml">യൂണിറ്റ് 1: മാനവികത — SSLC പഠന പോർട്ടൽ</span>
+</footer>
+
+<script>
+function setLang(lang){
+  document.body.className = 'show-' + lang;
+  document.getElementById('enBtn').classList.toggle('active', lang==='en');
+  document.getElementById('mlBtn').classList.toggle('active', lang==='ml');
+}
+
+const quizzes = {
+quiz1: [
+  {en:"Who wrote 'The Prince'?", ml:"'ദി പ്രിൻസ്' രചിച്ചതാര്?",
+   opts:[["Dante","ദാന്തെ"],["Machiavelli","മാക്യവെല്ലി"],["Petrarch","പെട്രാർക്ക്"],["Erasmus","ഇറാസ്മസ്"]], correct:1},
+  {en:"The Black Death occurred between which years?", ml:"ബ്ലാക്ക് ഡെത്ത് സംഭവിച്ചത് ഏത് വർഷങ്ങൾക്കിടയിൽ?",
+   opts:[["1247-1251","1247-1251"],["1347-1351","1347-1351"],["1453","1453"],["1517","1517"]], correct:1},
+  {en:"Who painted the 'Mona Lisa'?", ml:"മൊണാലിസ വരച്ചതാര്?",
+   opts:[["Michelangelo","മൈക്കലാഞ്ചലോ"],["Raphael","റാഫേൽ"],["Leonardo da Vinci","ലിയനാർഡോ ഡാവിഞ്ചി"],["Titian","ടിഷ്യൻ"]], correct:2},
+  {en:"Who proposed the Heliocentric theory?", ml:"സൂര്യകേന്ദ്ര സിദ്ധാന്തം അവതരിപ്പിച്ചതാര്?",
+   opts:[["Galileo","ഗലീലിയോ"],["Newton","ന്യൂട്ടൺ"],["Copernicus","കോപ്പർനിക്കസ്"],["Kepler","കെപ്ലർ"]], correct:2},
+  {en:"Which family made Florence prosperous?", ml:"ഫ്ലോറൻസിനെ സമ്പന്നമാക്കിയ കുടുംബം ഏത്?",
+   opts:[["Sforza","സ്ഫോർസ"],["Medici","മെഡിചി"],["Orsini","ഓർസീനി"],["Farnese","ഫർനീസി"]], correct:1},
+  {en:"Constantinople fell to the Turks in which year?", ml:"കോൺസ്റ്റാന്റിനോപ്പിളിന്റെ പതനം ഏത് വർഷം?",
+   opts:[["1347","1347"],["1453","1453"],["1517","1517"],["1215","1215"]], correct:1},
+  {en:"Who sculpted 'David' (bronze) and inspired Renaissance sculpture?", ml:"വെങ്കല 'ദാവീദ്' ശിൽപം നിർമ്മിച്ചത്?",
+   opts:[["Donatello","ഡൊണാടെല്ലോ"],["Michelangelo","മൈക്കലാഞ്ചലോ"],["Brunelleschi","ബ്രൂണലസ്കി"],["Bramante","ബ്രമാന്റെ"]], correct:0},
+  {en:"Who nailed the 95 Theses at Wittenberg in 1517?", ml:"1517-ൽ വിറ്റൻബർഗിൽ 95 പ്രബന്ധങ്ങൾ പതിപ്പിച്ചതാര്?",
+   opts:[["John Calvin","ജോൺ കാൽവിൻ"],["Zwingli","സ്വിംഗ്ലി"],["Martin Luther","മാർട്ടിൻ ലൂഥർ"],["Ignatius Loyola","ഇഗ്നേഷ്യസ് ലയോള"]], correct:2},
+  {en:"Who founded the Society of Jesus (Jesuits)?", ml:"സൊസൈറ്റി ഓഫ് ജീസസ് സ്ഥാപിച്ചതാര്?",
+   opts:[["Erasmus","ഇറാസ്മസ്"],["Ignatius Loyola","ഇഗ്നേഷ്യസ് ലയോള"],["Thomas More","തോമസ് മൂർ"],["Luther","ലൂഥർ"]], correct:1},
+  {en:"Which architectural style features pointed arches?", ml:"മുനയുള്ള കമാനങ്ങൾ ഏത് ശൈലിയുടെ സവിശേഷത?",
+   opts:[["Classical","ക്ലാസിക്കൽ"],["Gothic","ഗോഥിക്"],["Roman","റോമൻ"],["Baroque","ബറോക്ക്"]], correct:1},
+  {en:"Who invented the printing press?", ml:"അച്ചടിയന്ത്രം കണ്ടുപിടിച്ചതാര്?",
+   opts:[["Gutenberg","ഗുട്ടൻബർഗ്"],["Vesalius","വെസാലിയസ്"],["Kepler","കെപ്ലർ"],["Bruni","ബ്രൂണി"]], correct:0},
+  {en:"'Divine Comedy' was written by:", ml:"'ഡിവൈൻ കോമഡി' രചിച്ചത്:",
+   opts:[["Petrarch","പെട്രാർക്ക്"],["Boccaccio","ബൊക്കാച്ചിയോ"],["Dante","ദാന്തെ"],["Machiavelli","മാക്യവെല്ലി"]], correct:2},
+  {en:"Who led the Reformation in England, forming the Anglican Church?", ml:"ഇംഗ്ലണ്ടിൽ ആംഗ്ലിക്കൻ സഭയ്ക്ക് രൂപം നൽകി മതനവീകരണത്തിന് നേതൃത്വം നൽകിയത്?",
+   opts:[["Henry VIII","ഹെൻറി എട്ടാമൻ"],["Calvin","കാൽവിൻ"],["Zwingli","സ്വിംഗ്ലി"],["Loyola","ലയോള"]], correct:0},
+  {en:"Which Council did the Catholics convene for Counter-Reformation?", ml:"പ്രതിമതനവീകരണത്തിനായി കത്തോലിക്കർ വിളിച്ചുചേർത്ത സമ്മേളനം?",
+   opts:[["Council of Nicaea","നൈസിയ സമ്മേളനം"],["Council of Trent","ട്രെന്റ് സുനഹദോസ്"],["Council of Rome","റോം സമ്മേളനം"],["Council of Wittenberg","വിറ്റൻബർഗ് സമ്മേളനം"]], correct:1},
+  {en:"Who studied human anatomy through dissection?", ml:"മൃതശരീരം കീറിമുറിച്ച് ശരീരശാസ്ത്രം പഠിച്ചത്?",
+   opts:[["Vesalius","വെസാലിയസ്"],["Paracelsus","പാരസെൽസസ്"],["Newton","ന്യൂട്ടൺ"],["Kepler","കെപ്ലർ"]], correct:0},
+  {en:"Who was the 13th-century English thinker persecuted for rational thought?", ml:"യുക്തിചിന്തയ്ക്ക് പീഡനം സഹിക്കേണ്ടിവന്ന പതിമൂന്നാം നൂറ്റാണ്ടിലെ ഇംഗ്ലീഷ് ചിന്തകൻ?",
+   opts:[["Roger Bacon","റോജർ ബേക്കൺ"],["Thomas More","തോമസ് മൂർ"],["Erasmus","ഇറാസ്മസ്"],["Dante","ദാന്തെ"]], correct:0},
+  {en:"Which Italian family prospered in Parma?", ml:"പാർമയിൽ അഭിവൃദ്ധിപ്പെട്ട ഇറ്റാലിയൻ കുടുംബം?",
+   opts:[["Medici","മെഡിചി"],["Farnese","ഫർനീസി"],["Sforza","സ്ഫോർസ"],["Orsini","ഓർസീനി"]], correct:1},
+  {en:"According to Machiavelli, a ruler's foremost duty is to:", ml:"മാക്യവെല്ലിയുടെ അഭിപ്രായത്തിൽ ഭരണാധികാരിയുടെ പ്രധാന കടമ?",
+   opts:[["Be loved by all","എല്ലാവരാലും സ്നേഹിക്കപ്പെടുക"],["Preserve the state's power & security","രാജ്യത്തിന്റെ അധികാരവും സുരക്ഷയും നിലനിർത്തുക"],["Show religious devotion","മതഭക്തി കാണിക്കുക"],["Patronise the arts","കലയെ പ്രോത്സാഹിപ്പിക്കുക"]], correct:1},
+  {en:"Petrarch is regarded as a chief propagator of Humanism through his:", ml:"പെട്രാർക്ക് മാനവികതയുടെ പ്രധാന പ്രചാരകനായത് എന്തിലൂടെ?",
+   opts:[["Plays","നാടകങ്ങൾ"],["Sonnets","പ്രണയഗീതങ്ങൾ"],["Paintings","ചിത്രങ്ങൾ"],["Sculptures","ശിൽപങ്ങൾ"]], correct:1},
+  {en:"The Council of Trent, part of the Counter-Reformation, was convened in:", ml:"ട്രെന്റ് സുനഹദോസ് വിളിച്ചുചേർത്തത് എവിടെ?",
+   opts:[["Southern France","തെക്കൻ ഫ്രാൻസ്"],["Northern Italy","വടക്കൻ ഇറ്റലി"],["Central Germany","മധ്യ ജർമ്മനി"],["Northern Spain","വടക്കൻ സ്പെയിൻ"]], correct:1}
+],
+quiz2: [
+  {en:"What does the French word 'Renaissance' mean?", ml:"'റിനൈസ്സൻസ്' എന്ന വാക്കിന്റെ അർത്ഥമെന്ത്?",
+   opts:[["Revolution","വിപ്ലവം"],["Rebirth","പുനർജനി"],["Reform","നവീകരണം"],["Religion","മതം"]], correct:1},
+  {en:"In which century did the Renaissance begin in Italy?", ml:"നവോത്ഥാനം ഇറ്റലിയിൽ ആരംഭിച്ചത് ഏത് നൂറ്റാണ്ടിൽ?",
+   opts:[["12th","12"],["13th","13"],["14th","14"],["16th","16"]], correct:2},
+  {en:"Greek classical culture existed during which period?", ml:"ഗ്രീക്ക് ക്ലാസിക്കൽ സംസ്കാരം ഏത് കാലഘട്ടത്തിൽ?",
+   opts:[["12th–4th century BCE","ബി.സി.ഇ 12–4"],["5th BCE–5th CE","ബി.സി.ഇ5–സി.ഇ5"],["4th–1st century BCE","ബി.സി.ഇ 4–1"],["1st–5th century CE","സി.ഇ 1–5"]], correct:0},
+  {en:"Roman classical culture existed during which period?", ml:"റോമൻ ക്ലാസിക്കൽ സംസ്കാരം ഏത് കാലഘട്ടത്തിൽ?",
+   opts:[["12th–4th BCE","ബി.സി.ഇ 12–4"],["5th BCE–5th CE","ബി.സി.ഇ5–സി.ഇ5"],["1st–5th CE","സി.ഇ 1–5"],["3rd BCE–3rd CE","ബി.സി.ഇ3–സി.ഇ3"]], correct:1},
+  {en:"What is 'book-keeping'?", ml:"'ബുക്ക് കീപ്പിംഗ്' എന്നാൽ?",
+   opts:[["Buying books","പുസ്തകം വാങ്ങൽ"],["Systematic recording of income & expenditure","വരവ്-ചെലവ് ക്രമമായി രേഖപ്പെടുത്തൽ"],["Selling indulgences","ഇൻഡൾജൻസ് വിൽപന"],["Writing sonnets","പ്രണയഗീതങ്ങൾ എഴുതൽ"]], correct:1},
+  {en:"Which Italian family prospered in Milan?", ml:"മിലാനിൽ അഭിവൃദ്ധിപ്പെട്ട കുടുംബം?",
+   opts:[["Medici","മെഡിചി"],["Sforza","സ്ഫോർസ"],["Orsini","ഓർസീനി"],["Farnese","ഫർനീസി"]], correct:1},
+  {en:"Which family prospered in Naples?", ml:"നേപ്പിൾസിൽ അഭിവൃദ്ധിപ്പെട്ട കുടുംബം?",
+   opts:[["Medici","മെഡിചി"],["Visconti","വിസ്കൊന്തി"],["Orsini","ഓർസീനി"],["Sforza","സ്ഫോർസ"]], correct:2},
+  {en:"The Crusades were fought over control of which city?", ml:"കുരിശുയുദ്ധങ്ങൾ ഏത് നഗരത്തിനുവേണ്ടി?",
+   opts:[["Rome","റോം"],["Florence","ഫ്ലോറൻസ്"],["Jerusalem","ജറുസലേം"],["Constantinople","കോൺസ്റ്റാന്റിനോപ്പിൾ"]], correct:2},
+  {en:"In which centuries did the Crusades take place?", ml:"കുരിശുയുദ്ധങ്ങളുടെ കാലഘട്ടം?",
+   opts:[["9th–11th CE","9–11"],["11th–13th CE","11–13"],["13th–15th CE","13–15"],["14th–16th CE","14–16"]], correct:1},
+  {en:"What caused the Black Death to spread?", ml:"ബ്ലാക്ക് ഡെത്ത് പടർന്നത് എങ്ങനെ?",
+   opts:[["Contaminated water","മലിനജലം"],["Fleas on rats aboard ships","കപ്പലിലെ എലികളിലെ ചെള്ളുകൾ"],["Airborne dust","വായുവിലെ പൊടി"],["Poisoned food","വിഷഭക്ഷണം"]], correct:1},
+  {en:"The Black Death led to the collapse of which system?", ml:"ബ്ലാക്ക് ഡെത്ത് ഏത് വ്യവസ്ഥയുടെ തകർച്ചയ്ക്ക് കാരണമായി?",
+   opts:[["Feudal system","ഫ്യൂഡൽ വ്യവസ്ഥ"],["Monarchy","രാജവാഴ്ച"],["Republic","റിപ്പബ്ലിക്"],["Papacy","മാർപ്പാപ്പാ ഭരണം"]], correct:0},
+  {en:"Constantinople was the capital of which empire?", ml:"കോൺസ്റ്റാന്റിനോപ്പിൾ ഏത് സാമ്രാജ്യത്തിന്റെ തലസ്ഥാനം?",
+   opts:[["Roman Empire","റോമൻ സാമ്രാജ്യം"],["Holy Roman Empire","ഹോളി റോമൻ സാമ്രാജ്യം"],["Byzantine (Eastern Roman) Empire","ബൈസന്റൈൻ സാമ്രാജ്യം"],["Ottoman Empire","ഓട്ടോമൻ സാമ്രാജ്യം"]], correct:2},
+  {en:"Who captured Constantinople in 1453?", ml:"1453-ൽ കോൺസ്റ്റാന്റിനോപ്പിൾ പിടിച്ചെടുത്തതാര്?",
+   opts:[["Mongols","മംഗോളിയർ"],["Turks","തുർക്കികൾ"],["Persians","പേർഷ്യക്കാർ"],["Arabs","അറബികൾ"]], correct:1},
+  {en:"Scholasticism placed importance on:", ml:"സ്കൊളാസ്റ്റിസിസം ഊന്നൽ നൽകിയത്?",
+   opts:[["Human achievement","മാനുഷിക നേട്ടം"],["Divinity & afterlife","ദൈവികതയും പരലോകവും"],["Trade & commerce","വ്യാപാരം"],["Scientific experiment","ശാസ്ത്രീയ പരീക്ഷണം"]], correct:1},
+  {en:"Whose ideas were reintroduced to Europe through Arabic translations?", ml:"അറബി വിവർത്തനങ്ങൾ വഴി യൂറോപ്പിൽ എത്തിയ ചിന്തകൻ?",
+   opts:[["Plato","പ്ലേറ്റോ"],["Aristotle","അരിസ്റ്റോട്ടിൽ"],["Socrates","സോക്രട്ടീസ്"],["Homer","ഹോമർ"]], correct:1},
+  {en:"Who is regarded as the pioneer of the Greco-Roman independent painting style?", ml:"ഗ്രെക്കോ-റോമൻ ചിത്രകലയുടെ തുടക്കക്കാരൻ?",
+   opts:[["Giotto","ജിയോട്ടോ"],["Masaccio","മസാച്ചോ"],["Titian","ടിഷ്യൻ"],["Raphael","റാഫേൽ"]], correct:0},
+  {en:"Masaccio was known for:", ml:"മസാച്ചോ അറിയപ്പെടുന്നത്?",
+   opts:[["Sonnets","പ്രണയഗീതങ്ങൾ"],["3D-effect fresco paintings","ത്രിമാന ചുമർചിത്രങ്ങൾ"],["Bronze sculpture","വെങ്കല ശിൽപം"],["Dome architecture","താഴികക്കുട വാസ്തുവിദ്യ"]], correct:1},
+  {en:"'The Last Supper' was painted by:", ml:"'അന്ത്യ അത്താഴം' വരച്ചതാര്?",
+   opts:[["Michelangelo","മൈക്കലാഞ്ചലോ"],["Raphael","റാഫേൽ"],["Leonardo da Vinci","ലിയനാർഡോ ഡാവിഞ്ചി"],["Titian","ടിഷ്യൻ"]], correct:2},
+  {en:"Who painted 'The Last Judgment'?", ml:"'അന്ത്യവിധി' വരച്ചതാര്?",
+   opts:[["Leonardo","ലിയനാർഡോ"],["Michelangelo","മൈക്കലാഞ്ചലോ"],["Giotto","ജിയോട്ടോ"],["Masaccio","മസാച്ചോ"]], correct:1},
+  {en:"The Diptych of Federico da Montefeltro was painted by:", ml:"ഫെഡെറിക്കോയുടെ ഡിപ്റ്റിക് വരച്ചതാര്?",
+   opts:[["Piero della Francesca","പിയറോ ഡെല്ല ഫ്രാൻസെസ്ക"],["Titian","ടിഷ്യൻ"],["Raphael","റാഫേൽ"],["Giotto","ജിയോട്ടോ"]], correct:0},
+  {en:"Gothic architectural style originated in:", ml:"ഗോഥിക് ശൈലി ഉദയം ചെയ്തത് എവിടെ?",
+   opts:[["Italy","ഇറ്റലി"],["France","ഫ്രാൻസ്"],["Spain","സ്പെയിൻ"],["Germany","ജർമ്മനി"]], correct:1},
+  {en:"St. Peter's Basilica had contributions from Michelangelo and:", ml:"സെന്റ് പീറ്റേഴ്സ് ബസിലിക്കയ്ക്ക് സംഭാവന നൽകിയത് മൈക്കലാഞ്ചലോയും?",
+   opts:[["Bramante","ബ്രമാന്റെ"],["Donatello","ഡൊണാടെല്ലോ"],["Titian","ടിഷ്യൻ"],["Raphael","റാഫേൽ"]], correct:0},
+  {en:"Boccaccio wrote which work?", ml:"ബൊക്കാച്ചിയോ രചിച്ച കൃതി?",
+   opts:[["The Prince","ദി പ്രിൻസ്"],["Decameron","ഡക്കാമറൺ"],["Utopia","ഉട്ടോപ്യ"],["Don Quixote","ഡോൺ കിഹോട്ട്"]], correct:1},
+  {en:"'Canterbury Tales' was written by:", ml:"'കാന്റർബറി കഥകൾ' രചിച്ചതാര്?",
+   opts:[["Chaucer","ചോസർ"],["Cervantes","സെർവാന്റെ"],["Rabelais","റാബെലെ"],["More","മൂർ"]], correct:0},
+  {en:"'Utopia' was written by:", ml:"'ഉട്ടോപ്യ' രചിച്ചതാര്?",
+   opts:[["Erasmus","ഇറാസ്മസ്"],["Thomas More","തോമസ് മൂർ"],["Machiavelli","മാക്യവെല്ലി"],["Dante","ദാന്തെ"]], correct:1},
+  {en:"'Don Quixote' was written in which country?", ml:"'ഡോൺ കിഹോട്ട്' രചിക്കപ്പെട്ട രാജ്യം?",
+   opts:[["Italy","ഇറ്റലി"],["England","ഇംഗ്ലണ്ട്"],["Spain","സ്പെയിൻ"],["France","ഫ്രാൻസ്"]], correct:2},
+  {en:"'Gargantua and Pantagruel' was written by:", ml:"'ഗാർഗന്റുവയും പാന്റഗ്രൂലും' രചിച്ചതാര്?",
+   opts:[["Rabelais","റാബെലെ"],["Erasmus","ഇറാസ്മസ്"],["Chaucer","ചോസർ"],["Cervantes","സെർവാന്റെ"]], correct:0},
+  {en:"Erasmus's home country was:", ml:"ഇറാസ്മസിന്റെ സ്വദേശം?",
+   opts:[["Italy","ഇറ്റലി"],["Netherlands","നെതർലൻഡ്സ്"],["England","ഇംഗ്ലണ്ട്"],["Spain","സ്പെയിൻ"]], correct:1},
+  {en:"The printing press used which type of print blocks?", ml:"അച്ചടിയന്ത്രത്തിൽ ഉപയോഗിച്ചത്?",
+   opts:[["Wooden fixed type","മരം കൊണ്ടുള്ള അച്ച്"],["Movable metal type","ചലിക്കുന്ന ലോഹ അച്ച്"],["Stone carvings","കൽ കൊത്തുപണി"],["Clay tablets","കളിമൺ ഫലകം"]], correct:1},
+  {en:"Cassandra Fedele advocated for:", ml:"കസാന്ദ്ര ഫെഡെല വാദിച്ചത്?",
+   opts:[["Women's higher education","സ്ത്രീ ഉന്നത വിദ്യാഭ്യാസം"],["Trade reforms","വ്യാപാര നവീകരണം"],["Church reforms","സഭാ നവീകരണം"],["Scientific research","ശാസ്ത്ര ഗവേഷണം"]], correct:0},
+  {en:"Who pioneered scientific historiography in Renaissance Italy?", ml:"നവോത്ഥാന ചരിത്രരചനാരീതി ആവിഷ്കരിച്ചത്?",
+   opts:[["Flavio Biondo & Leonardo Bruni","ബിയോൺഡെയോ & ബ്രൂണി"],["Dante & Petrarch","ദാന്തെ & പെട്രാർക്ക്"],["Galileo & Newton","ഗലീലിയോ & ന്യൂട്ടൺ"],["Luther & Calvin","ലൂഥർ & കാൽവിൻ"]], correct:0},
+  {en:"Copernicus was a native of:", ml:"കോപ്പർനിക്കസിന്റെ സ്വദേശം?",
+   opts:[["Italy","ഇറ്റലി"],["Germany","ജർമ്മനി"],["Poland","പോളണ്ട്"],["France","ഫ്രാൻസ്"]], correct:2},
+  {en:"Galileo observed the moons of which planet?", ml:"ഗലീലിയോ ഏത് ഗ്രഹത്തിന്റെ ഉപഗ്രഹങ്ങളെ കണ്ടെത്തി?",
+   opts:[["Saturn","ശനി"],["Mars","ചൊവ്വ"],["Jupiter","വ്യാഴം"],["Venus","ശുക്രൻ"]], correct:2},
+  {en:"Kepler's contribution was about:", ml:"കെപ്ലറുടെ സംഭാവന?",
+   opts:[["Gravitation","ഗുരുത്വാകർഷണം"],["Planetary speed varying with distance from Sun","സൂര്യദൂരമനുസരിച്ചുള്ള ഗ്രഹവേഗത"],["Anatomy","ശരീരശാസ്ത്രം"],["Telescope invention","ദൂരദർശിനി കണ്ടുപിടിത്തം"]], correct:1},
+  {en:"Newton's Law of Gravitation was discovered in which century?", ml:"ഗുരുത്വാകർഷണ സിദ്ധാന്തം കണ്ടെത്തിയത് ഏത് നൂറ്റാണ്ടിൽ?",
+   opts:[["15th","15"],["16th","16"],["17th","17"],["18th","18"]], correct:2},
+  {en:"Paracelsus's field of study was:", ml:"പാരസെൽസസിന്റെ പഠനമേഖല?",
+   opts:[["Astronomy","ജ്യോതിശാസ്ത്രം"],["Diseases & remedies","രോഗങ്ങളും പ്രതിവിധികളും"],["Architecture","വാസ്തുവിദ്യ"],["Literature","സാഹിത്യം"]], correct:1},
+  {en:"Who sold indulgences, provoking Luther's protest?", ml:"ലൂഥറിന്റെ പ്രതിഷേധത്തിന് കാരണമായ ഇൻഡൾജൻസ് വിൽപനക്കാരൻ?",
+   opts:[["Johann Tetzel","ജൊഹാൻ ടെറ്റ്സൽ"],["Pope Leo X","ലിയോ പത്താമൻ മാർപ്പാപ്പ"],["John Calvin","ജോൺ കാൽവിൻ"],["Zwingli","സ്വിംഗ്ലി"]], correct:0},
+  {en:"Who led the Reformation in Switzerland?", ml:"സ്വിറ്റ്സർലാൻഡിൽ മതനവീകരണത്തിന് നേതൃത്വം നൽകിയത്?",
+   opts:[["Calvin","കാൽവിൻ"],["Zwingli","സ്വിംഗ്ലി"],["Luther","ലൂഥർ"],["Henry VIII","ഹെൻറി എട്ടാമൻ"]], correct:1},
+  {en:"The Anglican Church was established under:", ml:"ആംഗ്ലിക്കൻ സഭ സ്ഥാപിതമായത് ആരുടെ കീഴിൽ?",
+   opts:[["Henry VIII","ഹെൻറി എട്ടാമൻ"],["Calvin","കാൽവിൻ"],["Zwingli","സ്വിംഗ്ലി"],["Loyola","ലയോള"]], correct:0},
+  {en:"The 'Index' of prohibited books was published as part of:", ml:"നിരോധിത ഗ്രന്ഥങ്ങളുടെ 'ഇൻഡക്സ്' പ്രസിദ്ധീകരിച്ചത് ഏതിന്റെ ഭാഗമായി?",
+   opts:[["Renaissance art","നവോത്ഥാന കല"],["Counter-Reformation","പ്രതിമതനവീകരണം"],["Scientific revolution","ശാസ്ത്ര വിപ്ലവം"],["Reformation","മതനവീകരണം"]], correct:1}
+]
+};
+
+const QID = 'quiz1';
+let quizState = null;
+const storageKey = 'humanism_unit1_' + QID + '_result';
+
+function initQuiz(){
+  const stored = localStorage.getItem(storageKey);
+  if(stored){ renderLocked(JSON.parse(stored)); return; }
+  const data = quizzes[QID];
+  quizState = {idx:0, answers:new Array(data.length).fill(null)};
+  renderQuestion();
+}
+function renderLocked(result){
+  const data = quizzes[QID];
+  const body = document.getElementById('quizBody_'+QID);
+  body.innerHTML = `
+    <div class="quiz-locked">
+      <p class="lang-en">✅ You have already completed this quiz on this device.</p>
+      <p class="lang-ml">✅ ഈ ഡിവൈസിൽ നിങ്ങൾ ഈ ക്വിസ് പൂർത്തിയാക്കിക്കഴിഞ്ഞു.</p>
+      <div id="quizResult_locked">
+        <span class="lang-en">🎉 Your score: ${result.score} / ${data.length}</span>
+        <span class="lang-ml">🎉 നിങ്ങളുടെ സ്കോർ: ${result.score} / ${data.length}</span>
+      </div>
+    </div>`;
+}
+function renderQuestion(){
+  const data = quizzes[QID];
+  const st = quizState;
+  const body = document.getElementById('quizBody_'+QID);
+  const q = data[st.idx];
+  let optsHtml='';
+  q.opts.forEach((o,j)=>{
+    const sel = st.answers[st.idx]===j ? 'selected-opt' : '';
+    optsHtml += `<button class="opt ${sel}" onclick="selectOpt(${j})">
+      <span class="lang-en">${o[0]}</span><span class="lang-ml">${o[1]}</span></button>`;
+  });
+  const isLast = st.idx === data.length-1;
+  const answered = st.answers[st.idx] !== null;
+  body.innerHTML = `
+    <div class="quiz-progress"><span class="lang-en">Question ${st.idx+1} of ${data.length}</span><span class="lang-ml">ചോദ്യം ${st.idx+1} / ${data.length}</span></div>
+    <div class="quiz-q">
+      <p class="qtext"><span class="lang-en">${q.en}</span><span class="lang-ml">${q.ml}</span></p>
+      ${optsHtml}
+    </div>
+    <div class="quiz-nav">
+      <button class="actionbtn" onclick="prevQ()" ${st.idx===0?'disabled':''}>⬅ <span class="lang-en">Prev</span><span class="lang-ml">മുൻപ്</span></button>
+      ${isLast
+        ? `<button class="actionbtn green" onclick="submitQuiz()" ${answered?'':'disabled'}>✅ <span class="lang-en">Submit</span><span class="lang-ml">സമർപ്പിക്കുക</span></button>`
+        : `<button class="actionbtn" onclick="nextQ()" ${answered?'':'disabled'}><span class="lang-en">Next</span><span class="lang-ml">അടുത്തത്</span> ➡</button>`
+      }
+    </div>`;
+}
+function selectOpt(oi){ quizState.answers[quizState.idx] = oi; renderQuestion(); }
+function nextQ(){ if(quizState.idx < quizzes[QID].length-1){ quizState.idx++; renderQuestion(); } }
+function prevQ(){ if(quizState.idx > 0){ quizState.idx--; renderQuestion(); } }
+function submitQuiz(){
+  const data = quizzes[QID]; const st = quizState;
+  let score=0;
+  data.forEach((q,i)=>{ if(st.answers[i]===q.correct) score++; });
+  const result = {score, total:data.length, date:Date.now()};
+  localStorage.setItem(storageKey, JSON.stringify(result));
+  renderLocked(result);
+}
+initQuiz();
+</script>
+</body>
+</html>

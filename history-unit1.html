@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 1: Humanism | മാനവികത - SSLC Study Portal</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+  :root{
+    --brown1:#7a4a26; --brown2:#4a2c17; --gold:#c9932f; --cream:#fbf3e6;
+    --pink:#ffe1ec; --pinkline:#f492b6; --blue:#2596be; --lightblue:#e6f6fb;
+    --ink:#2b2119; --green:#2e8b57; --red:#c0392b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:'Poppins',sans-serif; background:var(--cream); color:var(--ink);
+  }
+  .ml{font-family:'Manjari','Poppins',sans-serif;}
+  header{
+    background:linear-gradient(135deg,var(--brown2),var(--brown1) 60%,var(--gold));
+    color:#fff; padding:22px 16px; text-align:center; position:relative;
+  }
+  header h1{margin:0 0 4px; font-size:1.5rem;}
+  header h2{margin:0; font-weight:400; font-size:1rem; opacity:.9;}
+  .topbar{
+    display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:14px;
+  }
+  button.pillbtn{
+    background:#fff; color:var(--brown2); border:none; border-radius:20px;
+    padding:8px 16px; font-size:.85rem; font-weight:600; cursor:pointer;
+    box-shadow:0 2px 5px rgba(0,0,0,.2);
+  }
+  button.pillbtn.active{background:var(--gold); color:#fff;}
+  nav.tabs{
+    display:flex; overflow-x:auto; background:var(--brown2); position:sticky; top:0; z-index:50;
+  }
+  nav.tabs button{
+    flex:1; min-width:110px; background:none; border:none; color:#f4e6d0; padding:14px 8px;
+    font-size:.85rem; font-weight:600; cursor:pointer; border-bottom:3px solid transparent; white-space:nowrap;
+  }
+  nav.tabs button.active{color:#fff; border-bottom:3px solid var(--gold); background:rgba(255,255,255,.08);}
+  main{max-width:900px; margin:0 auto; padding:18px 14px 60px;}
+  .tabpanel{display:none;}
+  .tabpanel.active{display:block; animation:fade .3s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);} to{opacity:1;transform:translateY(0);}}
+  .card{
+    background:#fff; border:1px solid #eadfce; border-radius:14px; padding:16px 18px;
+    margin-bottom:14px; box-shadow:0 2px 8px rgba(0,0,0,.05);
+  }
+  .card h3{margin-top:0; color:var(--brown2); border-bottom:2px dashed var(--gold); padding-bottom:6px;}
+  .quote{
+    background:var(--pink); border-left:5px solid var(--pinkline); padding:12px 16px;
+    border-radius:8px; font-style:italic; margin:14px 0;
+  }
+  .info{
+    background:var(--lightblue); border-left:5px solid var(--blue); padding:12px 16px;
+    border-radius:8px; margin:14px 0;
+  }
+  .think{
+    background:#f2f2f2; border-left:5px solid #888; padding:10px 16px; border-radius:8px;
+    margin:14px 0; font-weight:600;
+  }
+  table{width:100%; border-collapse:collapse; margin:10px 0;}
+  th,td{border:1px solid #e0d3bb; padding:8px 10px; text-align:left; font-size:.92rem;}
+  th{background:var(--brown1); color:#fff;}
+  tr:nth-child(even){background:#faf3e8;}
+  ul,ol{padding-left:22px;}
+  li{margin-bottom:5px;}
+  .lang-en, .lang-ml{display:none;}
+  body.show-en .lang-en{display:block;}
+  body.show-en span.lang-en{display:inline;}
+  body.show-ml .lang-ml{display:block;}
+  body.show-ml span.lang-ml{display:inline;}
+  body.show-both .lang-en, body.show-both .lang-ml{display:block;}
+  body.show-both span.lang-en, body.show-both span.lang-ml{display:inline;}
+
+  .owq-item{
+    background:#fff; border:1px solid #eee; border-radius:10px; padding:12px 14px; margin-bottom:8px;
+    cursor:pointer;
+  }
+  .owq-q{font-weight:600;}
+  .owq-a{display:none; margin-top:6px; color:var(--green); font-weight:600; border-top:1px dashed #ccc; padding-top:6px;}
+  .owq-item.open .owq-a{display:block;}
+  .owq-num{color:var(--gold); font-weight:700; margin-right:6px;}
+
+  .qb-block{margin-bottom:18px;}
+  .qb-block h4{color:var(--brown1); margin-bottom:6px;}
+
+  .quiz-q{background:#fff; border:1px solid #eadfce; border-radius:12px; padding:14px; margin-bottom:14px;}
+  .quiz-q p.qtext{font-weight:600; margin-bottom:10px;}
+  .opt{
+    display:block; width:100%; text-align:left; padding:9px 12px; margin-bottom:6px;
+    border:1px solid #ddd; border-radius:8px; background:#faf9f7; cursor:pointer; font-size:.92rem;
+  }
+  .opt.correct{background:#d9f2df; border-color:var(--green); font-weight:600;}
+  .opt.wrong{background:#fbdcd6; border-color:var(--red);}
+  .opt[disabled]{cursor:default;}
+  #quizResult{
+    text-align:center; padding:16px; font-size:1.1rem; font-weight:700; display:none;
+    background:var(--lightblue); border-radius:12px; margin-top:10px;
+  }
+  .actionbar{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin:16px 0;}
+  .actionbtn{
+    background:var(--brown1); color:#fff; border:none; padding:10px 18px; border-radius:24px;
+    font-weight:600; cursor:pointer; font-size:.9rem; display:flex; align-items:center; gap:6px;
+  }
+  .actionbtn.green{background:var(--green);}
+  .actionbtn.blue{background:var(--blue);}
+  .actionbtn.gold{background:var(--gold);}
+  footer{text-align:center; padding:16px; color:#8a7a63; font-size:.8rem;}
+
+  /* Quick Notes */
+  .qn-tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;}
+  .qn-tab-btn{
+    background:#f2e6d3; color:var(--brown2); border:none; border-radius:20px; padding:9px 16px;
+    font-weight:600; font-size:.85rem; cursor:pointer;
+  }
+  .qn-tab-btn.active{background:var(--brown1); color:#fff;}
+  .qn-panel{display:none;}
+  .qn-panel.active{display:block; animation:fade .3s ease;}
+  .qn-point{
+    background:#faf6ee; border:1px solid #eadfce; border-radius:10px; padding:10px 14px; margin-bottom:8px;
+  }
+  .qn-point b{color:var(--brown1);}
+
+  /* Quiz sub-tabs */
+  .quiz-subtabs{display:flex; gap:8px; justify-content:center; margin-bottom:14px; flex-wrap:wrap;}
+  .quiz-subtab-btn{
+    background:#f2e6d3; color:var(--brown2); border:none; border-radius:20px; padding:9px 18px;
+    font-weight:600; font-size:.85rem; cursor:pointer;
+  }
+  .quiz-subtab-btn.active{background:var(--green); color:#fff;}
+  .quiz-panel{display:none;}
+  .quiz-panel.active{display:block;}
+  .quiz-progress{
+    text-align:center; font-weight:700; color:var(--brown1); margin-bottom:10px; font-size:.9rem;
+  }
+  .opt.selected-opt{border-color:var(--gold); background:#fff6e6; outline:3px solid var(--gold);}
+  .quiz-nav{display:flex; justify-content:space-between; gap:10px; margin-top:6px;}
+  .quiz-nav .actionbtn{flex:1; justify-content:center;}
+  .quiz-nav .actionbtn[disabled]{opacity:.4; cursor:not-allowed;}
+  .quiz-locked{
+    background:var(--lightblue); border-radius:14px; padding:22px 16px; text-align:center;
+  }
+  .quiz-locked p{margin:4px 0;}
+  .quiz-locked #quizResult_locked{font-size:1.15rem; font-weight:700; margin-top:10px;}
+
+  /* Match the Following */
+  .match-set{margin-bottom:22px;}
+  .match-set h4{color:var(--brown1); margin-bottom:10px;}
+  .match-wrap{display:flex; gap:18px; flex-wrap:wrap;}
+  .match-col{flex:1; min-width:140px; display:flex; flex-direction:column; gap:8px;}
+  .match-item{
+    background:#fff; border:2px solid #ddd; border-radius:8px; padding:10px 12px;
+    cursor:pointer; font-size:.88rem; text-align:left; font-weight:500;
+  }
+  .match-item.selected{border-color:var(--gold); background:#fff6e6;}
+  .match-item.correct{border-color:var(--green); background:#d9f2df; cursor:default;}
+  .match-item.wrong{border-color:var(--red); background:#fbdcd6;}
+  .match-status{margin-top:10px; font-weight:700; text-align:center; color:var(--brown2);}
+  .match-reset{margin-top:10px;}
+
+  @media print{
+    nav.tabs, .topbar, .actionbar, #resetQuizBtn, .no-print{display:none !important;}
+    .tabpanel{display:block !important;}
+    header{background:none !important; color:var(--brown2) !important;}
+    .card{box-shadow:none; border:1px solid #999;}
+    body{background:#fff;}
+  }
+</style>
+</head>
+<body class="show-en">
+
+<header>
+  <a href="history.html" style="position:absolute; top:14px; left:16px; font-size:.85rem; color:#fff; text-decoration:none; opacity:.9; z-index:2;">&larr; Back to History</a>
+  <a href="index.html" title="Home" style="position:absolute; top:14px; right:16px; font-size:1.15rem; color:#fff; text-decoration:none; opacity:.9; z-index:2;">&#127968;</a>
+  <h1>Unit 1: Humanism <span class="ml">| മാനവികത</span></h1>
+  <h2>SSLC Social Science I — Standard X (SCERT 2026-27)</h2>
+  <div class="topbar no-print">
+    <button class="pillbtn active" id="enBtn" onclick="setLang('en')">English</button>
+    <button class="pillbtn" id="mlBtn" onclick="setLang('ml')">മലയാളം</button>
+    <button class="pillbtn" onclick="window.print()">🖨️ Print</button>
+    <button class="pillbtn" onclick="sharePage()">🔗 Share</button>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="notes">📖 Notes</button>
+  <button class="tab-btn" data-tab="owq">🔤 One-Word</button>
+  <button class="tab-btn" data-tab="qbank">📝 Question Bank</button>
+  <button class="tab-btn" data-tab="quicknotes">📌 Quick Notes</button>
+  <button class="tab-btn" data-tab="match">🔗 Match</button>
+  <button class="tab-btn" data-tab="quiz">🎯 Quiz</button>
+</nav>
+
+<main>
+
+<!-- ============ NOTES TAB ============ -->
+<section class="tabpanel active" id="notes">
+
+  <div class="quote">
+    <p class="lang-en">"The rejection of knowledge is our own rejection; the very light by which we are illuminated cannot fail to love that light. Love is the offspring only of knowledge. Right thinking is the guide to sound desire, and it alone leads us to salvation." — Roger Bacon</p>
+    <p class="lang-ml">"അറിവിന്റെ നിരാസം നമ്മുടെ നിരാസം തന്നെയാണ്; നമ്മുടെ ആലയാൽ പ്രകാശിതമാക്കപ്പെട്ട ബുദ്ധിക്ക് ആ ആലയെ സ്നേഹിക്കാതിരിക്കാനാവില്ല. സ്നേഹം അറിവിന്റെ മാത്രം സന്തതിയാണ്. യുക്തിചിന്ത ശരിയായ ഇച്ഛയുടെ മാർഗദർശിയും നമ്മെ മോക്ഷത്തിലേക്ക് നയിക്കുന്നതും യുക്തി തന്നെ." — റോജർ ബേക്കൺ</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="lang-en">1. Background: Europe on the Eve of Change</span><span class="lang-ml">1. പശ്ചാത്തലം: മാറ്റത്തിന്റെ വക്കിലുള്ള യൂറോപ്പ്</span></h3>
+    <p class="lang-en">Roger Bacon, a 13th-century English scientific thinker, lived at a time when European authorities suppressed rational thought. Thinkers who questioned existing ideas were persecuted — some imprisoned, some killed. But by the 14th century, conditions began to change: Europe's social, cultural, economic, and political spheres saw major shifts, influenced both by the legacy of ancient Greco-Roman culture and by new ideas emerging from the medieval period.</p>
+    <p class="lang-ml">പതിമൂന്നാം നൂറ്റാണ്ടിൽ ഇംഗ്ലണ്ടിൽ ജീവിച്ചിരുന്ന ശാസ്ത്രചിന്തകനായിരുന്നു റോജർ ബേക്കൺ. അദ്ദേഹത്തിന്റെ കാലത്ത് യൂറോപ്യൻ അധികാരികൾ യുക്തിചിന്തയെ നിഷേധിച്ചിരുന്നു; എതിർത്ത ചിന്തകർ പീഡനത്തിനും ജയിൽവാസത്തിനും വിധേയരായി, ചിലർക്ക് ജീവൻ തന്നെ നഷ്ടപ്പെട്ടു. എന്നാൽ പതിനാലാം നൂറ്റാണ്ടോടെ യൂറോപ്പിലെ സാമൂഹിക, സാംസ്കാരിക, സാമ്പത്തിക, രാഷ്ട്രീയ രംഗങ്ങളിൽ മാറ്റങ്ങൾ സംഭവിച്ചു — പ്രാചീന ഗ്രീക്കോ-റോമൻ സംസ്കാരത്തിന്റെ സ്വാധീനവും മധ്യകാലത്ത് നിലനിന്നിരുന്ന പുതിയ ആശയങ്ങളും ഇതിന് കാരണമായി.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="lang-en">2. Greco-Roman Culture</span><span class="lang-ml">2. ഗ്രെക്കോ-റോമൻ സംസ്കാരങ്ങൾ</span></h3>
+    <p class="lang-en">Ancient Europe had two major civilizations known as "Classical" cultures: <b>Greek</b> (12th century BCE – 4th century BCE) and <b>Roman</b> (5th century BCE – 5th century CE). Key features that spread across Europe from these cultures included:</p>
+    <p class="lang-ml">പ്രാചീന യൂറോപ്പിൽ നിലനിന്നിരുന്ന രണ്ട് പ്രധാന സംസ്കാരങ്ങളാണ് ഗ്രീക്ക്, റോമൻ സംസ്കാരങ്ങൾ — ഇവ 'ക്ലാസിക്കൽ' സംസ്കാരങ്ങൾ എന്നറിയപ്പെടുന്നു. ഗ്രീക്ക് സംസ്കാരം ബി.സി.ഇ. 12 മുതൽ 4 വരെ നൂറ്റാണ്ടിലും, റോമൻ സംസ്കാരം ബി.സി.ഇ. 5 മുതൽ സി.ഇ. 5 വരെ നൂറ്റാണ്ടിലും നിലനിന്നു. ഈ സംസ്കാരങ്ങളിൽ നിന്ന് പ്രചരിച്ച സവിശേഷതകൾ:</p>
+    <ul>
+      <li class="lang-en">Human-centred outlook (Humanism)</li><li class="lang-ml">മനുഷ്യകേന്ദ്രീതമായ കാഴ്ചപ്പാട് (മാനവികത)</li>
+      <li class="lang-en">Growth of city/urban life</li><li class="lang-ml">നഗരജീവിതത്തിന്റെ വളർച്ച</li>
+      <li class="lang-en">Progress of trade & commerce</li><li class="lang-ml">കച്ചവടത്തിന്റെ പുരോഗതി</li>
+      <li class="lang-en">Growth of nation-states</li><li class="lang-ml">ദേശരാഷ്ട്രങ്ങളുടെ വളർച്ച</li>
+      <li class="lang-en">Individual freedom</li><li class="lang-ml">വ്യക്തിസ്വാതന്ത്ര്യം</li>
+      <li class="lang-en">Rational / logical thinking</li><li class="lang-ml">യുക്തിചിന്ത</li>
+      <li class="lang-en">Spread of secular values</li><li class="lang-ml">മതേതരമൂല്യങ്ങളുടെ വ്യാപനം</li>
+      <li class="lang-en">Growth of a monetary economy</li><li class="lang-ml">പണാധിഷ്ഠിത സമ്പദ്‌ഘടന</li>
+      <li class="lang-en">Importance to regional/local languages</li><li class="lang-ml">പ്രാദേശികഭാഷകൾക്ക് ലഭിച്ച പ്രാധാന്യം</li>
+      <li class="lang-en">Changes in art & science</li><li class="lang-ml">കല, ശാസ്ത്ര രംഗങ്ങളിലുണ്ടായ മാറ്റങ്ങൾ</li>
+    </ul>
+    <div class="info">
+      <p class="lang-en"><b>Renaissance</b> — the term comes from French "Renaissance" meaning "rebirth" (revival). It refers to the rebirth of the ancient Greco-Roman cultures that took place in 14th century Italy, marking the transition from the medieval to the modern age.</p>
+      <p class="lang-ml"><b>നവോത്ഥാനം (Renaissance)</b> — 'റിനൈസ്സൻസ്' എന്ന ഫ്രഞ്ച് വാക്കിന് മലയാളത്തിൽ നവോത്ഥാനം, പുനർജനി എന്നൊക്കെയാണ് അർഥം. പതിനാലാം നൂറ്റാണ്ടോടുകൂടി പ്രാചീന ഗ്രെക്കോ-റോമൻ സംസ്കാരങ്ങൾക്കുണ്ടായ പുനർജനി എന്നാണ് ഇതുകൊണ്ട് അർഥമാക്കുന്നത്. മധ്യകാലഘട്ടത്തിൽ നിന്നും ആധുനിക കാലഘട്ടത്തിലേക്കുള്ള സംക്രമണകാലം (Transition Period) ആണിത്.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="lang-en">3. Why Italy? — City-States & Trade</span><span class="lang-ml">3. നവോത്ഥാനം എന്തുകൊണ്ട് ഇറ്റലിയിൽ?</span></h3>
+    <p class="lang-en">Italian cities were different from other European cities: they enjoyed greater independence and wealth. Merchants there were skilled in banking and insurance, and highly efficient in commercial techniques like <b>book-keeping</b> — the systematic recording of an establishment's income and expenditure, which is the first step of accounting.</p>
+    <p class="lang-ml">ഇറ്റലിയിലെ നഗരങ്ങൾ യൂറോപ്പിലെ മറ്റ് നഗരങ്ങളിൽ നിന്നും വ്യത്യസ്തമായിരുന്നു — അവ കൂടുതൽ സ്വതന്ത്രവും സമ്പന്നവുമായിരുന്നു. വ്യാപാരികൾ ബാങ്കിംഗ്, ഇൻഷുറൻസ് മേഖലകളെക്കുറിച്ച് അറിവുള്ളവരായിരുന്നു. <b>ബുക്ക് കീപ്പിംഗ്</b> എന്നത് ഒരു സ്ഥാപനത്തിന്റെ വരവും ചെലവും ദൈനംദിനാടിസ്ഥാനത്തിൽ ക്രമമായി രേഖപ്പെടുത്തുന്നതാണ്; അക്കൗണ്ടിംഗിന്റെ ആദ്യനടപടിയാണിത്.</p>
+
+    <table>
+      <tr><th class="lang-en">Italian Family</th><th class="lang-en">City that Prospered</th><th class="lang-ml">ഇറ്റാലിയൻ കുടുംബം</th><th class="lang-ml">വളർന്നുവന്ന നഗരം</th></tr>
+      <tr><td>Medici</td><td>Florence</td><td>മെഡിചി</td><td>ഫ്ലോറൻസ്</td></tr>
+      <tr><td>Sforza</td><td>Milan</td><td>സ്ഫോർസ</td><td>മിലാൻ</td></tr>
+      <tr><td>Farnese</td><td>Parma</td><td>ഫർനീസി</td><td>പാർമ</td></tr>
+      <tr><td>Orsini</td><td>Naples</td><td>ഓർസീനി</td><td>നേപ്പിൾസ്</td></tr>
+      <tr><td>Visconti</td><td>Milan</td><td>വിസ്കൊന്തി</td><td>മിലാൻ</td></tr>
+    </table>
+
+    <div class="info">
+      <p class="lang-en"><b>Crusades:</b> Series of wars between Christians and Muslims over control of Jerusalem, regarded as a holy land. They lasted from the 11th to 13th centuries CE and decisively influenced the religious, social, and economic life of Asia and Europe. The Crusades helped Italian cities exchange cultures with the East and grow economically through this trade route.</p>
+      <p class="lang-ml"><b>കുരിശുയുദ്ധങ്ങൾ:</b> വിശുദ്ധനാടായി കരുതപ്പെടുന്ന ജറുസലേമിനായി ഇസ്ലാം മത വിശ്വാസികളും ക്രൈസ്തവരും തമ്മിൽ നടന്ന യുദ്ധങ്ങളാണ് കുരിശുയുദ്ധങ്ങൾ. സി.ഇ. പതിനൊന്നാം നൂറ്റാണ്ടു മുതൽ പതിമൂന്നാം നൂറ്റാണ്ടു വരെയായിരുന്നു ഇതിന്റെ കാലഘട്ടം. ഇത് കിഴക്കൻ ലോകത്തെ സംസ്കാരങ്ങളുമായി ഇറ്റാലിയൻ നഗരങ്ങളെ പരിചയപ്പെടുത്തുകയും നഗരങ്ങളുടെ വളർച്ചയ്ക്ക് വേഗത കൂട്ടുകയും ചെയ്തു.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="lang-en">4. The Black Death & Rise of Humanism</span><span class="lang-ml">4. ബ്ലാക്ക് ഡെത്തും മാനവികതയുടെ ഉദയവും</span></h3>
+    <p class="lang-en"><b>Black Death (1347–1351):</b> A devastating plague (bubonic plague) that swept through Europe, spread by fleas carried on rats aboard trading ships. Victims developed dark swellings on the body — hence the name. It caused massive loss of life, a severe shortage of agricultural labourers, and the collapse of the feudal system that depended on it. As medicines failed against the plague, people began to study ancient Greek and Roman medical science more closely, and to think for themselves about the uncertainty of human life and worldly pleasures — leading toward Humanism.</p>
+    <p class="lang-ml"><b>ബ്ലാക്ക് ഡെത്ത് (1347-1351):</b> യൂറോപ്പിനെ തകർത്തെറിഞ്ഞ പ്ലേഗ് മഹാമാരി. രോഗം ബാധിച്ചവരുടെ ശരീരത്തിൽ കറുത്ത കുമിളകൾ രൂപപ്പെട്ടിരുന്നു — ഇതിനാലാണ് ഈ പേര്. വാണിജ്യത്തിനായി വന്ന കപ്പലുകളിലെ എലികളിലൂടെ പടർന്നു. ഇത് കാർഷികമേഖലയെ ആശ്രയിച്ചു നിലനിന്നിരുന്ന ഫ്യൂഡൽ വ്യവസ്ഥയുടെ തകർച്ചയ്ക്കും കാരണമായി. മരുന്നുകൾ പ്ലേഗിനെ ചെറുക്കുന്നതിൽ പരാജയപ്പെട്ടപ്പോൾ, ജനം പ്രാചീന ഗ്രീസിലെയും റോമിലെയും വൈദ്യശാസ്ത്രത്തെക്കുറിച്ച് കൂടുതൽ പഠിക്കാൻ തുടങ്ങുകയും ജീവിതത്തിന്റെ അനിശ്ചിതത്വത്തെക്കുറിച്ച് സ്വയം ചിന്തിക്കുകയും ചെയ്തു — ഇത് മാനവികതയിലേക്ക് (Humanism) വഴിതുറന്നു.</p>
+    <div class="think no-print">
+      <span class="lang-en">🖊️ Discuss: What changes did the plague cause in various fields of Europe in the 14th century?</span>
+      <span class="lang-ml">🖊️ ചർച്ച ചെയ്യുക: പതിനാലാം നൂറ്റാണ്ടിൽ പൊട്ടിപ്പുറപ്പെട്ട പ്ലേഗ് യൂറോപ്പിന്റെ വിവിധ മേഖലകളിൽ ഉണ്ടാക്കിയ മാറ്റങ്ങൾ എന്തെല്ലാം?</span>
+    </div>
+    <p class="lang-en">The growth of wealth, political freedom, and social unity in the cities nurtured self-awareness and self-respect among people. Ideas of ancient Rome — the rule of law and systems of governance — spread through Italy. A section of educated, wealthy people engaged in publishing works on classical language, literature, architecture, and ancient philosophy. Wealthy patrons and rulers encouraged artists and thinkers, believing this promoted their fame and prevented wars.</p>
+    <p class="lang-ml">നഗരങ്ങളിലെ സമ്പത്ത്, രാഷ്ട്രീയസ്വാതന്ത്ര്യം, സാമൂഹിക ഐക്യം എന്നിവ ജനങ്ങളിൽ പൗരബോധവും ആത്മാഭിമാനവും വളർത്തി. പ്രാചീന റോമാസാമ്രാജ്യത്തിൽ നിലനിന്നിരുന്ന ക്രമസമാധാനം, ഭരണകൂടം എന്നിവയെ സംബന്ധിച്ച ആശയങ്ങൾ ഇറ്റലിയിൽ പ്രചരിച്ചു. കെട്ടിടങ്ങൾ നിർമ്മിക്കുന്നതും കലയെയും സാഹിത്യത്തെയും പ്രോത്സാഹിപ്പിക്കുന്നതും യുദ്ധങ്ങളെ ഒഴിവാക്കാൻ തങ്ങളെ സഹായിക്കുമെന്ന് രാജാക്കന്മാർ കരുതി.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="lang-en">5. Fall of Constantinople (1453)</span><span class="lang-ml">5. കോൺസ്റ്റാന്റിനോപ്പിളിന്റെ പതനം (1453)</span></h3>
+    <p class="lang-en">In 1453 the Turks captured Constantinople, capital of the Eastern Roman (Byzantine) Empire, which had been home to numerous scholars preserving manuscripts of ancient Greco-Roman literature. Following the Turkish attack, these scholars fled with their manuscripts to Italian cities. This spread of ancient texts and learning beyond universities into libraries accelerated the growth of Italian cities' scientific and cultural life, opening pathways for fresh ideas in science and culture.</p>
+    <p class="lang-ml">1453-ൽ തുർക്കികൾ കിഴക്കൻ റോമാസാമ്രാജ്യത്തിന്റെ തലസ്ഥാനമായിരുന്ന കോൺസ്റ്റാന്റിനോപ്പിൾ പിടിച്ചെടുത്തു. പ്രാചീന ഗ്രെക്കോ-റോമൻ സാഹിത്യകൃതികളുടെ കൈയെഴുത്തുപ്രതികൾ കൈവശമുണ്ടായിരുന്ന നിരവധി പണ്ഡിതരുടെ കേന്ദ്രമായിരുന്നു കോൺസ്റ്റാന്റിനോപ്പിൾ. തുർക്കികളുടെ ആക്രമണത്തെത്തുടർന്ന് ഇവർ കൈയെഴുത്തുപ്രതികളുമായി ഇറ്റാലിയൻ നഗരങ്ങളിലേക്ക് നീങ്ങി. ഇത് സർവകലാശാലകളിൽ മാത്രം ഒതുങ്ങിനിന്ന അന്വേഷണങ്ങളും പഠനങ്ങളും ഗ്രന്ഥാലയങ്ങളിലേക്ക് വ്യാപിക്കാൻ കാരണമായി.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="lang-en">6. Humanism & Scholasticism</span><span class="lang-ml">6. മാനവികതയും സ്കൊളാസ്റ്റിസിസവും</span></h3>
+    <p class="lang-en"><b>Scholasticism:</b> The dominant medieval philosophy that upheld Christian religious thought, placing importance on divinity and life after death, even while encouraging debates and enquiry. <b>Humanism</b> shifted focus away from a God-centred worldview toward a human-centred one — highlighting human individuality, emotions, skills, writing, and conversation as central to life. Dissent and criticism gained space; humanists questioned the dominance of religion.</p>
+    <p class="lang-ml"><b>സ്കൊളാസ്റ്റിസിസം:</b> ക്രൈസ്തവ മതചിന്തയെ അടിസ്ഥാനമാക്കിയ മധ്യകാല തത്വശാസ്ത്രം — ദൈവത്തിനും പരലോകജീവിതത്തിനുമാണ് ഊന്നൽ നൽകിയത്. <b>മാനവികത (Humanism)</b> ദൈവകേന്ദ്രീകൃതമായ കാഴ്ചപ്പാടിൽ നിന്നും മനുഷ്യകേന്ദ്രീകൃതമായ വീക്ഷണത്തിലേക്കുള്ള മാറ്റമായിരുന്നു — മനുഷ്യനിലെ അനന്യത, വികാരങ്ങൾ, ശേഷികൾ, എഴുത്ത്, സംഭാഷണം എന്നിവയ്ക്ക് ഊന്നൽ നൽകി. വിയോജിപ്പുകൾക്കും വിമർശനങ്ങൾക്കും മാനവികതയിൽ സ്ഥാനം ലഭിച്ചു.</p>
+    <div class="info">
+      <p class="lang-en"><b>Aristotle:</b> Ancient Greek philosopher whose ideas — reintroduced to Europe through Arabic translations — brought fresh questions and dialogue to Renaissance thought. His works, translated into Latin and local languages, spread widely across Europe.</p>
+      <p class="lang-ml"><b>അരിസ്റ്റോട്ടിൽ:</b> പ്രാചീന ഗ്രീസിൽ ജീവിച്ചിരുന്ന ചിന്തകൻ. അദ്ദേഹത്തിന്റെ ആശയങ്ങൾ നവോത്ഥാനകാലത്ത് പുതിയ ചോദ്യങ്ങൾക്കും സംവാദങ്ങൾക്കും വഴിയൊരുക്കി. അറബികൾ വഴി ഇദ്ദേഹത്തിന്റെ കൃതികൾ ലാറ്റിനിലും പ്രാദേശികഭാഷകളിലും വിവർത്തനം ചെയ്ത് പ്രചരിപ്പിക്കപ്പെട്ടു.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="lang-en">7. Renaissance Art</span><span class="lang-ml">7. നവോത്ഥാനകല</span></h3>
+    <p class="lang-en"><b>Painting</b> was the field where Humanism was most powerfully reflected. Artists depicted human figures accurately and precisely, aided by their knowledge of anatomy. Emphasis moved to earthly, worldly values; art became more true-to-life. Key features: landscapes, use of colour for light & distance, realistic depiction of the human body, use of oil paint, portraits, and idealised divine figures shown in human form.</p>
+    <p class="lang-ml">നവോത്ഥാനകാലത്ത് മാനവികത ഏറ്റവും ശക്തമായി പ്രതിഫലിച്ച മേഖലയായിരുന്നു <b>ചിത്രകല</b>. ചിത്രകാരർ മനുഷ്യരൂപങ്ങളെ കൃത്യമായും വ്യക്തമായും സൂക്ഷ്മതയോടെയും അവതരിപ്പിച്ചു; ശരീരശാസ്ത്രത്തിൽ (Anatomy) അവർ കൈവരിച്ചിരുന്ന അറിവ് ഇതിന് സഹായകമായി. സവിശേഷതകൾ: ഭൂദൃശ്യങ്ങൾ, വർണ്ണങ്ങൾകൊണ്ട് പ്രകാശത്തെയും അകലത്തെയും ചിത്രീകരിക്കൽ, മനുഷ്യശരീരത്തിന്റെ യാഥാർഥ ചിത്രീകരണം, എണ്ണച്ചായത്തിന്റെ ഉപയോഗം, ചരായാചിത്രങ്ങൾ (Portraits), ആദർശവൽക്കരിക്കപ്പെട്ട മനുഷ്യരൂപത്തിലുള്ള ദൈവത്തിന്റെ ചിത്രീകരണം.</p>
+    <table>
+      <tr><th class="lang-en">Artist</th><th class="lang-en">Famous Work(s)</th><th class="lang-ml">കലാകാരൻ</th><th class="lang-ml">പ്രശസ്ത കൃതികൾ</th></tr>
+      <tr><td>Giotto</td><td>Pioneer of Greco-Roman independent style in painting</td><td>ജിയോട്ടോ</td><td>ഗ്രെക്കോ-റോമൻ സ്വാധീന ചിത്രകലയുടെ തുടക്കക്കാരൻ</td></tr>
+      <tr><td>Masaccio</td><td>3D-effect wall/fresco paintings</td><td>മസാച്ചോ</td><td>ചുമർചിത്രങ്ങൾ (ത്രിമാന പ്രതീതി)</td></tr>
+      <tr><td>Leonardo da Vinci</td><td>The Last Supper, Mona Lisa</td><td>ലിയനാർഡോ ഡാവിഞ്ചി</td><td>അന്ത്യ അത്താഴം, മൊണാലിസ</td></tr>
+      <tr><td>Michelangelo</td><td>Sistine Chapel ceiling, The Last Judgment</td><td>മൈക്കലാഞ്ചലോ</td><td>സിസ്റ്റൈൻ ചാപ്പൽ മുകൾത്തട്ട്, അന്ത്യവിധി</td></tr>
+      <tr><td>Titian & Raphael</td><td>Portraits, humane subjects</td><td>ടിഷ്യൻ & റാഫേൽ</td><td>ചരായാചിത്രങ്ങൾ, മാനുഷിക പ്രമേയങ്ങൾ</td></tr>
+      <tr><td>Piero della Francesca</td><td>Diptych of Federico da Montefeltro & Battista Sforza</td><td>പിയറോ ഡെല്ല ഫ്രാൻസെസ്ക</td><td>ഇരട്ട എണ്ണച്ചായ ചിത്രം</td></tr>
+    </table>
+
+    <h3><span class="lang-en">Sculpture</span><span class="lang-ml">ശിൽപകല</span></h3>
+    <p class="lang-en">Sculpture broke free from the medieval Gothic style, gaining individuality and vitality. <b>Donatello</b> created the bronze "David" — a shepherd boy who defeated a giant, symbolising a hero who saves a nation. <b>Michelangelo</b>'s "Pieta" (Mary holding Christ's dead body) and his "David" continued this classical revival.</p>
+    <p class="lang-ml">മധ്യകാല ഗോഥിക് ശൈലിയിൽ നിന്നും ശിൽപകലയെ മോചിപ്പിച്ച് ഊർജ്ജസ്വലതയും വ്യക്തിത്വവും പകർന്നു. <b>ഡൊണാടെല്ലോ</b>യുടെ വെങ്കലശിൽപമായ 'ദാവീദ്' ഒരു കൗമാരക്കാരനെ അവതരിപ്പിക്കുന്നു. <b>മൈക്കലാഞ്ചലോ</b>യുടെ 'പിയത്ത', 'ദാവീദ്' എന്നിവയും പ്രശസ്തമായ ശിൽപങ്ങളാണ്.</p>
+
+    <h3><span class="lang-en">Architecture</span><span class="lang-ml">വാസ്തുവിദ്യ</span></h3>
+    <p class="lang-en"><b>Filippo Brunelleschi</b> began a new style in architecture, moving away from the medieval Gothic style (marked by pointed arches) toward the classical Greco-Roman style. His masterpiece: the dome of Florence Cathedral. The Gothic style, in contrast, was born in France and produced tall towers/spires and cathedrals like St. Peter's Basilica (built with contributions from Michelangelo & Bramante).</p>
+    <p class="lang-ml"><b>ഫിലിപ്പോ ബ്രൂണലസ്കി</b> വാസ്തുവിദ്യാരംഗത്ത് പുതിയ ശൈലിക്ക് തുടക്കം കുറിച്ചു — ഫ്ലോറൻസിലെ താഴികക്കുടം (Dome) ഇതിന് ഉദാഹരണം. ഗോഥിക് ശൈലി ഫ്രാൻസിൽ ഉദയം ചെയ്തതാണ്; മുനയുള്ള കമാനങ്ങൾ (Pointed Arch) ഇതിന്റെ പ്രധാന സവിശേഷതയാണ്. സെന്റ് പീറ്റേഴ്സ് ബസിലിക്ക ഇതിന് ഉദാഹരണം.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="lang-en">8. Renaissance Literature</span><span class="lang-ml">8. നവോത്ഥാന സാഹിത്യം</span></h3>
+    <div class="quote">
+      <p class="lang-en">"The fault, dear Brutus, is not in our stars, but in ourselves..." — William Shakespeare, Julius Caesar</p>
+      <p class="lang-ml">"നമ്മുടെ വിധിയെ നിർണ്ണയിക്കാൻ കഴിയുന്നത് നക്ഷത്രങ്ങൾക്കല്ല, നമുക്ക് തന്നെയാണ്" — വില്യം ഷേക്സ്പിയർ, ജൂലിയസ് സീസർ</p>
+    </div>
+    <p class="lang-en">Renaissance writers emphasised individual freedom and secular values, breaking away from Scholasticism. Though the classical Greco-Roman influence was present, most Renaissance authors wrote in their own regional/vernacular languages rather than Latin, and prose gained new importance.</p>
+    <p class="lang-ml">നവോത്ഥാനസാഹിത്യകാർ വ്യക്തിസ്വാതന്ത്ര്യത്തിനും മതേതരമൂല്യങ്ങൾക്കും പ്രാധാന്യം നൽകി. ലാറ്റിൻ ഭാഷയ്ക്ക് പകരം പ്രാദേശികഭാഷയിലാണ് മിക്ക നവോത്ഥാനസാഹിത്യകാരും രചനകൾ നടത്തിയത്. ഗദ്യസാഹിത്യത്തിന് ഇക്കാലത്ത് കൂടുതൽ പ്രാധാന്യം ലഭിച്ചു.</p>
+    <table>
+      <tr><th class="lang-en">Writer</th><th class="lang-en">Work</th><th class="lang-en">Country</th><th class="lang-ml">സാഹിത്യകാരൻ</th><th class="lang-ml">കൃതി</th><th class="lang-ml">രാജ്യം</th></tr>
+      <tr><td>Dante Alighieri</td><td>Divine Comedy</td><td>Italy</td><td>ദാന്തെ</td><td>ഡിവൈൻ കോമഡി</td><td>ഇറ്റലി</td></tr>
+      <tr><td>Petrarch</td><td>Sonnets (love poems)</td><td>Italy</td><td>പെട്രാർക്ക്</td><td>പ്രണയഗീതങ്ങൾ</td><td>ഇറ്റലി</td></tr>
+      <tr><td>Boccaccio</td><td>Decameron</td><td>Italy</td><td>ബൊക്കാച്ചിയോ</td><td>ഡക്കാമറൺ</td><td>ഇറ്റലി</td></tr>
+      <tr><td>Niccolò Machiavelli</td><td>The Prince</td><td>Italy</td><td>മാക്യവെല്ലി</td><td>ദി പ്രിൻസ്</td><td>ഇറ്റലി</td></tr>
+      <tr><td>Erasmus</td><td>In Praise of Folly</td><td>Netherlands</td><td>ഇറാസ്മസ്</td><td>ഇൻ പ്രെയ്സ് ഓഫ് ഫോളി</td><td>നെതർലൻഡ്സ്</td></tr>
+      <tr><td>Geoffrey Chaucer</td><td>Canterbury Tales</td><td>England</td><td>ജെഫ്രി ചോസർ</td><td>കാന്റർബറി കഥകൾ</td><td>ഇംഗ്ലണ്ട്</td></tr>
+      <tr><td>Thomas More</td><td>Utopia</td><td>England</td><td>തോമസ് മൂർ</td><td>ഉട്ടോപ്യ</td><td>ഇംഗ്ലണ്ട്</td></tr>
+      <tr><td>Miguel de Cervantes</td><td>Don Quixote</td><td>Spain</td><td>മിഗ്വൽ ഡെ സെർവാന്റെ</td><td>ഡോൺ കിഹോട്ട്</td><td>സ്പെയിൻ</td></tr>
+      <tr><td>François Rabelais</td><td>Gargantua & Pantagruel</td><td>France</td><td>ഫ്രാൻസ്വാ റാബെലെ</td><td>ഗാർഗന്റുവയും പാന്റഗ്രൂലും</td><td>ഫ്രാൻസ്</td></tr>
+    </table>
+    <p class="lang-en"><b>Dante's Divine Comedy</b> imagines a symbolic pilgrimage through Hell, Purgatory, and Heaven, reflecting human love, patriotism, love of nature, freedom, and desire for a unified Italy — written in the Italian vernacular. <b>Petrarch</b> is regarded as a chief propagator of Humanism. <b>Machiavelli's "The Prince"</b> argues that a ruler's foremost duty is to preserve the power and security of the state — even if it requires being feared rather than loved, and that a ruler must not show favour to any single group.</p>
+    <p class="lang-ml"><b>ദാന്തെയുടെ ഡിവൈൻ കോമഡി</b> നരകം, ശുദ്ധീകരണസ്ഥലം, സ്വർഗം എന്നിവയിലൂടെയുള്ള സാങ്കൽപിക തീർത്ഥാടനമാണ്; മനുഷ്യസ്നേഹം, രാജ്യസ്നേഹം, പ്രകൃതി പ്രതിഭാസങ്ങളോടുള്ള താൽപര്യം, ഏകീകൃതമായ ഇറ്റലിക്കുവേണ്ടിയുള്ള മോഹങ്ങൾ എന്നിവ ഇതിൽ പ്രതിഫലിക്കുന്നു. <b>പെട്രാർക്ക്</b> മാനവികതയുടെ പ്രധാന പ്രചാരകനായിരുന്നു. <b>മാക്യവെല്ലിയുടെ 'ദി പ്രിൻസ്'</b> പ്രകാരം രാജ്യത്തിന്റെ അധികാരവും സുരക്ഷയും നിലനിർത്തുകയാണ് ഭരണാധികാരിയുടെ സുപ്രധാന കടമ — ഇതിനായി ക്രൂരൻ എന്ന പേര് കേൾക്കേണ്ടി വന്നാലും അത് സ്വീകാര്യമാണ്.</p>
+    <div class="info">
+      <p class="lang-en"><b>Printing Press:</b> Europe's first printing press was set up by <b>Johannes Gutenberg</b>, a German, in the 15th century — using movable, reusable metal type. This invention made books and ideas accessible to the common people, greatly aiding the spread of Renaissance writing and literacy.</p>
+      <p class="lang-ml"><b>അച്ചടിയന്ത്രം:</b> യൂറോപ്പിലെ ആദ്യത്തെ അച്ചടിശാല സ്ഥാപിച്ചത് ജർമ്മൻകാരനായ <b>ജൊഹാനസ് ഗുട്ടൻബർഗ്</b> ആയിരുന്നു — പതിനഞ്ചാം നൂറ്റാണ്ടിൽ, ലോഹനിർമ്മിതവും പുനരുപയോഗിക്കാവുന്നതുമായ അച്ചടിയന്ത്രം ഉപയോഗിച്ച്. ഇത് സാഹിത്യകൃതികളും ഗ്രന്ഥങ്ങളും ജനങ്ങൾക്കിടയിൽ വ്യാപകമായി വായിക്കാൻ വഴിയൊരുക്കി.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="lang-en">9. Women Humanists</span><span class="lang-ml">9. മാനവികതാവാദികളായ വനിതകൾ</span></h3>
+    <p class="lang-en"><b>Cassandra Fedele</b> was a prominent Renaissance humanist and writer in Italy, known for her speeches on the importance of higher education for women, expressed through her writings and correspondence with humanist rulers.</p>
+    <p class="lang-ml"><b>കസാന്ദ്ര ഫെഡെല</b> മാനവികതാവാദിയും എഴുത്തുകാരിയുമായി ഇറ്റലിയിൽ ജീവിച്ചിരുന്നു. സ്ത്രീകൾക്ക് ഉന്നതവിദ്യാഭ്യാസം നൽകേണ്ടതിന്റെ പ്രാധാന്യത്തെക്കുറിച്ച് തന്റെ പ്രസംഗങ്ങളിലൂടെയും രചനകളിലൂടെയും അവർ സംസാരിച്ചു.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="lang-en">10. Renaissance & Historiography</span><span class="lang-ml">10. നവോത്ഥാനവും ചരിത്രരചനയും</span></h3>
+    <p class="lang-en">Medieval historiography saw historical events as divinely ordained, controlled by a supernatural power. The Renaissance shifted this to a secular, human-centred, rational approach — historians began giving importance to chronicles, documents, and archaeological evidence. <b>Flavio Biondo</b> and <b>Leonardo Bruni</b>, Italian historians, pioneered this scientific method of history writing.</p>
+    <p class="lang-ml">ചരിത്രസംഭവങ്ങൾ ദൈവനിശ്ചയമാണെന്നും ഒരു അതിന്ദ്രിയശക്തിയാണ് ചരിത്രത്തിന്റെ ഗതി നിർണ്ണയിക്കുന്നതെന്നുമുള്ള കാഴ്ചപ്പാടാണ് മധ്യകാലത്ത് നിലനിന്നിരുന്നത്. നവോത്ഥാനകാലത്ത് ഇതിന് പ്രസക്തി നഷ്ടപ്പെട്ടു — ചരിത്രകാരൻ ദിനവൃത്താന്തങ്ങൾക്കും (Chronicles) പുരാവസ്തുതെളിവുകൾക്കും പ്രാധാന്യം നൽകി. ഇറ്റാലിയൻ ചരിത്രകാരരായ <b>ഫ്ലാവിയോ ബിയോൺഡെയോ</b>, <b>ലിയനാർഡോ ബ്രൂണി</b> എന്നിവരാണ് ഈ രീതി ആവിഷ്കരിച്ചത്.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="lang-en">11. Renaissance & Science</span><span class="lang-ml">11. നവോത്ഥാനവും ശാസ്ത്രവും</span></h3>
+    <div class="quote">
+      <p class="lang-en">"In 1589, the light of science began to shine. Living in his home in Padua, Galileo Galilei began to prove that the sun is stationary and it is the earth that moves." — from Bertolt Brecht's play "Life of Galileo"</p>
+      <p class="lang-ml">"ആയിരത്തി അറുനൂറ്റി ഒൻപതിൽ ശാസ്ത്രത്തിന്റെ പ്രകാശം ഉദിച്ചുയരാനാരംഭിച്ചു. പാദുവ നഗരത്തിലെ തന്റെ ഗൃഹത്തിലിരുന്നുകൊണ്ട് ഗലീലിയോ ഗലീലി സൂര്യൻ നിശ്ചലമാണെന്നും ഭൂമിയാണ് സഞ്ചരിക്കുന്നതെന്നും തെളിയിക്കാൻ ശ്രമമാരംഭിച്ചു." — ബെർത്തോൾഡ് ബ്രെഹ്തിന്റെ 'ഗലീലിയോയുടെ ജീവിതം' നാടകത്തിൽ നിന്ന്</p>
+    </div>
+    <p class="lang-en">For over 1,400 years, people believed the Earth was the centre of the universe (per Ptolemy's theory) and that physical forces controlled the movement of the cosmos. This idea was challenged by <b>Nicolaus Copernicus</b>, a Polish astronomer-priest, who argued that the Sun — not the Earth — is the centre, and that Earth and other planets revolve around it (Heliocentric theory).</p>
+    <p class="lang-ml">1,400 വർഷത്തിലേറെയായി ഭൂമിയാണ് പ്രപഞ്ചത്തിന്റെ കേന്ദ്രമെന്ന ടോളമിയുടെ സിദ്ധാന്തം നിലനിന്നു. ഇതിനെ വെല്ലുവിളിച്ച പോളണ്ടുകാരനും പുരോഹിതനുമായ <b>കോപ്പർനിക്കസ്</b> പ്രപഞ്ചത്തിന്റെ കേന്ദ്രം ഭൂമിയല്ല, സൂര്യനാണ് എന്ന് വാദിച്ചു (സൂര്യകേന്ദ്ര സിദ്ധാന്തം).</p>
+    <table>
+      <tr><th class="lang-en">Scientist</th><th class="lang-en">Contribution</th><th class="lang-ml">ശാസ്ത്രജ്ഞൻ</th><th class="lang-ml">സംഭാവന</th></tr>
+      <tr><td>Copernicus</td><td>Heliocentric theory (Sun at centre)</td><td>കോപ്പർനിക്കസ്</td><td>സൂര്യകേന്ദ്ര സിദ്ധാന്തം</td></tr>
+      <tr><td>Galileo Galilei</td><td>Telescope; observed Jupiter's moons & Saturn's rings; proved Copernicus right</td><td>ഗലീലിയോ ഗലീലി</td><td>ദൂരദർശിനി; വ്യാഴത്തിന്റെ ഉപഗ്രഹങ്ങൾ, ശനിയുടെ വലയങ്ങൾ കണ്ടെത്തി</td></tr>
+      <tr><td>Johannes Kepler</td><td>Planets' speed varies with distance from Sun</td><td>ജോഹാന്നാസ് കെപ്ലർ</td><td>സൂര്യനിൽ നിന്നുള്ള അകലമനുസരിച്ച് ഗ്രഹങ്ങളുടെ വേഗതയിലെ വ്യത്യാസം</td></tr>
+      <tr><td>Isaac Newton</td><td>Law of Gravitation (late 17th century)</td><td>ഐസക് ന്യൂട്ടൺ</td><td>ഗുരുത്വാകർഷണ സിദ്ധാന്തം</td></tr>
+      <tr><td>Paracelsus</td><td>Investigated causes & remedies of diseases</td><td>പാരസെൽസസ്</td><td>രോഗകാരണങ്ങളും പ്രതിവിധികളും അന്വേഷിച്ചു</td></tr>
+      <tr><td>Andreas Vesalius</td><td>Dissected corpses; advanced anatomy</td><td>ആൻഡ്രിയസ് വെസാലിയസ്</td><td>മൃതശരീരങ്ങൾ കീറിമുറിച്ച് പരിശോധിച്ചു; ശരീരശാസ്ത്രത്തിന് പുതിയ അറിവുകൾ</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3><span class="lang-en">12. Reformation</span><span class="lang-ml">12. മതനവീകരണം (Reformation)</span></h3>
+    <p class="lang-en">Renaissance humanism influenced the religious sphere of Europe as well. Writers like Erasmus, and reformers like John Wycliffe and Jan Hus, criticised certain practices and beliefs of the Catholic Church, preparing ground for protest. The chief target of protest was the sale of <b>Indulgences</b> — certificates that supposedly granted remission of sins in exchange for money, used to fund church buildings and construction projects.</p>
+    <p class="lang-ml">നവോത്ഥാനത്തിന്റെ സ്വാധീനം യൂറോപ്പിലെ മതരംഗത്തും പ്രതിഫലിച്ചു. ഇറാസ്മസിനെ പോലുള്ള മാനവികതാവാദികളും ജോൺവൈക്ലിഫ്, ജോൺഹസ്സ് തുടങ്ങിയവരുടെ വിമർശനങ്ങളും കത്തോലിക്കാസഭയിൽ നിലനിന്നിരുന്ന ചില പ്രവണതകൾക്കും വിശ്വാസങ്ങൾക്കും എതിരായി പ്രതിഷേധങ്ങൾ രൂപം കൊള്ളുന്നതിന് പശ്ചാത്തലമൊരുക്കി. <b>പാപവിമോചനപത്രം (Indulgence)</b> - പണം നൽകി വാങ്ങിയാൽ പാപങ്ങളിൽ നിന്നും മോചനം നേടാം എന്ന വില്പനയായിരുന്നു ഏറ്റവും കൂടുതൽ പ്രതിഷേധം ക്ഷണിച്ചുവരുത്തിയത്.</p>
+    <div class="info">
+      <p class="lang-en">In 1517, <b>Martin Luther</b>, a German priest, nailed his "95 Theses" to the door of Wittenberg Church, protesting the sale of indulgences by Johann Tetzel. This marked the beginning of the <b>Protestant movement</b>. Though Luther aimed only at reform and dialogue, his ideas were translated into German and spread widely by unknown printers, and he ultimately broke ties with the Church. The Reformation spread from Germany to other countries: <b>Zwingli</b> in Switzerland, <b>John Calvin</b> in Geneva, and in England, <b>King Henry VIII</b> led the Reformation, establishing the Anglican Church (Church of England) — known as a "National Church."</p>
+      <p class="lang-ml">1517-ൽ ജർമ്മൻ പുരോഹിതനായ <b>മാർട്ടിൻ ലൂഥർ</b> വിറ്റൻബർഗ് ദേവാലയത്തിന്റെ വാതിലിൽ തന്റെ '95 പ്രബന്ധങ്ങൾ' (Ninety Five Theses) പതിപ്പിച്ചു — ജൊഹാൻ ടെറ്റ്സൽ വിറ്റഴിക്കുന്ന പാപവിമോചനപത്രത്തിനെതിരെ. ഇത് <b>പ്രൊട്ടസ്റ്റന്റ് പ്രസ്ഥാനത്തിന്റെ</b> ആരംഭമായി കണക്കാക്കുന്നു. ജർമ്മനിയിൽ ആരംഭിച്ച മതനവീകരണം മറ്റ് യൂറോപ്യൻ രാജ്യങ്ങളിലേക്ക് വ്യാപിച്ചു — സ്വിറ്റ്സർലാൻഡിൽ <b>സ്വിംഗ്ലി</b>, ജനീവയിൽ <b>ജോൺകാൽവിൻ</b>, ഇംഗ്ലണ്ടിൽ രാജാവായ <b>ഹെൻറി എട്ടാമൻ</b> നേതൃത്വം നൽകി. ഇംഗ്ലണ്ടിൽ ആംഗ്ലിക്കൻ സഭ നിലവിൽ വന്നു — 'ദേശീയസഭ' (National Church) എന്നറിയപ്പെട്ടു.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="lang-en">13. Counter-Reformation</span><span class="lang-ml">13. പ്രതിമതനവീകരണം (Counter Reformation)</span></h3>
+    <p class="lang-en">Following the Reformation, the Catholic Church itself began efforts at self-renewal, known as the <b>Counter-Reformation</b> (also called the "Catholic Reformation"). As part of it, a council (Synod) was convened at Trent in northern Italy, aiming to reject wrong practices and move forward with reform: the sale of indulgences was banned, an "Index" of prohibited books was published, and the Inquisition was re-established. <b>Ignatius Loyola</b>, a Spanish priest, founded the "Society of Jesus" (Jesuits), which played a leading role in the Counter-Reformation through strict discipline, education, and missionary work, helping preserve the intellectual strength of the Catholic Church.</p>
+    <p class="lang-ml">മതനവീകരണത്തെ തുടർന്ന് കത്തോലിക്കാസഭ സ്വയം നവീകരിക്കാനുള്ള ശ്രമങ്ങൾ ആരംഭിച്ചു — ഇത് <b>പ്രതിമതനവീകരണം</b> (<b>കത്തോലിക്കാ മതനവീകരണം</b>) എന്നറിയപ്പെടുന്നു. വടക്കൻ ഇറ്റലിയിലെ ട്രെന്റിൽ സഭാനേതൃത്വത്തിന്റെ ഒരു സമ്മേളനം (സുനഹദോസ്) വിളിച്ചുചേർത്തു. പാപവിമോചനപത്രത്തിന്റെ വില്പന നിരോധിച്ചു; വിശ്വാസികൾ വായിക്കാൻ പാടില്ലാത്ത പുസ്തകങ്ങളുടെ പട്ടികയായ 'ഇൻഡക്സ്' പ്രസിദ്ധീകരിച്ചു; മതവിചാരണ കോടതി (Inquisition) പുനഃസ്ഥാപിച്ചു. സ്പെയിൻകാരനായ <b>ഇഗ്നേഷ്യസ് ലയോള</b> സ്ഥാപിച്ച 'സൊസൈറ്റി ഓഫ് ജീസസ്' (ജെസ്യൂട്ട്) ഈ പ്രസ്ഥാനത്തിൽ പ്രധാന പങ്കുവഹിച്ചു.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="lang-en">14. Summary</span><span class="lang-ml">14. ചുരുക്കം</span></h3>
+    <p class="lang-en">The Renaissance marks the phase of development of humanist ideas that existed from the Greco-Roman period onward — it was a continuation of ancient and medieval thought. Humanism, which gives central place to man and his needs and capacities, is the core of the Renaissance. Growing through Europe's mutual relations, trade, and exchange with other societies, the Renaissance eventually influenced the entire world.</p>
+    <p class="lang-ml">ഗ്രെക്കോ-റോമൻ കാലം മുതൽക്കേ നിലനിന്നിരുന്ന മാനവികാശയങ്ങളുടെ വികാസപരിണാമഘട്ടത്തെയാണ് നവോത്ഥാനം അടയാളപ്പെടുത്തുന്നത്. മനുഷ്യനും മനുഷ്യന്റെ ആവശ്യങ്ങൾക്കും സാധ്യതകൾക്കും കേന്ദ്രസ്ഥാനം നൽകുന്ന മാനവികതയാണ് നവോത്ഥാനത്തിന്റെ കാതൽ. യൂറോപ്പും ഇതര സമൂഹങ്ങളുമായുള്ള പരസ്പരബന്ധത്തിലൂടെയും വ്യാപാര-വിനിമയങ്ങളിലൂടെയും വളർന്നുവന്ന നവോത്ഥാനം ലോകത്തെ മുഴുവൻ സ്വാധീനിച്ചു.</p>
+  </div>
+
+</section>
+
+<!-- ============ ONE-WORD TAB ============ -->
+<section class="tabpanel" id="owq">
+  <div class="card">
+    <h3><span class="lang-en">🔤 One-Word Answer Questions (Tap to reveal answer)</span><span class="lang-ml">🔤 ഒറ്റവാക്ക് ഉത്തരങ്ങൾ (ഉത്തരം കാണാൻ ടാപ്പ് ചെയ്യുക)</span></h3>
+    <div id="owqList"></div>
+  </div>
+</section>
+
+<!-- ============ QUESTION BANK TAB ============ -->
+<section class="tabpanel" id="qbank">
+  <div class="card qb-block">
+    <h4><span class="lang-en">A. Very Short Answer (1 Mark)</span><span class="lang-ml">A. വളരെ ചെറിയ ഉത്തരങ്ങൾ (1 മാർക്ക്)</span></h4>
+    <ol>
+      <li><span class="lang-en">Who wrote "The Prince"?</span><span class="lang-ml">'ദി പ്രിൻസ്' രചിച്ചതാര്?</span></li>
+      <li><span class="lang-en">Name the pandemic that struck Europe between 1347 and 1351.</span><span class="lang-ml">1347 നും 1351 നും ഇടയിൽ യൂറോപ്പിനെ ബാധിച്ച മഹാമാരി ഏത്?</span></li>
+      <li><span class="lang-en">Who invented the printing press?</span><span class="lang-ml">അച്ചടിയന്ത്രം കണ്ടുപിടിച്ചതാര്?</span></li>
+      <li><span class="lang-en">Who nailed the 95 Theses to the church door at Wittenberg?</span><span class="lang-ml">വിറ്റൻബർഗ് ദേവാലയവാതിലിൽ 95 പ്രബന്ധങ്ങൾ പതിപ്പിച്ചതാര്?</span></li>
+      <li><span class="lang-en">Which Italian family made Florence prosperous?</span><span class="lang-ml">ഫ്ലോറൻസിനെ സമ്പന്നമാക്കിയ ഇറ്റാലിയൻ കുടുംബം ഏത്?</span></li>
+      <li><span class="lang-en">Who proposed the Heliocentric theory?</span><span class="lang-ml">സൂര്യകേന്ദ്ര സിദ്ധാന്തം മുന്നോട്ടുവച്ചതാര്?</span></li>
+      <li><span class="lang-en">Name the sculptor of "David" (bronze) and "Pieta".</span><span class="lang-ml">വെങ്കല 'ദാവീദ്', 'പിയത്ത' എന്നിവയുടെ ശിൽപികളാര്?</span></li>
+      <li><span class="lang-en">In which city did the Renaissance begin?</span><span class="lang-ml">നവോത്ഥാനം ആരംഭിച്ചത് എവിടെ?</span></li>
+    </ol>
+  </div>
+
+  <div class="card qb-block">
+    <h4><span class="lang-en">B. Short Answer (2 Marks)</span><span class="lang-ml">B. ചെറിയ ഉത്തരങ്ങൾ (2 മാർക്ക്)</span></h4>
+    <ol>
+      <li><span class="lang-en">What is meant by "book-keeping"? Why was it significant for Italian cities?</span><span class="lang-ml">'ബുക്ക് കീപ്പിംഗ്' എന്നാൽ എന്ത്? ഇറ്റാലിയൻ നഗരങ്ങൾക്ക് ഇത് പ്രധാനമായത് എന്തുകൊണ്ട്?</span></li>
+      <li><span class="lang-en">How did the Black Death contribute to the rise of Humanism?</span><span class="lang-ml">ബ്ലാക്ക് ഡെത്ത് മാനവികതയുടെ ഉദയത്തിന് എങ്ങനെ കാരണമായി?</span></li>
+      <li><span class="lang-en">Distinguish between Scholasticism and Humanism.</span><span class="lang-ml">സ്കൊളാസ്റ്റിസിസവും മാനവികതയും തമ്മിലുള്ള വ്യത്യാസം എന്ത്?</span></li>
+      <li><span class="lang-en">What is "Indulgence"? How did it lead to the Reformation?</span><span class="lang-ml">'ഇൻഡൾജൻസ്' എന്നാൽ എന്ത്? ഇത് മതനവീകരണത്തിന് എങ്ങനെ കാരണമായി?</span></li>
+      <li><span class="lang-en">Mention any two features of Gothic architecture.</span><span class="lang-ml">ഗോഥിക് വാസ്തുവിദ്യയുടെ ഏതെങ്കിലും രണ്ട് സവിശേഷതകൾ എഴുതുക.</span></li>
+    </ol>
+  </div>
+
+  <div class="card qb-block">
+    <h4><span class="lang-en">C. Paragraph Answer (3–4 Marks)</span><span class="lang-ml">C. ഖണ്ഡിക ഉത്തരങ്ങൾ (3–4 മാർക്ക്)</span></h4>
+    <ol>
+      <li><span class="lang-en">Explain how the fall of Constantinople in 1453 influenced the Italian Renaissance.</span><span class="lang-ml">1453-ലെ കോൺസ്റ്റാന്റിനോപ്പിളിന്റെ പതനം ഇറ്റാലിയൻ നവോത്ഥാനത്തെ എങ്ങനെ സ്വാധീനിച്ചു എന്ന് വിശദീകരിക്കുക.</span></li>
+      <li><span class="lang-en">Describe the main features of Renaissance painting, with examples of artists and their works.</span><span class="lang-ml">നവോത്ഥാന ചിത്രകലയുടെ പ്രധാന സവിശേഷതകൾ കലാകാരൻമാരുടെയും കൃതികളുടെയും ഉദാഹരണസഹിതം വിവരിക്കുക.</span></li>
+      <li><span class="lang-en">Explain Machiavelli's political ideas as presented in "The Prince".</span><span class="lang-ml">'ദി പ്രിൻസി'ൽ മാക്യവെല്ലി മുന്നോട്ടുവയ്ക്കുന്ന രാഷ്ട്രീയചിന്തകൾ വിശദീകരിക്കുക.</span></li>
+      <li><span class="lang-en">How did the Renaissance influence the field of Science? Explain with examples.</span><span class="lang-ml">നവോത്ഥാനം ശാസ്ത്രമേഖലയെ എങ്ങനെ സ്വാധീനിച്ചു? ഉദാഹരണസഹിതം വിശദീകരിക്കുക.</span></li>
+      <li><span class="lang-en">Compare Reformation and Counter-Reformation.</span><span class="lang-ml">മതനവീകരണവും പ്രതിമതനവീകരണവും തമ്മിൽ താരതമ്യം ചെയ്യുക.</span></li>
+    </ol>
+  </div>
+
+  <div class="card qb-block">
+    <h4><span class="lang-en">D. Essay Type (5 Marks)</span><span class="lang-ml">D. ഉപന്യാസരൂപ ഉത്തരങ്ങൾ (5 മാർക്ക്)</span></h4>
+    <ol>
+      <li><span class="lang-en">"Humanism is the core of the Renaissance." Substantiate this statement with reference to changes in art, literature, science, and religion.</span><span class="lang-ml">"മാനവികതയാണ് നവോത്ഥാനത്തിന്റെ കാതൽ." കല, സാഹിത്യം, ശാസ്ത്രം, മതം എന്നീ മേഖലകളിലുണ്ടായ മാറ്റങ്ങൾ പരാമർശിച്ച് സാധൂകരിക്കുക.</span></li>
+      <li><span class="lang-en">Trace the factors that made Italy the birthplace of the Renaissance.</span><span class="lang-ml">നവോത്ഥാനത്തിന്റെ ജന്മസ്ഥലമായി ഇറ്റലി മാറാൻ കാരണമായ ഘടകങ്ങൾ വിശകലനം ചെയ്യുക.</span></li>
+    </ol>
+  </div>
+  <div class="actionbar no-print">
+    <button class="actionbtn" onclick="window.print()">🖨️ Print Question Bank</button>
+  </div>
+</section>
+
+<!-- ============ QUICK NOTES TAB ============ -->
+<section class="tabpanel" id="quicknotes">
+  <div class="card">
+    <div class="qn-tabs no-print">
+      <button class="qn-tab-btn active" data-qn="shortnote">📄 Short Note</button>
+      <button class="qn-tab-btn" data-qn="revision">⚡ Quick Revision</button>
+      <button class="qn-tab-btn" data-qn="important">⭐ Important Points</button>
+    </div>
+
+    <div class="qn-panel active" id="qn-shortnote">
+      <h3><span class="lang-en">📄 Short Note: Renaissance & Humanism</span><span class="lang-ml">📄 ചെറുകുറിപ്പ്: നവോത്ഥാനവും മാനവികതയും</span></h3>
+      <p class="lang-en">The Renaissance ("rebirth") began in 14th-century Italy as a revival of ancient Greco-Roman culture, marking the transition from medieval to modern Europe. Italian city-states like Florence, Milan and Venice grew wealthy through trade and banking under families such as the Medici, giving rise to independent-minded, educated citizens. The Black Death (1347–51) shook faith in old institutions and turned attention to human life on earth, while the Fall of Constantinople (1453) sent Greek scholars and manuscripts fleeing into Italy, reviving classical learning. Humanism replaced the God-centred outlook of Scholasticism with a human-centred one, celebrating individual talent, reason and worldly achievement. This spirit transformed painting, sculpture and architecture (Leonardo, Michelangelo, Donatello, Brunelleschi), literature (Dante, Petrarch, Machiavelli, Erasmus), science (Copernicus, Galileo, Newton, Vesalius) and historiography. It also triggered the Reformation — Martin Luther's protest against indulgences in 1517 split the Church — and the Catholic Church's own Counter-Reformation through the Council of Trent and the Jesuits. In short, Humanism was the intellectual core that powered every field of Renaissance change.</p>
+      <p class="lang-ml">പതിനാലാം നൂറ്റാണ്ടിൽ ഇറ്റലിയിൽ ആരംഭിച്ച നവോത്ഥാനം (Renaissance) പ്രാചീന ഗ്രെക്കോ-റോമൻ സംസ്കാരത്തിന്റെ പുനർജനിയാണ്; മധ്യകാലത്തിൽ നിന്ന് ആധുനികതയിലേക്കുള്ള പരിവർത്തനഘട്ടം. മെഡിചി കുടുംബം പോലുള്ളവരുടെ വ്യാപാര-ബാങ്കിംഗ് വളർച്ചയിലൂടെ ഫ്ലോറൻസ്, മിലാൻ, വെനീസ് തുടങ്ങിയ നഗരരാഷ്ട്രങ്ങൾ സമ്പന്നമായി. ബ്ലാക്ക് ഡെത്ത് (1347-51) പഴയ വിശ്വാസങ്ങളെ ചോദ്യം ചെയ്യിക്കുകയും, കോൺസ്റ്റാന്റിനോപ്പിളിന്റെ പതനം (1453) പണ്ഡിതരെയും കൈയെഴുത്തുപ്രതികളെയും ഇറ്റലിയിലേക്ക് എത്തിക്കുകയും ചെയ്തു. ദൈവകേന്ദ്രീകൃതമായ സ്കൊളാസ്റ്റിസിസത്തിന് പകരം മനുഷ്യകേന്ദ്രീകൃതമായ മാനവികത നിലവിൽ വന്നു. ഇത് ചിത്രകല, ശിൽപകല, വാസ്തുവിദ്യ, സാഹിത്യം, ശാസ്ത്രം, ചരിത്രരചന എന്നിവയെ മാറ്റിമറിച്ചു. മാർട്ടിൻ ലൂഥറിന്റെ 1517-ലെ പ്രതിഷേധം മതനവീകരണത്തിനും (Reformation), തുടർന്ന് സഭയുടെ പ്രതിമതനവീകരണത്തിനും (Counter-Reformation) വഴിവച്ചു. ചുരുക്കത്തിൽ, നവോത്ഥാനത്തിന്റെ എല്ലാ മേഖലകൾക്കും ഊർജ്ജം പകർന്ന ആശയമാണ് മാനവികത.</p>
+      <p class="lang-en">In painting, artists like Giotto and Masaccio broke from flat medieval style, and Leonardo da Vinci, Michelangelo, Titian and Raphael perfected lifelike, anatomically accurate figures using oil paint, perspective and light. In sculpture, Donatello's bronze "David" and Michelangelo's "Pieta" gave the human body new dignity and vitality. In architecture, Filippo Brunelleschi's dome of Florence Cathedral revived classical Greco-Roman forms, distinct from the pointed-arch Gothic style born in France. Literature blossomed across Europe in vernacular languages — Dante's "Divine Comedy" and Petrarch's sonnets in Italy, Chaucer's "Canterbury Tales" in England, Cervantes's "Don Quixote" in Spain — while Gutenberg's printing press (15th century) carried these ideas to ordinary readers. In science, Copernicus's Heliocentric theory, confirmed by Galileo's telescope observations, and Vesalius's study of human anatomy, challenged centuries-old beliefs. Historians like Flavio Biondo and Leonardo Bruni began treating history as a human, evidence-based subject rather than divine destiny. Meanwhile, women humanists such as Cassandra Fedele argued for women's right to higher education — showing that Humanism's human-centred spirit reached beyond art and science into questions of religion and society, sparking the Reformation and Counter-Reformation.</p>
+      <p class="lang-ml">ചിത്രകലയിൽ ജിയോട്ടോ, മസാച്ചോ എന്നിവർ പഴയ ചട്ടക്കൂടിൽ നിന്ന് മോചനം നേടി; ലിയനാർഡോ, മൈക്കലാഞ്ചലോ, ടിഷ്യൻ, റാഫേൽ എന്നിവർ യാഥാർഥ്യബോധമുള്ള ചിത്രങ്ങൾ വരച്ചു. ശിൽപകലയിൽ ഡൊണാടെല്ലോയുടെ വെങ്കല 'ദാവീദ്', മൈക്കലാഞ്ചലോയുടെ 'പിയത്ത' എന്നിവ മനുഷ്യശരീരത്തിന് പുതിയ അന്തസ്സ് നൽകി. വാസ്തുവിദ്യയിൽ ബ്രൂണലസ്കിയുടെ ഫ്ലോറൻസ് താഴികക്കുടം ക്ലാസിക്കൽ ശൈലി പുനരുജ്ജീവിപ്പിച്ചു — ഫ്രാൻസിൽ ഉദയം ചെയ്ത ഗോഥിക് ശൈലിയിൽ നിന്ന് വ്യത്യസ്തമായി. സാഹിത്യം പ്രാദേശികഭാഷകളിൽ പുഷ്ടിപ്പെട്ടു — ദാന്തെ, പെട്രാർക്ക് (ഇറ്റലി), ചോസർ (ഇംഗ്ലണ്ട്), സെർവാന്റെ (സ്പെയിൻ); ഗുട്ടൻബർഗിന്റെ അച്ചടിയന്ത്രം ഈ ആശയങ്ങൾ സാധാരണക്കാരിലേക്ക് എത്തിച്ചു. ശാസ്ത്രത്തിൽ കോപ്പർനിക്കസിന്റെ സൂര്യകേന്ദ്ര സിദ്ധാന്തം, ഗലീലിയോയുടെ നിരീക്ഷണങ്ങൾ, വെസാലിയസിന്റെ ശരീരശാസ്ത്ര പഠനം എന്നിവ പഴയ വിശ്വാസങ്ങളെ വെല്ലുവിളിച്ചു. ബിയോൺഡെയോ, ബ്രൂണി തുടങ്ങിയ ചരിത്രകാരർ ചരിത്രത്തെ മാനുഷികവും തെളിവധിഷ്ഠിതവുമായ വിഷയമാക്കി. കസാന്ദ്ര ഫെഡെലയെപ്പോലുള്ള വനിതാ മാനവികതാവാദികൾ സ്ത്രീവിദ്യാഭ്യാസത്തിന് വേണ്ടി വാദിച്ചു — മാനവികതയുടെ സ്വാധീനം കലയിലും ശാസ്ത്രത്തിലും മാത്രമല്ല, മതത്തിലും സമൂഹത്തിലും എത്തി, മതനവീകരണത്തിനും പ്രതിമതനവീകരണത്തിനും വഴിവച്ചു.</p>
+
+    <div class="qn-panel" id="qn-revision">
+      <h3><span class="lang-en">⚡ Quick Revision Note</span><span class="lang-ml">⚡ പെട്ടെന്നുള്ള അവലോകനം</span></h3>
+      <div class="qn-point"><b class="lang-en">Renaissance:</b><span class="lang-en"> French word for "rebirth"; revival of Greco-Roman culture in 14th-century Italy.</span><b class="lang-ml">നവോത്ഥാനം:</b><span class="lang-ml"> "പുനർജനി"; 14-ാം നൂറ്റാണ്ടിലെ ഇറ്റലിയിൽ ഗ്രെക്കോ-റോമൻ സംസ്കാര പുനരുജ്ജീവനം.</span></div>
+      <div class="qn-point"><b class="lang-en">Why Italy:</b><span class="lang-en"> independent, wealthy city-states; book-keeping; Medici, Sforza, Farnese families.</span><b class="lang-ml">ഇറ്റലി എന്തുകൊണ്ട്:</b><span class="lang-ml"> സ്വതന്ത്ര, സമ്പന്ന നഗരരാഷ്ട്രങ്ങൾ; ബുക്ക് കീപ്പിംഗ്; മെഡിചി, സ്ഫോർസ കുടുംബങ്ങൾ.</span></div>
+      <div class="qn-point"><b class="lang-en">Black Death:</b><span class="lang-en"> 1347–1351 plague; collapsed feudalism; turned focus to human life (→ Humanism).</span><b class="lang-ml">ബ്ലാക്ക് ഡെത്ത്:</b><span class="lang-ml"> 1347-1351-ലെ പ്ലേഗ്; ഫ്യൂഡലിസത്തിന്റെ തകർച്ച; മാനവികതയിലേക്ക് വഴിതുറന്നു.</span></div>
+      <div class="qn-point"><b class="lang-en">Fall of Constantinople:</b><span class="lang-en"> 1453; Greek scholars fled to Italy with manuscripts.</span><b class="lang-ml">കോൺസ്റ്റാന്റിനോപ്പിളിന്റെ പതനം:</b><span class="lang-ml"> 1453; ഗ്രീക്ക് പണ്ഡിതർ കൈയെഴുത്തുപ്രതികളുമായി ഇറ്റലിയിലേക്ക്.</span></div>
+      <div class="qn-point"><b class="lang-en">Scholasticism vs Humanism:</b><span class="lang-en"> God-centred vs human-centred worldview.</span><b class="lang-ml">സ്കൊളാസ്റ്റിസിസം vs മാനവികത:</b><span class="lang-ml"> ദൈവകേന്ദ്രീകൃതം vs മനുഷ്യകേന്ദ്രീകൃതം.</span></div>
+      <div class="qn-point"><b class="lang-en">Art:</b><span class="lang-en"> Leonardo (Mona Lisa), Michelangelo (Sistine ceiling, Pieta, David), Donatello (bronze David), Brunelleschi (Florence dome).</span><b class="lang-ml">കല:</b><span class="lang-ml"> ലിയനാർഡോ (മൊണാലിസ), മൈക്കലാഞ്ചലോ (സിസ്റ്റൈൻ, പിയത്ത, ദാവീദ്), ഡൊണാടെല്ലോ (വെങ്കല ദാവീദ്), ബ്രൂണലസ്കി (ഫ്ലോറൻസ് താഴികക്കുടം).</span></div>
+      <div class="qn-point"><b class="lang-en">Literature:</b><span class="lang-en"> Dante (Divine Comedy), Petrarch (sonnets), Machiavelli (The Prince), Erasmus (In Praise of Folly), Thomas More (Utopia).</span><b class="lang-ml">സാഹിത്യം:</b><span class="lang-ml"> ദാന്തെ, പെട്രാർക്ക്, മാക്യവെല്ലി, ഇറാസ്മസ്, തോമസ് മൂർ.</span></div>
+      <div class="qn-point"><b class="lang-en">Science:</b><span class="lang-en"> Copernicus (Heliocentric theory), Galileo (telescope), Newton (gravitation), Vesalius (anatomy).</span><b class="lang-ml">ശാസ്ത്രം:</b><span class="lang-ml"> കോപ്പർനിക്കസ്, ഗലീലിയോ, ന്യൂട്ടൺ, വെസാലിയസ്.</span></div>
+      <div class="qn-point"><b class="lang-en">Reformation:</b><span class="lang-en"> Martin Luther's 95 Theses (1517) at Wittenberg → Protestant movement; spread via Zwingli, Calvin, Henry VIII.</span><b class="lang-ml">മതനവീകരണം:</b><span class="lang-ml"> മാർട്ടിൻ ലൂഥറിന്റെ 95 പ്രബന്ധങ്ങൾ (1517); സ്വിംഗ്ലി, കാൽവിൻ, ഹെൻറി എട്ടാമൻ.</span></div>
+      <div class="qn-point"><b class="lang-en">Counter-Reformation:</b><span class="lang-en"> Council of Trent; Ignatius Loyola's Jesuits.</span><b class="lang-ml">പ്രതിമതനവീകരണം:</b><span class="lang-ml"> ട്രെന്റ് സുനഹദോസ്; ഇഗ്നേഷ്യസ് ലയോളയുടെ ജെസ്യൂട്ടുകൾ.</span></div>
+      <div class="qn-point"><b class="lang-en">Women Humanist:</b><span class="lang-en"> Cassandra Fedele — advocated women's higher education.</span><b class="lang-ml">വനിതാ മാനവികതാവാദി:</b><span class="lang-ml"> കസാന്ദ്ര ഫെഡെല — സ്ത്രീവിദ്യാഭ്യാസത്തിനുവേണ്ടി വാദിച്ചു.</span></div>
+      <div class="qn-point"><b class="lang-en">Crusades:</b><span class="lang-en"> 11th–13th century CE wars for Jerusalem; opened trade & cultural exchange between Italy and the East.</span><b class="lang-ml">കുരിശുയുദ്ധങ്ങൾ:</b><span class="lang-ml"> സി.ഇ. 11–13 നൂറ്റാണ്ട്; ജറുസലേമിനുവേണ്ടിയുള്ള യുദ്ധങ്ങൾ; ഇറ്റലിക്ക് കിഴക്കൻ ലോകവുമായി വ്യാപാരബന്ധം.</span></div>
+      <div class="qn-point"><b class="lang-en">Painting features:</b><span class="lang-en"> landscapes, oil paint, realistic human anatomy, portraits, use of light & perspective.</span><b class="lang-ml">ചിത്രകലയുടെ സവിശേഷതകൾ:</b><span class="lang-ml"> ഭൂദൃശ്യങ്ങൾ, എണ്ണച്ചായം, യാഥാർഥ ശരീരചിത്രീകരണം, ചരായാചിത്രങ്ങൾ.</span></div>
+      <div class="qn-point"><b class="lang-en">Sculpture & Architecture:</b><span class="lang-en"> Donatello & Michelangelo revived classical sculpture; Brunelleschi's Florence dome vs Gothic pointed arches (from France).</span><b class="lang-ml">ശിൽപകലയും വാസ്തുവിദ്യയും:</b><span class="lang-ml"> ഡൊണാടെല്ലോ, മൈക്കലാഞ്ചലോ; ബ്രൂണലസ്കിയുടെ താഴികക്കുടം vs ഫ്രഞ്ച് ഗോഥിക് ശൈലി.</span></div>
+      <div class="qn-point"><b class="lang-en">More Literature:</b><span class="lang-en"> Boccaccio (Decameron), Chaucer (Canterbury Tales), Cervantes (Don Quixote), Rabelais (Gargantua & Pantagruel).</span><b class="lang-ml">കൂടുതൽ സാഹിത്യകാരർ:</b><span class="lang-ml"> ബൊക്കാച്ചിയോ, ചോസർ, സെർവാന്റെ, റാബെലെ.</span></div>
+      <div class="qn-point"><b class="lang-en">More Science:</b><span class="lang-en"> Kepler (planetary speed), Paracelsus (diseases & remedies).</span><b class="lang-ml">കൂടുതൽ ശാസ്ത്രജ്ഞർ:</b><span class="lang-ml"> കെപ്ലർ, പാരസെൽസസ്.</span></div>
+      <div class="qn-point"><b class="lang-en">Historiography:</b><span class="lang-en"> Flavio Biondo & Leonardo Bruni pioneered a secular, evidence-based method of writing history.</span><b class="lang-ml">ചരിത്രരചന:</b><span class="lang-ml"> ബിയോൺഡെയോ, ബ്രൂണി — തെളിവധിഷ്ഠിത ചരിത്രരചനാരീതി ആവിഷ്കരിച്ചു.</span></div>
+      <div class="qn-point"><b class="lang-en">Aristotle's role:</b><span class="lang-en"> his works, reintroduced via Arabic translations, sparked fresh debate in Renaissance thought.</span><b class="lang-ml">അരിസ്റ്റോട്ടിലിന്റെ പങ്ക്:</b><span class="lang-ml"> അറബി വിവർത്തനങ്ങൾ വഴി പുനഃപരിചയപ്പെടുത്തി, പുതിയ ചർച്ചകൾക്ക് വഴിതുറന്നു.</span></div>
+    </div>
+
+    <div class="qn-panel" id="qn-important">
+      <h3><span class="lang-en">⭐ Important Points (Exam Focus)</span><span class="lang-ml">⭐ പ്രധാന പോയിന്റുകൾ (പരീക്ഷാ ഫോക്കസ്)</span></h3>
+      <ol>
+        <li><span class="lang-en">"Renaissance" = rebirth of Greco-Roman culture; began in 14th-century Italy.</span><span class="lang-ml">"നവോത്ഥാനം" = ഗ്രെക്കോ-റോമൻ സംസ്കാരത്തിന്റെ പുനർജനി; 14-ാം നൂറ്റാണ്ട് ഇറ്റലി.</span></li>
+        <li><span class="lang-en">Book-keeping = systematic daily recording of income & expenditure — origin of accounting, developed in Italian trading cities.</span><span class="lang-ml">ബുക്ക് കീപ്പിംഗ് = വരവ്-ചെലവ് ദിനംപ്രതി രേഖപ്പെടുത്തൽ — അക്കൗണ്ടിംഗിന്റെ തുടക്കം.</span></li>
+        <li><span class="lang-en">Black Death (1347–1351): bubonic plague spread by fleas on ships; collapsed feudalism; boosted Humanist thinking.</span><span class="lang-ml">ബ്ലാക്ക് ഡെത്ത് (1347-1351): കപ്പലിലെ എലികളിലൂടെ പടർന്ന പ്ലേഗ്; ഫ്യൂഡലിസത്തിന്റെ തകർച്ച.</span></li>
+        <li><span class="lang-en">Fall of Constantinople — 1453 — Turks captured it; Greek scholars fled to Italy with manuscripts.</span><span class="lang-ml">കോൺസ്റ്റാന്റിനോപ്പിളിന്റെ പതനം — 1453 — തുർക്കികൾ പിടിച്ചെടുത്തു.</span></li>
+        <li><span class="lang-en">Scholasticism = God-centred medieval philosophy; Humanism = human-centred outlook.</span><span class="lang-ml">സ്കൊളാസ്റ്റിസിസം = ദൈവകേന്ദ്രീകൃതം; മാനവികത = മനുഷ്യകേന്ദ്രീകൃതം.</span></li>
+        <li><span class="lang-en">Gothic architecture: pointed arches, born in France; Renaissance style: classical Greco-Roman revival (Brunelleschi's Florence dome).</span><span class="lang-ml">ഗോഥിക്: മുനയുള്ള കമാനങ്ങൾ, ഫ്രാൻസിൽ ഉദയം; നവോത്ഥാന ശൈലി: ക്ലാസിക്കൽ പുനരുജ്ജീവനം.</span></li>
+        <li><span class="lang-en">Printing Press — Johannes Gutenberg (Germany, 15th century) — movable metal type.</span><span class="lang-ml">അച്ചടിയന്ത്രം — ജൊഹാനസ് ഗുട്ടൻബർഗ് (ജർമ്മനി, 15-ാം നൂറ്റാണ്ട്).</span></li>
+        <li><span class="lang-en">Heliocentric theory — Nicolaus Copernicus — Sun at the centre, not Earth.</span><span class="lang-ml">സൂര്യകേന്ദ്ര സിദ്ധാന്തം — കോപ്പർനിക്കസ്.</span></li>
+        <li><span class="lang-en">Indulgence = certificate promising remission of sins for money — main trigger of Reformation.</span><span class="lang-ml">ഇൻഡൾജൻസ് = പണം നൽകി പാപമോചനം — മതനവീകരണത്തിന്റെ പ്രധാന കാരണം.</span></li>
+        <li><span class="lang-en">1517 — Martin Luther nails 95 Theses at Wittenberg — start of Protestant movement.</span><span class="lang-ml">1517 — മാർട്ടിൻ ലൂഥർ 95 പ്രബന്ധങ്ങൾ പതിപ്പിച്ചു — പ്രൊട്ടസ്റ്റന്റ് പ്രസ്ഥാനത്തിന്റെ തുടക്കം.</span></li>
+        <li><span class="lang-en">Council of Trent = Catholic Church's Counter-Reformation council; banned indulgence sale, published "Index" of banned books.</span><span class="lang-ml">ട്രെന്റ് സുനഹദോസ് = പ്രതിമതനവീകരണ സമ്മേളനം.</span></li>
+        <li><span class="lang-en">Ignatius Loyola founded the Society of Jesus (Jesuits) — key Counter-Reformation force.</span><span class="lang-ml">ഇഗ്നേഷ്യസ് ലയോള — സൊസൈറ്റി ഓഫ് ജീസസ് (ജെസ്യൂട്ട്) സ്ഥാപകൻ.</span></li>
+        <li><span class="lang-en">Cassandra Fedele — leading woman humanist — championed women's education.</span><span class="lang-ml">കസാന്ദ്ര ഫെഡെല — വനിതാ മാനവികതാവാദി.</span></li>
+        <li><span class="lang-en">Crusades (11th–13th century CE): wars between Christians and Muslims for Jerusalem; helped Italian cities gain wealth via trade with the East.</span><span class="lang-ml">കുരിശുയുദ്ധങ്ങൾ (സി.ഇ. 11–13): ജറുസലേമിനുവേണ്ടിയുള്ള യുദ്ധങ്ങൾ; ഇറ്റാലിയൻ നഗരങ്ങൾക്ക് വ്യാപാരനേട്ടം.</span></li>
+        <li><span class="lang-en">Medici (Florence), Sforza (Milan), Farnese (Parma), Orsini (Naples) — leading Italian city-state families.</span><span class="lang-ml">മെഡിചി (ഫ്ലോറൻസ്), സ്ഫോർസ (മിലാൻ), ഫർനീസി (പാർമ), ഓർസീനി (നേപ്പിൾസ്) — പ്രധാന ഇറ്റാലിയൻ കുടുംബങ്ങൾ.</span></li>
+        <li><span class="lang-en">Aristotle's works, reintroduced to Europe via Arabic translations, fuelled Renaissance debate and dialogue.</span><span class="lang-ml">അരിസ്റ്റോട്ടിലിന്റെ കൃതികൾ അറബി വിവർത്തനങ്ങൾ വഴി യൂറോപ്പിൽ എത്തി, പുതിയ ചർച്ചകൾക്ക് വഴിതുറന്നു.</span></li>
+        <li><span class="lang-en">Giotto pioneered the independent Greco-Roman painting style; Masaccio introduced 3D-effect frescoes.</span><span class="lang-ml">ജിയോട്ടോ ഗ്രെക്കോ-റോമൻ ചിത്രകലയുടെ തുടക്കക്കാരൻ; മസാച്ചോ ത്രിമാന ചുമർചിത്രങ്ങൾ അവതരിപ്പിച്ചു.</span></li>
+        <li><span class="lang-en">Leonardo da Vinci — "The Last Supper" & "Mona Lisa"; Michelangelo — Sistine Chapel ceiling, "The Last Judgment", "Pieta" & "David".</span><span class="lang-ml">ലിയനാർഡോ — അന്ത്യ അത്താഴം & മൊണാലിസ; മൈക്കലാഞ്ചലോ — സിസ്റ്റൈൻ ചാപ്പൽ, അന്ത്യവിധി, പിയത്ത, ദാവീദ്.</span></li>
+        <li><span class="lang-en">Dante's "Divine Comedy", Petrarch's sonnets, Boccaccio's "Decameron" — all written in the Italian vernacular, not Latin.</span><span class="lang-ml">ദാന്തെയുടെ ഡിവൈൻ കോമഡി, പെട്രാർക്കിന്റെ പ്രണയഗീതങ്ങൾ, ബൊക്കാച്ചിയോയുടെ ഡക്കാമറൺ — ഇറ്റാലിയൻ പ്രാദേശികഭാഷയിൽ.</span></li>
+        <li><span class="lang-en">Galileo Galilei's telescope confirmed the Heliocentric theory by observing Jupiter's moons and Saturn's rings.</span><span class="lang-ml">ഗലീലിയോയുടെ ദൂരദർശിനി വ്യാഴത്തിന്റെ ഉപഗ്രഹങ്ങളും ശനിയുടെ വലയങ്ങളും കണ്ടെത്തി സൂര്യകേന്ദ്ര സിദ്ധാന്തം ശരിവച്ചു.</span></li>
+        <li><span class="lang-en">Andreas Vesalius advanced anatomy by dissecting corpses; Isaac Newton discovered the Law of Gravitation in the late 17th century.</span><span class="lang-ml">വെസാലിയസ് മൃതശരീരം കീറിമുറിച്ച് ശരീരശാസ്ത്രം പഠിച്ചു; ന്യൂട്ടൺ 17-ാം നൂറ്റാണ്ടിന്റെ അവസാനം ഗുരുത്വാകർഷണ സിദ്ധാന്തം കണ്ടെത്തി.</span></li>
+        <li><span class="lang-en">Flavio Biondo and Leonardo Bruni pioneered a secular, evidence-based (chronicles & archaeology) method of writing history.</span><span class="lang-ml">ബിയോൺഡെയോ, ബ്രൂണി — ദിനവൃത്താന്തങ്ങളും പുരാവസ്തുതെളിവുകളും അടിസ്ഥാനമാക്കിയ ചരിത്രരചനാരീതി ആവിഷ്കരിച്ചു.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MATCH THE FOLLOWING TAB ============ -->
+<section class="tabpanel" id="match">
+  <div class="card">
+    <h3><span class="lang-en">🔗 Activity: Match the Following</span><span class="lang-ml">🔗 പ്രവർത്തനം: ജോടിയാക്കുക</span></h3>
+    <p class="lang-en">Tap an item in Column A, then tap its matching item in Column B.</p>
+    <p class="lang-ml">A യിലെ ഇനം ടാപ്പ് ചെയ്ത ശേഷം B യിലെ ബന്ധപ്പെട്ട ഇനം ടാപ്പ് ചെയ്യുക.</p>
+    <div class="actionbar no-print">
+      <button class="actionbtn blue" onclick="shareMatch()">📤 Share / Copy Link</button>
+      <button class="actionbtn gold" onclick="window.open('unit1_humanism_match.html','_blank')">🔗 Open Standalone Page</button>
+    </div>
+  </div>
+
+  <div class="card match-set">
+    <h4><span class="lang-en">Set 1 — Personalities & Their Works/Achievements</span><span class="lang-ml">സെറ്റ് 1 — വ്യക്തികളും അവരുടെ കൃതികളും</span></h4>
+    <div class="match-wrap" id="matchSet1"></div>
+    <div class="match-status" id="matchStatus1"></div>
+    <div class="actionbar no-print match-reset"><button class="actionbtn" onclick="buildMatch(1)">🔄 Reset Set 1</button></div>
+  </div>
+
+  <div class="card match-set">
+    <h4><span class="lang-en">Set 2 — Terms & Their Meanings</span><span class="lang-ml">സെറ്റ് 2 — സംജ്ഞകളും അർത്ഥങ്ങളും</span></h4>
+    <div class="match-wrap" id="matchSet2"></div>
+    <div class="match-status" id="matchStatus2"></div>
+    <div class="actionbar no-print match-reset"><button class="actionbtn" onclick="buildMatch(2)">🔄 Reset Set 2</button></div>
+  </div>
+
+  <div class="card match-set">
+    <h4><span class="lang-en">Set 3 — Events & Years</span><span class="lang-ml">സെറ്റ് 3 — സംഭവങ്ങളും വർഷങ്ങളും</span></h4>
+    <div class="match-wrap" id="matchSet3"></div>
+    <div class="match-status" id="matchStatus3"></div>
+    <div class="actionbar no-print match-reset"><button class="actionbtn" onclick="buildMatch(3)">🔄 Reset Set 3</button></div>
+  </div>
+</section>
+
+<!-- ============ QUIZ TAB ============ -->
+<section class="tabpanel" id="quiz">
+  <div class="card no-print">
+    <h3><span class="lang-en">🎯 Renaissance & Humanism Quiz</span><span class="lang-ml">🎯 നവോത്ഥാനം & മാനവികത ക്വിസ്</span></h3>
+    <p class="lang-en">Choose a quiz. Questions appear one at a time. Each quiz can be attempted only once per device.</p>
+    <p class="lang-ml">ഒരു ക്വിസ് തിരഞ്ഞെടുക്കുക. ചോദ്യങ്ങൾ ഓരോന്നായി വരും. ഓരോ ക്വിസും ഒരു ഡിവൈസിൽ ഒരിക്കൽ മാത്രമേ അറ്റന്റ് ചെയ്യാൻ കഴിയൂ.</p>
+    <div class="quiz-subtabs">
+      <button class="quiz-subtab-btn active" data-qs="quiz1">Quiz 1 (20 Q)</button>
+      <button class="quiz-subtab-btn" data-qs="quiz2">Quiz 2 (40 Q)</button>
+    </div>
+  </div>
+
+  <div class="quiz-panel active" id="quiz1-panel">
+    <div id="quizBody_quiz1"></div>
+    <div class="actionbar no-print">
+      <button class="actionbtn blue" onclick="shareQuiz('quiz1')">📤 Share / Copy Link</button>
+      <button class="actionbtn gold" onclick="window.open('unit1_humanism_quiz1.html','_blank')">🔗 Open Standalone Page</button>
+    </div>
+  </div>
+
+  <div class="quiz-panel" id="quiz2-panel">
+    <div id="quizBody_quiz2"></div>
+    <div class="actionbar no-print">
+      <button class="actionbtn blue" onclick="shareQuiz('quiz2')">📤 Share / Copy Link</button>
+      <button class="actionbtn gold" onclick="window.open('unit1_humanism_quiz2.html','_blank')">🔗 Open Standalone Page</button>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<footer>
+  <span class="lang-en">Unit 1: Humanism — SSLC Study Portal • Built for classroom & self-study use</span>
+  <span class="lang-ml">യൂണിറ്റ് 1: മാനവികത — SSLC പഠന പോർട്ടൽ</span>
+</footer>
+
+<script>
+// ---------- Language toggle ----------
+function setLang(lang){
+  document.body.className = 'show-' + lang;
+  document.getElementById('enBtn').classList.toggle('active', lang==='en');
+  document.getElementById('mlBtn').classList.toggle('active', lang==='ml');
+}
+
+// ---------- Tabs ----------
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+});
+
+// ---------- Share whole page ----------
+function sharePage(){
+  if(navigator.share){
+    navigator.share({title:document.title, text:'SSLC Study Portal - Unit 1: Humanism / മാനവികത', url:location.href}).catch(()=>{});
+  } else {
+    navigator.clipboard.writeText(location.href).then(()=>alert('Link copied! / ലിങ്ക് പകർത്തി!'));
+  }
+}
+
+// ---------- One Word Questions ----------
+const owqData = [
+  {en:"Who wrote the Divine Comedy?", ml:"'ഡിവൈൻ കോമഡി' രചിച്ചതാര്?", ans:"Dante Alighieri / ദാന്തെ"},
+  {en:"Who wrote 'The Prince'?", ml:"'ദി പ്രിൻസ്' രചിച്ചതാര്?", ans:"Niccolò Machiavelli / മാക്യവെല്ലി"},
+  {en:"Who painted the Mona Lisa?", ml:"മൊണാലിസ വരച്ചതാര്?", ans:"Leonardo da Vinci / ലിയനാർഡോ ഡാവിഞ്ചി"},
+  {en:"Who painted the ceiling of the Sistine Chapel?", ml:"സിസ്റ്റൈൻ ചാപ്പലിന്റെ മുകൾത്തട്ട് വരച്ചതാര്?", ans:"Michelangelo / മൈക്കലാഞ്ചലോ"},
+  {en:"Who sculpted the bronze 'David'?", ml:"വെങ്കല 'ദാവീദ്' ശിൽപം നിർമ്മിച്ചതാര്?", ans:"Donatello / ഡൊണാടെല്ലോ"},
+  {en:"Who sculpted 'Pieta'?", ml:"'പിയത്ത' ശിൽപം നിർമ്മിച്ചതാര്?", ans:"Michelangelo / മൈക്കലാഞ്ചലോ"},
+  {en:"Who designed the dome of Florence Cathedral?", ml:"ഫ്ലോറൻസ് കത്തീഡ്രലിന്റെ താഴികക്കുടം രൂപകൽപന ചെയ്തതാര്?", ans:"Filippo Brunelleschi / ഫിലിപ്പോ ബ്രൂണലസ്കി"},
+  {en:"Which architectural style has pointed arches?", ml:"മുനയുള്ള കമാനങ്ങൾ ഉള്ള വാസ്തുവിദ്യാശൈലി ഏത്?", ans:"Gothic style / ഗോഥിക് ശൈലി"},
+  {en:"Who proposed the Heliocentric theory?", ml:"സൂര്യകേന്ദ്ര സിദ്ധാന്തം അവതരിപ്പിച്ചതാര്?", ans:"Nicolaus Copernicus / കോപ്പർനിക്കസ്"},
+  {en:"Who built the telescope and observed Jupiter's moons?", ml:"ദൂരദർശിനി നിർമ്മിച്ച് വ്യാഴത്തിന്റെ ഉപഗ്രഹങ്ങളെ കണ്ടെത്തിയതാര്?", ans:"Galileo Galilei / ഗലീലിയോ ഗലീലി"},
+  {en:"Who discovered the Law of Gravitation?", ml:"ഗുരുത്വാകർഷണ സിദ്ധാന്തം കണ്ടെത്തിയതാര്?", ans:"Isaac Newton / ഐസക് ന്യൂട്ടൺ"},
+  {en:"Who studied human anatomy by dissecting corpses?", ml:"മൃതശരീരങ്ങൾ കീറിമുറിച്ച് ശരീരശാസ്ത്രം പഠിച്ചതാര്?", ans:"Andreas Vesalius / ആൻഡ്രിയസ് വെസാലിയസ്"},
+  {en:"Who invented the printing press with movable type?", ml:"ചലിക്കുന്ന അച്ചുകൾ ഉപയോഗിച്ചുള്ള അച്ചടിയന്ത്രം കണ്ടുപിടിച്ചതാര്?", ans:"Johannes Gutenberg / ജൊഹാനസ് ഗുട്ടൻബർഗ്"},
+  {en:"Which pandemic devastated Europe from 1347–1351?", ml:"1347-1351 കാലത്ത് യൂറോപ്പിനെ തകർത്ത മഹാമാരി ഏത്?", ans:"Black Death / ബ്ലാക്ക് ഡെത്ത്"},
+  {en:"Who nailed the 95 Theses to the Wittenberg church door?", ml:"വിറ്റൻബർഗ് ദേവാലയവാതിലിൽ 95 പ്രബന്ധങ്ങൾ പതിപ്പിച്ചതാര്?", ans:"Martin Luther / മാർട്ടിൻ ലൂഥർ"},
+  {en:"In which year did Martin Luther post his 95 Theses?", ml:"മാർട്ടിൻ ലൂഥർ 95 പ്രബന്ധങ്ങൾ പതിപ്പിച്ച വർഷം?", ans:"1517"},
+  {en:"Who founded the Society of Jesus (Jesuits)?", ml:"സൊസൈറ്റി ഓഫ് ജീസസ് (ജെസ്യൂട്ട്) സ്ഥാപിച്ചതാര്?", ans:"Ignatius Loyola / ഇഗ്നേഷ്യസ് ലയോള"},
+  {en:"Who led the Reformation in England?", ml:"ഇംഗ്ലണ്ടിൽ മതനവീകരണത്തിന് നേതൃത്വം നൽകിയതാര്?", ans:"King Henry VIII / ഹെൻറി എട്ടാമൻ"},
+  {en:"Which Italian family made Florence prosperous?", ml:"ഫ്ലോറൻസിനെ സമ്പന്നമാക്കിയ കുടുംബം ഏത്?", ans:"Medici / മെഡിചി"},
+  {en:"In which city did the Fall of Constantinople happen (1453)?", ml:"1453-ൽ ഏത് നഗരമാണ് പതനം സംഭവിച്ചത്?", ans:"Constantinople / കോൺസ്റ്റാന്റിനോപ്പിൾ"},
+  {en:"Who wrote 'Utopia'?", ml:"'ഉട്ടോപ്യ' രചിച്ചതാര്?", ans:"Thomas More / തോമസ് മൂർ"},
+  {en:"Who wrote 'Don Quixote'?", ml:"'ഡോൺ കിഹോട്ട്' രചിച്ചതാര്?", ans:"Miguel de Cervantes / മിഗ്വൽ ഡെ സെർവാന്റെ"},
+  {en:"Who wrote 'In Praise of Folly'?", ml:"'ഇൻ പ്രെയ്സ് ഓഫ് ഫോളി' രചിച്ചതാര്?", ans:"Erasmus / ഇറാസ്മസ്"},
+  {en:"Who is regarded as a chief propagator of Humanism through his sonnets?", ml:"പ്രണയഗീതങ്ങളിലൂടെ മാനവികതയുടെ പ്രധാന പ്രചാരകനായത് ആര്?", ans:"Petrarch / പെട്രാർക്ക്"},
+  {en:"What was the medieval philosophy that upheld Christian theology called?", ml:"ക്രൈസ്തവ ദൈവശാസ്ത്രത്തിന് ഊന്നൽ നൽകിയ മധ്യകാല തത്വശാസ്ത്രം ഏത്?", ans:"Scholasticism / സ്കൊളാസ്റ്റിസിസം"},
+  {en:"What certificate promised remission of sins for money?", ml:"പണം നൽകി പാപമോചനം വാഗ്ദാനം ചെയ്ത രേഖ ഏത്?", ans:"Indulgence / ഇൻഡൾജൻസ്"},
+  {en:"Who founded the Protestant movement in Switzerland?", ml:"സ്വിറ്റ്സർലാൻഡിൽ പ്രൊട്ടസ്റ്റന്റ് പ്രസ്ഥാനത്തിന് നേതൃത്വം നൽകിയതാര്?", ans:"Zwingli / സ്വിംഗ്ലി"},
+  {en:"Who led the Reformation in Geneva?", ml:"ജനീവയിൽ മതനവീകരണത്തിന് നേതൃത്വം നൽകിയതാര്?", ans:"John Calvin / ജോൺ കാൽവിൻ"},
+  {en:"Which council did the Catholic Church convene as part of Counter-Reformation?", ml:"പ്രതിമതനവീകരണത്തിന്റെ ഭാഗമായി കത്തോലിക്കാസഭ വിളിച്ചുചേർത്ത സമ്മേളനം ഏത്?", ans:"Council of Trent / ട്രെന്റ് സുനഹദോസ്"},
+  {en:"Who was the woman humanist known for advocating women's education?", ml:"സ്ത്രീവിദ്യാഭ്യാസത്തിന് വേണ്ടി വാദിച്ച മാനവികതാവാദിയായ വനിത ആര്?", ans:"Cassandra Fedele / കസാന്ദ്ര ഫെഡെല"}
+];
+const owqList = document.getElementById('owqList');
+owqData.forEach((item,i)=>{
+  const div = document.createElement('div');
+  div.className='owq-item';
+  div.innerHTML = `<div class="owq-q"><span class="owq-num">${i+1}.</span>
+      <span class="lang-en">${item.en}</span><span class="lang-ml">${item.ml}</span></div>
+      <div class="owq-a">✔ ${item.ans}</div>`;
+  div.addEventListener('click', ()=>div.classList.toggle('open'));
+  owqList.appendChild(div);
+});
+
+// ---------- Quick Notes sub-tabs ----------
+document.querySelectorAll('.qn-tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.qn-tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.qn-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('qn-'+btn.dataset.qn).classList.add('active');
+  });
+});
+
+// ---------- Quiz sub-tabs ----------
+document.querySelectorAll('.quiz-subtab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.quiz-subtab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.quiz-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.qs+'-panel').classList.add('active');
+  });
+});
+
+// ---------- Match the Following ----------
+const matchData = {
+  1: [
+    {a:"Leonardo da Vinci", ml_a:"ലിയനാർഡോ ഡാവിഞ്ചി", b:"Mona Lisa", ml_b:"മൊണാലിസ"},
+    {a:"Michelangelo", ml_a:"മൈക്കലാഞ്ചലോ", b:"Sistine Chapel Ceiling", ml_b:"സിസ്റ്റൈൻ ചാപ്പൽ മുകൾത്തട്ട്"},
+    {a:"Donatello", ml_a:"ഡൊണാടെല്ലോ", b:"Bronze David", ml_b:"വെങ്കല ദാവീദ്"},
+    {a:"Filippo Brunelleschi", ml_a:"ഫിലിപ്പോ ബ്രൂണലസ്കി", b:"Dome of Florence Cathedral", ml_b:"ഫ്ലോറൻസ് താഴികക്കുടം"},
+    {a:"Niccolò Machiavelli", ml_a:"മാക്യവെല്ലി", b:"The Prince", ml_b:"ദി പ്രിൻസ്"},
+    {a:"Dante Alighieri", ml_a:"ദാന്തെ", b:"Divine Comedy", ml_b:"ഡിവൈൻ കോമഡി"},
+    {a:"Johannes Gutenberg", ml_a:"ഗുട്ടൻബർഗ്", b:"Printing Press", ml_b:"അച്ചടിയന്ത്രം"},
+    {a:"Martin Luther", ml_a:"മാർട്ടിൻ ലൂഥർ", b:"95 Theses", ml_b:"95 പ്രബന്ധങ്ങൾ"}
+  ],
+  2: [
+    {a:"Renaissance", ml_a:"നവോത്ഥാനം", b:"Rebirth of Greco-Roman culture", ml_b:"ഗ്രെക്കോ-റോമൻ പുനർജനി"},
+    {a:"Humanism", ml_a:"മാനവികത", b:"Human-centred outlook", ml_b:"മനുഷ്യകേന്ദ്രീകൃത വീക്ഷണം"},
+    {a:"Scholasticism", ml_a:"സ്കൊളാസ്റ്റിസിസം", b:"God-centred medieval philosophy", ml_b:"ദൈവകേന്ദ്രീകൃത തത്വശാസ്ത്രം"},
+    {a:"Indulgence", ml_a:"ഇൻഡൾജൻസ്", b:"Certificate of pardon for money", ml_b:"പണം നൽകി പാപമോചനം"},
+    {a:"Reformation", ml_a:"മതനവീകരണം", b:"Protestant break from Catholic Church", ml_b:"പ്രൊട്ടസ്റ്റന്റ് പ്രസ്ഥാനം"},
+    {a:"Counter-Reformation", ml_a:"പ്രതിമതനവീകരണം", b:"Catholic Church's self-renewal", ml_b:"കത്തോലിക്കാ സഭയുടെ സ്വയംനവീകരണം"},
+    {a:"Heliocentric Theory", ml_a:"സൂര്യകേന്ദ്ര സിദ്ധാന്തം", b:"Sun at the centre of universe", ml_b:"സൂര്യൻ പ്രപഞ്ചകേന്ദ്രം"},
+    {a:"Black Death", ml_a:"ബ്ലാക്ക് ഡെത്ത്", b:"14th-century bubonic plague", ml_b:"14-ാം നൂറ്റാണ്ടിലെ പ്ലേഗ്"}
+  ],
+  3: [
+    {a:"Black Death", ml_a:"ബ്ലാക്ക് ഡെത്ത്", b:"1347–1351", ml_b:"1347–1351"},
+    {a:"Fall of Constantinople", ml_a:"കോൺസ്റ്റാന്റിനോപ്പിളിന്റെ പതനം", b:"1453", ml_b:"1453"},
+    {a:"Martin Luther's 95 Theses", ml_a:"95 പ്രബന്ധങ്ങൾ", b:"1517", ml_b:"1517"},
+    {a:"Renaissance begins in Italy", ml_a:"നവോത്ഥാനത്തിന്റെ തുടക്കം", b:"14th century", ml_b:"14-ാം നൂറ്റാണ്ട്"},
+    {a:"Greek Classical Culture", ml_a:"ഗ്രീക്ക് സംസ്കാരം", b:"12th–4th century BCE", ml_b:"ബി.സി.ഇ. 12–4"},
+    {a:"Roman Classical Culture", ml_a:"റോമൻ സംസ്കാരം", b:"5th century BCE – 5th century CE", ml_b:"ബി.സി.ഇ. 5 – സി.ഇ. 5"},
+    {a:"Crusades", ml_a:"കുരിശുയുദ്ധങ്ങൾ", b:"11th–13th century CE", ml_b:"സി.ഇ. 11–13 നൂറ്റാണ്ട്"},
+    {a:"Newton's Law of Gravitation", ml_a:"ഗുരുത്വാകർഷണ സിദ്ധാന്തം", b:"Late 17th century", ml_b:"17-ാം നൂറ്റാണ്ടിന്റെ അവസാനം"}
+  ]
+};
+const matchState = {};
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function buildMatch(setNum){
+  const pairs = matchData[setNum];
+  const container = document.getElementById('matchSet'+setNum);
+  const status = document.getElementById('matchStatus'+setNum);
+  status.textContent='';
+  matchState[setNum] = {selectedA:null, matched:0, total:pairs.length};
+  const colA = pairs.map((p,i)=>({...p, idx:i}));
+  const colB = shuffle(pairs.map((p,i)=>({...p, idx:i})));
+  container.innerHTML = `
+    <div class="match-col" id="matchColA${setNum}"></div>
+    <div class="match-col" id="matchColB${setNum}"></div>`;
+  const elA = document.getElementById('matchColA'+setNum);
+  const elB = document.getElementById('matchColB'+setNum);
+  colA.forEach(item=>{
+    const div = document.createElement('div');
+    div.className='match-item'; div.dataset.idx=item.idx;
+    div.innerHTML = `<span class="lang-en">${item.a}</span><span class="lang-ml">${item.ml_a}</span>`;
+    div.onclick = ()=>selectMatchA(setNum, item.idx, div);
+    elA.appendChild(div);
+  });
+  colB.forEach(item=>{
+    const div = document.createElement('div');
+    div.className='match-item'; div.dataset.idx=item.idx;
+    div.innerHTML = `<span class="lang-en">${item.b}</span><span class="lang-ml">${item.ml_b}</span>`;
+    div.onclick = ()=>selectMatchB(setNum, item.idx, div);
+    elB.appendChild(div);
+  });
+}
+function selectMatchA(setNum, idx, el){
+  if(el.classList.contains('correct')) return;
+  document.querySelectorAll(`#matchColA${setNum} .match-item`).forEach(d=>d.classList.remove('selected'));
+  el.classList.add('selected');
+  matchState[setNum].selectedA = {idx, el};
+}
+function selectMatchB(setNum, idx, el){
+  const st = matchState[setNum];
+  if(el.classList.contains('correct') || !st.selectedA) return;
+  if(st.selectedA.idx === idx){
+    st.selectedA.el.classList.remove('selected'); st.selectedA.el.classList.add('correct');
+    el.classList.add('correct');
+    st.matched++;
+    const status = document.getElementById('matchStatus'+setNum);
+    if(st.matched === st.total){
+      status.innerHTML = `<span class="lang-en">🎉 All matched!</span><span class="lang-ml">🎉 എല്ലാം ശരിയായി ജോടിയാക്കി!</span>`;
+    }
+  } else {
+    st.selectedA.el.classList.add('wrong'); el.classList.add('wrong');
+    setTimeout(()=>{
+      st.selectedA.el.classList.remove('selected','wrong'); el.classList.remove('wrong');
+    }, 700);
+  }
+  st.selectedA = null;
+}
+buildMatch(1); buildMatch(2); buildMatch(3);
+
+// ---------- Quiz ----------
+const quizzes = {
+quiz1: [
+  {en:"Who wrote 'The Prince'?", ml:"'ദി പ്രിൻസ്' രചിച്ചതാര്?",
+   opts:[["Dante","ദാന്തെ"],["Machiavelli","മാക്യവെല്ലി"],["Petrarch","പെട്രാർക്ക്"],["Erasmus","ഇറാസ്മസ്"]], correct:1},
+  {en:"The Black Death occurred between which years?", ml:"ബ്ലാക്ക് ഡെത്ത് സംഭവിച്ചത് ഏത് വർഷങ്ങൾക്കിടയിൽ?",
+   opts:[["1247-1251","1247-1251"],["1347-1351","1347-1351"],["1453","1453"],["1517","1517"]], correct:1},
+  {en:"Who painted the 'Mona Lisa'?", ml:"മൊണാലിസ വരച്ചതാര്?",
+   opts:[["Michelangelo","മൈക്കലാഞ്ചലോ"],["Raphael","റാഫേൽ"],["Leonardo da Vinci","ലിയനാർഡോ ഡാവിഞ്ചി"],["Titian","ടിഷ്യൻ"]], correct:2},
+  {en:"Who proposed the Heliocentric theory?", ml:"സൂര്യകേന്ദ്ര സിദ്ധാന്തം അവതരിപ്പിച്ചതാര്?",
+   opts:[["Galileo","ഗലീലിയോ"],["Newton","ന്യൂട്ടൺ"],["Copernicus","കോപ്പർനിക്കസ്"],["Kepler","കെപ്ലർ"]], correct:2},
+  {en:"Which family made Florence prosperous?", ml:"ഫ്ലോറൻസിനെ സമ്പന്നമാക്കിയ കുടുംബം ഏത്?",
+   opts:[["Sforza","സ്ഫോർസ"],["Medici","മെഡിചി"],["Orsini","ഓർസീനി"],["Farnese","ഫർനീസി"]], correct:1},
+  {en:"Constantinople fell to the Turks in which year?", ml:"കോൺസ്റ്റാന്റിനോപ്പിളിന്റെ പതനം ഏത് വർഷം?",
+   opts:[["1347","1347"],["1453","1453"],["1517","1517"],["1215","1215"]], correct:1},
+  {en:"Who sculpted 'David' (bronze) and inspired Renaissance sculpture?", ml:"വെങ്കല 'ദാവീദ്' ശിൽപം നിർമ്മിച്ചത്?",
+   opts:[["Donatello","ഡൊണാടെല്ലോ"],["Michelangelo","മൈക്കലാഞ്ചലോ"],["Brunelleschi","ബ്രൂണലസ്കി"],["Bramante","ബ്രമാന്റെ"]], correct:0},
+  {en:"Who nailed the 95 Theses at Wittenberg in 1517?", ml:"1517-ൽ വിറ്റൻബർഗിൽ 95 പ്രബന്ധങ്ങൾ പതിപ്പിച്ചതാര്?",
+   opts:[["John Calvin","ജോൺ കാൽവിൻ"],["Zwingli","സ്വിംഗ്ലി"],["Martin Luther","മാർട്ടിൻ ലൂഥർ"],["Ignatius Loyola","ഇഗ്നേഷ്യസ് ലയോള"]], correct:2},
+  {en:"Who founded the Society of Jesus (Jesuits)?", ml:"സൊസൈറ്റി ഓഫ് ജീസസ് സ്ഥാപിച്ചതാര്?",
+   opts:[["Erasmus","ഇറാസ്മസ്"],["Ignatius Loyola","ഇഗ്നേഷ്യസ് ലയോള"],["Thomas More","തോമസ് മൂർ"],["Luther","ലൂഥർ"]], correct:1},
+  {en:"Which architectural style features pointed arches?", ml:"മുനയുള്ള കമാനങ്ങൾ ഏത് ശൈലിയുടെ സവിശേഷത?",
+   opts:[["Classical","ക്ലാസിക്കൽ"],["Gothic","ഗോഥിക്"],["Roman","റോമൻ"],["Baroque","ബറോക്ക്"]], correct:1},
+  {en:"Who invented the printing press?", ml:"അച്ചടിയന്ത്രം കണ്ടുപിടിച്ചതാര്?",
+   opts:[["Gutenberg","ഗുട്ടൻബർഗ്"],["Vesalius","വെസാലിയസ്"],["Kepler","കെപ്ലർ"],["Bruni","ബ്രൂണി"]], correct:0},
+  {en:"'Divine Comedy' was written by:", ml:"'ഡിവൈൻ കോമഡി' രചിച്ചത്:",
+   opts:[["Petrarch","പെട്രാർക്ക്"],["Boccaccio","ബൊക്കാച്ചിയോ"],["Dante","ദാന്തെ"],["Machiavelli","മാക്യവെല്ലി"]], correct:2},
+  {en:"Who led the Reformation in England, forming the Anglican Church?", ml:"ഇംഗ്ലണ്ടിൽ ആംഗ്ലിക്കൻ സഭയ്ക്ക് രൂപം നൽകി മതനവീകരണത്തിന് നേതൃത്വം നൽകിയത്?",
+   opts:[["Henry VIII","ഹെൻറി എട്ടാമൻ"],["Calvin","കാൽവിൻ"],["Zwingli","സ്വിംഗ്ലി"],["Loyola","ലയോള"]], correct:0},
+  {en:"Which Council did the Catholics convene for Counter-Reformation?", ml:"പ്രതിമതനവീകരണത്തിനായി കത്തോലിക്കർ വിളിച്ചുചേർത്ത സമ്മേളനം?",
+   opts:[["Council of Nicaea","നൈസിയ സമ്മേളനം"],["Council of Trent","ട്രെന്റ് സുനഹദോസ്"],["Council of Rome","റോം സമ്മേളനം"],["Council of Wittenberg","വിറ്റൻബർഗ് സമ്മേളനം"]], correct:1},
+  {en:"Who studied human anatomy through dissection?", ml:"മൃതശരീരം കീറിമുറിച്ച് ശരീരശാസ്ത്രം പഠിച്ചത്?",
+   opts:[["Vesalius","വെസാലിയസ്"],["Paracelsus","പാരസെൽസസ്"],["Newton","ന്യൂട്ടൺ"],["Kepler","കെപ്ലർ"]], correct:0},
+  {en:"Who was the 13th-century English thinker persecuted for rational thought?", ml:"യുക്തിചിന്തയ്ക്ക് പീഡനം സഹിക്കേണ്ടിവന്ന പതിമൂന്നാം നൂറ്റാണ്ടിലെ ഇംഗ്ലീഷ് ചിന്തകൻ?",
+   opts:[["Roger Bacon","റോജർ ബേക്കൺ"],["Thomas More","തോമസ് മൂർ"],["Erasmus","ഇറാസ്മസ്"],["Dante","ദാന്തെ"]], correct:0},
+  {en:"Which Italian family prospered in Parma?", ml:"പാർമയിൽ അഭിവൃദ്ധിപ്പെട്ട ഇറ്റാലിയൻ കുടുംബം?",
+   opts:[["Medici","മെഡിചി"],["Farnese","ഫർനീസി"],["Sforza","സ്ഫോർസ"],["Orsini","ഓർസീനി"]], correct:1},
+  {en:"According to Machiavelli, a ruler's foremost duty is to:", ml:"മാക്യവെല്ലിയുടെ അഭിപ്രായത്തിൽ ഭരണാധികാരിയുടെ പ്രധാന കടമ?",
+   opts:[["Be loved by all","എല്ലാവരാലും സ്നേഹിക്കപ്പെടുക"],["Preserve the state's power & security","രാജ്യത്തിന്റെ അധികാരവും സുരക്ഷയും നിലനിർത്തുക"],["Show religious devotion","മതഭക്തി കാണിക്കുക"],["Patronise the arts","കലയെ പ്രോത്സാഹിപ്പിക്കുക"]], correct:1},
+  {en:"Petrarch is regarded as a chief propagator of Humanism through his:", ml:"പെട്രാർക്ക് മാനവികതയുടെ പ്രധാന പ്രചാരകനായത് എന്തിലൂടെ?",
+   opts:[["Plays","നാടകങ്ങൾ"],["Sonnets","പ്രണയഗീതങ്ങൾ"],["Paintings","ചിത്രങ്ങൾ"],["Sculptures","ശിൽപങ്ങൾ"]], correct:1},
+  {en:"The Council of Trent, part of the Counter-Reformation, was convened in:", ml:"ട്രെന്റ് സുനഹദോസ് വിളിച്ചുചേർത്തത് എവിടെ?",
+   opts:[["Southern France","തെക്കൻ ഫ്രാൻസ്"],["Northern Italy","വടക്കൻ ഇറ്റലി"],["Central Germany","മധ്യ ജർമ്മനി"],["Northern Spain","വടക്കൻ സ്പെയിൻ"]], correct:1}
+],
+quiz2: [
+  {en:"What does the French word 'Renaissance' mean?", ml:"'റിനൈസ്സൻസ്' എന്ന വാക്കിന്റെ അർത്ഥമെന്ത്?",
+   opts:[["Revolution","വിപ്ലവം"],["Rebirth","പുനർജനി"],["Reform","നവീകരണം"],["Religion","മതം"]], correct:1},
+  {en:"In which century did the Renaissance begin in Italy?", ml:"നവോത്ഥാനം ഇറ്റലിയിൽ ആരംഭിച്ചത് ഏത് നൂറ്റാണ്ടിൽ?",
+   opts:[["12th","12"],["13th","13"],["14th","14"],["16th","16"]], correct:2},
+  {en:"Greek classical culture existed during which period?", ml:"ഗ്രീക്ക് ക്ലാസിക്കൽ സംസ്കാരം ഏത് കാലഘട്ടത്തിൽ?",
+   opts:[["12th–4th century BCE","ബി.സി.ഇ 12–4"],["5th BCE–5th CE","ബി.സി.ഇ5–സി.ഇ5"],["4th–1st century BCE","ബി.സി.ഇ 4–1"],["1st–5th century CE","സി.ഇ 1–5"]], correct:0},
+  {en:"Roman classical culture existed during which period?", ml:"റോമൻ ക്ലാസിക്കൽ സംസ്കാരം ഏത് കാലഘട്ടത്തിൽ?",
+   opts:[["12th–4th BCE","ബി.സി.ഇ 12–4"],["5th BCE–5th CE","ബി.സി.ഇ5–സി.ഇ5"],["1st–5th CE","സി.ഇ 1–5"],["3rd BCE–3rd CE","ബി.സി.ഇ3–സി.ഇ3"]], correct:1},
+  {en:"What is 'book-keeping'?", ml:"'ബുക്ക് കീപ്പിംഗ്' എന്നാൽ?",
+   opts:[["Buying books","പുസ്തകം വാങ്ങൽ"],["Systematic recording of income & expenditure","വരവ്-ചെലവ് ക്രമമായി രേഖപ്പെടുത്തൽ"],["Selling indulgences","ഇൻഡൾജൻസ് വിൽപന"],["Writing sonnets","പ്രണയഗീതങ്ങൾ എഴുതൽ"]], correct:1},
+  {en:"Which Italian family prospered in Milan?", ml:"മിലാനിൽ അഭിവൃദ്ധിപ്പെട്ട കുടുംബം?",
+   opts:[["Medici","മെഡിചി"],["Sforza","സ്ഫോർസ"],["Orsini","ഓർസീനി"],["Farnese","ഫർനീസി"]], correct:1},
+  {en:"Which family prospered in Naples?", ml:"നേപ്പിൾസിൽ അഭിവൃദ്ധിപ്പെട്ട കുടുംബം?",
+   opts:[["Medici","മെഡിചി"],["Visconti","വിസ്കൊന്തി"],["Orsini","ഓർസീനി"],["Sforza","സ്ഫോർസ"]], correct:2},
+  {en:"The Crusades were fought over control of which city?", ml:"കുരിശുയുദ്ധങ്ങൾ ഏത് നഗരത്തിനുവേണ്ടി?",
+   opts:[["Rome","റോം"],["Florence","ഫ്ലോറൻസ്"],["Jerusalem","ജറുസലേം"],["Constantinople","കോൺസ്റ്റാന്റിനോപ്പിൾ"]], correct:2},
+  {en:"In which centuries did the Crusades take place?", ml:"കുരിശുയുദ്ധങ്ങളുടെ കാലഘട്ടം?",
+   opts:[["9th–11th CE","9–11"],["11th–13th CE","11–13"],["13th–15th CE","13–15"],["14th–16th CE","14–16"]], correct:1},
+  {en:"What caused the Black Death to spread?", ml:"ബ്ലാക്ക് ഡെത്ത് പടർന്നത് എങ്ങനെ?",
+   opts:[["Contaminated water","മലിനജലം"],["Fleas on rats aboard ships","കപ്പലിലെ എലികളിലെ ചെള്ളുകൾ"],["Airborne dust","വായുവിലെ പൊടി"],["Poisoned food","വിഷഭക്ഷണം"]], correct:1},
+  {en:"The Black Death led to the collapse of which system?", ml:"ബ്ലാക്ക് ഡെത്ത് ഏത് വ്യവസ്ഥയുടെ തകർച്ചയ്ക്ക് കാരണമായി?",
+   opts:[["Feudal system","ഫ്യൂഡൽ വ്യവസ്ഥ"],["Monarchy","രാജവാഴ്ച"],["Republic","റിപ്പബ്ലിക്"],["Papacy","മാർപ്പാപ്പാ ഭരണം"]], correct:0},
+  {en:"Constantinople was the capital of which empire?", ml:"കോൺസ്റ്റാന്റിനോപ്പിൾ ഏത് സാമ്രാജ്യത്തിന്റെ തലസ്ഥാനം?",
+   opts:[["Roman Empire","റോമൻ സാമ്രാജ്യം"],["Holy Roman Empire","ഹോളി റോമൻ സാമ്രാജ്യം"],["Byzantine (Eastern Roman) Empire","ബൈസന്റൈൻ സാമ്രാജ്യം"],["Ottoman Empire","ഓട്ടോമൻ സാമ്രാജ്യം"]], correct:2},
+  {en:"Who captured Constantinople in 1453?", ml:"1453-ൽ കോൺസ്റ്റാന്റിനോപ്പിൾ പിടിച്ചെടുത്തതാര്?",
+   opts:[["Mongols","മംഗോളിയർ"],["Turks","തുർക്കികൾ"],["Persians","പേർഷ്യക്കാർ"],["Arabs","അറബികൾ"]], correct:1},
+  {en:"Scholasticism placed importance on:", ml:"സ്കൊളാസ്റ്റിസിസം ഊന്നൽ നൽകിയത്?",
+   opts:[["Human achievement","മാനുഷിക നേട്ടം"],["Divinity & afterlife","ദൈവികതയും പരലോകവും"],["Trade & commerce","വ്യാപാരം"],["Scientific experiment","ശാസ്ത്രീയ പരീക്ഷണം"]], correct:1},
+  {en:"Whose ideas were reintroduced to Europe through Arabic translations?", ml:"അറബി വിവർത്തനങ്ങൾ വഴി യൂറോപ്പിൽ എത്തിയ ചിന്തകൻ?",
+   opts:[["Plato","പ്ലേറ്റോ"],["Aristotle","അരിസ്റ്റോട്ടിൽ"],["Socrates","സോക്രട്ടീസ്"],["Homer","ഹോമർ"]], correct:1},
+  {en:"Who is regarded as the pioneer of the Greco-Roman independent painting style?", ml:"ഗ്രെക്കോ-റോമൻ ചിത്രകലയുടെ തുടക്കക്കാരൻ?",
+   opts:[["Giotto","ജിയോട്ടോ"],["Masaccio","മസാച്ചോ"],["Titian","ടിഷ്യൻ"],["Raphael","റാഫേൽ"]], correct:0},
+  {en:"Masaccio was known for:", ml:"മസാച്ചോ അറിയപ്പെടുന്നത്?",
+   opts:[["Sonnets","പ്രണയഗീതങ്ങൾ"],["3D-effect fresco paintings","ത്രിമാന ചുമർചിത്രങ്ങൾ"],["Bronze sculpture","വെങ്കല ശിൽപം"],["Dome architecture","താഴികക്കുട വാസ്തുവിദ്യ"]], correct:1},
+  {en:"'The Last Supper' was painted by:", ml:"'അന്ത്യ അത്താഴം' വരച്ചതാര്?",
+   opts:[["Michelangelo","മൈക്കലാഞ്ചലോ"],["Raphael","റാഫേൽ"],["Leonardo da Vinci","ലിയനാർഡോ ഡാവിഞ്ചി"],["Titian","ടിഷ്യൻ"]], correct:2},
+  {en:"Who painted 'The Last Judgment'?", ml:"'അന്ത്യവിധി' വരച്ചതാര്?",
+   opts:[["Leonardo","ലിയനാർഡോ"],["Michelangelo","മൈക്കലാഞ്ചലോ"],["Giotto","ജിയോട്ടോ"],["Masaccio","മസാച്ചോ"]], correct:1},
+  {en:"The Diptych of Federico da Montefeltro was painted by:", ml:"ഫെഡെറിക്കോയുടെ ഡിപ്റ്റിക് വരച്ചതാര്?",
+   opts:[["Piero della Francesca","പിയറോ ഡെല്ല ഫ്രാൻസെസ്ക"],["Titian","ടിഷ്യൻ"],["Raphael","റാഫേൽ"],["Giotto","ജിയോട്ടോ"]], correct:0},
+  {en:"Gothic architectural style originated in:", ml:"ഗോഥിക് ശൈലി ഉദയം ചെയ്തത് എവിടെ?",
+   opts:[["Italy","ഇറ്റലി"],["France","ഫ്രാൻസ്"],["Spain","സ്പെയിൻ"],["Germany","ജർമ്മനി"]], correct:1},
+  {en:"St. Peter's Basilica had contributions from Michelangelo and:", ml:"സെന്റ് പീറ്റേഴ്സ് ബസിലിക്കയ്ക്ക് സംഭാവന നൽകിയത് മൈക്കലാഞ്ചലോയും?",
+   opts:[["Bramante","ബ്രമാന്റെ"],["Donatello","ഡൊണാടെല്ലോ"],["Titian","ടിഷ്യൻ"],["Raphael","റാഫേൽ"]], correct:0},
+  {en:"Boccaccio wrote which work?", ml:"ബൊക്കാച്ചിയോ രചിച്ച കൃതി?",
+   opts:[["The Prince","ദി പ്രിൻസ്"],["Decameron","ഡക്കാമറൺ"],["Utopia","ഉട്ടോപ്യ"],["Don Quixote","ഡോൺ കിഹോട്ട്"]], correct:1},
+  {en:"'Canterbury Tales' was written by:", ml:"'കാന്റർബറി കഥകൾ' രചിച്ചതാര്?",
+   opts:[["Chaucer","ചോസർ"],["Cervantes","സെർവാന്റെ"],["Rabelais","റാബെലെ"],["More","മൂർ"]], correct:0},
+  {en:"'Utopia' was written by:", ml:"'ഉട്ടോപ്യ' രചിച്ചതാര്?",
+   opts:[["Erasmus","ഇറാസ്മസ്"],["Thomas More","തോമസ് മൂർ"],["Machiavelli","മാക്യവെല്ലി"],["Dante","ദാന്തെ"]], correct:1},
+  {en:"'Don Quixote' was written in which country?", ml:"'ഡോൺ കിഹോട്ട്' രചിക്കപ്പെട്ട രാജ്യം?",
+   opts:[["Italy","ഇറ്റലി"],["England","ഇംഗ്ലണ്ട്"],["Spain","സ്പെയിൻ"],["France","ഫ്രാൻസ്"]], correct:2},
+  {en:"'Gargantua and Pantagruel' was written by:", ml:"'ഗാർഗന്റുവയും പാന്റഗ്രൂലും' രചിച്ചതാര്?",
+   opts:[["Rabelais","റാബെലെ"],["Erasmus","ഇറാസ്മസ്"],["Chaucer","ചോസർ"],["Cervantes","സെർവാന്റെ"]], correct:0},
+  {en:"Erasmus's home country was:", ml:"ഇറാസ്മസിന്റെ സ്വദേശം?",
+   opts:[["Italy","ഇറ്റലി"],["Netherlands","നെതർലൻഡ്സ്"],["England","ഇംഗ്ലണ്ട്"],["Spain","സ്പെയിൻ"]], correct:1},
+  {en:"The printing press used which type of print blocks?", ml:"അച്ചടിയന്ത്രത്തിൽ ഉപയോഗിച്ചത്?",
+   opts:[["Wooden fixed type","മരം കൊണ്ടുള്ള അച്ച്"],["Movable metal type","ചലിക്കുന്ന ലോഹ അച്ച്"],["Stone carvings","കൽ കൊത്തുപണി"],["Clay tablets","കളിമൺ ഫലകം"]], correct:1},
+  {en:"Cassandra Fedele advocated for:", ml:"കസാന്ദ്ര ഫെഡെല വാദിച്ചത്?",
+   opts:[["Women's higher education","സ്ത്രീ ഉന്നത വിദ്യാഭ്യാസം"],["Trade reforms","വ്യാപാര നവീകരണം"],["Church reforms","സഭാ നവീകരണം"],["Scientific research","ശാസ്ത്ര ഗവേഷണം"]], correct:0},
+  {en:"Who pioneered scientific historiography in Renaissance Italy?", ml:"നവോത്ഥാന ചരിത്രരചനാരീതി ആവിഷ്കരിച്ചത്?",
+   opts:[["Flavio Biondo & Leonardo Bruni","ബിയോൺഡെയോ & ബ്രൂണി"],["Dante & Petrarch","ദാന്തെ & പെട്രാർക്ക്"],["Galileo & Newton","ഗലീലിയോ & ന്യൂട്ടൺ"],["Luther & Calvin","ലൂഥർ & കാൽവിൻ"]], correct:0},
+  {en:"Copernicus was a native of:", ml:"കോപ്പർനിക്കസിന്റെ സ്വദേശം?",
+   opts:[["Italy","ഇറ്റലി"],["Germany","ജർമ്മനി"],["Poland","പോളണ്ട്"],["France","ഫ്രാൻസ്"]], correct:2},
+  {en:"Galileo observed the moons of which planet?", ml:"ഗലീലിയോ ഏത് ഗ്രഹത്തിന്റെ ഉപഗ്രഹങ്ങളെ കണ്ടെത്തി?",
+   opts:[["Saturn","ശനി"],["Mars","ചൊവ്വ"],["Jupiter","വ്യാഴം"],["Venus","ശുക്രൻ"]], correct:2},
+  {en:"Kepler's contribution was about:", ml:"കെപ്ലറുടെ സംഭാവന?",
+   opts:[["Gravitation","ഗുരുത്വാകർഷണം"],["Planetary speed varying with distance from Sun","സൂര്യദൂരമനുസരിച്ചുള്ള ഗ്രഹവേഗത"],["Anatomy","ശരീരശാസ്ത്രം"],["Telescope invention","ദൂരദർശിനി കണ്ടുപിടിത്തം"]], correct:1},
+  {en:"Newton's Law of Gravitation was discovered in which century?", ml:"ഗുരുത്വാകർഷണ സിദ്ധാന്തം കണ്ടെത്തിയത് ഏത് നൂറ്റാണ്ടിൽ?",
+   opts:[["15th","15"],["16th","16"],["17th","17"],["18th","18"]], correct:2},
+  {en:"Paracelsus's field of study was:", ml:"പാരസെൽസസിന്റെ പഠനമേഖല?",
+   opts:[["Astronomy","ജ്യോതിശാസ്ത്രം"],["Diseases & remedies","രോഗങ്ങളും പ്രതിവിധികളും"],["Architecture","വാസ്തുവിദ്യ"],["Literature","സാഹിത്യം"]], correct:1},
+  {en:"Who sold indulgences, provoking Luther's protest?", ml:"ലൂഥറിന്റെ പ്രതിഷേധത്തിന് കാരണമായ ഇൻഡൾജൻസ് വിൽപനക്കാരൻ?",
+   opts:[["Johann Tetzel","ജൊഹാൻ ടെറ്റ്സൽ"],["Pope Leo X","ലിയോ പത്താമൻ മാർപ്പാപ്പ"],["John Calvin","ജോൺ കാൽവിൻ"],["Zwingli","സ്വിംഗ്ലി"]], correct:0},
+  {en:"Who led the Reformation in Switzerland?", ml:"സ്വിറ്റ്സർലാൻഡിൽ മതനവീകരണത്തിന് നേതൃത്വം നൽകിയത്?",
+   opts:[["Calvin","കാൽവിൻ"],["Zwingli","സ്വിംഗ്ലി"],["Luther","ലൂഥർ"],["Henry VIII","ഹെൻറി എട്ടാമൻ"]], correct:1},
+  {en:"The Anglican Church was established under:", ml:"ആംഗ്ലിക്കൻ സഭ സ്ഥാപിതമായത് ആരുടെ കീഴിൽ?",
+   opts:[["Henry VIII","ഹെൻറി എട്ടാമൻ"],["Calvin","കാൽവിൻ"],["Zwingli","സ്വിംഗ്ലി"],["Loyola","ലയോള"]], correct:0},
+  {en:"The 'Index' of prohibited books was published as part of:", ml:"നിരോധിത ഗ്രന്ഥങ്ങളുടെ 'ഇൻഡക്സ്' പ്രസിദ്ധീകരിച്ചത് ഏതിന്റെ ഭാഗമായി?",
+   opts:[["Renaissance art","നവോത്ഥാന കല"],["Counter-Reformation","പ്രതിമതനവീകരണം"],["Scientific revolution","ശാസ്ത്ര വിപ്ലവം"],["Reformation","മതനവീകരണം"]], correct:1}
+]
+};
+
+const quizState = {quiz1:null, quiz2:null};
+const quizPageMap = {quiz1:'unit1_humanism_quiz1.html', quiz2:'unit1_humanism_quiz2.html'};
+const quizStorageKey = qid => 'humanism_unit1_'+qid+'_result';
+
+function initQuiz(qid){
+  const stored = localStorage.getItem(quizStorageKey(qid));
+  if(stored){
+    renderLockedQuiz(qid, JSON.parse(stored));
+    return;
+  }
+  const data = quizzes[qid];
+  quizState[qid] = {idx:0, answers:new Array(data.length).fill(null)};
+  renderQuestion(qid);
+}
+function renderLockedQuiz(qid, result){
+  const data = quizzes[qid];
+  const body = document.getElementById('quizBody_'+qid);
+  body.innerHTML = `
+    <div class="quiz-locked">
+      <p class="lang-en">✅ You have already completed this quiz on this device.</p>
+      <p class="lang-ml">✅ ഈ ഡിവൈസിൽ നിങ്ങൾ ഈ ക്വിസ് പൂർത്തിയാക്കിക്കഴിഞ്ഞു.</p>
+      <div id="quizResult_locked">
+        <span class="lang-en">🎉 Your score: ${result.score} / ${data.length}</span>
+        <span class="lang-ml">🎉 നിങ്ങളുടെ സ്കോർ: ${result.score} / ${data.length}</span>
+      </div>
+    </div>`;
+}
+function renderQuestion(qid){
+  const data = quizzes[qid];
+  const st = quizState[qid];
+  const body = document.getElementById('quizBody_'+qid);
+  const q = data[st.idx];
+  let optsHtml='';
+  q.opts.forEach((o,j)=>{
+    const sel = st.answers[st.idx]===j ? 'selected-opt' : '';
+    optsHtml += `<button class="opt ${sel}" data-o="${j}" onclick="selectOpt('${qid}',${j})">
+      <span class="lang-en">${o[0]}</span><span class="lang-ml">${o[1]}</span></button>`;
+  });
+  const isLast = st.idx === data.length-1;
+  const answered = st.answers[st.idx] !== null;
+  body.innerHTML = `
+    <div class="quiz-progress"><span class="lang-en">Question ${st.idx+1} of ${data.length}</span><span class="lang-ml">ചോദ്യം ${st.idx+1} / ${data.length}</span></div>
+    <div class="quiz-q">
+      <p class="qtext"><span class="lang-en">${q.en}</span><span class="lang-ml">${q.ml}</span></p>
+      ${optsHtml}
+    </div>
+    <div class="quiz-nav no-print">
+      <button class="actionbtn" onclick="prevQ('${qid}')" ${st.idx===0?'disabled':''}>⬅ <span class="lang-en">Prev</span><span class="lang-ml">മുൻപ്</span></button>
+      ${isLast
+        ? `<button class="actionbtn green" onclick="submitQuiz('${qid}')" ${answered?'':'disabled'}>✅ <span class="lang-en">Submit</span><span class="lang-ml">സമർപ്പിക്കുക</span></button>`
+        : `<button class="actionbtn" onclick="nextQ('${qid}')" ${answered?'':'disabled'}><span class="lang-en">Next</span><span class="lang-ml">അടുത്തത്</span> ➡</button>`
+      }
+    </div>`;
+}
+function selectOpt(qid,oi){
+  quizState[qid].answers[quizState[qid].idx] = oi;
+  renderQuestion(qid);
+}
+function nextQ(qid){
+  const st = quizState[qid];
+  if(st.idx < quizzes[qid].length-1){ st.idx++; renderQuestion(qid); }
+}
+function prevQ(qid){
+  const st = quizState[qid];
+  if(st.idx > 0){ st.idx--; renderQuestion(qid); }
+}
+function submitQuiz(qid){
+  const data = quizzes[qid];
+  const st = quizState[qid];
+  let score=0;
+  data.forEach((q,i)=>{ if(st.answers[i]===q.correct) score++; });
+  const result = {score, total:data.length, date:Date.now()};
+  localStorage.setItem(quizStorageKey(qid), JSON.stringify(result));
+  renderLockedQuiz(qid, result);
+}
+function shareQuiz(qid){
+  const label = qid==='quiz1' ? 'Quiz 1 (20 Q)' : 'Quiz 2 (40 Q)';
+  const url = new URL(quizPageMap[qid], location.href).href;
+  const text = `Try the Unit 1: Humanism ${label} — Renaissance & Humanism, SSLC Social Science!`;
+  if(navigator.share){
+    navigator.share({title:'Humanism Quiz', text:text, url:url}).catch(()=>{});
+  } else {
+    navigator.clipboard.writeText(url).then(()=>alert('Link copied! / ലിങ്ക് പകർത്തി!\n'+url));
+  }
+}
+function shareMatch(){
+  const url = new URL('unit1_humanism_match.html', location.href).href;
+  const text = 'Try the Match the Following activity — Unit 1: Humanism, SSLC Social Science!';
+  if(navigator.share){
+    navigator.share({title:'Match the Following', text:text, url:url}).catch(()=>{});
+  } else {
+    navigator.clipboard.writeText(url).then(()=>alert('Link copied! / ലിങ്ക് പകർത്തി!\n'+url));
+  }
+}
+initQuiz('quiz1');
+initQuiz('quiz2');
+</script>
+</body>
+</html>

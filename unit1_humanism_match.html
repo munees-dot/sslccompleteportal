@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Match the Following | Unit 1: Humanism - SSLC Study Portal</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+  :root{
+    --brown1:#7a4a26; --brown2:#4a2c17; --gold:#c9932f; --cream:#fbf3e6;
+    --blue:#2596be; --lightblue:#e6f6fb; --ink:#2b2119; --green:#2e8b57; --red:#c0392b;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:'Poppins',sans-serif; background:var(--cream); color:var(--ink);}
+  .ml{font-family:'Manjari','Poppins',sans-serif;}
+  header{
+    background:linear-gradient(135deg,var(--brown2),var(--brown1) 60%,var(--gold));
+    color:#fff; padding:22px 16px; text-align:center;
+  }
+  header h1{margin:0 0 4px; font-size:1.4rem;}
+  header h2{margin:0; font-weight:400; font-size:.95rem; opacity:.9;}
+  .topbar{display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:14px;}
+  button.pillbtn{
+    background:#fff; color:var(--brown2); border:none; border-radius:20px;
+    padding:8px 16px; font-size:.85rem; font-weight:600; cursor:pointer; box-shadow:0 2px 5px rgba(0,0,0,.2);
+  }
+  button.pillbtn.active{background:var(--gold); color:#fff;}
+  main{max-width:700px; margin:0 auto; padding:18px 14px 60px;}
+  .card{
+    background:#fff; border:1px solid #eadfce; border-radius:14px; padding:16px 18px;
+    margin-bottom:14px; box-shadow:0 2px 8px rgba(0,0,0,.05);
+  }
+  .card h4{color:var(--brown1); margin-bottom:10px;}
+  .lang-en, .lang-ml{display:none;}
+  body.show-en .lang-en{display:block;}
+  body.show-en span.lang-en{display:inline;}
+  body.show-ml .lang-ml{display:block;}
+  body.show-ml span.lang-ml{display:inline;}
+  .match-wrap{display:flex; gap:18px; flex-wrap:wrap;}
+  .match-col{flex:1; min-width:140px; display:flex; flex-direction:column; gap:8px;}
+  .match-item{
+    background:#fff; border:2px solid #ddd; border-radius:8px; padding:10px 12px;
+    cursor:pointer; font-size:.88rem; text-align:left; font-weight:500;
+  }
+  .match-item.selected{border-color:var(--gold); background:#fff6e6;}
+  .match-item.correct{border-color:var(--green); background:#d9f2df; cursor:default;}
+  .match-item.wrong{border-color:var(--red); background:#fbdcd6;}
+  .match-status{margin-top:10px; font-weight:700; text-align:center; color:var(--brown2);}
+  .actionbtn{
+    background:var(--brown1); color:#fff; border:none; padding:10px 18px; border-radius:24px;
+    font-weight:600; cursor:pointer; font-size:.9rem; display:flex; align-items:center; gap:6px; justify-content:center;
+  }
+  .actionbar{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:12px;}
+  footer{text-align:center; padding:16px; color:#8a7a63; font-size:.8rem;}
+  a.backlink{display:inline-block; margin-top:10px; color:var(--blue); font-weight:600; text-decoration:none;}
+</style>
+</head>
+<body class="show-en">
+
+<header>
+  <h1>Match the Following <span class="ml">| ജോടിയാക്കുക</span></h1>
+  <h2>Unit 1: Humanism — SSLC Social Science I — Standard X</h2>
+  <div class="topbar">
+    <button class="pillbtn active" id="enBtn" onclick="setLang('en')">English</button>
+    <button class="pillbtn" id="mlBtn" onclick="setLang('ml')">മലയാളം</button>
+  </div>
+</header>
+
+<main>
+  <div class="card">
+    <p class="lang-en">Tap an item in Column A, then tap its matching item in Column B.</p>
+    <p class="lang-ml">A യിലെ ഇനം ടാപ്പ് ചെയ്ത ശേഷം B യിലെ ബന്ധപ്പെട്ട ഇനം ടാപ്പ് ചെയ്യുക.</p>
+  </div>
+
+  <div class="card">
+    <h4><span class="lang-en">Set 1 — Personalities & Their Works/Achievements</span><span class="lang-ml">സെറ്റ് 1 — വ്യക്തികളും അവരുടെ കൃതികളും</span></h4>
+    <div class="match-wrap" id="matchSet1"></div>
+    <div class="match-status" id="matchStatus1"></div>
+    <div class="actionbar"><button class="actionbtn" onclick="buildMatch(1)">🔄 Reset Set 1</button></div>
+  </div>
+
+  <div class="card">
+    <h4><span class="lang-en">Set 2 — Terms & Their Meanings</span><span class="lang-ml">സെറ്റ് 2 — സംജ്ഞകളും അർത്ഥങ്ങളും</span></h4>
+    <div class="match-wrap" id="matchSet2"></div>
+    <div class="match-status" id="matchStatus2"></div>
+    <div class="actionbar"><button class="actionbtn" onclick="buildMatch(2)">🔄 Reset Set 2</button></div>
+  </div>
+
+  <div class="card">
+    <h4><span class="lang-en">Set 3 — Events & Years</span><span class="lang-ml">സെറ്റ് 3 — സംഭവങ്ങളും വർഷങ്ങളും</span></h4>
+    <div class="match-wrap" id="matchSet3"></div>
+    <div class="match-status" id="matchStatus3"></div>
+    <div class="actionbar"><button class="actionbtn" onclick="buildMatch(3)">🔄 Reset Set 3</button></div>
+  </div>
+
+  <div class="card">
+    <a class="backlink" href="unit1_humanism_portal.html">⬅ Back to Study Portal / പഠന പോർട്ടലിലേക്ക്</a>
+  </div>
+</main>
+
+<footer>
+  <span class="lang-en">Unit 1: Humanism — SSLC Study Portal</span>
+  <span class="lang-ml">യൂണിറ്റ് 1: മാനവികത — SSLC പഠന പോർട്ടൽ</span>
+</footer>
+
+<script>
+function setLang(lang){
+  document.body.className = 'show-' + lang;
+  document.getElementById('enBtn').classList.toggle('active', lang==='en');
+  document.getElementById('mlBtn').classList.toggle('active', lang==='ml');
+}
+
+const matchData = {
+  1: [
+    {a:"Leonardo da Vinci", ml_a:"ലിയനാർഡോ ഡാവിഞ്ചി", b:"Mona Lisa", ml_b:"മൊണാലിസ"},
+    {a:"Michelangelo", ml_a:"മൈക്കലാഞ്ചലോ", b:"Sistine Chapel Ceiling", ml_b:"സിസ്റ്റൈൻ ചാപ്പൽ മുകൾത്തട്ട്"},
+    {a:"Donatello", ml_a:"ഡൊണാടെല്ലോ", b:"Bronze David", ml_b:"വെങ്കല ദാവീദ്"},
+    {a:"Filippo Brunelleschi", ml_a:"ഫിലിപ്പോ ബ്രൂണലസ്കി", b:"Dome of Florence Cathedral", ml_b:"ഫ്ലോറൻസ് താഴികക്കുടം"},
+    {a:"Niccolò Machiavelli", ml_a:"മാക്യവെല്ലി", b:"The Prince", ml_b:"ദി പ്രിൻസ്"},
+    {a:"Dante Alighieri", ml_a:"ദാന്തെ", b:"Divine Comedy", ml_b:"ഡിവൈൻ കോമഡി"},
+    {a:"Johannes Gutenberg", ml_a:"ഗുട്ടൻബർഗ്", b:"Printing Press", ml_b:"അച്ചടിയന്ത്രം"},
+    {a:"Martin Luther", ml_a:"മാർട്ടിൻ ലൂഥർ", b:"95 Theses", ml_b:"95 പ്രബന്ധങ്ങൾ"}
+  ],
+  2: [
+    {a:"Renaissance", ml_a:"നവോത്ഥാനം", b:"Rebirth of Greco-Roman culture", ml_b:"ഗ്രെക്കോ-റോമൻ പുനർജനി"},
+    {a:"Humanism", ml_a:"മാനവികത", b:"Human-centred outlook", ml_b:"മനുഷ്യകേന്ദ്രീകൃത വീക്ഷണം"},
+    {a:"Scholasticism", ml_a:"സ്കൊളാസ്റ്റിസിസം", b:"God-centred medieval philosophy", ml_b:"ദൈവകേന്ദ്രീകൃത തത്വശാസ്ത്രം"},
+    {a:"Indulgence", ml_a:"ഇൻഡൾജൻസ്", b:"Certificate of pardon for money", ml_b:"പണം നൽകി പാപമോചനം"},
+    {a:"Reformation", ml_a:"മതനവീകരണം", b:"Protestant break from Catholic Church", ml_b:"പ്രൊട്ടസ്റ്റന്റ് പ്രസ്ഥാനം"},
+    {a:"Counter-Reformation", ml_a:"പ്രതിമതനവീകരണം", b:"Catholic Church's self-renewal", ml_b:"കത്തോലിക്കാ സഭയുടെ സ്വയംനവീകരണം"},
+    {a:"Heliocentric Theory", ml_a:"സൂര്യകേന്ദ്ര സിദ്ധാന്തം", b:"Sun at the centre of universe", ml_b:"സൂര്യൻ പ്രപഞ്ചകേന്ദ്രം"},
+    {a:"Black Death", ml_a:"ബ്ലാക്ക് ഡെത്ത്", b:"14th-century bubonic plague", ml_b:"14-ാം നൂറ്റാണ്ടിലെ പ്ലേഗ്"}
+  ],
+  3: [
+    {a:"Black Death", ml_a:"ബ്ലാക്ക് ഡെത്ത്", b:"1347–1351", ml_b:"1347–1351"},
+    {a:"Fall of Constantinople", ml_a:"കോൺസ്റ്റാന്റിനോപ്പിളിന്റെ പതനം", b:"1453", ml_b:"1453"},
+    {a:"Martin Luther's 95 Theses", ml_a:"95 പ്രബന്ധങ്ങൾ", b:"1517", ml_b:"1517"},
+    {a:"Renaissance begins in Italy", ml_a:"നവോത്ഥാനത്തിന്റെ തുടക്കം", b:"14th century", ml_b:"14-ാം നൂറ്റാണ്ട്"},
+    {a:"Greek Classical Culture", ml_a:"ഗ്രീക്ക് സംസ്കാരം", b:"12th–4th century BCE", ml_b:"ബി.സി.ഇ. 12–4"},
+    {a:"Roman Classical Culture", ml_a:"റോമൻ സംസ്കാരം", b:"5th century BCE – 5th century CE", ml_b:"ബി.സി.ഇ. 5 – സി.ഇ. 5"},
+    {a:"Crusades", ml_a:"കുരിശുയുദ്ധങ്ങൾ", b:"11th–13th century CE", ml_b:"സി.ഇ. 11–13 നൂറ്റാണ്ട്"},
+    {a:"Newton's Law of Gravitation", ml_a:"ഗുരുത്വാകർഷണ സിദ്ധാന്തം", b:"Late 17th century", ml_b:"17-ാം നൂറ്റാണ്ടിന്റെ അവസാനം"}
+  ]
+};
+
+const matchState = {};
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function buildMatch(setNum){
+  const pairs = matchData[setNum];
+  const container = document.getElementById('matchSet'+setNum);
+  const status = document.getElementById('matchStatus'+setNum);
+  status.textContent='';
+  matchState[setNum] = {selectedA:null, matched:0, total:pairs.length};
+  const colA = pairs.map((p,i)=>({...p, idx:i}));
+  const colB = shuffle(pairs.map((p,i)=>({...p, idx:i})));
+  container.innerHTML = `
+    <div class="match-col" id="matchColA${setNum}"></div>
+    <div class="match-col" id="matchColB${setNum}"></div>`;
+  const elA = document.getElementById('matchColA'+setNum);
+  const elB = document.getElementById('matchColB'+setNum);
+  colA.forEach(item=>{
+    const div = document.createElement('div');
+    div.className='match-item'; div.dataset.idx=item.idx;
+    div.innerHTML = `<span class="lang-en">${item.a}</span><span class="lang-ml">${item.ml_a}</span>`;
+    div.onclick = ()=>selectMatchA(setNum, item.idx, div);
+    elA.appendChild(div);
+  });
+  colB.forEach(item=>{
+    const div = document.createElement('div');
+    div.className='match-item'; div.dataset.idx=item.idx;
+    div.innerHTML = `<span class="lang-en">${item.b}</span><span class="lang-ml">${item.ml_b}</span>`;
+    div.onclick = ()=>selectMatchB(setNum, item.idx, div);
+    elB.appendChild(div);
+  });
+}
+function selectMatchA(setNum, idx, el){
+  if(el.classList.contains('correct')) return;
+  document.querySelectorAll(`#matchColA${setNum} .match-item`).forEach(d=>d.classList.remove('selected'));
+  el.classList.add('selected');
+  matchState[setNum].selectedA = {idx, el};
+}
+function selectMatchB(setNum, idx, el){
+  const st = matchState[setNum];
+  if(el.classList.contains('correct') || !st.selectedA) return;
+  if(st.selectedA.idx === idx){
+    st.selectedA.el.classList.remove('selected'); st.selectedA.el.classList.add('correct');
+    el.classList.add('correct');
+    st.matched++;
+    const status = document.getElementById('matchStatus'+setNum);
+    if(st.matched === st.total){
+      status.innerHTML = `<span class="lang-en">🎉 All matched!</span><span class="lang-ml">🎉 എല്ലാം ശരിയായി ജോടിയാക്കി!</span>`;
+    }
+  } else {
+    st.selectedA.el.classList.add('wrong'); el.classList.add('wrong');
+    setTimeout(()=>{
+      st.selectedA.el.classList.remove('selected','wrong'); el.classList.remove('wrong');
+    }, 700);
+  }
+  st.selectedA = null;
+}
+buildMatch(1); buildMatch(2); buildMatch(3);
+</script>
+</body>
+</html>
