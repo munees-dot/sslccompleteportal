@@ -123,6 +123,62 @@ let qi=0, score=0, answered=false, studentName="";
 const host=document.getElementById('cardHost');
 const PAGE_URL = window.location.href.split('#')[0];
 
+/* ---------- TIME-GATE: quiz open only 9:30 PM – 10:30 PM daily ---------- */
+const OPEN_HOUR=21, OPEN_MIN=30;   // 9:30 PM
+const CLOSE_HOUR=22, CLOSE_MIN=30; // 10:30 PM
+
+function withinWindow(){
+  const now=new Date();
+  const mins = now.getHours()*60+now.getMinutes();
+  const openMins = OPEN_HOUR*60+OPEN_MIN;
+  const closeMins = CLOSE_HOUR*60+CLOSE_MIN;
+  return mins>=openMins && mins<closeMins;
+}
+function fmt(h,m){
+  const ap = h>=12 ? 'PM':'AM';
+  let hh = h%12; if(hh===0) hh=12;
+  return hh+':'+String(m).padStart(2,'0')+' '+ap;
+}
+function renderClosed(){
+  const now=new Date();
+  const mins = now.getHours()*60+now.getMinutes();
+  const openMins = OPEN_HOUR*60+OPEN_MIN;
+  let waitMsg;
+  if(mins < openMins){
+    const diff = openMins-mins;
+    waitMsg = "Opens in "+Math.floor(diff/60)+"h "+(diff%60)+"m";
+  } else {
+    const diff = (24*60 - mins) + openMins;
+    waitMsg = "Opens in "+Math.floor(diff/60)+"h "+(diff%60)+"m";
+  }
+  host.innerHTML=`
+    <div class="start" style="text-align:center;">
+      <div style="font-size:38px;margin-bottom:6px;">🔒</div>
+      <div class="ui" style="font-weight:700;font-size:16px;color:#e7ecf7;">Quiz is currently closed</div>
+      <p style="color:#b9c3d9;font-size:14px;line-height:1.7;margin-top:10px;">
+        This quiz opens daily only between<br>
+        <b style="color:var(--amber-soft);">${fmt(OPEN_HOUR,OPEN_MIN)} – ${fmt(CLOSE_HOUR,CLOSE_MIN)}</b>
+      </p>
+      <div class="meta-line" style="margin-top:14px;">⏳ ${waitMsg}</div>
+    </div>`;
+}
+function checkAccess(){
+  if(withinWindow()){ renderStart(); }
+  else{ renderClosed(); }
+}
+setInterval(()=>{
+  // re-check every 20s so the page auto-unlocks/locks without a manual refresh
+  const stillOpen = withinWindow();
+  const isClosedScreen = host.querySelector('.start') && host.textContent.includes('currently closed');
+  const isQuestionScreen = host.querySelector('.quiz-q');
+  if(!stillOpen && (isQuestionScreen || (!isClosedScreen && host.querySelector('#startBtn')))){
+    renderClosed();
+  } else if(stillOpen && isClosedScreen){
+    renderStart();
+  }
+}, 20000);
+/* ---------------------------------------------------------------------- */
+
 function renderStart(){
   host.innerHTML=`
     <div class="start">
@@ -197,10 +253,10 @@ function renderResult(){
       setTimeout(()=>document.getElementById('copiedMsg').classList.remove('show'),2500);
     });
   });
-  document.getElementById('restartBtn').addEventListener('click',()=>{ renderStart(); });
+  document.getElementById('restartBtn').addEventListener('click',()=>{ checkAccess(); });
 }
 
-renderStart();
+checkAccess();
 </script>
 </body>
 </html>
