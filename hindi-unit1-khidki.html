@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>खिड़की — SSLC हिंदी अध्ययन पोर्टल</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Hind:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0f1c33;
+  --night2:#1a2c4d;
+  --amber:#f2b544;
+  --amber-soft:#f7d38b;
+  --shawl:#b5484a;
+  --shawl-deep:#8c343a;
+  --steel:#7c8fa6;
+  --paper:#f7f2e7;
+  --paper2:#efe6d2;
+  --ink:#20232b;
+  --ink-soft:#565b68;
+  --line:#d8cdb0;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Hind',sans-serif;}
+.ui{font-family:'Poppins',sans-serif;}
+h1,h2,h3{font-family:'Hind',sans-serif;font-weight:700;margin:0;}
+.display{font-family:'Yatra One',cursive;}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;background:linear-gradient(180deg,var(--night) 0%,var(--night2) 70%,#243a63 100%);
+  overflow:hidden;padding:38px 20px 46px;color:#fff;text-align:center;
+}
+.hero .stars{position:absolute;inset:0;background-image:radial-gradient(1px 1px at 20% 30%, #fff 60%, transparent 100%),
+  radial-gradient(1px 1px at 70% 20%, #fff 60%, transparent 100%),
+  radial-gradient(1px 1px at 40% 60%, #fff 50%, transparent 100%),
+  radial-gradient(1px 1px at 85% 45%, #fff 50%, transparent 100%),
+  radial-gradient(1px 1px at 55% 15%, #fff 50%, transparent 100%);
+  opacity:.6;
+}
+.eyebrow{font-family:'Poppins',sans-serif;letter-spacing:.18em;font-size:12px;text-transform:uppercase;color:var(--amber-soft);position:relative;z-index:2;}
+.hero h1{font-family:'Yatra One',cursive;font-size:clamp(46px,9vw,78px);margin:8px 0 4px;position:relative;z-index:2;
+  text-shadow:0 2px 18px rgba(242,181,68,.35);}
+.hero .sub{font-size:15px;color:#cdd7ea;position:relative;z-index:2;}
+.hero .author-badge{display:inline-flex;gap:10px;align-items:center;margin-top:16px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);border-radius:40px;padding:8px 18px;font-size:13px;position:relative;z-index:2;}
+.hero .author-badge b{color:var(--amber);}
+
+/* train strip */
+.train-track{position:relative;height:78px;margin-top:26px;z-index:2;}
+.rail{position:absolute;bottom:10px;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,#4d5b78 0 14px,transparent 14px 24px);}
+.train{position:absolute;bottom:13px;left:-260px;display:flex;animation:roll 13s linear infinite;}
+.coach{width:86px;height:46px;background:linear-gradient(180deg,#33456e,#1f3157);border-radius:6px 6px 3px 3px;margin-right:6px;
+  border:1px solid #4a5d84;display:flex;align-items:center;justify-content:space-evenly;padding:0 6px;position:relative;}
+.coach:after{content:"";position:absolute;left:6px;right:6px;bottom:-6px;height:5px;background:#12203a;border-radius:2px;}
+.win{width:16px;height:14px;background:var(--amber);border-radius:2px;box-shadow:0 0 8px 2px rgba(242,181,68,.7);}
+.win.dim{background:#2a3c60;box-shadow:none;}
+@keyframes roll{ to{ left:110%; } }
+@media (prefers-reduced-motion: reduce){ .train{animation:none;left:20%;} }
+
+/* ===== NAV ===== */
+.tabbar{position:sticky;top:0;z-index:50;background:var(--night);display:flex;overflow-x:auto;gap:4px;padding:8px 10px;
+  box-shadow:0 4px 14px rgba(0,0,0,.25);}
+.tabbar::-webkit-scrollbar{height:0;}
+.tabbtn{font-family:'Poppins',sans-serif;flex:0 0 auto;background:transparent;border:1px solid transparent;color:#c6cfe0;
+  padding:10px 16px 8px;font-size:13.5px;font-weight:600;cursor:pointer;border-radius:10px 10px 4px 4px;position:relative;
+  transition:.2s;white-space:nowrap;}
+.tabbtn:hover{background:rgba(255,255,255,.06);color:#fff;}
+.tabbtn.active{background:var(--paper);color:var(--night);}
+.tabbtn.active:after{content:"";position:absolute;left:14%;right:14%;top:4px;height:3px;background:var(--shawl);border-radius:2px;}
+
+/* ===== SECTIONS ===== */
+.wrap{max-width:960px;margin:0 auto;padding:30px 18px 70px;}
+.panel{display:none;}
+.panel.active{display:block;animation:fade .35s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+.window-card{
+  background:var(--paper);border:2px solid var(--night);border-radius:22px 22px 10px 10px;padding:26px 24px 22px;
+  position:relative;margin-bottom:22px;box-shadow:0 6px 0 rgba(15,28,51,.08);
+}
+.window-card:before{content:"";position:absolute;top:-2px;left:16px;right:16px;height:10px;background:var(--shawl);
+  border-radius:6px 6px 0 0;opacity:.85;}
+.window-card h3{font-size:20px;color:var(--night2);border-bottom:2px dashed var(--line);padding-bottom:10px;margin-bottom:14px;}
+.window-card h3 .tag{font-family:'Poppins',sans-serif;font-size:11px;background:var(--amber);color:var(--night);
+  padding:3px 9px;border-radius:20px;margin-left:8px;font-weight:700;vertical-align:middle;}
+
+p{line-height:1.85;font-size:16.5px;color:var(--ink);}
+.think{background:var(--paper2);border-left:4px solid var(--shawl);border-radius:6px;padding:12px 16px;margin:14px 0;
+  font-size:15px;color:var(--ink-soft);}
+.think b{color:var(--shawl-deep);font-family:'Poppins',sans-serif;font-size:12.5px;letter-spacing:.03em;}
+
+.section-title{font-family:'Poppins',sans-serif;font-weight:700;color:var(--night2);font-size:13px;letter-spacing:.06em;
+  text-transform:uppercase;margin:22px 0 10px;display:flex;align-items:center;gap:8px;}
+.section-title:before{content:"";width:20px;height:2px;background:var(--shawl);display:inline-block;}
+
+/* meanings table */
+.search-box{display:flex;gap:8px;margin-bottom:16px;}
+.search-box input{flex:1;padding:11px 14px;border-radius:10px;border:2px solid var(--line);font-family:'Hind',sans-serif;
+  font-size:15px;background:#fff;}
+.search-box input:focus{outline:none;border-color:var(--shawl);}
+table.meanings{width:100%;border-collapse:collapse;font-size:15.5px;}
+table.meanings th{text-align:left;font-family:'Poppins',sans-serif;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;
+  color:#fff;background:var(--night2);padding:10px 12px;}
+table.meanings th:first-child{border-radius:8px 0 0 0;}
+table.meanings th:last-child{border-radius:0 8px 0 0;}
+table.meanings td{padding:11px 12px;border-bottom:1px solid var(--line);}
+table.meanings tr:nth-child(even) td{background:var(--paper2);}
+table.meanings .eng{color:var(--ink-soft);font-family:'Poppins',sans-serif;font-size:12.5px;font-style:italic;}
+table.meanings tr.hide{display:none;}
+
+/* grammar */
+.drill{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px;}
+.drill .q{font-weight:600;margin-bottom:8px;}
+.reveal-btn{font-family:'Poppins',sans-serif;font-size:12.5px;font-weight:600;background:var(--night2);color:#fff;
+  border:none;padding:6px 14px;border-radius:20px;cursor:pointer;}
+.reveal-ans{display:none;margin-top:8px;background:var(--paper2);border-radius:8px;padding:10px 12px;color:var(--shawl-deep);
+  font-weight:600;}
+.reveal-ans.show{display:block;}
+textarea.ans-box{width:100%;border:1.5px dashed var(--line);border-radius:8px;padding:10px;font-family:'Hind',sans-serif;
+  font-size:15px;min-height:64px;margin-top:8px;resize:vertical;}
+
+/* question bank */
+.mark-group{margin-bottom:18px;}
+.mark-head{display:flex;align-items:center;justify-content:space-between;background:var(--night);color:#fff;padding:10px 16px;
+  border-radius:10px;cursor:pointer;font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;}
+.mark-head .badge{background:var(--amber);color:var(--night);font-size:11.5px;padding:2px 10px;border-radius:20px;}
+.mark-body{display:none;padding:6px 4px 4px;}
+.mark-body.open{display:block;}
+.qitem{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0;}
+.qitem .qtxt{font-weight:600;margin-bottom:8px;}
+.qitem .qtxt .num{color:var(--shawl-deep);margin-right:6px;}
+.qitem .alt{color:var(--ink-soft);font-size:14px;font-style:italic;margin:4px 0 8px;}
+.ans-toggle{font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;color:var(--night2);background:var(--paper2);
+  border:1px solid var(--line);padding:5px 12px;border-radius:20px;cursor:pointer;}
+.ans-block{display:none;margin-top:10px;border-top:1px dashed var(--line);padding-top:10px;color:var(--ink);}
+.ans-block.show{display:block;}
+.ans-block b{color:var(--shawl-deep);}
+
+/* quiz */
+.quiz-shell{background:var(--night);border-radius:22px;padding:24px;color:#fff;}
+.progress-wrap{height:8px;background:rgba(255,255,255,.15);border-radius:8px;overflow:hidden;margin-bottom:18px;}
+.progress-bar{height:100%;background:var(--amber);border-radius:8px;transition:.3s;width:0%;}
+.quiz-meta{display:flex;justify-content:space-between;font-family:'Poppins',sans-serif;font-size:12.5px;color:#b9c3d9;margin-bottom:10px;}
+.quiz-q{font-size:19px;font-weight:600;margin-bottom:16px;min-height:56px;}
+.quiz-opts{display:grid;gap:10px;}
+.qopt{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.18);border-radius:12px;padding:12px 16px;
+  cursor:pointer;font-size:15.5px;transition:.15s;}
+.qopt:hover{border-color:var(--amber);}
+.qopt.correct{background:rgba(94,193,120,.25);border-color:#5ec178;}
+.qopt.wrong{background:rgba(213,80,80,.25);border-color:#d55050;}
+.qopt.disabled{pointer-events:none;}
+.quiz-explain{margin-top:14px;background:rgba(242,181,68,.12);border-left:3px solid var(--amber);padding:10px 14px;
+  border-radius:6px;font-size:14.5px;display:none;color:#ecd9a8;}
+.quiz-explain.show{display:block;}
+.quiz-nav{display:flex;justify-content:space-between;margin-top:20px;}
+.qbtn{font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;padding:10px 22px;border-radius:24px;border:none;
+  cursor:pointer;background:var(--amber);color:var(--night);}
+.qbtn:disabled{opacity:.35;cursor:default;}
+.qbtn.ghost{background:transparent;color:#c6cfe0;border:1.5px solid rgba(255,255,255,.25);}
+.quiz-result{text-align:center;}
+.quiz-result .score{font-family:'Yatra One',cursive;font-size:60px;color:var(--amber);}
+
+/* buttons / footer */
+.print-btn{position:fixed;right:18px;bottom:18px;z-index:40;font-family:'Poppins',sans-serif;font-weight:600;font-size:13.5px;
+  background:var(--shawl);color:#fff;border:none;padding:12px 20px;border-radius:30px;cursor:pointer;box-shadow:0 6px 18px rgba(140,52,58,.4);}
+footer{text-align:center;font-family:'Poppins',sans-serif;font-size:12px;color:var(--ink-soft);padding:22px 10px 40px;}
+footer b{color:var(--shawl-deep);}
+
+@media print{
+  .tabbar,.print-btn{display:none!important;}
+  .hero{padding:14px 10px;}
+  .train-track{display:none;}
+  .panel{display:block!important;}
+  .panel:not(.print-target){display:none!important;}
+  body{background:#fff;}
+}
+@media (max-width:600px){
+  .window-card{padding:20px 16px 18px;}
+  .mark-head{font-size:13px;padding:9px 12px;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="stars"></div>
+  <div class="eyebrow">SSLC · Hindi · Third Language · Chapter 1 · Laghukatha</div>
+  <h1>खिड़की</h1>
+  <div class="sub">by Anju Kharbanda</div>
+  <div class="author-badge">Born: <b>31 October 1971</b>, Delhi &nbsp;|&nbsp; Genres: Short Story · Poetry · Memoir</div>
+  <div class="train-track">
+    <div class="rail"></div>
+    <div class="train">
+      <div class="coach"><div class="win"></div><div class="win dim"></div><div class="win"></div></div>
+      <div class="coach"><div class="win dim"></div><div class="win"></div><div class="win"></div></div>
+      <div class="coach"><div class="win"></div><div class="win"></div><div class="win dim"></div></div>
+      <div class="coach"><div class="win dim"></div><div class="win"></div><div class="win dim"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="tabbar ui" id="tabbar">
+  <button class="tabbtn active" data-tab="intro">Overview</button>
+  <button class="tabbtn" data-tab="summary">Story Summary</button>
+  <button class="tabbtn" data-tab="meanings">Word Meanings</button>
+  <button class="tabbtn" data-tab="grammar">Grammar</button>
+  <button class="tabbtn" data-tab="qbank">Question Bank</button>
+  <button class="tabbtn" data-tab="quiz">Quiz</button>
+  <button class="tabbtn" data-tab="notes">Short Notes</button>
+</div>
+
+<div class="wrap">
+
+  <!-- ================= INTRO ================= -->
+  <section class="panel active" id="intro">
+    <div class="window-card">
+      <h3>लेखिका परिचय <span class="tag">Author</span></h3>
+      <p>अंजू खरबंदा का जन्म दिल्ली में 31 अक्तूबर 1971 को हुआ। वे अध्यापिका, लेखिका तथा रेडियो कलाकार हैं। लघुकथा, कविता, संस्मरण आदि विधाओं में वे सक्रिय रूप से लेखन करती हैं। उनकी प्रकाशित कृतियों में <i>'उजली होती भोर'</i> और <i>'किंग्ज़वे कैम्प दिल्ली-9'</i> प्रमुख हैं। साहित्य सेवा के लिए उन्हें सावित्री बाई फुले सम्मान से पुरस्कृत किया गया है।</p>
+    </div>
+    <div class="window-card">
+      <h3>पाठ के बारे में <span class="tag">About the chapter</span></h3>
+      <p>'खिड़की' एक लघुकथा है — यानी बहुत कम शब्दों में गहरा भाव और संदेश देने वाली रचना। यह कहानी एक रेलगाड़ी की यात्रा के दौरान घटती है, जहाँ लेखक अपने परिवार के साथ जनरल कोच से सफ़र कर रहा है। खिड़की केवल एक भौतिक वस्तु नहीं, बल्कि स्मृति, वर्ग-भेद और सहानुभूति की एक खिड़की के रूप में उभरती है।</p>
+      <div class="think"><b>ध्यान दें ›</b> कहानी में 'खिड़की' शब्द कई अर्थों की ओर संकेत करता है — बाहर की दुनिया को देखने की खिड़की, अतीत में झाँकने की खिड़की, और दूसरे के दर्द को समझने की खिड़की। पढ़ते समय इन तीनों स्तरों पर ध्यान दें।</p></div>
+    </div>
+    <div class="window-card">
+      <h3>मुख्य पात्र <span class="tag">Characters</span></h3>
+      <p><b>लेखक (यात्री/पति)</b> — कथावाचक, जो अपने परिवार के साथ जनरल कोच में सफ़र करता है।<br>
+      <b>पत्नी</b> — व्यावहारिक स्वभाव की, मोल-भाव में सतर्क।<br>
+      <b>शॉल बेचने वाली युवती</b> — साँवली-सलोनी, कजरारी आँखों वाली, जीवन-यापन के लिए ट्रेन में शॉल बेचती है।<br>
+      <b>लेखक के पिता (स्मृति में)</b> — जो पहले रेलगाड़ी में सामान बेचकर परिवार चलाते थे।</p>
+    </div>
+  </section>
+
+  <!-- ================= SUMMARY ================= -->
+  <section class="panel" id="summary">
+    <div class="window-card">
+      <h3>Story Summary <span class="tag">कथासार</span>
+        <button class="reveal-btn" id="summaryToggle" style="float:right;margin-top:-4px;">Show in: MALAYALAM</button>
+      </h3>
+      <div id="summary-hi">
+      <p>होशियारपुर में एक शादी का निमंत्रण मिलने पर लेखक अपने परिवार के साथ ट्रेन से यात्रा तय करता है। हल्की सर्दी के कारण वह इस बार एसी के बजाय जनरल कोच से यात्रा करने का फ़ैसला लेता है, जिस पर परिवार पहले नाराज़ होता है पर बाद में मान जाता है। सफ़र के दौरान बच्चे खिड़की वाली सीट झपट लेते हैं, और लेखक-पत्नी बातों में मशगूल हो जाते हैं।</p>
+      <p>इसी बीच शॉलों की भारी गठरी उठाए एक साँवली-सलोनी, कजरारी आँखों वाली युवती डिब्बे में शॉल बेचने आती है। पत्नी शॉलों में दिलचस्पी दिखाती है और दोनों के बीच लंबा मोल-भाव चलता है — युवती अढ़ाई सौ रुपए बताती है, पत्नी सौ रुपए पर अड़ी रहती है। बार-बार अनुरोध करने पर भी जब पत्नी नहीं मानती, तो युवती का गला रुँध जाता है और उसकी आँखें भर आती हैं — क्योंकि यह उसकी रोज़ी-रोटी का सवाल है।</p>
+      <p>अंत में युवती डेढ़ सौ रुपए में पाँच शॉलें देने को तैयार हो जाती है। लेखक झट 750 रुपए निकालकर दे देता है। युवती के जाने के बाद पत्नी को लगता है कि उन्हें और मोल-भाव करना चाहिए था — जबकि लेखक का मन बिल्कुल दूसरी दिशा में मुड़ जाता है। बेटी को गोद में बिठाए खिड़की से झाँकते हुए उसे अपने पिता की याद आती है, जो कभी रेलगाड़ी में सामान बेच-बेचकर थके-हारे घर लौटते थे — और उनकी आँखों में भी वही नमी होती थी, जो आज इस अनजान युवती की आँखों में लेखक ने देखी।</p>
+      <div class="think"><b>भाव और संदेश ›</b> लघुकथा वर्ग-असमानता, आजीविका के संघर्ष और सहानुभूति के क्षणिक बोध को उजागर करती है। 'खिड़की' के माध्यम से लेखक वर्तमान (मोल-भाव करती युवती) और अतीत (अपने पिता का संघर्ष) — दोनों को एक साथ देख पाता है।</div>
+      </div>
+      <div id="summary-ml" style="display:none;">
+      <p>ഹോശിയാർപൂരിൽ ഒരു വിവാഹത്തിനുള്ള ക്ഷണം ലഭിച്ചതോടെ, ലേഖകൻ കുടുംബത്തോടൊപ്പം തീവണ്ടിയിൽ യാത്ര ചെയ്യാൻ തീരുമാനിക്കുന്നു. ചെറിയ തണുപ്പ് അനുഭവപ്പെട്ടു തുടങ്ങിയതിനാൽ, ഇത്തവണ എ.സി. കോച്ചിനു പകരം ജനറൽ കോച്ചിൽ യാത്ര ചെയ്യാൻ അദ്ദേഹം തീരുമാനിക്കുന്നു. ഇതിൽ കുടുംബം ആദ്യം അതൃപ്തി പ്രകടിപ്പിച്ചെങ്കിലും പിന്നീട് സമ്മതിക്കുന്നു. യാത്രയ്ക്കിടെ കുട്ടികൾ ജനാലയരികിലെ സീറ്റ് പിടിച്ചെടുക്കുന്നു; ലേഖകനും ഭാര്യയും സംഭാഷണത്തിൽ മുഴുകുന്നു.</p>
+      <p>ഇതിനിടെ, ഷാളുകളുടെ വലിയ കെട്ടുമായി കറുത്തിരുണ്ട നിറമുള്ള, സുന്ദരിയായ, മഷിയെഴുതിയ കണ്ണുകളുള്ള ഒരു യുവതി കോച്ചിൽ ഷാൾ വിൽക്കാൻ എത്തുന്നു. ഭാര്യ ഷാളുകളിൽ താൽപ്പര്യം കാണിക്കുകയും ഇരുവരും തമ്മിൽ ദീർഘനേരം വിലപേശൽ നടക്കുകയും ചെയ്യുന്നു — യുവതി ഇരുനൂറ്റമ്പത് രൂപ ആവശ്യപ്പെടുന്നു, ഭാര്യ നൂറ് രൂപയിൽ ഉറച്ചുനിൽക്കുന്നു. യുവതി പലതവണ അപേക്ഷിച്ചിട്ടും ഭാര്യ വഴങ്ങാതിരുന്നപ്പോൾ, യുവതിയുടെ തൊണ്ട ഇടറുകയും കണ്ണുകൾ നിറയുകയും ചെയ്യുന്നു — കാരണം അത് അവളുടെ ഉപജീവനത്തിന്റെ ചോദ്യമായിരുന്നു.</p>
+      <p>ഒടുവിൽ നൂറ്റമ്പത് രൂപയ്ക്ക് അഞ്ച് ഷാളുകൾ നൽകാൻ യുവതി സമ്മതിക്കുന്നു. ലേഖകൻ ഉടനെ എഴുനൂറ്റമ്പത് രൂപ എടുത്തുകൊടുക്കുന്നു. യുവതി പോയതിനുശേഷം, കുറച്ചുകൂടി വിലപേശണമായിരുന്നു എന്ന് ഭാര്യക്ക് തോന്നുന്നു — എന്നാൽ ലേഖകന്റെ മനസ്സ് തികച്ചും മറ്റൊരു ദിശയിലേക്ക് തിരിയുന്നു. മകളെ മടിയിലിരുത്തി ജനാലയിലൂടെ നോക്കുമ്പോൾ, തീവണ്ടിയിൽ സാധനങ്ങൾ വിറ്റ് ക്ഷീണിതനായി വീട്ടിലെത്തിയിരുന്ന തന്റെ പിതാവിനെ അദ്ദേഹം ഓർക്കുന്നു — ഇന്ന് ഈ അപരിചിതയായ യുവതിയുടെ കണ്ണുകളിൽ കണ്ട അതേ നനവ് അന്ന് പിതാവിന്റെ കണ്ണുകളിലും ഉണ്ടായിരുന്നു.</p>
+      <div class="think"><b>ആശയവും സന്ദേശവും ›</b> ഈ ചെറുകഥ വർഗ്ഗ അസമത്വം, ഉപജീവന പോരാട്ടം, സഹാനുഭൂതിയുടെ ക്ഷണികമായ തിരിച്ചറിവ് എന്നിവ വെളിപ്പെടുത്തുന്നു. 'ജനാല' എന്ന ബിംബത്തിലൂടെ ലേഖകൻ വർത്തമാനകാലവും (വിലപേശുന്ന യുവതി) ഭൂതകാലവും (തന്റെ പിതാവിന്റെ പോരാട്ടം) — രണ്ടും ഒരുമിച്ച് കാണുന്നു.</div>
+      </div>
+    </div>
+    <div class="window-card">
+      <h3>Why "खिड़की" (Window)? <span class="tag">शीर्षक की सार्थकता</span></h3>
+      <div id="title-hi">
+      <p>ट्रेन की खिड़की कहानी में तीन भूमिकाएँ निभाती है — पहली, बच्चों के लिए बाहर देखने का मनोरंजन का साधन; दूसरी, बेटी को गोद में बिठाकर बाहर झाँकते समय लेखक के लिए अतीत में लौटने का माध्यम; और तीसरी, प्रतीकात्मक रूप से — दूसरे इंसान के दर्द और संघर्ष को समझने की एक 'खिड़की'। इसी बहुअर्थकता के कारण यह शीर्षक अत्यंत सार्थक बन जाता है।</p>
+      </div>
+      <div id="title-ml" style="display:none;">
+      <p>തീവണ്ടിയുടെ ജനാല കഥയിൽ മൂന്ന് തലങ്ങളിൽ പ്രവർത്തിക്കുന്നു — കുട്ടികൾക്ക് പുറംകാഴ്ച കാണാനുള്ള ഉപാധിയായും, മകളെ മടിയിലിരുത്തി പുറത്തേക്ക് നോക്കുമ്പോൾ ലേഖകന് ഭൂതകാലത്തിലേക്ക് തിരിച്ചുപോകാനുള്ള മാർഗ്ഗമായും, പ്രതീകാത്മകമായി — മറ്റൊരാളുടെ വേദനയും പോരാട്ടവും മനസ്സിലാക്കാനുള്ള ഒരു 'ജനാല'യായും. ഈ ബഹുമുഖ അർത്ഥം കൊണ്ടാണ് ഈ ശീർഷകം ഏറെ അർത്ഥവത്താകുന്നത്.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MEANINGS ================= -->
+  <section class="panel" id="meanings">
+    <div class="window-card">
+      <h3>शब्दार्थ <span class="tag">Word meanings</span></h3>
+      <div class="search-box">
+        <input type="text" id="meaningSearch" placeholder="शब्द खोजें... (search a word)">
+        <button class="reveal-btn" id="glossToggle" style="white-space:nowrap;">Meaning in: ENGLISH</button>
+      </div>
+      <table class="meanings" id="meaningsTable">
+        <tr><th>शब्द</th><th>अर्थ</th></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= GRAMMAR ================= -->
+  <section class="panel" id="grammar">
+    <div class="window-card">
+      <h3>वाक्य विस्तार <span class="tag">Sentence expansion</span></h3>
+      <p class="think"><b>निर्देश ›</b> कोष्ठक के शब्दों की मदद से वाक्य का विस्तार करें, जैसे पाठ की गतिविधि में दिया गया है।</p>
+      <div class="drill">
+        <div class="q">(शॉल, ट्रेन में, रंगीन) — युवती बेचती है।</div>
+        <textarea class="ans-box" placeholder="अपना उत्तर यहाँ लिखें..."></textarea>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">नमूना उत्तर देखें</button>
+        <div class="reveal-ans">युवती ट्रेन में रंगीन शॉल बेचती है।</div>
+      </div>
+      <div class="drill">
+        <div class="q">(पिता, रेलगाड़ी में, थके-हारे) — सामान बेचते थे।</div>
+        <textarea class="ans-box" placeholder="अपना उत्तर यहाँ लिखें..."></textarea>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">नमूना उत्तर देखें</button>
+        <div class="reveal-ans">पिता रेलगाड़ी में थके-हारे सामान बेचते थे।</div>
+      </div>
+    </div>
+
+    <div class="window-card">
+      <h3>काल परिवर्तन <span class="tag">Tense change drill</span></h3>
+      <p class="think"><b>नमूना ›</b> ट्रेन <b>चलती है</b> → ट्रेन <b>चल रही है</b></p>
+      <div class="drill"><div class="q">व्यापारी गीत <b>गाता है</b>।</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">उत्तर देखें</button>
+        <div class="reveal-ans">व्यापारी गीत गा रहा है।</div></div>
+      <div class="drill"><div class="q">युवती शॉल <b>बेचती है</b>।</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">उत्तर देखें</button>
+        <div class="reveal-ans">युवती शॉल बेच रही है।</div></div>
+      <div class="drill"><div class="q">पत्नी मोल-भाव <b>करती है</b>।</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">उत्तर देखें</button>
+        <div class="reveal-ans">पत्नी मोल-भाव कर रही है।</div></div>
+    </div>
+
+    <div class="window-card">
+      <h3>सर्वनाम पहचान <span class="tag">Pronoun identification</span></h3>
+      <div class="drill"><div class="q">"उसने कहा और गठर पत्नी के सामने सरका दिया।" — रेखांकित सर्वनाम पहचानें: <u>उसने</u></div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">उत्तर देखें</button>
+        <div class="reveal-ans">'उसने' — पुरुषवाचक सर्वनाम (कर्ता कारक)</div></div>
+      <div class="drill"><div class="q">"मैंने पत्नी को इशारा किया" — रेखांकित सर्वनाम पहचानें: <u>मैंने</u></div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">उत्तर देखें</button>
+        <div class="reveal-ans">'मैंने' — प्रथम पुरुष सर्वनाम (कर्ता कारक)</div></div>
+    </div>
+  </section>
+
+  <!-- ================= QUESTION BANK ================= -->
+  <section class="panel" id="qbank">
+    <div class="window-card">
+      <h3>प्रश्न बैंक <span class="tag">Question bank · परीक्षा पैटर्न अनुसार</span></h3>
+      <p class="think"><b>नोट ›</b> प्रश्न SSLC परीक्षा पैटर्न (बहुविकल्पीय, अतिसंक्षिप्त, रचनात्मक लेखन) के अनुसार तैयार किए गए हैं।</p>
+      <div id="qbankHost"></div>
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="panel" id="quiz">
+    <div class="window-card" style="background:transparent;border:none;box-shadow:none;padding:0;">
+      <div style="display:flex;justify-content:flex-end;margin-bottom:10px;">
+        <a href="hindi_ch1_khidki_quiz.html" target="_blank" class="ui" style="text-decoration:none;font-weight:600;font-size:13px;
+          background:var(--night2);color:#fff;padding:9px 18px;border-radius:24px;">🔗 Open Standalone Shareable Quiz</a>
+      </div>
+      <div class="quiz-shell" id="quizShell"></div>
+    </div>
+  </section>
+
+  <!-- ================= SHORT NOTES ================= -->
+  <section class="panel" id="notes">
+    <div class="window-card">
+      <h3>लघु नोट्स — त्वरित पुनरावलोकन <span class="tag">Quick revision</span></h3>
+      <p><b>विधा:</b> लघुकथा &nbsp;|&nbsp; <b>लेखिका:</b> अंजू खरबंदा</p>
+      <p><b>पृष्ठभूमि:</b> होशियारपुर की शादी में जाने हेतु जनरल कोच से ट्रेन यात्रा।</p>
+      <p><b>मुख्य घटना:</b> शॉल बेचने वाली युवती और पत्नी के बीच मोल-भाव; युवती का गला रुँधना।</p>
+      <p><b>समाधान:</b> डेढ़ सौ रुपए में पाँच शॉलों की सौदा; लेखक 750 रुपए देता है।</p>
+      <p><b>मोड़ (टर्निंग पॉइंट):</b> खिड़की से झाँकते हुए लेखक को अपने पिता की याद आती है — जो भी रेलगाड़ी में सामान बेचकर थके-हारे घर लौटते थे।</p>
+      <p><b>केंद्रीय भाव:</b> वर्ग-असमानता, आजीविका का संघर्ष, सहानुभूति और आत्मपरिचय।</p>
+      <p><b>प्रतीक:</b> 'खिड़की' — बाहरी दृश्य + स्मृति + दूसरे के दुख को देखने की दृष्टि।</p>
+    </div>
+  </section>
+
+</div>
+
+<button class="print-btn ui" onclick="printActive()">🖨️ Print</button>
+<footer>Abacus Academy · SSLC Hindi Study Portal · <b>खिड़की</b> — Anju Kharbanda</footer>
+
+<script>
+/* ---------- TAB LOGIC ---------- */
+const tabs=document.querySelectorAll('.tabbtn');
+const panels=document.querySelectorAll('.panel');
+tabs.forEach(t=>t.addEventListener('click',()=>{
+  tabs.forEach(x=>x.classList.remove('active'));
+  panels.forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.tab).classList.add('active');
+}));
+function printActive(){
+  panels.forEach(p=>p.classList.remove('print-target'));
+  document.querySelector('.panel.active').classList.add('print-target');
+  window.print();
+}
+
+/* ---------- SUMMARY LANGUAGE TOGGLE ---------- */
+let summaryLang='hi';
+document.getElementById('summaryToggle').addEventListener('click',()=>{
+  summaryLang = summaryLang==='hi' ? 'ml' : 'hi';
+  document.getElementById('summary-hi').style.display = summaryLang==='hi'?'block':'none';
+  document.getElementById('summary-ml').style.display = summaryLang==='ml'?'block':'none';
+  document.getElementById('title-hi').style.display = summaryLang==='hi'?'block':'none';
+  document.getElementById('title-ml').style.display = summaryLang==='ml'?'block':'none';
+  document.getElementById('summaryToggle').textContent = 'Show in: ' + (summaryLang==='hi'?'MALAYALAM':'HINDI');
+});
+
+/* ---------- MEANINGS DATA ---------- */
+const meanings=[
+ ["बुलावा","निमंत्रण","invitation","ക്ഷണം"],
+ ["सर्दी दस्तक देना","सर्दी का अनुभव होना","winter setting in","തണുപ്പ് അനുഭവപ്പെട്ടു തുടങ്ങുക"],
+ ["ना-नुकुर","असहमति","reluctance / objection","എതിർപ്പ് / വിസമ്മതം"],
+ ["सीट झपट लेना","सीट पकड़ लेना","grab the seat","സീറ്റ് പിടിച്ചെടുക്കുക"],
+ ["मशगूल होना","लीन होना","engrossed","മുഴുകുക"],
+ ["गठर","बड़ी गठरी","a big bundle","വലിയ കെട്ട്"],
+ ["साँवली","श्याम रंग की","dark-complexioned","കറുത്തിരുണ്ട നിറമുള്ള"],
+ ["सलोनी","सुंदर","pretty","സുന്ദരിയായ"],
+ ["कजरारी आँखें","काजल लगी आँखें","kohl-lined eyes","മഷിയെഴുതിയ കണ്ണുകൾ"],
+ ["इसरार करना","आग्रह करना","to insist / urge","നിർബന്ധിക്കുക / അപേക്ഷിക്കുക"],
+ ["अढ़ाई सौ","ढाई सौ, 250","two hundred fifty","ഇരുനൂറ്റമ്പത് (250)"],
+ ["इत्ती","इतनी","this much","ഇത്ര"],
+ ["इशारा करना","संकेत करना","to signal / gesture","ആംഗ്യം കാണിക്കുക"],
+ ["आँखें तरेरना","क्रोध से देखना","to glare angrily","ദേഷ്യത്തോടെ നോക്കുക"],
+ ["गला रुँध जाना","रोने को आना","to choke up, about to cry","തൊണ്ട ഇടറുക (കരച്ചിൽ വരാൻ പോകുക)"],
+ ["सुई अटकना","ध्यान केंद्रित होना","mind fixed on","ശ്രദ്ധ കേന്ദ്രീകരിക്കുക"],
+ ["खिड़की से झाँकना","खिड़की से बाहर देखना","to peek out of the window","ജനാലയിലൂടെ പുറത്തേക്ക് നോക്കുക"],
+ ["थके-हारे","बहुत थके हुए","utterly exhausted","നന്നായി ക്ഷീണിച്ച്"],
+ ["नमी","भीनापन / आँसू का संकेत","moisture, here — tears","ഈർപ്പം (ഇവിടെ കണ്ണീരിന്റെ സൂചന)"],
+ ["अतीत","बीता हुआ समय","the past","ഭൂതകാലം"],
+];
+let glossLang='en';
+const tbl=document.getElementById('meaningsTable');
+function renderMeanings(){
+  tbl.innerHTML='<tr><th>शब्द (Word)</th><th>अर्थ (Meaning)</th></tr>';
+  meanings.forEach(([w,hi,en,ml])=>{
+    const gloss = glossLang==='en' ? en : ml;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><b>${w}</b></td><td>${hi} <span class="eng">(${gloss})</span></td>`;
+    tr.dataset.key=w;
+    tbl.appendChild(tr);
+  });
+}
+renderMeanings();
+document.getElementById('glossToggle').addEventListener('click',()=>{
+  glossLang = glossLang==='en' ? 'ml' : 'en';
+  document.getElementById('glossToggle').textContent = 'Meaning in: ' + (glossLang==='en'?'ENGLISH':'MALAYALAM');
+  renderMeanings();
+  document.getElementById('meaningSearch').dispatchEvent(new Event('input'));
+});
+document.getElementById('meaningSearch').addEventListener('input',e=>{
+  const v=e.target.value.trim();
+  [...tbl.querySelectorAll('tr')].slice(1).forEach(tr=>{
+    tr.classList.toggle('hide', v && !tr.dataset.key.includes(v) && !tr.textContent.includes(v));
+  });
+});
+
+/* ---------- QUESTION BANK DATA ---------- */
+const qbank={
+ "1 अंक (बहुविकल्पीय / अतिसंक्षिप्त)":[
+   {q:"लेखक ने इस बार यात्रा के लिए कौन-सा कोच चुना?",
+    opts:"(क) एसी  (ख) जनरल  (ग) स्लीपर  (घ) चेयर कार",
+    ans:"(ख) जनरल कोच — हल्की सर्दी के कारण जनरल कोच से सफ़र का आनंद लेना चाहा।"},
+   {q:"डिब्बे में खिड़की वाली सीट किन्होंने झपट ली?",
+    opts:"(क) पत्नी  (ख) लेखक  (ग) बच्चों ने  (घ) युवती",
+    ans:"(ग) बच्चों ने खिड़की वाली सीट झपट ली।"},
+   {q:"'गठर' शब्द का अर्थ है —",
+    opts:"(क) छोटा थैला  (ख) बड़ी गठरी  (ग) टोकरी  (घ) पेटी",
+    ans:"(ख) बड़ी गठरी।"}
+ ],
+ "2 अंक (संक्षिप्त उत्तर)":[
+   {q:"युवती का गला रुँध जाने का कारण क्या हो सकता है?",
+    ans:"मोल-भाव में बार-बार अनुनय करने पर भी पत्नी के न मानने से युवती को लगा कि उसकी मेहनत और ज़रूरत की कद्र नहीं हो रही — इसी निराशा और आजीविका की चिंता से उसका गला रुँध गया और आँखें भर आईं।"},
+   {q:"पत्नी की सुई किस बात पर अटकी रही और क्यों?",
+    ans:"पत्नी की सुई इस बात पर अटकी रही कि युवती एक ही बार में डेढ़ सौ रुपए में मान गई — पत्नी को लगा कि थोड़ा और मोल-भाव करना चाहिए था। यह उसके व्यावहारिक, बचत करने वाले स्वभाव को दर्शाता है।"}
+ ],
+ "3–4 अंक (रचनात्मक लेखन)":[
+   {q:"शॉल बेचने वाली युवती और लेखक की पत्नी के बीच हुई संभावित बातचीत को संवाद-रूप में लिखें।",
+    alt:"(संकेत: मोल-भाव, आग्रह, अंतिम सौदा — संवाद में दर्शाएँ)"},
+   {q:"लेखक अपने पिता को याद करते हुए एक डायरी प्रविष्टि लिखता है — कल्पना करके लिखें।",
+    alt:"(संकेत: पिता का संघर्ष, रेलगाड़ी में सामान बेचना, आज की घटना से जुड़ाव)"},
+   {q:"रेलगाड़ी की इस घटना के बारे में लेखक अपने किसी मित्र को पत्र लिखता है — पत्र लिखें।",
+    alt:"(संकेत: यात्रा का अनुभव, युवती की स्थिति, मन में उठे भाव)"},
+   {q:"कहानी के लिए एक और उपयुक्त शीर्षक सुझाएँ और उसका औचित्य बताएँ।",
+    alt:"(उदाहरण: 'मोल-भाव', 'दो नमियाँ', 'अनजानी पहचान' आदि — कारण सहित)"},
+ ],
+ "जागरूकता पोस्टर (4 अंक)":[
+   {q:"15 अक्तूबर 'अंतरराष्ट्रीय ग्रामीण महिला दिवस' के अवसर पर, सरकारी विद्यालय में एक जागरूकता कार्यक्रम होने वाला है। इसके लिए एक पोस्टर तैयार करें, जिसमें मेहनतकश महिलाओं (जैसे शॉल बेचने वाली युवती) के सम्मान का संदेश हो।",
+    alt:"(संकेत: शीर्षक, स्लोगन, तिथि-स्थान, चित्र-संकेत सहित पोस्टर बनाएँ)"}
+ ]
+};
+const qbHost=document.getElementById('qbankHost');
+Object.entries(qbank).forEach(([mark,list],gi)=>{
+  const group=document.createElement('div'); group.className='mark-group';
+  const head=document.createElement('div'); head.className='mark-head';
+  head.innerHTML=`<span>${mark}</span><span class="badge">${list.length} प्रश्न</span>`;
+  const body=document.createElement('div'); body.className='mark-body'+(gi===0?' open':'');
+  head.addEventListener('click',()=>body.classList.toggle('open'));
+  list.forEach((item,qi)=>{
+    const box=document.createElement('div'); box.className='qitem';
+    let html=`<div class="qtxt"><span class="num">${qi+1}.</span>${item.q}</div>`;
+    if(item.opts) html+=`<div class="alt">${item.opts}</div>`;
+    if(item.alt) html+=`<div class="alt">${item.alt}</div>`;
+    if(item.ans){
+      html+=`<button class="ans-toggle">उत्तर देखें</button><div class="ans-block"><b>उत्तर:</b> ${item.ans}</div>`;
+    } else {
+      html+=`<button class="ans-toggle">संकेत / नमूना बिंदु</button><div class="ans-block">रचनात्मक प्रश्न — शिक्षक द्वारा मूल्यांकन। ऊपर दिए संकेत बिंदुओं के आधार पर उत्तर विस्तृत करें।</div>`;
+    }
+    box.innerHTML=html;
+    box.querySelector('.ans-toggle').addEventListener('click',e=>{
+      box.querySelector('.ans-block').classList.toggle('show');
+    });
+    body.appendChild(box);
+  });
+  group.appendChild(head); group.appendChild(body);
+  qbHost.appendChild(group);
+});
+
+/* ---------- QUIZ ---------- */
+const quizData=[
+ {q:"लेखक ने इस बार यात्रा के लिए किस कोच को चुना?",o:["एसी","जनरल कोच","स्लीपर","चेयर कार"],a:1,
+  ex:"हल्की सर्दी के कारण लेखक ने एसी के बजाय जनरल कोच से सफ़र करने का फ़ैसला लिया।"},
+ {q:"डिब्बे में खिड़की वाली सीट सबसे पहले किन्होंने ली?",o:["पत्नी ने","बच्चों ने","लेखक ने","युवती ने"],a:1,
+  ex:"बच्चों ने झट खिड़की वाली सीट झपट ली।"},
+ {q:"शॉल बेचने वाली युवती ने शुरू में शॉलों की क्या क़ीमत बताई?",o:["सौ रुपए","डेढ़ सौ रुपए","अढ़ाई सौ रुपए","तीन सौ रुपए"],a:2,
+  ex:"युवती ने पहले अढ़ाई सौ रुपए क़ीमत बताई थी।"},
+ {q:"पत्नी शुरू में कितने रुपए पर पीस देने की बात कर रही थी?",o:["सौ रुपए","डेढ़ सौ रुपए","दो सौ रुपए","अढ़ाई सौ रुपए"],a:0,
+  ex:"पत्नी सौ रुपए पर पीस देने की बात पर अड़ी रही।"},
+ {q:"अंत में कितने रुपए में पाँच शॉलों का सौदा हुआ?",o:["सौ रुपए में","डेढ़ सौ रुपए में","दो सौ रुपए में","अढ़ाई सौ रुपए में"],a:1,
+  ex:"डेढ़ सौ रुपए प्रति शॉल के भाव पर सौदा तय हुआ, यानी पाँच शॉलों के 750 रुपए।"},
+ {q:"युवती का गला रुँध जाने का मुख्य कारण क्या था?",o:["वह थकी हुई थी","आजीविका की चिंता व निराशा","उसे गुस्सा आया","ट्रेन छूट रही थी"],a:1,
+  ex:"बार-बार अनुनय के बाद भी पत्नी के न मानने से उसकी आजीविका की चिंता झलक उठी।"},
+ {q:"खिड़की से झाँकते हुए लेखक को किसकी याद आई?",o:["माँ की","पिता की","बचपन के दोस्त की","अध्यापक की"],a:1,
+  ex:"लेखक को अपने पिता की याद आई, जो रेलगाड़ी में सामान बेचकर थके-हारे घर लौटते थे।"},
+ {q:"लेखक के पिता क्या काम करते थे?",o:["अध्यापक","किसान","रेलगाड़ी में सामान बेचने वाले","व्यापारी"],a:2,
+  ex:"पिता रेलगाड़ी में सामान बेचकर परिवार का पालन करते थे।"},
+ {q:"पत्नी के मन में युवती के जाने के बाद कौन-सा विचार अटका रहा?",o:["शॉल का रंग","थोड़ा और मोल-भाव करना चाहिए था","युवती का नाम","अगला स्टेशन"],a:1,
+  ex:"पत्नी को लगा कि युवती एक ही बार में मान गई, इसलिए थोड़ा और मोल-भाव करना चाहिए था।"},
+ {q:"'खिड़की' शीर्षक मुख्यतः किस भाव का प्रतीक है?",o:["केवल यात्रा का साधन","दूसरे के दर्द को देखने व समझने की दृष्टि","सर्दी से बचाव","बच्चों का खेल"],a:1,
+  ex:"खिड़की यहाँ बाहरी दृश्य के साथ-साथ स्मृति व सहानुभूति की दृष्टि का प्रतीक बनती है।"},
+ {q:"लेखिका अंजू खरबंदा को किस सम्मान से पुरस्कृत किया गया है?",o:["ज्ञानपीठ सम्मान","साहित्य अकादमी","सावित्री बाई फुले सम्मान","पद्मश्री"],a:2,
+  ex:"अंजू खरबंदा सावित्री बाई फुले सम्मान से पुरस्कृत हैं।"},
+ {q:"'खिड़की' किस विधा की रचना है?",o:["कविता","संस्मरण","लघुकथा","निबंध"],a:2,
+  ex:"'खिड़की' एक लघुकथा है।"},
+ {q:"दिल्ली से होशियारपुर तक का सफ़र लगभग कितने घंटे का था?",o:["4 घंटे","6 घंटे","8 घंटे","10 घंटे"],a:2,
+  ex:"दिल्ली से लगभग आठ घंटे का सफ़र था।"},
+ {q:"सीट पहले से बुक होने के कारण क्या हुआ?",o:["ज़्यादा परेशानी हुई","ज़्यादा परेशानी नहीं हुई","सीट नहीं मिली","यात्रा रद्द हुई"],a:1,
+  ex:"सीट बुक थी, इसलिए ज़्यादा परेशानी नहीं हुई।"},
+ {q:"पत्नी ने गठर में से कितनी शॉलें अलग कर लीं?",o:["तीन","चार","पाँच","छह"],a:2,
+  ex:"पत्नी ने पाँच शॉलें अलग कर लीं और रुपए देने का इशारा किया।"},
+];
+let qi=0, score=0, answered=false;
+const shell=document.getElementById('quizShell');
+function renderQuiz(){
+  if(qi>=quizData.length){ renderResult(); return; }
+  answered=false;
+  const d=quizData[qi];
+  shell.innerHTML=`
+    <div class="progress-wrap"><div class="progress-bar" style="width:${(qi/quizData.length)*100}%"></div></div>
+    <div class="quiz-meta"><span>प्रश्न ${qi+1} / ${quizData.length}</span><span>स्कोर: ${score}</span></div>
+    <div class="quiz-q">${d.q}</div>
+    <div class="quiz-opts" id="optsHost"></div>
+    <div class="quiz-explain" id="explainBox">${d.ex}</div>
+    <div class="quiz-nav"><button class="qbtn ghost" id="prevBtn">← Previous</button><button class="qbtn ghost" id="skipBtn">Skip</button><button class="qbtn" id="nextBtn" disabled>Next →</button></div>
+  `;
+  document.getElementById('prevBtn').disabled = (qi===0);
+  const optsHost=document.getElementById('optsHost');
+  d.o.forEach((opt,i)=>{
+    const b=document.createElement('div'); b.className='qopt'; b.textContent=opt;
+    b.addEventListener('click',()=>{
+      if(answered) return; answered=true;
+      [...optsHost.children].forEach(c=>c.classList.add('disabled'));
+      if(i===d.a){ b.classList.add('correct'); score++; }
+      else{ b.classList.add('wrong'); optsHost.children[d.a].classList.add('correct'); }
+      document.getElementById('explainBox').classList.add('show');
+      document.getElementById('nextBtn').disabled=false;
+    });
+    optsHost.appendChild(b);
+  });
+  document.getElementById('prevBtn').addEventListener('click',()=>{ if(qi>0){ qi--; renderQuiz(); } });
+  document.getElementById('skipBtn').addEventListener('click',()=>{ qi++; renderQuiz(); });
+  document.getElementById('nextBtn').addEventListener('click',()=>{ qi++; renderQuiz(); });
+}
+function renderResult(){
+  const pct=Math.round((score/quizData.length)*100);
+  let msg = pct>=80?"बहुत बढ़िया! आप तैयार हैं। 🎉" : pct>=50?"अच्छा प्रयास — दोबारा पाठ पढ़ें। 👍" : "पाठ फिर से पढ़ें, फिर दोबारा कोशिश करें। 📖";
+  const waText = encodeURIComponent("I scored "+score+"/"+quizData.length+" ("+pct+"%) in the खिड़की (SSLC Hindi) quiz! Try it: "+window.location.href.split('#')[0].replace('hindi_ch1_khidki_portal.html','hindi_ch1_khidki_quiz.html'));
+  shell.innerHTML=`
+    <div class="quiz-result">
+      <div class="score">${score}/${quizData.length}</div>
+      <p style="color:#e9edf5;font-size:16px;">${msg}</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px;">
+        <button class="qbtn" id="restartBtn">दोबारा कोशिश करें</button>
+        <button class="qbtn" style="background:#25D366;" id="shareScoreBtn">📲 Share Score</button>
+      </div>
+    </div>`;
+  document.getElementById('restartBtn').addEventListener('click',()=>{ qi=0; score=0; renderQuiz(); });
+  document.getElementById('shareScoreBtn').addEventListener('click',()=>{
+    window.open('https://wa.me/?text='+waText,'_blank');
+  });
+}
+renderQuiz();
+</script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>खिड़की — Quiz | SSLC Hindi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Hind:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0f1c33; --night2:#1a2c4d; --amber:#f2b544; --amber-soft:#f7d38b;
+  --shawl:#b5484a; --shawl-deep:#8c343a; --paper:#f7f2e7; --paper2:#efe6d2;
+  --ink:#20232b; --ink-soft:#565b68; --line:#d8cdb0;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:linear-gradient(180deg,var(--night) 0%,var(--night2) 60%,#243a63 100%);min-height:100vh;
+  font-family:'Hind',sans-serif;color:#fff;}
+.ui{font-family:'Poppins',sans-serif;}
+.wrap{max-width:560px;margin:0 auto;padding:30px 18px 60px;}
+.hero{text-align:center;padding:10px 0 22px;}
+.eyebrow{font-family:'Poppins',sans-serif;letter-spacing:.18em;font-size:11px;text-transform:uppercase;color:var(--amber-soft);}
+.hero h1{font-family:'Yatra One',cursive;font-size:clamp(40px,10vw,60px);margin:6px 0 2px;
+  text-shadow:0 2px 18px rgba(242,181,68,.35);}
+.hero .sub{font-size:13.5px;color:#cdd7ea;}
+
+.card{background:var(--night);border:1.5px solid rgba(255,255,255,.12);border-radius:22px;padding:26px 22px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);}
+
+/* start screen */
+.start input{width:100%;padding:13px 16px;border-radius:12px;border:none;font-family:'Hind',sans-serif;font-size:16px;
+  margin:14px 0;background:#fff;color:var(--ink);}
+.bigbtn{width:100%;font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;padding:14px;border-radius:14px;
+  border:none;cursor:pointer;background:var(--amber);color:var(--night);}
+.bigbtn.ghost{background:transparent;color:#e7ecf7;border:1.5px solid rgba(255,255,255,.3);margin-top:10px;}
+.meta-line{font-family:'Poppins',sans-serif;font-size:12.5px;color:#aab6cc;text-align:center;margin-top:12px;}
+
+/* quiz */
+.progress-wrap{height:8px;background:rgba(255,255,255,.15);border-radius:8px;overflow:hidden;margin-bottom:18px;}
+.progress-bar{height:100%;background:var(--amber);border-radius:8px;transition:.3s;width:0%;}
+.quiz-meta{display:flex;justify-content:space-between;font-family:'Poppins',sans-serif;font-size:12.5px;color:#b9c3d9;margin-bottom:10px;}
+.quiz-q{font-size:19px;font-weight:600;margin-bottom:16px;min-height:56px;}
+.quiz-opts{display:grid;gap:10px;}
+.qopt{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.18);border-radius:12px;padding:12px 16px;
+  cursor:pointer;font-size:15.5px;transition:.15s;}
+.qopt:hover{border-color:var(--amber);}
+.qopt.correct{background:rgba(94,193,120,.25);border-color:#5ec178;}
+.qopt.wrong{background:rgba(213,80,80,.25);border-color:#d55050;}
+.qopt.disabled{pointer-events:none;}
+.quiz-explain{margin-top:14px;background:rgba(242,181,68,.12);border-left:3px solid var(--amber);padding:10px 14px;
+  border-radius:6px;font-size:14.5px;display:none;color:#ecd9a8;}
+.quiz-explain.show{display:block;}
+.quiz-nav{display:flex;justify-content:space-between;gap:8px;margin-top:20px;}
+.qbtn{font-family:'Poppins',sans-serif;font-weight:600;font-size:13.5px;padding:10px 16px;border-radius:24px;border:none;
+  cursor:pointer;background:var(--amber);color:var(--night);flex:1;}
+.qbtn:disabled{opacity:.35;cursor:default;}
+.qbtn.ghost{background:transparent;color:#c6cfe0;border:1.5px solid rgba(255,255,255,.25);}
+
+/* result */
+.quiz-result{text-align:center;}
+.quiz-result .score{font-family:'Yatra One',cursive;font-size:58px;color:var(--amber);}
+.quiz-result .name{font-family:'Poppins',sans-serif;font-size:14px;color:#cdd7ea;margin-bottom:6px;}
+.share-row{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
+.share-btn{font-family:'Poppins',sans-serif;font-weight:700;font-size:14.5px;padding:13px;border-radius:14px;border:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;}
+.share-btn.wa{background:#25D366;color:#0b3d1f;}
+.share-btn.link{background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.25);}
+.copied-msg{font-family:'Poppins',sans-serif;font-size:12px;color:var(--amber-soft);text-align:center;margin-top:6px;display:none;}
+.copied-msg.show{display:block;}
+
+footer{text-align:center;font-family:'Poppins',sans-serif;font-size:11.5px;color:#8fa0bd;padding:20px 10px 10px;}
+footer b{color:var(--amber-soft);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">SSLC · Hindi · Chapter 1 · Standalone Quiz</div>
+    <h1>खिड़की</h1>
+    <div class="sub">15-Question Quiz · Anju Kharbanda</div>
+  </div>
+
+  <div class="card" id="cardHost"></div>
+
+  <div class="meta-line" id="shareLine" style="display:none;">Share this quiz link with your classmates 👇</div>
+</div>
+<footer>Abacus Academy · SSLC Hindi Study Portal · <b>खिड़की</b> Quiz</footer>
+
+<script>
+const quizData=[
+ {q:"लेखक ने इस बार यात्रा के लिए किस कोच को चुना?",o:["एसी","जनरल कोच","स्लीपर","चेयर कार"],a:1,
+  ex:"हल्की सर्दी के कारण लेखक ने एसी के बजाय जनरल कोच से सफ़र करने का फ़ैसला लिया।"},
+ {q:"डिब्बे में खिड़की वाली सीट सबसे पहले किन्होंने ली?",o:["पत्नी ने","बच्चों ने","लेखक ने","युवती ने"],a:1,
+  ex:"बच्चों ने झट खिड़की वाली सीट झपट ली।"},
+ {q:"शॉल बेचने वाली युवती ने शुरू में शॉलों की क्या क़ीमत बताई?",o:["सौ रुपए","डेढ़ सौ रुपए","अढ़ाई सौ रुपए","तीन सौ रुपए"],a:2,
+  ex:"युवती ने पहले अढ़ाई सौ रुपए क़ीमत बताई थी।"},
+ {q:"पत्नी शुरू में कितने रुपए पर पीस देने की बात कर रही थी?",o:["सौ रुपए","डेढ़ सौ रुपए","दो सौ रुपए","अढ़ाई सौ रुपए"],a:0,
+  ex:"पत्नी सौ रुपए पर पीस देने की बात पर अड़ी रही।"},
+ {q:"अंत में कितने रुपए में पाँच शॉलों का सौदा हुआ?",o:["सौ रुपए में","डेढ़ सौ रुपए में","दो सौ रुपए में","अढ़ाई सौ रुपए में"],a:1,
+  ex:"डेढ़ सौ रुपए प्रति शॉल के भाव पर सौदा तय हुआ, यानी पाँच शॉलों के 750 रुपए।"},
+ {q:"युवती का गला रुँध जाने का मुख्य कारण क्या था?",o:["वह थकी हुई थी","आजीविका की चिंता व निराशा","उसे गुस्सा आया","ट्रेन छूट रही थी"],a:1,
+  ex:"बार-बार अनुनय के बाद भी पत्नी के न मानने से उसकी आजीविका की चिंता झलक उठी।"},
+ {q:"खिड़की से झाँकते हुए लेखक को किसकी याद आई?",o:["माँ की","पिता की","बचपन के दोस्त की","अध्यापक की"],a:1,
+  ex:"लेखक को अपने पिता की याद आई, जो रेलगाड़ी में सामान बेचकर थके-हारे घर लौटते थे।"},
+ {q:"लेखक के पिता क्या काम करते थे?",o:["अध्यापक","किसान","रेलगाड़ी में सामान बेचने वाले","व्यापारी"],a:2,
+  ex:"पिता रेलगाड़ी में सामान बेचकर परिवार का पालन करते थे।"},
+ {q:"पत्नी के मन में युवती के जाने के बाद कौन-सा विचार अटका रहा?",o:["शॉल का रंग","थोड़ा और मोल-भाव करना चाहिए था","युवती का नाम","अगला स्टेशन"],a:1,
+  ex:"पत्नी को लगा कि युवती एक ही बार में मान गई, इसलिए थोड़ा और मोल-भाव करना चाहिए था।"},
+ {q:"'खिड़की' शीर्षक मुख्यतः किस भाव का प्रतीक है?",o:["केवल यात्रा का साधन","दूसरे के दर्द को देखने व समझने की दृष्टि","सर्दी से बचाव","बच्चों का खेल"],a:1,
+  ex:"खिड़की यहाँ बाहरी दृश्य के साथ-साथ स्मृति व सहानुभूति की दृष्टि का प्रतीक बनती है।"},
+ {q:"लेखिका अंजू खरबंदा को किस सम्मान से पुरस्कृत किया गया है?",o:["ज्ञानपीठ सम्मान","साहित्य अकादमी","सावित्री बाई फुले सम्मान","पद्मश्री"],a:2,
+  ex:"अंजू खरबंदा सावित्री बाई फुले सम्मान से पुरस्कृत हैं।"},
+ {q:"'खिड़की' किस विधा की रचना है?",o:["कविता","संस्मरण","लघुकथा","निबंध"],a:2,
+  ex:"'खिड़की' एक लघुकथा है।"},
+ {q:"दिल्ली से होशियारपुर तक का सफ़र लगभग कितने घंटे का था?",o:["4 घंटे","6 घंटे","8 घंटे","10 घंटे"],a:2,
+  ex:"दिल्ली से लगभग आठ घंटे का सफ़र था।"},
+ {q:"सीट पहले से बुक होने के कारण क्या हुआ?",o:["ज़्यादा परेशानी हुई","ज़्यादा परेशानी नहीं हुई","सीट नहीं मिली","यात्रा रद्द हुई"],a:1,
+  ex:"सीट बुक थी, इसलिए ज़्यादा परेशानी नहीं हुई।"},
+ {q:"पत्नी ने गठर में से कितनी शॉलें अलग कर लीं?",o:["तीन","चार","पाँच","छह"],a:2,
+  ex:"पत्नी ने पाँच शॉलें अलग कर लीं और रुपए देने का इशारा किया।"},
+];
+
+let qi=0, score=0, answered=false, studentName="";
+const host=document.getElementById('cardHost');
+const PAGE_URL = window.location.href.split('#')[0];
+
+function renderStart(){
+  host.innerHTML=`
+    <div class="start">
+      <div class="ui" style="font-weight:700;font-size:15px;color:#e7ecf7;">Enter your name to begin</div>
+      <input type="text" id="nameInput" placeholder="Your name" maxlength="30">
+      <button class="bigbtn" id="startBtn">Start Quiz</button>
+    </div>`;
+  document.getElementById('startBtn').addEventListener('click',()=>{
+    const v=document.getElementById('nameInput').value.trim();
+    studentName = v || "Student";
+    qi=0; score=0;
+    renderQuiz();
+  });
+}
+
+function renderQuiz(){
+  if(qi>=quizData.length){ renderResult(); return; }
+  answered=false;
+  const d=quizData[qi];
+  host.innerHTML=`
+    <div class="progress-wrap"><div class="progress-bar" style="width:${(qi/quizData.length)*100}%"></div></div>
+    <div class="quiz-meta"><span>Question ${qi+1} / ${quizData.length}</span><span>Score: ${score}</span></div>
+    <div class="quiz-q">${d.q}</div>
+    <div class="quiz-opts" id="optsHost"></div>
+    <div class="quiz-explain" id="explainBox">${d.ex}</div>
+    <div class="quiz-nav">
+      <button class="qbtn ghost" id="prevBtn">← Previous</button>
+      <button class="qbtn ghost" id="skipBtn">Skip</button>
+      <button class="qbtn" id="nextBtn" disabled>Next →</button>
+    </div>`;
+  document.getElementById('prevBtn').disabled = (qi===0);
+  const optsHost=document.getElementById('optsHost');
+  d.o.forEach((opt,i)=>{
+    const b=document.createElement('div'); b.className='qopt'; b.textContent=opt;
+    b.addEventListener('click',()=>{
+      if(answered) return; answered=true;
+      [...optsHost.children].forEach(c=>c.classList.add('disabled'));
+      if(i===d.a){ b.classList.add('correct'); score++; }
+      else{ b.classList.add('wrong'); optsHost.children[d.a].classList.add('correct'); }
+      document.getElementById('explainBox').classList.add('show');
+      document.getElementById('nextBtn').disabled=false;
+    });
+    optsHost.appendChild(b);
+  });
+  document.getElementById('prevBtn').addEventListener('click',()=>{ if(qi>0){ qi--; renderQuiz(); } });
+  document.getElementById('skipBtn').addEventListener('click',()=>{ qi++; renderQuiz(); });
+  document.getElementById('nextBtn').addEventListener('click',()=>{ qi++; renderQuiz(); });
+}
+
+function renderResult(){
+  const pct=Math.round((score/quizData.length)*100);
+  let msg = pct>=80?"Excellent! You're exam-ready. 🎉" : pct>=50?"Good effort — revise once more. 👍" : "Read the chapter again, then retry. 📖";
+  const waText = encodeURIComponent(studentName+" scored "+score+"/"+quizData.length+" ("+pct+"%) in the खिड़की (SSLC Hindi) quiz!\\nTry it yourself: "+PAGE_URL);
+  host.innerHTML=`
+    <div class="quiz-result">
+      <div class="name">${studentName}'s score</div>
+      <div class="score">${score}/${quizData.length}</div>
+      <p style="color:#e9edf5;font-size:15px;">${msg}</p>
+      <div class="share-row">
+        <button class="share-btn wa" id="waBtn">📲 Share score on WhatsApp</button>
+        <button class="share-btn link" id="linkBtn">🔗 Copy quiz link</button>
+        <button class="bigbtn ghost" id="restartBtn">Try Again</button>
+      </div>
+      <div class="copied-msg" id="copiedMsg">Link copied! Paste it anywhere to share.</div>
+    </div>`;
+  document.getElementById('waBtn').addEventListener('click',()=>{
+    window.open('https://wa.me/?text='+waText,'_blank');
+  });
+  document.getElementById('linkBtn').addEventListener('click',()=>{
+    navigator.clipboard.writeText(PAGE_URL).then(()=>{
+      document.getElementById('copiedMsg').classList.add('show');
+      setTimeout(()=>document.getElementById('copiedMsg').classList.remove('show'),2500);
+    });
+  });
+  document.getElementById('restartBtn').addEventListener('click',()=>{ renderStart(); });
+}
+
+renderStart();
+</script>
+</body>
+</html>
