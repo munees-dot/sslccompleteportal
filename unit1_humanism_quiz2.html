@@ -37,6 +37,9 @@
   .lockscreen{background:#fff; border:2px solid #c9932f; border-radius:16px; padding:30px 20px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,.08);}
   .lockscreen h2{color:#4a2c17; margin-top:0;}
   .lockscreen .timebox{display:inline-block; background:#fbf3e6; border-radius:10px; padding:10px 18px; font-weight:700; margin-top:10px; font-size:1.05rem; color:#7a4a26;}
+  .lockscreen.done{border-color:#2e8b57;}
+  .lockscreen.done h2{color:#2e8b57;}
+  .attempt-note{background:#fff3cd; border:1px solid #ffe083; border-radius:10px; padding:8px 14px; font-size:.85rem; text-align:center; margin-bottom:14px; color:#7a4a26; font-weight:600;}
 </style>
 </head>
 <body class="lang-en">
@@ -49,6 +52,13 @@
   </div>
 </header>
 <main>
+  <div class="attempt-note">⚠️ <span class="en">This quiz allows only ONE attempt per device.</span><span class="ml">ഈ ക്വിസ് ഒരു ഡിവൈസിൽ ഒരു തവണ മാത്രമേ അറ്റംപ്റ്റ് ചെയ്യാൻ കഴിയൂ.</span></div>
+  <div class="lockscreen done" id="doneScreen" style="display:none;">
+    <h2>✅ <span class="en">Already Attempted</span><span class="ml">നേരത്തെ അറ്റംപ്റ്റ് ചെയ്തു</span></h2>
+    <p><span class="en">You have already completed this quiz. Only one attempt is allowed per device.</span>
+       <span class="ml">നിങ്ങൾ ഈ ക്വിസ് നേരത്തെ പൂർത്തിയാക്കിയിട്ടുണ്ട്. ഒരു ഡിവൈസിൽ ഒരു തവണ മാത്രമേ അനുവദിക്കൂ.</span></p>
+    <div class="timebox" id="pastScoreDisp"></div>
+  </div>
   <div class="lockscreen" id="lockScreen" style="display:none;">
     <h2>🔒 <span class="en">Quiz Locked</span><span class="ml">ക്വിസ് ലോക്ക് ചെയ്തിരിക്കുന്നു</span></h2>
     <p><span class="en">This quiz is active only between <b>9:30 PM and 10:30 PM</b>.</span>
@@ -155,6 +165,21 @@ function nextQ(){
   else { submitQuiz(); }
 }
 let lastScore=0;
+const ATTEMPT_KEY='humanism_quiz2_attempt';
+function hasAttempted(){
+  try{ return localStorage.getItem(ATTEMPT_KEY) !== null; }catch(e){ return false; }
+}
+function markAttempted(score,total){
+  try{
+    localStorage.setItem(ATTEMPT_KEY, JSON.stringify({score:score, total:total, date:new Date().toISOString()}));
+  }catch(e){}
+}
+function getPastAttempt(){
+  try{
+    const raw = localStorage.getItem(ATTEMPT_KEY);
+    return raw ? JSON.parse(raw) : null;
+  }catch(e){ return null; }
+}
 function submitQuiz(){
   let score=0;
   quizData.forEach((q,i)=>{ if(userAnswers[i]===q.correct) score++; });
@@ -166,6 +191,12 @@ function submitQuiz(){
   res.innerHTML=`<span class="en">${emoji} You scored ${score} / ${quizData.length} (${pct}%)</span>
                   <span class="ml">${emoji} നിങ്ങൾക്ക് ${score} / ${quizData.length} (${pct}%) സ്കോർ ലഭിച്ചു</span>`;
   res.scrollIntoView({behavior:'smooth'});
+  markAttempted(score, quizData.length);
+  document.getElementById('nextBtn').disabled=true;
+  document.getElementById('prevBtn').disabled=true;
+  document.querySelectorAll('.opt').forEach(b=>b.setAttribute('disabled','true'));
+  const retryBtn = document.querySelector('.actionbar button[onclick="buildQuiz()"]');
+  if(retryBtn) retryBtn.remove();
 }
 function shareScore(){
   const text=`I scored ${lastScore}/${quizData.length} on the Unit 1: Humanism Quiz 2! Try it: ${location.href}`;
@@ -181,9 +212,20 @@ function inActiveWindow(){
   return mins >= (21*60+30) && mins <= (22*60+30);
 }
 function updateLockUI(){
-  const locked = !inActiveWindow();
-  document.getElementById('lockScreen').style.display = locked ? 'block' : 'none';
-  document.getElementById('quizArea').style.display = locked ? 'none' : 'block';
+  const attempted = hasAttempted();
+  const active = inActiveWindow();
+  document.getElementById('doneScreen').style.display = attempted ? 'block' : 'none';
+  document.getElementById('lockScreen').style.display = (!attempted && !active) ? 'block' : 'none';
+  document.getElementById('quizArea').style.display = (!attempted && active) ? 'block' : 'none';
+  if(attempted){
+    const past = getPastAttempt();
+    if(past){
+      const pct = Math.round(past.score/past.total*100);
+      document.getElementById('pastScoreDisp').innerHTML =
+        `<span class="en">Score: ${past.score}/${past.total} (${pct}%)</span><span class="ml">സ്കോർ: ${past.score}/${past.total} (${pct}%)</span>`;
+    }
+    return;
+  }
   const now = new Date();
   const timeStr = now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
   document.getElementById('curTimeDisp').innerHTML =
