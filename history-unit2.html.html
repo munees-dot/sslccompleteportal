@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 2: Climate Zones &amp; Climate Change | കാലാവസ്ഥാമേഖലകളും കാലാവസ്ഥാമാറ്റവും</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Malayalam:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sky-deep:#122A44; --sky-mid:#2E6F95; --sky-soft:#5FA8C9; --sky-light:#EAF4F8;
+  --cloud:#FFFFFF; --sun:#F2A93B; --sun-soft:#FCE3B6; --storm:#E4572E; --leaf:#3E8E5A;
+  --ink:#132330; --ink-soft:#4C6472; --line:#D3E4EC;
+  --radius:16px; --shadow:0 10px 30px -12px rgba(18,42,68,.25);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0; background:var(--sky-light); color:var(--ink); font-family:'Inter','Noto Sans Malayalam',sans-serif; line-height:1.65;}
+h1,h2,h3,h4{font-family:'Fraunces','Noto Sans Malayalam',serif; color:var(--sky-deep); margin:0 0 .4em;}
+p{margin:.3em 0 .9em;}
+a{color:var(--sky-mid);}
+::selection{background:var(--sun-soft);}
+body.mode-ml .lang-en{display:none;}
+body.mode-en .lang-ml{display:none;}
+
+.topbar{position:sticky; top:0; z-index:50; background:linear-gradient(180deg,var(--sky-deep) 0%, #17395a 100%); color:#fff; padding:10px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:var(--shadow);}
+.topbar .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px;}
+.topbar .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--sun);box-shadow:0 0 12px var(--sun);}
+.lang-switch{display:flex; background:rgba(255,255,255,.1); border-radius:999px; padding:3px; border:1px solid rgba(255,255,255,.2);}
+.lang-switch button{background:none; border:none; color:#dceefb; padding:6px 14px; border-radius:999px; font-weight:700; font-size:.8rem; cursor:pointer;}
+.lang-switch button.active{background:var(--sun); color:#3a2500;}
+.tabs{display:flex; gap:6px; margin-left:auto; flex-wrap:wrap;}
+.tab-btn{background:rgba(255,255,255,.08); color:#dceefb; border:1px solid rgba(255,255,255,.15); padding:8px 14px; border-radius:999px; font-size:.85rem; cursor:pointer; font-weight:600; transition:.2s; white-space:nowrap;}
+.tab-btn:hover{background:rgba(255,255,255,.18);}
+.tab-btn.active{background:var(--sun); color:#3a2500; border-color:var(--sun);}
+.score-pill{background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:999px; padding:6px 12px; font-size:.78rem; font-family:'JetBrains Mono',monospace;}
+.chapter-nav{background:#0c1e33; padding:8px 18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+.chapter-nav a{color:#cfe6f2; text-decoration:none; font-size:.82rem; font-weight:600; padding:6px 14px; border-radius:999px; border:1px solid rgba(255,255,255,.15);}
+.chapter-nav a.current{background:var(--sun); color:#3a2500; border-color:var(--sun);}
+
+.hero{position:relative; overflow:hidden; padding:60px 20px 80px; background:radial-gradient(ellipse at 70% -10%, #3f88ac 0%, var(--sky-deep) 55%, #0c1e33 100%); color:#fff; text-align:center;}
+.hero .sun{position:absolute; top:-60px; right:8%; width:160px; height:160px; border-radius:50%; background:radial-gradient(circle at 35% 35%, #fff6df, var(--sun) 55%, #c9791b 100%); box-shadow:0 0 80px 20px rgba(242,169,59,.45); animation:pulse 6s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
+.hero h1{color:#fff; font-size:clamp(1.4rem,3.2vw,2.4rem); font-weight:900; max-width:820px; margin:0 auto .3em; position:relative; z-index:2;}
+.hero .sub{color:#cfe6f2; max-width:600px; margin:0 auto 1.2em; font-size:1rem; position:relative; z-index:2;}
+.hero .eyebrow{display:inline-block; font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--sun-soft); background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.2); padding:6px 14px; border-radius:999px; margin-bottom:16px; position:relative; z-index:2;}
+.instrument-row{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:26px; position:relative; z-index:2;}
+.instrument{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); border-radius:14px; padding:12px 16px; min-width:120px; backdrop-filter:blur(6px);}
+.instrument .val{font-family:'JetBrains Mono',monospace; font-size:1.2rem; font-weight:700; color:var(--sun);}
+.instrument .lbl{font-size:.7rem; color:#cfe6f2; margin-top:4px;}
+
+.wrap{max-width:1080px; margin:0 auto; padding:0 20px;}
+.page{display:none; animation:fade .35s ease;}
+.page.active{display:block;}
+@keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+.section{background:var(--cloud); border:1px solid var(--line); border-radius:var(--radius); padding:28px 26px; margin:18px 0; box-shadow:var(--shadow); scroll-margin-top:120px;}
+.section h2{display:flex; align-items:center; gap:12px; font-size:1.4rem; border-bottom:3px solid var(--sun-soft); padding-bottom:12px;}
+.section h2 .num{background:var(--sky-deep); color:var(--sun); font-family:'JetBrains Mono',monospace; width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:.9rem; flex-shrink:0;}
+.section h3{font-size:1.08rem; margin-top:22px; color:var(--sky-mid); border-left:4px solid var(--sun); padding-left:10px;}
+
+.callout{background:var(--sky-light); border:1px dashed var(--sky-soft); border-radius:12px; padding:14px 16px; margin:14px 0; font-size:.94rem;}
+.callout.warn{background:#FCEDE8; border-color:var(--storm);}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+@media (max-width:720px){.grid2{grid-template-columns:1fr;}}
+.card{border:1px solid var(--line); border-radius:14px; padding:16px; background:var(--sky-light);}
+.card h4{margin-top:0; color:var(--sky-deep); font-size:1rem;}
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:.9rem;}
+th,td{border:1px solid var(--line); padding:9px 10px; text-align:left;}
+th{background:var(--sky-deep); color:#fff;}
+tr:nth-child(even){background:var(--sky-light);}
+.zone-card{border-left:6px solid var(--sky-mid); background:var(--cloud); border-radius:12px; padding:16px 18px; margin:14px 0; box-shadow:var(--shadow);}
+.zone-card.eq{border-color:var(--leaf);} .zone-card.mon{border-color:var(--sky-mid);} .zone-card.sav{border-color:var(--sun);}
+.zone-card.des{border-color:var(--storm);} .zone-card.med{border-color:#9C6ADE;} .zone-card.temp{border-color:#3E8E5A;}
+.zone-card.taiga{border-color:#2E6F95;} .zone-card.tundra{border-color:#7C90A0;}
+.zone-card h3{margin-top:0; border:none; padding:0; color:inherit;}
+.stat-row{display:flex; gap:18px; flex-wrap:wrap; margin:8px 0;}
+.stat{font-family:'JetBrains Mono',monospace; font-size:.82rem; background:var(--sky-light); border-radius:8px; padding:6px 10px;}
+
+.quiz-header{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+.progress-bar{height:8px; background:var(--sky-light); border-radius:99px; overflow:hidden; margin:14px 0 22px;}
+.progress-fill{height:100%; background:linear-gradient(90deg,var(--sun),var(--storm)); width:0%; transition:.35s;}
+.q-text{font-size:1.05rem; font-weight:700; margin-bottom:14px;}
+.opt{display:block; width:100%; text-align:left; background:var(--sky-light); border:2px solid var(--line); border-radius:12px; padding:12px 16px; margin:8px 0; cursor:pointer; font-size:.94rem; transition:.15s; font-family:inherit; color:var(--ink);}
+.opt:hover{border-color:var(--sky-mid);}
+.opt.correct{background:#E4F5EA; border-color:var(--leaf); font-weight:700;}
+.opt.wrong{background:#FCE8E4; border-color:var(--storm); font-weight:700;}
+.opt[disabled]{cursor:default;}
+.explain{background:var(--sky-light); border-left:4px solid var(--sky-mid); padding:10px 14px; border-radius:8px; margin-top:12px; font-size:.88rem; display:none;}
+.explain.show{display:block;}
+.quiz-nav{display:flex; justify-content:space-between; margin-top:22px;}
+.btn{background:var(--sky-deep); color:#fff; border:none; padding:11px 22px; border-radius:999px; font-weight:700; cursor:pointer; font-size:.9rem; transition:.2s;}
+.btn:hover{background:var(--sky-mid);}
+.btn.secondary{background:var(--cloud); color:var(--sky-deep); border:2px solid var(--line);}
+.result-box{text-align:center; padding:30px 10px;}
+.result-box .big{font-family:'Fraunces',serif; font-size:3rem; font-weight:900; color:var(--sky-deep);}
+
+.qb-filters{display:flex; gap:8px; flex-wrap:wrap; margin:16px 0;}
+.qb-filters button{background:var(--cloud); border:1px solid var(--line); padding:7px 14px; border-radius:999px; font-size:.82rem; cursor:pointer; font-weight:600; color:var(--sky-deep);}
+.qb-filters button.active{background:var(--sun); border-color:var(--sun); color:#3a2500;}
+.qb-item{border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin:10px 0; background:var(--sky-light);}
+.qb-item .mark{float:right; background:var(--sky-deep); color:var(--sun); font-size:.72rem; padding:3px 9px; border-radius:999px; font-family:'JetBrains Mono',monospace;}
+.qb-item .ans{display:none; margin-top:10px; padding-top:10px; border-top:1px dashed var(--sky-soft); color:var(--ink-soft); font-size:.9rem;}
+.qb-item .ans.show{display:block;}
+.qb-toggle{background:none; border:none; color:var(--sky-mid); font-weight:700; cursor:pointer; padding:0; font-size:.85rem; margin-top:6px;}
+footer{text-align:center; padding:40px 20px; color:var(--ink-soft); font-size:.85rem;}
+.print-btn{background:var(--cloud); border:2px solid var(--sky-mid); color:var(--sky-mid); padding:8px 16px; border-radius:999px; font-weight:700; font-size:.82rem; cursor:pointer; display:inline-flex; align-items:center; gap:6px; margin-bottom:10px;}
+.print-btn:hover{background:var(--sky-mid); color:#fff;}
+.page-head{display:flex; justify-content:flex-end; gap:10px; margin-bottom:6px;}
+.note-block{background:var(--cloud); border:1px solid var(--line); border-radius:var(--radius); padding:26px; box-shadow:var(--shadow);}
+.note-block h3{color:var(--sky-deep); border-left:4px solid var(--sun); padding-left:10px; margin-top:20px;}
+.note-block ul{margin:6px 0 14px; padding-left:22px;}
+.note-block li{margin:4px 0;}
+@media print{
+  .topbar, .chapter-nav, .page-head, .qb-filters, .quiz-nav, .lang-switch{display:none !important;}
+  body{background:#fff;}
+  .section, .note-block{box-shadow:none; border:1px solid #ccc;}
+  .wrap{max-width:100%;}
+  .hero{display:none;}
+}
+</style>
+</head>
+<body class="mode-ml">
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> <span class="lang-ml">അധ്യായം 2: കാലാവസ്ഥാമേഖലകൾ</span><span class="lang-en">Chapter 2: Climate Zones</span></div>
+  <div class="lang-switch">
+    <button id="btnML" class="active" onclick="setLang('ml')">മലയാളം</button>
+    <button id="btnEN" onclick="setLang('en')">English</button>
+  </div>
+  <div class="tabs">
+    <button class="tab-btn active" data-page="learn"><span class="lang-ml">📖 പഠനം</span><span class="lang-en">📖 Learn</span></button>
+    <button class="tab-btn" data-page="notes"><span class="lang-ml">📄 കുറിപ്പ്</span><span class="lang-en">📄 Short Notes</span></button>
+    <button class="tab-btn" data-page="quiz"><span class="lang-ml">🎯 ക്വിസ്</span><span class="lang-en">🎯 Quiz</span></button>
+    <button class="tab-btn" data-page="bank"><span class="lang-ml">📝 ചോദ്യബാങ്ക്</span><span class="lang-en">📝 Question Bank</span></button>
+  </div>
+  <div class="score-pill" id="topScore"><span class="lang-ml">സ്കോർ</span><span class="lang-en">Score</span>: --</div>
+</div>
+<div class="chapter-nav">
+  <a href="chapter2_climate_zones.html" class="current"><span class="lang-ml">🌍 അധ്യായം 2 · കാലാവസ്ഥാമേഖലകൾ</span><span class="lang-en">🌍 Chapter 2 · Climate Zones</span></a>
+</div>
+
+<div class="hero">
+  <div class="sun"></div>
+  <div class="eyebrow">SOCIAL SCIENCE · STANDARD X · CHAPTER 2</div>
+  <h1><span class="lang-ml">കാലാവസ്ഥാമേഖലകളും കാലാവസ്ഥാമാറ്റവും</span><span class="lang-en">Climate Zones &amp; Climate Change</span></h1>
+  <p class="sub">
+    <span class="lang-ml">ലോകത്തിലെ 8 പ്രധാന കാലാവസ്ഥാമേഖലകളും ആഗോളതാപനത്തിന്റെ പ്രത്യാഘാതങ്ങളും പരിശോധിക്കുന്ന പഠനസഹായി.</span>
+    <span class="lang-en">A study guide to the world's 8 major climate zones and the impacts of global warming.</span>
+  </p>
+  <div class="instrument-row">
+    <div class="instrument"><div class="val"><span class="lang-ml">8 മേഖലകൾ</span><span class="lang-en">8 Zones</span></div><div class="lbl"><span class="lang-ml">ലോക കാലാവസ്ഥാമേഖലകൾ</span><span class="lang-en">Major World Climate Zones</span></div></div>
+    <div class="instrument"><div class="val">+1.1°C</div><div class="lbl"><span class="lang-ml">ആഗോളതാപന വർധന (2011-20)</span><span class="lang-en">Global warming rise (2011-20)</span></div></div>
+    <div class="instrument"><div class="val">2015</div><div class="lbl"><span class="lang-ml">പാരിസ് ഉടമ്പടി</span><span class="lang-en">Paris Agreement</span></div></div>
+  </div>
+</div>
+
+<div class="wrap">
+<section class="page active" id="page-learn">
+
+  <div class="page-head"><button class="print-btn" onclick="window.print()">🖨️ <span class="lang-ml">പ്രിന്റ്</span><span class="lang-en">Print</span></button></div>
+
+  <div class="section">
+    <h2><span class="num">i</span><span class="lang-ml">കാലാവസ്ഥാമേഖലകൾ</span><span class="lang-en">Climate Zones</span></h2>
+    <p class="lang-ml">ലോകത്തെ പ്രധാന കാലാവസ്ഥാമേഖലകളും അവയുടെ താപനില, വർഷണം, സസ്യജാലങ്ങൾ, ജനജീവിതരീതി എന്നിവയും പരിശോധിക്കാം.</p>
+    <p class="lang-en">Let us examine the major climate zones of the world along with their temperature, rainfall, vegetation, and human life patterns.</p>
+  </div>
+
+  <div class="zone-card eq">
+    <h3><span class="lang-ml">🌴 ഭൂമധ്യരേഖാ കാലാവസ്ഥാമേഖല</span><span class="lang-en">🌴 Equatorial Climate</span></h3>
+    <p style="font-family:'JetBrains Mono',monospace; font-size:.85rem; color:var(--ink-soft);">10°N – 10°S</p>
+    <div class="stat-row"><span class="stat lang-ml">ഉയർന്ന താപനില വർഷം മുഴുവൻ</span><span class="stat lang-en">High temperature all year</span><span class="stat lang-ml">ദിനംപ്രതി സംവഹനമഴ</span><span class="stat lang-en">Daily convectional rain</span></div>
+    <p class="lang-ml">സൂര്യരശ്മികൾ ഏറെക്കുറെ ലംബമായി പതിക്കുന്നതിനാൽ ചൂട് കൂടുതൽ. നിത്യഹരിതവനങ്ങൾ ധാരാളമായി കാണപ്പെടുന്നു. പിഗ്മി ഗോത്രവിഭാഗം ഇവിടത്തെ ജനവിഭാഗത്തിന് ഉദാഹരണം.</p>
+    <p class="lang-en">Sun rays fall almost vertically, causing high temperatures. Dense evergreen rainforests dominate. The Pygmy tribes are a well-known example of the local population.</p>
+  </div>
+
+  <div class="zone-card mon">
+    <h3><span class="lang-ml">🌧️ മൺസൂൺ കാലാവസ്ഥാമേഖല</span><span class="lang-en">🌧️ Monsoon Climate</span></h3>
+    <p class="lang-ml">കാലികമായി ദിശാവ്യതിയാനം സംഭവിക്കുന്ന കാറ്റുകളാണ് (മൺസൂൺ കാറ്റുകൾ) ഈ മേഖലയെ നിർണ്ണയിക്കുന്നത് — വേനൽക്കാലത്ത് കടലിൽ നിന്ന് കരയിലേക്കും ശൈത്യകാലത്ത് തിരിച്ചും.</p>
+    <p class="lang-en">This zone is defined by monsoon winds that periodically reverse direction — blowing from sea to land in summer and land to sea in winter.</p>
+    <div class="stat-row"><span class="stat lang-ml">വാർഷികമഴ 50–1000+ സെ.മീ.</span><span class="stat lang-en">Annual rain 50–1000+ cm</span><span class="stat">Indian Subcontinent</span></div>
+    <p class="lang-ml">ഇലപൊഴിയും വൃക്ഷങ്ങളും (ഉഷ്ണമേഖലാ ഇലപൊഴിയും കാടുകൾ) പ്രധാന സസ്യജാലം. നെല്ല്, കരിമ്പ്, ചണം, പരുത്തി, തേയില, കാപ്പി തുടങ്ങിയ ഉഷ്ണമേഖലാവിളകൾ കൃഷി ചെയ്യുന്നു.</p>
+    <p class="lang-en">Deciduous trees (tropical deciduous forests) are the dominant vegetation. Tropical crops like rice, sugarcane, jute, cotton, tea, and coffee are cultivated.</p>
+  </div>
+
+  <div class="zone-card sav">
+    <h3><span class="lang-ml">🦒 സാവന്ന കാലാവസ്ഥാമേഖല</span><span class="lang-en">🦒 Savanna Climate</span></h3>
+    <p style="font-family:'JetBrains Mono',monospace; font-size:.85rem; color:var(--ink-soft);">10° – 30°, both hemispheres</p>
+    <p class="lang-ml">ഉഷ്ണമേഖലാ പുൽമേടുകൾ — ആഫ്രിക്കയിൽ <i>സാവന്ന</i>, ബ്രസീലിൽ <i>കാംപോസ്</i>, വെനിസ്വേലയിൽ <i>ലനോസ്</i> എന്നറിയപ്പെടുന്നു.</p>
+    <p class="lang-en">Tropical grasslands — known as <i>Savanna</i> in Africa, <i>Campos</i> in Brazil, and <i>Llanos</i> in Venezuela.</p>
+    <div class="stat-row"><span class="stat">21°C–32°C</span><span class="stat">25–125 cm rain</span></div>
+    <p class="lang-ml">ജിറാഫ്, സീബ്ര തുടങ്ങിയ സസ്യഭോജികളും സിംഹം, കടുവ തുടങ്ങിയ മാംസഭോജികളും. മസായി ഗോത്രം (ആഫ്രിക്ക) ഇടയജീവിതം നയിക്കുന്നു. ഡ്രൈ ഫാമിംഗ് അവലംബിക്കുന്നു.</p>
+    <p class="lang-en">Herbivores like giraffes and zebras, and carnivores like lions and tigers are found here. The Maasai tribe (Africa) practises a pastoral lifestyle. Dry farming is common.</p>
+  </div>
+
+  <div class="zone-card des">
+    <h3><span class="lang-ml">🏜️ ഉഷ്ണമരുഭൂമികൾ</span><span class="lang-en">🏜️ Hot Deserts</span></h3>
+    <p class="lang-ml">ഭൂമുഖത്തെ ഏറ്റവും ചൂടേറിയ പ്രദേശങ്ങൾ. ശരാശരി വാർഷിക താപനില 30°C (സഹാറയിലെ അൽഅസീസിയയിൽ 58°C വരെ രേഖപ്പെടുത്തിയിട്ടുണ്ട്).</p>
+    <p class="lang-en">The hottest regions on Earth. Average annual temperature is 30°C (Al Aziziyah in the Sahara recorded up to 58°C).</p>
+    <div class="stat-row"><span class="stat lang-ml">വാർഷികമഴ ~25 സെ.മീ. താഴെ</span><span class="stat lang-en">Annual rain below ~25 cm</span><span class="stat">Sahara, Arabian, Kalahari, Atacama</span></div>
+    <p class="lang-ml">കള്ളിമുൾച്ചെടികൾ, ചെറുകുറ്റിച്ചെടികൾ പ്രധാന സസ്യങ്ങൾ. ബുഷ്മെൻ (കലഹാരി) പോലുള്ള ഗോത്രസമൂഹങ്ങൾ പ്രതികൂല സാഹചര്യങ്ങളോട് ഇണങ്ങി ജീവിക്കുന്നു. ധാതുനിക്ഷേപം പ്രധാന സാമ്പത്തിക സ്രോതസ്സ്.</p>
+    <p class="lang-en">Cacti and small shrubs are the main vegetation. Tribal communities such as the Bushmen (Kalahari) have adapted to harsh conditions. Mineral deposits are a key economic resource.</p>
+  </div>
+
+  <div class="zone-card med">
+    <h3><span class="lang-ml">🍇 മെഡിറ്ററേനിയൻ കാലാവസ്ഥാമേഖല</span><span class="lang-en">🍇 Mediterranean Climate</span></h3>
+    <p style="font-family:'JetBrains Mono',monospace; font-size:.85rem; color:var(--ink-soft);">30°–45°, around Mediterranean Sea &amp; similar regions</p>
+    <div class="stat-row"><span class="stat lang-ml">വേനൽ: 20–25°C വരണ്ടത്</span><span class="stat lang-en">Summer: 20–25°C, dry</span><span class="stat lang-ml">ശൈത്യം: 10–16°C, 35–75 സെ.മീ.</span><span class="stat lang-en">Winter: 10–16°C, 35–75 cm rain</span></div>
+    <p class="lang-ml">ഓക്ക്, സിഖോയ (നിത്യഹരിതം), പൈൻ, ഫിർ (സ്റ്റൂപികാഗ്രം) വൃക്ഷങ്ങൾ. മുന്തിരി, നാരകഫലങ്ങൾ പ്രധാന കൃഷി — ലോകത്തിലെ വൈൻ ഉൽപാദനത്തിൽ മുൻപന്തിയിൽ.</p>
+    <p class="lang-en">Oak, Sequoia (evergreen), pine, and fir (conical) trees are common. Grapes and citrus fruits are the main crops — the region leads the world in wine production.</p>
+  </div>
+
+  <div class="zone-card temp">
+    <h3><span class="lang-ml">🌾 മിതോഷ്ണ പുൽമേടുകൾ</span><span class="lang-en">🌾 Temperate Grasslands</span></h3>
+    <p style="font-family:'JetBrains Mono',monospace; font-size:.85rem; color:var(--ink-soft);">40°–55°, both hemispheres — Prairies, Steppes, Pampas, Veld, Downs</p>
+    <div class="stat-row"><span class="stat">2°C–13°C</span><span class="stat">25–60 cm rain</span></div>
+    <p class="lang-ml">ലോകത്തിന്റെ ധാന്യകലവറ എന്നറിയപ്പെടുന്ന പ്രയറി (വടക്കേ അമേരിക്ക) ഗോതമ്പ് കൃഷിക്ക് പ്രശസ്തം. യന്ത്രവൽകൃത കൃഷിയും മൃഗപരിപാലനവും പ്രധാന ഉപജീവനമാർഗം.</p>
+    <p class="lang-en">The Prairies (North America), known as the "granary of the world", are famous for wheat cultivation. Mechanised farming and animal husbandry are the main livelihoods.</p>
+  </div>
+
+  <div class="zone-card taiga">
+    <h3><span class="lang-ml">🌲 ടൈഗാ മേഖല</span><span class="lang-en">🌲 Taiga</span></h3>
+    <p style="font-family:'JetBrains Mono',monospace; font-size:.85rem; color:var(--ink-soft);">55°–70°N (Northern Hemisphere only)</p>
+    <div class="stat-row"><span class="stat lang-ml">വേനൽ: 15–20°C</span><span class="stat lang-en">Summer: 15–20°C</span><span class="stat lang-ml">ശൈത്യം: -13 മുതൽ -25°C</span><span class="stat lang-en">Winter: -13 to -25°C</span></div>
+    <p class="lang-ml">സ്റ്റൂപികാഗ്ര നിത്യഹരിതവൃക്ഷങ്ങൾ (പൈൻ, ഫിർ, സ്പ്രൂസ്) — റഷ്യൻ ഭാഷയിൽ "ടൈഗ". മരംവെട്ടും കമ്പിളിരോമ വ്യവസായവുമാണ് പ്രധാന സാമ്പത്തിക പ്രവർത്തനങ്ങൾ.</p>
+    <p class="lang-en">Coniferous evergreen trees (pine, fir, spruce) dominate — "Taiga" is a Russian term. Lumbering and the fur trade are the main economic activities.</p>
+  </div>
+
+  <div class="zone-card tundra">
+    <h3><span class="lang-ml">❄️ ടണ്ഡ്രാ മേഖല</span><span class="lang-en">❄️ Tundra</span></h3>
+    <p style="font-family:'JetBrains Mono',monospace; font-size:.85rem; color:var(--ink-soft);">Arctic Circle — Alaska, Canada, Greenland, N. Europe, N. Asia</p>
+    <div class="stat-row"><span class="stat lang-ml">ശൈത്യം: -25 മുതൽ -40°C</span><span class="stat lang-en">Winter: -25 to -40°C</span><span class="stat lang-ml">വേനൽ: 10°C വരെ</span><span class="stat lang-en">Summer: up to 10°C</span></div>
+    <p class="lang-ml">ചെറുകുറ്റിച്ചെടികളും പായലുകളും മാത്രം. എസ്ക്കിമോ, ലാപ്പ്ലാൻഡ് ഗോത്രവിഭാഗങ്ങൾ ജീവിക്കുന്നു. ജനവാസം വളരെ കുറവ്.</p>
+    <p class="lang-en">Only small shrubs and mosses survive. Eskimo and Lapland tribes live here. Population density is extremely low.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">ii</span><span class="lang-ml">കാലാവസ്ഥാവ്യതിയാനം</span><span class="lang-en">Climate Change</span></h2>
+    <p class="lang-ml">അന്തരീക്ഷ താപനിലയിലും കാലാവസ്ഥയിലും ദീർഘകാലാടിസ്ഥാനത്തിൽ ഉണ്ടാകുന്ന മാറ്റമാണ് <b>കാലാവസ്ഥാവ്യതിയാനം (Climate Change)</b> — UN നിർവചനപ്രകാരം ഇത് സ്വാഭാവികമോ മനുഷ്യപ്രവൃത്തി മൂലമോ ആകാം.</p>
+    <p class="lang-en">A long-term change in atmospheric temperature and climate patterns is called <b>Climate Change</b> — as defined by the UN, it may be caused by natural processes or human activity.</p>
+
+    <h3><span class="lang-ml">ഹരിതഗൃഹപ്രഭാവവും ആഗോളതാപനവും</span><span class="lang-en">Greenhouse Effect &amp; Global Warming</span></h3>
+    <p class="lang-ml">കാർബൺ ഡൈഓക്സൈഡ്, നൈട്രസ് ഓക്സൈഡ് പോലുള്ള <b>ഹരിതഗൃഹവാതകങ്ങൾ</b> സൂര്യതാപം അന്തരീക്ഷത്തിൽ തടഞ്ഞുനിർത്തുന്ന പ്രക്രിയയാണ് <b>ഹരിതഗൃഹപ്രഭാവം</b>. ഫോസിൽ ഇന്ധനങ്ങൾ കത്തിക്കുന്നത്, വ്യവസായശാലകളിലെ മാലിന്യങ്ങൾ എന്നിവയാൽ ഇത് ശക്തമാകുമ്പോൾ <b>ആഗോളതാപനം (Global Warming)</b> ഉണ്ടാകുന്നു.</p>
+    <p class="lang-en"><b>Greenhouse gases</b> such as carbon dioxide and nitrous oxide trap heat in the atmosphere — this process is the <b>Greenhouse Effect</b>. When intensified by burning fossil fuels and industrial waste, it causes <b>Global Warming</b>.</p>
+
+    <h3><span class="lang-ml">കാരണങ്ങൾ</span><span class="lang-en">Causes</span></h3>
+    <div class="grid2">
+      <div class="card"><h4><span class="lang-ml">സ്വാഭാവിക കാരണങ്ങൾ</span><span class="lang-en">Natural Causes</span></h4><span class="lang-ml">അഗ്നിപർവത സ്ഫോടനം, സമുദ്രജല പ്രവാഹങ്ങളിലെ മാറ്റം</span><span class="lang-en">Volcanic eruptions, changes in ocean currents</span></div>
+      <div class="card"><h4><span class="lang-ml">മനുഷ്യജന്യ കാരണങ്ങൾ</span><span class="lang-en">Anthropogenic Causes</span></h4><span class="lang-ml">വനനശീകരണം, എണ്ണ ഖനനം, വ്യവസായവൽക്കരണം, ഫോസിൽ ഇന്ധന ഉപയോഗം</span><span class="lang-en">Deforestation, oil drilling, industrialisation, fossil fuel use</span></div>
+    </div>
+
+    <h3><span class="lang-ml">ആഗോളതാപനത്തിന്റെ പ്രത്യാഘാതങ്ങൾ</span><span class="lang-en">Impacts of Global Warming</span></h3>
+    <table>
+      <tr><th><span class="lang-ml">വസ്തുത</span><span class="lang-en">Fact</span></th><th><span class="lang-ml">സ്രോതസ്സ്</span><span class="lang-en">Source</span></th></tr>
+      <tr><td><span class="lang-ml">ശരാശരി സമുദ്രനിരപ്പ് പ്രതിവർഷം 10–20 മില്ലീമീറ്റർ ഉയരുന്നു</span><span class="lang-en">Mean sea level rising by 10–20 mm per year</span></td><td>IPCC Sealevel Rise Report 2023</td></tr>
+      <tr><td><span class="lang-ml">ധ്രുവഹിമാനി 1978-ലെ 7.5 ദശലക്ഷം ച.കി.മീ.-ൽ നിന്ന് 2019-ൽ 3.74 ദശലക്ഷമായി കുറഞ്ഞു</span><span class="lang-en">Polar ice from 7.5 million sq.km (1978) shrank to 3.74 million (2019)</span></td><td>NASA GCC Report 2020</td></tr>
+      <tr><td><span class="lang-ml">135 ദശലക്ഷത്തോളം ജനങ്ങൾ മരുഭൂമിവൽക്കരണഭീഷണി നേരിടുന്നു</span><span class="lang-en">About 135 million people face desertification risk</span></td><td>UNCCD</td></tr>
+      <tr><td><span class="lang-ml">2011–2020 കാലഘട്ടത്തിൽ ആഗോളതാപനില 1.1°C വർധിച്ചു</span><span class="lang-en">Global temperature rose 1.1°C during 2011–2020</span></td><td>IPCC Climate Change 2023</td></tr>
+    </table>
+    <div class="callout warn">
+      <p class="lang-ml">ആഗോളതാപനം കാലാവസ്ഥാവ്യതിയാനത്തിന് ആക്കം കൂട്ടുന്നു — വരൾച്ച, പ്രളയം, മരുഭൂവൽക്കരണം, സമുദ്രനിരപ്പ് ഉയരൽ, കടലേറ്റം എന്നിവയാൽ ദശലക്ഷക്കണക്കിന് ആളുകൾ <b>കാലാവസ്ഥാ അഭയാർഥികൾ</b> ആയി മാറുന്നു.</p>
+      <p class="lang-en">Global warming accelerates climate change — droughts, floods, desertification, and rising sea levels are turning millions of people into <b>climate refugees</b>.</p>
+    </div>
+
+    <h3><span class="lang-ml">അന്താരാഷ്ട്ര ഉടമ്പടികൾ</span><span class="lang-en">International Efforts</span></h3>
+    <table>
+      <tr><th><span class="lang-ml">ഉദ്യമം</span><span class="lang-en">Initiative</span></th><th><span class="lang-ml">വർഷം</span><span class="lang-en">Year</span></th><th><span class="lang-ml">സ്ഥലം</span><span class="lang-en">Place</span></th></tr>
+      <tr><td><span class="lang-ml">ലോകകാലാവസ്ഥാ സംഘടന</span><span class="lang-en">World Meteorological Organization</span></td><td>1950</td><td>Geneva</td></tr>
+      <tr><td><span class="lang-ml">സ്റ്റോക്ക്ഹോം സമ്മേളനം</span><span class="lang-en">Stockholm Conference</span></td><td>1972</td><td>Stockholm</td></tr>
+      <tr><td><span class="lang-ml">ഭൗമഉച്ചകോടി (Agenda 21)</span><span class="lang-en">Earth Summit (Agenda 21)</span></td><td>1992</td><td>Rio de Janeiro</td></tr>
+      <tr><td>Kyoto Protocol</td><td>1997</td><td>Kyoto</td></tr>
+      <tr><td>Montreal Protocol</td><td>1987</td><td>Montreal</td></tr>
+      <tr><td>Paris Agreement</td><td>2015</td><td>Paris</td></tr>
+      <tr><td>G20 Summit</td><td>2023</td><td>New Delhi</td></tr>
+    </table>
+    <div class="callout" style="text-align:center; font-style:italic;">"The Greatest threat to our planet is the belief that someone else will save it." — Robert Swan</div>
+  </div>
+
+</section>
+
+<section class="page" id="page-quiz">
+  <div class="page-head">
+    <button class="print-btn" style="background:#25D366; border-color:#25D366; color:#fff;" onclick="shareQuizPage()">📤 <span class="lang-ml">ഷെയർ / ലൈവ് ക്വിസ്</span><span class="lang-en">Share / Live Quiz</span></button>
+    <button class="print-btn" onclick="window.print()">🖨️ <span class="lang-ml">പ്രിന്റ്</span><span class="lang-en">Print</span></button>
+  </div>
+  <div class="section">
+    <div class="quiz-header">
+      <h2 style="border:none; padding:0;"><span class="lang-ml">🎯 ഇന്ററാക്ടീവ് ക്വിസ്</span><span class="lang-en">🎯 Interactive Quiz</span></h2>
+      <div id="quizMeta" style="font-family:'JetBrains Mono',monospace; font-size:.85rem; color:var(--ink-soft);"></div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+    <div id="quizArea"></div>
+    <div class="quiz-nav">
+      <button class="btn secondary" id="prevBtn"><span class="lang-ml">← മുൻപ്</span><span class="lang-en">← Prev</span></button>
+      <button class="btn" id="nextBtn"><span class="lang-ml">അടുത്തത് →</span><span class="lang-en">Next →</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="page-notes">
+  <div class="page-head"><button class="print-btn" onclick="window.print()">🖨️ <span class="lang-ml">പ്രിന്റ്</span><span class="lang-en">Print</span></button></div>
+  <div class="note-block">
+    <h2 style="border-bottom:3px solid var(--sun-soft); padding-bottom:12px;"><span class="lang-ml">📄 ചുരുക്കക്കുറിപ്പ് — കാലാവസ്ഥാമേഖലകൾ</span><span class="lang-en">📄 Short Notes — Climate Zones</span></h2>
+
+    <h3><span class="lang-ml">8 കാലാവസ്ഥാമേഖലകൾ</span><span class="lang-en">8 Climate Zones</span></h3>
+    <ul class="lang-ml">
+      <li><b>ഭൂമധ്യരേഖ</b> (0°-10°): ഉയർന്ന താപനില+മഴ, നിത്യഹരിതവനം, പിഗ്മി ഗോത്രം</li>
+      <li><b>മൺസൂൺ</b>: കാലിക കാറ്റുകൾ, ഇലപൊഴിയും വനം, നെല്ല്/തേയില/കാപ്പി</li>
+      <li><b>സാവന്ന</b> (10°-30°): ഉഷ്ണമേഖലാ പുൽമേട്, മസായി ഗോത്രം, ഡ്രൈ ഫാമിംഗ്</li>
+      <li><b>ഉഷ്ണമരുഭൂമി</b>: 30°C+ താപനില, <25 സെ.മീ. മഴ, സഹാറ/കലഹാരി/അറ്റക്കാമ</li>
+      <li><b>മെഡിറ്ററേനിയൻ</b> (30°-45°): വരണ്ട വേനൽ, ആർദ്ര ശൈത്യം, മുന്തിരി/വൈൻ</li>
+      <li><b>മിതോഷ്ണ പുൽമേട്</b> (40°-55°): പ്രയറി = "ധാന്യക്കലവറ", ഗോതമ്പ്</li>
+      <li><b>ടൈഗ</b> (55°-70°N, ഉത്തരാർധം മാത്രം): സ്റ്റൂപികാഗ്ര നിത്യഹരിതം, മരംവെട്ട്</li>
+      <li><b>ടണ്ഡ്ര</b> (ആർട്ടിക്): അതിശൈത്യം, എസ്ക്കിമോ/ലാപ്ലാൻഡ്</li>
+    </ul>
+    <ul class="lang-en">
+      <li><b>Equatorial</b> (0°-10°): high temp+rain, evergreen forest, Pygmy tribe</li>
+      <li><b>Monsoon</b>: periodic winds, deciduous forest, rice/tea/coffee</li>
+      <li><b>Savanna</b> (10°-30°): tropical grassland, Maasai tribe, dry farming</li>
+      <li><b>Hot Desert</b>: 30°C+ temp, &lt;25 cm rain, Sahara/Kalahari/Atacama</li>
+      <li><b>Mediterranean</b> (30°-45°): dry summer, wet winter, grapes/wine</li>
+      <li><b>Temperate Grassland</b> (40°-55°): Prairie = "granary of world", wheat</li>
+      <li><b>Taiga</b> (55°-70°N, N. Hemisphere only): coniferous evergreen, lumbering</li>
+      <li><b>Tundra</b> (Arctic): extreme cold, Eskimo/Lapland</li>
+    </ul>
+
+    <h3><span class="lang-ml">കാലാവസ്ഥാവ്യതിയാനം</span><span class="lang-en">Climate Change</span></h3>
+    <ul class="lang-ml">
+      <li>ഹരിതഗൃഹപ്രഭാവം → ആഗോളതാപനം (CO₂, N₂O വാതകങ്ങൾ)</li>
+      <li>കാരണങ്ങൾ: ഫോസിൽ ഇന്ധനം, വനനശീകരണം, വ്യവസായവൽക്കരണം</li>
+      <li>പ്രത്യാഘാതങ്ങൾ: സമുദ്രനിരപ്പ് ഉയരൽ (10-20mm/വർഷം), ഹിമാനി ഉരുകൽ, +1.1°C (2011-20)</li>
+      <li>ഉടമ്പടികൾ: WMO (1950), സ്റ്റോക്ക്ഹോം (1972), റിയോ (1992), ക്യോട്ടോ (1997), മോൺട്രിയൽ (1987), പാരിസ് (2015), G20 (2023)</li>
+    </ul>
+    <ul class="lang-en">
+      <li>Greenhouse Effect → Global Warming (CO₂, N₂O gases)</li>
+      <li>Causes: fossil fuels, deforestation, industrialisation</li>
+      <li>Effects: sea level rise (10-20mm/yr), melting ice, +1.1°C (2011-20)</li>
+      <li>Agreements: WMO (1950), Stockholm (1972), Rio (1992), Kyoto (1997), Montreal (1987), Paris (2015), G20 (2023)</li>
+    </ul>
+  </div>
+</section>
+
+<section class="page" id="page-bank">
+  <div class="page-head"><button class="print-btn" onclick="window.print()">🖨️ <span class="lang-ml">പ്രിന്റ്</span><span class="lang-en">Print</span></button></div>
+  <div class="section">
+    <h2 style="border:none;padding:0;"><span class="lang-ml">📝 ചോദ്യബാങ്ക്</span><span class="lang-en">📝 Question Bank</span></h2>
+    <div class="qb-filters" id="qbFilters">
+      <button class="active" data-f="all"><span class="lang-ml">എല്ലാം</span><span class="lang-en">All</span></button>
+      <button data-f="1"><span class="lang-ml">1 മാർക്ക്</span><span class="lang-en">1 Mark</span></button>
+      <button data-f="2"><span class="lang-ml">2 മാർക്ക്</span><span class="lang-en">2 Marks</span></button>
+      <button data-f="3"><span class="lang-ml">3 മാർക്ക്</span><span class="lang-en">3 Marks</span></button>
+      <button data-f="4"><span class="lang-ml">4+ മാർക്ക്</span><span class="lang-en">4+ Marks</span></button>
+    </div>
+    <div id="qbList"></div>
+  </div>
+</section>
+
+</div>
+
+<footer><span class="lang-ml">Abacus Academy · SSLC പഠനപോർട്ടൽ — അധ്യായം 2 | കേരള SCERT പത്താം ക്ലാസ് സാമൂഹ്യശാസ്ത്രം</span><span class="lang-en">Abacus Academy · SSLC Study Portal — Chapter 2 | Kerala SCERT Standard X Social Science</span></footer>
+
+<script>
+let LANG = 'ml';
+function shareQuizPage(){
+  const url = new URL('chapter2_climate_zones_quiz.html', window.location.href).href;
+  const text = LANG==='ml'
+    ? 'കാലാവസ്ഥാമേഖലകൾ ലൈവ് ക്വിസ് (രാത്രി 9:30-10:30) ഇവിടെ പങ്കെടുക്കൂ: '
+    : 'Join the Climate Zones live quiz (9:30-10:30 PM) here: ';
+  if(navigator.share){ navigator.share({title:'Climate Zones Quiz', text:text, url:url}); }
+  else{ window.open('https://wa.me/?text='+encodeURIComponent(text+url),'_blank'); }
+}
+function setLang(l){
+  LANG = l;
+  document.body.className = 'mode-'+l;
+  document.getElementById('btnML').classList.toggle('active', l==='ml');
+  document.getElementById('btnEN').classList.toggle('active', l==='en');
+  renderQuiz(); renderQB();
+}
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('page-'+btn.dataset.page).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+const QUIZ = [
+ {ml:{q:"ഭൂമധ്യരേഖാ കാലാവസ്ഥാമേഖല ഏത് അക്ഷാംശപരിധിയിലാണ്?",o:["0°-10°","10°-30°","30°-45°","40°-55°"],e:"ഭൂമധ്യരേഖയ്ക്ക് ഇരുവശവും 10° വരെ."},
+  en:{q:"The Equatorial climate zone lies within which latitude range?",o:["0°-10°","10°-30°","30°-45°","40°-55°"],e:"Up to 10° on either side of the equator."}, a:0},
+ {ml:{q:"ആഫ്രിക്കൻ സാവന്നയിൽ ഇടയജീവിതം നയിക്കുന്ന ഗോത്രം?",o:["ബുഷ്മെൻ","മസായി","എസ്ക്കിമോ","പിഗ്മി"],e:"മസായി ഗോത്രവിഭാഗമാണ് ആഫ്രിക്കൻ സാവന്നയിലെ ഇടയജീവിതത്തിന് ഉദാഹരണം."},
+  en:{q:"Which tribe practises a pastoral life in the African Savanna?",o:["Bushmen","Maasai","Eskimo","Pygmy"],e:"The Maasai tribe is the example of pastoral life in the African Savanna."}, a:1},
+ {ml:{q:"ലോകത്തിലെ ഏറ്റവും ചൂടേറിയ പ്രദേശമായി രേഖപ്പെടുത്തിയ അൽ അസീസിയ ഏത് മരുഭൂമിയിലാണ്?",o:["കലഹാരി","അറ്റക്കാമ","സഹാറ","ഓസ്ട്രേലിയൻ"],e:"സഹാറാ മരുഭൂമിയിലാണ് അൽ അസീസിയ സ്ഥിതി ചെയ്യുന്നത്."},
+  en:{q:"Al Aziziyah, recorded as one of the hottest places, is in which desert?",o:["Kalahari","Atacama","Sahara","Australian"],e:"Al Aziziyah is located in the Sahara Desert."}, a:2},
+ {ml:{q:"ലോകത്തിന്റെ ധാന്യക്കലവറ എന്നറിയപ്പെടുന്ന പുൽമേട്?",o:["സ്റ്റെപ്പി","പ്രയറി","പാംപാസ്","വെൽഡ്"],e:"വടക്കേ അമേരിക്കയിലെ പ്രയറി പുൽമേടുകൾ."},
+  en:{q:"Which grassland is known as the 'granary of the world'?",o:["Steppe","Prairie","Pampas","Veld"],e:"The Prairies of North America."}, a:1},
+ {ml:{q:"'ടൈഗ' എന്ന വാക്ക് ഏത് ഭാഷയിൽ നിന്നാണ്?",o:["ജർമൻ","റഷ്യൻ","ഫ്രഞ്ച്","സ്പാനിഷ്"],e:"സ്റ്റൂപികാഗ്ര നിത്യഹരിതവൃക്ഷങ്ങളെ റഷ്യൻ ഭാഷയിൽ ടൈഗ എന്നു വിളിക്കുന്നു."},
+  en:{q:"The word 'Taiga' comes from which language?",o:["German","Russian","French","Spanish"],e:"Coniferous evergreen forests are called Taiga in Russian."}, a:1},
+ {ml:{q:"ടൈഗാ മേഖല കാണപ്പെടുന്നത് ഏത് അർധഗോളത്തിൽ മാത്രമാണ്?",o:["ഉത്തരാർധഗോളം","ദക്ഷിണാർധഗോളം","രണ്ടിലും","ഒന്നിലുമില്ല"],e:"ദക്ഷിണാർധഗോളത്തിൽ വൻകരകളുടെ വ്യാപ്തി കുറവായതിനാൽ ടൈഗ കാണപ്പെടുന്നില്ല."},
+  en:{q:"The Taiga zone is found only in which hemisphere?",o:["Northern Hemisphere","Southern Hemisphere","Both","Neither"],e:"Due to limited landmass in high southern latitudes, Taiga does not occur there."}, a:0},
+ {ml:{q:"മെഡിറ്ററേനിയൻ പ്രദേശം ലോകത്തിൽ ഏത് ഉൽപന്നത്തിന്റെ ഉൽപാദനത്തിൽ മുൻപന്തിയിലാണ്?",o:["ഗോതമ്പ്","വൈൻ","ചായ","റബ്ബർ"],e:"മെഡിറ്ററേനിയൻ രാജ്യങ്ങളാണ് ലോകത്തിലെ പ്രധാന വൈൻ ഉൽപാദകർ."},
+  en:{q:"The Mediterranean region leads the world in producing which product?",o:["Wheat","Wine","Tea","Rubber"],e:"Mediterranean countries are the world's leading wine producers."}, a:1},
+ {ml:{q:"പാരിസ് ഉടമ്പടി ഒപ്പുവെച്ച വർഷം?",o:["2010","2015","2019","2023"],e:"2015-ൽ പാരിസിൽ വച്ചാണ് ഈ ഉടമ്പടി ഒപ്പുവെച്ചത്."},
+  en:{q:"In which year was the Paris Agreement signed?",o:["2010","2015","2019","2023"],e:"It was signed in Paris in 2015."}, a:1},
+ {ml:{q:"ഓസോൺപാളിക്ക് നാശം വരുത്തുന്ന പദാർഥങ്ങളുടെ അളവ് പരിമിതപ്പെടുത്താൻ ലക്ഷ്യമിട്ട ഉടമ്പടി?",o:["ക്യോട്ടോ പ്രോട്ടോക്കോൾ","മോൺട്രിയൽ പ്രോട്ടോക്കോൾ","പാരിസ് ഉടമ്പടി","റിയോ ഉടമ്പടി"],e:"1987-ലെ മോൺട്രിയൽ പ്രോട്ടോക്കോൾ."},
+  en:{q:"Which agreement aimed to limit ozone-depleting substances?",o:["Kyoto Protocol","Montreal Protocol","Paris Agreement","Rio Agreement"],e:"The 1987 Montreal Protocol."}, a:1},
+ {ml:{q:"2011-2020 കാലയളവിൽ ആഗോളതാപനില എത്ര ഡിഗ്രി വർധിച്ചു (IPCC 2023)?",o:["0.5°C","1.1°C","2.0°C","3.5°C"],e:"IPCC Climate Change 2023 Report പ്രകാരം 1.1°C."},
+  en:{q:"How much did global temperature rise during 2011–2020 (IPCC 2023)?",o:["0.5°C","1.1°C","2.0°C","3.5°C"],e:"According to the IPCC Climate Change 2023 Report, 1.1°C."}, a:1},
+ {ml:{q:"കാലാവസ്ഥാവ്യതിയാനം മൂലം കുടിയൊഴിപ്പിക്കപ്പെടുന്നവരെ എന്ത് വിളിക്കുന്നു?",o:["പരിസ്ഥിതി പ്രവർത്തകർ","കാലാവസ്ഥാ അഭയാർഥികൾ","ദുരിതബാധിതർ","സാമൂഹ്യപ്രവർത്തകർ"],e:"Climate Refugees എന്ന് ഇംഗ്ലീഷിൽ അറിയപ്പെടുന്നു."},
+  en:{q:"People displaced due to climate change are called?",o:["Environmental activists","Climate refugees","Disaster victims","Social workers"],e:"They are known as Climate Refugees."}, a:1},
+ {ml:{q:"ശരാശരി സമുദ്രനിരപ്പ് പ്രതിവർഷം എത്ര മില്ലീമീറ്റർ ഉയരുന്നു (IPCC 2023)?",o:["1-5 mm","10-20 mm","50-60 mm","100 mm"],e:"IPCC Sealevel Rise Report 2023 പ്രകാരം 10-20 മില്ലീമീറ്റർ."},
+  en:{q:"By how much does mean sea level rise per year (IPCC 2023)?",o:["1-5 mm","10-20 mm","50-60 mm","100 mm"],e:"As per IPCC Sealevel Rise Report 2023, 10-20 mm per year."}, a:1},
+ {ml:{q:"G20 ഉച്ചകോടി 2023-ൽ നടന്ന സ്ഥലം?",o:["പാരിസ്","ന്യൂഡൽഹി","ജനീവ","റിയോ ഡി ജനീറോ"],e:"2023-ലെ G20 ഉച്ചകോടി ന്യൂഡൽഹിയിൽ നടന്നു."},
+  en:{q:"Where was the 2023 G20 Summit held?",o:["Paris","New Delhi","Geneva","Rio de Janeiro"],e:"The 2023 G20 Summit was held in New Delhi."}, a:1}
+];
+let qi=0, answers=new Array(QUIZ.length).fill(null);
+function renderQuiz(){
+  const area=document.getElementById('quizArea');
+  if(qi>=QUIZ.length){
+    const score=answers.filter((a,i)=>a===QUIZ[i].a).length;
+    const msg = LANG==='ml' ? (score>=QUIZ.length*0.8?'🎉 മികച്ച പ്രകടനം!':score>=QUIZ.length*0.5?'👍 നല്ല ശ്രമം.':'💪 വീണ്ടും ശ്രമിക്കൂ!')
+      : (score>=QUIZ.length*0.8?'🎉 Excellent work!':score>=QUIZ.length*0.5?'👍 Good try!':'💪 Try again!');
+    const label = LANG==='ml' ? 'നിങ്ങളുടെ സ്കോർ!' : 'Your Score!';
+    const retry = LANG==='ml' ? 'വീണ്ടും ചെയ്യുക' : 'Retry Quiz';
+    area.innerHTML=`<div class="result-box"><div class="big">${score} / ${QUIZ.length}</div><p>${label} ${msg}</p><button class="btn" onclick="resetQuiz()">${retry}</button></div>`;
+    document.getElementById('prevBtn').style.visibility='hidden';
+    document.getElementById('nextBtn').style.visibility='hidden';
+    document.getElementById('topScore').innerHTML=(LANG==='ml'?'സ്കോർ':'Score')+': '+score+'/'+QUIZ.length;
+    document.getElementById('progFill').style.width='100%';
+    return;
+  }
+  document.getElementById('prevBtn').style.visibility='visible';
+  document.getElementById('nextBtn').style.visibility='visible';
+  const item=QUIZ[qi][LANG];
+  document.getElementById('quizMeta').textContent=(LANG==='ml'?'ചോദ്യം':'Question')+` ${qi+1} / ${QUIZ.length}`;
+  document.getElementById('progFill').style.width=((qi)/QUIZ.length*100)+'%';
+  let html=`<div class="q-card active"><div class="q-text">${qi+1}. ${item.q}</div>`;
+  item.o.forEach((opt,idx)=>{
+    let cls='opt'; let dis='';
+    if(answers[qi]!==null){ dis='disabled'; if(idx===QUIZ[qi].a) cls+=' correct'; else if(idx===answers[qi]) cls+=' wrong'; }
+    html+=`<button class="${cls}" ${dis} onclick="selectOpt(${idx})">${String.fromCharCode(65+idx)}. ${opt}</button>`;
+  });
+  html+=`<div class="explain ${answers[qi]!==null?'show':''}">💡 ${item.e}</div></div>`;
+  area.innerHTML=html;
+  document.getElementById('prevBtn').disabled = qi===0;
+}
+function selectOpt(idx){ if(answers[qi]!==null) return; answers[qi]=idx; renderQuiz(); }
+function resetQuiz(){ qi=0; answers=new Array(QUIZ.length).fill(null); document.getElementById('topScore').innerHTML=(LANG==='ml'?'സ്കോർ':'Score')+': --'; renderQuiz(); }
+document.getElementById('nextBtn').addEventListener('click',()=>{ if(qi<QUIZ.length){qi++; renderQuiz();} });
+document.getElementById('prevBtn').addEventListener('click',()=>{ if(qi>0){qi--; renderQuiz();} });
+renderQuiz();
+
+const QB = [
+ {m:1, ml:{q:"ആഫ്രിക്കൻ സാവന്നയെ ബ്രസീലിൽ എന്ത് പേരിൽ അറിയപ്പെടുന്നു?", a:"കാംപോസ് (Campos)."}, en:{q:"What is the African Savanna called in Brazil?", a:"Campos."}},
+ {m:1, ml:{q:"ടൈഗാ മേഖല ഏത് അർധഗോളത്തിൽ മാത്രമാണ് കാണപ്പെടുന്നത്?", a:"ഉത്തരാർധഗോളത്തിൽ മാത്രം (55°-70°N)."}, en:{q:"In which hemisphere is the Taiga zone found?", a:"Only in the Northern Hemisphere (55°-70°N)."}},
+ {m:1, ml:{q:"മോൺട്രിയൽ പ്രോട്ടോക്കോൾ ഒപ്പുവെച്ച വർഷം ഏത്?", a:"1987."}, en:{q:"In which year was the Montreal Protocol signed?", a:"1987."}},
+ {m:2, ml:{q:"സാവന്നയും ഉഷ്ണമരുഭൂമിയും തമ്മിലുള്ള കാലാവസ്ഥാ വ്യത്യാസം എന്ത്?", a:"സാവന്നയിൽ ഉഷ്ണമേഖലാ പുൽമേടുകളും 25-125 സെ.മീ. മഴയും ഉണ്ട്. ഉഷ്ണമരുഭൂമിയിൽ വളരെ കുറഞ്ഞ മഴ (25 സെ.മീ.-ൽ താഴെ) മാത്രമാണ് ലഭിക്കുന്നത്, സസ്യജാലം വിരളമാണ്."},
+  en:{q:"What is the climatic difference between Savanna and Hot Desert?", a:"Savanna has tropical grasslands with 25-125 cm of rainfall. Hot Deserts receive very little rainfall (below 25 cm) and have sparse vegetation."}},
+ {m:2, ml:{q:"കാലാവസ്ഥാ അഭയാർഥികൾ ആരാണ്?", a:"വരൾച്ച, പ്രളയം, സമുദ്രനിരപ്പ് ഉയരൽ തുടങ്ങിയ കാലാവസ്ഥാവ്യതിയാന പ്രത്യാഘാതങ്ങൾ മൂലം സ്വന്തം വാസസ്ഥലം വിട്ട് കുടിയേറേണ്ടിവരുന്നവരാണ് കാലാവസ്ഥാ അഭയാർഥികൾ."},
+  en:{q:"Who are climate refugees?", a:"People forced to leave their homes due to the effects of climate change — such as drought, floods, and rising sea levels — are called climate refugees."}},
+ {m:3, ml:{q:"മൺസൂൺ കാലാവസ്ഥാമേഖലയുടെ പ്രത്യേകതകൾ വിവരിക്കുക.", a:"കാലികമായി ദിശ മാറുന്ന മൺസൂൺ കാറ്റുകളാൽ നിർണയിക്കപ്പെടുന്ന മേഖലയാണിത്. ആർദ്രവും ദീർഘവുമായ വേനൽക്കാലവും വരണ്ടതും ഹ്രസ്വവുമായ ശൈത്യകാലവുമാണ് സവിശേഷത. ഇന്ത്യൻ ഉപഭൂഖണ്ഡം ഉൾപ്പെടെയുള്ള പ്രദേശങ്ങളിൽ കാണപ്പെടുന്നു. ഇലപൊഴിയും വനങ്ങളും ഉഷ്ണമേഖലാ വിളകളും ഇവിടെ പ്രധാനമാണ്. ജനസാന്ദ്രത കൂടിയ പ്രദേശമാണിത്."},
+  en:{q:"Describe the features of the Monsoon climate zone.", a:"This zone is defined by monsoon winds that periodically reverse direction. It features a long, humid summer and a short, dry winter. It occurs in regions including the Indian Subcontinent. Deciduous forests and tropical crops are important here. It is a densely populated region."}},
+ {m:3, ml:{q:"ടൈഗ മേഖലയിലെ സസ്യജാലവും സാമ്പത്തിക പ്രവർത്തനങ്ങളും വിവരിക്കുക.", a:"സ്റ്റൂപികാഗ്ര നിത്യഹരിതവൃക്ഷങ്ങളായ പൈൻ, ഫിർ, സ്പ്രൂസ് എന്നിവയാണ് പ്രധാന സസ്യജാലം. ഇവ ഒരേയിനം മരങ്ങളായി വൻതോതിൽ കാണപ്പെടുന്നു. മരംവെട്ട് വ്യവസായവും കമ്പിളിരോമ വ്യാപാരവുമാണ് പ്രധാന സാമ്പത്തിക പ്രവർത്തനങ്ങൾ. കാർഷികവൃത്തി വളരെ പരിമിതമാണ്."},
+  en:{q:"Describe the vegetation and economic activities of the Taiga zone.", a:"Coniferous evergreen trees such as pine, fir, and spruce are the dominant vegetation, occurring extensively as single-species stands. Lumbering and the fur trade are the main economic activities; agriculture is very limited."}},
+ {m:4, ml:{q:"ലോകത്തിലെ പ്രധാന കാലാവസ്ഥാമേഖലകൾ ഏവയെന്ന് പട്ടികപ്പെടുത്തി ഓരോന്നിന്റെയും പ്രധാന സവിശേഷത വിവരിക്കുക.", a:"1. ഭൂമധ്യരേഖാ മേഖല: ഉയർന്ന താപനില, ഉയർന്ന മഴ, നിത്യഹരിതവനങ്ങൾ. 2. മൺസൂൺ മേഖല: കാലിക കാറ്റുകൾ, ഇലപൊഴിയും വനങ്ങൾ. 3. സാവന്ന: ഉഷ്ണമേഖലാ പുൽമേടുകൾ. 4. ഉഷ്ണമരുഭൂമി: അതിതീവ്ര ചൂട്, കുറഞ്ഞ മഴ. 5. മെഡിറ്ററേനിയൻ: വരണ്ട വേനൽ, ആർദ്ര ശൈത്യം. 6. മിതോഷ്ണ പുൽമേടുകൾ: ധാന്യകൃഷിക്ക് അനുയോജ്യം. 7. ടൈഗ: സ്റ്റൂപികാഗ്ര നിത്യഹരിതവനങ്ങൾ. 8. ടണ്ഡ്ര: അതിശൈത്യം, വിരളമായ സസ്യജാലം."},
+  en:{q:"List the major climate zones of the world and describe the key feature of each.", a:"1. Equatorial: high temperature, high rainfall, evergreen forests. 2. Monsoon: periodic winds, deciduous forests. 3. Savanna: tropical grasslands. 4. Hot Desert: extreme heat, very low rainfall. 5. Mediterranean: dry summer, wet winter. 6. Temperate Grasslands: ideal for grain cultivation. 7. Taiga: coniferous evergreen forests. 8. Tundra: extreme cold, sparse vegetation."}},
+ {m:4, ml:{q:"ആഗോളതാപനത്തിന്റെ കാരണങ്ങളും പ്രത്യാഘാതങ്ങളും വിശദമാക്കുക.", a:"കാരണങ്ങൾ: ഫോസിൽ ഇന്ധനങ്ങളുടെ ജ്വലനം, വനനശീകരണം, വ്യവസായവൽക്കരണം, ഹരിതഗൃഹവാതക ബഹിർഗമനം. പ്രത്യാഘാതങ്ങൾ: സമുദ്രനിരപ്പ് ഉയരൽ, ധ്രുവഹിമാനികളുടെ ഉരുകൽ, കാലാവസ്ഥാവ്യതിയാനം ത്വരിതപ്പെടൽ, മരുഭൂവൽക്കരണം, അതിതീവ്ര കാലാവസ്ഥാ പ്രതിഭാസങ്ങൾ, കാലാവസ്ഥാ അഭയാർഥികളുടെ എണ്ണത്തിലെ വർധന."},
+  en:{q:"Explain the causes and effects of Global Warming.", a:"Causes: burning fossil fuels, deforestation, industrialisation, greenhouse gas emissions. Effects: rising sea levels, melting polar ice, accelerated climate change, desertification, extreme weather events, and a growing number of climate refugees."}},
+ {m:4, ml:{q:"കാലാവസ്ഥാവ്യതിയാനം നിയന്ത്രിക്കാൻ ലോകരാഷ്ട്രങ്ങൾ സ്വീകരിച്ച നടപടികൾ ഏവ?", a:"ലോകകാലാവസ്ഥാ സംഘടന (1950, ജനീവ) മുതൽ, സ്റ്റോക്ക്ഹോം സമ്മേളനം (1972), ഭൗമ ഉച്ചകോടി (1992, റിയോ), ക്യോട്ടോ പ്രോട്ടോക്കോൾ (1997), മോൺട്രിയൽ പ്രോട്ടോക്കോൾ (1987), പാരിസ് ഉടമ്പടി (2015), G20 ഉച്ചകോടി (2023, ന്യൂഡൽഹി) എന്നിവ പ്രധാന അന്താരാഷ്ട്ര ഉദ്യമങ്ങളാണ്."},
+  en:{q:"What steps have world nations taken to control climate change?", a:"Key international efforts include the World Meteorological Organization (1950, Geneva), Stockholm Conference (1972), Earth Summit (1992, Rio), Kyoto Protocol (1997), Montreal Protocol (1987), Paris Agreement (2015), and the G20 Summit (2023, New Delhi)."}}
+];
+let qbFilter='all';
+function renderQB(){
+  const list=document.getElementById('qbList');
+  const filtered = QB.filter(item=> qbFilter==='all' || (qbFilter==='4' ? item.m>=4 : item.m==qbFilter));
+  const toggleLabel = LANG==='ml' ? 'ഉത്തരം കാണിക്കുക / മറയ്ക്കുക ▾' : 'Show / Hide Answer ▾';
+  list.innerHTML = filtered.map((item,i)=>{
+    const d = item[LANG];
+    const markText = LANG==='ml' ? (item.m+' മാർക്ക്') : (item.m+' Mark'+(item.m>1?'s':''));
+    return `<div class="qb-item"><span class="mark">${markText}</span><div><b>${i+1}.</b> ${d.q}</div><button class="qb-toggle" onclick="this.nextElementSibling.classList.toggle('show')">${toggleLabel}</button><div class="ans">${d.a}</div></div>`;
+  }).join('');
+}
+document.querySelectorAll('#qbFilters button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('#qbFilters button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    qbFilter=btn.dataset.f;
+    renderQB();
+  });
+});
+renderQB();
+</script>
+</body>
+</html>

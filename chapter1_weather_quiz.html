@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 1 Quiz | ദിനാന്തരീക്ഷസ്ഥിതി ക്വിസ്</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Malayalam:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sky-deep:#122A44; --sky-mid:#2E6F95; --sky-light:#EAF4F8; --cloud:#FFFFFF;
+  --sun:#F2A93B; --sun-soft:#FCE3B6; --storm:#E4572E; --leaf:#3E8E5A;
+  --ink:#132330; --ink-soft:#4C6472; --line:#D3E4EC; --radius:16px; --shadow:0 10px 30px -12px rgba(18,42,68,.25);
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--sky-light); color:var(--ink); font-family:'Inter','Noto Sans Malayalam',sans-serif; line-height:1.6; min-height:100vh;}
+body.mode-ml .lang-en{display:none;} body.mode-en .lang-ml{display:none;}
+h1,h2{font-family:'Fraunces','Noto Sans Malayalam',serif; color:var(--sky-deep); margin:0;}
+.topbar{background:linear-gradient(180deg,var(--sky-deep) 0%, #17395a 100%); color:#fff; padding:14px 18px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+.brand{font-weight:800;}
+.lang-switch{display:flex; background:rgba(255,255,255,.1); border-radius:999px; padding:3px; border:1px solid rgba(255,255,255,.2);}
+.lang-switch button{background:none; border:none; color:#dceefb; padding:6px 14px; border-radius:999px; font-weight:700; font-size:.8rem; cursor:pointer;}
+.lang-switch button.active{background:var(--sun); color:#3a2500;}
+.wrap{max-width:640px; margin:30px auto; padding:0 18px;}
+.card{background:var(--cloud); border:1px solid var(--line); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow);}
+.badge{display:inline-block; background:var(--sky-light); border:1px solid var(--sky-mid); color:var(--sky-deep); padding:5px 14px; border-radius:999px; font-size:.75rem; font-weight:700; font-family:'JetBrains Mono',monospace; margin-bottom:14px;}
+.gate{text-align:center; padding:40px 10px;}
+.gate .icon{font-size:3rem; margin-bottom:10px;}
+.gate .clock{font-family:'JetBrains Mono',monospace; font-size:1.6rem; color:var(--sky-mid); margin:14px 0;}
+.progress-bar{height:8px; background:var(--sky-light); border-radius:99px; overflow:hidden; margin:14px 0 22px;}
+.progress-fill{height:100%; background:linear-gradient(90deg,var(--sun),var(--storm)); width:0%; transition:.35s;}
+.q-text{font-size:1.08rem; font-weight:700; margin-bottom:14px;}
+.opt{display:block; width:100%; text-align:left; background:var(--sky-light); border:2px solid var(--line); border-radius:12px; padding:12px 16px; margin:8px 0; cursor:pointer; font-size:.95rem; transition:.15s; font-family:inherit; color:var(--ink);}
+.opt:hover{border-color:var(--sky-mid);}
+.opt.correct{background:#E4F5EA; border-color:var(--leaf); font-weight:700;}
+.opt.wrong{background:#FCE8E4; border-color:var(--storm); font-weight:700;}
+.opt[disabled]{cursor:default;}
+.explain{background:var(--sky-light); border-left:4px solid var(--sky-mid); padding:10px 14px; border-radius:8px; margin-top:12px; font-size:.88rem; display:none;}
+.explain.show{display:block;}
+.quiz-nav{display:flex; justify-content:space-between; margin-top:22px;}
+.btn{background:var(--sky-deep); color:#fff; border:none; padding:12px 24px; border-radius:999px; font-weight:700; cursor:pointer; font-size:.92rem;}
+.btn:hover{background:var(--sky-mid);}
+.btn.secondary{background:var(--cloud); color:var(--sky-deep); border:2px solid var(--line);}
+.btn.share{background:#25D366;}
+.btn.share:hover{background:#1ebc59;}
+.result-box{text-align:center; padding:20px 10px;}
+.result-box .big{font-family:'Fraunces',serif; font-size:3rem; font-weight:900; color:var(--sky-deep);}
+.share-row{display:flex; gap:10px; justify-content:center; margin-top:18px; flex-wrap:wrap;}
+footer{text-align:center; padding:30px 20px; color:var(--ink-soft); font-size:.82rem;}
+</style>
+</head>
+<body class="mode-ml">
+<div class="topbar">
+  <div class="brand">🌤️ <span class="lang-ml">ദിനാന്തരീക്ഷസ്ഥിതി ക്വിസ്</span><span class="lang-en">Weather Quiz</span></div>
+  <div class="lang-switch">
+    <button id="btnML" class="active" onclick="setLang('ml')">മലയാളം</button>
+    <button id="btnEN" onclick="setLang('en')">English</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="card">
+    <div class="badge">⏰ <span class="lang-ml">ലൈവ് ക്വിസ് സമയം: രാത്രി 9:30 – 10:30</span><span class="lang-en">Live Quiz Window: 9:30 PM – 10:30 PM</span></div>
+    <div class="badge" style="display:block; margin-top:-6px;">🔒 <span class="lang-ml">ഒരു ദിവസം ഒരു ഉപകരണത്തിൽ നിന്ന് ഒരു തവണ മാത്രം (പ്രതിദിനം പുതുക്കും)</span><span class="lang-en">One attempt per device per day (resets daily)</span></div>
+    <div id="quizArea"></div>
+    <div class="progress-bar" id="progWrap" style="display:none;"><div class="progress-fill" id="progFill"></div></div>
+    <div class="quiz-nav" id="navRow" style="display:none;">
+      <button class="btn secondary" id="prevBtn"><span class="lang-ml">← മുൻപ്</span><span class="lang-en">← Prev</span></button>
+      <button class="btn" id="nextBtn"><span class="lang-ml">അടുത്തത് →</span><span class="lang-en">Next →</span></button>
+    </div>
+  </div>
+</div>
+<footer><span class="lang-ml">Abacus Academy · SSLC ലൈവ് ക്വിസ് — അധ്യായം 1</span><span class="lang-en">Abacus Academy · SSLC Live Quiz — Chapter 1</span></footer>
+
+<script>
+let LANG='ml';
+function setLang(l){
+  LANG=l; document.body.className='mode-'+l;
+  document.getElementById('btnML').classList.toggle('active', l==='ml');
+  document.getElementById('btnEN').classList.toggle('active', l==='en');
+  boot();
+}
+
+const STORAGE_KEY_PREFIX = 'ch1_quiz_attempt_';
+function todayKey(){
+  const d=new Date();
+  return STORAGE_KEY_PREFIX + d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+}
+function isWithinWindow(){
+  const now=new Date();
+  const total = now.getHours()*60 + now.getMinutes();
+  return total >= (21*60+30) && total < (22*60+30);
+}
+function timeUntilWindow(){
+  const now=new Date();
+  const total = now.getHours()*60+now.getMinutes();
+  const start=21*60+30, end=22*60+30;
+  if(total<start) return start-total;
+  return (24*60-total)+start;
+}
+
+const QUIZ = [
+ {ml:{q:"ഭൂമിയുടെ പ്രധാന ഊർജസ്രോതസ്സ് ഏതാണ്?",o:["ചന്ദ്രൻ","സൂര്യൻ","ഭൂഗർഭതാപം","കാറ്റ്"],e:"സൂര്യനിലെ അണുസംയോജന പ്രക്രിയയാണ് ഊർജത്തിന്റെ സ്രോതസ്സ്."},
+  en:{q:"What is Earth's main source of energy?",o:["Moon","Sun","Geothermal heat","Wind"],e:"Nuclear fusion in the Sun is the source of this energy."}, a:1},
+ {ml:{q:"ഭൂമോപരിതലത്തിലെത്തുന്ന സൗരവികിരണത്തിന്റെ അളവിനെ എന്തു വിളിക്കുന്നു?",o:["ഇൻസൊലേഷൻ","ആൽബിഡോ","കൺവെക്ഷൻ","അഡ്വെക്ഷൻ"],e:"Insolation എന്നാണ് ഇതിനെ വിളിക്കുന്നത്."},
+  en:{q:"What is the amount of solar radiation reaching the Earth's surface called?",o:["Insolation","Albedo","Convection","Advection"],e:"It is called Insolation."}, a:0},
+ {ml:{q:"ഒരു ദിവസത്തെ കൂടിയ താപനിലയും കുറഞ്ഞ താപനിലയും തമ്മിലുള്ള വ്യത്യാസം എന്ത്?",o:["ദൈനിക ശരാശരി താപനില","ദൈനികതാപാന്തരം","ഇൻസൊലേഷൻ","ലാപ്സ് റേറ്റ്"],e:"Diurnal Range of Temperature."},
+  en:{q:"What is the difference between max and min temperature of a day called?",o:["Daily Mean Temperature","Diurnal Range","Insolation","Lapse Rate"],e:"It is called Diurnal Range of Temperature."}, a:1},
+ {ml:{q:"ഓരോ കിലോമീറ്റർ ഉയരത്തിനും അന്തരീക്ഷതാപനില ശരാശരി എത്ര ഡിഗ്രി കുറയുന്നു?",o:["3.5°C","6.4°C","9.8°C","12°C"],e:"ഇതാണ് Normal Lapse Rate."},
+  en:{q:"By how many degrees does temperature fall per km of altitude on average?",o:["3.5°C","6.4°C","9.8°C","12°C"],e:"This is the Normal Lapse Rate."}, a:1},
+ {ml:{q:"ഒരേ താപനിലയുള്ള പ്രദേശങ്ങളെ യോജിപ്പിക്കുന്ന രേഖ ഏത്?",o:["ഐസോബാർ","ഐസോഹൈറ്റ്","ഐസോതേം","ഐസോഹെയ്റ്റ്"],e:"Isotherm (സമതാപരേഖ)."},
+  en:{q:"Which line joins places of equal temperature?",o:["Isobar","Isohyet","Isotherm","Isohyte"],e:"The Isotherm."}, a:2},
+ {ml:{q:"അന്തരീക്ഷമർദം അളക്കാൻ ഉപയോഗിക്കുന്ന ഉപകരണം?",o:["തെർമോമീറ്റർ","ബാരോമീറ്റർ","ഹൈഗ്രോമീറ്റർ","അനിമോമീറ്റർ"],e:"Barometer ആണ് അന്തരീക്ഷമർദം അളക്കുന്നത്."},
+  en:{q:"Which instrument measures atmospheric pressure?",o:["Thermometer","Barometer","Hygrometer","Anemometer"],e:"The Barometer measures atmospheric pressure."}, a:1},
+ {ml:{q:"ഭൂമധ്യരേഖാ ന്യൂനമർദമേഖലയെ എന്ത് എന്നും വിളിക്കുന്നു?",o:["ഹോഴ്സ് ലാറ്റിറ്റ്യൂഡ്സ്","നിർവാതമേഖല","സബ്ട്രോപ്പിക്കൽ ഹൈ","ITCZ മാത്രം"],e:"Doldrums എന്നാണ് ഇംഗ്ലീഷിൽ അറിയപ്പെടുന്നത്."},
+  en:{q:"The Equatorial Low Pressure Belt is also known as?",o:["Horse Latitudes","Doldrums","Subtropical High","ITCZ only"],e:"It is known as the Doldrums."}, a:1},
+ {ml:{q:"കാറ്റിന്റെ ദിശ കാണിക്കുന്ന ഉപകരണം?",o:["അനിമോമീറ്റർ","വിൻഡ്‌വെയ്ൻ","ബാരോമീറ്റർ","ഹൈഗ്രോമീറ്റർ"],e:"Wind Vane ആണ് ദിശ കാണിക്കുന്നത്; അനിമോമീറ്റർ വേഗത അളക്കുന്നു."},
+  en:{q:"Which instrument shows wind direction?",o:["Anemometer","Wind Vane","Barometer","Hygrometer"],e:"Wind Vane shows direction; Anemometer measures speed."}, a:1},
+ {ml:{q:"തെക്കുപടിഞ്ഞാറൻ മൺസൂൺ കാറ്റുകൾ വീശുന്നത് ഏത് കാലത്താണ്?",o:["ശൈത്യകാലം","വേനൽക്കാലം","വസന്തകാലം","ശരത്കാലം"],e:"ഉഷ്ണകാലത്ത് സമുദ്രത്തിൽ നിന്ന് കരയിലേക്ക് വീശുന്നു."},
+  en:{q:"In which season do South West Monsoon winds blow?",o:["Winter","Summer","Spring","Autumn"],e:"They blow from sea to land during summer."}, a:1},
+ {ml:{q:"ഉത്തരേന്ത്യൻ സമതലത്തിൽ വീശുന്ന ഉഷ്ണക്കാറ്റ്?",o:["ഹർമാറ്റൻ","ഫൊൻ","ലൂ","ചിനൂക്ക്"],e:"'ലൂ' ഉത്തരേന്ത്യൻ സമതലത്തിലെ ഉഷ്ണക്കാറ്റാണ്."},
+  en:{q:"Which hot wind blows over the North Indian Plains?",o:["Harmattan","Foehn","Loo","Chinook"],e:"'Loo' is the hot wind of the North Indian Plains."}, a:2},
+ {ml:{q:"ആപേക്ഷിക ആർദ്രത കണക്കാക്കുന്ന സൂത്രവാക്യത്തിൽ ഗുണിക്കുന്ന സംഖ്യ?",o:["10","100","1000","1"],e:"ശതമാനത്തിൽ കണക്കാക്കാൻ 100 കൊണ്ട് ഗുണിക്കുന്നു."},
+  en:{q:"In the Relative Humidity formula, what number is used to multiply?",o:["10","100","1000","1"],e:"Multiplying by 100 gives the value as a percentage."}, a:1},
+ {ml:{q:"0.001 സെ.മീ.-ൽ താഴെ വ്യാസമുള്ള ജലകണികകൾ ചേർന്നുണ്ടാകുന്നത്?",o:["മൂടൽമഞ്ഞ്","മേഘങ്ങൾ","തുഷാരം","ഹിമം"],e:"ഇത്തരം സൂക്ഷ്മ ജലകണികകൾ അന്തരീക്ഷത്തിൽ തങ്ങിനിന്ന് മേഘങ്ങൾ ഉണ്ടാക്കുന്നു."},
+  en:{q:"Water droplets under 0.001 cm diameter combine to form?",o:["Fog","Clouds","Dew","Frost"],e:"These tiny droplets remain suspended in the air, forming clouds."}, a:1},
+ {ml:{q:"'നാലുമണിമഴ' എന്നറിയപ്പെടുന്നത്?",o:["ചക്രവാതവൃഷ്ടി","പർവതമഴ","സംവഹനവൃഷ്ടി","വാതമുഖമഴ"],e:"ഉച്ചതിരിഞ്ഞ് ഉണ്ടാകുന്ന സംവഹനവൃഷ്ടിയെയാണ് ഇങ്ങനെ വിളിക്കുന്നത്."},
+  en:{q:"What is known as the '4 o'clock rain'?",o:["Cyclonic rainfall","Orographic rainfall","Convectional rainfall","Frontal rainfall"],e:"The afternoon convectional rainfall is called this."}, a:2},
+ {ml:{q:"തമിഴ്നാടിന്റെ പടിഞ്ഞാറൻ ഭാഗങ്ങളിൽ മഴ കുറവായിരിക്കാൻ കാരണം?",o:["മഴനിഴൽ പ്രദേശം","സമുദ്രസാമീപ്യം","ഉയർന്ന താപനില","കാറ്റിന്റെ ദിശ"],e:"പശ്ചിമഘട്ടത്തിന്റെ മറുവശത്ത് മഴനിഴൽ പ്രദേശമായതിനാൽ."},
+  en:{q:"Why does western Tamil Nadu receive less rainfall?",o:["Rain shadow region","Proximity to sea","High temperature","Wind direction"],e:"It lies on the leeward, rain-shadow side of the Western Ghats."}, a:0},
+ {ml:{q:"ഭൂമിയുടെ താപബജറ്റ് പ്രകാരം ഭൗമോപരിതലം എത്ര യൂണിറ്റ് സൗരോർജം ആഗിരണം ചെയ്യുന്നു (ആകെ 100-ൽ)?",o:["14","35","51","100"],e:"51 യൂണിറ്റ് ഭൗമോപരിതലം നേരിട്ട് ആഗിരണം ചെയ്യുന്നു."},
+  en:{q:"As per Earth's Heat Budget, how many units does the Earth's surface absorb (out of 100)?",o:["14","35","51","100"],e:"The Earth's surface directly absorbs 51 units."}, a:2}
+];
+let qi=0, answers=new Array(QUIZ.length).fill(null);
+
+function boot(){
+  const area=document.getElementById('quizArea');
+  const existing = localStorage.getItem(todayKey());
+  if(existing){
+    const data=JSON.parse(existing);
+    document.getElementById('progWrap').style.display='none';
+    document.getElementById('navRow').style.display='none';
+    area.innerHTML = `<div class="gate">
+      <div class="icon">✅</div>
+      <h2><span class="lang-ml">നിങ്ങൾ ഇന്ന് ക്വിസ് പൂർത്തിയാക്കി!</span><span class="lang-en">You've already completed today's quiz!</span></h2>
+      <div class="result-box"><div class="big">${data.score} / ${data.total}</div></div>
+      <p class="lang-ml">ഒരു ഉപകരണത്തിൽ നിന്ന് പ്രതിദിനം ഒരു തവണ മാത്രമേ ക്വിസ് അറ്റംപ്റ്റ് ചെയ്യാൻ കഴിയൂ. ഈ പരിധി എല്ലാ ദിവസവും അർദ്ധരാത്രിക്ക് ശേഷം പുതുക്കപ്പെടും — നാളെ രാത്രി 9:30-ന് വീണ്ടും ശ്രമിക്കാം!</p>
+      <p class="lang-en">Only one attempt per device per day is allowed. This limit resets every day after midnight — you can try again tomorrow at 9:30 PM!</p>
+    </div>`;
+    return;
+  }
+  if(!isWithinWindow()){
+    document.getElementById('progWrap').style.display='none';
+    document.getElementById('navRow').style.display='none';
+    const mins=timeUntilWindow();
+    const h=Math.floor(mins/60), m=mins%60;
+    area.innerHTML = `<div class="gate">
+      <div class="icon">🔒</div>
+      <h2><span class="lang-ml">ക്വിസ് ഇപ്പോൾ ലഭ്യമല്ല</span><span class="lang-en">Quiz Not Available Now</span></h2>
+      <div class="clock">🕤 9:30 PM – 10:30 PM</div>
+      <p class="lang-ml">ക്വിസ് രാത്രി 9:30 മുതൽ 10:30 വരെ മാത്രമേ ലഭ്യമാകൂ. ഏകദേശം ${h} മണിക്കൂർ ${m} മിനിറ്റ് കൂടി കാത്തിരിക്കുക.</p>
+      <p class="lang-en">The quiz is available only from 9:30 PM to 10:30 PM. Please come back in about ${h}h ${m}m.</p>
+    </div>`;
+    return;
+  }
+  document.getElementById('progWrap').style.display='block';
+  document.getElementById('navRow').style.display='flex';
+  renderQuiz();
+}
+
+function renderQuiz(){
+  const area=document.getElementById('quizArea');
+  if(qi>=QUIZ.length){
+    const score=answers.filter((a,i)=>a===QUIZ[i].a).length;
+    localStorage.setItem(todayKey(), JSON.stringify({score, total:QUIZ.length, time:Date.now()}));
+    const msg = LANG==='ml' ? (score>=QUIZ.length*0.8?'🎉 മികച്ച പ്രകടനം!':score>=QUIZ.length*0.5?'👍 നല്ല ശ്രമം.':'💪 വീണ്ടും ശ്രമിക്കൂ!')
+      : (score>=QUIZ.length*0.8?'🎉 Excellent work!':score>=QUIZ.length*0.5?'👍 Good try!':'💪 Try again!');
+    const shareText = LANG==='ml'
+      ? `ഞാൻ ദിനാന്തരീക്ഷസ്ഥിതി ക്വിസിൽ ${score}/${QUIZ.length} സ്കോർ നേടി! നിങ്ങളും ശ്രമിക്കൂ 👉 `
+      : `I scored ${score}/${QUIZ.length} on the Weather Quiz! Try it too 👉 `;
+    area.innerHTML=`<div class="result-box">
+      <div class="big">${score} / ${QUIZ.length}</div>
+      <p>${msg}</p>
+      <div class="share-row">
+        <button class="btn share" onclick="shareResult('${shareText.replace(/'/g,"\\'")}')">📤 <span class="lang-ml">ഷെയർ ചെയ്യുക</span><span class="lang-en">Share</span></button>
+      </div>
+    </div>`;
+    document.getElementById('progWrap').style.display='none';
+    document.getElementById('navRow').style.display='none';
+    return;
+  }
+  const item=QUIZ[qi][LANG];
+  document.getElementById('progFill').style.width=((qi)/QUIZ.length*100)+'%';
+  let html=`<div class="q-text">${qi+1}/${QUIZ.length}. ${item.q}</div>`;
+  item.o.forEach((opt,idx)=>{
+    let cls='opt'; let dis='';
+    if(answers[qi]!==null){ dis='disabled'; if(idx===QUIZ[qi].a) cls+=' correct'; else if(idx===answers[qi]) cls+=' wrong'; }
+    html+=`<button class="${cls}" ${dis} onclick="selectOpt(${idx})">${String.fromCharCode(65+idx)}. ${opt}</button>`;
+  });
+  html+=`<div class="explain ${answers[qi]!==null?'show':''}">💡 ${item.e}</div>`;
+  area.innerHTML=html;
+  document.getElementById('prevBtn').disabled = qi===0;
+}
+function selectOpt(idx){ if(answers[qi]!==null) return; answers[qi]=idx; renderQuiz(); }
+function shareResult(text){
+  const url=window.location.href;
+  const full=text+url;
+  if(navigator.share){ navigator.share({title:'Weather Quiz', text:text, url:url}); }
+  else{ window.open('https://wa.me/?text='+encodeURIComponent(full),'_blank'); }
+}
+document.getElementById('nextBtn').addEventListener('click',()=>{ if(qi<QUIZ.length){qi++; renderQuiz();} });
+document.getElementById('prevBtn').addEventListener('click',()=>{ if(qi>0){qi--; renderQuiz();} });
+boot();
+setInterval(()=>{ if(!localStorage.getItem(todayKey())) boot(); }, 30000);
+</script>
+</body>
+</html>

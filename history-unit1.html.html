@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 1: Weather &amp; Climate | ദിനാന്തരീക്ഷസ്ഥിതിയും കാലാവസ്ഥയും</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Malayalam:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sky-deep:#122A44; --sky-mid:#2E6F95; --sky-soft:#5FA8C9; --sky-light:#EAF4F8;
+  --cloud:#FFFFFF; --sun:#F2A93B; --sun-soft:#FCE3B6; --storm:#E4572E; --leaf:#3E8E5A;
+  --ink:#132330; --ink-soft:#4C6472; --line:#D3E4EC;
+  --radius:16px; --shadow:0 10px 30px -12px rgba(18,42,68,.25);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0; background:var(--sky-light); color:var(--ink); font-family:'Inter','Noto Sans Malayalam',sans-serif; line-height:1.65;}
+h1,h2,h3,h4{font-family:'Fraunces','Noto Sans Malayalam',serif; color:var(--sky-deep); margin:0 0 .4em;}
+p{margin:.3em 0 .9em;}
+a{color:var(--sky-mid);}
+::selection{background:var(--sun-soft);}
+body.mode-ml .lang-en{display:none;}
+body.mode-en .lang-ml{display:none;}
+
+.topbar{position:sticky; top:0; z-index:50; background:linear-gradient(180deg,var(--sky-deep) 0%, #17395a 100%); color:#fff; padding:10px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:var(--shadow);}
+.topbar .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px;}
+.topbar .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--sun);box-shadow:0 0 12px var(--sun);}
+.lang-switch{display:flex; background:rgba(255,255,255,.1); border-radius:999px; padding:3px; border:1px solid rgba(255,255,255,.2);}
+.lang-switch button{background:none; border:none; color:#dceefb; padding:6px 14px; border-radius:999px; font-weight:700; font-size:.8rem; cursor:pointer;}
+.lang-switch button.active{background:var(--sun); color:#3a2500;}
+.tabs{display:flex; gap:6px; margin-left:auto; flex-wrap:wrap;}
+.tab-btn{background:rgba(255,255,255,.08); color:#dceefb; border:1px solid rgba(255,255,255,.15); padding:8px 14px; border-radius:999px; font-size:.85rem; cursor:pointer; font-weight:600; transition:.2s; white-space:nowrap;}
+.tab-btn:hover{background:rgba(255,255,255,.18);}
+.tab-btn.active{background:var(--sun); color:#3a2500; border-color:var(--sun);}
+.score-pill{background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:999px; padding:6px 12px; font-size:.78rem; font-family:'JetBrains Mono',monospace;}
+.chapter-nav{background:#0c1e33; padding:8px 18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+.chapter-nav a{color:#cfe6f2; text-decoration:none; font-size:.82rem; font-weight:600; padding:6px 14px; border-radius:999px; border:1px solid rgba(255,255,255,.15);}
+.chapter-nav a.current{background:var(--sun); color:#3a2500; border-color:var(--sun);}
+
+.hero{position:relative; overflow:hidden; padding:60px 20px 80px; background:radial-gradient(ellipse at 70% -10%, #3f88ac 0%, var(--sky-deep) 55%, #0c1e33 100%); color:#fff; text-align:center;}
+.hero .sun{position:absolute; top:-60px; right:8%; width:160px; height:160px; border-radius:50%; background:radial-gradient(circle at 35% 35%, #fff6df, var(--sun) 55%, #c9791b 100%); box-shadow:0 0 80px 20px rgba(242,169,59,.45); animation:pulse 6s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
+.hero h1{color:#fff; font-size:clamp(1.4rem,3.2vw,2.4rem); font-weight:900; max-width:820px; margin:0 auto .3em; position:relative; z-index:2;}
+.hero .sub{color:#cfe6f2; max-width:600px; margin:0 auto 1.2em; font-size:1rem; position:relative; z-index:2;}
+.hero .eyebrow{display:inline-block; font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--sun-soft); background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.2); padding:6px 14px; border-radius:999px; margin-bottom:16px; position:relative; z-index:2;}
+.instrument-row{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:26px; position:relative; z-index:2;}
+.instrument{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); border-radius:14px; padding:12px 16px; min-width:120px; backdrop-filter:blur(6px);}
+.instrument .val{font-family:'JetBrains Mono',monospace; font-size:1.2rem; font-weight:700; color:var(--sun);}
+.instrument .lbl{font-size:.7rem; color:#cfe6f2; margin-top:4px;}
+
+.wrap{max-width:1080px; margin:0 auto; padding:0 20px;}
+.page{display:none; animation:fade .35s ease;}
+.page.active{display:block;}
+@keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+.section{background:var(--cloud); border:1px solid var(--line); border-radius:var(--radius); padding:28px 26px; margin:18px 0; box-shadow:var(--shadow); scroll-margin-top:120px;}
+.section h2{display:flex; align-items:center; gap:12px; font-size:1.4rem; border-bottom:3px solid var(--sun-soft); padding-bottom:12px;}
+.section h2 .num{background:var(--sky-deep); color:var(--sun); font-family:'JetBrains Mono',monospace; width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:.9rem; flex-shrink:0;}
+.section h3{font-size:1.08rem; margin-top:22px; color:var(--sky-mid); border-left:4px solid var(--sun); padding-left:10px;}
+
+.callout{background:var(--sky-light); border:1px dashed var(--sky-soft); border-radius:12px; padding:14px 16px; margin:14px 0; font-size:.94rem;}
+.callout.warn{background:#FCEDE8; border-color:var(--storm);}
+.callout.formula{background:var(--sky-deep); color:#fff; border:none; font-family:'JetBrains Mono',monospace; text-align:center; font-size:.98rem; padding:16px;}
+.think{background:linear-gradient(135deg,#FFF7E8,#FCE3B6); border:1px solid var(--sun); border-radius:12px; padding:14px 16px 14px 46px; margin:14px 0; position:relative;}
+.think::before{content:"?"; position:absolute; left:12px; top:10px; font-family:'Fraunces',serif; font-weight:900; font-size:1.4rem; color:var(--storm);}
+
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+@media (max-width:720px){.grid2,.grid3{grid-template-columns:1fr;}}
+.chip-list{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0;}
+.chip{background:var(--sky-light); border:1px solid var(--sky-soft); color:var(--sky-deep); padding:6px 12px; border-radius:999px; font-size:.82rem; font-weight:600;}
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:.9rem;}
+th,td{border:1px solid var(--line); padding:9px 10px; text-align:left;}
+th{background:var(--sky-deep); color:#fff;}
+tr:nth-child(even){background:var(--sky-light);}
+.card{border:1px solid var(--line); border-radius:14px; padding:16px; background:var(--sky-light);}
+.card h4{margin-top:0; color:var(--sky-deep); font-size:1rem;}
+
+.quiz-header{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+.progress-bar{height:8px; background:var(--sky-light); border-radius:99px; overflow:hidden; margin:14px 0 22px;}
+.progress-fill{height:100%; background:linear-gradient(90deg,var(--sun),var(--storm)); width:0%; transition:.35s;}
+.q-text{font-size:1.05rem; font-weight:700; margin-bottom:14px;}
+.opt{display:block; width:100%; text-align:left; background:var(--sky-light); border:2px solid var(--line); border-radius:12px; padding:12px 16px; margin:8px 0; cursor:pointer; font-size:.94rem; transition:.15s; font-family:inherit; color:var(--ink);}
+.opt:hover{border-color:var(--sky-mid);}
+.opt.correct{background:#E4F5EA; border-color:var(--leaf); font-weight:700;}
+.opt.wrong{background:#FCE8E4; border-color:var(--storm); font-weight:700;}
+.opt[disabled]{cursor:default;}
+.explain{background:var(--sky-light); border-left:4px solid var(--sky-mid); padding:10px 14px; border-radius:8px; margin-top:12px; font-size:.88rem; display:none;}
+.explain.show{display:block;}
+.quiz-nav{display:flex; justify-content:space-between; margin-top:22px;}
+.btn{background:var(--sky-deep); color:#fff; border:none; padding:11px 22px; border-radius:999px; font-weight:700; cursor:pointer; font-size:.9rem; transition:.2s;}
+.btn:hover{background:var(--sky-mid);}
+.btn.secondary{background:var(--cloud); color:var(--sky-deep); border:2px solid var(--line);}
+.result-box{text-align:center; padding:30px 10px;}
+.result-box .big{font-family:'Fraunces',serif; font-size:3rem; font-weight:900; color:var(--sky-deep);}
+
+.qb-filters{display:flex; gap:8px; flex-wrap:wrap; margin:16px 0;}
+.qb-filters button{background:var(--cloud); border:1px solid var(--line); padding:7px 14px; border-radius:999px; font-size:.82rem; cursor:pointer; font-weight:600; color:var(--sky-deep);}
+.qb-filters button.active{background:var(--sun); border-color:var(--sun); color:#3a2500;}
+.qb-item{border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin:10px 0; background:var(--sky-light);}
+.qb-item .mark{float:right; background:var(--sky-deep); color:var(--sun); font-size:.72rem; padding:3px 9px; border-radius:999px; font-family:'JetBrains Mono',monospace;}
+.qb-item .ans{display:none; margin-top:10px; padding-top:10px; border-top:1px dashed var(--sky-soft); color:var(--ink-soft); font-size:.9rem;}
+.qb-item .ans.show{display:block;}
+.qb-toggle{background:none; border:none; color:var(--sky-mid); font-weight:700; cursor:pointer; padding:0; font-size:.85rem; margin-top:6px;}
+footer{text-align:center; padding:40px 20px; color:var(--ink-soft); font-size:.85rem;}
+.print-btn{background:var(--cloud); border:2px solid var(--sky-mid); color:var(--sky-mid); padding:8px 16px; border-radius:999px; font-weight:700; font-size:.82rem; cursor:pointer; display:inline-flex; align-items:center; gap:6px; margin-bottom:10px;}
+.print-btn:hover{background:var(--sky-mid); color:#fff;}
+.page-head{display:flex; justify-content:flex-end; gap:10px; margin-bottom:6px;}
+.note-block{background:var(--cloud); border:1px solid var(--line); border-radius:var(--radius); padding:26px; box-shadow:var(--shadow);}
+.note-block h3{color:var(--sky-deep); border-left:4px solid var(--sun); padding-left:10px; margin-top:20px;}
+.note-block ul{margin:6px 0 14px; padding-left:22px;}
+.note-block li{margin:4px 0;}
+@media print{
+  .topbar, .chapter-nav, .page-head, .qb-filters, .quiz-nav, .lang-switch{display:none !important;}
+  body{background:#fff;}
+  .section, .note-block{box-shadow:none; border:1px solid #ccc;}
+  .wrap{max-width:100%;}
+  .hero{display:none;}
+}
+</style>
+</head>
+<body class="mode-ml">
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> <span class="lang-ml">അധ്യായം 1: ദിനാന്തരീക്ഷസ്ഥിതി</span><span class="lang-en">Chapter 1: Weather</span></div>
+  <div class="lang-switch">
+    <button id="btnML" class="active" onclick="setLang('ml')">മലയാളം</button>
+    <button id="btnEN" onclick="setLang('en')">English</button>
+  </div>
+  <div class="tabs">
+    <button class="tab-btn active" data-page="learn"><span class="lang-ml">📖 പഠനം</span><span class="lang-en">📖 Learn</span></button>
+    <button class="tab-btn" data-page="notes"><span class="lang-ml">📄 കുറിപ്പ്</span><span class="lang-en">📄 Short Notes</span></button>
+    <button class="tab-btn" data-page="quiz"><span class="lang-ml">🎯 ക്വിസ്</span><span class="lang-en">🎯 Quiz</span></button>
+    <button class="tab-btn" data-page="bank"><span class="lang-ml">📝 ചോദ്യബാങ്ക്</span><span class="lang-en">📝 Question Bank</span></button>
+  </div>
+  <div class="score-pill" id="topScore"><span class="lang-ml">സ്കോർ</span><span class="lang-en">Score</span>: --</div>
+</div>
+
+<div class="hero">
+  <div class="sun"></div>
+  <div class="eyebrow">SOCIAL SCIENCE · STANDARD X · CHAPTER 1</div>
+  <h1><span class="lang-ml">ദിനാന്തരീക്ഷസ്ഥിതിയും കാലാവസ്ഥയും</span><span class="lang-en">Weather &amp; Climate</span></h1>
+  <p class="sub">
+    <span class="lang-ml">താപനില, മർദം, കാറ്റ്, ആർദ്രത, വർഷണം — ദിനാന്തരീക്ഷഘടകങ്ങളെക്കുറിച്ചുള്ള സമ്പൂർണ്ണ പഠനസഹായി.</span>
+    <span class="lang-en">Temperature, pressure, wind, humidity, and precipitation — a complete study guide to the elements of weather.</span>
+  </p>
+  <div class="instrument-row">
+    <div class="instrument"><div class="val">1013.2 mb</div><div class="lbl"><span class="lang-ml">ശരാശരി അന്തരീക്ഷമർദം</span><span class="lang-en">Mean atmospheric pressure</span></div></div>
+    <div class="instrument"><div class="val">6.4°C/km</div><div class="lbl"><span class="lang-ml">താപനഷ്ടനിരക്ക്</span><span class="lang-en">Normal Lapse Rate</span></div></div>
+    <div class="instrument"><div class="val">51%</div><div class="lbl"><span class="lang-ml">ഭൗമോപരിതല ആഗിരണം</span><span class="lang-en">Surface absorption (Heat Budget)</span></div></div>
+  </div>
+</div>
+
+<div class="wrap">
+<section class="page active" id="page-learn">
+
+  <div class="page-head"><button class="print-btn" onclick="window.print()">🖨️ <span class="lang-ml">പ്രിന്റ്</span><span class="lang-en">Print</span></button></div>
+
+  <div class="section">
+    <h2><span class="num">i</span><span class="lang-ml">ആമുഖം</span><span class="lang-en">Introduction</span></h2>
+    <p class="lang-ml">ഒരു നിശ്ചിത പ്രദേശത്ത് ഹ്രസ്വകാലയളവിൽ അനുഭവപ്പെടുന്ന താപനില, അന്തരീക്ഷമർദം, കാറ്റുകൾ, ആർദ്രത, വർഷണം തുടങ്ങിയ സാഹചര്യങ്ങളെയാണ് <b>ദിനാന്തരീക്ഷസ്ഥിതി (Weather)</b> എന്നു വിശേഷിപ്പിക്കുന്നത്. ഒരു വിശാലഭൂപ്രദേശത്ത് ദീർഘകാലമായി (35–40 വർഷം) അനുഭവപ്പെടുന്ന ദിനാവസ്ഥാ സാഹചര്യങ്ങളുടെ ശരാശരിയാണ് <b>കാലാവസ്ഥ (Climate)</b>.</p>
+    <p class="lang-en">The short-term atmospheric conditions experienced in a specific area — temperature, pressure, winds, humidity, and precipitation — are called <b>Weather</b>. The average of these day-to-day conditions over a long period (35–40 years) across a large region is called <b>Climate</b>.</p>
+    <div class="chip-list">
+      <span class="chip lang-ml">വെയിൽ</span><span class="chip lang-en">Sunshine</span>
+      <span class="chip lang-ml">മഴ</span><span class="chip lang-en">Rain</span>
+      <span class="chip lang-ml">മഞ്ഞ്</span><span class="chip lang-en">Fog</span>
+      <span class="chip lang-ml">ചൂട്</span><span class="chip lang-en">Heat</span>
+      <span class="chip lang-ml">തണുപ്പ്</span><span class="chip lang-en">Cold</span>
+      <span class="chip lang-ml">കാറ്റ്</span><span class="chip lang-en">Wind</span>
+      <span class="chip lang-ml">മേഘം</span><span class="chip lang-en">Clouds</span>
+    </div>
+    <p style="font-style:italic; color:var(--ink-soft);"><span class="lang-ml">ഇവയെ ഒരുമിച്ച് "ദിനാന്തരീക്ഷഘടകങ്ങൾ" (Elements of Weather) എന്നു വിളിക്കുന്നു.</span><span class="lang-en">Together these are called the <b>Elements of Weather</b>.</span></p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">1</span><span class="lang-ml">അന്തരീക്ഷ താപനില</span><span class="lang-en">Atmospheric Temperature</span></h2>
+    <p class="lang-ml">സൂര്യനാണ് ഭൂമിയുടെ പ്രധാന ഊർജസ്രോതസ്സ്. അണുസംയോജനത്തിലൂടെ (Nuclear Fusion) സൂര്യനിൽ ഊർജം ഉണ്ടാകുന്നു. ഭൂമിയിലെത്തുന്ന സൗരവികിരണത്തിന്റെ അളവിനെ <b>ഇൻസൊലേഷൻ (Insolation)</b> എന്നു വിളിക്കുന്നു.</p>
+    <p class="lang-en">The Sun is Earth's main source of energy, generated through <b>Nuclear Fusion</b>. The amount of solar radiation reaching Earth's surface is called <b>Insolation</b>.</p>
+
+    <h3><span class="lang-ml">താപവ്യാപനപ്രക്രിയകൾ</span><span class="lang-en">Heat Transfer Processes</span></h3>
+    <div class="grid2">
+      <div class="card"><h4><span class="lang-ml">താപചാലനം</span><span class="lang-en">Conduction</span></h4>
+        <p class="lang-ml">ചൂടായ ഭൗമോപരിതലത്തോട് ചേർന്നുള്ള അന്തരീക്ഷത്തിന്റെ താഴ്ന്ന വിതാനങ്ങളിലേക്ക് താപം പകരുന്നു.</p>
+        <p class="lang-en">Heat passes from the warm ground to the lowest layers of air in direct contact with it.</p></div>
+      <div class="card"><h4><span class="lang-ml">സംവഹനം</span><span class="lang-en">Convection</span></h4>
+        <p class="lang-ml">ചൂടുപിടിച്ച വായു വികസിച്ച് മുകളിലേക്കുയരുന്നതിലൂടെ ഉയരങ്ങളിലേക്ക് താപം വ്യാപിക്കുന്നു.</p>
+        <p class="lang-en">Heated air expands, becomes lighter, and rises — carrying heat to higher altitudes.</p></div>
+      <div class="card"><h4><span class="lang-ml">അഭിവഹനം</span><span class="lang-en">Advection</span></h4>
+        <p class="lang-ml">കാറ്റിലൂടെ തിരശ്ചീനതലത്തിൽ താപം വ്യാപിക്കുന്നു.</p>
+        <p class="lang-en">Heat spreads horizontally through the movement of wind.</p></div>
+      <div class="card"><h4><span class="lang-ml">വികിരണം</span><span class="lang-en">Radiation</span></h4>
+        <p class="lang-ml">ഭൗമോപരിതലം ചൂടുപിടിക്കുന്നതോടെ ദീർഘതരംഗങ്ങളായി ഊർജം പുറന്തള്ളുന്നു.</p>
+        <p class="lang-en">The heated Earth's surface releases energy back as long-wave radiation.</p></div>
+    </div>
+
+    <h3><span class="lang-ml">ഭൂമിയുടെ താപ ബജറ്റ്</span><span class="lang-en">Earth's Heat Budget</span></h3>
+    <p class="lang-ml">ആകെ ലഭിക്കുന്ന സൗരോർജം 100 യൂണിറ്റ് എന്നു കണക്കാക്കിയാൽ: 35 യൂണിറ്റ് ഊർജം പ്രതിഫലനത്തിലൂടെ തിരിച്ചുപോകുന്നു, 14 യൂണിറ്റ് അന്തരീക്ഷം ആഗിരണം ചെയ്യുന്നു, 51 യൂണിറ്റ് ഭൗമോപരിതലം ആഗിരണം ചെയ്യുന്നു. ഈ താപസന്തുലനപ്രക്രിയയെ <b>താപബജറ്റ് (Heat Budget)</b> എന്നു വിളിക്കുന്നു — ഇത് ഭൂമിയെ ജീവഗ്രഹമായി നിലനിർത്തുന്നു.</p>
+    <p class="lang-en">If total incoming solar energy is taken as 100 units: 35 units are reflected back, 14 units are absorbed by the atmosphere, and 51 units are absorbed by the Earth's surface. This balancing process is called the <b>Heat Budget</b>, and it keeps Earth habitable.</p>
+
+    <div class="callout formula">
+      <span class="lang-ml">ദൈനികതാപാന്തരം = കൂടിയ താപനില − കുറഞ്ഞ താപനില<br>ദൈനിക ശരാശരി താപനില = (കൂടിയ താപനില + കുറഞ്ഞ താപനില) ÷ 2</span>
+      <span class="lang-en">Diurnal Range = Max Temp − Min Temp<br>Daily Mean Temp = (Max Temp + Min Temp) ÷ 2</span>
+    </div>
+    <div class="think">
+      <p class="lang-ml">ഉദാഹരണം: കൂടിയ താപനില 36°C, കുറഞ്ഞ താപനില 28°C ആണെങ്കിൽ ദൈനികതാപാന്തരം = 8°C, ദൈനിക ശരാശരി = 32°C.</p>
+      <p class="lang-en">Example: If max temp is 36°C and min temp is 28°C, diurnal range = 8°C, daily mean = 32°C.</p>
+    </div>
+
+    <h3><span class="lang-ml">പ്രധാന ആശയങ്ങൾ</span><span class="lang-en">Key Concepts</span></h3>
+    <table>
+      <tr><th><span class="lang-ml">പദം</span><span class="lang-en">Term</span></th><th><span class="lang-ml">വിശദീകരണം</span><span class="lang-en">Explanation</span></th></tr>
+      <tr><td>Isotherm</td><td><span class="lang-ml">ഒരേ താപനിലയുള്ള പ്രദേശങ്ങളെ യോജിപ്പിക്കുന്ന സാങ്കല്പിക രേഖ</span><span class="lang-en">Imaginary line joining places of equal temperature</span></td></tr>
+      <tr><td>Thermal Equator</td><td><span class="lang-ml">ഏറ്റവും ഉയർന്ന വാർഷിക ശരാശരി താപനിലയുള്ള പ്രദേശങ്ങളെ യോജിപ്പിക്കുന്ന രേഖ</span><span class="lang-en">Line joining places with the highest annual mean temperature</span></td></tr>
+      <tr><td>Normal Lapse Rate</td><td><span class="lang-ml">ഓരോ കി.മീ. ഉയരത്തിനും ഏകദേശം 6.4°C കുറയുന്ന താപനില</span><span class="lang-en">Temperature falls by about 6.4°C for every 1 km rise in altitude</span></td></tr>
+    </table>
+    <p><b class="lang-ml">താപവിതരണത്തെ സ്വാധീനിക്കുന്ന ഘടകങ്ങൾ:</b><b class="lang-en">Factors affecting temperature distribution:</b>
+    <span class="lang-ml"> അക്ഷാംശീയസ്ഥാനം, സമുദ്രനിരപ്പിൽ നിന്നുള്ള ഉയരം, കരയും കടലും, സമുദ്രജലപ്രവാഹങ്ങൾ, ഭൂപ്രകൃതി.</span>
+    <span class="lang-en"> Latitude, altitude above sea level, land and sea distribution, ocean currents, and topography.</span></p>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">2</span><span class="lang-ml">അന്തരീക്ഷമർദവും കാറ്റുകളും</span><span class="lang-en">Atmospheric Pressure &amp; Winds</span></h2>
+    <p class="lang-ml">ഭൗമോപരിതലത്തിൽ അന്തരീക്ഷവായു ചെലുത്തുന്ന ഭാരമാണ് <b>അന്തരീക്ഷമർദം (Atmospheric Pressure)</b>. ബാരോമീറ്റർ ഉപയോഗിച്ചാണ് ഇത് അളക്കുന്നത്; യൂണിറ്റ് മില്ലിബാർ (mb) അഥവാ ഹെക്റ്റോപാസ്കൽ (hPa). ശരാശരി മർദം 1013.2 mb ആണ്.</p>
+    <p class="lang-en">The weight exerted by air on the Earth's surface is called <b>Atmospheric Pressure</b>, measured with a barometer in millibars (mb) or hectopascals (hPa). The mean sea-level pressure is 1013.2 mb.</p>
+    <p><b class="lang-ml">സ്വാധീനിക്കുന്ന ഘടകങ്ങൾ:</b><b class="lang-en">Factors affecting it:</b>
+    <span class="lang-ml"> അന്തരീക്ഷതാപനില, സമുദ്രനിരപ്പിൽ നിന്നുള്ള ഉയരം, അന്തരീക്ഷവായുവിലെ ജലാംശം. ഓരോ 10 മീറ്ററിനും ഏകദേശം 1 mb കുറയുന്നു. സമമർദമുള്ള പ്രദേശങ്ങളെ യോജിപ്പിക്കുന്ന രേഖകളാണ് <b>സമമർദരേഖകൾ (Isobars)</b>.</span>
+    <span class="lang-en"> Temperature, altitude, and humidity. Pressure falls by about 1 mb for every 10 m of altitude. Lines joining places of equal pressure are called <b>Isobars</b>.</span></p>
+
+    <h3><span class="lang-ml">ആഗോള മർദമേഖലകൾ</span><span class="lang-en">Global Pressure Belts</span></h3>
+    <div class="grid2">
+      <div class="card"><h4><span class="lang-ml">ഭൂമധ്യരേഖാ ന്യൂനമർദമേഖല</span><span class="lang-en">Equatorial Low Pressure Belt</span></h4>0° — <span class="lang-ml">നിർവാതമേഖല</span><span class="lang-en">Doldrums</span></div>
+      <div class="card"><h4><span class="lang-ml">ഉപോഷ്ണ ഉച്ചമർദമേഖല</span><span class="lang-en">Subtropical High Pressure Belt</span></h4>30°N/S</div>
+      <div class="card"><h4><span class="lang-ml">ഉപധ്രുവീയ ന്യൂനമർദമേഖല</span><span class="lang-en">Subpolar Low Pressure Belt</span></h4>60°N/S</div>
+      <div class="card"><h4><span class="lang-ml">ധ്രുവീയ ഉച്ചമർദമേഖല</span><span class="lang-en">Polar High Pressure Belt</span></h4>90°N/S</div>
+    </div>
+
+    <h3><span class="lang-ml">കാറ്റിനെ സ്വാധീനിക്കുന്ന ബലങ്ങൾ</span><span class="lang-en">Forces Affecting Wind</span></h3>
+    <p class="lang-ml">1. <b>മർദചരിവുബലം</b> — മർദവ്യത്യാസം കൂടുതലുള്ളിടത്ത് കാറ്റ് ശക്തമായിരിക്കും.<br>2. <b>ഘർഷണബലം</b> — കുന്നുകൾ, കെട്ടിടങ്ങൾ മുതലായവ കാറ്റിന്റെ സഞ്ചാരം തടസ്സപ്പെടുത്തുന്നു.<br>3. <b>കോറിയോലിസ് ബലം</b> — ഭൂഭ്രമണം മൂലം ഉത്തരാർധഗോളത്തിൽ വലത്തോട്ടും ദക്ഷിണാർധഗോളത്തിൽ ഇടത്തോട്ടും കാറ്റ് വ്യതിചലിക്കുന്നു.</p>
+    <p class="lang-en">1. <b>Pressure Gradient Force</b> — greater the pressure difference, stronger the wind.<br>2. <b>Frictional Force</b> — hills, buildings, and forests obstruct the free flow of wind.<br>3. <b>Coriolis Force</b> — due to Earth's rotation, winds deflect to the right in the Northern Hemisphere and to the left in the Southern Hemisphere.</p>
+
+    <h3><span class="lang-ml">കാറ്റുകളുടെ വർഗീകരണം</span><span class="lang-en">Types of Winds</span></h3>
+    <div class="grid2">
+      <div class="card"><h4><span class="lang-ml">സ്ഥിരവാതങ്ങൾ</span><span class="lang-en">Permanent Winds</span></h4><span class="lang-ml">വാണിജ്യവാതങ്ങൾ, പശ്ചിമവാതങ്ങൾ, ധ്രുവീയ പൂർവവാതങ്ങൾ</span><span class="lang-en">Trade Winds, Westerlies, Polar Easterlies</span></div>
+      <div class="card"><h4><span class="lang-ml">കാലികവാതങ്ങൾ</span><span class="lang-en">Periodic Winds</span></h4><span class="lang-ml">മൺസൂൺ കാറ്റുകൾ, കടൽക്കാറ്റ്/കരക്കാറ്റ്, പർവതക്കാറ്റ്/താഴ്വരക്കാറ്റ്</span><span class="lang-en">Monsoons, Land/Sea Breeze, Mountain/Valley Breeze</span></div>
+      <div class="card"><h4><span class="lang-ml">പ്രാദേശികവാതങ്ങൾ</span><span class="lang-en">Local Winds</span></h4><span class="lang-ml">ലൂ, ചിനൂക്ക്, ഫൊൻ, ഹർമാറ്റൻ</span><span class="lang-en">Loo, Chinook, Foehn, Harmattan</span></div>
+      <div class="card"><h4><span class="lang-ml">അസ്ഥിരവാതങ്ങൾ</span><span class="lang-en">Variable Winds</span></h4><span class="lang-ml">പ്രതിചക്രവാതം ഉൾപ്പെടെയുള്ള ക്രമരഹിത വാതങ്ങൾ</span><span class="lang-en">Irregular winds including Anti-cyclones</span></div>
+    </div>
+    <table>
+      <tr><th><span class="lang-ml">പ്രാദേശികവാതം</span><span class="lang-en">Local Wind</span></th><th><span class="lang-ml">പ്രദേശം</span><span class="lang-en">Region</span></th><th><span class="lang-ml">സവിശേഷത</span><span class="lang-en">Feature</span></th></tr>
+      <tr><td>Loo</td><td><span class="lang-ml">ഉത്തരേന്ത്യൻ സമതലം</span><span class="lang-en">North Indian Plains</span></td><td><span class="lang-ml">ഉഷ്ണക്കാറ്റ്</span><span class="lang-en">Hot wind</span></td></tr>
+      <tr><td>Chinook</td><td><span class="lang-ml">റോക്കി പർവതചരിവ്</span><span class="lang-en">Rocky Mountain slopes</span></td><td><span class="lang-ml">വരണ്ട ഉഷ്ണക്കാറ്റ്</span><span class="lang-en">Dry hot wind</span></td></tr>
+      <tr><td>Foehn</td><td><span class="lang-ml">ആൽപ്സ് പർവതചരിവ്</span><span class="lang-en">Alps slopes</span></td><td><span class="lang-ml">വരണ്ട ഉഷ്ണക്കാറ്റ്</span><span class="lang-en">Dry hot wind</span></td></tr>
+      <tr><td>Harmattan</td><td><span class="lang-ml">സഹാറ മരുഭൂമി</span><span class="lang-en">Sahara Desert</span></td><td><span class="lang-ml">കൊടുംചൂടിന് ശമനം</span><span class="lang-en">Relieves extreme heat</span></td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">3</span><span class="lang-ml">ആർദ്രതയും ഘനീകരണവും</span><span class="lang-en">Humidity &amp; Condensation</span></h2>
+    <p class="lang-ml">അന്തരീക്ഷത്തിൽ അദൃശ്യമായി നിലകൊള്ളുന്ന ജലാംശത്തെ <b>ആർദ്രത (Humidity)</b> എന്നു വിളിക്കുന്നു.</p>
+    <p class="lang-en">The invisible water vapour present in the atmosphere is called <b>Humidity</b>.</p>
+    <div class="callout formula">
+      <span class="lang-ml">ആപേക്ഷിക ആർദ്രത = (കേവല ആർദ്രത ÷ അന്തരീക്ഷത്തിന്റെ ആകെ ജലാഗിരണശേഷി) × 100</span>
+      <span class="lang-en">Relative Humidity = (Absolute Humidity ÷ Total Capacity) × 100</span>
+    </div>
+    <p class="lang-ml"><b>കേവല ആർദ്രത:</b> നിശ്ചിത വ്യാപ്തം അന്തരീക്ഷവായുവിലുള്ള ജലത്തിന്റെ യഥാർഥ അളവ്. അന്തരീഷം പൂർണമായി ജലപൂരിതമാകുന്ന അവസ്ഥ <b>പൂരിതാവസ്ഥ</b>; അത് സംഭവിക്കുന്ന താപനില <b>പൂരിതാങ്കം</b>.</p>
+    <p class="lang-en"><b>Absolute Humidity:</b> the actual amount of water vapour present in a given volume of air. When air holds the maximum moisture possible, it reaches <b>Saturation</b>; the temperature at which this happens is the <b>Saturation Point</b>.</p>
+
+    <h3><span class="lang-ml">ഘനീകരണരൂപങ്ങൾ</span><span class="lang-en">Forms of Condensation</span></h3>
+    <div class="grid2">
+      <div class="card"><h4><span class="lang-ml">തുഷാരം</span><span class="lang-en">Dew</span></h4>
+        <p class="lang-ml">രാത്രി ഭൗമോപരിതലം തണുക്കുമ്പോൾ നീരാവി ഘനീഭവിച്ച് ഇലകളിലും പുൽക്കൊടികളിലും പറ്റിപ്പിടിക്കുന്ന ജലത്തുള്ളികൾ</p>
+        <p class="lang-en">Water droplets that form when water vapour condenses on cooled leaves and grass at night.</p></div>
+      <div class="card"><h4><span class="lang-ml">ഹിമം</span><span class="lang-en">Frost</span></h4>
+        <p class="lang-ml">താപനില 0°C ൽ താഴെ ആകുമ്പോൾ രൂപപ്പെടുന്ന നേർത്ത ഹിമകണികകൾ</p>
+        <p class="lang-en">Fine ice crystals that form when temperature falls below 0°C.</p></div>
+      <div class="card"><h4><span class="lang-ml">മൂടൽമഞ്ഞ്</span><span class="lang-en">Fog / Mist</span></h4>
+        <p class="lang-ml">അന്തരീക്ഷത്തിന്റെ താഴ്ന്ന വിതാനങ്ങളിൽ പൊടിപടലങ്ങൾ കേന്ദ്രീകരിച്ച് നടക്കുന്ന ഘനീകരണം</p>
+        <p class="lang-en">Condensation around dust particles in the lower layers of the atmosphere.</p></div>
+      <div class="card"><h4><span class="lang-ml">മേഘങ്ങൾ</span><span class="lang-en">Clouds</span></h4>
+        <p class="lang-ml">ഉയർന്ന വിതാനങ്ങളിൽ പൊടിപടലങ്ങളെ കേന്ദ്രീകരിച്ചുള്ള ഘനീകരണം (ജലകണിക വ്യാസം ≤0.001 സെ.മീ.)</p>
+        <p class="lang-en">Condensation at higher altitudes around dust particles (droplet diameter ≤ 0.001 cm).</p></div>
+    </div>
+    <h3><span class="lang-ml">മേഘങ്ങളുടെ തരങ്ങൾ</span><span class="lang-en">Types of Clouds</span></h3>
+    <table>
+      <tr><th><span class="lang-ml">തരം</span><span class="lang-en">Type</span></th><th><span class="lang-ml">രൂപം</span><span class="lang-en">Appearance</span></th></tr>
+      <tr><td>Cirrus</td><td><span class="lang-ml">ഉയർന്ന വിതാനത്തിലെ നേർത്ത തൂവൽക്കെട്ടുകൾ</span><span class="lang-en">Thin, feathery clouds at high altitude</span></td></tr>
+      <tr><td>Cumulus</td><td><span class="lang-ml">പഞ്ഞിക്കെട്ടുകൾ പോലുള്ള മേഘങ്ങൾ</span><span class="lang-en">Cotton-wool shaped clouds</span></td></tr>
+      <tr><td>Stratus</td><td><span class="lang-ml">താഴ്ന്ന വിതാനത്തിലെ കനത്ത പാളികൾ</span><span class="lang-en">Thick layers at low altitude</span></td></tr>
+      <tr><td>Nimbus</td><td><span class="lang-ml">താഴ്ന്ന വിതാനത്തിലെ ഇരുണ്ട മഴമേഘങ്ങൾ</span><span class="lang-en">Dark rain-bearing clouds, low altitude</span></td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">4</span><span class="lang-ml">വർഷണം</span><span class="lang-en">Precipitation</span></h2>
+    <p class="lang-ml">മേഘങ്ങളിൽ നിന്ന് ജലകണികകൾ ഭൂമിയിൽ പതിക്കുന്നതിനെ <b>വർഷണം (Precipitation)</b> എന്നു വിളിക്കുന്നു — മഴ, മഞ്ഞുവീഴ്ച, ആലിപ്പഴവീഴ്ച എന്നിവ ഇതിന്റെ രൂപങ്ങളാണ്.</p>
+    <p class="lang-en">The falling of water particles from clouds onto the Earth's surface is called <b>Precipitation</b> — rain, snowfall, and hailstones are its forms.</p>
+    <div class="grid3">
+      <div class="card"><h4><span class="lang-ml">പർവതമഴ</span><span class="lang-en">Orographic Rainfall</span></h4>
+        <p class="lang-ml">നീരാവിപൂരിതമായ കാറ്റ് പർവതചരിവിൽ തട്ടി ഉയരുമ്പോൾ ഉണ്ടാകുന്നത്</p>
+        <p class="lang-en">Occurs when moisture-laden winds rise over a mountain slope.</p></div>
+      <div class="card"><h4><span class="lang-ml">സംവഹനവൃഷ്ടി</span><span class="lang-en">Convectional Rainfall</span></h4>
+        <p class="lang-ml">ഉച്ചതിരിഞ്ഞ് ഉയർന്ന താപനില മൂലം — "നാലുമണിമഴ"</p>
+        <p class="lang-en">Caused by intense afternoon heating — the "4 o'clock rain".</p></div>
+      <div class="card"><h4><span class="lang-ml">ചക്രവാതവൃഷ്ടി</span><span class="lang-en">Cyclonic Rainfall</span></h4>
+        <p class="lang-ml">ഉഷ്ണ-ശീതവായു സഞ്ചയങ്ങൾ വാതമുഖങ്ങളിൽ കൂടിച്ചേരുമ്പോൾ</p>
+        <p class="lang-en">Occurs when warm and cold air masses meet at a front.</p></div>
+    </div>
+    <p class="lang-ml"><b>മഴനിഴൽപ്രദേശങ്ങൾ:</b> പർവതത്തിന്റെ കാറ്റിന് എതിർവശത്ത് മഴ തീരെ കുറവായിരിക്കുന്ന പ്രദേശങ്ങൾ — ഉദാ. തമിഴ്നാടിന്റെ പടിഞ്ഞാറൻ ഭാഗങ്ങൾ.</p>
+    <p class="lang-en"><b>Rain Shadow Regions:</b> areas on the leeward side of a mountain that receive very little rainfall — e.g. western Tamil Nadu.</p>
+    <div class="callout warn">
+      <p class="lang-ml"><b>അതിതീവ്രമഴയും മേഘവിസ്ഫോടനവും:</b> ചെറിയ സമയത്തിനുള്ളിൽ വൻതോതിൽ മഴ പെയ്യുന്ന പ്രതിഭാസം. മണിക്കൂറിൽ 10 സെ.മീ.-ൽ കൂടുതൽ മഴ ലഭിച്ചാൽ മേഘസ്ഫോടനമായി കണക്കാക്കുന്നു. (2019 കവളപ്പാറ, പുത്തുമല; 2024 ചൂരൽമല ഉരുൾപൊട്ടലുകൾ ഉദാഹരണങ്ങൾ)</p>
+      <p class="lang-en"><b>Extreme Rainfall &amp; Cloudburst:</b> a phenomenon of very heavy rainfall in a short time. Rainfall exceeding 10 cm per hour is classified as a cloudburst (e.g. 2019 Kavalappara/Puthumala and 2024 Chooralmala landslides).</p>
+    </div>
+  </div>
+
+</section>
+
+<section class="page" id="page-quiz">
+  <div class="page-head">
+    <button class="print-btn" style="background:#25D366; border-color:#25D366; color:#fff;" onclick="shareQuizPage()">📤 <span class="lang-ml">ഷെയർ / ലൈവ് ക്വിസ്</span><span class="lang-en">Share / Live Quiz</span></button>
+    <button class="print-btn" onclick="window.print()">🖨️ <span class="lang-ml">പ്രിന്റ്</span><span class="lang-en">Print</span></button>
+  </div>
+  <div class="section">
+    <div class="quiz-header">
+      <h2 style="border:none; padding:0;"><span class="lang-ml">🎯 ഇന്ററാക്ടീവ് ക്വിസ്</span><span class="lang-en">🎯 Interactive Quiz</span></h2>
+      <div id="quizMeta" style="font-family:'JetBrains Mono',monospace; font-size:.85rem; color:var(--ink-soft);"></div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+    <div id="quizArea"></div>
+    <div class="quiz-nav">
+      <button class="btn secondary" id="prevBtn"><span class="lang-ml">← മുൻപ്</span><span class="lang-en">← Prev</span></button>
+      <button class="btn" id="nextBtn"><span class="lang-ml">അടുത്തത് →</span><span class="lang-en">Next →</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="page-notes">
+  <div class="page-head"><button class="print-btn" onclick="window.print()">🖨️ <span class="lang-ml">പ്രിന്റ്</span><span class="lang-en">Print</span></button></div>
+  <div class="note-block">
+    <h2 style="border-bottom:3px solid var(--sun-soft); padding-bottom:12px;"><span class="lang-ml">📄 ചുരുക്കക്കുറിപ്പ് — ദിനാന്തരീക്ഷസ്ഥിതി</span><span class="lang-en">📄 Short Notes — Weather</span></h2>
+
+    <h3><span class="lang-ml">ദിനാന്തരീക്ഷസ്ഥിതിയും കാലാവസ്ഥയും</span><span class="lang-en">Weather &amp; Climate</span></h3>
+    <ul class="lang-ml">
+      <li>ദിനാന്തരീക്ഷസ്ഥിതി = ഹ്രസ്വകാല അന്തരീക്ഷാവസ്ഥ; കാലാവസ്ഥ = 35-40 വർഷത്തെ ശരാശരി</li>
+      <li>ഘടകങ്ങൾ: താപനില, മർദം, കാറ്റ്, ആർദ്രത, വർഷണം</li>
+    </ul>
+    <ul class="lang-en">
+      <li>Weather = short-term atmospheric state; Climate = 35-40 year average</li>
+      <li>Elements: temperature, pressure, wind, humidity, precipitation</li>
+    </ul>
+
+    <h3><span class="lang-ml">താപനില</span><span class="lang-en">Temperature</span></h3>
+    <ul class="lang-ml">
+      <li>ഇൻസൊലേഷൻ = ഭൂമിയിലെത്തുന്ന സൗരവികിരണം</li>
+      <li>താപവ്യാപനം: ചാലനം, സംവഹനം, അഭിവഹനം, വികിരണം</li>
+      <li>താപബജറ്റ്: 100 യൂണിറ്റിൽ 35 പ്രതിഫലനം, 14 അന്തരീക്ഷം, 51 ഭൗമോപരിതലം ആഗിരണം</li>
+      <li>ദൈനികതാപാന്തരം = കൂടിയത് − കുറഞ്ഞത്; ശരാശരി = (കൂടിയത്+കുറഞ്ഞത്)÷2</li>
+      <li>ലാപ്സ് റേറ്റ് = 6.4°C / കി.മീ.; ഐസോതേം = സമതാപരേഖ</li>
+    </ul>
+    <ul class="lang-en">
+      <li>Insolation = solar radiation reaching Earth</li>
+      <li>Heat transfer: conduction, convection, advection, radiation</li>
+      <li>Heat Budget: of 100 units, 35 reflected, 14 by atmosphere, 51 by surface</li>
+      <li>Diurnal Range = Max − Min; Mean = (Max+Min)÷2</li>
+      <li>Lapse Rate = 6.4°C/km; Isotherm = equal-temperature line</li>
+    </ul>
+
+    <h3><span class="lang-ml">മർദവും കാറ്റും</span><span class="lang-en">Pressure &amp; Wind</span></h3>
+    <ul class="lang-ml">
+      <li>ബാരോമീറ്റർ → മർദം; ശരാശരി 1013.2 mb; ഐസോബാർ = സമമർദരേഖ</li>
+      <li>മർദമേഖലകൾ: 0° ന്യൂനം, 30° ഉച്ചം, 60° ന്യൂനം, 90° ഉച്ചം</li>
+      <li>ബലങ്ങൾ: മർദചരിവ്, ഘർഷണം, കോറിയോലിസ്</li>
+      <li>കാറ്റുകൾ: സ്ഥിരം (വാണിജ്യം), കാലികം (മൺസൂൺ), പ്രാദേശികം (ലൂ, ചിനൂക്ക്, ഫൊൻ, ഹർമാറ്റൻ)</li>
+    </ul>
+    <ul class="lang-en">
+      <li>Barometer → pressure; mean 1013.2 mb; Isobar = equal-pressure line</li>
+      <li>Pressure belts: 0° Low, 30° High, 60° Low, 90° High</li>
+      <li>Forces: pressure gradient, friction, Coriolis</li>
+      <li>Winds: Permanent (Trade), Periodic (Monsoon), Local (Loo, Chinook, Foehn, Harmattan)</li>
+    </ul>
+
+    <h3><span class="lang-ml">ആർദ്രതയും ഘനീകരണവും</span><span class="lang-en">Humidity &amp; Condensation</span></h3>
+    <ul class="lang-ml">
+      <li>ആപേക്ഷിക ആർദ്രത = (കേവല ആർദ്രത ÷ ആകെ ശേഷി) × 100</li>
+      <li>ഘനീകരണരൂപങ്ങൾ: തുഷാരം, ഹിമം, മൂടൽമഞ്ഞ്, മേഘങ്ങൾ</li>
+      <li>മേഘതരങ്ങൾ: സിറസ്, ക്യുമുലസ്, സ്ട്രാറ്റസ്, നിംബസ്</li>
+    </ul>
+    <ul class="lang-en">
+      <li>Relative Humidity = (Absolute Humidity ÷ Total Capacity) × 100</li>
+      <li>Condensation forms: dew, frost, fog/mist, clouds</li>
+      <li>Cloud types: Cirrus, Cumulus, Stratus, Nimbus</li>
+    </ul>
+
+    <h3><span class="lang-ml">വർഷണം</span><span class="lang-en">Precipitation</span></h3>
+    <ul class="lang-ml">
+      <li>പർവതമഴ, സംവഹനവൃഷ്ടി ("നാലുമണിമഴ"), ചക്രവാതവൃഷ്ടി</li>
+      <li>മഴനിഴൽ പ്രദേശം = പർവതത്തിന്റെ എതിർവശം (ഉദാ: പടിഞ്ഞാറൻ തമിഴ്നാട്)</li>
+      <li>മേഘസ്ഫോടനം = മണിക്കൂറിൽ 10 സെ.മീ.-ൽ കൂടുതൽ മഴ</li>
+    </ul>
+    <ul class="lang-en">
+      <li>Orographic, Convectional ("4 o'clock rain"), Cyclonic rainfall</li>
+      <li>Rain shadow = leeward side of mountain (e.g. western Tamil Nadu)</li>
+      <li>Cloudburst = rainfall over 10 cm/hour</li>
+    </ul>
+  </div>
+</section>
+
+<section class="page" id="page-bank">
+  <div class="page-head"><button class="print-btn" onclick="window.print()">🖨️ <span class="lang-ml">പ്രിന്റ്</span><span class="lang-en">Print</span></button></div>
+  <div class="section">
+    <h2 style="border:none;padding:0;"><span class="lang-ml">📝 ചോദ്യബാങ്ക്</span><span class="lang-en">📝 Question Bank</span></h2>
+    <div class="qb-filters" id="qbFilters">
+      <button class="active" data-f="all"><span class="lang-ml">എല്ലാം</span><span class="lang-en">All</span></button>
+      <button data-f="1"><span class="lang-ml">1 മാർക്ക്</span><span class="lang-en">1 Mark</span></button>
+      <button data-f="2"><span class="lang-ml">2 മാർക്ക്</span><span class="lang-en">2 Marks</span></button>
+      <button data-f="3"><span class="lang-ml">3 മാർക്ക്</span><span class="lang-en">3 Marks</span></button>
+    </div>
+    <div id="qbList"></div>
+  </div>
+</section>
+
+</div>
+
+<footer><span class="lang-ml">Abacus Academy · SSLC പഠനപോർട്ടൽ — അധ്യായം 1 | കേരള SCERT പത്താം ക്ലാസ് സാമൂഹ്യശാസ്ത്രം</span><span class="lang-en">Abacus Academy · SSLC Study Portal — Chapter 1 | Kerala SCERT Standard X Social Science</span></footer>
+
+<script>
+let LANG = 'ml';
+function shareQuizPage(){
+  const url = new URL('chapter1_weather_quiz.html', window.location.href).href;
+  const text = LANG==='ml'
+    ? 'ദിനാന്തരീക്ഷസ്ഥിതി ലൈവ് ക്വിസ് (രാത്രി 9:30-10:30) ഇവിടെ പങ്കെടുക്കൂ: '
+    : 'Join the Weather live quiz (9:30-10:30 PM) here: ';
+  if(navigator.share){ navigator.share({title:'Weather Quiz', text:text, url:url}); }
+  else{ window.open('https://wa.me/?text='+encodeURIComponent(text+url),'_blank'); }
+}
+function setLang(l){
+  LANG = l;
+  document.body.className = 'mode-'+l;
+  document.getElementById('btnML').classList.toggle('active', l==='ml');
+  document.getElementById('btnEN').classList.toggle('active', l==='en');
+  renderQuiz(); renderQB();
+}
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('page-'+btn.dataset.page).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+const QUIZ = [
+ {ml:{q:"ഭൂമിയുടെ പ്രധാന ഊർജസ്രോതസ്സ് ഏതാണ്?",o:["ചന്ദ്രൻ","സൂര്യൻ","ഭൂഗർഭതാപം","കാറ്റ്"],e:"സൂര്യനിലെ അണുസംയോജന പ്രക്രിയയാണ് ഊർജത്തിന്റെ സ്രോതസ്സ്."},
+  en:{q:"What is Earth's main source of energy?",o:["Moon","Sun","Geothermal heat","Wind"],e:"Nuclear fusion in the Sun is the source of this energy."}, a:1},
+ {ml:{q:"ഭൂമോപരിതലത്തിലെത്തുന്ന സൗരവികിരണത്തിന്റെ അളവിനെ എന്തു വിളിക്കുന്നു?",o:["ഇൻസൊലേഷൻ","ആൽബിഡോ","കൺവെക്ഷൻ","അഡ്വെക്ഷൻ"],e:"Insolation എന്നാണ് ഇതിനെ വിളിക്കുന്നത്."},
+  en:{q:"What is the amount of solar radiation reaching the Earth's surface called?",o:["Insolation","Albedo","Convection","Advection"],e:"It is called Insolation."}, a:0},
+ {ml:{q:"ഒരു ദിവസത്തെ കൂടിയ താപനിലയും കുറഞ്ഞ താപനിലയും തമ്മിലുള്ള വ്യത്യാസം എന്ത്?",o:["ദൈനിക ശരാശരി താപനില","ദൈനികതാപാന്തരം","ഇൻസൊലേഷൻ","ലാപ്സ് റേറ്റ്"],e:"Diurnal Range of Temperature."},
+  en:{q:"What is the difference between max and min temperature of a day called?",o:["Daily Mean Temperature","Diurnal Range","Insolation","Lapse Rate"],e:"It is called Diurnal Range of Temperature."}, a:1},
+ {ml:{q:"ഓരോ കിലോമീറ്റർ ഉയരത്തിനും അന്തരീക്ഷതാപനില ശരാശരി എത്ര ഡിഗ്രി കുറയുന്നു?",o:["3.5°C","6.4°C","9.8°C","12°C"],e:"ഇതാണ് Normal Lapse Rate."},
+  en:{q:"By how many degrees does temperature fall per km of altitude on average?",o:["3.5°C","6.4°C","9.8°C","12°C"],e:"This is the Normal Lapse Rate."}, a:1},
+ {ml:{q:"ഒരേ താപനിലയുള്ള പ്രദേശങ്ങളെ യോജിപ്പിക്കുന്ന രേഖ ഏത്?",o:["ഐസോബാർ","ഐസോഹൈറ്റ്","ഐസോതേം","ഐസോഹെയ്റ്റ്"],e:"Isotherm (സമതാപരേഖ)."},
+  en:{q:"Which line joins places of equal temperature?",o:["Isobar","Isohyet","Isotherm","Isohyte"],e:"The Isotherm."}, a:2},
+ {ml:{q:"അന്തരീക്ഷമർദം അളക്കാൻ ഉപയോഗിക്കുന്ന ഉപകരണം?",o:["തെർമോമീറ്റർ","ബാരോമീറ്റർ","ഹൈഗ്രോമീറ്റർ","അനിമോമീറ്റർ"],e:"Barometer ആണ് അന്തരീക്ഷമർദം അളക്കുന്നത്."},
+  en:{q:"Which instrument measures atmospheric pressure?",o:["Thermometer","Barometer","Hygrometer","Anemometer"],e:"The Barometer measures atmospheric pressure."}, a:1},
+ {ml:{q:"ഭൂമധ്യരേഖാ ന്യൂനമർദമേഖലയെ എന്ത് എന്നും വിളിക്കുന്നു?",o:["ഹോഴ്സ് ലാറ്റിറ്റ്യൂഡ്സ്","നിർവാതമേഖല","സബ്ട്രോപ്പിക്കൽ ഹൈ","ITCZ മാത്രം"],e:"Doldrums എന്നാണ് ഇംഗ്ലീഷിൽ അറിയപ്പെടുന്നത്."},
+  en:{q:"The Equatorial Low Pressure Belt is also known as?",o:["Horse Latitudes","Doldrums","Subtropical High","ITCZ only"],e:"It is known as the Doldrums."}, a:1},
+ {ml:{q:"കാറ്റിന്റെ ദിശ കാണിക്കുന്ന ഉപകരണം?",o:["അനിമോമീറ്റർ","വിൻഡ്‌വെയ്ൻ","ബാരോമീറ്റർ","ഹൈഗ്രോമീറ്റർ"],e:"Wind Vane ആണ് ദിശ കാണിക്കുന്നത്; അനിമോമീറ്റർ വേഗത അളക്കുന്നു."},
+  en:{q:"Which instrument shows wind direction?",o:["Anemometer","Wind Vane","Barometer","Hygrometer"],e:"Wind Vane shows direction; Anemometer measures speed."}, a:1},
+ {ml:{q:"തെക്കുപടിഞ്ഞാറൻ മൺസൂൺ കാറ്റുകൾ വീശുന്നത് ഏത് കാലത്താണ്?",o:["ശൈത്യകാലം","വേനൽക്കാലം","വസന്തകാലം","ശരത്കാലം"],e:"ഉഷ്ണകാലത്ത് സമുദ്രത്തിൽ നിന്ന് കരയിലേക്ക് വീശുന്നു."},
+  en:{q:"In which season do South West Monsoon winds blow?",o:["Winter","Summer","Spring","Autumn"],e:"They blow from sea to land during summer."}, a:1},
+ {ml:{q:"ഉത്തരേന്ത്യൻ സമതലത്തിൽ വീശുന്ന ഉഷ്ണക്കാറ്റ്?",o:["ഹർമാറ്റൻ","ഫൊൻ","ലൂ","ചിനൂക്ക്"],e:"'ലൂ' ഉത്തരേന്ത്യൻ സമതലത്തിലെ ഉഷ്ണക്കാറ്റാണ്."},
+  en:{q:"Which hot wind blows over the North Indian Plains?",o:["Harmattan","Foehn","Loo","Chinook"],e:"'Loo' is the hot wind of the North Indian Plains."}, a:2},
+ {ml:{q:"ആപേക്ഷിക ആർദ്രത കണക്കാക്കുന്ന സൂത്രവാക്യത്തിൽ ഗുണിക്കുന്ന സംഖ്യ?",o:["10","100","1000","1"],e:"ശതമാനത്തിൽ കണക്കാക്കാൻ 100 കൊണ്ട് ഗുണിക്കുന്നു."},
+  en:{q:"In the Relative Humidity formula, what number is used to multiply?",o:["10","100","1000","1"],e:"Multiplying by 100 gives the value as a percentage."}, a:1},
+ {ml:{q:"0.001 സെ.മീ.-ൽ താഴെ വ്യാസമുള്ള ജലകണികകൾ ചേർന്നുണ്ടാകുന്നത്?",o:["മൂടൽമഞ്ഞ്","മേഘങ്ങൾ","തുഷാരം","ഹിമം"],e:"ഇത്തരം സൂക്ഷ്മ ജലകണികകൾ അന്തരീക്ഷത്തിൽ തങ്ങിനിന്ന് മേഘങ്ങൾ ഉണ്ടാക്കുന്നു."},
+  en:{q:"Water droplets under 0.001 cm diameter combine to form?",o:["Fog","Clouds","Dew","Frost"],e:"These tiny droplets remain suspended in the air, forming clouds."}, a:1},
+ {ml:{q:"'നാലുമണിമഴ' എന്നറിയപ്പെടുന്നത്?",o:["ചക്രവാതവൃഷ്ടി","പർവതമഴ","സംവഹനവൃഷ്ടി","വാതമുഖമഴ"],e:"ഉച്ചതിരിഞ്ഞ് ഉണ്ടാകുന്ന സംവഹനവൃഷ്ടിയെയാണ് ഇങ്ങനെ വിളിക്കുന്നത്."},
+  en:{q:"What is known as the '4 o'clock rain'?",o:["Cyclonic rainfall","Orographic rainfall","Convectional rainfall","Frontal rainfall"],e:"The afternoon convectional rainfall is called this."}, a:2},
+ {ml:{q:"തമിഴ്നാടിന്റെ പടിഞ്ഞാറൻ ഭാഗങ്ങളിൽ മഴ കുറവായിരിക്കാൻ കാരണം?",o:["മഴനിഴൽ പ്രദേശം","സമുദ്രസാമീപ്യം","ഉയർന്ന താപനില","കാറ്റിന്റെ ദിശ"],e:"പശ്ചിമഘട്ടത്തിന്റെ മറുവശത്ത് മഴനിഴൽ പ്രദേശമായതിനാൽ."},
+  en:{q:"Why does western Tamil Nadu receive less rainfall?",o:["Rain shadow region","Proximity to sea","High temperature","Wind direction"],e:"It lies on the leeward, rain-shadow side of the Western Ghats."}, a:0},
+ {ml:{q:"ഭൂമിയുടെ താപബജറ്റ് പ്രകാരം ഭൗമോപരിതലം എത്ര യൂണിറ്റ് സൗരോർജം ആഗിരണം ചെയ്യുന്നു (ആകെ 100-ൽ)?",o:["14","35","51","100"],e:"51 യൂണിറ്റ് ഭൗമോപരിതലം നേരിട്ട് ആഗിരണം ചെയ്യുന്നു."},
+  en:{q:"As per Earth's Heat Budget, how many units does the Earth's surface absorb (out of 100)?",o:["14","35","51","100"],e:"The Earth's surface directly absorbs 51 units."}, a:2}
+];
+let qi=0, answers=new Array(QUIZ.length).fill(null);
+function renderQuiz(){
+  const area=document.getElementById('quizArea');
+  if(qi>=QUIZ.length){
+    const score=answers.filter((a,i)=>a===QUIZ[i].a).length;
+    const msg = LANG==='ml' ? (score>=QUIZ.length*0.8?'🎉 മികച്ച പ്രകടനം!':score>=QUIZ.length*0.5?'👍 നല്ല ശ്രമം.':'💪 വീണ്ടും ശ്രമിക്കൂ!')
+      : (score>=QUIZ.length*0.8?'🎉 Excellent work!':score>=QUIZ.length*0.5?'👍 Good try!':'💪 Try again!');
+    const label = LANG==='ml' ? 'നിങ്ങളുടെ സ്കോർ!' : 'Your Score!';
+    const retry = LANG==='ml' ? 'വീണ്ടും ചെയ്യുക' : 'Retry Quiz';
+    area.innerHTML=`<div class="result-box"><div class="big">${score} / ${QUIZ.length}</div><p>${label} ${msg}</p><button class="btn" onclick="resetQuiz()">${retry}</button></div>`;
+    document.getElementById('prevBtn').style.visibility='hidden';
+    document.getElementById('nextBtn').style.visibility='hidden';
+    document.getElementById('topScore').innerHTML=(LANG==='ml'?'സ്കോർ':'Score')+': '+score+'/'+QUIZ.length;
+    document.getElementById('progFill').style.width='100%';
+    return;
+  }
+  document.getElementById('prevBtn').style.visibility='visible';
+  document.getElementById('nextBtn').style.visibility='visible';
+  const item=QUIZ[qi][LANG];
+  document.getElementById('quizMeta').textContent=(LANG==='ml'?'ചോദ്യം':'Question')+` ${qi+1} / ${QUIZ.length}`;
+  document.getElementById('progFill').style.width=((qi)/QUIZ.length*100)+'%';
+  let html=`<div class="q-card active"><div class="q-text">${qi+1}. ${item.q}</div>`;
+  item.o.forEach((opt,idx)=>{
+    let cls='opt'; let dis='';
+    if(answers[qi]!==null){ dis='disabled'; if(idx===QUIZ[qi].a) cls+=' correct'; else if(idx===answers[qi]) cls+=' wrong'; }
+    html+=`<button class="${cls}" ${dis} onclick="selectOpt(${idx})">${String.fromCharCode(65+idx)}. ${opt}</button>`;
+  });
+  html+=`<div class="explain ${answers[qi]!==null?'show':''}">💡 ${item.e}</div></div>`;
+  area.innerHTML=html;
+  document.getElementById('prevBtn').disabled = qi===0;
+}
+function selectOpt(idx){ if(answers[qi]!==null) return; answers[qi]=idx; renderQuiz(); }
+function resetQuiz(){ qi=0; answers=new Array(QUIZ.length).fill(null); document.getElementById('topScore').innerHTML=(LANG==='ml'?'സ്കോർ':'Score')+': --'; renderQuiz(); }
+document.getElementById('nextBtn').addEventListener('click',()=>{ if(qi<QUIZ.length){qi++; renderQuiz();} });
+document.getElementById('prevBtn').addEventListener('click',()=>{ if(qi>0){qi--; renderQuiz();} });
+renderQuiz();
+
+const QB = [
+ {m:1, ml:{q:"എന്താണ് ഇൻസൊലേഷൻ?", a:"ഭൂമോപരിതലത്തിലെത്തുന്ന സൗരവികിരണത്തിന്റെ അളവിനെ ഇൻസൊലേഷൻ എന്നു വിളിക്കുന്നു."}, en:{q:"What is Insolation?", a:"The amount of solar radiation reaching the Earth's surface is called Insolation."}},
+ {m:1, ml:{q:"അന്തരീക്ഷമർദം അളക്കുന്ന ഉപകരണം ഏത്?", a:"ബാരോമീറ്റർ (Barometer)."}, en:{q:"Which instrument measures atmospheric pressure?", a:"The Barometer."}},
+ {m:1, ml:{q:"സമമർദമുള്ള പ്രദേശങ്ങളെ യോജിപ്പിക്കുന്ന രേഖ ഏത്?", a:"ഐസോബാർ (Isobar)."}, en:{q:"Which line joins places of equal pressure?", a:"The Isobar."}},
+ {m:1, ml:{q:"ഭൂമധ്യരേഖാ ന്യൂനമർദമേഖലയെ എന്തു വിളിക്കുന്നു?", a:"നിർവാതമേഖല (Doldrums)."}, en:{q:"What is the Equatorial Low Pressure Belt also called?", a:"The Doldrums."}},
+ {m:1, ml:{q:"കാറ്റിന്റെ വേഗത അളക്കുന്ന ഉപകരണം ഏത്?", a:"അനിമോമീറ്റർ (Anemometer)."}, en:{q:"Which instrument measures wind speed?", a:"The Anemometer."}},
+ {m:2, ml:{q:"ദൈനികതാപാന്തരവും ദൈനിക ശരാശരി താപനിലയും കണക്കാക്കുന്ന സൂത്രവാക്യങ്ങൾ എഴുതുക.", a:"ദൈനികതാപാന്തരം = കൂടിയ താപനില − കുറഞ്ഞ താപനില. ദൈനിക ശരാശരി താപനില = (കൂടിയ താപനില + കുറഞ്ഞ താപനില) ÷ 2."},
+  en:{q:"Write the formulas for Diurnal Range and Daily Mean Temperature.", a:"Diurnal Range = Max Temp − Min Temp. Daily Mean Temperature = (Max Temp + Min Temp) ÷ 2."}},
+ {m:2, ml:{q:"കേവല ആർദ്രതയും ആപേക്ഷിക ആർദ്രതയും തമ്മിലുള്ള വ്യത്യാസം എന്ത്?", a:"കേവല ആർദ്രത നിശ്ചിത വ്യാപ്തം വായുവിലടങ്ങിയ ജലത്തിന്റെ യഥാർത്ഥ അളവാണ്. ആപേക്ഷിക ആർദ്രത ആ താപനിലയിൽ വായുവിന് പരമാവധി ഉൾക്കൊള്ളാൻ കഴിയുന്ന ജലാംശവുമായുള്ള അനുപാതം ശതമാനത്തിൽ കാണിക്കുന്നതാണ്."},
+  en:{q:"Distinguish between Absolute Humidity and Relative Humidity.", a:"Absolute Humidity is the actual amount of water vapour in a given volume of air. Relative Humidity is the ratio (percentage) of this to the maximum moisture the air can hold at that temperature."}},
+ {m:2, ml:{q:"താപചാലനവും സംവഹനവും തമ്മിൽ വേർതിരിക്കുക.", a:"താപചാലനം: ചൂടായ ഭൗമോപരിതലത്തിൽ നിന്ന് തൊട്ടടുത്ത വായുവിലേക്ക് നേരിട്ട് താപം പകരുന്നു. സംവഹനം: ചൂടുപിടിച്ച വായു വികസിച്ച് ഭാരം കുറഞ്ഞ് മുകളിലേക്കുയരുന്നതിലൂടെ താപം വ്യാപിക്കുന്നു."},
+  en:{q:"Differentiate between Conduction and Convection.", a:"Conduction: heat passes directly from the warm surface to the air in contact with it. Convection: heated air expands, becomes lighter, and rises — spreading heat upward."}},
+ {m:2, ml:{q:"മഴനിഴൽ പ്രദേശങ്ങൾ എങ്ങനെ രൂപപ്പെടുന്നു?", a:"നീരാവിപൂരിതമായ കാറ്റ് പർവതത്തിന്റെ ഒരു വശത്ത് തട്ടി ഉയർന്ന് മഴ പെയ്യിക്കുന്നു. മറുവശത്ത് കാറ്റ് വരണ്ടതായതിനാൽ മഴ ലഭിക്കാതെ വരുന്നു — ഈ പ്രദേശങ്ങളെ മഴനിഴൽ പ്രദേശങ്ങൾ എന്നു വിളിക്കുന്നു."},
+  en:{q:"How are rain shadow regions formed?", a:"Moisture-laden winds rise on the windward side of a mountain, causing rainfall. On the leeward side, the dry wind produces little rain — these areas are called rain shadow regions."}},
+ {m:2, ml:{q:"സ്ഥിരവാതങ്ങളും കാലികവാതങ്ങളും തമ്മിലുള്ള വ്യത്യാസം എന്ത്?", a:"സ്ഥിരവാതങ്ങൾ വർഷം മുഴുവൻ ഒരു നിശ്ചിത ദിശയിൽ സ്ഥിരമായി വീശുന്നു (ഉദാ: വാണിജ്യവാതങ്ങൾ). കാലികവാതങ്ങൾ നിശ്ചിത ഇടവേളകളിൽ ദിശ മാറി വീശുന്നു (ഉദാ: മൺസൂൺ കാറ്റുകൾ)."},
+  en:{q:"What is the difference between Permanent Winds and Periodic Winds?", a:"Permanent winds blow steadily in one direction all year (e.g. Trade Winds). Periodic winds reverse direction at fixed intervals (e.g. Monsoon winds)."}},
+ {m:3, ml:{q:"ഭൂമിയുടെ താപബജറ്റ് വിശദീകരിക്കുക.", a:"സൂര്യനിൽ നിന്ന് ഭൂമിയിലെത്തുന്ന ആകെ സൗരോർജത്തെ 100 യൂണിറ്റ് ആയി കണക്കാക്കിയാൽ, 35 യൂണിറ്റ് പ്രതിഫലനത്തിലൂടെ തിരികെപ്പോകുന്നു, 14 യൂണിറ്റ് അന്തരീക്ഷം ആഗിരണം ചെയ്യുന്നു, 51 യൂണിറ്റ് ഭൗമോപരിതലം ആഗിരണം ചെയ്യുന്നു. ഈ ഊർജം തിരികെ ബഹിരാകാശത്തേക്ക് വികിരണം ചെയ്യപ്പെടുന്നു. ഇത് ഭൂമിയെ ജീവയോഗ്യമാക്കുന്നു."},
+  en:{q:"Explain the Earth's Heat Budget.", a:"If total incoming solar energy is 100 units, 35 units are reflected back, 14 units are absorbed by the atmosphere, and 51 units by the Earth's surface. This energy is radiated back into space, keeping incoming and outgoing energy balanced — this process keeps Earth habitable."}},
+ {m:3, ml:{q:"കാറ്റിന്റെ ദിശയെയും വേഗതയെയും സ്വാധീനിക്കുന്ന ഘടകങ്ങൾ വിവരിക്കുക.", a:"1. മർദചരിവുബലം: മർദവ്യത്യാസം കൂടുതലാണെങ്കിൽ കാറ്റ് ശക്തമാകും. 2. ഘർഷണബലം: കുന്നുകൾ, കെട്ടിടങ്ങൾ കാറ്റിന്റെ സഞ്ചാരത്തെ തടസ്സപ്പെടുത്തുന്നു. 3. കോറിയോലിസ് ബലം: ഭൂഭ്രമണം മൂലം ഉത്തരാർധഗോളത്തിൽ വലത്തോട്ടും ദക്ഷിണാർധഗോളത്തിൽ ഇടത്തോട്ടും കാറ്റ് വ്യതിചലിക്കുന്നു."},
+  en:{q:"Describe the factors that affect wind direction and speed.", a:"1. Pressure Gradient Force: a greater pressure difference causes stronger wind. 2. Frictional Force: hills and buildings obstruct wind movement. 3. Coriolis Force: winds deflect right in the Northern Hemisphere and left in the Southern Hemisphere due to Earth's rotation."}},
+ {m:3, ml:{q:"ഘനീകരണത്തിന്റെ വിവിധ രൂപങ്ങൾ ഏവ? വിശദീകരിക്കുക.", a:"തുഷാരം: രാത്രി ഭൗമോപരിതലം തണുക്കുമ്പോൾ നീരാവി ഘനീഭവിച്ച് ജലത്തുള്ളികളാകുന്നു. ഹിമം: താപനില 0°C-ൽ താഴെ ആകുമ്പോൾ നേർത്ത ഹിമകണികകൾ. മൂടൽമഞ്ഞ്: താഴ്ന്ന വിതാനത്തിൽ പൊടിപടലങ്ങൾ കേന്ദ്രീകരിച്ചുള്ള ഘനീകരണം. മേഘങ്ങൾ: ഉയർന്ന വിതാനങ്ങളിൽ നടക്കുന്ന ഘനീകരണം."},
+  en:{q:"What are the various forms of condensation? Explain.", a:"Dew: water vapour condenses on cooled leaves at night, forming droplets. Frost: fine ice crystals form below 0°C. Fog/Mist: condensation around dust particles in the lower atmosphere. Clouds: condensation at higher altitudes."}}
+];
+let qbFilter='all';
+function renderQB(){
+  const list=document.getElementById('qbList');
+  const filtered = QB.filter(item=> qbFilter==='all' || item.m==qbFilter);
+  const toggleLabel = LANG==='ml' ? 'ഉത്തരം കാണിക്കുക / മറയ്ക്കുക ▾' : 'Show / Hide Answer ▾';
+  list.innerHTML = filtered.map((item,i)=>{
+    const d = item[LANG];
+    const markText = LANG==='ml' ? (item.m+' മാർക്ക്') : (item.m+' Mark'+(item.m>1?'s':''));
+    return `<div class="qb-item"><span class="mark">${markText}</span><div><b>${i+1}.</b> ${d.q}</div><button class="qb-toggle" onclick="this.nextElementSibling.classList.toggle('show')">${toggleLabel}</button><div class="ans">${d.a}</div></div>`;
+  }).join('');
+}
+document.querySelectorAll('#qbFilters button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('#qbFilters button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    qbFilter=btn.dataset.f;
+    renderQB();
+  });
+});
+renderQB();
+</script>
+</body>
+</html>
