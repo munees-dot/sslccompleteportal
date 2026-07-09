@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ലെൻസുകൾ | Lenses — Class 10 Physics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16202e; --ink-soft:#48566a; --paper:#eceee8; --card:#ffffff;
+    --wave:#4f46e5; --wave-deep:#3730a3; --amp:#ea580c; --reso:#0d9488;
+    --line:#d6d9d1; --good:#108a5b; --bad:#c0392b;
+    --shadow:0 1px 0 rgba(22,32,46,.04), 0 8px 24px -16px rgba(22,32,46,.35);
+    --r:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Noto Sans Malayalam",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  .mono{font-family:"Space Mono","Noto Sans Malayalam",monospace;}
+  .wrap{max-width:900px;margin:0 auto;padding:0 18px;}
+
+  /* ===== BILINGUAL SWITCH ===== */
+  .t-en{display:none;}
+  body.lang-en .t-ml{display:none;}
+  body.lang-en .t-en{display:revert;}
+
+  /* ---------- header ---------- */
+  header{background:var(--ink);color:#eef2f6;position:relative;overflow:hidden;border-bottom:3px solid var(--wave);}
+  .scope{position:absolute;inset:0;width:100%;height:100%;opacity:.55;}
+  .scope .ray{fill:none;stroke:var(--wave);stroke-width:1.6;}
+  .scope .ray.glow{stroke:#818cf8;stroke-width:1;opacity:.7;}
+  .scope .lens{fill:rgba(129,140,248,.10);stroke:#a5b4fc;stroke-width:2;}
+  .scope .axis{stroke:#3b4a5e;stroke-width:1;stroke-dasharray:5 6;}
+  .scope .foc{fill:var(--amp);}
+  @keyframes drift{from{transform:translateX(0);}to{transform:translateX(-220px);}}
+  .scope #scopeG{animation:drift 7s linear infinite;}
+  .hero{position:relative;z-index:2;padding:40px 18px 30px;max-width:900px;margin:0 auto;}
+  .eyebrow{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:12px;letter-spacing:2px;
+    text-transform:uppercase;color:#a5b4fc;margin:0 0 8px;}
+  .hero h1{font-weight:800;font-size:clamp(34px,7vw,58px);margin:0;line-height:1.05;letter-spacing:-.5px;}
+  .hero .sub{margin:10px 0 0;color:#aebccb;font-size:15px;max-width:560px;}
+  .hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+  .pill{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:11px;letter-spacing:.5px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
+    color:#cfe0ec;padding:5px 11px;border-radius:30px;}
+
+  /* language toggle */
+  .langbar{position:absolute;top:16px;right:18px;z-index:5;display:flex;
+    background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:30px;padding:3px;}
+  .langbar button{border:none;background:none;cursor:pointer;color:#cfe0ec;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:12.5px;
+    padding:6px 14px;border-radius:30px;transition:.15s;}
+  .langbar button.on{background:var(--wave);color:#fff;}
+
+  /* ---------- tabs ---------- */
+  nav.tabs{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--line);}
+  .tabwrap{max-width:900px;margin:0 auto;display:flex;gap:2px;overflow-x:auto;padding:0 10px;}
+  .tab{flex:0 0 auto;border:none;background:none;cursor:pointer;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:600;font-size:14.5px;
+    color:var(--ink-soft);padding:14px 16px;border-bottom:3px solid transparent;white-space:nowrap;transition:color .15s;}
+  .tab:hover{color:var(--ink);}
+  .tab.active{color:var(--wave-deep);border-bottom-color:var(--wave);}
+
+  /* ---------- panels ---------- */
+  .panel{display:none;padding:26px 0 60px;}
+  .panel.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .lead{color:var(--ink-soft);font-size:15px;margin:0 0 22px;}
+
+  details.topic{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+    margin:0 0 12px;box-shadow:var(--shadow);overflow:hidden;}
+  summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:12px;}
+  summary::-webkit-details-marker{display:none;}
+  .tnum{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-weight:700;font-size:13px;
+    color:#fff;background:var(--wave);min-width:30px;height:30px;border-radius:8px;
+    display:grid;place-items:center;flex:0 0 auto;}
+  details[open] .tnum{background:var(--amp);}
+  .ttitle{font-weight:700;font-size:18px;flex:1;line-height:1.25;}
+  .chev{transition:transform .2s;color:var(--ink-soft);font-size:13px;}
+  details[open] .chev{transform:rotate(90deg);}
+  .tbody{padding:2px 18px 20px 18px;border-top:1px solid var(--line);}
+  .tbody p{margin:14px 0 0;}
+  .tbody ul{margin:12px 0 0;padding-left:0;list-style:none;}
+  .tbody li{position:relative;padding-left:22px;margin:7px 0;}
+  .tbody li::before{content:"";position:absolute;left:4px;top:12px;width:8px;height:8px;border-radius:50%;background:var(--wave);}
+  .def{background:#f1f1fb;border-left:4px solid var(--wave);border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0 0;}
+  .def b{color:var(--wave-deep);}
+  .note{font-size:13.5px;color:var(--ink-soft);}
+  .mini-tbl{width:100%;border-collapse:collapse;margin:14px 0 0;font-size:14px;}
+  .mini-tbl th,.mini-tbl td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+  .mini-tbl th{background:#f1f1fb;color:var(--wave-deep);font-weight:700;}
+  .mini-tbl td:first-child{background:#faf7f3;font-weight:600;}
+
+  .fgrid{display:grid;grid-template-columns:1fr;gap:16px;}
+  .fcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow);}
+  .fcard .fname{font-weight:600;font-size:16px;color:var(--ink-soft);margin:0 0 12px;}
+  .formula{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-weight:700;
+    font-size:clamp(22px,5vw,30px);color:var(--wave-deep);background:#f3f3fc;
+    border:1px dashed var(--wave);border-radius:10px;padding:14px 18px;text-align:center;letter-spacing:1px;}
+  .where{margin-top:14px;display:grid;gap:6px;}
+  .where div{font-size:14.5px;}
+  .where .sym{font-family:"Space Mono","Noto Sans Malayalam",monospace;color:var(--amp);font-weight:700;}
+
+  .fcwrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+  .flip{perspective:1200px;height:180px;cursor:pointer;}
+  .flip-inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d;}
+  .flip.on .flip-inner{transform:rotateY(180deg);}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    padding:18px;text-align:center;box-shadow:var(--shadow);}
+  .face.front{background:var(--card);border:1px solid var(--line);}
+  .face.front .term{font-weight:700;font-size:19px;color:var(--ink);}
+  .face.front .sec{font-size:12.5px;color:var(--ink-soft);margin-top:6px;font-style:italic;}
+  .face.front .hint{position:absolute;bottom:10px;font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:10px;color:var(--wave);letter-spacing:1px;}
+  .face.back{background:var(--wave-deep);color:#eef0fb;transform:rotateY(180deg);
+    border:1px solid var(--wave-deep);font-size:14px;line-height:1.55;}
+
+  /* share bar */
+  .sharebar{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:0 0 18px;}
+  .sbtn{border:none;cursor:pointer;text-decoration:none;display:inline-block;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;
+    font-size:13.5px;padding:10px 18px;border-radius:10px;transition:.15s;}
+  .sbtn.open{background:var(--wave);color:#fff;}
+  .sbtn.open:hover{background:var(--wave-deep);}
+  .sbtn.share{background:var(--reso);color:#fff;}
+  .sbtn.share:hover{background:#0b7a6b;}
+  .sbtn.wa{background:#1f9e50;color:#fff;}
+  .sbtn.wa:hover{background:#177d3e;}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#eef2f6;padding:11px 20px;border-radius:30px;font-size:13.5px;
+    opacity:0;pointer-events:none;transition:.25s;z-index:99;box-shadow:0 8px 24px -8px rgba(0,0,0,.5);}
+  .toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  .quiz-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+    box-shadow:var(--shadow);padding:24px;max-width:680px;margin:0 auto;}
+  .qmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+  .qcount,.qscore{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:12px;letter-spacing:1px;}
+  .qcount{color:var(--ink-soft);} .qscore{color:var(--amp);font-weight:700;}
+  .qbar{height:6px;background:#e7eae3;border-radius:6px;overflow:hidden;margin-bottom:18px;}
+  .qbar i{display:block;height:100%;background:var(--wave);transition:width .3s;}
+  .qtext{font-weight:600;font-size:19px;line-height:1.4;margin:0 0 18px;}
+  .opt{display:block;width:100%;text-align:left;background:#f6f8f3;border:2px solid var(--line);
+    border-radius:11px;padding:13px 16px;margin:9px 0;cursor:pointer;
+    font-family:"Noto Sans Malayalam",sans-serif;font-size:15.5px;color:var(--ink);transition:all .15s;}
+  .opt:hover:not(:disabled){border-color:var(--wave);background:#eeeefb;}
+  .opt:disabled{cursor:default;}
+  .opt.correct{border-color:var(--good);background:#e7f6ee;color:#0a5e3d;font-weight:600;}
+  .opt.wrong{border-color:var(--bad);background:#fbecea;color:#8e2118;}
+  .qfb{margin-top:14px;padding:12px 15px;border-radius:10px;font-size:14.5px;display:none;}
+  .qfb.show{display:block;}
+  .qfb.ok{background:#e7f6ee;color:#0a5e3d;border-left:4px solid var(--good);}
+  .qfb.no{background:#fbecea;color:#8e2118;border-left:4px solid var(--bad);}
+  .qnext{margin-top:18px;width:100%;border:none;cursor:pointer;background:var(--wave);color:#fff;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:16px;padding:13px;border-radius:11px;transition:background .15s;}
+  .qnext:hover{background:var(--wave-deep);}
+  .qnext[disabled]{background:#aeb8c2;cursor:not-allowed;}
+  .result{text-align:center;padding:14px 0;}
+  .result .big{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-weight:700;font-size:54px;color:var(--wave-deep);line-height:1;}
+  .result .lbl{font-weight:600;font-size:20px;margin-top:8px;}
+  .result .msg{color:var(--ink-soft);margin-top:6px;}
+  .retry{margin-top:20px;background:var(--amp);color:#fff;border:none;cursor:pointer;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:15px;padding:11px 26px;border-radius:10px;}
+
+  .gsearch{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:11px;
+    font-family:"Noto Sans Malayalam",sans-serif;font-size:15px;margin-bottom:18px;background:var(--card);}
+  .gsearch:focus{outline:none;border-color:var(--wave);}
+  table.gloss{width:100%;border-collapse:collapse;background:var(--card);
+    border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);}
+  .gloss th{background:var(--ink);color:#dfe7ee;font-weight:600;text-align:left;padding:12px 16px;font-size:14px;}
+  .gloss td{padding:11px 16px;border-top:1px solid var(--line);font-size:15px;vertical-align:top;}
+  .gloss td.gen{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:13px;color:var(--wave-deep);}
+  .gloss tr:hover td{background:#f6f8f3;}
+
+  .qb-tools{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px;}
+  .qb-btn{border:none;cursor:pointer;font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;
+    font-size:14px;padding:10px 18px;border-radius:10px;}
+  .qb-btn.show{background:var(--wave);color:#fff;}
+  .qb-btn.show:hover{background:var(--wave-deep);}
+  .qb-btn.prn{background:var(--reso);color:#fff;}
+  .qb-sec{margin:0 0 30px;}
+  .qb-head{display:flex;align-items:center;gap:12px;margin:0 0 4px;border-bottom:2px solid var(--wave);padding-bottom:8px;}
+  .qb-head .sl{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-weight:700;font-size:13px;color:#fff;
+    background:var(--wave-deep);padding:4px 11px;border-radius:7px;flex:0 0 auto;}
+  .qb-head h3{font-weight:800;font-size:19px;margin:0;flex:1;line-height:1.2;}
+  .qb-head .mk{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:12px;color:var(--amp);font-weight:700;}
+  .qb-item{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px;margin:12px 0;box-shadow:var(--shadow);}
+  .qb-q{display:flex;gap:10px;font-size:16px;font-weight:600;line-height:1.5;}
+  .qb-q .n{font-family:"Space Mono","Noto Sans Malayalam",monospace;color:var(--amp);font-weight:700;flex:0 0 auto;}
+  .qb-opts{list-style:none;padding:0;margin:10px 0 0 26px;display:grid;gap:5px;}
+  .qb-opts li{font-size:15px;color:var(--ink-soft);}
+  .qb-opts li b{color:var(--wave-deep);font-family:"Space Mono","Noto Sans Malayalam",monospace;margin-right:6px;}
+  .qb-ans{margin:12px 0 0;padding:11px 14px;border-radius:9px;background:#e7f6ee;
+    border-left:4px solid var(--good);color:#0a5e3d;font-size:14.5px;line-height:1.6;display:none;}
+  .qb-ans.on{display:block;}
+  body.lang-en .qb-ans.on .t-ml{display:none;}
+  .qb-ans b{color:#084d33;}
+  .qb-rev{margin-top:10px;background:none;border:1px dashed var(--good);color:var(--good);cursor:pointer;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:12.5px;padding:5px 12px;border-radius:8px;}
+  .qb-rev:hover{background:#eafaf1;}
+
+  .sn-paper{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:26px 28px;}
+  .sn-paper h2{font-weight:800;font-size:22px;text-align:center;margin:0 0 4px;color:var(--ink);}
+  .sn-paper .sn-sub{text-align:center;color:var(--ink-soft);font-size:13px;margin:0 0 20px;
+    font-family:"Space Mono","Noto Sans Malayalam",monospace;letter-spacing:1px;}
+  .sn-block{margin:0 0 18px;break-inside:avoid;}
+  .sn-block h4{font-weight:800;font-size:15.5px;margin:0 0 7px;color:var(--wave-deep);display:flex;align-items:center;gap:8px;}
+  .sn-block h4 .dot{width:9px;height:9px;border-radius:50%;background:var(--amp);flex:0 0 auto;}
+  .sn-block ul{list-style:none;padding:0;margin:0;}
+  .sn-block li{position:relative;padding-left:16px;margin:4px 0;font-size:14px;line-height:1.55;}
+  .sn-block li::before{content:"▸";position:absolute;left:0;color:var(--wave);font-size:11px;top:2px;}
+  .sn-block li b{color:var(--ink);}
+  .sn-key{background:#f3f3fc;border:1px dashed var(--wave);border-radius:9px;padding:10px 14px;margin:4px 0;
+    font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:14px;color:var(--wave-deep);font-weight:700;}
+  .sn-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 18px;}
+  .sn-grid .sn-key{margin:0;}
+  @media(max-width:560px){.sn-grid{grid-template-columns:1fr;}}
+
+  .prnbtn{background:var(--reso);color:#fff;border:none;cursor:pointer;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:15px;padding:11px 28px;border-radius:11px;}
+
+  footer{background:var(--ink);color:#8ea0b2;text-align:center;padding:26px 18px;font-size:13px;}
+  footer b{color:#cfe0ec;}
+
+  @media print{
+    nav.tabs,.scope,.hero .meta,.langbar,footer,.qnext,.retry,.gsearch,.flip .hint,
+    .qb-tools,.qb-rev,.no-print,.prnbtn{display:none!important;}
+    .panel{display:block!important;page-break-before:always;padding:0;}
+    body{background:#fff;}
+    details.topic{break-inside:avoid;border:1px solid #ccc;}
+    summary{pointer-events:none;}
+    .flip-inner{transform:none!important;}
+    .face.back{position:relative;transform:none;}
+    .qb-item,.sn-block{break-inside:avoid;}
+    body.print-one .panel{display:none!important;page-break-before:auto;}
+    body.print-one .panel.print-me{display:block!important;page-break-before:auto;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .scope #scopeG{animation:none;} .panel.active{animation:none;} .flip-inner{transition:none;}
+  }
+  @media (max-width:560px){
+    .hero{padding:56px 18px 24px;} .ttitle{font-size:16px;}
+    .langbar{top:12px;right:12px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="scope" id="scope" viewBox="0 0 900 240" preserveAspectRatio="none" aria-hidden="true">
+    <line class="axis" x1="0" y1="120" x2="900" y2="120"/>
+    <g id="scopeG"></g>
+  </svg>
+
+  <div class="langbar">
+    <button id="btnML" class="on">മലയാളം</button>
+    <button id="btnEN">English</button>
+  </div>
+
+  <div class="hero">
+    <p class="eyebrow">Class 10 · Physics · Unit 2</p>
+    <h1><span class="t-ml">ലെൻസുകൾ</span><span class="t-en">Lenses</span></h1>
+    <p class="sub">
+      <span class="t-ml">കോൺവെക്സ് മുതൽ ടെലിസ്കോപ്പ് വരെ — കുറിപ്പുകൾ, സൂത്രവാക്യങ്ങൾ, ഫ്ലാഷ്കാർഡ്, ക്വിസ് എല്ലാം ഒരിടത്ത്.</span>
+      <span class="t-en">From convex lenses to telescopes — notes, formulas, flashcards and quizzes, all in one place.</span>
+    </p>
+    <div class="meta">
+      <span class="pill">1/f = 1/v − 1/u</span>
+      <span class="pill">m = v/u</span>
+      <span class="pill">P = 1/f (D)</span>
+      <span class="pill">SCERT 2025</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabwrap">
+    <button class="tab active" data-p="notes"><span class="t-ml">കുറിപ്പുകൾ</span><span class="t-en">Notes</span></button>
+    <button class="tab" data-p="formula"><span class="t-ml">സൂത്രവാക്യങ്ങൾ</span><span class="t-en">Formulas</span></button>
+    <button class="tab" data-p="flash"><span class="t-ml">ഫ്ലാഷ്കാർഡ്</span><span class="t-en">Flashcards</span></button>
+    <button class="tab" data-p="quiz"><span class="t-ml">ക്വിസ്</span><span class="t-en">Quiz</span></button>
+    <button class="tab" data-p="qbank"><span class="t-ml">ചോദ്യബാങ്ക്</span><span class="t-en">Question Bank</span></button>
+    <button class="tab" data-p="short"><span class="t-ml">ഷോർട്ട് നോട്ട്</span><span class="t-en">Short Note</span></button>
+    <button class="tab" data-p="gloss"><span class="t-ml">പദാവലി</span><span class="t-en">Glossary</span></button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ================= NOTES ================= -->
+<section class="panel active" id="notes">
+  <p class="lead">
+    <span class="t-ml">ഓരോ ടൈറ്റിലിലും ക്ലിക്ക് ചെയ്ത് ആ ഭാഗം തുറക്കാം. പ്രധാന നിർവചനങ്ങൾ <b style="color:var(--wave-deep)">നീല ബോക്സിൽ</b> അടയാളപ്പെടുത്തിയിരിക്കുന്നു.</span>
+    <span class="t-en">Click any title to open that section. Key definitions are marked in <b style="color:var(--wave-deep)">blue boxes</b>.</span>
+  </p>
+
+  <details class="topic" open>
+    <summary><span class="tnum">1</span><span class="ttitle"><span class="t-ml">ലെൻസ് — അടിസ്ഥാന ധാരണ</span><span class="t-en">Lens — Basic Idea</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <div class="def">
+        <span class="t-ml"><b>ലെൻസ് (Lens):</b> അപവർത്തനപ്രതലങ്ങൾ ഗോളങ്ങളുടെ ഭാഗമായി വരുന്ന സുതാര്യമാധ്യമമാണ് ലെൻസ്. ഓരോ ലെൻസിനും രണ്ട് അപവർത്തനപ്രതലങ്ങൾ ഉണ്ട്.</span>
+        <span class="t-en"><b>Lens:</b> A transparent medium whose refracting surfaces form parts of spheres. Every lens has two refracting surfaces.</span>
+      </div>
+      <p>
+        <span class="t-ml">സാധാരണ ഗ്ലാസ് ഷീറ്റിലൂടെ പ്രകാശം കടക്കുമ്പോൾ പ്രകാശബണ്ഡത്തിന്റെ വലുപ്പം മാറുന്നില്ല. എന്നാൽ ലെൻസിന് <b>പ്രകാശരശ്മികളെ ഒരു ബിന്ദുവിലേക്ക് കേന്ദ്രീകരിക്കാനോ വ്യാപിപ്പിക്കാനോ</b> കഴിയും.</span>
+        <span class="t-en">When light passes through a plain glass sheet, the size of the light beam does not change. But a lens can <b>converge light rays to a point or spread them out</b>.</span>
+      </p>
+      <p><b><span class="t-ml">ദൈനംദിന ഉദാഹരണങ്ങൾ:</span><span class="t-en">Everyday examples:</span></b></p>
+      <ul>
+        <li><span class="t-ml">റീഡിങ് ലെൻസ് — അക്ഷരങ്ങൾ വലുതായി കാണാൻ</span><span class="t-en">Reading lens — to magnify letters</span></li>
+        <li><span class="t-ml">കണ്ണടകൾ</span><span class="t-en">Spectacles</span></li>
+        <li><span class="t-ml">കളിപ്പാട്ടങ്ങൾ</span><span class="t-en">Toys</span></li>
+        <li><span class="t-ml">ഡോർലെൻസ് — വാതിലിൽ ഉറപ്പിച്ച് പുറത്തെ ദൃശ്യങ്ങൾ കാണാൻ</span><span class="t-en">Door lens (peephole) — fixed on a door to view outside</span></li>
+        <li><span class="t-ml">ക്യാമറ, മൈക്രോസ്കോപ്, ടെലിസ്കോപ്</span><span class="t-en">Camera, microscope, telescope</span></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">2</span><span class="ttitle"><span class="t-ml">കോൺവെക്സ് ലെൻസും കോൺകേവ് ലെൻസും</span><span class="t-en">Convex and Concave Lenses</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <div class="def">
+        <span class="t-ml"><b>കോൺവെക്സ് ലെൻസ് (Convex lens):</b> <b>മധ്യഭാഗം കനം കൂടിയത്</b>, അരിക് കനം കുറവ്. വസ്തുക്കളെ വലുതാക്കിക്കാണിക്കുന്നു. <b>പ്രകാശരശ്മികളെ സംഭ്രജിപ്പിക്കുന്നു (converge)</b>. കടലാസ് കത്തിക്കാൻ കഴിയും.</span>
+        <span class="t-en"><b>Convex lens:</b> <b>Thicker at the middle</b>, thinner at the edges. Magnifies objects. It <b>converges</b> light rays. It can burn a piece of paper.</span>
+      </div>
+      <div class="def">
+        <span class="t-ml"><b>കോൺകേവ് ലെൻസ് (Concave lens):</b> <b>മധ്യഭാഗം കനം കുറവ്</b>, അരിക് കനം കൂടിയത്. <b>പ്രകാശരശ്മികളെ വിഭ്രജിപ്പിക്കുന്നു (diverge)</b>. കടലാസ് കത്തിക്കാൻ കഴിയില്ല.</span>
+        <span class="t-en"><b>Concave lens:</b> <b>Thinner at the middle</b>, thicker at the edges. It <b>diverges</b> light rays. It cannot burn paper.</span>
+      </div>
+      <table class="mini-tbl t-ml">
+        <tr><th>കോൺവെക്സ് ലെൻസ്</th><th>കോൺകേവ് ലെൻസ്</th></tr>
+        <tr><td>മധ്യഭാഗം കനം കൂടിയത്</td><td>അരിക് കനം കൂടിയത്</td></tr>
+        <tr><td>പ്രകാശത്തെ സംഭ്രജിപ്പിക്കുന്നു</td><td>പ്രകാശത്തെ വിഭ്രജിപ്പിക്കുന്നു</td></tr>
+        <tr><td>വസ്തുവിനെ വലുതാക്കിക്കാണിക്കുന്നു</td><td>അക്ഷരങ്ങൾ വിപരീത ദിശയിലേക്ക് നീങ്ങുന്നതായി തോന്നുന്നു</td></tr>
+      </table>
+      <table class="mini-tbl t-en">
+        <tr><th>Convex lens</th><th>Concave lens</th></tr>
+        <tr><td>Thicker at the middle</td><td>Thicker at the edges</td></tr>
+        <tr><td>Converges light</td><td>Diverges light</td></tr>
+        <tr><td>Magnifies objects</td><td>Letters appear to shift in the opposite direction</td></tr>
+      </table>
+      <p class="note">
+        <span class="t-ml"><b>എളുപ്പവഴി:</b> അക്ഷരത്തിലൂടെ ലെൻസ് ഒരു വശത്തേക്ക് നീക്കുമ്പോൾ — കോൺവെക്സിൽ അക്ഷരം <b>വിപരീത</b> ദിശയിലേക്കും, കോൺകേവിൽ <b>അതേ</b> ദിശയിലേക്കും നീങ്ങുന്നതായി തോന്നും.</span>
+        <span class="t-en"><b>Quick test:</b> Slide the lens sideways over printed letters — with a convex lens the letters seem to move in the <b>opposite</b> direction; with a concave lens, in the <b>same</b> direction.</span>
+      </p>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">3</span><span class="ttitle"><span class="t-ml">ലെൻസുമായി ബന്ധപ്പെട്ട പദങ്ങൾ</span><span class="t-en">Terms Related to Lenses</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <ul>
+        <li><span class="t-ml"><b>പ്രകാശികകേന്ദ്രം (Optic centre, O)</b> — ലെൻസിന്റെ മധ്യബിന്ദു. ഇതിലൂടെ കടക്കുന്ന രശ്മി വ്യതിയാനമില്ലാതെ നേരെ പോകുന്നു.</span>
+            <span class="t-en"><b>Optic centre (O)</b> — the midpoint of the lens. A ray through it passes straight without deviation.</span></li>
+        <li><span class="t-ml"><b>വക്രതാകേന്ദ്രങ്ങൾ (Centres of curvature, C₁, C₂)</b> — ഓരോ പ്രതലവും ഉൾപ്പെടുന്ന ഗോളങ്ങളുടെ കേന്ദ്രങ്ങൾ.</span>
+            <span class="t-en"><b>Centres of curvature (C₁, C₂)</b> — the centres of the spheres of which each surface is a part.</span></li>
+        <li><span class="t-ml"><b>പ്രകാശിക അക്ഷം (Optic axis)</b> — വക്രതാകേന്ദ്രങ്ങളിലൂടെയും പ്രകാശികകേന്ദ്രത്തിലൂടെയും കടന്നുപോകുന്ന സാങ്കല്പിക രേഖ.</span>
+            <span class="t-en"><b>Optic axis</b> — the imaginary line passing through the centres of curvature and the optic centre.</span></li>
+        <li><span class="t-ml"><b>അപ്പെർച്ചർ (Aperture)</b> — പ്രകാശം കടന്നുപോകുന്ന ഭാഗത്തിന്റെ പരപ്പളവ്. സ്റ്റോപ്പ് ഉപയോഗിച്ച് വ്യത്യാസപ്പെടുത്താം.</span>
+            <span class="t-en"><b>Aperture</b> — the area of the lens through which light passes. It can be varied using a stop.</span></li>
+      </ul>
+      <div class="def">
+        <span class="t-ml"><b>മുഖ്യഫോക്കസ് (Principal focus, F):</b> പ്രകാശിക അക്ഷത്തിന് സമാന്തരമായി ലെൻസിൽ പതിക്കുന്ന രശ്മികൾ അപവർത്തനത്തിനു ശേഷം സംഭ്രജിക്കുന്നതോ (കോൺവെക്സ്) അകന്നുപോകുന്നതായി തോന്നുന്നതോ (കോൺകേവ്) ആയ അക്ഷത്തിലെ ബിന്ദു.</span>
+        <span class="t-en"><b>Principal focus (F):</b> The point on the optic axis where rays parallel to the axis converge after refraction (convex), or appear to diverge from (concave).</span>
+      </div>
+      <ul>
+        <li><span class="t-ml"><b>കോൺവെക്സ്:</b> രശ്മികൾ യഥാർഥത്തിൽ ഒന്നിക്കുന്നു → ഫോക്കസ് <b>യഥാർഥമാണ് (Real)</b>.</span>
+            <span class="t-en"><b>Convex:</b> rays actually meet → the focus is <b>real</b>.</span></li>
+        <li><span class="t-ml"><b>കോൺകേവ്:</b> രശ്മികൾ ഒരു ബിന്ദുവിൽ നിന്ന് അകന്നുപോകുന്നതായി തോന്നുന്നു → ഫോക്കസ് <b>മിഥ്യയാണ് (Virtual)</b>.</span>
+            <span class="t-en"><b>Concave:</b> rays only appear to come from a point → the focus is <b>virtual</b>.</span></li>
+        <li><span class="t-ml">ഓരോ ലെൻസിനും <b>രണ്ട് മുഖ്യഫോക്കസുകൾ</b> ഉണ്ട് — പ്രകാശികകേന്ദ്രത്തിൽ നിന്ന് തുല്യ അകലത്തിൽ.</span>
+            <span class="t-en">Every lens has <b>two principal foci</b>, equidistant from the optic centre.</span></li>
+      </ul>
+      <div class="def">
+        <span class="t-ml"><b>ഫോക്കസ് ദൂരം (Focal length, f):</b> ലെൻസിന്റെ പ്രകാശികകേന്ദ്രത്തിൽ നിന്ന് മുഖ്യഫോക്കസിലേക്കുള്ള അകലം.</span>
+        <span class="t-en"><b>Focal length (f):</b> The distance from the optic centre to the principal focus.</span>
+      </div>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">4</span><span class="ttitle"><span class="t-ml">യഥാർഥ പ്രതിബിംബവും മിഥ്യാപ്രതിബിംബവും</span><span class="t-en">Real and Virtual Images</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <div class="def">
+        <span class="t-ml"><b>യഥാർഥ പ്രതിബിംബം (Real image):</b> സ്ക്രീനിൽ പതിപ്പിക്കാൻ കഴിയുന്ന പ്രതിബിംബം. ഉദാ: ക്യാമറയിൽ ലഭിക്കുന്നത്, സിനിമാസ്ക്രീനിൽ രൂപപ്പെടുന്നത്.</span>
+        <span class="t-en"><b>Real image:</b> An image that can be caught on a screen. Examples: the image in a camera, the image on a cinema screen.</span>
+      </div>
+      <div class="def">
+        <span class="t-ml"><b>മിഥ്യാപ്രതിബിംബം (Virtual image):</b> സ്ക്രീനിൽ പതിപ്പിക്കാൻ കഴിയാത്തതും, കാണാൻ മാത്രം കഴിയുന്നതുമായ പ്രതിബിംബം. ഉദാ: റീഡിങ് ലെൻസിലൂടെ കാണുന്ന വലുതായ പ്രതിബിംബം.</span>
+        <span class="t-en"><b>Virtual image:</b> An image that cannot be caught on a screen but can only be seen. Example: the enlarged image seen through a reading lens.</span>
+      </div>
+      <p class="note">
+        <span class="t-ml"><b>ഓർക്കുക:</b> യഥാർഥ പ്രതിബിംബം എപ്പോഴും <b>തലകീഴായതാണ്</b>; മിഥ്യാപ്രതിബിംബം എപ്പോഴും <b>നിവർന്നതാണ്</b>.</span>
+        <span class="t-en"><b>Remember:</b> A real image is always <b>inverted</b>; a virtual image is always <b>erect</b>.</span>
+      </p>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">5</span><span class="ttitle"><span class="t-ml">കോൺവെക്സ് ലെൻസ് — പ്രതിബിംബരൂപീകരണം</span><span class="t-en">Convex Lens — Image Formation</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <p><b><span class="t-ml">രേഖാചിത്രം വരയ്ക്കാനുള്ള മൂന്ന് രശ്മികൾ:</span><span class="t-en">The three rays used to draw ray diagrams:</span></b></p>
+      <ul>
+        <li><span class="t-ml">അക്ഷത്തിന് <b>സമാന്തരമായ</b> രശ്മി → അപവർത്തനശേഷം മറുവശത്തെ <b>മുഖ്യഫോക്കസിലൂടെ</b> കടന്നുപോകുന്നു.</span>
+            <span class="t-en">A ray <b>parallel to the axis</b> → after refraction it passes through the <b>principal focus</b> on the other side.</span></li>
+        <li><span class="t-ml"><b>പ്രകാശികകേന്ദ്രത്തിലൂടെ</b> പോകുന്ന രശ്മി → വ്യതിയാനമില്ലാതെ നേരെ പോകുന്നു.</span>
+            <span class="t-en">A ray through the <b>optic centre</b> → goes straight without deviation.</span></li>
+        <li><span class="t-ml">വസ്തുവിന്റെ വശത്തെ <b>ഫോക്കസിലൂടെ</b> പോകുന്ന രശ്മി → അക്ഷത്തിന് സമാന്തരമായി കടന്നുപോകുന്നു.</span>
+            <span class="t-en">A ray through the <b>focus on the object side</b> → emerges parallel to the axis.</span></li>
+      </ul>
+      <table class="mini-tbl t-ml">
+        <tr><th>വസ്തുവിന്റെ സ്ഥാനം</th><th>പ്രതിബിംബത്തിന്റെ സ്ഥാനം</th><th>സവിശേഷതകൾ</th></tr>
+        <tr><td>2F ന് അപ്പുറം</td><td>F നും 2F നും ഇടയിൽ</td><td>ചെറുത്, തലകീഴായത്, യഥാർഥം</td></tr>
+        <tr><td>2F ൽ</td><td>2F ൽ</td><td>അതേ വലുപ്പം, തലകീഴായത്, യഥാർഥം</td></tr>
+        <tr><td>2F നും F നും ഇടയിൽ</td><td>2F ന് അപ്പുറം</td><td>വലുത്, തലകീഴായത്, യഥാർഥം</td></tr>
+        <tr><td>F ൽ</td><td>അനന്തതയിൽ</td><td>വളരെ വലുത്, തലകീഴായത്, യഥാർഥം</td></tr>
+        <tr><td>F നും ലെൻസിനും ഇടയിൽ</td><td>വസ്തുവിന്റെ അതേ വശത്ത്</td><td>വലുത്, നിവർന്നത്, മിഥ്യ</td></tr>
+      </table>
+      <table class="mini-tbl t-en">
+        <tr><th>Position of object</th><th>Position of image</th><th>Nature of image</th></tr>
+        <tr><td>Beyond 2F</td><td>Between F and 2F</td><td>Diminished, inverted, real</td></tr>
+        <tr><td>At 2F</td><td>At 2F</td><td>Same size, inverted, real</td></tr>
+        <tr><td>Between 2F and F</td><td>Beyond 2F</td><td>Enlarged, inverted, real</td></tr>
+        <tr><td>At F</td><td>At infinity</td><td>Highly enlarged, inverted, real</td></tr>
+        <tr><td>Between F and the lens</td><td>Same side as the object</td><td>Enlarged, erect, virtual</td></tr>
+      </table>
+      <p class="note">
+        <span class="t-ml"><b>റീഡിങ് ലെൻസ്:</b> വസ്തു F നും ലെൻസിനും ഇടയിലായാൽ — വലുതും നിവർന്നതും മിഥ്യയുമായ പ്രതിബിംബം.</span>
+        <span class="t-en"><b>Magnifying glass:</b> when the object lies between F and the lens, the image is enlarged, erect and virtual.</span>
+      </p>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">6</span><span class="ttitle"><span class="t-ml">കോൺകേവ് ലെൻസ് — പ്രതിബിംബരൂപീകരണം</span><span class="t-en">Concave Lens — Image Formation</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <p>
+        <span class="t-ml">കോൺകേവ് ലെൻസ് പ്രകാശരശ്മികളെ വിഭ്രജിപ്പിക്കുന്നതുകൊണ്ട് അത് രൂപപ്പെടുത്തുന്ന പ്രതിബിംബം <b>എല്ലായ്പ്പോഴും ഒരേ സ്വഭാവമാണ്</b>:</span>
+        <span class="t-en">Because a concave lens diverges light, the image it forms <b>always has the same nature</b>:</span>
+      </p>
+      <div class="def" style="text-align:center;font-size:16px">
+        <b><span class="t-ml">ചെറുത് · നിവർന്നത് · മിഥ്യ</span><span class="t-en">Diminished · Erect · Virtual</span></b>
+      </div>
+      <ul>
+        <li><span class="t-ml">വസ്തു എവിടെ വെച്ചാലും — പ്രതിബിംബം <b>വസ്തുവിന്റെ അതേ വശത്ത്</b>, <b>F നും ലെൻസിനും ഇടയിൽ</b>.</span>
+            <span class="t-en">Wherever the object is placed, the image forms on the <b>same side as the object</b>, <b>between F and the lens</b>.</span></li>
+        <li><span class="t-ml">പ്രതിബിംബം എപ്പോഴും വസ്തുവിനേക്കാൾ <b>ചെറുതും നിവർന്നതുമാണ്</b>.</span>
+            <span class="t-en">The image is always <b>smaller than the object and erect</b>.</span></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">7</span><span class="ttitle"><span class="t-ml">ലെൻസ് സമവാക്യവും ചിഹ്നരീതിയും</span><span class="t-en">Lens Equation and Sign Convention</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <div class="def">
+        <span class="t-ml"><b>ലെൻസ് സമവാക്യം:</b> വസ്തുദൂരം (u), പ്രതിബിംബദൂരം (v), ഫോക്കസ് ദൂരം (f) — ഇവ തമ്മിലുള്ള ബന്ധം:</span>
+        <span class="t-en"><b>Lens equation:</b> the relation between object distance (u), image distance (v) and focal length (f):</span>
+      </div>
+      <div class="formula" style="margin-top:12px">1/f = 1/v − 1/u</div>
+      <p style="text-align:center;margin-top:6px">
+        <span class="t-ml">അല്ലെങ്കിൽ</span><span class="t-en">or</span> &nbsp; <b class="mono" style="color:var(--amp)">f = uv / (u − v)</b>
+      </p>
+      <div class="def"><b><span class="t-ml">കാർട്ടീഷ്യൻ ചിഹ്നരീതി (Cartesian sign convention)</span><span class="t-en">Cartesian sign convention</span></b></div>
+      <ul>
+        <li><span class="t-ml">എല്ലാ ദൂരങ്ങളും <b>പ്രകാശികകേന്ദ്രത്തിൽ (O) നിന്ന്</b> അളക്കണം.</span>
+            <span class="t-en">All distances are measured <b>from the optic centre (O)</b>.</span></li>
+        <li><span class="t-ml">പതനരശ്മിയുടെ <b>അതേദിശയിൽ</b> → <b>പോസിറ്റീവ്</b>; <b>വിപരീതദിശയിൽ</b> → <b>നെഗറ്റീവ്</b>.</span>
+            <span class="t-en">Distances measured in the <b>same direction</b> as the incident ray are <b>positive</b>; those in the <b>opposite direction</b> are <b>negative</b>.</span></li>
+        <li><span class="t-ml">അക്ഷത്തിന് <b>മുകളിലേക്ക്</b> → പോസിറ്റീവ്; <b>താഴേക്ക്</b> → നെഗറ്റീവ്.</span>
+            <span class="t-en">Heights measured <b>upward</b> from the axis are positive; <b>downward</b>, negative.</span></li>
+      </ul>
+      <p class="note">
+        <span class="t-ml"><b>പ്രായോഗികമായി:</b> u എപ്പോഴും നെഗറ്റീവ്. യഥാർഥ പ്രതിബിംബത്തിന് v പോസിറ്റീവ്; മിഥ്യാപ്രതിബിംബത്തിന് v നെഗറ്റീവ്. കോൺവെക്സിന് f പോസിറ്റീവ്; കോൺകേവിന് f നെഗറ്റീവ്.</span>
+        <span class="t-en"><b>In practice:</b> u is always negative. For a real image v is positive; for a virtual image v is negative. f is positive for a convex lens and negative for a concave lens.</span>
+      </p>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">8</span><span class="ttitle"><span class="t-ml">ആവർധനവും ലെൻസിന്റെ പവറും</span><span class="t-en">Magnification and Power of a Lens</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <div class="def">
+        <span class="t-ml"><b>ആവർധനം (Magnification, m):</b> പ്രതിബിംബത്തിന്റെ ഉയരവും വസ്തുവിന്റെ ഉയരവും തമ്മിലുള്ള അനുപാത സംഖ്യ. ഇതിന് യൂണിറ്റ് ഇല്ല.</span>
+        <span class="t-en"><b>Magnification (m):</b> The ratio of the height of the image to the height of the object. It has no unit.</span>
+      </div>
+      <div class="formula" style="margin-top:12px">m = hᵢ / hₒ = v / u</div>
+      <ul>
+        <li><span class="t-ml">m <b>പോസിറ്റീവ്</b> → പ്രതിബിംബം നിവർന്നതും മിഥ്യയും.</span>
+            <span class="t-en">If m is <b>positive</b> → the image is erect and virtual.</span></li>
+        <li><span class="t-ml">m <b>നെഗറ്റീവ്</b> → പ്രതിബിംബം തലകീഴായതും യഥാർഥവും.</span>
+            <span class="t-en">If m is <b>negative</b> → the image is inverted and real.</span></li>
+        <li><span class="t-ml">|m| &gt; 1 → വലുത്; |m| &lt; 1 → ചെറുത്.</span>
+            <span class="t-en">|m| &gt; 1 → enlarged; |m| &lt; 1 → diminished.</span></li>
+      </ul>
+      <div class="def">
+        <span class="t-ml"><b>ലെൻസിന്റെ പവർ (Power, P):</b> ഫോക്കസ് ദൂരത്തിന്റെ വ്യുൽക്രമമാണ് പവർ. ഫോക്കസ്ദൂരം കുറഞ്ഞ ലെൻസിന്റെ പവർ കൂടുതലായിരിക്കും.</span>
+        <span class="t-en"><b>Power of a lens (P):</b> The reciprocal of the focal length. A lens with a shorter focal length has greater power.</span>
+      </div>
+      <div class="formula" style="margin-top:12px">P = 1 / f</div>
+      <ul>
+        <li><span class="t-ml">SI യൂണിറ്റ്: <b>ഡയോപ്റ്റർ (D)</b>. (f മീറ്ററിൽ എടുക്കണം)</span>
+            <span class="t-en">SI unit: <b>dioptre (D)</b>. (f must be taken in metres)</span></li>
+        <li><span class="t-ml">1 മീറ്റർ ഫോക്കസ്ദൂരമുള്ള ലെൻസിന്റെ പവർ = <b>1 ഡയോപ്റ്റർ</b>.</span>
+            <span class="t-en">A lens of focal length 1 metre has a power of <b>1 dioptre</b>.</span></li>
+        <li><span class="t-ml">കോൺവെക്സ് → പവർ <b>പോസിറ്റീവ്</b>; കോൺകേവ് → പവർ <b>നെഗറ്റീവ്</b>.</span>
+            <span class="t-en">Convex → power is <b>positive</b>; concave → power is <b>negative</b>.</span></li>
+      </ul>
+      <p class="note">
+        <span class="t-ml"><b>കണ്ണടക്കുറിപ്പ്:</b> "+2.00" എന്നത് ലെൻസിന്റെ പവർ ആണ് — പോസിറ്റീവ് ആയതിനാൽ കോൺവെക്സ് ലെൻസ്.</span>
+        <span class="t-en"><b>Spectacle prescription:</b> "+2.00" indicates the power of the lens — being positive, it is a convex lens.</span>
+      </p>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">9</span><span class="ttitle"><span class="t-ml">ഒപ്റ്റിക്കൽ ഉപകരണങ്ങൾ</span><span class="t-en">Optical Instruments</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <div class="def">
+        <span class="t-ml"><b>കോമ്പൗണ്ട് മൈക്രോസ്കോപ്:</b> സൂക്ഷ്മവസ്തുക്കളെ വലുതാക്കിക്കാണാൻ. രണ്ട് കോൺവെക്സ് ലെൻസുകൾ — <b>ഒബ്ജക്റ്റിവ്</b>, <b>ഐപീസ്</b>.</span>
+        <span class="t-en"><b>Compound microscope:</b> Used to view tiny objects magnified. It has two convex lenses — the <b>objective</b> and the <b>eyepiece</b>.</span>
+      </div>
+      <ul>
+        <li><span class="t-ml"><b>ഒബ്ജക്റ്റിവ്:</b> വസ്തുവിനടുത്ത് വെക്കുന്ന ലെൻസ്. ഫോക്കസ്ദൂരം <b>കുറവ്</b>. വലുതും യഥാർഥവും തലകീഴായതുമായ പ്രതിബിംബം ഉണ്ടാക്കുന്നു.</span>
+            <span class="t-en"><b>Objective:</b> the lens placed near the object. Its focal length is <b>small</b>. It forms an enlarged, real, inverted image.</span></li>
+        <li><span class="t-ml"><b>ഐപീസ്:</b> നിരീക്ഷിക്കുന്ന ലെൻസ്. ഫോക്കസ്ദൂരം <b>കൂടുതൽ</b>. ആ പ്രതിബിംബത്തെ വീണ്ടും വലുതാക്കി മിഥ്യാപ്രതിബിംബമായി കാണിക്കുന്നു.</span>
+            <span class="t-en"><b>Eyepiece:</b> the lens we look through. Its focal length is <b>larger</b>. It further magnifies that image into a virtual image.</span></li>
+      </ul>
+      <div class="def">
+        <span class="t-ml"><b>അപവർത്തന ടെലിസ്കോപ്:</b> അകലെയുള്ള വസ്തുക്കളെ വ്യക്തമായി കാണാൻ. ഒബ്ജക്റ്റിവും ഐപീസും പ്രധാന ഭാഗങ്ങൾ.</span>
+        <span class="t-en"><b>Refracting telescope:</b> Used to view distant objects clearly. Its main parts are the objective and the eyepiece.</span>
+      </div>
+      <ul>
+        <li><span class="t-ml"><b>ഒബ്ജക്റ്റിവ്:</b> ഫോക്കസ്ദൂരവും അപ്പെർച്ചറും <b>കൂടുതലായിരിക്കണം</b>.</span>
+            <span class="t-en"><b>Objective:</b> should have a <b>large</b> focal length and aperture.</span></li>
+        <li><span class="t-ml"><b>ഐപീസ്:</b> ഫോക്കസ്ദൂരവും അപ്പെർച്ചറും <b>കുറഞ്ഞതായിരിക്കണം</b>.</span>
+            <span class="t-en"><b>Eyepiece:</b> should have a <b>small</b> focal length and aperture.</span></li>
+        <li><span class="t-ml">ഗുണനിലവാരം കൂടിയ ലെൻസുകൾ ഉപയോഗിക്കണം.</span>
+            <span class="t-en">High-quality lenses should be used.</span></li>
+      </ul>
+      <p class="note">
+        <span class="t-ml"><b>⚠️ ശ്രദ്ധിക്കുക:</b> ടെലിസ്കോപ് ഉപയോഗിച്ച് ഒരിക്കലും സൂര്യനെ നോക്കരുത് — കണ്ണിന് ഗുരുതരമായ കേടുപാട് വരാം.</span>
+        <span class="t-en"><b>⚠️ Caution:</b> Never look at the Sun through a telescope — it can cause severe eye damage.</span>
+      </p>
+    </div>
+  </details>
+
+  <p style="text-align:center;margin-top:26px">
+    <button class="prnbtn" onclick="printPanel('notes')">🖨️ <span class="t-ml">കുറിപ്പുകൾ പ്രിന്റ് ചെയ്യാം</span><span class="t-en">Print notes</span></button>
+  </p>
+</section>
+
+<!-- ================= FORMULAS ================= -->
+<section class="panel" id="formula">
+  <p class="lead">
+    <span class="t-ml">പ്രധാന സൂത്രവാക്യങ്ങളും ഓരോ ചിഹ്നം എന്തിനെ സൂചിപ്പിക്കുന്നു എന്നതും യൂണിറ്റും.</span>
+    <span class="t-en">Key formulas, what each symbol means, and the units.</span>
+  </p>
+  <div class="fgrid">
+    <div class="fcard">
+      <p class="fname"><span class="t-ml">ലെൻസ് സമവാക്യം</span><span class="t-en">Lens equation</span></p>
+      <div class="formula">1/f = 1/v − 1/u</div>
+      <div class="where">
+        <div><span class="sym">f</span> = <span class="t-ml">ഫോക്കസ് ദൂരം (cm / m)</span><span class="t-en">focal length (cm / m)</span></div>
+        <div><span class="sym">v</span> = <span class="t-ml">പ്രതിബിംബത്തിലേക്കുള്ള ദൂരം</span><span class="t-en">image distance</span></div>
+        <div><span class="sym">u</span> = <span class="t-ml">വസ്തുവിലേക്കുള്ള ദൂരം</span><span class="t-en">object distance</span></div>
+        <div class="note">⤷ f = uv / (u − v)</div>
+      </div>
+    </div>
+    <div class="fcard">
+      <p class="fname"><span class="t-ml">ആവർധനം</span><span class="t-en">Magnification</span></p>
+      <div class="formula">m = hᵢ/hₒ = v/u</div>
+      <div class="where">
+        <div><span class="sym">m</span> = <span class="t-ml">ആവർധനം (യൂണിറ്റ് ഇല്ല)</span><span class="t-en">magnification (no unit)</span></div>
+        <div><span class="sym">hᵢ</span> = <span class="t-ml">പ്രതിബിംബത്തിന്റെ ഉയരം</span><span class="t-en">height of image</span></div>
+        <div><span class="sym">hₒ</span> = <span class="t-ml">വസ്തുവിന്റെ ഉയരം</span><span class="t-en">height of object</span></div>
+        <div class="note"><span class="t-ml">⤷ +m → നിവർന്നത്/മിഥ്യ · −m → തലകീഴ്/യഥാർഥം</span><span class="t-en">⤷ +m → erect/virtual · −m → inverted/real</span></div>
+      </div>
+    </div>
+    <div class="fcard">
+      <p class="fname"><span class="t-ml">ലെൻസിന്റെ പവർ</span><span class="t-en">Power of a lens</span></p>
+      <div class="formula">P = 1 / f</div>
+      <div class="where">
+        <div><span class="sym">P</span> = <span class="t-ml">പവർ, യൂണിറ്റ് ഡയോപ്റ്റർ (D)</span><span class="t-en">power, unit dioptre (D)</span></div>
+        <div><span class="sym">f</span> = <span class="t-ml">ഫോക്കസ് ദൂരം <b>മീറ്ററിൽ</b></span><span class="t-en">focal length <b>in metres</b></span></div>
+        <div class="note"><span class="t-ml">⤷ കോൺവെക്സ് → +P · കോൺകേവ് → −P</span><span class="t-en">⤷ convex → +P · concave → −P</span></div>
+      </div>
+    </div>
+    <div class="fcard">
+      <p class="fname"><span class="t-ml">പ്രതിബിംബ ഉയരം</span><span class="t-en">Image height</span></p>
+      <div class="formula">hᵢ = m × hₒ</div>
+      <div class="where">
+        <div class="note"><span class="t-ml">ഉദാ: m = −1/2, hₒ = 3 cm → hᵢ = −1.5 cm (തലകീഴ്, യഥാർഥം)</span><span class="t-en">e.g. m = −1/2, hₒ = 3 cm → hᵢ = −1.5 cm (inverted, real)</span></div>
+      </div>
+    </div>
+    <div class="fcard" style="background:#eef7f6;border-color:#a7e0d8;">
+      <p class="fname" style="color:var(--reso)"><span class="t-ml">കാർട്ടീഷ്യൻ ചിഹ്നരീതി</span><span class="t-en">Cartesian sign convention</span></p>
+      <div class="where" style="margin-top:0">
+        <div><span class="t-ml">വസ്തുദൂരം</span><span class="t-en">Object distance</span> <span class="sym">u</span> → <span class="t-ml">എപ്പോഴും നെഗറ്റീവ് (−)</span><span class="t-en">always negative (−)</span></div>
+        <div><span class="t-ml">യഥാർഥ പ്രതിബിംബം</span><span class="t-en">Real image</span> → <span class="sym">v</span> (+)</div>
+        <div><span class="t-ml">മിഥ്യാപ്രതിബിംബം</span><span class="t-en">Virtual image</span> → <span class="sym">v</span> (−)</div>
+        <div><span class="t-ml">കോൺവെക്സ്</span><span class="t-en">Convex</span> <span class="sym">f (+)</span> · <span class="t-ml">കോൺകേവ്</span><span class="t-en">Concave</span> <span class="sym">f (−)</span></div>
+      </div>
+    </div>
+    <div class="fcard" style="background:#f4f0fb;border-color:#d9c9f5;">
+      <p class="fname" style="color:#6d28d9"><span class="t-ml">ഓർത്തിരിക്കാൻ — സ്ഥിര വസ്തുതകൾ</span><span class="t-en">Facts worth memorising</span></p>
+      <div class="where" style="margin-top:0">
+        <div><span class="t-ml">കോൺവെക്സ് → ഫോക്കസ് <span class="sym">യഥാർഥം</span> · കോൺകേവ് → ഫോക്കസ് <span class="sym">മിഥ്യ</span></span><span class="t-en">Convex → focus is <span class="sym">real</span> · Concave → focus is <span class="sym">virtual</span></span></div>
+        <div><span class="t-ml">കോൺകേവ് പ്രതിബിംബം → എപ്പോഴും <span class="sym">ചെറുത്, നിവർന്നത്, മിഥ്യ</span></span><span class="t-en">Concave image → always <span class="sym">diminished, erect, virtual</span></span></div>
+        <div><span class="t-ml">1 m ഫോക്കസ്ദൂരം → പവർ <span class="sym">1 D</span></span><span class="t-en">Focal length 1 m → power <span class="sym">1 D</span></span></div>
+        <div><span class="t-ml">യഥാർഥ പ്രതിബിംബം → എപ്പോഴും <span class="sym">തലകീഴ്</span></span><span class="t-en">Real image → always <span class="sym">inverted</span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FLASHCARDS ================= -->
+<section class="panel" id="flash">
+  <p class="lead">
+    <span class="t-ml">ഓരോ കാർഡിലും ടാപ്പ് ചെയ്ത് ഉത്തരം നോക്കാം. റിവിഷന് ഉത്തമം!</span>
+    <span class="t-en">Tap any card to reveal the answer. Great for revision!</span>
+  </p>
+  <div class="fcwrap" id="fcwrap"></div>
+</section>
+
+<!-- ================= QUIZ ================= -->
+<section class="panel" id="quiz">
+  <p class="lead">
+    <span class="t-ml">ഓരോ ചോദ്യത്തിനും ഉത്തരം തിരഞ്ഞെടുക്കൂ — ഉടനെ ശരി/തെറ്റ് അറിയാം.</span>
+    <span class="t-en">Choose an answer for each question — you'll see instantly whether it's right or wrong.</span>
+  </p>
+
+  <div class="sharebar no-print">
+    <a class="sbtn open" href="lensukal-quiz.html" target="_blank" rel="noopener">
+      🚀 <span class="t-ml">ക്വിസ് പേജ് തുറക്കുക</span><span class="t-en">Open quiz page</span></a>
+    <button class="sbtn share" id="shareBtn">
+      🔗 <span class="t-ml">ക്വിസ് ലിങ്ക് പകർത്തുക</span><span class="t-en">Copy quiz link</span></button>
+    <button class="sbtn wa" id="waBtn">
+      📲 <span class="t-ml">WhatsApp-ൽ അയക്കുക</span><span class="t-en">Send on WhatsApp</span></button>
+  </div>
+  <p class="lead" style="text-align:center;font-size:13px;margin:-10px 0 22px">
+    <span class="t-ml">ലിങ്ക് പങ്കിട്ടാൽ കുട്ടികൾക്ക് ക്വിസ് മാത്രമുള്ള പ്രത്യേക പേജ് തുറക്കും.</span>
+    <span class="t-en">Sharing the link opens a separate, quiz-only page for students.</span>
+  </p>
+
+  <div class="quiz-card" id="quizCard"></div>
+</section>
+
+<!-- ================= QUESTION BANK ================= -->
+<section class="panel" id="qbank">
+  <p class="lead">
+    <span class="t-ml">പരീക്ഷയ്ക്കുള്ള ചോദ്യബാങ്ക്. ഓരോ ചോദ്യത്തിനും താഴെ <b style="color:var(--good)">ഉത്തരം കാണിക്കുക</b> അമർത്തി ഉത്തരം പരിശോധിക്കാം.</span>
+    <span class="t-en">Exam question bank. Press <b style="color:var(--good)">Show answer</b> below each question to check your answer.</span>
+  </p>
+
+  <div class="qb-tools no-print">
+    <button class="qb-btn show" id="qbToggleAll">📖 <span class="t-ml">എല്ലാ ഉത്തരങ്ങളും കാണിക്കുക</span><span class="t-en">Show all answers</span></button>
+    <button class="qb-btn prn" onclick="printPanel('qbank')">🖨️ <span class="t-ml">ചോദ്യപ്പേപ്പർ പ്രിന്റ് ചെയ്യാം</span><span class="t-en">Print question paper</span></button>
+  </div>
+
+  <div class="qb-sec">
+    <div class="qb-head"><span class="sl">A</span><h3><span class="t-ml">ശരിയുത്തരം തിരഞ്ഞെടുക്കുക</span><span class="t-en">Choose the correct answer</span></h3><span class="mk">1 × 6 = 6</span></div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">1.</span><span><span class="t-ml">ഏത് ലെൻസിന്റെ മധ്യഭാഗമാണ് കനം കൂടിയത്?</span><span class="t-en">Which lens is thicker at the middle?</span></span></div>
+      <ul class="qb-opts">
+        <li><b>a)</b> <span class="t-ml">കോൺകേവ്</span><span class="t-en">Concave</span></li>
+        <li><b>b)</b> <span class="t-ml">കോൺവെക്സ്</span><span class="t-en">Convex</span></li>
+        <li><b>c)</b> <span class="t-ml">രണ്ടും തുല്യം</span><span class="t-en">Both equally</span></li>
+        <li><b>d)</b> <span class="t-ml">ഒന്നുമല്ല</span><span class="t-en">Neither</span></li>
+      </ul>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: b) കോൺവെക്സ്</b> — മധ്യഭാഗം കനം കൂടിയത്, പ്രകാശത്തെ സംഭ്രജിപ്പിക്കുന്നു.</span><span class="t-en"><b>Answer: b) Convex</b> — thicker at the middle; it converges light.</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">2.</span><span><span class="t-ml">പ്രകാശരശ്മികളെ വിഭ്രജിപ്പിക്കുന്ന ലെൻസ് ഏതാണ്?</span><span class="t-en">Which lens diverges light rays?</span></span></div>
+      <ul class="qb-opts">
+        <li><b>a)</b> <span class="t-ml">കോൺവെക്സ്</span><span class="t-en">Convex</span></li>
+        <li><b>b)</b> <span class="t-ml">കോൺകേവ്</span><span class="t-en">Concave</span></li>
+        <li><b>c)</b> <span class="t-ml">ഗ്ലാസ് ഷീറ്റ്</span><span class="t-en">Glass sheet</span></li>
+        <li><b>d)</b> <span class="t-ml">പ്രിസം</span><span class="t-en">Prism</span></li>
+      </ul>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: b) കോൺകേവ്</b></span><span class="t-en"><b>Answer: b) Concave</b></span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">3.</span><span><span class="t-ml">ലെൻസ് സമവാക്യം ഏതാണ്?</span><span class="t-en">Which is the lens equation?</span></span></div>
+      <ul class="qb-opts">
+        <li><b>a)</b> 1/f = 1/v + 1/u</li>
+        <li><b>b)</b> 1/f = 1/v − 1/u</li>
+        <li><b>c)</b> f = v × u</li>
+        <li><b>d)</b> 1/f = u − v</li>
+      </ul>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: b)</b> 1/f = 1/v − 1/u</span><span class="t-en"><b>Answer: b)</b> 1/f = 1/v − 1/u</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">4.</span><span><span class="t-ml">ലെൻസിന്റെ പവറിന്റെ SI യൂണിറ്റ് ഏതാണ്?</span><span class="t-en">What is the SI unit of the power of a lens?</span></span></div>
+      <ul class="qb-opts">
+        <li><b>a)</b> <span class="t-ml">മീറ്റർ</span><span class="t-en">Metre</span></li>
+        <li><b>b)</b> <span class="t-ml">വാട്ട്</span><span class="t-en">Watt</span></li>
+        <li><b>c)</b> <span class="t-ml">ഡയോപ്റ്റർ (D)</span><span class="t-en">Dioptre (D)</span></li>
+        <li><b>d)</b> <span class="t-ml">ന്യൂട്ടൺ</span><span class="t-en">Newton</span></li>
+      </ul>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: c) ഡയോപ്റ്റർ (D)</b> — P = 1/f, f മീറ്ററിൽ.</span><span class="t-en"><b>Answer: c) Dioptre (D)</b> — P = 1/f, with f in metres.</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">5.</span><span><span class="t-ml">കോൺകേവ് ലെൻസ് രൂപപ്പെടുത്തുന്ന പ്രതിബിംബം എപ്പോഴും ഏതുതരം?</span><span class="t-en">The image formed by a concave lens is always…</span></span></div>
+      <ul class="qb-opts">
+        <li><b>a)</b> <span class="t-ml">വലുത്, തലകീഴ്, യഥാർഥം</span><span class="t-en">Enlarged, inverted, real</span></li>
+        <li><b>b)</b> <span class="t-ml">ചെറുത്, നിവർന്നത്, മിഥ്യ</span><span class="t-en">Diminished, erect, virtual</span></li>
+        <li><b>c)</b> <span class="t-ml">അതേ വലുപ്പം, യഥാർഥം</span><span class="t-en">Same size, real</span></li>
+        <li><b>d)</b> <span class="t-ml">വലുത്, നിവർന്നത്, മിഥ്യ</span><span class="t-en">Enlarged, erect, virtual</span></li>
+      </ul>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: b)</b> വസ്തു എവിടെ വെച്ചാലും ചെറുത്, നിവർന്നത്, മിഥ്യ.</span><span class="t-en"><b>Answer: b)</b> Wherever the object is placed — diminished, erect, virtual.</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">6.</span><span><span class="t-ml">ടെലിസ്കോപ്പിന് ഏറ്റവും അനുയോജ്യമായ പ്രസ്താവന?</span><span class="t-en">Which statement about a telescope is most appropriate?</span></span></div>
+      <ul class="qb-opts">
+        <li><b>a)</b> <span class="t-ml">ഒബ്ജക്റ്റിവിന് f കുറവും ഐപീസിന് കൂടുതലും</span><span class="t-en">Objective has small f, eyepiece large f</span></li>
+        <li><b>b)</b> <span class="t-ml">ഒബ്ജക്റ്റിവിന് f കൂടുതലും ഐപീസിന് കുറവും</span><span class="t-en">Objective has large f, eyepiece small f</span></li>
+        <li><b>c)</b> <span class="t-ml">രണ്ടും കോൺകേവ്</span><span class="t-en">Both are concave</span></li>
+        <li><b>d)</b> <span class="t-ml">ഒബ്ജക്റ്റിവ് കോൺകേവ്, ഐപീസ് കോൺവെക്സ്</span><span class="t-en">Objective concave, eyepiece convex</span></li>
+      </ul>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: b)</b> ഒബ്ജക്റ്റിവ് ഫോക്കസ്ദൂരവും അപ്പെർച്ചറും കൂടുതൽ; ഐപീസ് കുറവ്.</span><span class="t-en"><b>Answer: b)</b> The objective has a larger focal length and aperture; the eyepiece, smaller.</span></div>
+    </div>
+  </div>
+
+  <div class="qb-sec">
+    <div class="qb-head"><span class="sl">B</span><h3><span class="t-ml">ഒറ്റ വാക്കിൽ / ഒരു വാക്യത്തിൽ ഉത്തരം</span><span class="t-en">Answer in one word / one sentence</span></h3><span class="mk">1 × 6 = 6</span></div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">7.</span><span><span class="t-ml">ലെൻസിന്റെ മധ്യബിന്ദുവിനെ എന്തു വിളിക്കുന്നു?</span><span class="t-en">What is the midpoint of a lens called?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>പ്രകാശികകേന്ദ്രം (Optic centre, O)</b></span><span class="t-en"><b>The optic centre (O)</b></span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">8.</span><span><span class="t-ml">സ്ക്രീനിൽ പതിപ്പിക്കാൻ കഴിയുന്ന പ്രതിബിംബത്തെ എന്തു വിളിക്കുന്നു?</span><span class="t-en">What is an image that can be caught on a screen called?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>യഥാർഥ പ്രതിബിംബം (Real image)</b></span><span class="t-en"><b>A real image</b></span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">9.</span><span><span class="t-ml">പ്രകാശികകേന്ദ്രത്തിൽ നിന്ന് മുഖ്യഫോക്കസിലേക്കുള്ള അകലം?</span><span class="t-en">What is the distance from the optic centre to the principal focus called?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ഫോക്കസ് ദൂരം (Focal length, f)</b></span><span class="t-en"><b>The focal length (f)</b></span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">10.</span><span><span class="t-ml">കണ്ണടക്കുറിപ്പിലെ "+2.00" സൂചിപ്പിക്കുന്നത് എന്ത്?</span><span class="t-en">What does "+2.00" in a spectacle prescription indicate?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ലെൻസിന്റെ പവർ</b> — പോസിറ്റീവ് ആയതിനാൽ കോൺവെക്സ് ലെൻസ്.</span><span class="t-en"><b>The power of the lens</b> — being positive, it is a convex lens.</span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">11.</span><span><span class="t-ml">മൈക്രോസ്കോപ്പിൽ വസ്തുവിനടുത്ത് വെക്കുന്ന ലെൻസ്?</span><span class="t-en">Which lens in a microscope is placed near the object?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ഒബ്ജക്റ്റിവ്</b> — ഫോക്കസ്ദൂരം കുറവ്.</span><span class="t-en"><b>The objective</b> — it has a small focal length.</span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">12.</span><span><span class="t-ml">കോൺകേവ് ലെൻസിന്റെ മുഖ്യഫോക്കസ് യഥാർഥമോ മിഥ്യയോ?</span><span class="t-en">Is the principal focus of a concave lens real or virtual?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>മിഥ്യ (Virtual)</b> — രശ്മികൾ ഒരു ബിന്ദുവിൽ നിന്ന് അകന്നുപോകുന്നതായി തോന്നുന്നു.</span><span class="t-en"><b>Virtual</b> — the rays only appear to diverge from that point.</span></div>
+    </div>
+  </div>
+
+  <div class="qb-sec">
+    <div class="qb-head"><span class="sl">C</span><h3><span class="t-ml">ചെറിയ ഉത്തരം</span><span class="t-en">Short answer</span></h3><span class="mk">2 × 4 = 8</span></div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">13.</span><span><span class="t-ml">കോൺവെക്സ് ലെൻസും കോൺകേവ് ലെൻസും തമ്മിലുള്ള രണ്ട് വ്യത്യാസങ്ങൾ എഴുതുക.</span><span class="t-en">Write two differences between a convex lens and a concave lens.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml">① കോൺവെക്സ് — മധ്യഭാഗം കനം കൂടുതൽ; കോൺകേവ് — അരിക് കനം കൂടുതൽ. ② കോൺവെക്സ് പ്രകാശത്തെ <b>സംഭ്രജിപ്പിക്കുന്നു</b>; കോൺകേവ് <b>വിഭ്രജിപ്പിക്കുന്നു</b>.</span><span class="t-en">① Convex is thicker at the middle; concave is thicker at the edges. ② Convex <b>converges</b> light; concave <b>diverges</b> it.</span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">14.</span><span><span class="t-ml">കാർട്ടീഷ്യൻ ചിഹ്നരീതിയിലെ പ്രധാന നിയമങ്ങൾ എഴുതുക.</span><span class="t-en">State the main rules of the Cartesian sign convention.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml">എല്ലാ ദൂരവും O-ൽ നിന്ന് അളക്കുന്നു. പതനരശ്മിയുടെ അതേ ദിശ → <b>+</b>, വിപരീതദിശ → <b>−</b>. അക്ഷത്തിന് മുകളിൽ → +, താഴെ → −.</span><span class="t-en">All distances are measured from O. Same direction as the incident ray → <b>+</b>; opposite → <b>−</b>. Heights above the axis → +, below → −.</span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">15.</span><span><span class="t-ml">റീഡിങ് ലെൻസിൽ വസ്തു എവിടെ വെച്ചാലാണ് വലുതും നിവർന്നതുമായ പ്രതിബിംബം ലഭിക്കുന്നത്?</span><span class="t-en">Where must an object be placed in a magnifying glass to get an enlarged, erect image?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml">വസ്തു <b>F നും ലെൻസിനും ഇടയിൽ</b> — വലുതും നിവർന്നതും മിഥ്യയുമായ പ്രതിബിംബം.</span><span class="t-en"><b>Between F and the lens</b> — the image is enlarged, erect and virtual.</span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">16.</span><span><span class="t-ml">ടെലിസ്കോപ് ഉപയോഗിച്ച് സൂര്യനെ നോക്കരുത് എന്ന് പറയുന്നത് എന്തുകൊണ്ട്?</span><span class="t-en">Why should you never look at the Sun through a telescope?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml">ഒബ്ജക്റ്റിവ് ലെൻസ് സൂര്യപ്രകാശത്തെ കേന്ദ്രീകരിച്ച് റെറ്റിനയിൽ വൻതീവ്രതയുള്ളതാക്കും — ഇത് കണ്ണിന് <b>ഗുരുതരമായ കേടുപാട്</b> വരുത്തും.</span><span class="t-en">The objective concentrates sunlight to very high intensity on the retina — this can cause <b>severe eye damage</b>.</span></div>
+    </div>
+  </div>
+
+  <div class="qb-sec">
+    <div class="qb-head"><span class="sl">D</span><h3><span class="t-ml">കണക്കുകൂട്ടൽ ചോദ്യങ്ങൾ</span><span class="t-en">Numerical problems</span></h3><span class="mk">3 × 10 = 30</span></div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">17.</span><span><span class="t-ml">കോൺവെക്സ് ലെൻസ് f = 20 cm. 60 cm അകലെ 3 cm ഉയരമുള്ള വസ്തു. പ്രതിബിംബ ഉയരവും സവിശേഷതകളും കണ്ടെത്തുക.</span><span class="t-en">A convex lens has f = 20 cm. An object 3 cm tall is placed 60 cm away. Find the image height and its nature.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans">u = −60, f = +20. &nbsp;1/20 = 1/v + 1/60 → 1/v = 1/20 − 1/60 = 2/60 → <b>v = +30 cm</b>.<br>m = v/u = 30/−60 = <b>−1/2</b>. hᵢ = −0.5 × 3 = <b>−1.5 cm</b>.<br><span class="t-ml">പ്രതിബിംബം: <b>1.5 cm, തലകീഴ്, യഥാർഥം, ചെറുത്</b>.</span><span class="t-en">Image: <b>1.5 cm, inverted, real, diminished</b>.</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">18.</span><span><span class="t-ml">ലെൻസ് f = 20 cm, വസ്തു 30 cm അകലെ. (a) സ്ക്രീൻ എത്ര അകലെ? (b) വസ്തു 1.2 cm ഉയരമെങ്കിൽ പ്രതിബിംബ ഉയരം?</span><span class="t-en">A lens has f = 20 cm; an object is 30 cm away. (a) At what distance must the screen be placed? (b) If the object is 1.2 cm tall, what is the image height?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans">(a) u = −30, f = +20. 1/20 = 1/v + 1/30 → 1/v = 1/60 → <b>v = +60 cm</b>.<br>(b) m = 60/−30 = −2. hᵢ = −2 × 1.2 = <b>−2.4 cm</b> <span class="t-ml">(തലകീഴ്).</span><span class="t-en">(inverted).</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">19.</span><span><span class="t-ml">കോൺവെക്സ് ലെൻസ് f = 100 mm. 60 mm അകലെ 15 mm ഉയരമുള്ള വസ്തു. (a) പ്രതിബിംബ സ്ഥാനവും ഉയരവും. (b) വസ്തുദൂരം 20 mm ആയാൽ ആവർധനം?</span><span class="t-en">A convex lens has f = 100 mm. An object 15 mm tall is 60 mm away. (a) Find the image position and height. (b) If the object distance were 20 mm, find the magnification.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans">(a) u = −60, f = +100. 1/v = 1/100 − 1/60 = −1/150 → <b>v = −150 mm</b>. m = −150/−60 = <b>+2.5</b>. hᵢ = <b>+37.5 mm</b> <span class="t-ml">(വലുത്, നിവർന്നത്, മിഥ്യ).</span><span class="t-en">(enlarged, erect, virtual).</span><br>(b) u = −20: 1/v = 1/100 − 1/20 = −1/25 → v = −25 mm. m = −25/−20 = <b>+1.25</b>.</div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">20.</span><span><span class="t-ml">കോൺകേവ് ലെൻസ് f = 50 cm. അതിന്റെ പവർ എത്ര?</span><span class="t-en">A concave lens has f = 50 cm. Find its power.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml">കോൺകേവ് →</span><span class="t-en">Concave →</span> f = −50 cm = −0.5 m. P = 1/(−0.5) = <b>−2 D</b>.</div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">21.</span><span><span class="t-ml">25 cm ഫോക്കസ്ദൂരമുള്ള കോൺകേവ് ലെൻസിന്റെ പവർ കണ്ടെത്തുക.</span><span class="t-en">Find the power of a concave lens of focal length 25 cm.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans">f = −25 cm = −0.25 m. P = 1/(−0.25) = <b>−4 D</b>. <span class="t-ml">(നെഗറ്റീവ് ആയതിനാൽ കോൺകേവ്.)</span><span class="t-en">(Negative, hence concave.)</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">22.</span><span><span class="t-ml">വസ്തു 90 cm അകലെ; പ്രതിബിംബം മറുവശത്ത് 30 cm അകലെ സ്ക്രീനിൽ. ഫോക്കസ് ദൂരവും ലെൻസിന്റെ തരവും കണ്ടെത്തുക.</span><span class="t-en">An object is 90 cm from a lens; the image forms on a screen 30 cm on the other side. Find the focal length and the type of lens.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans">u = −90, v = +30. f = uv/(u−v) = (−90 × 30)/(−120) = <b>+22.5 cm</b>.<br><span class="t-ml">f പോസിറ്റീവ് → <b>കോൺവെക്സ് ലെൻസ്</b>. m = 30/−90 = −1/3 → ചെറുത്, തലകീഴ്, യഥാർഥം.</span><span class="t-en">f is positive → <b>convex lens</b>. m = 30/−90 = −1/3 → diminished, inverted, real.</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">23.</span><span><span class="t-ml">കോൺവെക്സ് ലെൻസ് f = 15 cm, വസ്തു 30 cm അകലെ (2F-ൽ). പ്രതിബിംബദൂരവും സവിശേഷതകളും?</span><span class="t-en">A convex lens has f = 15 cm; the object is 30 cm away (at 2F). Find v and the nature of the image.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans">u = −30, f = +15. 1/v = 1/15 − 1/30 = 1/30 → <b>v = +30 cm</b>. m = <b>−1</b>.<br><span class="t-ml"><b>അതേ വലുപ്പം, തലകീഴ്, യഥാർഥം</b> (2F-ൽ).</span><span class="t-en"><b>Same size, inverted, real</b> (at 2F).</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">24.</span><span><span class="t-ml">കോൺകേവ് ലെൻസ് f = 20 cm, വസ്തു 30 cm അകലെ. പ്രതിബിംബദൂരവും സവിശേഷതകളും?</span><span class="t-en">A concave lens has f = 20 cm; the object is 30 cm away. Find v and the nature of the image.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans">u = −30, f = −20. 1/v = −1/20 − 1/30 = −1/12 → <b>v = −12 cm</b>. m = −12/−30 = <b>+0.4</b>.<br><span class="t-ml"><b>ചെറുത്, നിവർന്നത്, മിഥ്യ</b>.</span><span class="t-en"><b>Diminished, erect, virtual</b>.</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">25.</span><span><span class="t-ml">ഒരു ലെൻസിന്റെ പവർ +5 D ആണ്. ഫോക്കസ് ദൂരവും തരവും കണ്ടെത്തുക.</span><span class="t-en">The power of a lens is +5 D. Find its focal length and type.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans">f = 1/P = 1/5 = 0.2 m = <b>+20 cm</b>. <span class="t-ml">പോസിറ്റീവ് ആയതിനാൽ <b>കോൺവെക്സ് ലെൻസ്</b>.</span><span class="t-en">Positive, hence a <b>convex lens</b>.</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">26.</span><span><span class="t-ml">കോൺവെക്സ് ലെൻസ് f = 10 cm. 15 cm അകലെ 5 cm ഉയരമുള്ള വസ്തു. പ്രതിബിംബ സ്ഥാനം, ഉയരം, സ്വഭാവം?</span><span class="t-en">A convex lens has f = 10 cm. An object 5 cm tall is 15 cm away. Find the image position, height and nature.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans">u = −15, f = +10. 1/v = 1/10 − 1/15 = 1/30 → <b>v = +30 cm</b>. m = 30/−15 = <b>−2</b>. hᵢ = <b>−10 cm</b>.<br><span class="t-ml"><b>വലുത്, തലകീഴ്, യഥാർഥം</b>.</span><span class="t-en"><b>Enlarged, inverted, real</b>.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SHORT NOTE ================= -->
+<section class="panel" id="short">
+  <p class="lead no-print">
+    <span class="t-ml">പരീക്ഷയ്ക്ക് മുൻപുള്ള അവസാന റിവിഷന് — മുഴുവൻ അധ്യായവും ഒറ്റ ഷീറ്റിൽ.</span>
+    <span class="t-en">Last-minute revision — the whole chapter on a single sheet.</span>
+  </p>
+  <p style="text-align:center;margin:0 0 20px" class="no-print">
+    <button class="prnbtn" onclick="printPanel('short')">🖨️ <span class="t-ml">ഷോർട്ട് നോട്ട് പ്രിന്റ് ചെയ്യാം</span><span class="t-en">Print short note</span></button>
+  </p>
+
+  <div class="sn-paper">
+    <h2><span class="t-ml">ലെൻസുകൾ — ഷോർട്ട് നോട്ട്</span><span class="t-en">Lenses — Short Note</span></h2>
+    <p class="sn-sub">CLASS 10 · PHYSICS · UNIT 2 · QUICK REVISION</p>
+
+    <div class="sn-block">
+      <h4><span class="dot"></span><span class="t-ml">1. ലെൻസിന്റെ തരങ്ങൾ</span><span class="t-en">1. Types of lenses</span></h4>
+      <ul class="t-ml">
+        <li><b>ലെൻസ്:</b> അപവർത്തനപ്രതലങ്ങൾ ഗോളങ്ങളുടെ ഭാഗമായ സുതാര്യമാധ്യമം.</li>
+        <li><b>കോൺവെക്സ്:</b> മധ്യം കനം കൂടുതൽ · പ്രകാശത്തെ <b>സംഭ്രജിപ്പിക്കുന്നു</b>.</li>
+        <li><b>കോൺകേവ്:</b> അരിക് കനം കൂടുതൽ · പ്രകാശത്തെ <b>വിഭ്രജിപ്പിക്കുന്നു</b>.</li>
+      </ul>
+      <ul class="t-en">
+        <li><b>Lens:</b> a transparent medium whose refracting surfaces are parts of spheres.</li>
+        <li><b>Convex:</b> thicker at the middle · <b>converges</b> light.</li>
+        <li><b>Concave:</b> thicker at the edges · <b>diverges</b> light.</li>
+      </ul>
+    </div>
+
+    <div class="sn-block">
+      <h4><span class="dot"></span><span class="t-ml">2. പ്രധാന പദങ്ങൾ</span><span class="t-en">2. Key terms</span></h4>
+      <ul class="t-ml">
+        <li><b>പ്രകാശികകേന്ദ്രം (O):</b> ലെൻസിന്റെ മധ്യബിന്ദു.</li>
+        <li><b>വക്രതാകേന്ദ്രങ്ങൾ (C₁, C₂):</b> പ്രതലങ്ങളുടെ ഗോളകേന്ദ്രങ്ങൾ.</li>
+        <li><b>പ്രകാശിക അക്ഷം:</b> C₁, O, C₂ വഴിയുള്ള രേഖ.</li>
+        <li><b>മുഖ്യഫോക്കസ് (F):</b> കോൺവെക്സ് → യഥാർഥം · കോൺകേവ് → മിഥ്യ. രണ്ട് ഫോക്കസ്.</li>
+        <li><b>ഫോക്കസ് ദൂരം (f):</b> O മുതൽ F വരെ.</li>
+      </ul>
+      <ul class="t-en">
+        <li><b>Optic centre (O):</b> the midpoint of the lens.</li>
+        <li><b>Centres of curvature (C₁, C₂):</b> centres of the spheres of the surfaces.</li>
+        <li><b>Optic axis:</b> the line through C₁, O and C₂.</li>
+        <li><b>Principal focus (F):</b> convex → real · concave → virtual. Two foci.</li>
+        <li><b>Focal length (f):</b> from O to F.</li>
+      </ul>
+    </div>
+
+    <div class="sn-block">
+      <h4><span class="dot"></span><span class="t-ml">3. കോൺവെക്സ് — പ്രതിബിംബം</span><span class="t-en">3. Convex — image formation</span></h4>
+      <ul class="t-ml">
+        <li>2F-ന് അപ്പുറം → F-2F ഇടയിൽ · ചെറുത്, തലകീഴ്, യഥാർഥം</li>
+        <li>2F-ൽ → 2F-ൽ · അതേ വലുപ്പം, തലകീഴ്, യഥാർഥം</li>
+        <li>F-2F ഇടയിൽ → 2F-ന് അപ്പുറം · വലുത്, തലകീഴ്, യഥാർഥം</li>
+        <li>F-ൽ → അനന്തതയിൽ</li>
+        <li>F-ന് ഉള്ളിൽ → അതേ വശത്ത് · വലുത്, നിവർന്നത്, മിഥ്യ (റീഡിങ് ലെൻസ്)</li>
+      </ul>
+      <ul class="t-en">
+        <li>Beyond 2F → between F and 2F · diminished, inverted, real</li>
+        <li>At 2F → at 2F · same size, inverted, real</li>
+        <li>Between F and 2F → beyond 2F · enlarged, inverted, real</li>
+        <li>At F → at infinity</li>
+        <li>Inside F → same side · enlarged, erect, virtual (magnifying glass)</li>
+      </ul>
+    </div>
+
+    <div class="sn-block">
+      <h4><span class="dot"></span><span class="t-ml">4. കോൺകേവ് — പ്രതിബിംബം</span><span class="t-en">4. Concave — image formation</span></h4>
+      <ul class="t-ml">
+        <li>വസ്തു എവിടെയായാലും → <b>ചെറുത്, നിവർന്നത്, മിഥ്യ</b>.</li>
+        <li>സ്ഥാനം: വസ്തുവിന്റെ അതേ വശത്ത്, F-നും ലെൻസിനും ഇടയിൽ.</li>
+      </ul>
+      <ul class="t-en">
+        <li>Wherever the object is → <b>diminished, erect, virtual</b>.</li>
+        <li>Position: same side as the object, between F and the lens.</li>
+      </ul>
+    </div>
+
+    <div class="sn-block">
+      <h4><span class="dot"></span><span class="t-ml">5. സൂത്രവാക്യങ്ങൾ</span><span class="t-en">5. Formulas</span></h4>
+      <div class="sn-key">1/f = 1/v − 1/u &nbsp;|&nbsp; f = uv/(u−v)</div>
+      <div class="sn-key">m = hᵢ/hₒ = v/u</div>
+      <div class="sn-key">P = 1/f &nbsp;<span class="t-ml">(ഡയോപ്റ്റർ, f മീറ്ററിൽ)</span><span class="t-en">(dioptre, f in metres)</span></div>
+    </div>
+
+    <div class="sn-block">
+      <h4><span class="dot"></span><span class="t-ml">6. ചിഹ്നരീതി</span><span class="t-en">6. Sign convention</span></h4>
+      <div class="sn-grid t-ml">
+        <div class="sn-key">u → എപ്പോഴും (−)</div>
+        <div class="sn-key">യഥാർഥ പ്രതിബിംബം → v (+)</div>
+        <div class="sn-key">മിഥ്യ → v (−)</div>
+        <div class="sn-key">കോൺവെക്സ് f(+) · കോൺകേവ് f(−)</div>
+        <div class="sn-key">+m → നിവർന്നത്/മിഥ്യ</div>
+        <div class="sn-key">−m → തലകീഴ്/യഥാർഥം</div>
+      </div>
+      <div class="sn-grid t-en">
+        <div class="sn-key">u → always (−)</div>
+        <div class="sn-key">Real image → v (+)</div>
+        <div class="sn-key">Virtual → v (−)</div>
+        <div class="sn-key">Convex f(+) · Concave f(−)</div>
+        <div class="sn-key">+m → erect / virtual</div>
+        <div class="sn-key">−m → inverted / real</div>
+      </div>
+    </div>
+
+    <div class="sn-block">
+      <h4><span class="dot"></span><span class="t-ml">7. ഒപ്റ്റിക്കൽ ഉപകരണങ്ങൾ</span><span class="t-en">7. Optical instruments</span></h4>
+      <ul class="t-ml">
+        <li><b>മൈക്രോസ്കോപ്:</b> ഒബ്ജക്റ്റിവ് (f കുറവ്) + ഐപീസ് (f കൂടുതൽ). രണ്ടും കോൺവെക്സ്.</li>
+        <li><b>ടെലിസ്കോപ്:</b> ഒബ്ജക്റ്റിവ് (f, അപ്പെർച്ചർ കൂടുതൽ) + ഐപീസ് (കുറവ്). ⚠️ സൂര്യനെ നോക്കരുത്.</li>
+      </ul>
+      <ul class="t-en">
+        <li><b>Microscope:</b> objective (small f) + eyepiece (larger f). Both convex.</li>
+        <li><b>Telescope:</b> objective (large f and aperture) + eyepiece (small). ⚠️ Never view the Sun.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GLOSSARY ================= -->
+<section class="panel" id="gloss">
+  <p class="lead">
+    <span class="t-ml">ഇംഗ്ലീഷ് — മലയാളം പദങ്ങൾ. തിരയാൻ ടൈപ്പ് ചെയ്യൂ.</span>
+    <span class="t-en">English — Malayalam terms with meanings. Type to search.</span>
+  </p>
+  <input class="gsearch" id="gsearch" placeholder="🔍 convex, focus, ആവർധനം...">
+  <table class="gloss">
+    <thead><tr>
+      <th style="width:30%"><span class="t-ml">മലയാളം</span><span class="t-en">Malayalam</span></th>
+      <th style="width:26%">English</th>
+      <th><span class="t-ml">അർഥം</span><span class="t-en">Meaning</span></th>
+    </tr></thead>
+    <tbody id="glossBody"></tbody>
+  </table>
+</section>
+
+</main>
+
+<footer>
+  <b><span class="t-ml">ലെൻസുകൾ</span><span class="t-en">Lenses</span></b> · Class 10 Physics (SCERT Kerala, 2025)<br>
+  <span class="t-ml">പഠനസഹായി — കുറിപ്പുകൾ · സൂത്രവാക്യങ്ങൾ · ഫ്ലാഷ്കാർഡ് · ക്വിസ് · ചോദ്യബാങ്ക് · ഷോർട്ട് നോട്ട്</span>
+  <span class="t-en">Study portal — notes · formulas · flashcards · quiz · question bank · short note</span>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- header lens-ray motif ---------- */
+(function(){
+  const g=document.getElementById('scopeG'); if(!g)return;
+  const ys=[40,80,160,200], W=220; let svg='';
+  for(let X=-220;X<=1100;X+=W){
+    const lx=X+90, fx=X+170;
+    ys.forEach(y=>{
+      svg+=`<line class="ray" x1="${X}" y1="${y}" x2="${lx}" y2="${y}"/>`;
+      svg+=`<line class="ray glow" x1="${lx}" y1="${y}" x2="${fx}" y2="120"/>`;
+      svg+=`<line class="ray" x1="${fx}" y1="120" x2="${X+220}" y2="${240-y}"/>`;
+    });
+    svg+=`<path class="lens" d="M ${lx} 44 Q ${lx+22} 120 ${lx} 196 Q ${lx-22} 120 ${lx} 44 Z"/>`;
+    svg+=`<circle class="foc" cx="${fx}" cy="120" r="3.5"/>`;
+  }
+  g.innerHTML=svg;
+})();
+
+/* ---------- language state ---------- */
+let LANG='ml';
+const btnML=document.getElementById('btnML'), btnEN=document.getElementById('btnEN');
+function setLang(l){
+  LANG=l;
+  document.body.classList.toggle('lang-en', l==='en');
+  document.documentElement.lang = l;
+  btnML.classList.toggle('on', l==='ml');
+  btnEN.classList.toggle('on', l==='en');
+  buildFlash(); buildGloss(); renderQ();
+  document.getElementById('gsearch').value='';
+}
+btnML.addEventListener('click',()=>setLang('ml'));
+btnEN.addEventListener('click',()=>setLang('en'));
+
+/* ---------- tabs ---------- */
+const tabs=document.querySelectorAll('.tab'), panels=document.querySelectorAll('.panel');
+tabs.forEach(t=>t.addEventListener('click',()=>{
+  tabs.forEach(x=>x.classList.remove('active'));
+  panels.forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.p).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+
+/* ---------- bilingual term data ---------- */
+const cards=[
+  {ml:"ലെൻസ്",en:"Lens",
+   bml:"അപവർത്തനപ്രതലങ്ങൾ ഗോളങ്ങളുടെ ഭാഗമായി വരുന്ന സുതാര്യമാധ്യമം.",
+   ben:"A transparent medium whose refracting surfaces are parts of spheres."},
+  {ml:"കോൺവെക്സ് ലെൻസ്",en:"Convex lens",
+   bml:"മധ്യഭാഗം കനം കൂടിയത്. പ്രകാശത്തെ സംഭ്രജിപ്പിക്കുന്നു. വസ്തുവിനെ വലുതാക്കുന്നു.",
+   ben:"Thicker at the middle. Converges light. Magnifies objects."},
+  {ml:"കോൺകേവ് ലെൻസ്",en:"Concave lens",
+   bml:"അരിക് കനം കൂടിയത്. പ്രകാശത്തെ വിഭ്രജിപ്പിക്കുന്നു.",
+   ben:"Thicker at the edges. Diverges light."},
+  {ml:"പ്രകാശികകേന്ദ്രം",en:"Optic centre (O)",
+   bml:"ലെൻസിന്റെ മധ്യബിന്ദു. ഇതിലൂടെ പോകുന്ന രശ്മി നേരെ പോകുന്നു.",
+   ben:"The midpoint of the lens. A ray through it passes undeviated."},
+  {ml:"വക്രതാകേന്ദ്രം",en:"Centre of curvature (C)",
+   bml:"ലെൻസിന്റെ ഓരോ പ്രതലവും ഉൾപ്പെടുന്ന ഗോളത്തിന്റെ കേന്ദ്രം.",
+   ben:"The centre of the sphere of which a lens surface is a part."},
+  {ml:"പ്രകാശിക അക്ഷം",en:"Optic axis",
+   bml:"വക്രതാകേന്ദ്രങ്ങളിലൂടെയും പ്രകാശികകേന്ദ്രത്തിലൂടെയും പോകുന്ന സാങ്കല്പിക രേഖ.",
+   ben:"The imaginary line through the centres of curvature and the optic centre."},
+  {ml:"അപ്പെർച്ചർ",en:"Aperture",
+   bml:"പ്രകാശം കടന്നുപോകുന്ന ലെൻസ് ഭാഗത്തിന്റെ പരപ്പളവ്.",
+   ben:"The area of the lens through which light passes."},
+  {ml:"മുഖ്യഫോക്കസ്",en:"Principal focus (F)",
+   bml:"അക്ഷത്തിന് സമാന്തരമായ രശ്മികൾ അപവർത്തനശേഷം ഒന്നിക്കുന്ന/അകന്നുപോകുന്നതായി തോന്നുന്ന ബിന്ദു.",
+   ben:"The point where rays parallel to the axis converge, or appear to diverge from, after refraction."},
+  {ml:"ഫോക്കസ് ദൂരം",en:"Focal length (f)",
+   bml:"പ്രകാശികകേന്ദ്രത്തിൽ നിന്ന് മുഖ്യഫോക്കസിലേക്കുള്ള അകലം.",
+   ben:"The distance from the optic centre to the principal focus."},
+  {ml:"സംഭ്രജനം",en:"Converge",
+   bml:"പ്രകാശരശ്മികളെ ഒരു ബിന്ദുവിലേക്ക് ഒന്നിപ്പിക്കൽ. കോൺവെക്സ് ലെൻസ്.",
+   ben:"Bringing light rays together at a point. Done by a convex lens."},
+  {ml:"വിഭ്രജനം",en:"Diverge",
+   bml:"പ്രകാശരശ്മികളെ പരസ്പരം അകറ്റി വ്യാപിപ്പിക്കൽ. കോൺകേവ് ലെൻസ്.",
+   ben:"Spreading light rays apart. Done by a concave lens."},
+  {ml:"യഥാർഥ പ്രതിബിംബം",en:"Real image",
+   bml:"സ്ക്രീനിൽ പതിപ്പിക്കാൻ കഴിയുന്നത്. എപ്പോഴും തലകീഴ്. ഉദാ: ക്യാമറ.",
+   ben:"An image that can be caught on a screen. Always inverted. e.g. a camera image."},
+  {ml:"മിഥ്യാപ്രതിബിംബം",en:"Virtual image",
+   bml:"സ്ക്രീനിൽ പതിപ്പിക്കാനാവില്ല, കാണാൻ മാത്രം. എപ്പോഴും നിവർന്നത്.",
+   ben:"An image that cannot be caught on a screen, only seen. Always erect."},
+  {ml:"ആവർധനം",en:"Magnification (m)",
+   bml:"പ്രതിബിംബ ഉയരവും വസ്തു ഉയരവും തമ്മിലുള്ള അനുപാതം. m = hᵢ/hₒ = v/u.",
+   ben:"The ratio of image height to object height. m = hᵢ/hₒ = v/u. No unit."},
+  {ml:"പവർ",en:"Power (P)",
+   bml:"ഫോക്കസ്ദൂരത്തിന്റെ വ്യുൽക്രമം. P = 1/f. യൂണിറ്റ് ഡയോപ്റ്റർ (D).",
+   ben:"The reciprocal of the focal length. P = 1/f. Unit: dioptre (D)."},
+  {ml:"ഡയോപ്റ്റർ",en:"Dioptre (D)",
+   bml:"പവറിന്റെ SI യൂണിറ്റ്. 1 m ഫോക്കസ്ദൂരം = 1 D.",
+   ben:"The SI unit of power. A focal length of 1 m gives 1 D."},
+  {ml:"ലെൻസ് സമവാക്യം",en:"Lens equation",
+   bml:"1/f = 1/v − 1/u. പ്രതിബിംബ സ്ഥാനം കണക്കാക്കാൻ.",
+   ben:"1/f = 1/v − 1/u. Used to find the image position."},
+  {ml:"കാർട്ടീഷ്യൻ ചിഹ്നരീതി",en:"Cartesian sign convention",
+   bml:"ദൂരങ്ങൾക്ക് ചിഹ്നം നൽകുന്ന രീതി — O-ൽ നിന്ന്, പതനദിശ +, വിപരീതം −.",
+   ben:"Rules for signing distances — measured from O; along the incident ray +, opposite −."},
+  {ml:"ഒബ്ജക്റ്റിവ്",en:"Objective",
+   bml:"വസ്തുവിനടുത്ത് വെക്കുന്ന ലെൻസ്. മൈക്രോസ്കോപ്പിൽ ഫോക്കസ്ദൂരം കുറവ്.",
+   ben:"The lens placed near the object. In a microscope its focal length is small."},
+  {ml:"ഐപീസ്",en:"Eyepiece",
+   bml:"നിരീക്ഷിക്കുന്ന ലെൻസ്. ഒബ്ജക്റ്റിവിന്റെ പ്രതിബിംബത്തെ വീണ്ടും വലുതാക്കുന്നു.",
+   ben:"The lens we look through. It further magnifies the objective's image."},
+  {ml:"കോമ്പൗണ്ട് മൈക്രോസ്കോപ്",en:"Compound microscope",
+   bml:"സൂക്ഷ്മവസ്തുക്കളെ വലുതാക്കാൻ — ഒബ്ജക്റ്റിവ് + ഐപീസ് (രണ്ടും കോൺവെക്സ്).",
+   ben:"Magnifies tiny objects — objective + eyepiece, both convex."},
+  {ml:"ടെലിസ്കോപ്",en:"Telescope",
+   bml:"അകലെയുള്ള വസ്തുക്കളെ കാണാൻ. ഒബ്ജക്റ്റിവ് f കൂടുതൽ, ഐപീസ് f കുറവ്.",
+   ben:"For viewing distant objects. Objective has large f; eyepiece, small f."}
+];
+
+/* ---------- flashcards ---------- */
+const fcwrap=document.getElementById('fcwrap');
+function buildFlash(){
+  fcwrap.innerHTML='';
+  cards.forEach(c=>{
+    const front = LANG==='ml' ? c.ml : c.en;
+    const sec   = LANG==='ml' ? c.en : c.ml;
+    const back  = LANG==='ml' ? c.bml : c.ben;
+    const hint  = LANG==='ml' ? 'ടാപ്പ് ▸' : 'TAP ▸';
+    const d=document.createElement('div');
+    d.className='flip';
+    d.innerHTML=`<div class="flip-inner">
+      <div class="face front"><div class="term">${front}</div><div class="sec">${sec}</div><div class="hint">${hint}</div></div>
+      <div class="face back">${back}</div></div>`;
+    d.addEventListener('click',()=>d.classList.toggle('on'));
+    fcwrap.appendChild(d);
+  });
+}
+
+/* ---------- glossary ---------- */
+const glossBody=document.getElementById('glossBody');
+function buildGloss(){
+  glossBody.innerHTML='';
+  cards.slice().sort((a,b)=>a.en.localeCompare(b.en)).forEach(c=>{
+    const meaning = LANG==='ml' ? c.bml : c.ben;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${c.ml}</td><td class="gen">${c.en}</td><td>${meaning}</td>`;
+    tr.dataset.s=(c.ml+' '+c.en+' '+meaning).toLowerCase();
+    glossBody.appendChild(tr);
+  });
+}
+document.getElementById('gsearch').addEventListener('input',e=>{
+  const q=e.target.value.toLowerCase().trim();
+  glossBody.querySelectorAll('tr').forEach(tr=>{ tr.style.display=tr.dataset.s.includes(q)?'':'none'; });
+});
+
+/* ---------- bilingual quiz ---------- */
+const quiz=[
+  {qml:"ഏത് ലെൻസിന്റെ മധ്യഭാഗമാണ് കനം കൂടിയത്?", qen:"Which lens is thicker at the middle?",
+   oml:["കോൺകേവ്","കോൺവെക്സ്","ഗ്ലാസ് ഷീറ്റ്","രണ്ടും തുല്യം"], oen:["Concave","Convex","Glass sheet","Both equally"], a:1,
+   fml:"കോൺവെക്സ് ലെൻസിന്റെ മധ്യഭാഗം കനം കൂടിയത് — പ്രകാശത്തെ സംഭ്രജിപ്പിക്കുന്നു.",
+   fen:"A convex lens is thicker at the middle — it converges light."},
+  {qml:"പ്രകാശരശ്മികളെ വിഭ്രജിപ്പിക്കുന്ന ലെൻസ് ഏതാണ്?", qen:"Which lens diverges light rays?",
+   oml:["കോൺവെക്സ്","കോൺകേവ്","പ്രിസം","ഗ്ലാസ് ഷീറ്റ്"], oen:["Convex","Concave","Prism","Glass sheet"], a:1,
+   fml:"കോൺകേവ് ലെൻസ് രശ്മികളെ വിഭ്രജിപ്പിക്കുന്നു.", fen:"A concave lens diverges the rays."},
+  {qml:"ലെൻസിന്റെ മധ്യബിന്ദുവിനെ സൂചിപ്പിക്കുന്ന ചിഹ്നം ഏതാണ്?", qen:"Which symbol denotes the midpoint of a lens?",
+   oml:["F","C","O","P"], oen:["F","C","O","P"], a:2,
+   fml:"പ്രകാശികകേന്ദ്രം (Optic centre) — O.", fen:"The optic centre — O."},
+  {qml:"ലെൻസ് സമവാക്യം ഏതാണ്?", qen:"Which is the lens equation?",
+   oml:["1/f = 1/v + 1/u","f = v × u","1/f = 1/v − 1/u","1/f = u − v"],
+   oen:["1/f = 1/v + 1/u","f = v × u","1/f = 1/v − 1/u","1/f = u − v"], a:2,
+   fml:"ലെൻസ് സമവാക്യം: 1/f = 1/v − 1/u.", fen:"The lens equation is 1/f = 1/v − 1/u."},
+  {qml:"ലെൻസിന്റെ പവറിന്റെ SI യൂണിറ്റ് ഏതാണ്?", qen:"What is the SI unit of the power of a lens?",
+   oml:["മീറ്റർ","ഡയോപ്റ്റർ (D)","വാട്ട്","ഹെട്സ്"], oen:["Metre","Dioptre (D)","Watt","Hertz"], a:1,
+   fml:"പവർ P = 1/f, യൂണിറ്റ് ഡയോപ്റ്റർ (D). f മീറ്ററിൽ എടുക്കണം.",
+   fen:"P = 1/f; the unit is the dioptre (D), with f in metres."},
+  {qml:"കോൺകേവ് ലെൻസ് രൂപപ്പെടുത്തുന്ന പ്രതിബിംബം എപ്പോഴും ഏതുതരം?", qen:"The image formed by a concave lens is always…",
+   oml:["വലുത്, തലകീഴ്, യഥാർഥം","ചെറുത്, നിവർന്നത്, മിഥ്യ","അതേ വലുപ്പം, യഥാർഥം","വലുത്, നിവർന്നത്, യഥാർഥം"],
+   oen:["Enlarged, inverted, real","Diminished, erect, virtual","Same size, real","Enlarged, erect, real"], a:1,
+   fml:"വസ്തു എവിടെ വെച്ചാലും — ചെറുത്, നിവർന്നത്, മിഥ്യ.",
+   fen:"Wherever the object is placed — diminished, erect, virtual."},
+  {qml:"f = 20 cm കോൺവെക്സ് ലെൻസ്, വസ്തു 60 cm അകലെ. പ്രതിബിംബദൂരം v എത്ര?",
+   qen:"A convex lens with f = 20 cm; the object is 60 cm away. Find v.",
+   oml:["15 cm","30 cm","60 cm","20 cm"], oen:["15 cm","30 cm","60 cm","20 cm"], a:1,
+   fml:"1/20 = 1/v + 1/60 → 1/v = 2/60 → v = 30 cm.",
+   fen:"1/20 = 1/v + 1/60 → 1/v = 2/60 → v = 30 cm."},
+  {qml:"ആവർധനത്തിന്റെ (m) സൂത്രവാക്യം ഏതാണ്?", qen:"Which is the formula for magnification (m)?",
+   oml:["v + u","u/v","v/u","v − u"], oen:["v + u","u/v","v/u","v − u"], a:2,
+   fml:"m = hᵢ/hₒ = v/u.", fen:"m = hᵢ/hₒ = v/u."},
+  {qml:"f = 50 cm കോൺകേവ് ലെൻസിന്റെ പവർ എത്ര?", qen:"What is the power of a concave lens of f = 50 cm?",
+   oml:["+2 D","+0.5 D","−2 D","−0.5 D"], oen:["+2 D","+0.5 D","−2 D","−0.5 D"], a:2,
+   fml:"f = −0.5 m. P = 1/(−0.5) = −2 D.", fen:"f = −0.5 m. P = 1/(−0.5) = −2 D."},
+  {qml:"വസ്തു 2F-ന് അപ്പുറം വെച്ച കോൺവെക്സ് ലെൻസിന്റെ പ്രതിബിംബം എങ്ങനെ?",
+   qen:"For an object beyond 2F of a convex lens, the image is…",
+   oml:["വലുത്, നിവർന്നത്, മിഥ്യ","ചെറുത്, തലകീഴ്, യഥാർഥം","അതേ വലുപ്പം, നിവർന്നത്","വലുത്, തലകീഴ്, യഥാർഥം"],
+   oen:["Enlarged, erect, virtual","Diminished, inverted, real","Same size, erect","Enlarged, inverted, real"], a:1,
+   fml:"F-നും 2F-നും ഇടയിൽ — ചെറുത്, തലകീഴ്, യഥാർഥം.",
+   fen:"It forms between F and 2F — diminished, inverted, real."},
+  {qml:"താഴെ പറയുന്നവയിൽ യഥാർഥ പ്രതിബിംബത്തിന് ഉദാഹരണം ഏത്?",
+   qen:"Which of the following is an example of a real image?",
+   oml:["റീഡിങ് ലെൻസിലെ പ്രതിബിംബം","കണ്ണാടിയിലെ പ്രതിബിംബം","സിനിമാസ്ക്രീനിലെ പ്രതിബിംബം","കോൺകേവ് ലെൻസ് പ്രതിബിംബം"],
+   oen:["Image in a reading lens","Image in a plane mirror","Image on a cinema screen","Image from a concave lens"], a:2,
+   fml:"സ്ക്രീനിൽ പതിക്കുന്നത് യഥാർഥം — ക്യാമറ, സിനിമാസ്ക്രീൻ.",
+   fen:"What can be caught on a screen is real — camera, cinema screen."},
+  {qml:"ടെലിസ്കോപ്പിലെ ഒബ്ജക്റ്റിവ് ലെൻസിന്റെ ഫോക്കസ്ദൂരം എങ്ങനെയായിരിക്കണം?",
+   qen:"In a telescope, the focal length of the objective should be…",
+   oml:["കുറവ്","കൂടുതൽ","പൂജ്യം","ഐപീസിന് തുല്യം"], oen:["Small","Large","Zero","Equal to the eyepiece"], a:1,
+   fml:"ടെലിസ്കോപ്പിൽ ഒബ്ജക്റ്റിവ് ഫോക്കസ്ദൂരവും അപ്പെർച്ചറും കൂടുതലായിരിക്കണം.",
+   fen:"In a telescope the objective must have a large focal length and aperture."},
+  {qml:"ആവർധനം m = +2 ആയ പ്രതിബിംബം എങ്ങനെ?", qen:"An image with magnification m = +2 is…",
+   oml:["തലകീഴ്, യഥാർഥം","നിവർന്നത്, മിഥ്യ, വലുത്","ചെറുത്, യഥാർഥം","നിവർന്നത്, യഥാർഥം"],
+   oen:["Inverted, real","Erect, virtual, enlarged","Diminished, real","Erect, real"], a:1,
+   fml:"പോസിറ്റീവ് m → നിവർന്നത്, മിഥ്യ. മൂല്യം 2 → ഇരട്ടി വലുപ്പം.",
+   fen:"Positive m → erect and virtual. A value of 2 means twice the size."},
+  {qml:"വസ്തു കോൺവെക്സ് ലെൻസിന്റെ F-നും ലെൻസിനും ഇടയിലായാൽ പ്രതിബിംബം?",
+   qen:"If an object lies between F and a convex lens, the image is…",
+   oml:["ചെറുത്, തലകീഴ്, യഥാർഥം","വലുത്, നിവർന്നത്, മിഥ്യ","അതേ വലുപ്പം, യഥാർഥം","പ്രതിബിംബമില്ല"],
+   oen:["Diminished, inverted, real","Enlarged, erect, virtual","Same size, real","No image"], a:1,
+   fml:"ഇതാണ് റീഡിങ് ലെൻസ് — വലുത്, നിവർന്നത്, മിഥ്യ.",
+   fen:"This is the magnifying glass case — enlarged, erect, virtual."},
+  {qml:"f = 100 mm, u = −60 mm കോൺവെക്സ് ലെൻസ്. പ്രതിബിംബം എങ്ങനെ?",
+   qen:"A convex lens with f = 100 mm and u = −60 mm. The image is…",
+   oml:["യഥാർഥം, തലകീഴ്","മിഥ്യ, നിവർന്നത്, വലുത്","അനന്തതയിൽ","ചെറുത്, യഥാർഥം"],
+   oen:["Real, inverted","Virtual, erect, enlarged","At infinity","Diminished, real"], a:1,
+   fml:"വസ്തു F-നുള്ളിൽ (60<100) → v നെഗറ്റീവ് → മിഥ്യ, നിവർന്നത്, വലുത് (m = +2.5).",
+   fen:"The object is inside F (60<100) → v is negative → virtual, erect, enlarged (m = +2.5)."},
+  {qml:"f = 15 cm കോൺവെക്സ് ലെൻസ്, വസ്തു 30 cm അകലെ (2F-ൽ). v എത്ര?",
+   qen:"A convex lens with f = 15 cm; object at 30 cm (at 2F). Find v.",
+   oml:["10 cm","15 cm","30 cm","45 cm"], oen:["10 cm","15 cm","30 cm","45 cm"], a:2,
+   fml:"1/v = 1/15 − 1/30 = 1/30 → v = 30 cm (2F-ൽ, അതേ വലുപ്പം).",
+   fen:"1/v = 1/15 − 1/30 = 1/30 → v = 30 cm (at 2F, same size)."},
+  {qml:"ഒരു ലെൻസിന്റെ പവർ −4 D ആണ്. ഇത് ഏത് തരം ലെൻസ്?",
+   qen:"A lens has a power of −4 D. What type of lens is it?",
+   oml:["കോൺവെക്സ്","കോൺകേവ്","ഗ്ലാസ് ഷീറ്റ്","പ്രിസം"], oen:["Convex","Concave","Glass sheet","Prism"], a:1,
+   fml:"പവർ നെഗറ്റീവ് → കോൺകേവ് ലെൻസ് (f = −0.25 m).",
+   fen:"Negative power → concave lens (f = −0.25 m)."},
+  {qml:"ഒരു ലെൻസിന്റെ പവർ +5 D. അതിന്റെ ഫോക്കസ് ദൂരം എത്ര?",
+   qen:"A lens has a power of +5 D. What is its focal length?",
+   oml:["5 cm","20 cm","50 cm","2 cm"], oen:["5 cm","20 cm","50 cm","2 cm"], a:1,
+   fml:"f = 1/P = 1/5 = 0.2 m = 20 cm (പോസിറ്റീവ് → കോൺവെക്സ്).",
+   fen:"f = 1/P = 1/5 = 0.2 m = 20 cm (positive → convex)."},
+  {qml:"കോൺകേവ് ലെൻസ് f = 20 cm, വസ്തു 30 cm അകലെ. v എത്ര?",
+   qen:"A concave lens with f = 20 cm; object 30 cm away. Find v.",
+   oml:["−12 cm","+12 cm","−60 cm","+30 cm"], oen:["−12 cm","+12 cm","−60 cm","+30 cm"], a:0,
+   fml:"f = −20. 1/v = −1/20 − 1/30 = −1/12 → v = −12 cm (മിഥ്യ).",
+   fen:"f = −20. 1/v = −1/20 − 1/30 = −1/12 → v = −12 cm (virtual)."},
+  {qml:"യഥാർഥ പ്രതിബിംബം എപ്പോഴും എങ്ങനെയായിരിക്കും?", qen:"A real image is always…",
+   oml:["നിവർന്നത്","തലകീഴ്","വലുത്","ചെറുത്"], oen:["Erect","Inverted","Enlarged","Diminished"], a:1,
+   fml:"സ്ക്രീനിൽ പതിക്കുന്ന യഥാർഥ പ്രതിബിംബം എപ്പോഴും തലകീഴായതാണ്.",
+   fen:"A real image caught on a screen is always inverted."},
+  {qml:"ലെൻസ് സമവാക്യത്തിൽ വസ്തുദൂരം u-ന്റെ ചിഹ്നം എപ്പോഴും എന്താണ്?",
+   qen:"In the lens equation, what is the sign of the object distance u?",
+   oml:["പോസിറ്റീവ് (+)","നെഗറ്റീവ് (−)","പൂജ്യം","മാറിക്കൊണ്ടിരിക്കും"],
+   oen:["Positive (+)","Negative (−)","Zero","It varies"], a:1,
+   fml:"വസ്തു പതനരശ്മിയുടെ വിപരീത ദിശയിലായതിനാൽ u എപ്പോഴും നെഗറ്റീവ്.",
+   fen:"The object lies opposite to the incident ray direction, so u is always negative."}
+];
+
+const T={
+  ml:{q:"ചോദ്യം",score:"സ്കോർ",next:"അടുത്ത ചോദ്യം ▸",result:"ഫലം കാണാം ▸",correct:"ശരി",retry:"വീണ്ടും ശ്രമിക്കാം ↻",
+      good:"മികച്ചത്! നന്നായി പഠിച്ചു 🌟",mid:"നന്നായി വരുന്നു — ഒന്നു കൂടി റിവിഷൻ ചെയ്യാം 👍",low:"കുറിപ്പുകൾ ഒന്നുകൂടി വായിച്ച് വീണ്ടും ശ്രമിക്കാം 📘",
+      showAll:"📖 എല്ലാ ഉത്തരങ്ങളും കാണിക്കുക",hideAll:"🙈 എല്ലാ ഉത്തരങ്ങളും മറയ്ക്കുക",
+      showOne:"ഉത്തരം കാണിക്കുക ▾",hideOne:"ഉത്തരം മറയ്ക്കുക ▴"},
+  en:{q:"Question",score:"Score",next:"Next question ▸",result:"See result ▸",correct:"correct",retry:"Try again ↻",
+      good:"Excellent! Well studied 🌟",mid:"Coming along nicely — one more revision 👍",low:"Read the notes once more and try again 📘",
+      showAll:"📖 Show all answers",hideAll:"🙈 Hide all answers",
+      showOne:"Show answer ▾",hideOne:"Hide answer ▴"}
+};
+
+let qi=0,score=0,answered=false;
+const qc=document.getElementById('quizCard');
+function renderQ(){
+  answered=false; qi=Math.min(qi,quiz.length-1);
+  const t=T[LANG], item=quiz[qi];
+  const qtext = LANG==='ml'?item.qml:item.qen;
+  const opts  = LANG==='ml'?item.oml:item.oen;
+  qc.innerHTML=`
+    <div class="qmeta">
+      <span class="qcount">${t.q} ${qi+1} / ${quiz.length}</span>
+      <span class="qscore">${t.score}: ${score}</span>
+    </div>
+    <div class="qbar"><i style="width:${qi/quiz.length*100}%"></i></div>
+    <p class="qtext">${qtext}</p>
+    <div id="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div>
+    <div class="qfb" id="qfb"></div>
+    <button class="qnext" id="qnext" disabled>${qi===quiz.length-1?t.result:t.next}</button>`;
+  qc.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',pick));
+  document.getElementById('qnext').addEventListener('click',()=>{qi++;qi<quiz.length?renderQ():showResult();});
+}
+function pick(e){
+  if(answered)return; answered=true;
+  const t=T[LANG], chosen=+e.currentTarget.dataset.i, correct=quiz[qi].a;
+  qc.querySelectorAll('.opt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===correct)b.classList.add('correct');
+    if(i===chosen&&chosen!==correct)b.classList.add('wrong');
+  });
+  const fb=document.getElementById('qfb');
+  const expl = LANG==='ml'?quiz[qi].fml:quiz[qi].fen;
+  if(chosen===correct){score++;fb.className='qfb show ok';fb.innerHTML='✓ '+expl;}
+  else{fb.className='qfb show no';fb.innerHTML='✗ '+expl;}
+  document.querySelector('.qscore').textContent=t.score+': '+score;
+  document.getElementById('qnext').disabled=false;
+}
+function showResult(){
+  const t=T[LANG], pct=Math.round(score/quiz.length*100);
+  const msg = pct>=80?t.good : pct>=50?t.mid : t.low;
+  qc.innerHTML=`<div class="result">
+    <div class="big">${score}<span style="font-size:24px;color:var(--ink-soft)">/${quiz.length}</span></div>
+    <div class="lbl">${pct}% ${t.correct}</div>
+    <div class="msg">${msg}</div>
+    <button class="retry" id="retry">${t.retry}</button>
+  </div>`;
+  document.getElementById('retry').addEventListener('click',()=>{qi=0;score=0;renderQ();});
+}
+
+/* ---------- question bank reveal ---------- */
+document.querySelectorAll('#qbank .qb-rev').forEach(btn=>{
+  btn.addEventListener('click',()=>{ btn.nextElementSibling.classList.toggle('on'); });
+});
+const qbToggleAll=document.getElementById('qbToggleAll');
+let qbAllOn=false;
+qbToggleAll.addEventListener('click',()=>{
+  qbAllOn=!qbAllOn;
+  document.querySelectorAll('#qbank .qb-ans').forEach(a=>a.classList.toggle('on',qbAllOn));
+  qbToggleAll.innerHTML = qbAllOn
+    ? `🙈 <span class="t-ml">എല്ലാ ഉത്തരങ്ങളും മറയ്ക്കുക</span><span class="t-en">Hide all answers</span>`
+    : `📖 <span class="t-ml">എല്ലാ ഉത്തരങ്ങളും കാണിക്കുക</span><span class="t-en">Show all answers</span>`;
+});
+
+/* ---------- targeted single-panel print ---------- */
+function printPanel(id){
+  const el=document.getElementById(id);
+  document.body.classList.add('print-one');
+  el.classList.add('print-me');
+  const wasClosed=[...el.querySelectorAll('details:not([open])')];
+  wasClosed.forEach(d=>d.open=true);
+  const cleanup=()=>{
+    document.body.classList.remove('print-one');
+    el.classList.remove('print-me');
+    wasClosed.forEach(d=>d.open=false);
+    window.removeEventListener('afterprint',cleanup);
+  };
+  window.addEventListener('afterprint',cleanup);
+  window.print();
+  setTimeout(cleanup,800);
+}
+
+/* ---------- share the standalone quiz page ---------- */
+const toastEl=document.getElementById('toast');
+let toastT;
+function toast(msg){
+  toastEl.textContent=msg; toastEl.classList.add('on');
+  clearTimeout(toastT); toastT=setTimeout(()=>toastEl.classList.remove('on'),2200);
+}
+function quizURL(){
+  const base=window.location.href.split('#')[0].split('?')[0];
+  return base.replace(/[^/]*$/, 'lensukal-quiz.html');
+}
+async function copyQuizLink(){
+  const url=quizURL();
+  const title = LANG==='ml' ? 'ലെൻസുകൾ — ക്വിസ് (Class 10 Physics)' : 'Lenses — Quiz (Class 10 Physics)';
+  if(navigator.share){
+    try{ await navigator.share({title, text:title, url}); return; }catch(e){ if(e.name==='AbortError')return; }
+  }
+  try{
+    await navigator.clipboard.writeText(url);
+    toast(LANG==='ml'?'ക്വിസ് ലിങ്ക് കോപ്പി ചെയ്തു ✓':'Quiz link copied ✓');
+  }catch(e){
+    const ta=document.createElement('textarea');
+    ta.value=url; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); toast(LANG==='ml'?'ക്വിസ് ലിങ്ക് കോപ്പി ചെയ്തു ✓':'Quiz link copied ✓'); }
+    catch(_){ toast(url); }
+    document.body.removeChild(ta);
+  }
+}
+document.getElementById('shareBtn').addEventListener('click',copyQuizLink);
+document.getElementById('waBtn').addEventListener('click',()=>{
+  const msg = (LANG==='ml'
+    ? 'ലെൻസുകൾ (Class 10 Physics) ക്വിസ് — ഇവിടെ ചെയ്യാം:\n'
+    : 'Lenses (Class 10 Physics) quiz — try it here:\n') + quizURL();
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank','noopener');
+});
+
+/* ---------- init ---------- */
+setLang('ml');
+</script>
+</body>
+</html>

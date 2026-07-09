@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ലെൻസുകൾ ക്വിസ് | Lenses Quiz — Class 10 Physics</title>
+<meta name="description" content="Class 10 Physics · Unit 2 Lenses — bilingual interactive quiz (Malayalam / English).">
+<meta property="og:title" content="ലെൻസുകൾ ക്വിസ് | Lenses Quiz">
+<meta property="og:description" content="Class 10 Physics · Unit 2 · 21 questions · മലയാളം / English">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16202e; --ink-soft:#48566a; --paper:#eceee8; --card:#ffffff;
+    --wave:#4f46e5; --wave-deep:#3730a3; --amp:#ea580c; --reso:#0d9488;
+    --line:#d6d9d1; --good:#108a5b; --bad:#c0392b;
+    --shadow:0 1px 0 rgba(22,32,46,.04), 0 8px 24px -16px rgba(22,32,46,.35);
+    --r:14px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Noto Sans Malayalam",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;
+    min-height:100vh;display:flex;flex-direction:column;}
+  .t-en{display:none;}
+  body.lang-en .t-ml{display:none;}
+  body.lang-en .t-en{display:revert;}
+
+  header{background:var(--ink);color:#eef2f6;position:relative;overflow:hidden;border-bottom:3px solid var(--wave);}
+  .scope{position:absolute;inset:0;width:100%;height:100%;opacity:.5;}
+  .scope .ray{fill:none;stroke:var(--wave);stroke-width:1.6;}
+  .scope .ray.glow{stroke:#818cf8;stroke-width:1;opacity:.7;}
+  .scope .lens{fill:rgba(129,140,248,.10);stroke:#a5b4fc;stroke-width:2;}
+  .scope .axis{stroke:#3b4a5e;stroke-width:1;stroke-dasharray:5 6;}
+  .scope .foc{fill:var(--amp);}
+  @keyframes drift{from{transform:translateX(0);}to{transform:translateX(-220px);}}
+  .scope #scopeG{animation:drift 7s linear infinite;}
+  .hero{position:relative;z-index:2;padding:34px 18px 26px;max-width:760px;margin:0 auto;}
+  .eyebrow{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:11.5px;letter-spacing:2px;
+    text-transform:uppercase;color:#a5b4fc;margin:0 0 8px;}
+  .hero h1{font-weight:800;font-size:clamp(28px,6vw,44px);margin:0;line-height:1.06;letter-spacing:-.5px;}
+  .hero .sub{margin:9px 0 0;color:#aebccb;font-size:14.5px;}
+
+  .langbar{position:absolute;top:14px;right:16px;z-index:5;display:flex;
+    background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:30px;padding:3px;}
+  .langbar button{border:none;background:none;cursor:pointer;color:#cfe0ec;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:12.5px;
+    padding:6px 14px;border-radius:30px;transition:.15s;}
+  .langbar button.on{background:var(--wave);color:#fff;}
+
+  main{flex:1;max-width:760px;margin:0 auto;padding:28px 18px 50px;width:100%;}
+
+  .sharebar{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:0 0 20px;}
+  .sbtn{border:none;cursor:pointer;font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;
+    font-size:13.5px;padding:9px 18px;border-radius:10px;transition:.15s;}
+  .sbtn.share{background:var(--reso);color:#fff;}
+  .sbtn.share:hover{background:#0b7a6b;}
+  .sbtn.wa{background:#1f9e50;color:#fff;}
+
+  /* gate / lock screens */
+  .gate{text-align:center;padding:18px 6px;}
+  .gate .icon{font-size:48px;line-height:1;margin-bottom:6px;}
+  .gate h2{font-weight:800;font-size:22px;margin:8px 0 6px;color:var(--ink);}
+  .gate p{color:var(--ink-soft);font-size:14.5px;margin:6px 0;}
+  .gate .window{display:inline-block;margin-top:14px;background:#f3f3fc;border:1px dashed var(--wave);
+    border-radius:11px;padding:12px 22px;font-family:"Space Mono","Noto Sans Malayalam",monospace;
+    font-weight:700;font-size:17px;color:var(--wave-deep);letter-spacing:1px;}
+  .gate .cd{margin-top:16px;font-family:"Space Mono","Noto Sans Malayalam",monospace;
+    font-weight:700;font-size:34px;color:var(--amp);letter-spacing:2px;}
+  .gate .cdlbl{font-size:12px;color:var(--ink-soft);letter-spacing:1.5px;text-transform:uppercase;
+    font-family:"Space Mono","Noto Sans Malayalam",monospace;}
+  .gate .prev{margin-top:18px;background:#e7f6ee;border-left:4px solid var(--good);
+    border-radius:0 10px 10px 0;padding:12px 16px;text-align:left;color:#0a5e3d;font-size:14.5px;}
+  .gate .prev b{color:#084d33;}
+  .warnbar{background:#fdf0e7;border:1px solid #f6cead;color:#9a4a12;border-radius:10px;
+    padding:10px 14px;font-size:13px;margin:0 0 16px;text-align:center;}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#eef2f6;padding:11px 20px;border-radius:30px;font-size:13.5px;
+    opacity:0;pointer-events:none;transition:.25s;z-index:99;box-shadow:0 8px 24px -8px rgba(0,0,0,.5);}
+  .toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  .quiz-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+    box-shadow:var(--shadow);padding:24px;}
+  .qmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+  .qcount,.qscore{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:12px;letter-spacing:1px;}
+  .qcount{color:var(--ink-soft);} .qscore{color:var(--amp);font-weight:700;}
+  .qbar{height:6px;background:#e7eae3;border-radius:6px;overflow:hidden;margin-bottom:18px;}
+  .qbar i{display:block;height:100%;background:var(--wave);transition:width .3s;}
+  .qtext{font-weight:600;font-size:19px;line-height:1.4;margin:0 0 18px;}
+  .opt{display:block;width:100%;text-align:left;background:#f6f8f3;border:2px solid var(--line);
+    border-radius:11px;padding:13px 16px;margin:9px 0;cursor:pointer;
+    font-family:"Noto Sans Malayalam",sans-serif;font-size:15.5px;color:var(--ink);transition:all .15s;}
+  .opt:hover:not(:disabled){border-color:var(--wave);background:#eeeefb;}
+  .opt:disabled{cursor:default;}
+  .opt.correct{border-color:var(--good);background:#e7f6ee;color:#0a5e3d;font-weight:600;}
+  .opt.wrong{border-color:var(--bad);background:#fbecea;color:#8e2118;}
+  .qfb{margin-top:14px;padding:12px 15px;border-radius:10px;font-size:14.5px;display:none;}
+  .qfb.show{display:block;}
+  .qfb.ok{background:#e7f6ee;color:#0a5e3d;border-left:4px solid var(--good);}
+  .qfb.no{background:#fbecea;color:#8e2118;border-left:4px solid var(--bad);}
+  .qnext{margin-top:18px;width:100%;border:none;cursor:pointer;background:var(--wave);color:#fff;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:16px;padding:13px;border-radius:11px;transition:background .15s;}
+  .qnext:hover{background:var(--wave-deep);}
+  .qnext[disabled]{background:#aeb8c2;cursor:not-allowed;}
+
+  .result{text-align:center;padding:14px 0;}
+  .result .big{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-weight:700;font-size:56px;color:var(--wave-deep);line-height:1;}
+  .result .lbl{font-weight:600;font-size:20px;margin-top:8px;}
+  .result .msg{color:var(--ink-soft);margin-top:6px;}
+  .rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;}
+  .rgrid button{border:none;cursor:pointer;font-family:"Noto Sans Malayalam",sans-serif;
+    font-weight:700;font-size:14.5px;padding:12px;border-radius:10px;}
+  .rgrid .retry{background:var(--amp);color:#fff;}
+  .rgrid .rshare{background:var(--reso);color:#fff;}
+  .review{margin-top:22px;text-align:left;border-top:1px solid var(--line);padding-top:16px;}
+  .review h3{font-size:15px;margin:0 0 10px;color:var(--wave-deep);}
+  .rvitem{display:flex;gap:9px;font-size:13.5px;margin:7px 0;line-height:1.45;}
+  .rvitem .mk{flex:0 0 auto;font-weight:700;}
+  .rvitem .mk.ok{color:var(--good);} .rvitem .mk.no{color:var(--bad);}
+
+  footer{background:var(--ink);color:#8ea0b2;text-align:center;padding:22px 18px;font-size:12.5px;}
+  footer b{color:#cfe0ec;}
+  @media (prefers-reduced-motion:reduce){.scope #scopeG{animation:none;}}
+  @media (max-width:560px){.hero{padding:52px 18px 22px;} .langbar{top:12px;right:12px;} .rgrid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="scope" viewBox="0 0 900 200" preserveAspectRatio="none" aria-hidden="true">
+    <line class="axis" x1="0" y1="100" x2="900" y2="100"/>
+    <g id="scopeG"></g>
+  </svg>
+  <div class="langbar">
+    <button id="btnML" class="on">മലയാളം</button>
+    <button id="btnEN">English</button>
+  </div>
+  <div class="hero">
+    <p class="eyebrow">Class 10 · Physics · Unit 2</p>
+    <h1><span class="t-ml">ലെൻസുകൾ — ക്വിസ്</span><span class="t-en">Lenses — Quiz</span></h1>
+    <p class="sub">
+      <span class="t-ml">20 ചോദ്യങ്ങൾ · ഒരു ഉപകരണത്തിൽ ഒരു തവണ മാത്രം · രാത്രി 9:30 – 10:30</span>
+      <span class="t-en">20 questions · one attempt per device · 9:30 – 10:30 PM only</span>
+    </p>
+  </div>
+</header>
+
+<main>
+  <div class="sharebar">
+    <button class="sbtn share" id="shareBtn">🔗 <span class="t-ml">ലിങ്ക് പങ്കിടുക</span><span class="t-en">Share link</span></button>
+    <button class="sbtn wa" id="waBtn">📲 <span class="t-ml">WhatsApp-ൽ അയക്കുക</span><span class="t-en">Send on WhatsApp</span></button>
+  </div>
+
+  <div class="quiz-card" id="quizCard"></div>
+</main>
+
+<footer>
+  <b><span class="t-ml">ലെൻസുകൾ</span><span class="t-en">Lenses</span></b> · Class 10 Physics (SCERT Kerala, 2025)
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- header motif ---------- */
+(function(){
+  const g=document.getElementById('scopeG'); if(!g)return;
+  const ys=[30,65,135,170], W=220; let svg='';
+  for(let X=-220;X<=1100;X+=W){
+    const lx=X+90, fx=X+170;
+    ys.forEach(y=>{
+      svg+=`<line class="ray" x1="${X}" y1="${y}" x2="${lx}" y2="${y}"/>`;
+      svg+=`<line class="ray glow" x1="${lx}" y1="${y}" x2="${fx}" y2="100"/>`;
+      svg+=`<line class="ray" x1="${fx}" y1="100" x2="${X+220}" y2="${200-y}"/>`;
+    });
+    svg+=`<path class="lens" d="M ${lx} 34 Q ${lx+20} 100 ${lx} 166 Q ${lx-20} 100 ${lx} 34 Z"/>`;
+    svg+=`<circle class="foc" cx="${fx}" cy="100" r="3.5"/>`;
+  }
+  g.innerHTML=svg;
+})();
+
+/* ---------- toast ---------- */
+const toastEl=document.getElementById('toast');
+let toastT;
+function toast(msg){
+  toastEl.textContent=msg; toastEl.classList.add('on');
+  clearTimeout(toastT); toastT=setTimeout(()=>toastEl.classList.remove('on'),2200);
+}
+
+/* ---------- share ---------- */
+const shareTitle={ml:"ലെൻസുകൾ — ക്വിസ് (Class 10 Physics)",en:"Lenses — Quiz (Class 10 Physics)"};
+function pageURL(){ return window.location.href.split('#')[0]; }
+async function doShare(){
+  const url=pageURL(), title=shareTitle[LANG];
+  if(navigator.share){
+    try{ await navigator.share({title, text:title, url}); return; }catch(e){ if(e.name==='AbortError')return; }
+  }
+  try{
+    await navigator.clipboard.writeText(url);
+    toast(LANG==='ml'?'ലിങ്ക് കോപ്പി ചെയ്തു ✓':'Link copied ✓');
+  }catch(e){
+    const ta=document.createElement('textarea');
+    ta.value=url; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); toast(LANG==='ml'?'ലിങ്ക് കോപ്പി ചെയ്തു ✓':'Link copied ✓'); }
+    catch(_){ toast(url); }
+    document.body.removeChild(ta);
+  }
+}
+document.getElementById('shareBtn').addEventListener('click',doShare);
+document.getElementById('waBtn').addEventListener('click',()=>{
+  const msg = (LANG==='ml'
+    ? 'ലെൻസുകൾ (Class 10 Physics) ക്വിസ് — ഇവിടെ ചെയ്യാം:\n'
+    : 'Lenses (Class 10 Physics) quiz — try it here:\n') + pageURL();
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank','noopener');
+});
+
+/* ---------- language ---------- */
+let LANG='ml';
+const btnML=document.getElementById('btnML'), btnEN=document.getElementById('btnEN');
+function setLang(l){
+  LANG=l;
+  document.body.classList.toggle('lang-en', l==='en');
+  document.documentElement.lang=l;
+  btnML.classList.toggle('on', l==='ml');
+  btnEN.classList.toggle('on', l==='en');
+  route();
+}
+btnML.addEventListener('click',()=>setLang('ml'));
+btnEN.addEventListener('click',()=>setLang('en'));
+
+/* ---------- questions ---------- */
+const quiz=[
+  {qml:"ഏത് ലെൻസിന്റെ മധ്യഭാഗമാണ് കനം കൂടിയത്?", qen:"Which lens is thicker at the middle?",
+   oml:["കോൺകേവ്","കോൺവെക്സ്","ഗ്ലാസ് ഷീറ്റ്","രണ്ടും തുല്യം"], oen:["Concave","Convex","Glass sheet","Both equally"], a:1,
+   fml:"കോൺവെക്സ് ലെൻസിന്റെ മധ്യഭാഗം കനം കൂടിയത് — പ്രകാശത്തെ സംഭ്രജിപ്പിക്കുന്നു.",
+   fen:"A convex lens is thicker at the middle — it converges light."},
+  {qml:"പ്രകാശരശ്മികളെ വിഭ്രജിപ്പിക്കുന്ന ലെൻസ് ഏതാണ്?", qen:"Which lens diverges light rays?",
+   oml:["കോൺവെക്സ്","കോൺകേവ്","പ്രിസം","ഗ്ലാസ് ഷീറ്റ്"], oen:["Convex","Concave","Prism","Glass sheet"], a:1,
+   fml:"കോൺകേവ് ലെൻസ് രശ്മികളെ വിഭ്രജിപ്പിക്കുന്നു.", fen:"A concave lens diverges the rays."},
+  {qml:"ലെൻസിന്റെ മധ്യബിന്ദുവിനെ സൂചിപ്പിക്കുന്ന ചിഹ്നം ഏതാണ്?", qen:"Which symbol denotes the midpoint of a lens?",
+   oml:["F","C","O","P"], oen:["F","C","O","P"], a:2,
+   fml:"പ്രകാശികകേന്ദ്രം (Optic centre) — O.", fen:"The optic centre — O."},
+  {qml:"ലെൻസ് സമവാക്യം ഏതാണ്?", qen:"Which is the lens equation?",
+   oml:["1/f = 1/v + 1/u","f = v × u","1/f = 1/v − 1/u","1/f = u − v"],
+   oen:["1/f = 1/v + 1/u","f = v × u","1/f = 1/v − 1/u","1/f = u − v"], a:2,
+   fml:"ലെൻസ് സമവാക്യം: 1/f = 1/v − 1/u.", fen:"The lens equation is 1/f = 1/v − 1/u."},
+  {qml:"ലെൻസിന്റെ പവറിന്റെ SI യൂണിറ്റ് ഏതാണ്?", qen:"What is the SI unit of the power of a lens?",
+   oml:["മീറ്റർ","ഡയോപ്റ്റർ (D)","വാട്ട്","ഹെട്സ്"], oen:["Metre","Dioptre (D)","Watt","Hertz"], a:1,
+   fml:"പവർ P = 1/f, യൂണിറ്റ് ഡയോപ്റ്റർ (D). f മീറ്ററിൽ എടുക്കണം.",
+   fen:"P = 1/f; the unit is the dioptre (D), with f in metres."},
+  {qml:"കോൺകേവ് ലെൻസ് രൂപപ്പെടുത്തുന്ന പ്രതിബിംബം എപ്പോഴും ഏതുതരം?", qen:"The image formed by a concave lens is always…",
+   oml:["വലുത്, തലകീഴ്, യഥാർഥം","ചെറുത്, നിവർന്നത്, മിഥ്യ","അതേ വലുപ്പം, യഥാർഥം","വലുത്, നിവർന്നത്, യഥാർഥം"],
+   oen:["Enlarged, inverted, real","Diminished, erect, virtual","Same size, real","Enlarged, erect, real"], a:1,
+   fml:"വസ്തു എവിടെ വെച്ചാലും — ചെറുത്, നിവർന്നത്, മിഥ്യ.",
+   fen:"Wherever the object is placed — diminished, erect, virtual."},
+  {qml:"f = 20 cm കോൺവെക്സ് ലെൻസ്, വസ്തു 60 cm അകലെ. പ്രതിബിംബദൂരം v എത്ര?",
+   qen:"A convex lens with f = 20 cm; the object is 60 cm away. Find v.",
+   oml:["15 cm","30 cm","60 cm","20 cm"], oen:["15 cm","30 cm","60 cm","20 cm"], a:1,
+   fml:"1/20 = 1/v + 1/60 → 1/v = 2/60 → v = 30 cm.",
+   fen:"1/20 = 1/v + 1/60 → 1/v = 2/60 → v = 30 cm."},
+  {qml:"ആവർധനത്തിന്റെ (m) സൂത്രവാക്യം ഏതാണ്?", qen:"Which is the formula for magnification (m)?",
+   oml:["v + u","u/v","v/u","v − u"], oen:["v + u","u/v","v/u","v − u"], a:2,
+   fml:"m = hᵢ/hₒ = v/u.", fen:"m = hᵢ/hₒ = v/u."},
+  {qml:"f = 50 cm കോൺകേവ് ലെൻസിന്റെ പവർ എത്ര?", qen:"What is the power of a concave lens of f = 50 cm?",
+   oml:["+2 D","+0.5 D","−2 D","−0.5 D"], oen:["+2 D","+0.5 D","−2 D","−0.5 D"], a:2,
+   fml:"f = −0.5 m. P = 1/(−0.5) = −2 D.", fen:"f = −0.5 m. P = 1/(−0.5) = −2 D."},
+  {qml:"വസ്തു 2F-ന് അപ്പുറം വെച്ച കോൺവെക്സ് ലെൻസിന്റെ പ്രതിബിംബം എങ്ങനെ?",
+   qen:"For an object beyond 2F of a convex lens, the image is…",
+   oml:["വലുത്, നിവർന്നത്, മിഥ്യ","ചെറുത്, തലകീഴ്, യഥാർഥം","അതേ വലുപ്പം, നിവർന്നത്","വലുത്, തലകീഴ്, യഥാർഥം"],
+   oen:["Enlarged, erect, virtual","Diminished, inverted, real","Same size, erect","Enlarged, inverted, real"], a:1,
+   fml:"F-നും 2F-നും ഇടയിൽ — ചെറുത്, തലകീഴ്, യഥാർഥം.",
+   fen:"It forms between F and 2F — diminished, inverted, real."},
+  {qml:"താഴെ പറയുന്നവയിൽ യഥാർഥ പ്രതിബിംബത്തിന് ഉദാഹരണം ഏത്?",
+   qen:"Which of the following is an example of a real image?",
+   oml:["റീഡിങ് ലെൻസിലെ പ്രതിബിംബം","കണ്ണാടിയിലെ പ്രതിബിംബം","സിനിമാസ്ക്രീനിലെ പ്രതിബിംബം","കോൺകേവ് ലെൻസ് പ്രതിബിംബം"],
+   oen:["Image in a reading lens","Image in a plane mirror","Image on a cinema screen","Image from a concave lens"], a:2,
+   fml:"സ്ക്രീനിൽ പതിക്കുന്നത് യഥാർഥം — ക്യാമറ, സിനിമാസ്ക്രീൻ.",
+   fen:"What can be caught on a screen is real — camera, cinema screen."},
+  {qml:"ടെലിസ്കോപ്പിലെ ഒബ്ജക്റ്റിവ് ലെൻസിന്റെ ഫോക്കസ്ദൂരം എങ്ങനെയായിരിക്കണം?",
+   qen:"In a telescope, the focal length of the objective should be…",
+   oml:["കുറവ്","കൂടുതൽ","പൂജ്യം","ഐപീസിന് തുല്യം"], oen:["Small","Large","Zero","Equal to the eyepiece"], a:1,
+   fml:"ടെലിസ്കോപ്പിൽ ഒബ്ജക്റ്റിവ് ഫോക്കസ്ദൂരവും അപ്പെർച്ചറും കൂടുതലായിരിക്കണം.",
+   fen:"In a telescope the objective must have a large focal length and aperture."},
+  {qml:"ആവർധനം m = +2 ആയ പ്രതിബിംബം എങ്ങനെ?", qen:"An image with magnification m = +2 is…",
+   oml:["തലകീഴ്, യഥാർഥം","നിവർന്നത്, മിഥ്യ, വലുത്","ചെറുത്, യഥാർഥം","നിവർന്നത്, യഥാർഥം"],
+   oen:["Inverted, real","Erect, virtual, enlarged","Diminished, real","Erect, real"], a:1,
+   fml:"പോസിറ്റീവ് m → നിവർന്നത്, മിഥ്യ. മൂല്യം 2 → ഇരട്ടി വലുപ്പം.",
+   fen:"Positive m → erect and virtual. A value of 2 means twice the size."},
+  {qml:"വസ്തു കോൺവെക്സ് ലെൻസിന്റെ F-നും ലെൻസിനും ഇടയിലായാൽ പ്രതിബിംബം?",
+   qen:"If an object lies between F and a convex lens, the image is…",
+   oml:["ചെറുത്, തലകീഴ്, യഥാർഥം","വലുത്, നിവർന്നത്, മിഥ്യ","അതേ വലുപ്പം, യഥാർഥം","പ്രതിബിംബമില്ല"],
+   oen:["Diminished, inverted, real","Enlarged, erect, virtual","Same size, real","No image"], a:1,
+   fml:"ഇതാണ് റീഡിങ് ലെൻസ് — വലുത്, നിവർന്നത്, മിഥ്യ.",
+   fen:"This is the magnifying glass case — enlarged, erect, virtual."},
+  {qml:"f = 100 mm, u = −60 mm കോൺവെക്സ് ലെൻസ്. പ്രതിബിംബം എങ്ങനെ?",
+   qen:"A convex lens with f = 100 mm and u = −60 mm. The image is…",
+   oml:["യഥാർഥം, തലകീഴ്","മിഥ്യ, നിവർന്നത്, വലുത്","അനന്തതയിൽ","ചെറുത്, യഥാർഥം"],
+   oen:["Real, inverted","Virtual, erect, enlarged","At infinity","Diminished, real"], a:1,
+   fml:"വസ്തു F-നുള്ളിൽ (60<100) → v നെഗറ്റീവ് → മിഥ്യ, നിവർന്നത്, വലുത് (m = +2.5).",
+   fen:"The object is inside F (60<100) → v is negative → virtual, erect, enlarged (m = +2.5)."},
+  {qml:"f = 15 cm കോൺവെക്സ് ലെൻസ്, വസ്തു 30 cm അകലെ (2F-ൽ). v എത്ര?",
+   qen:"A convex lens with f = 15 cm; object at 30 cm (at 2F). Find v.",
+   oml:["10 cm","15 cm","30 cm","45 cm"], oen:["10 cm","15 cm","30 cm","45 cm"], a:2,
+   fml:"1/v = 1/15 − 1/30 = 1/30 → v = 30 cm (2F-ൽ, അതേ വലുപ്പം).",
+   fen:"1/v = 1/15 − 1/30 = 1/30 → v = 30 cm (at 2F, same size)."},
+  {qml:"ഒരു ലെൻസിന്റെ പവർ −4 D ആണ്. ഇത് ഏത് തരം ലെൻസ്?",
+   qen:"A lens has a power of −4 D. What type of lens is it?",
+   oml:["കോൺവെക്സ്","കോൺകേവ്","ഗ്ലാസ് ഷീറ്റ്","പ്രിസം"], oen:["Convex","Concave","Glass sheet","Prism"], a:1,
+   fml:"പവർ നെഗറ്റീവ് → കോൺകേവ് ലെൻസ് (f = −0.25 m).",
+   fen:"Negative power → concave lens (f = −0.25 m)."},
+  {qml:"ഒരു ലെൻസിന്റെ പവർ +5 D. അതിന്റെ ഫോക്കസ് ദൂരം എത്ര?",
+   qen:"A lens has a power of +5 D. What is its focal length?",
+   oml:["5 cm","20 cm","50 cm","2 cm"], oen:["5 cm","20 cm","50 cm","2 cm"], a:1,
+   fml:"f = 1/P = 1/5 = 0.2 m = 20 cm (പോസിറ്റീവ് → കോൺവെക്സ്).",
+   fen:"f = 1/P = 1/5 = 0.2 m = 20 cm (positive → convex)."},
+  {qml:"കോൺകേവ് ലെൻസ് f = 20 cm, വസ്തു 30 cm അകലെ. v എത്ര?",
+   qen:"A concave lens with f = 20 cm; object 30 cm away. Find v.",
+   oml:["−12 cm","+12 cm","−60 cm","+30 cm"], oen:["−12 cm","+12 cm","−60 cm","+30 cm"], a:0,
+   fml:"f = −20. 1/v = −1/20 − 1/30 = −1/12 → v = −12 cm (മിഥ്യ).",
+   fen:"f = −20. 1/v = −1/20 − 1/30 = −1/12 → v = −12 cm (virtual)."},
+  {qml:"യഥാർഥ പ്രതിബിംബം എപ്പോഴും എങ്ങനെയായിരിക്കും?", qen:"A real image is always…",
+   oml:["നിവർന്നത്","തലകീഴ്","വലുത്","ചെറുത്"], oen:["Erect","Inverted","Enlarged","Diminished"], a:1,
+   fml:"സ്ക്രീനിൽ പതിക്കുന്ന യഥാർഥ പ്രതിബിംബം എപ്പോഴും തലകീഴായതാണ്.",
+   fen:"A real image caught on a screen is always inverted."},
+  {qml:"ലെൻസ് സമവാക്യത്തിൽ വസ്തുദൂരം u-ന്റെ ചിഹ്നം എപ്പോഴും എന്താണ്?",
+   qen:"In the lens equation, what is the sign of the object distance u?",
+   oml:["പോസിറ്റീവ് (+)","നെഗറ്റീവ് (−)","പൂജ്യം","മാറിക്കൊണ്ടിരിക്കും"],
+   oen:["Positive (+)","Negative (−)","Zero","It varies"], a:1,
+   fml:"വസ്തു പതനരശ്മിയുടെ വിപരീത ദിശയിലായതിനാൽ u എപ്പോഴും നെഗറ്റീവ്.",
+   fen:"The object lies opposite to the incident ray direction, so u is always negative."}
+];
+
+const T={
+  ml:{q:"ചോദ്യം",score:"സ്കോർ",next:"അടുത്ത ചോദ്യം ▸",result:"ഫലം കാണാം ▸",correct:"ശരി",
+      rshare:"🔗 ഫലം പങ്കിടുക",
+      good:"മികച്ചത്! നന്നായി പഠിച്ചു 🌟",mid:"നന്നായി വരുന്നു — ഒന്നു കൂടി റിവിഷൻ ചെയ്യാം 👍",
+      low:"കുറിപ്പുകൾ ഒന്നുകൂടി വായിച്ച് വീണ്ടും ശ്രമിക്കാം 📘",
+      review:"തെറ്റിയ ചോദ്യങ്ങൾ",allright:"എല്ലാ ചോദ്യങ്ങൾക്കും ശരിയുത്തരം! 🎉",
+      warn:"⚠️ ഒരു ഉപകരണത്തിൽ ഒരു തവണ മാത്രം. തുടങ്ങിയാൽ പേജ് റിഫ്രഷ് ചെയ്യരുത്.",
+      gateTitle:"ക്വിസ് ഇപ്പോൾ ലഭ്യമല്ല",
+      gateBody:"ഈ ക്വിസ് എല്ലാ ദിവസവും രാത്രി 9:30 മുതൽ 10:30 വരെ മാത്രമേ തുറക്കൂ.",
+      window:"രാത്രി 9:30 – 10:30",
+      cdlbl:"തുറക്കാൻ ബാക്കി",
+      lockTitle:"ഈ ഉപകരണത്തിൽ ക്വിസ് പൂർത്തിയാക്കിയിട്ടുണ്ട്",
+      lockBody:"ഒരു ഉപകരണത്തിൽ ഒരു തവണ മാത്രമേ ക്വിസ് ചെയ്യാൻ കഴിയൂ.",
+      lockIncomplete:"ക്വിസ് തുടങ്ങിയെങ്കിലും പൂർത്തിയാക്കിയില്ല. അവസരം ഉപയോഗിച്ചുകഴിഞ്ഞു.",
+      prevScore:"നിങ്ങളുടെ സ്കോർ",
+      attemptedOn:"ചെയ്ത തീയതി"},
+  en:{q:"Question",score:"Score",next:"Next question ▸",result:"See result ▸",correct:"correct",
+      rshare:"🔗 Share result",
+      good:"Excellent! Well studied 🌟",mid:"Coming along nicely — one more revision 👍",
+      low:"Read the notes once more and try again 📘",
+      review:"Questions you missed",allright:"All answers correct! 🎉",
+      warn:"⚠️ One attempt per device only. Do not refresh the page once you begin.",
+      gateTitle:"The quiz is not open right now",
+      gateBody:"This quiz opens only between 9:30 PM and 10:30 PM, every day.",
+      window:"9:30 – 10:30 PM",
+      cdlbl:"Opens in",
+      lockTitle:"This device has already taken the quiz",
+      lockBody:"Only one attempt is allowed per device.",
+      lockIncomplete:"The quiz was started but not completed. The attempt has been used.",
+      prevScore:"Your score",
+      attemptedOn:"Attempted on"}
+};
+
+/* ---------- config: 20 questions · time gate · device lock ---------- */
+const QUIZ_N   = 20;                 // maximum questions shown
+const OPEN_MIN = 21*60 + 30;         // 9:30 PM  → 1290 minutes
+const CLOSE_MIN= 22*60 + 30;         // 10:30 PM → 1350 minutes
+const LOCK_KEY = 'lensukal_quiz_attempt_v1';
+
+let items=[];
+function pickItems(){
+  const a=quiz.slice();
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  items=a.slice(0,Math.min(QUIZ_N,a.length));
+}
+
+function nowMin(){ const d=new Date(); return d.getHours()*60 + d.getMinutes(); }
+function isOpen(){ const m=nowMin(); return m>=OPEN_MIN && m<CLOSE_MIN; }
+function msUntilOpen(){
+  const d=new Date();
+  const t=new Date(d.getFullYear(),d.getMonth(),d.getDate(),21,30,0,0);
+  if(d.getTime()>=t.getTime()) t.setDate(t.getDate()+1);
+  return t.getTime()-d.getTime();
+}
+function fmtCd(ms){
+  const s=Math.max(0,Math.floor(ms/1000));
+  const h=String(Math.floor(s/3600)).padStart(2,'0');
+  const m=String(Math.floor(s%3600/60)).padStart(2,'0');
+  const ss=String(s%60).padStart(2,'0');
+  return `${h}:${m}:${ss}`;
+}
+
+/* localStorage may be unavailable (private mode) — degrade gracefully */
+function readLock(){ try{ const r=localStorage.getItem(LOCK_KEY); return r?JSON.parse(r):null; }catch(e){ return null; } }
+function writeLock(o){ try{ localStorage.setItem(LOCK_KEY,JSON.stringify(o)); }catch(e){} }
+
+let qi=0,score=0,answered=false,finished=false;
+let screen='quiz';           // 'gate' | 'lock' | 'quiz' | 'result'
+let picked=[];
+let cdTimer=null;
+const qc=document.getElementById('quizCard');
+
+/* ---------- router ---------- */
+function route(){
+  if(cdTimer){clearInterval(cdTimer);cdTimer=null;}
+  const rec=readLock();
+
+  if(finished){ screen='result'; showResult(); return; }
+  if(screen==='quiz' && items.length){ renderQ(); return; }   // mid-quiz language switch
+
+  if(rec && rec.used){ screen='lock'; showLock(rec); return; }
+  if(!isOpen()){ screen='gate'; showGate(); return; }
+
+  screen='quiz';
+  if(!items.length){ pickItems(); picked=new Array(items.length).fill(null); }
+  renderQ();
+}
+
+/* ---------- gate screen ---------- */
+function showGate(){
+  const t=T[LANG];
+  qc.innerHTML=`<div class="gate">
+    <div class="icon">🌙</div>
+    <h2>${t.gateTitle}</h2>
+    <p>${t.gateBody}</p>
+    <div class="window">${t.window}</div>
+    <div class="cdlbl" style="margin-top:18px">${t.cdlbl}</div>
+    <div class="cd" id="cd">--:--:--</div>
+  </div>`;
+  const cdEl=document.getElementById('cd');
+  const tick=()=>{
+    if(isOpen()){ route(); return; }
+    cdEl.textContent=fmtCd(msUntilOpen());
+  };
+  tick();
+  cdTimer=setInterval(tick,1000);
+}
+
+/* ---------- lock screen ---------- */
+function showLock(rec){
+  const t=T[LANG];
+  let prev='';
+  if(rec.done){
+    const pct=Math.round(rec.score/rec.total*100);
+    prev=`<div class="prev"><b>${t.prevScore}:</b> ${rec.score} / ${rec.total} (${pct}%)<br>
+          <b>${t.attemptedOn}:</b> ${new Date(rec.at).toLocaleString(LANG==='ml'?'ml-IN':'en-IN')}</div>`;
+  }else{
+    prev=`<div class="prev" style="background:#fdf0e7;border-left-color:var(--amp);color:#9a4a12">${t.lockIncomplete}</div>`;
+  }
+  qc.innerHTML=`<div class="gate">
+    <div class="icon">🔒</div>
+    <h2>${t.lockTitle}</h2>
+    <p>${t.lockBody}</p>
+    ${prev}
+  </div>`;
+}
+
+/* ---------- quiz ---------- */
+function renderQ(){
+  answered=false;
+  const t=T[LANG], item=items[qi];
+  const qtext = LANG==='ml'?item.qml:item.qen;
+  const opts  = LANG==='ml'?item.oml:item.oen;
+  qc.innerHTML=`
+    ${qi===0?`<div class="warnbar">${t.warn}</div>`:''}
+    <div class="qmeta">
+      <span class="qcount">${t.q} ${qi+1} / ${items.length}</span>
+      <span class="qscore">${t.score}: ${score}</span>
+    </div>
+    <div class="qbar"><i style="width:${qi/items.length*100}%"></i></div>
+    <p class="qtext">${qtext}</p>
+    <div>${opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div>
+    <div class="qfb" id="qfb"></div>
+    <button class="qnext" id="qnext" disabled>${qi===items.length-1?t.result:t.next}</button>`;
+
+  /* burn the attempt the moment the first question is shown */
+  if(qi===0 && !readLock()){
+    writeLock({used:true,done:false,startedAt:Date.now()});
+  }
+
+  qc.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',pick));
+  document.getElementById('qnext').addEventListener('click',()=>{
+    qi++;
+    if(qi<items.length){ renderQ(); }
+    else { finished=true; screen='result'; showResult(); }
+  });
+}
+
+function pick(e){
+  if(answered)return; answered=true;
+  const t=T[LANG], chosen=+e.currentTarget.dataset.i, correct=items[qi].a;
+  picked[qi]=chosen;
+  qc.querySelectorAll('.opt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===correct)b.classList.add('correct');
+    if(i===chosen&&chosen!==correct)b.classList.add('wrong');
+  });
+  const fb=document.getElementById('qfb');
+  const expl = LANG==='ml'?items[qi].fml:items[qi].fen;
+  if(chosen===correct){score++;fb.className='qfb show ok';fb.innerHTML='✓ '+expl;}
+  else{fb.className='qfb show no';fb.innerHTML='✗ '+expl;}
+  document.querySelector('.qscore').textContent=t.score+': '+score;
+  document.getElementById('qnext').disabled=false;
+}
+
+/* ---------- result ---------- */
+function showResult(){
+  const t=T[LANG], pct=Math.round(score/items.length*100);
+  const msg = pct>=80?t.good : pct>=50?t.mid : t.low;
+
+  writeLock({used:true,done:true,score,total:items.length,at:Date.now()});
+
+  const wrong = items.map((item,i)=>({item,i}))
+    .filter(({item,i})=>picked[i]!==null && picked[i]!==item.a);
+  let reviewHTML;
+  if(wrong.length){
+    reviewHTML=`<div class="review"><h3>${t.review} (${wrong.length})</h3>` +
+      wrong.map(({item,i})=>{
+        const q = LANG==='ml'?item.qml:item.qen;
+        const right = (LANG==='ml'?item.oml:item.oen)[item.a];
+        return `<div class="rvitem"><span class="mk no">✗</span><span><b>${i+1}.</b> ${q}<br><span class="mk ok">✓</span> ${right}</span></div>`;
+      }).join('') + `</div>`;
+  }else{
+    reviewHTML=`<div class="review"><h3>${t.allright}</h3></div>`;
+  }
+
+  qc.innerHTML=`<div class="result">
+    <div class="big">${score}<span style="font-size:24px;color:var(--ink-soft)">/${items.length}</span></div>
+    <div class="lbl">${pct}% ${t.correct}</div>
+    <div class="msg">${msg}</div>
+    <div class="rgrid" style="grid-template-columns:1fr">
+      <button class="rshare" id="rshare">${t.rshare}</button>
+    </div>
+    ${reviewHTML}
+  </div>`;
+
+  document.getElementById('rshare').addEventListener('click',async()=>{
+    const line = LANG==='ml'
+      ? `ലെൻസുകൾ ക്വിസ്: ${score}/${items.length} (${pct}%) ✅\nനിങ്ങളും ശ്രമിക്കൂ: `
+      : `Lenses quiz: ${score}/${items.length} (${pct}%) ✅\nTry it yourself: `;
+    const payload = line + pageURL();
+    if(navigator.share){
+      try{ await navigator.share({title:shareTitle[LANG], text:payload}); return; }catch(e){ if(e.name==='AbortError')return; }
+    }
+    try{
+      await navigator.clipboard.writeText(payload);
+      toast(LANG==='ml'?'ഫലം കോപ്പി ചെയ്തു ✓':'Result copied ✓');
+    }catch(e){ window.open('https://wa.me/?text='+encodeURIComponent(payload),'_blank','noopener'); }
+  });
+}
+
+/* ---------- init ---------- */
+setLang('ml');
+</script>
+</body>
+</html>
