@@ -47,59 +47,67 @@ label{ font-size:.88rem; color:#555; }
 .time-note{ text-align:center; font-size:.85rem; color:#666; margin-top:6px; }
 .btn-stack{ display:flex; flex-direction:column; gap:10px; }
 footer.note{ text-align:center; font-size:.75rem; color:#8a8067; margin-top:20px; }
+.lang-toggle{ display:inline-flex; gap:4px; background:rgba(255,255,255,.15); padding:4px; border-radius:20px; }
+.lang-toggle button{ border:none; background:transparent; color:#fff; padding:6px 16px; border-radius:16px;
+  cursor:pointer; font-family:inherit; font-size:.8rem; font-weight:600; opacity:.7; width:auto; }
+.lang-toggle button.active{ background:#fff; color:var(--chain-dark); opacity:1; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <header>
-    <h1>Quick Quiz</h1>
-    <p>Chemical Reactions of Organic Compounds · Abacus Academy</p>
+    <h1 data-ml="ക്വിക്ക് ക്വിസ്" data-en="Quick Quiz">Quick Quiz</h1>
+    <p data-ml="ഓർഗാനിക് സംയുക്തങ്ങളുടെ രാസപ്രവർത്തനങ്ങൾ · Abacus Academy" data-en="Chemical Reactions of Organic Compounds · Abacus Academy">Chemical Reactions of Organic Compounds · Abacus Academy</p>
+    <div class="lang-toggle no-print" style="margin-top:10px;">
+      <button id="langMlBtn" onclick="setLang('ml')">മലയാളം</button>
+      <button id="langEnBtn" class="active" onclick="setLang('en')">English</button>
+    </div>
   </header>
 
   <!-- SCREEN: outside time window -->
   <div class="card hidden" id="closedScreen">
     <div class="lock-icon">🔒</div>
-    <p class="result-sub" style="margin-bottom:4px;">Quiz is open only between</p>
+    <p class="result-sub" style="margin-bottom:4px;" data-ml="ക്വിസ് ലഭ്യമാകുന്ന സമയം" data-en="Quiz is open only between">Quiz is open only between</p>
     <div class="result-score" style="font-size:1.4rem;">9:30 PM – 10:30 PM</div>
-    <p class="time-note" id="closedMsg">Please come back during the quiz window.</p>
+    <p class="time-note" data-ml="ക്വിസ് സമയത്ത് വീണ്ടും വരൂ." data-en="Please come back during the quiz window.">Please come back during the quiz window.</p>
   </div>
 
   <!-- SCREEN: already attempted today -->
   <div class="card hidden" id="attemptedScreen">
     <div class="lock-icon">✅</div>
-    <p class="result-sub" style="margin-bottom:4px;">You've already taken today's quiz</p>
+    <p class="result-sub" style="margin-bottom:4px;" data-ml="നിങ്ങൾ ഇന്ന് ക്വിസ് ചെയ്തുകഴിഞ്ഞു" data-en="You've already taken today's quiz">You've already taken today's quiz</p>
     <div class="result-score"><span id="prevScore">0</span> / <span id="prevTotal">20</span></div>
-    <p class="time-note">Only one attempt per day is allowed. Come back tomorrow between 9:30–10:30 PM!</p>
+    <p class="time-note" data-ml="ഒരു ദിവസം ഒരു തവണ മാത്രമേ അനുവദിക്കൂ. നാളെ 9:30–10:30 PM-ന് ഇടയിൽ വീണ്ടും വരൂ!" data-en="Only one attempt per day is allowed. Come back tomorrow between 9:30–10:30 PM!">Only one attempt per day is allowed. Come back tomorrow between 9:30–10:30 PM!</p>
     <div style="margin-top:14px;">
-      <button class="btn whatsapp" onclick="shareOnWhatsApp()">📱 Share on WhatsApp</button>
+      <button class="btn whatsapp" onclick="shareOnWhatsApp()" data-ml="📱 WhatsApp-ൽ പങ്കിടുക" data-en="📱 Share on WhatsApp">📱 Share on WhatsApp</button>
     </div>
   </div>
 
   <!-- STEP 1: name entry -->
   <div class="card hidden" id="nameScreen">
-    <label for="studentName">Enter your name</label>
+    <label for="studentName" data-ml="നിന്റെ പേര് എഴുതുക" data-en="Enter your name">Enter your name</label>
     <input type="text" id="studentName" placeholder="e.g. Arjun S">
-    <button class="btn" onclick="startQuiz()">Start Quiz →</button>
+    <button class="btn" onclick="startQuiz()" data-ml="ക്വിസ് തുടങ്ങുക →" data-en="Start Quiz →">Start Quiz →</button>
   </div>
 
   <!-- STEP 2: quiz -->
   <div class="card hidden" id="quizScreen">
-    <div class="progress">Question <b id="qPos">1</b> / <span id="qTotal">20</span></div>
+    <div class="progress"><span data-ml="ചോദ്യം" data-en="Question">Question</span> <b id="qPos">1</b> / <span id="qTotal">20</span></div>
     <div id="quizContainer"></div>
     <div class="nav-row">
-      <button class="btn secondary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+      <button class="btn secondary" id="nextBtn" onclick="nextQuestion()" data-ml="അടുത്തത് →" data-en="Next →">Next →</button>
     </div>
   </div>
 
   <!-- STEP 3: result -->
   <div class="card hidden" id="resultScreen">
-    <p class="result-sub">Your Score</p>
+    <p class="result-sub" data-ml="നിന്റെ സ്കോർ" data-en="Your Score">Your Score</p>
     <div class="result-score"><span id="finalScore">0</span> / <span id="finalTotal">20</span></div>
     <div id="submitStatus"></div>
     <div class="btn-stack">
-      <button class="btn whatsapp" onclick="shareOnWhatsApp()">📱 Share on WhatsApp</button>
-      <button class="btn secondary" onclick="shareGeneric()">🔗 Share (other apps)</button>
+      <button class="btn whatsapp" onclick="shareOnWhatsApp()" data-ml="📱 WhatsApp-ൽ പങ്കിടുക" data-en="📱 Share on WhatsApp">📱 Share on WhatsApp</button>
+      <button class="btn secondary" onclick="shareGeneric()" data-ml="🔗 പങ്കിടുക (മറ്റ് ആപ്പുകൾ)" data-en="🔗 Share (other apps)">🔗 Share (other apps)</button>
     </div>
   </div>
 
@@ -144,9 +152,9 @@ function markAttempted(name, score, total){
 }
 
 /* =====================================================================
-   QUIZ DATA — 20 questions
+   QUIZ DATA — 20 questions (bilingual)
    ===================================================================== */
-const quizData = [
+const quizDataML = [
   { q:"CH₄ + Cl₂ → CH₃Cl + HCl ഏത് തരം രാസപ്രവർത്തനമാണ്?", opts:["അഡിഷൻ","ആദേശം","ജ്വലനം","താപീയ വിഘടനം"], ans:1 },
   { q:"CH₂=CH₂ + H₂ → CH₃–CH₃ ഈ പ്രവർത്തനത്തിൽ ഉപയോഗിക്കുന്ന ഉൽപ്രേരകം ഏത്?", opts:["Fe","Ni","Pt","Cu"], ans:1 },
   { q:"PVC യുടെ മോണോമർ ഏത്?", opts:["ഈഥീൻ","വിനൈൽ ക്ലോറൈഡ്","ടെട്രാഫ്ളൂറോഈഥീൻ","സ്റ്റൈറീൻ"], ans:1 },
@@ -168,10 +176,45 @@ const quizData = [
   { q:"ഡെറ്റോൾ ഏത് വിഭാഗത്തിൽ പെടുന്നു?", opts:["അനാൾജസിക്","ആന്റിസെപ്റ്റിക്","ആന്റിബയോട്ടിക്","ആന്റിപൈറെറ്റിക്"], ans:1 },
   { q:"ആസ്പിരിന്റെ രാസനാമം എന്ത്?", opts:["പാരാ ഹൈഡ്രോക്സി അസെറ്റാമൈഡ്","അസെറ്റൈൽ സാലിസിലിക് ആസിഡ്","ബെൻസോയിക് ആസിഡ്","സാലിസിലിക് ആൽക്കഹോൾ"], ans:1 }
 ];
+const quizDataEN = [
+  { q:"CH₄ + Cl₂ → CH₃Cl + HCl — what type of reaction is this?", opts:["Addition","Substitution","Combustion","Thermal cracking"], ans:1 },
+  { q:"Which catalyst is used in CH₂=CH₂ + H₂ → CH₃–CH₃?", opts:["Fe","Ni","Pt","Cu"], ans:1 },
+  { q:"What is the monomer of PVC?", opts:["Ethene","Vinyl chloride","Tetrafluoroethene","Styrene"], ans:1 },
+  { q:"What type of polymer is Nylon 66?", opts:["Addition polymer","Condensation polymer","Natural polymer","Monomer"], ans:1 },
+  { q:"C₃H₈ → CH₄ + CH₂=CH₂ is an example of?", opts:["Combustion","Substitution","Thermal cracking","Addition"], ans:2 },
+  { q:"CH₄ + 2O₂ → CO₂ + 2H₂O + heat is which reaction?", opts:["Combustion","Substitution","Addition","Polymerisation"], ans:0 },
+  { q:"A 5-8% ethanoic acid solution is known as?", opts:["Wash","Vinegar","Spirit","Formalin"], ans:1 },
+  { q:"What is the reaction between an alcohol and a carboxylic acid called?", opts:["Polymerisation","Esterification","Fermentation","Combustion"], ans:1 },
+  { q:"Which category of medicine is paracetamol?", opts:["Antibiotic","Antipyretic","Antiseptic","Analgesic"], ans:1 },
+  { q:"What is 100% ethanol called?", opts:["Rectified spirit","Absolute alcohol","Power alcohol","Wash"], ans:1 },
+  { q:"What product is formed when ethene is polymerised?", opts:["PVC","Polythene","Teflon","Nylon"], ans:1 },
+  { q:"What is the monomer of Teflon?", opts:["Ethene","Vinyl chloride","Tetrafluoroethene","Adipic acid"], ans:2 },
+  { q:"Which small molecule is released in condensation polymerisation?", opts:["CO₂","H₂O","O₂","N₂"], ans:1 },
+  { q:"Thermal cracking takes place under which condition?", opts:["In presence of air","In absence of air","In presence of water","With excess oxygen"], ans:1 },
+  { q:"What are the products of complete combustion of hydrocarbons?", opts:["CO, H₂","CO₂, H₂O","CH₄, O₂","C, H₂O"], ans:1 },
+  { q:"What is used with CO to industrially prepare methanol?", opts:["O₂","H₂","N₂","Cl₂"], ans:1 },
+  { q:"Which enzyme converts glucose to ethanol during fermentation?", opts:["Invertase","Zymase","Amylase","Lipase"], ans:1 },
+  { q:"What is the role of concentrated H₂SO₄ in esterification?", opts:["Oxidiser","Catalyst","Reducer","Solvent"], ans:1 },
+  { q:"Which category does Dettol belong to?", opts:["Analgesic","Antiseptic","Antibiotic","Antipyretic"], ans:1 },
+  { q:"What is the chemical name of aspirin?", opts:["Para hydroxy acetamide","Acetylsalicylic acid","Benzoic acid","Salicyl alcohol"], ans:1 }
+];
+let quizData = quizDataEN;
+let currentLang = 'en';
 
 let studentName = "";
 let currentQ = 0;
 let score = 0;
+
+function setLang(lang){
+  currentLang = lang;
+  document.getElementById('langMlBtn').classList.toggle('active', lang === 'ml');
+  document.getElementById('langEnBtn').classList.toggle('active', lang === 'en');
+  document.querySelectorAll('[data-ml][data-en]').forEach(el=>{
+    el.textContent = (lang === 'ml') ? el.dataset.ml : el.dataset.en;
+  });
+  quizData = (lang === 'ml') ? quizDataML : quizDataEN;
+  // Note: language switch takes effect from the next question onward if a quiz is in progress
+}
 
 /* =====================================================================
    INIT — always let the student type their name first
@@ -232,7 +275,9 @@ function renderQuestion(){
   });
   container.appendChild(qDiv);
   document.getElementById('nextBtn').disabled = true;
-  document.getElementById('nextBtn').textContent = (currentQ === quizData.length - 1) ? 'See Result →' : 'Next →';
+  document.getElementById('nextBtn').textContent = (currentQ === quizData.length - 1)
+    ? (currentLang === 'ml' ? 'ഫലം കാണുക →' : 'See Result →')
+    : (currentLang === 'ml' ? 'അടുത്തത് →' : 'Next →');
 }
 
 function nextQuestion(){
@@ -283,17 +328,21 @@ async function submitResult(){
 }
 
 function shareOnWhatsApp(){
-  const text = `*Quick Quiz — Chemical Reactions of Organic Compounds*\n${studentName}'s score: ${score} / ${quizData.length}\n\nTry it yourself between 9:30–10:30 PM!`;
+  const text = currentLang === 'ml'
+    ? `*ക്വിക്ക് ക്വിസ് — ഓർഗാനിക് സംയുക്തങ്ങളുടെ രാസപ്രവർത്തനങ്ങൾ*\n${studentName} ന്റെ സ്കോർ: ${score} / ${quizData.length}\n\nരാത്രി 9:30–10:30 PM-ന് ഇടയിൽ നിങ്ങളും ചെയ്തുനോക്കൂ!`
+    : `*Quick Quiz — Chemical Reactions of Organic Compounds*\n${studentName}'s score: ${score} / ${quizData.length}\n\nTry it yourself between 9:30–10:30 PM!`;
   const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
   window.open(url, '_blank');
 }
 
 function shareGeneric(){
-  const text = `Quick Quiz — Chemical Reactions of Organic Compounds\n${studentName}'s score: ${score} / ${quizData.length}`;
+  const text = currentLang === 'ml'
+    ? `ക്വിക്ക് ക്വിസ് — ഓർഗാനിക് സംയുക്തങ്ങളുടെ രാസപ്രവർത്തനങ്ങൾ\n${studentName} ന്റെ സ്കോർ: ${score} / ${quizData.length}`
+    : `Quick Quiz — Chemical Reactions of Organic Compounds\n${studentName}'s score: ${score} / ${quizData.length}`;
   if(navigator.share){
-    navigator.share({ title: 'Quick Quiz Score', text: text }).catch(()=>{});
+    navigator.share({ title: currentLang === 'ml' ? 'ക്വിക്ക് ക്വിസ്' : 'Quick Quiz Score', text: text }).catch(()=>{});
   } else if(navigator.clipboard){
-    navigator.clipboard.writeText(text).then(()=> alert('Score copied!'));
+    navigator.clipboard.writeText(text).then(()=> alert(currentLang === 'ml' ? 'സ്കോർ കോപ്പി ചെയ്തു!' : 'Score copied!'));
   } else {
     alert(text);
   }
