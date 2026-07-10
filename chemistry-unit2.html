@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<title>യൂണിറ്റ് 2 — ഓർഗാനിക് സംയുക്തങ്ങളുടെ രാസപ്രവർത്തനങ്ങൾ | Study Tool</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root{
+  --ink:#1f2937; --paper:#faf6ee; --chain:#2b6e63; --chain-dark:#184d44;
+  --branch:#c1622d; --branch-light:#f2e1d2; --func:#7b4fa0; --line:#e1d7c3; --card:#ffffff;
+  --mono: 'Courier New', ui-monospace, monospace;
+}
+*{box-sizing:border-box;}
+body{ margin:0; background:var(--paper); color:var(--ink);
+  font-family:'Noto Sans Malayalam','Manjari',system-ui,sans-serif; line-height:1.55; }
+header{ background:linear-gradient(135deg,var(--chain-dark),var(--chain) 65%); color:#fff;
+  padding:20px 18px 60px; position:relative; overflow:hidden; }
+header .backbone{ position:absolute; inset:0; opacity:.15;
+  background-image: repeating-linear-gradient(115deg, transparent 0 38px, #fff 38px 40px); }
+header h1{ margin:0 0 4px; font-size:1.5rem; position:relative; z-index:1; }
+header p.sub{ margin:0 0 12px; opacity:.85; font-size:.92rem; position:relative; z-index:1; }
+.lang-toggle{ position:relative; z-index:1; display:inline-flex; gap:4px; background:rgba(255,255,255,.15); padding:4px; border-radius:20px; }
+.lang-toggle button{ border:none; background:transparent; color:#fff; padding:6px 16px; border-radius:16px;
+  cursor:pointer; font-family:inherit; font-size:.85rem; font-weight:600; opacity:.7; }
+.lang-toggle button.active{ background:#fff; color:var(--chain-dark); opacity:1; }
+.wrap{ max-width:960px; margin:-40px auto 40px; padding:0 14px; position:relative; z-index:2; }
+nav.tabs{ display:flex; flex-wrap:wrap; gap:8px; background:var(--card); border-radius:14px;
+  padding:10px; box-shadow:0 8px 24px rgba(24,77,68,.12); margin-bottom:18px; position:sticky; top:10px; z-index:5; }
+nav.tabs button{ border:none; background:var(--paper); color:var(--chain-dark); padding:9px 14px;
+  border-radius:9px; cursor:pointer; font-size:.9rem; font-weight:600; font-family:inherit; transition:.15s; }
+nav.tabs button.active{ background:var(--chain); color:#fff; }
+nav.tabs button:hover{ filter:brightness(1.05); }
+.panel{ display:none; }
+.panel.active{ display:block; animation:fade .25s ease; }
+@keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+.card{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(31,41,55,.04); }
+h2.section-title{ color:var(--chain-dark); border-bottom:3px solid var(--branch); display:inline-block; padding-bottom:4px; margin-top:0; font-size:1.15rem; }
+h3.sub-title{ color:var(--func); margin:18px 0 8px; font-size:1rem; }
+.formula-box{ background:var(--branch-light); border-left:4px solid var(--branch); padding:10px 14px; border-radius:8px; font-family:var(--mono); margin:10px 0; font-size:.95rem; overflow-x:auto; }
+.chain{ font-family:var(--mono); background:#f2f7f5; border:1px dashed var(--chain); padding:8px 12px; border-radius:8px; display:inline-block; margin:6px 6px 6px 0; }
+table{ width:100%; border-collapse:collapse; margin:10px 0; font-size:.92rem; }
+th,td{ border:1px solid var(--line); padding:8px 10px; text-align:left; }
+th{ background:var(--chain); color:#fff; }
+tr:nth-child(even) td{ background:#f7f4ec; }
+table.compact th, table.compact td{ padding:5px 8px; font-size:.85rem; }
+ul{ padding-left:20px; } li{ margin-bottom:6px; }
+.tag{ display:inline-block; background:var(--func); color:#fff; font-size:.72rem; padding:2px 8px; border-radius:20px; margin-left:6px; }
+.step-list li{ margin-bottom:10px; }
+.quiz-opts button{ display:block; width:100%; text-align:left; margin:6px 0; padding:10px 14px; border:1px solid var(--line); background:#fff; border-radius:9px; cursor:pointer; font-family:inherit; font-size:.92rem; }
+.quiz-opts button.correct{ background:#dff3e8; border-color:var(--chain); font-weight:600; }
+.quiz-opts button.wrong{ background:#fbe4e0; border-color:var(--branch); }
+.quiz-opts button[disabled]{ cursor:default; }
+.quiz-nav{ display:flex; justify-content:space-between; margin-top:14px; }
+.quiz-nav button:disabled{ opacity:.4; cursor:default; }
+.score-bar{ background:var(--chain-dark); color:#fff; border-radius:10px; padding:10px 16px; margin-bottom:14px; font-size:.9rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+.btn{ background:var(--branch); color:#fff; border:none; padding:9px 16px; border-radius:8px; cursor:pointer; font-family:inherit; font-weight:600; }
+.btn.secondary{ background:var(--chain); }
+.teacher-share{ margin-bottom:14px; display:flex; gap:8px; flex-wrap:wrap; }
+.teacher-share .btn{ background:var(--func); flex:1; min-width:200px; }
+.teacher-share .btn.secondary{ background:var(--chain); }
+.share-toast{ display:none; margin-top:12px; background:var(--chain-dark); color:#fff; padding:9px 14px; border-radius:8px; font-size:.85rem; text-align:center; }
+.share-toast.show{ display:block; }
+.mqp-header{ text-align:center; margin-bottom:14px; }
+.mqp-header h2{ margin:2px 0; color:var(--chain-dark); }
+.mqp-meta{ display:flex; justify-content:space-between; font-size:.85rem; margin:6px 0 16px; }
+.mqp-section-title{ background:var(--branch); color:#fff; padding:5px 12px; border-radius:6px; display:inline-block; margin:14px 0 8px; font-size:.9rem; }
+.mqp-q{ margin-bottom:12px; } .mqp-q b{ color:var(--chain-dark); }
+.exam-tip{ background:#eef7f2; border:1px solid var(--chain); border-radius:8px; padding:10px 14px; margin-top:16px; font-size:.9rem; }
+.revision-sheet h3.sub-title{ margin-top:16px; }
+footer.note{ text-align:center; font-size:.78rem; color:#8a8067; margin:30px 0 10px; }
+.lang-en{ display:none; }
+body.show-en .lang-ml{ display:none; }
+body.show-en .lang-en{ display:block; }
+@media print{
+  header, nav.tabs, .no-print{ display:none !important; }
+  .panel{ display:none !important; }
+  .panel.print-target{ display:block !important; }
+  .wrap{ margin:0; }
+  .card{ box-shadow:none; border:1px solid #999; }
+  body{ background:#fff; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="backbone"></div>
+  <h1 data-ml="ഓർഗാനിക് സംയുക്തങ്ങളുടെ രാസപ്രവർത്തനങ്ങൾ" data-en="Chemical Reactions of Organic Compounds">ഓർഗാനിക് സംയുക്തങ്ങളുടെ രാസപ്രവർത്തനങ്ങൾ</h1>
+  <p class="sub" data-ml="രസതന്ത്രം · സ്റ്റാൻഡേർഡ് 10 · യൂണിറ്റ് 2 — സമ്പൂർണ പഠനോപകരണം" data-en="Chemistry · Class 10 · Unit 2 — Complete Study Tool">രസതന്ത്രം · സ്റ്റാൻഡേർഡ് 10 · യൂണിറ്റ് 2 — സമ്പൂർണ പഠനോപകരണം</p>
+  <div class="lang-toggle no-print">
+    <button id="langMlBtn" class="active" onclick="setLang('ml')">മലയാളം</button>
+    <button id="langEnBtn" onclick="setLang('en')">English</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav class="tabs no-print">
+    <button data-tab="notes" class="active" data-ml="📘 സംഗ്രഹം" data-en="📘 Notes">📘 സംഗ്രഹം</button>
+    <button data-tab="revision" data-ml="⚡ ക്വിക്ക് റിവിഷൻ" data-en="⚡ Quick Revision">⚡ ക്വിക്ക് റിവിഷൻ</button>
+    <button data-tab="reactions" data-ml="🧪 രാസപ്രവർത്തനങ്ങൾ" data-en="🧪 Reactions">🧪 രാസപ്രവർത്തനങ്ങൾ</button>
+    <button data-tab="compounds" data-ml="⚗️ പ്രധാന സംയുക്തങ്ങൾ" data-en="⚗️ Key Compounds">⚗️ പ്രധാന സംയുക്തങ്ങൾ</button>
+    <button data-tab="quiz" data-ml="✅ ക്വിസ്" data-en="✅ Quiz">✅ ക്വിസ്</button>
+    <button data-tab="mqp" data-ml="📝 മാതൃകാ ചോദ്യപേപ്പർ" data-en="📝 Model Question Paper">📝 മാതൃകാ ചോദ്യപേപ്പർ</button>
+    <button id="printBtn" onclick="printCurrent()" style="margin-left:auto;background:var(--chain-dark);color:#fff;" data-ml="🖨️ പ്രിന്റ് ചെയ്യുക" data-en="🖨️ Print">🖨️ പ്രിന്റ് ചെയ്യുക</button>
+  </nav>
+
+  <!-- ================= NOTES ================= -->
+  <section class="panel active" id="notes">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">ചുരുക്ക സംഗ്രഹം</h2>
+        <ul>
+          <li>കാർബണിക രസതന്ത്രത്തിലെ പ്രധാനപ്പെട്ട രാസപ്രവർത്തനങ്ങളാണ് ആദേശം, അഡിഷൻ, ജ്വലനം, താപീയ വിഘടനം, പോളിമെറൈസേഷൻ എന്നിവ.</li>
+          <li><b>ആദേശ രാസപ്രവർത്തനം:</b> ഒരു ആറ്റത്തിനുപകരം മറ്റൊരു ആറ്റമോ ആറ്റഗ്രൂപ്പോ വന്നുചേരുന്നത് (ഉദാ: മീഥെയ്ൻ + ക്ലോറിൻ).</li>
+          <li><b>അഡിഷൻ രാസപ്രവർത്തനം:</b> ദ്വിബന്ധനമോ ത്രിബന്ധനമോ ഉള്ള അപൂരിത സംയുക്തങ്ങൾ പൂരിത സംയുക്തങ്ങളായി മാറുന്നത്.</li>
+          <li><b>പോളിമെറൈസേഷൻ:</b> ചെറിയ മോണോമർ തന്മാത്രകൾ ചേർന്ന് വലിയ പോളിമർ തന്മാത്രകൾ ഉണ്ടാകുന്ന പ്രവർത്തനം — അഡിഷൻ പോളിമറുകൾ, കണ്ടൻസേഷൻ പോളിമറുകൾ എന്നിങ്ങനെ രണ്ട് തരം.</li>
+          <li><b>താപീയ വിഘടനം:</b> വലിയ ഹൈഡ്രോകാർബണുകൾ ചൂടാക്കുമ്പോൾ ചെറിയ ഹൈഡ്രോകാർബണുകളായി വിഘടിക്കുന്നത്.</li>
+          <li><b>ജ്വലനം:</b> ഹൈഡ്രോകാർബണുകൾ ഓക്സിജനുമായി പ്രവർത്തിച്ച് CO₂, H₂O, താപം, പ്രകാശം എന്നിവ ഉണ്ടാക്കുന്നത്.</li>
+          <li>മെഥനോൾ, എഥനോൾ എന്നിവ പ്രധാന ആൽക്കഹോളുകളാണ്; എഥനോയിക് ആസിഡ് ഒരു പ്രധാന കാർബോക്സിലിക് ആസിഡാണ്.</li>
+          <li>ആൽക്കഹോളും കാർബോക്സിലിക് ആസിഡും തമ്മിൽ പ്രവർത്തിക്കുമ്പോൾ എസ്റ്ററുകൾ ഉണ്ടാകുന്നു (എസ്റ്ററിഫിക്കേഷൻ) — ഇവയ്ക്ക് പഴങ്ങളുടെ സുഗന്ധമുണ്ട്.</li>
+          <li>ആസ്പിരിൻ, പാരസെറ്റമോൾ തുടങ്ങിയ ഔഷധങ്ങളും കാർബണിക രസതന്ത്രത്തിന്റെ സംഭാവനയാണ്.</li>
+        </ul>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Chapter Summary</h2>
+        <ul>
+          <li>Key reactions in organic chemistry: substitution, addition, combustion, thermal cracking, and polymerisation.</li>
+          <li><b>Substitution reaction:</b> One atom is replaced by another atom or group (e.g. methane + chlorine).</li>
+          <li><b>Addition reaction:</b> Unsaturated compounds with a double/triple bond become saturated.</li>
+          <li><b>Polymerisation:</b> Small monomer molecules join to form large polymer molecules — addition polymers and condensation polymers.</li>
+          <li><b>Thermal cracking:</b> Large hydrocarbons break down into smaller hydrocarbons on heating.</li>
+          <li><b>Combustion:</b> Hydrocarbons react with oxygen to give CO₂, H₂O, heat and light.</li>
+          <li>Methanol and ethanol are important alcohols; ethanoic acid is an important carboxylic acid.</li>
+          <li>An alcohol and a carboxylic acid react to form an ester (esterification) — esters have fruity smells.</li>
+          <li>Medicines like aspirin and paracetamol are also contributions of organic chemistry.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUICK REVISION ================= -->
+  <section class="panel" id="revision">
+    <div class="card revision-sheet">
+      <div class="lang-ml">
+        <h2 class="section-title">⚡ ക്വിക്ക് റിവിഷൻ ഷീറ്റ്</h2>
+        <h3 class="sub-title">🔹 രാസപ്രവർത്തന തരങ്ങൾ</h3>
+        <table class="compact"><tr><th>പ്രവർത്തനം</th><th>നിർവചനം</th><th>ഉദാ.</th></tr>
+          <tr><td>ആദേശം</td><td>ആറ്റം → മറ്റൊരു ആറ്റം</td><td>CH₄+Cl₂→CH₃Cl+HCl</td></tr>
+          <tr><td>അഡിഷൻ</td><td>അപൂരിതം → പൂരിതം</td><td>CH₂=CH₂+H₂→CH₃CH₃</td></tr>
+          <tr><td>താപീയ വിഘടനം</td><td>വലിയത് → ചെറിയവ</td><td>C₃H₈→CH₄+C₂H₄</td></tr>
+          <tr><td>ജ്വലനം</td><td>+O₂ → CO₂+H₂O+താപം</td><td>CH₄+2O₂→CO₂+2H₂O</td></tr>
+          <tr><td>പോളിമെറൈസേഷൻ</td><td>മോണോമർ → പോളിമർ</td><td>nCH₂=CH₂→[CH₂CH₂]ₙ</td></tr></table>
+        <h3 class="sub-title">🔹 പോളിമറുകൾ</h3>
+        <table class="compact"><tr><th>മോണോമർ</th><th>പോളിമർ</th><th>ഉപയോഗം</th></tr>
+          <tr><td>വിനൈൽ ക്ലോറൈഡ്</td><td>PVC</td><td>പൈപ്പുകൾ</td></tr>
+          <tr><td>ഈഥീൻ</td><td>പോളിത്തീൻ</td><td>ബാഗുകൾ</td></tr>
+          <tr><td>ടെട്രാഫ്ളൂറോഈഥീൻ</td><td>ടെഫ്ളോൺ</td><td>നോൺസ്റ്റിക് പാത്രം</td></tr>
+          <tr><td>അഡിപിക് ആസിഡ്+ഹെക്സാമെഥിലീൻഡൈഅമീൻ</td><td>നൈലോൺ 66</td><td>വസ്ത്രം, ചീർപ്പ്</td></tr></table>
+        <h3 class="sub-title">🔹 ആൽക്കഹോൾ ഗ്രേഡുകൾ</h3>
+        <table class="compact"><tr><th>പേര്</th><th>ശക്തി</th></tr>
+          <tr><td>വാഷ്</td><td>8-10% എഥനോൾ</td></tr>
+          <tr><td>റക്ടിഫൈഡ് സ്പിരിറ്റ്</td><td>95.6% എഥനോൾ</td></tr>
+          <tr><td>അബ്സൊല്യൂട്ട് ആൽക്കഹോൾ</td><td>100% എഥനോൾ</td></tr>
+          <tr><td>പവർ ആൽക്കഹോൾ</td><td>20% അബ്സൊല്യൂട്ട് + 80% പെട്രോൾ</td></tr></table>
+        <h3 class="sub-title">🔹 ഔഷധ വിഭാഗങ്ങൾ</h3>
+        <table class="compact"><tr><th>വിഭാഗം</th><th>ഉദാ.</th></tr>
+          <tr><td>അനാൾജസിക്</td><td>ആസ്പിരിൻ</td></tr>
+          <tr><td>ആന്റിപൈറെറ്റിക്</td><td>പാരസെറ്റമോൾ</td></tr>
+          <tr><td>ആന്റിസെപ്റ്റിക്</td><td>ഡെറ്റോൾ</td></tr>
+          <tr><td>ആന്റിബയോട്ടിക്</td><td>പെനിസിലിൻ</td></tr></table>
+        <p class="exam-tip">📌 പരീക്ഷാ ടിപ്പ്: സമവാക്യത്തിൽ ദ്വിബന്ധനം/ത്രിബന്ധനം കണ്ടാൽ അഡിഷൻ; ഒരു ആറ്റം മറ്റൊന്നായി മാറിയാൽ ആദേശം; വലിയ തന്മാത്ര ചെറുതായാൽ താപീയ വിഘടനം.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">⚡ Quick Revision Sheet</h2>
+        <h3 class="sub-title">🔹 Types of Reactions</h3>
+        <table class="compact"><tr><th>Reaction</th><th>Definition</th><th>Ex.</th></tr>
+          <tr><td>Substitution</td><td>Atom → another atom</td><td>CH₄+Cl₂→CH₃Cl+HCl</td></tr>
+          <tr><td>Addition</td><td>Unsaturated → saturated</td><td>CH₂=CH₂+H₂→CH₃CH₃</td></tr>
+          <tr><td>Thermal cracking</td><td>Large → smaller</td><td>C₃H₈→CH₄+C₂H₄</td></tr>
+          <tr><td>Combustion</td><td>+O₂ → CO₂+H₂O+heat</td><td>CH₄+2O₂→CO₂+2H₂O</td></tr>
+          <tr><td>Polymerisation</td><td>Monomer → polymer</td><td>nCH₂=CH₂→[CH₂CH₂]ₙ</td></tr></table>
+        <h3 class="sub-title">🔹 Polymers</h3>
+        <table class="compact"><tr><th>Monomer</th><th>Polymer</th><th>Use</th></tr>
+          <tr><td>Vinyl chloride</td><td>PVC</td><td>Pipes</td></tr>
+          <tr><td>Ethene</td><td>Polythene</td><td>Bags</td></tr>
+          <tr><td>Tetrafluoroethene</td><td>Teflon</td><td>Non-stick cookware</td></tr>
+          <tr><td>Adipic acid+Hexamethylenediamine</td><td>Nylon 66</td><td>Clothes, combs</td></tr></table>
+        <h3 class="sub-title">🔹 Alcohol Grades</h3>
+        <table class="compact"><tr><th>Name</th><th>Strength</th></tr>
+          <tr><td>Wash</td><td>8-10% ethanol</td></tr>
+          <tr><td>Rectified spirit</td><td>95.6% ethanol</td></tr>
+          <tr><td>Absolute alcohol</td><td>100% ethanol</td></tr>
+          <tr><td>Power alcohol</td><td>20% absolute + 80% petrol</td></tr></table>
+        <h3 class="sub-title">🔹 Medicine Categories</h3>
+        <table class="compact"><tr><th>Category</th><th>Ex.</th></tr>
+          <tr><td>Analgesic</td><td>Aspirin</td></tr>
+          <tr><td>Antipyretic</td><td>Paracetamol</td></tr>
+          <tr><td>Antiseptic</td><td>Dettol</td></tr>
+          <tr><td>Antibiotic</td><td>Penicillin</td></tr></table>
+        <p class="exam-tip">📌 Exam tip: double/triple bond in the equation → addition; one atom replaced → substitution; large molecule breaking → thermal cracking.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= REACTIONS ================= -->
+  <section class="panel" id="reactions">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">രാസപ്രവർത്തനങ്ങൾ</h2>
+        <h3 class="sub-title">1. ആദേശ രാസപ്രവർത്തനങ്ങൾ (Substitution)</h3>
+        <div class="formula-box">CH₄ + Cl₂ → CH₃Cl + HCl (സൂര്യപ്രകാശം)</div>
+        <div class="formula-box">CH₃Cl + Cl₂ → CH₂Cl₂ + HCl</div>
+        <div class="formula-box">CH₂Cl₂ + Cl₂ → CHCl₃ + HCl</div>
+        <div class="formula-box">CHCl₃ + Cl₂ → CCl₄ + HCl</div>
+        <p>ഒരു സംയുക്തത്തിലെ ഒരാറ്റത്തിനുപകരം മറ്റൊരു ആറ്റമോ ആറ്റഗ്രൂപ്പോ വന്നുചേരുന്ന പ്രവർത്തനങ്ങളാണ് ആദേശ രാസപ്രവർത്തനങ്ങൾ.</p>
+
+        <h3 class="sub-title">2. അഡിഷൻ രാസപ്രവർത്തനങ്ങൾ (Addition)</h3>
+        <div class="formula-box">CH₂=CH₂ + H₂ --Ni--> CH₃–CH₃ (ഈഥീൻ → ഈഥെയ്ൻ)</div>
+        <div class="formula-box">HC≡CH + 2H₂ --Ni--> CH₃–CH₃</div>
+        <p>ദ്വിബന്ധനമോ ത്രിബന്ധനമോ ഉള്ള അപൂരിത സംയുക്തങ്ങൾ മറ്റ് തന്മാത്രകളുമായി ചേർന്ന് പൂരിത സംയുക്തങ്ങളായി മാറുന്ന പ്രവർത്തനമാണ് അഡിഷൻ.</p>
+
+        <h3 class="sub-title">3. പോളിമെറൈസേഷൻ (Polymerisation)</h3>
+        <p><b>അഡിഷൻ പോളിമറുകൾ</b> — മോണോമറുകളുടെ ആവർത്തിച്ചുള്ള അഡിഷൻ വഴി:</p>
+        <div class="formula-box">nCH₂=CH₂ → [–CH₂–CH₂–]ₙ (ഈഥീൻ → പോളിഈഥീൻ/പോളിത്തീൻ)</div>
+        <div class="formula-box">nCH₂=CHCl → [–CH₂–CHCl–]ₙ (വിനൈൽ ക്ലോറൈഡ് → PVC)</div>
+        <div class="formula-box">nCF₂=CF₂ → [–CF₂–CF₂–]ₙ (ടെട്രാഫ്ളൂറോഈഥീൻ → ടെഫ്ളോൺ)</div>
+        <p><b>കണ്ടൻസേഷൻ പോളിമറുകൾ</b> — വ്യത്യസ്ത മോണോമറുകൾ ചേർന്ന്, ചെറിയ തന്മാത്ര (H₂O) നീക്കം ചെയ്ത്:</p>
+        <div class="formula-box">nHOOC–(CH₂)₄–COOH + nNH₂–(CH₂)₆–NH₂ → [–CO–(CH₂)₄–CO–NH–(CH₂)₆–NH–]ₙ + nH₂O (നൈലോൺ 66)</div>
+
+        <h3 class="sub-title">4. താപീയ വിഘടനം (Thermal Cracking)</h3>
+        <div class="formula-box">CH₃–CH₂–CH₃ --താപം--> CH₄ + CH₂=CH₂</div>
+        <p>വലിയ ഹൈഡ്രോകാർബണുകൾ വായുവിന്റെ അസാന്നിധ്യത്തിൽ ചൂടാക്കുമ്പോൾ ചെറിയ ഹൈഡ്രോകാർബണുകളായി വിഘടിക്കുന്ന പ്രവർത്തനം.</p>
+
+        <h3 class="sub-title">5. ജ്വലനം (Combustion)</h3>
+        <div class="formula-box">CH₄ + 2O₂ → CO₂ + 2H₂O + താപം</div>
+        <div class="formula-box">2C₄H₁₀ + 13O₂ → 8CO₂ + 10H₂O + താപം</div>
+        <p>ഹൈഡ്രോകാർബണുകൾ ഓക്സിജനുമായി പ്രവർത്തിച്ച് CO₂, H₂O എന്നിവയോടൊപ്പം താപവും പ്രകാശവും ഉണ്ടാക്കുന്ന പ്രവർത്തനം.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Chemical Reactions</h2>
+        <h3 class="sub-title">1. Substitution Reactions</h3>
+        <div class="formula-box">CH₄ + Cl₂ → CH₃Cl + HCl (sunlight)</div>
+        <div class="formula-box">CH₃Cl + Cl₂ → CH₂Cl₂ + HCl</div>
+        <div class="formula-box">CH₂Cl₂ + Cl₂ → CHCl₃ + HCl</div>
+        <div class="formula-box">CHCl₃ + Cl₂ → CCl₄ + HCl</div>
+        <p>Reactions where one atom in a compound is replaced by another atom or group.</p>
+
+        <h3 class="sub-title">2. Addition Reactions</h3>
+        <div class="formula-box">CH₂=CH₂ + H₂ --Ni--> CH₃–CH₃ (ethene → ethane)</div>
+        <div class="formula-box">HC≡CH + 2H₂ --Ni--> CH₃–CH₃</div>
+        <p>Unsaturated compounds with a double or triple bond combine with other molecules to become saturated.</p>
+
+        <h3 class="sub-title">3. Polymerisation</h3>
+        <p><b>Addition polymers</b> — via repeated addition of monomers:</p>
+        <div class="formula-box">nCH₂=CH₂ → [–CH₂–CH₂–]ₙ (ethene → polyethene/polythene)</div>
+        <div class="formula-box">nCH₂=CHCl → [–CH₂–CHCl–]ₙ (vinyl chloride → PVC)</div>
+        <div class="formula-box">nCF₂=CF₂ → [–CF₂–CF₂–]ₙ (tetrafluoroethene → Teflon)</div>
+        <p><b>Condensation polymers</b> — different monomers combine, removing a small molecule (H₂O):</p>
+        <div class="formula-box">nHOOC–(CH₂)₄–COOH + nNH₂–(CH₂)₆–NH₂ → [–CO–(CH₂)₄–CO–NH–(CH₂)₆–NH–]ₙ + nH₂O (Nylon 66)</div>
+
+        <h3 class="sub-title">4. Thermal Cracking</h3>
+        <div class="formula-box">CH₃–CH₂–CH₃ --heat--> CH₄ + CH₂=CH₂</div>
+        <p>Large hydrocarbons break down into smaller hydrocarbons on heating in the absence of air.</p>
+
+        <h3 class="sub-title">5. Combustion</h3>
+        <div class="formula-box">CH₄ + 2O₂ → CO₂ + 2H₂O + heat</div>
+        <div class="formula-box">2C₄H₁₀ + 13O₂ → 8CO₂ + 10H₂O + heat</div>
+        <p>Hydrocarbons react with oxygen to give CO₂, H₂O, heat and light.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= KEY COMPOUNDS ================= -->
+  <section class="panel" id="compounds">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">പ്രധാന ഓർഗാനിക് സംയുക്തങ്ങൾ</h2>
+        <h3 class="sub-title">മെഥനോൾ (CH₃OH)</h3>
+        <div class="formula-box">CO + 2H₂ --ഉൽപ്രേരകം,573K--> CH₃OH</div>
+        <p>ഒരു വിഷപദാർത്ഥം. വാർണിഷ്, പെയിന്റ്, ഫോർമാൽഡിഹൈഡ് നിർമ്മാണത്തിന് ഉപയോഗിക്കുന്നു.</p>
+
+        <h3 class="sub-title">എഥനോൾ (CH₃CH₂OH)</h3>
+        <div class="formula-box">C₁₂H₂₂O₁₁ + H₂O --ഇൻവർട്ടേസ്--> C₆H₁₂O₆ + C₆H₁₂O₆ (ഗ്ലൂക്കോസ്+ഫ്രക്ടോസ്)</div>
+        <div class="formula-box">C₆H₁₂O₆ --സൈമേസ്--> 2C₂H₅OH + 2CO₂</div>
+        <table><tr><th>ഗ്രേഡ്</th><th>%</th></tr>
+          <tr><td>വാഷ്</td><td>8-10%</td></tr>
+          <tr><td>റക്ടിഫൈഡ് സ്പിരിറ്റ്</td><td>95.6%</td></tr>
+          <tr><td>അബ്സൊല്യൂട്ട് ആൽക്കഹോൾ</td><td>100%</td></tr>
+          <tr><td>പവർ ആൽക്കഹോൾ</td><td>20% അബ്സൊല്യൂട്ട്+80% പെട്രോൾ</td></tr></table>
+
+        <h3 class="sub-title">എഥനോയിക് ആസിഡ് (CH₃COOH)</h3>
+        <div class="formula-box">CH₃OH + CO --ഉൽപ്രേരകം--> CH₃COOH</div>
+        <p>5-8% ലായനി വിനാഗിരി (Vinegar) എന്നറിയപ്പെടുന്നു.</p>
+
+        <h3 class="sub-title">എസ്റ്ററുകൾ (Esters)</h3>
+        <div class="formula-box">CH₃COOH + C₂H₅OH --സാന്ദ്ര H₂SO₄--> CH₃COOC₂H₅ + H₂O</div>
+        <p>ആൽക്കഹോളും കാർബോക്സിലിക് ആസിഡും തമ്മിലുള്ള പ്രവർത്തനത്തെ എസ്റ്ററിഫിക്കേഷൻ എന്ന് പറയുന്നു. എസ്റ്ററുകൾക്ക് പഴങ്ങളുടെ സുഗന്ധമുണ്ട്.</p>
+        <table class="compact"><tr><th>ആസിഡ്</th><th>ആൽക്കഹോൾ</th><th>സുഗന്ധം</th></tr>
+          <tr><td>എഥനോയിക് ആസിഡ്</td><td>ഐസോഅമൈൽ ആൽക്കഹോൾ</td><td>നേന്ത്രപ്പഴം</td></tr>
+          <tr><td>എഥനോയിക് ആസിഡ്</td><td>ബെൻസൈൽ ആൽക്കഹോൾ</td><td>മുല്ലപ്പൂവ്</td></tr>
+          <tr><td>എഥനോയിക് ആസിഡ്</td><td>ഒക്ടൈൽ ആൽക്കഹോൾ</td><td>ഓറഞ്ച്</td></tr>
+          <tr><td>ബ്യൂട്ടനോയിക് ആസിഡ്</td><td>ഈഥൈൽ ആൽക്കഹോൾ</td><td>പൈനാപ്പിൾ</td></tr></table>
+
+        <h3 class="sub-title">ഔഷധങ്ങൾ</h3>
+        <table><tr><th>വിഭാഗം</th><th>ധർമ്മം</th><th>ഉദാ.</th></tr>
+          <tr><td>അനാൾജസിക്</td><td>വേദന സംഹാരി</td><td>ആസ്പിരിൻ</td></tr>
+          <tr><td>ആന്റിപൈറെറ്റിക്</td><td>ശരീരതാപനില കുറയ്ക്കൽ</td><td>പാരസെറ്റമോൾ</td></tr>
+          <tr><td>ആന്റിസെപ്റ്റിക്</td><td>സൂക്ഷ്മാണുക്കളെ നിയന്ത്രിക്കൽ</td><td>ഡെറ്റോൾ</td></tr>
+          <tr><td>ആന്റിബയോട്ടിക്</td><td>രോഗകാരികളെ നശിപ്പിക്കൽ</td><td>പെനിസിലിൻ</td></tr></table>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Key Organic Compounds</h2>
+        <h3 class="sub-title">Methanol (CH₃OH)</h3>
+        <div class="formula-box">CO + 2H₂ --catalyst,573K--> CH₃OH</div>
+        <p>A poisonous substance. Used to make varnish, paint, and formaldehyde.</p>
+
+        <h3 class="sub-title">Ethanol (CH₃CH₂OH)</h3>
+        <div class="formula-box">C₁₂H₂₂O₁₁ + H₂O --invertase--> C₆H₁₂O₆ + C₆H₁₂O₆ (glucose+fructose)</div>
+        <div class="formula-box">C₆H₁₂O₆ --zymase--> 2C₂H₅OH + 2CO₂</div>
+        <table><tr><th>Grade</th><th>%</th></tr>
+          <tr><td>Wash</td><td>8-10%</td></tr>
+          <tr><td>Rectified spirit</td><td>95.6%</td></tr>
+          <tr><td>Absolute alcohol</td><td>100%</td></tr>
+          <tr><td>Power alcohol</td><td>20% absolute+80% petrol</td></tr></table>
+
+        <h3 class="sub-title">Ethanoic Acid (CH₃COOH)</h3>
+        <div class="formula-box">CH₃OH + CO --catalyst--> CH₃COOH</div>
+        <p>A 5-8% solution is known as vinegar.</p>
+
+        <h3 class="sub-title">Esters</h3>
+        <div class="formula-box">CH₃COOH + C₂H₅OH --conc. H₂SO₄--> CH₃COOC₂H₅ + H₂O</div>
+        <p>The reaction between an alcohol and a carboxylic acid is called esterification. Esters have fruity smells.</p>
+        <table class="compact"><tr><th>Acid</th><th>Alcohol</th><th>Smell</th></tr>
+          <tr><td>Ethanoic acid</td><td>Isoamyl alcohol</td><td>Banana</td></tr>
+          <tr><td>Ethanoic acid</td><td>Benzyl alcohol</td><td>Jasmine</td></tr>
+          <tr><td>Ethanoic acid</td><td>Octyl alcohol</td><td>Orange</td></tr>
+          <tr><td>Butanoic acid</td><td>Ethyl alcohol</td><td>Pineapple</td></tr></table>
+
+        <h3 class="sub-title">Medicines</h3>
+        <table><tr><th>Category</th><th>Function</th><th>Ex.</th></tr>
+          <tr><td>Analgesic</td><td>Pain relief</td><td>Aspirin</td></tr>
+          <tr><td>Antipyretic</td><td>Lowers body temperature</td><td>Paracetamol</td></tr>
+          <tr><td>Antiseptic</td><td>Controls microorganisms</td><td>Dettol</td></tr>
+          <tr><td>Antibiotic</td><td>Kills disease-causing microbes</td><td>Penicillin</td></tr></table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUIZ (redirects to standalone page) ================= -->
+  <section class="panel" id="quiz">
+    <div class="card no-print" style="text-align:center;">
+      <h2 class="section-title" data-ml="ക്വിക്ക് ക്വിസ്" data-en="Quick Quiz">ക്വിക്ക് ക്വിസ്</h2>
+      <p class="lang-ml">ഈ യൂണിറ്റിലെ 20 ചോദ്യങ്ങളുള്ള ക്വിസ് ഒരു പ്രത്യേക പേജിലാണ്. ഇത് <b>രാത്രി 9:30 മുതൽ 10:30 വരെ</b> മാത്രമേ ലഭ്യമാകൂ, ഒരു ദിവസം <b>ഒരു തവണ മാത്രമേ</b> ചെയ്യാൻ കഴിയൂ.</p>
+      <p class="lang-en">This unit's 20-question quiz is on a separate page. It is available only between <b>9:30 PM – 10:30 PM</b> daily, and can be taken <b>only once per day</b>.</p>
+      <a href="unit2_quiz.html" class="btn" style="display:inline-block; text-decoration:none; margin-top:10px;" data-ml="🚀 ക്വിസ് പേജിലേക്ക് പോകുക" data-en="🚀 Go to Quiz Page">🚀 ക്വിസ് പേജിലേക്ക് പോകുക</a>
+    </div>
+  </section>
+
+  <!-- ================= MODEL QUESTION PAPER ================= -->
+  <section class="panel" id="mqp">
+    <div class="card print-target" id="mqpCard">
+      <div class="lang-ml">
+        <div class="mqp-header">
+          <h2>രസതന്ത്രം — മാതൃകാ ചോദ്യപേപ്പർ</h2>
+          <p>യൂണിറ്റ് 2: ഓർഗാനിക് സംയുക്തങ്ങളുടെ രാസപ്രവർത്തനങ്ങൾ</p>
+        </div>
+        <div class="mqp-meta"><span>സമയം: 45 മിനിറ്റ്</span><span>ആകെ സ്കോർ: 20</span></div>
+        <div class="mqp-section-title">Section A — 1 സ്കോർ വീതം (5 × 1 = 5)</div>
+        <div class="mqp-q">1. ആദേശ രാസപ്രവർത്തനത്തിന് ഒരു ഉദാഹരണം എഴുതുക.</div>
+        <div class="mqp-q">2. അഡിഷൻ പോളിമറിന് ഒരു ഉദാഹരണം എഴുതുക.</div>
+        <div class="mqp-q">3. വിനാഗിരി എന്നാൽ എന്ത്?</div>
+        <div class="mqp-q">4. ആസ്പിരിൻ ഏത് വിഭാഗം ഔഷധമാണ്?</div>
+        <div class="mqp-q">5. അബ്സൊല്യൂട്ട് ആൽക്കഹോൾ എന്നാൽ എന്ത്?</div>
+        <div class="mqp-section-title">Section B — 2 സ്കോർ വീതം (4 × 2 = 8)</div>
+        <div class="mqp-q">6. ആദേശ രാസപ്രവർത്തനവും അഡിഷൻ രാസപ്രവർത്തനവും തമ്മിലുള്ള വ്യത്യാസം എന്ത്?</div>
+        <div class="mqp-q">7. നൈലോൺ 66 ന്റെ മോണോമറുകൾ ഏതെല്ലാം?</div>
+        <div class="mqp-q">8. താപീയ വിഘടനം എന്നാൽ എന്ത്? ഒരു സമവാക്യം എഴുതുക.</div>
+        <div class="mqp-q">9. എസ്റ്ററിഫിക്കേഷൻ പ്രവർത്തനത്തിന്റെ സമവാക്യം എഴുതുക.</div>
+        <div class="mqp-section-title">Section C — 3 സ്കോർ വീതം (2 × 3 = 6)</div>
+        <div class="mqp-q">10. അഡിഷൻ പോളിമറും കണ്ടൻസേഷൻ പോളിമറും തമ്മിലുള്ള വ്യത്യാസം ഉദാഹരണസഹിതം വിശദീകരിക്കുക.</div>
+        <div class="mqp-q">11. എഥനോളിന്റെ വ്യാവസായിക നിർമ്മാണം (ഫെർമെന്റേഷൻ) ഘട്ടം ഘട്ടമായി വിശദീകരിക്കുക.</div>
+        <div class="mqp-section-title">Section D — ഉപന്യാസ തരം (1 × 1 = 1)</div>
+        <div class="mqp-q">12. ഹൈഡ്രോകാർബണുകളുടെ ജ്വലനത്തെക്കുറിച്ചും അതിന്റെ പ്രാധാന്യത്തെക്കുറിച്ചും ഒരു ഖണ്ഡിക എഴുതുക, സമവാക്യങ്ങൾ സഹിതം.</div>
+      </div>
+      <div class="lang-en">
+        <div class="mqp-header">
+          <h2>Chemistry — Model Question Paper</h2>
+          <p>Unit 2: Chemical Reactions of Organic Compounds</p>
+        </div>
+        <div class="mqp-meta"><span>Time: 45 minutes</span><span>Total score: 20</span></div>
+        <div class="mqp-section-title">Section A — 1 score each (5 × 1 = 5)</div>
+        <div class="mqp-q">1. Write one example of a substitution reaction.</div>
+        <div class="mqp-q">2. Write one example of an addition polymer.</div>
+        <div class="mqp-q">3. What is vinegar?</div>
+        <div class="mqp-q">4. Which category of medicine is aspirin?</div>
+        <div class="mqp-q">5. What is absolute alcohol?</div>
+        <div class="mqp-section-title">Section B — 2 scores each (4 × 2 = 8)</div>
+        <div class="mqp-q">6. What is the difference between substitution and addition reactions?</div>
+        <div class="mqp-q">7. What are the monomers of Nylon 66?</div>
+        <div class="mqp-q">8. What is thermal cracking? Write one equation.</div>
+        <div class="mqp-q">9. Write the equation for an esterification reaction.</div>
+        <div class="mqp-section-title">Section C — 3 scores each (2 × 3 = 6)</div>
+        <div class="mqp-q">10. Explain the difference between addition polymers and condensation polymers with examples.</div>
+        <div class="mqp-q">11. Explain the industrial preparation of ethanol (fermentation) step by step.</div>
+        <div class="mqp-section-title">Section D — Essay type (1 × 1 = 1)</div>
+        <div class="mqp-q">12. Write a paragraph on the combustion of hydrocarbons and its significance, with equations.</div>
+      </div>
+    </div>
+    <div class="no-print" style="margin-top:10px;">
+      <button class="btn secondary" onclick="printCurrent()" data-ml="🖨️ പ്രിന്റ് ചെയ്യുക" data-en="🖨️ Print">🖨️ പ്രിന്റ് ചെയ്യുക</button>
+    </div>
+  </section>
+
+</div>
+
+<footer class="note" data-ml="Abacus Academy · Class 10 Chemistry · Prepared for self-study" data-en="Abacus Academy · Class 10 Chemistry · Prepared for self-study">Abacus Academy · Class 10 Chemistry · Prepared for self-study</footer>
+
+<script>
+let currentLang = 'ml';
+function setLang(lang){
+  currentLang = lang;
+  document.body.classList.toggle('show-en', lang === 'en');
+  document.getElementById('langMlBtn').classList.toggle('active', lang === 'ml');
+  document.getElementById('langEnBtn').classList.toggle('active', lang === 'en');
+  document.querySelectorAll('[data-ml][data-en]').forEach(el=>{
+    el.textContent = (lang === 'ml') ? el.dataset.ml : el.dataset.en;
+  });
+}
+
+const tabButtons = document.querySelectorAll('nav.tabs button[data-tab]');
+const panels = document.querySelectorAll('.panel');
+let currentTab = 'notes';
+tabButtons.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    tabButtons.forEach(b=>b.classList.remove('active'));
+    panels.forEach(p=>{p.classList.remove('active'); p.classList.remove('print-target');});
+    btn.classList.add('active');
+    currentTab = btn.dataset.tab;
+    document.getElementById(currentTab).classList.add('active');
+  });
+});
+function printCurrent(){
+  panels.forEach(p=>p.classList.remove('print-target'));
+  document.getElementById(currentTab).classList.add('print-target');
+  window.print();
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quick Quiz — Chemical Reactions of Organic Compounds</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root{
+  --ink:#1f2937; --paper:#faf6ee; --chain:#2b6e63; --chain-dark:#184d44;
+  --branch:#c1622d; --branch-light:#f2e1d2; --func:#7b4fa0; --line:#e1d7c3; --card:#ffffff;
+  --wa:#25D366;
+}
+*{box-sizing:border-box;}
+body{ margin:0; min-height:100vh; background:var(--paper); color:var(--ink);
+  font-family:'Noto Sans Malayalam','Manjari',system-ui,sans-serif; line-height:1.55;
+  display:flex; align-items:flex-start; justify-content:center; }
+.wrap{ max-width:520px; width:100%; padding:20px 14px 60px; }
+header{ background:linear-gradient(135deg,var(--chain-dark),var(--chain) 65%); color:#fff;
+  padding:20px; border-radius:14px; text-align:center; margin-bottom:16px; }
+header h1{ margin:0 0 4px; font-size:1.15rem; }
+header p{ margin:0; opacity:.85; font-size:.85rem; }
+.card{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px;
+  box-shadow:0 2px 10px rgba(31,41,55,.05); margin-bottom:14px; }
+input[type=text]{ width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:9px;
+  font-size:1rem; font-family:inherit; margin:8px 0 16px; }
+label{ font-size:.88rem; color:#555; }
+.btn{ background:var(--branch); color:#fff; border:none; padding:11px 18px; border-radius:9px;
+  cursor:pointer; font-family:inherit; font-weight:600; font-size:.95rem; width:100%; }
+.btn.secondary{ background:var(--chain); }
+.btn.whatsapp{ background:var(--wa); display:flex; align-items:center; justify-content:center; gap:8px; }
+.btn:disabled{ opacity:.5; cursor:default; }
+.progress{ font-size:.85rem; color:#666; margin-bottom:10px; text-align:center; }
+.quiz-opts button{ display:block; width:100%; text-align:left; margin:6px 0; padding:10px 14px;
+  border:1px solid var(--line); background:#fff; border-radius:9px; cursor:pointer;
+  font-family:inherit; font-size:.92rem; }
+.quiz-opts button.correct{ background:#dff3e8; border-color:var(--chain); font-weight:600; }
+.quiz-opts button.wrong{ background:#fbe4e0; border-color:var(--branch); }
+.quiz-opts button[disabled]{ cursor:default; }
+.nav-row{ display:flex; gap:10px; margin-top:14px; }
+.hidden{ display:none !important; }
+.result-score{ font-size:2.2rem; font-weight:700; color:var(--chain-dark); text-align:center; margin:6px 0; }
+.result-sub{ text-align:center; color:#666; font-size:.9rem; margin-bottom:16px; }
+.status-msg{ text-align:center; font-size:.85rem; padding:8px; border-radius:8px; margin-bottom:12px; }
+.status-msg.ok{ background:#dff3e8; color:var(--chain-dark); }
+.status-msg.err{ background:#fbe4e0; color:var(--branch); }
+.lock-icon{ font-size:2.5rem; text-align:center; margin-bottom:8px; }
+.time-note{ text-align:center; font-size:.85rem; color:#666; margin-top:6px; }
+.btn-stack{ display:flex; flex-direction:column; gap:10px; }
+footer.note{ text-align:center; font-size:.75rem; color:#8a8067; margin-top:20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Quick Quiz</h1>
+    <p>Chemical Reactions of Organic Compounds · Abacus Academy</p>
+  </header>
+
+  <!-- SCREEN: outside time window -->
+  <div class="card hidden" id="closedScreen">
+    <div class="lock-icon">🔒</div>
+    <p class="result-sub" style="margin-bottom:4px;">Quiz is open only between</p>
+    <div class="result-score" style="font-size:1.4rem;">9:30 PM – 10:30 PM</div>
+    <p class="time-note" id="closedMsg">Please come back during the quiz window.</p>
+  </div>
+
+  <!-- SCREEN: already attempted today -->
+  <div class="card hidden" id="attemptedScreen">
+    <div class="lock-icon">✅</div>
+    <p class="result-sub" style="margin-bottom:4px;">You've already taken today's quiz</p>
+    <div class="result-score"><span id="prevScore">0</span> / <span id="prevTotal">20</span></div>
+    <p class="time-note">Only one attempt per day is allowed. Come back tomorrow between 9:30–10:30 PM!</p>
+    <div style="margin-top:14px;">
+      <button class="btn whatsapp" onclick="shareOnWhatsApp()">📱 Share on WhatsApp</button>
+    </div>
+  </div>
+
+  <!-- STEP 1: name entry -->
+  <div class="card hidden" id="nameScreen">
+    <label for="studentName">Enter your name</label>
+    <input type="text" id="studentName" placeholder="e.g. Arjun S">
+    <button class="btn" onclick="startQuiz()">Start Quiz →</button>
+  </div>
+
+  <!-- STEP 2: quiz -->
+  <div class="card hidden" id="quizScreen">
+    <div class="progress">Question <b id="qPos">1</b> / <span id="qTotal">20</span></div>
+    <div id="quizContainer"></div>
+    <div class="nav-row">
+      <button class="btn secondary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: result -->
+  <div class="card hidden" id="resultScreen">
+    <p class="result-sub">Your Score</p>
+    <div class="result-score"><span id="finalScore">0</span> / <span id="finalTotal">20</span></div>
+    <div id="submitStatus"></div>
+    <div class="btn-stack">
+      <button class="btn whatsapp" onclick="shareOnWhatsApp()">📱 Share on WhatsApp</button>
+      <button class="btn secondary" onclick="shareGeneric()">🔗 Share (other apps)</button>
+    </div>
+  </div>
+
+  <footer class="note">Abacus Academy · Class 10 Chemistry</footer>
+</div>
+
+<script>
+/* =====================================================================
+   TIME GATE — quiz only opens daily between these hours (24h format)
+   ===================================================================== */
+const QUIZ_START_HOUR = 21, QUIZ_START_MIN = 30;  // 9:30 PM
+const QUIZ_END_HOUR   = 22, QUIZ_END_MIN   = 30;  // 10:30 PM
+const QUIZ_KEY_PREFIX = "unit2quiz_";              // localStorage key prefix
+const QUIZ_NAME = "unit2-organic-reactions";
+
+/* =====================================================================
+   SUPABASE (optional) — leave as-is to skip cloud score saving
+   ===================================================================== */
+const SUPABASE_URL = "https://fomgindrntvtyycdwmhh.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_NhpX4lRHgeEaSQNhwVie5A_tmhKPkkc";
+
+function todayKey(){
+  const d = new Date();
+  return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+}
+
+function isWithinQuizWindow(){
+  const now = new Date();
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  const startMin = QUIZ_START_HOUR*60 + QUIZ_START_MIN;
+  const endMin = QUIZ_END_HOUR*60 + QUIZ_END_MIN;
+  return nowMin >= startMin && nowMin < endMin;
+}
+
+function hasAttemptedToday(){
+  const raw = localStorage.getItem(QUIZ_KEY_PREFIX + todayKey());
+  return raw ? JSON.parse(raw) : null;
+}
+
+function markAttempted(name, score, total){
+  localStorage.setItem(QUIZ_KEY_PREFIX + todayKey(), JSON.stringify({ name, score, total }));
+}
+
+/* =====================================================================
+   QUIZ DATA — 20 questions
+   ===================================================================== */
+const quizData = [
+  { q:"CH₄ + Cl₂ → CH₃Cl + HCl ഏത് തരം രാസപ്രവർത്തനമാണ്?", opts:["അഡിഷൻ","ആദേശം","ജ്വലനം","താപീയ വിഘടനം"], ans:1 },
+  { q:"CH₂=CH₂ + H₂ → CH₃–CH₃ ഈ പ്രവർത്തനത്തിൽ ഉപയോഗിക്കുന്ന ഉൽപ്രേരകം ഏത്?", opts:["Fe","Ni","Pt","Cu"], ans:1 },
+  { q:"PVC യുടെ മോണോമർ ഏത്?", opts:["ഈഥീൻ","വിനൈൽ ക്ലോറൈഡ്","ടെട്രാഫ്ളൂറോഈഥീൻ","സ്റ്റൈറീൻ"], ans:1 },
+  { q:"നൈലോൺ 66 ഏത് തരം പോളിമറാണ്?", opts:["അഡിഷൻ പോളിമർ","കണ്ടൻസേഷൻ പോളിമർ","നാച്ചുറൽ പോളിമർ","മോണോമർ"], ans:1 },
+  { q:"C₃H₈ → CH₄ + CH₂=CH₂ ഏത് പ്രവർത്തനത്തിന്റെ ഉദാഹരണമാണ്?", opts:["ജ്വലനം","ആദേശം","താപീയ വിഘടനം","അഡിഷൻ"], ans:2 },
+  { q:"CH₄ + 2O₂ → CO₂ + 2H₂O + താപം ഏത് പ്രവർത്തനമാണ്?", opts:["ജ്വലനം","ആദേശം","അഡിഷൻ","പോളിമെറൈസേഷൻ"], ans:0 },
+  { q:"5-8% എഥനോയിക് ആസിഡ് ലായനി എന്തറിയപ്പെടുന്നു?", opts:["വാഷ്","വിനാഗിരി","സ്പിരിറ്റ്","ഫോർമാലിൻ"], ans:1 },
+  { q:"ആൽക്കഹോളും കാർബോക്സിലിക് ആസിഡും തമ്മിലുള്ള പ്രവർത്തനത്തിന്റെ പേര്?", opts:["പോളിമെറൈസേഷൻ","എസ്റ്ററിഫിക്കേഷൻ","ഫെർമെന്റേഷൻ","ജ്വലനം"], ans:1 },
+  { q:"പാരസെറ്റമോൾ ഏത് വിഭാഗം ഔഷധമാണ്?", opts:["ആന്റിബയോട്ടിക്","ആന്റിപൈറെറ്റിക്","ആന്റിസെപ്റ്റിക്","അനാൾജസിക്"], ans:1 },
+  { q:"100% എഥനോളിനെ എന്ത് വിളിക്കുന്നു?", opts:["റക്ടിഫൈഡ് സ്പിരിറ്റ്","അബ്സൊല്യൂട്ട് ആൽക്കഹോൾ","പവർ ആൽക്കഹോൾ","വാഷ്"], ans:1 },
+  { q:"ഈഥീൻ പോളിമെറൈസ് ചെയ്യുമ്പോൾ ലഭിക്കുന്ന ഉൽപ്പന്നം?", opts:["PVC","പോളിത്തീൻ","ടെഫ്ളോൺ","നൈലോൺ"], ans:1 },
+  { q:"ടെഫ്ളോണിന്റെ മോണോമർ ഏത്?", opts:["ഈഥീൻ","വിനൈൽ ക്ലോറൈഡ്","ടെട്രാഫ്ളൂറോഈഥീൻ","അഡിപിക് ആസിഡ്"], ans:2 },
+  { q:"കണ്ടൻസേഷൻ പോളിമെറൈസേഷനിൽ പുറന്തള്ളപ്പെടുന്ന ചെറിയ തന്മാത്ര ഏത്?", opts:["CO₂","H₂O","O₂","N₂"], ans:1 },
+  { q:"താപീയ വിഘടനം നടക്കുന്നത് ഏത് സാഹചര്യത്തിലാണ്?", opts:["വായുവിന്റെ സാന്നിധ്യത്തിൽ","വായുവിന്റെ അസാന്നിധ്യത്തിൽ","ജലത്തിന്റെ സാന്നിധ്യത്തിൽ","ഓക്സിജന്റെ അധിക അളവിൽ"], ans:1 },
+  { q:"ഹൈഡ്രോകാർബണുകളുടെ പൂർണ ജ്വലനത്തിന്റെ ഉൽപ്പന്നങ്ങൾ ഏതെല്ലാം?", opts:["CO, H₂","CO₂, H₂O","CH₄, O₂","C, H₂O"], ans:1 },
+  { q:"മെഥനോൾ വ്യാവസായികമായി നിർമ്മിക്കാൻ CO വിനോടൊപ്പം ഉപയോഗിക്കുന്നത്?", opts:["O₂","H₂","N₂","Cl₂"], ans:1 },
+  { q:"ഫെർമെന്റേഷനിൽ ഗ്ലൂക്കോസിനെ എഥനോളാക്കി മാറ്റുന്ന എൻസൈം ഏത്?", opts:["ഇൻവർട്ടേസ്","സൈമേസ്","അമൈലേസ്","ലൈപ്പേസ്"], ans:1 },
+  { q:"എസ്റ്ററിഫിക്കേഷനിൽ സാന്ദ്ര H₂SO₄ ന്റെ ധർമ്മം എന്ത്?", opts:["ഓക്സിഡൈസർ","ഉൽപ്രേരകം","റിഡ്യൂസർ","ലായകം"], ans:1 },
+  { q:"ഡെറ്റോൾ ഏത് വിഭാഗത്തിൽ പെടുന്നു?", opts:["അനാൾജസിക്","ആന്റിസെപ്റ്റിക്","ആന്റിബയോട്ടിക്","ആന്റിപൈറെറ്റിക്"], ans:1 },
+  { q:"ആസ്പിരിന്റെ രാസനാമം എന്ത്?", opts:["പാരാ ഹൈഡ്രോക്സി അസെറ്റാമൈഡ്","അസെറ്റൈൽ സാലിസിലിക് ആസിഡ്","ബെൻസോയിക് ആസിഡ്","സാലിസിലിക് ആൽക്കഹോൾ"], ans:1 }
+];
+
+let studentName = "";
+let currentQ = 0;
+let score = 0;
+
+/* =====================================================================
+   INIT — always let the student type their name first
+   ===================================================================== */
+window.addEventListener('DOMContentLoaded', ()=>{
+  document.getElementById('nameScreen').classList.remove('hidden');
+});
+
+function startQuiz(){
+  const nameInput = document.getElementById('studentName');
+  const val = nameInput.value.trim();
+  if(!val){ nameInput.style.borderColor = 'var(--branch)'; nameInput.focus(); return; }
+  studentName = val;
+
+  // Check restrictions only now, after the name is entered
+  const attempt = hasAttemptedToday();
+  if(attempt){
+    document.getElementById('nameScreen').classList.add('hidden');
+    document.getElementById('attemptedScreen').classList.remove('hidden');
+    document.getElementById('prevScore').textContent = attempt.score;
+    document.getElementById('prevTotal').textContent = attempt.total;
+    studentName = attempt.name;
+    score = attempt.score;
+    return;
+  }
+  if(!isWithinQuizWindow()){
+    document.getElementById('nameScreen').classList.add('hidden');
+    document.getElementById('closedScreen').classList.remove('hidden');
+    return;
+  }
+
+  document.getElementById('nameScreen').classList.add('hidden');
+  document.getElementById('quizScreen').classList.remove('hidden');
+  document.getElementById('qTotal').textContent = quizData.length;
+  renderQuestion();
+}
+
+function renderQuestion(){
+  document.getElementById('qPos').textContent = currentQ + 1;
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  const item = quizData[currentQ];
+  const qDiv = document.createElement('div');
+  qDiv.innerHTML = `<p><b>${currentQ+1}.</b> ${item.q}</p><div class="quiz-opts"></div>`;
+  const optsDiv = qDiv.querySelector('.quiz-opts');
+  item.opts.forEach((opt, oIdx)=>{
+    const b = document.createElement('button');
+    b.textContent = opt;
+    b.addEventListener('click', ()=>{
+      if(b.disabled) return;
+      const allBtns = optsDiv.querySelectorAll('button');
+      allBtns.forEach(x=>x.disabled=true);
+      if(oIdx === item.ans){ b.classList.add('correct'); score++; }
+      else { b.classList.add('wrong'); allBtns[item.ans].classList.add('correct'); }
+      document.getElementById('nextBtn').disabled = false;
+    });
+    optsDiv.appendChild(b);
+  });
+  container.appendChild(qDiv);
+  document.getElementById('nextBtn').disabled = true;
+  document.getElementById('nextBtn').textContent = (currentQ === quizData.length - 1) ? 'See Result →' : 'Next →';
+}
+
+function nextQuestion(){
+  if(currentQ < quizData.length - 1){
+    currentQ++;
+    renderQuestion();
+  } else {
+    finishQuiz();
+  }
+}
+
+function finishQuiz(){
+  document.getElementById('quizScreen').classList.add('hidden');
+  document.getElementById('resultScreen').classList.remove('hidden');
+  document.getElementById('finalScore').textContent = score;
+  document.getElementById('finalTotal').textContent = quizData.length;
+  markAttempted(studentName, score, quizData.length);
+  submitResult();
+}
+
+async function submitResult(){
+  const statusDiv = document.getElementById('submitStatus');
+  if(SUPABASE_URL.includes('YOUR-PROJECT-REF')) return;
+  try{
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/quiz_scores`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        student_name: studentName,
+        score: score,
+        total: quizData.length,
+        quiz_name: QUIZ_NAME
+      })
+    });
+    if(res.ok){
+      statusDiv.innerHTML = '<p class="status-msg ok">✅ Score saved</p>';
+    } else {
+      statusDiv.innerHTML = '<p class="status-msg err">⚠️ Could not save score</p>';
+    }
+  } catch(e){
+    statusDiv.innerHTML = '<p class="status-msg err">⚠️ Please check your internet connection</p>';
+  }
+}
+
+function shareOnWhatsApp(){
+  const text = `*Quick Quiz — Chemical Reactions of Organic Compounds*\n${studentName}'s score: ${score} / ${quizData.length}\n\nTry it yourself between 9:30–10:30 PM!`;
+  const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank');
+}
+
+function shareGeneric(){
+  const text = `Quick Quiz — Chemical Reactions of Organic Compounds\n${studentName}'s score: ${score} / ${quizData.length}`;
+  if(navigator.share){
+    navigator.share({ title: 'Quick Quiz Score', text: text }).catch(()=>{});
+  } else if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=> alert('Score copied!'));
+  } else {
+    alert(text);
+  }
+}
+</script>
+</body>
+</html>
