@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<title>Quick Quiz — Genetics of Life</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root{
+  --ink:#1f2937;
+  --paper:#f6f4fb;
+  --helix:#2d4f8a;
+  --helix-dark:#1a2f5c;
+  --gene:#7b3fa0;
+  --gene-light:#ede1f5;
+  --trait:#2e8b57;
+  --line:#dcd6ea;
+  --card:#ffffff;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--paper); color:var(--ink); min-height:100vh;
+  font-family:'Noto Sans Malayalam','Manjari',system-ui,sans-serif;
+  line-height:1.55; display:flex; flex-direction:column;
+}
+header{
+  background:linear-gradient(135deg,var(--helix-dark),var(--helix) 65%);
+  color:#fff; padding:22px 18px; text-align:center;
+}
+header h1{ margin:0 0 4px; font-size:1.25rem; }
+header p{ margin:0 0 12px; opacity:.85; font-size:.85rem; }
+.lang-toggle{ display:inline-flex; gap:4px; background:rgba(255,255,255,.15); padding:4px; border-radius:20px; }
+.lang-toggle button{
+  border:none; background:transparent; color:#fff; padding:6px 16px; border-radius:16px;
+  cursor:pointer; font-family:inherit; font-size:.82rem; font-weight:600; opacity:.7;
+}
+.lang-toggle button.active{ background:#fff; color:var(--helix-dark); opacity:1; }
+.wrap{ max-width:480px; margin:0 auto; padding:20px 16px 40px; flex:1; width:100%; }
+.card{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:22px 20px; box-shadow:0 4px 18px rgba(26,47,92,.08); }
+.hidden{ display:none !important; }
+
+/* ---- Name screen ---- */
+#nameScreen h2{ margin-top:0; color:var(--helix-dark); font-size:1.1rem; }
+#nameScreen input{
+  width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:10px;
+  font-size:1rem; font-family:inherit; margin:12px 0; outline:none;
+}
+#nameScreen input:focus{ border-color:var(--helix); }
+.btn{ background:var(--gene); color:#fff; border:none; padding:12px 18px; border-radius:10px; cursor:pointer; font-family:inherit; font-weight:600; font-size:.95rem; width:100%; }
+.btn.secondary{ background:var(--helix); }
+.btn.outline{ background:#fff; color:var(--helix); border:1px solid var(--helix); }
+.btn-row{ display:flex; gap:10px; margin-top:10px; }
+.btn-row .btn{ flex:1; }
+
+/* ---- Quiz screen ---- */
+.progress-bar{ background:var(--gene-light); border-radius:20px; height:8px; overflow:hidden; margin-bottom:16px; }
+.progress-fill{ background:var(--helix); height:100%; border-radius:20px; transition:width .25s ease; }
+.q-meta{ font-size:.8rem; color:var(--gene); font-weight:700; margin-bottom:6px; }
+#quizScreen h2{ margin:0 0 14px; font-size:1.05rem; color:var(--ink); }
+.quiz-opts button{ display:block; width:100%; text-align:left; margin:8px 0; padding:12px 14px; border:1px solid var(--line); background:#fff; border-radius:10px; cursor:pointer; font-family:inherit; font-size:.92rem; }
+.quiz-opts button.correct{ background:#dff3e8; border-color:var(--trait); font-weight:600; }
+.quiz-opts button.wrong{ background:#fbe4e0; border-color:var(--gene); }
+.quiz-opts button[disabled]{ cursor:default; }
+#nextBtnWrap{ margin-top:14px; }
+
+/* ---- Result screen ---- */
+#resultScreen{ text-align:center; }
+.score-circle{
+  width:130px; height:130px; border-radius:50%; margin:10px auto 18px;
+  background:conic-gradient(var(--trait) calc(var(--pct)*1%), var(--gene-light) 0);
+  display:flex; align-items:center; justify-content:center; position:relative;
+}
+.score-circle::before{
+  content:''; position:absolute; width:104px; height:104px; border-radius:50%; background:#fff;
+}
+.score-circle span{ position:relative; z-index:1; font-size:1.5rem; font-weight:800; color:var(--helix-dark); }
+#resultScreen h2{ margin:0 0 4px; color:var(--helix-dark); }
+#resultScreen p.name{ margin:0 0 16px; color:var(--gene); font-weight:600; }
+.status-msg{ font-size:.85rem; border-radius:8px; padding:8px 12px; margin:12px 0; }
+.status-msg.ok{ background:#dff3e8; color:#1c6b3f; }
+.status-msg.err{ background:#fbe9e0; color:#a44b1f; }
+
+footer.note{ text-align:center; font-size:.78rem; color:#8a8067; padding:14px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🧬 Quick Quiz</h1>
+  <p>Genetics of Life · Biology · Class 10</p>
+  <div class="lang-toggle">
+    <button id="langMlBtn" class="active" onclick="setLang('ml')">മലയാളം</button>
+    <button id="langEnBtn" onclick="setLang('en')">English</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ================= NAME SCREEN ================= -->
+  <div id="nameScreen" class="card">
+    <h2 id="nameHeading">👋 തുടങ്ങുന്നതിന് മുൻപ്...</h2>
+    <p id="namePrompt">നിങ്ങളുടെ പേര് നൽകുക:</p>
+    <input type="text" id="studentNameInput" placeholder="നിങ്ങളുടെ പേര്" autocomplete="off">
+    <button class="btn" id="startBtn" onclick="startQuiz()">ക്വിസ് തുടങ്ങുക →</button>
+  </div>
+
+  <!-- ================= QUIZ SCREEN ================= -->
+  <div id="quizScreen" class="card hidden">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="q-meta"><span id="qLabel">ചോദ്യം</span> <span id="qPos">1</span> / <span id="qTotal">10</span></div>
+    <h2 id="qText"></h2>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div id="nextBtnWrap" class="hidden">
+      <button class="btn secondary" id="nextBtn" onclick="nextQuestion()">അടുത്തത് →</button>
+    </div>
+  </div>
+
+  <!-- ================= RESULT SCREEN ================= -->
+  <div id="resultScreen" class="card hidden">
+    <div class="score-circle" id="scoreCircle"><span id="scoreText">0/10</span></div>
+    <h2 id="resultHeading">👏 പൂർത്തിയായി!</h2>
+    <p class="name" id="resultName"></p>
+    <div id="submitStatus"></div>
+    <div class="btn-row">
+      <button class="btn" id="shareBtn" onclick="shareResult()">🔗 സ്കോർ ഷെയർ ചെയ്യുക</button>
+      <button class="btn outline" id="retryBtn" onclick="retryQuiz()">വീണ്ടും ചെയ്യുക</button>
+    </div>
+  </div>
+
+</div>
+
+<footer class="note">Abacus Academy · Class 10 Biology · Quick Quiz</footer>
+
+<script>
+/* =====================================================================
+   Supabase (optional) — leave blank to just show/share score locally.
+   Set both values below once you create a Supabase project + table
+   to auto-collect student scores. See setup steps in chat.
+   ===================================================================== */
+const SUPABASE_URL = "";        // e.g. "https://xxxxx.supabase.co"
+const SUPABASE_ANON_KEY = "";   // anon public key
+const QUIZ_NAME = "genetics-of-life-unit1";
+/* ===================================================================== */
+
+/* ===================== BILINGUAL UI TEXT ===================== */
+const uiText = {
+  ml: {
+    nameHeading: "👋 തുടങ്ങുന്നതിന് മുൻപ്...",
+    namePrompt: "നിങ്ങളുടെ പേര് നൽകുക:",
+    namePlaceholder: "നിങ്ങളുടെ പേര്",
+    startBtn: "ക്വിസ് തുടങ്ങുക →",
+    qLabel: "ചോദ്യം",
+    nextBtn: "അടുത്തത് →",
+    finishBtn: "ഫലം കാണുക →",
+    resultHeading: "👏 പൂർത്തിയായി!",
+    shareBtn: "🔗 സ്കോർ ഷെയർ ചെയ്യുക",
+    retryBtn: "വീണ്ടും ചെയ്യുക",
+    savedMsg: "✅ സ്കോർ സേവ് ചെയ്തു",
+    saveFailMsg: "⚠️ സ്കോർ സേവ് ചെയ്യാൻ കഴിഞ്ഞില്ല",
+    connMsg: "⚠️ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിക്കുക",
+    shareTitle: "ക്വിക്ക് ക്വിസ് സ്കോർ",
+    shareTextTemplate: (name, score, total) => `ക്വിക്ക് ക്വിസ് — ജീവന്റെ ജനിതകം\n${name} ന്റെ സ്കോർ: ${score} / ${total}`,
+    copiedMsg: "സ്കോർ കോപ്പി ചെയ്തു!"
+  },
+  en: {
+    nameHeading: "👋 Before you start...",
+    namePrompt: "Enter your name:",
+    namePlaceholder: "Your name",
+    startBtn: "Start Quiz →",
+    qLabel: "Question",
+    nextBtn: "Next →",
+    finishBtn: "See Result →",
+    resultHeading: "👏 Completed!",
+    shareBtn: "🔗 Share Score",
+    retryBtn: "Retry",
+    savedMsg: "✅ Score saved",
+    saveFailMsg: "⚠️ Could not save score",
+    connMsg: "⚠️ Please check your internet connection",
+    shareTitle: "Quick Quiz Score",
+    shareTextTemplate: (name, score, total) => `Quick Quiz — Genetics of Life\n${name}'s score: ${score} / ${total}`,
+    copiedMsg: "Score copied!"
+  }
+};
+
+let currentLang = 'ml';
+
+function setLang(lang){
+  currentLang = lang;
+  document.getElementById('langMlBtn').classList.toggle('active', lang === 'ml');
+  document.getElementById('langEnBtn').classList.toggle('active', lang === 'en');
+  const t = uiText[lang];
+
+  document.getElementById('nameHeading').textContent = t.nameHeading;
+  document.getElementById('namePrompt').textContent = t.namePrompt;
+  document.getElementById('studentNameInput').placeholder = t.namePlaceholder;
+  document.getElementById('startBtn').textContent = t.startBtn;
+  document.getElementById('qLabel').textContent = t.qLabel;
+  document.getElementById('resultHeading').textContent = t.resultHeading;
+  document.getElementById('shareBtn').textContent = t.shareBtn;
+  document.getElementById('retryBtn').textContent = t.retryBtn;
+
+  quizData = (lang === 'ml') ? quizDataML : quizDataEN;
+
+  // Re-render whichever screen is currently visible so question text/options switch too
+  if(!document.getElementById('quizScreen').classList.contains('hidden')){
+    renderQuestion();
+  }
+}
+
+/* ===================== QUIZ DATA (bilingual) ===================== */
+const quizDataML = [
+  { q:"DNA-യുടെ അടിസ്ഥാന നിർമ്മാണ യൂണിറ്റ് ഏത്?", opts:["ന്യൂക്ലിയോടൈഡ്","അമിനോ ആസിഡ്","ഗ്ലൂക്കോസ്","പ്രോട്ടീൻ"], ans:0 },
+  { q:"DNA-യുടെ ചുറ്റുഗോവണി മാതൃക അവതരിപ്പിച്ചത് ആരൊക്കെ?", opts:["മെൻഡലും ഡാർവിനും","വാട്സണും ക്രിക്കും","ഫ്രാങ്ക്ലിനും വിൽക്കിൻസും","ഡാർവിനും വാലസും"], ans:1 },
+  { q:"RNA-യിൽ കാണപ്പെടുന്ന, DNA-യിൽ ഇല്ലാത്ത ബേസ് ഏത്?", opts:["അഡിനിൻ","തൈമിൻ","യുറാസിൽ","ഗ്വാനിൻ"], ans:2 },
+  { q:"മനുഷ്യരിലെ ആകെ ക്രോമസോമുകളുടെ എണ്ണം?", opts:["23","44","46","48"], ans:2 },
+  { q:"Y ക്രോമസോമിലെ ഏത് ജീനാണ് പുരുഷ ലൈംഗിക വളർച്ചയ്ക്ക് കാരണമാകുന്നത്?", opts:["SRY","ABO","TT","Rh"], ans:0 },
+  { q:"ട്രാൻസ്ക്രിപ്ഷൻ നടക്കുന്നത് എവിടെയാണ്?", opts:["റൈബോസോം","ന്യൂക്ലിയസ്","മൈറ്റോകോൺഡ്രിയ","കോശഭിത്തി"], ans:1 },
+  { q:"മോണോഹൈബ്രിഡ് ക്രോസിൽ F2 തലമുറയിലെ ഫീനോടൈപ്പ് അനുപാതം എത്ര?", opts:["1:1","9:3:3:1","3:1","1:2:1"], ans:2 },
+  { q:"ചുവന്ന പൂവും വെള്ളപ്പൂവും ചേർന്ന് പിങ്ക് പൂവ് ഉണ്ടാകുന്നത് ഏത് പ്രതിഭാസത്തിന് ഉദാഹരണം?", opts:["കോ-ഡോമിനൻസ്","ഇൻകംപ്ലീറ്റ് ഡോമിനൻസ്","മൾട്ടിപ്പിൾ അലീലിസം","പോളിജീനിക് ഇൻഹെറിറ്റൻസ്"], ans:1 },
+  { q:"ABO രക്തഗ്രൂപ്പ് ഏത് ജനിതക പ്രതിഭാസത്തിന് ഉദാഹരണമാണ്?", opts:["ഇൻകംപ്ലീറ്റ് ഡോമിനൻസ്","പോളിജീനിക് ഇൻഹെറിറ്റൻസ്","മൾട്ടിപ്പിൾ അലീലിസം","ക്രോസിങ് ഓവർ"], ans:2 },
+  { q:"ക്രോസിങ് ഓവർ നടക്കുന്നത് ഏത് പ്രക്രിയയുടെ ഘട്ടത്തിലാണ്?", opts:["മൈറ്റോസിസ്","മയോസിസ്","ട്രാൻസ്ക്രിപ്ഷൻ","ട്രാൻസ്ലേഷൻ"], ans:1 }
+];
+const quizDataEN = [
+  { q:"What is the basic building unit of DNA?", opts:["Nucleotide","Amino acid","Glucose","Protein"], ans:0 },
+  { q:"Who proposed the double helix model of DNA?", opts:["Mendel and Darwin","Watson and Crick","Franklin and Wilkins","Darwin and Wallace"], ans:1 },
+  { q:"Which base is found in RNA but not in DNA?", opts:["Adenine","Thymine","Uracil","Guanine"], ans:2 },
+  { q:"What is the total number of chromosomes in humans?", opts:["23","44","46","48"], ans:2 },
+  { q:"Which gene on the Y chromosome causes male sexual development?", opts:["SRY","ABO","TT","Rh"], ans:0 },
+  { q:"Where does transcription take place?", opts:["Ribosome","Nucleus","Mitochondria","Cell wall"], ans:1 },
+  { q:"In a monohybrid cross, what is the F2 phenotype ratio?", opts:["1:1","9:3:3:1","3:1","1:2:1"], ans:2 },
+  { q:"A red flower and a white flower producing a pink flower is an example of?", opts:["Co-dominance","Incomplete dominance","Multiple allelism","Polygenic inheritance"], ans:1 },
+  { q:"The ABO blood group is an example of which genetic phenomenon?", opts:["Incomplete dominance","Polygenic inheritance","Multiple allelism","Crossing over"], ans:2 },
+  { q:"Crossing over occurs during which process?", opts:["Mitosis","Meiosis","Transcription","Translation"], ans:1 }
+];
+let quizData = quizDataML;
+
+let studentName = "";
+let currentQ = 0;
+let score = 0;
+let answered = false;
+
+function startQuiz(){
+  const val = document.getElementById('studentNameInput').value.trim();
+  if(!val){ document.getElementById('studentNameInput').focus(); return; }
+  studentName = val;
+  document.getElementById('nameScreen').classList.add('hidden');
+  document.getElementById('quizScreen').classList.remove('hidden');
+  currentQ = 0; score = 0;
+  renderQuestion();
+}
+
+function renderQuestion(){
+  answered = false;
+  const item = quizData[currentQ];
+  const t = uiText[currentLang];
+  document.getElementById('qPos').textContent = currentQ + 1;
+  document.getElementById('qTotal').textContent = quizData.length;
+  document.getElementById('progressFill').style.width = ((currentQ) / quizData.length * 100) + '%';
+  document.getElementById('qText').textContent = item.q;
+  document.getElementById('nextBtnWrap').classList.add('hidden');
+
+  const optsDiv = document.getElementById('quizOpts');
+  optsDiv.innerHTML = '';
+  item.opts.forEach((opt, oIdx)=>{
+    const b = document.createElement('button');
+    b.textContent = opt;
+    b.addEventListener('click', ()=>{
+      if(answered) return;
+      answered = true;
+      const allBtns = optsDiv.querySelectorAll('button');
+      allBtns.forEach(x=>x.disabled = true);
+      if(oIdx === item.ans){ b.classList.add('correct'); score++; }
+      else { b.classList.add('wrong'); allBtns[item.ans].classList.add('correct'); }
+      document.getElementById('nextBtnWrap').classList.remove('hidden');
+      document.getElementById('nextBtn').textContent = (currentQ === quizData.length - 1) ? t.finishBtn : t.nextBtn;
+    });
+    optsDiv.appendChild(b);
+  });
+}
+
+function nextQuestion(){
+  if(currentQ < quizData.length - 1){
+    currentQ++;
+    renderQuestion();
+  } else {
+    finishQuiz();
+  }
+}
+
+function finishQuiz(){
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('quizScreen').classList.add('hidden');
+  document.getElementById('resultScreen').classList.remove('hidden');
+  const pct = Math.round((score / quizData.length) * 100);
+  document.getElementById('scoreCircle').style.setProperty('--pct', pct);
+  document.getElementById('scoreText').textContent = `${score}/${quizData.length}`;
+  document.getElementById('resultName').textContent = studentName;
+  submitResult();
+}
+
+async function submitResult(){
+  const t = uiText[currentLang];
+  const statusDiv = document.getElementById('submitStatus');
+  if(!SUPABASE_URL || !SUPABASE_ANON_KEY){
+    statusDiv.innerHTML = '';
+    return;
+  }
+  try{
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/quiz_scores`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        student_name: studentName,
+        score: score,
+        total: quizData.length,
+        quiz_name: QUIZ_NAME
+      })
+    });
+    if(res.ok){
+      statusDiv.innerHTML = `<p class="status-msg ok">${t.savedMsg}</p>`;
+    } else {
+      statusDiv.innerHTML = `<p class="status-msg err">${t.saveFailMsg}</p>`;
+    }
+  } catch(e){
+    statusDiv.innerHTML = `<p class="status-msg err">${t.connMsg}</p>`;
+  }
+}
+
+function shareResult(){
+  const t = uiText[currentLang];
+  const text = t.shareTextTemplate(studentName, score, quizData.length);
+  if(navigator.share){
+    navigator.share({ title: t.shareTitle, text: text }).catch(()=>{});
+  } else if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=> alert(t.copiedMsg));
+  } else {
+    alert(text);
+  }
+}
+
+function retryQuiz(){
+  document.getElementById('resultScreen').classList.add('hidden');
+  document.getElementById('nameScreen').classList.remove('hidden');
+  document.getElementById('studentNameInput').value = studentName;
+}
+</script>
+
+</body>
+</html>

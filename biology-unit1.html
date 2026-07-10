@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<title>Unit 1 — Genetics of Life | Study Tool</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root{
+  --ink:#1f2937;
+  --paper:#f6f4fb;
+  --helix:#2d4f8a;
+  --helix-dark:#1a2f5c;
+  --gene:#7b3fa0;
+  --gene-light:#ede1f5;
+  --trait:#2e8b57;
+  --line:#dcd6ea;
+  --card:#ffffff;
+  --mono: 'Courier New', ui-monospace, monospace;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:'Noto Sans Malayalam','Manjari',system-ui,sans-serif;
+  line-height:1.55;
+}
+header{
+  background:linear-gradient(135deg,var(--helix-dark),var(--helix) 65%);
+  color:#fff; padding:20px 18px 60px; position:relative; overflow:hidden;
+}
+header .backbone{ position:absolute; inset:0; opacity:.15;
+  background-image: repeating-linear-gradient(115deg, transparent 0 38px, #fff 38px 40px); }
+header h1{ margin:0 0 4px; font-size:1.5rem; position:relative; z-index:1; }
+header p.sub{ margin:0 0 12px; opacity:.85; font-size:.92rem; position:relative; z-index:1; }
+.lang-toggle{ position:relative; z-index:1; display:inline-flex; gap:4px; background:rgba(255,255,255,.15); padding:4px; border-radius:20px; }
+.lang-toggle button{
+  border:none; background:transparent; color:#fff; padding:6px 16px; border-radius:16px;
+  cursor:pointer; font-family:inherit; font-size:.85rem; font-weight:600; opacity:.7;
+}
+.lang-toggle button.active{ background:#fff; color:var(--helix-dark); opacity:1; }
+.wrap{ max-width:960px; margin:-40px auto 40px; padding:0 14px; position:relative; z-index:2; }
+nav.tabs{
+  display:flex; flex-wrap:wrap; gap:8px; background:var(--card); border-radius:14px;
+  padding:10px; box-shadow:0 8px 24px rgba(26,47,92,.12); margin-bottom:18px;
+  position:sticky; top:10px; z-index:5;
+}
+nav.tabs button{
+  border:none; background:var(--paper); color:var(--helix-dark); padding:9px 14px;
+  border-radius:9px; cursor:pointer; font-size:.9rem; font-weight:600; font-family:inherit; transition:.15s;
+}
+nav.tabs button.active{ background:var(--helix); color:#fff; }
+nav.tabs button:hover{ filter:brightness(1.05); }
+.panel{ display:none; }
+.panel.active{ display:block; animation:fade .25s ease; }
+@keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+.card{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(31,41,55,.04); }
+h2.section-title{ color:var(--helix-dark); border-bottom:3px solid var(--gene); display:inline-block; padding-bottom:4px; margin-top:0; font-size:1.15rem; }
+h3.sub-title{ color:var(--gene); margin:18px 0 8px; font-size:1rem; }
+.formula-box{ background:var(--gene-light); border-left:4px solid var(--gene); padding:10px 14px; border-radius:8px; font-family:var(--mono); margin:10px 0; font-size:.95rem; overflow-x:auto; }
+.chain{ font-family:var(--mono); background:#eef3fa; border:1px dashed var(--helix); padding:8px 12px; border-radius:8px; display:inline-block; margin:6px 6px 6px 0; }
+table{ width:100%; border-collapse:collapse; margin:10px 0; font-size:.92rem; }
+th,td{ border:1px solid var(--line); padding:8px 10px; text-align:left; }
+th{ background:var(--helix); color:#fff; }
+tr:nth-child(even) td{ background:#f4f1fa; }
+table.compact th, table.compact td{ padding:5px 8px; font-size:.85rem; }
+ul{ padding-left:20px; } li{ margin-bottom:6px; }
+.tag{ display:inline-block; background:var(--gene); color:#fff; font-size:.72rem; padding:2px 8px; border-radius:20px; margin-left:6px; }
+.step-list li{ margin-bottom:10px; }
+.quiz-opts button{ display:block; width:100%; text-align:left; margin:6px 0; padding:10px 14px; border:1px solid var(--line); background:#fff; border-radius:9px; cursor:pointer; font-family:inherit; font-size:.92rem; }
+.quiz-opts button.correct{ background:#dff3e8; border-color:var(--trait); font-weight:600; }
+.quiz-opts button.wrong{ background:#fbe4e0; border-color:var(--gene); }
+.quiz-opts button[disabled]{ cursor:default; }
+.quiz-nav{ display:flex; justify-content:space-between; margin-top:14px; }
+.quiz-nav button:disabled{ opacity:.4; cursor:default; }
+.score-bar{ background:var(--helix-dark); color:#fff; border-radius:10px; padding:10px 16px; margin-bottom:14px; font-size:.9rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+.btn{ background:var(--gene); color:#fff; border:none; padding:9px 16px; border-radius:8px; cursor:pointer; font-family:inherit; font-weight:600; }
+.btn.secondary{ background:var(--helix); }
+.teacher-share{ margin-bottom:14px; display:flex; gap:8px; flex-wrap:wrap; }
+.teacher-share .btn{ background:var(--gene); flex:1; min-width:200px; }
+.teacher-share .btn.secondary{ background:var(--helix); }
+.share-toast{ display:none; margin-top:12px; background:var(--helix-dark); color:#fff; padding:9px 14px; border-radius:8px; font-size:.85rem; text-align:center; }
+.share-toast.show{ display:block; }
+.mqp-header{ text-align:center; margin-bottom:14px; }
+.mqp-header h2{ margin:2px 0; color:var(--helix-dark); }
+.mqp-meta{ display:flex; justify-content:space-between; font-size:.85rem; margin:6px 0 16px; }
+.mqp-section-title{ background:var(--gene); color:#fff; padding:5px 12px; border-radius:6px; display:inline-block; margin:14px 0 8px; font-size:.9rem; }
+.mqp-q{ margin-bottom:12px; } .mqp-q b{ color:var(--helix-dark); }
+.exam-tip{ background:#eef4f8; border:1px solid var(--helix); border-radius:8px; padding:10px 14px; margin-top:16px; font-size:.9rem; }
+.revision-sheet h3.sub-title{ margin-top:16px; }
+.pill-row{ display:flex; gap:10px; flex-wrap:wrap; margin:10px 0; }
+.pill{ background:var(--gene-light); color:var(--helix-dark); padding:8px 14px; border-radius:20px; font-size:.85rem; font-weight:600; }
+footer.note{ text-align:center; font-size:.78rem; color:#8a8067; margin:30px 0 10px; }
+
+/* ---- Bilingual toggle logic ---- */
+.lang-en{ display:none; }
+body.show-en .lang-ml{ display:none; }
+body.show-en .lang-en{ display:block; }
+
+@media print{
+  header, nav.tabs, .no-print{ display:none !important; }
+  .panel{ display:none !important; }
+  .panel.print-target{ display:block !important; }
+  .wrap{ margin:0; }
+  .card{ box-shadow:none; border:1px solid #999; }
+  body{ background:#fff; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="backbone"></div>
+  <h1>Genetics of Life</h1>
+  <p class="sub">Biology · Class 10 · Unit 1 — Complete Study Tool</p>
+  <div class="lang-toggle no-print">
+    <button id="langMlBtn" class="active" onclick="setLang('ml')">മലയാളം</button>
+    <button id="langEnBtn" onclick="setLang('en')">English</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav class="tabs no-print">
+    <button data-tab="notes" class="active" data-ml="📘 സംഗ്രഹം" data-en="📘 Notes">📘 സംഗ്രഹം</button>
+    <button data-tab="revision" data-ml="⚡ ക്വിക്ക് റിവിഷൻ" data-en="⚡ Quick Revision">⚡ ക്വിക്ക് റിവിഷൻ</button>
+    <button data-tab="dna" data-ml="🧬 DNA & ക്രോമസോം" data-en="🧬 DNA & Chromosome">🧬 DNA & ക്രോമസോം</button>
+    <button data-tab="genetics" data-ml="🌱 മെൻഡൽ ജനിതകം" data-en="🌱 Mendelian Genetics">🌱 മെൻഡൽ ജനിതകം</button>
+    <button data-tab="nonmendel" data-ml="🩸 നോൺ-മെൻഡലിയൻ" data-en="🩸 Non-Mendelian">🩸 നോൺ-മെൻഡലിയൻ</button>
+    <button data-tab="variation" data-ml="🔀 വ്യതിയാനം" data-en="🔀 Variation">🔀 വ്യതിയാനം</button>
+    <button data-tab="quiz" data-ml="✅ ക്വിസ്" data-en="✅ Quiz">✅ ക്വിസ്</button>
+    <button data-tab="mqp" data-ml="📝 മാതൃകാ ചോദ്യപേപ്പർ" data-en="📝 Model Question Paper">📝 മാതൃകാ ചോദ്യപേപ്പർ</button>
+    <button id="printBtn" onclick="printCurrent()" style="margin-left:auto;background:var(--helix-dark);color:#fff;" data-ml="🖨️ പ്രിന്റ് ചെയ്യുക" data-en="🖨️ Print">🖨️ പ്രിന്റ് ചെയ്യുക</button>
+  </nav>
+
+  <!-- ================= NOTES ================= -->
+  <section class="panel active" id="notes">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">ചുരുക്ക സംഗ്രഹം</h2>
+        <ul>
+          <li>ജീൻ എഡിറ്റിങ് സാങ്കേതികവിദ്യ (CRISPR-Cas9) വികസിപ്പിച്ചതിന് 2020-ലെ രസതന്ത്ര നോബൽ സമ്മാനം എമ്മാനുവേൽ കാർപെന്റിയർ, ജെന്നിഫർ എ ഡൗഡ്ന എന്നിവർക്ക് ലഭിച്ചു.</li>
+          <li>DNA, ന്യൂക്ലിയസ്, ക്രോമസോം, DNA എന്നിവ കോശത്തിനുള്ളിൽ കാണപ്പെടുന്ന ക്രമത്തിലാണ് ജനിതക വിവരങ്ങൾ സൂക്ഷിക്കപ്പെടുന്നത്.</li>
+          <li>1953-ൽ ജെയിംസ് വാട്സണും ഫ്രാൻസിസ് ക്രിക്കും DNA-യുടെ ചുറ്റുഗോവണി മാതൃക (Double Helix) അവതരിപ്പിച്ചു; റോസലിൻഡ് ഫ്രാങ്ക്ലിന്റെ എക്സ്-റേ ഡിഫ്രാക്ഷൻ ചിത്രം (ഫോട്ടോ 51) ഇതിന് നിർണായകമായിരുന്നു.</li>
+          <li>DNA-യുടെ അടിസ്ഥാന ഘടകം ന്യൂക്ലിയോടൈഡ് ആണ് — പഞ്ചസാര (ഡിഓക്സിറൈബോസ്), ഫോസ്ഫേറ്റ്, നൈട്രജൻ ബേസ് എന്നിവ ചേർന്നത്.</li>
+          <li>DNA-യും ഹിസ്റ്റോൺ പ്രോട്ടീനുകളും ചേർന്നാണ് ക്രോമസോം ഉണ്ടാകുന്നത്; ഹിസ്റ്റോൺ ഒക്ടാമറിനെ DNA വലയം ചെയ്ത് ന്യൂക്ലിയോസോം ഉണ്ടാകുന്നു.</li>
+          <li>മനുഷ്യരിൽ 23 ജോടി (46) ക്രോമസോമുകളുണ്ട് — 22 ജോടി സ്വരൂപ ക്രോമസോമുകളും 1 ജോടി ലിംഗനിർണ്ണയ ക്രോമസോമുകളും (XX/XY).</li>
+          <li>DNA-യിലെ നിശ്ചിത ന്യൂക്ലിയോടൈഡ് ശ്രേണിയാണ് ജീൻ; ജീനുകളുടെ നിർദേശപ്രകാരം നിർമിക്കുന്ന പ്രോട്ടീനുകളാണ് സ്വഭാവസവിശേഷതകൾ രൂപപ്പെടുത്തുന്നത്.</li>
+          <li>പ്രോട്ടീൻ നിർമ്മാണം രണ്ട് ഘട്ടങ്ങളിലാണ് നടക്കുന്നത് — ട്രാൻസ്ക്രിപ്ഷൻ (DNA യിൽ നിന്ന് mRNA രൂപപ്പെടൽ), ട്രാൻസ്ലേഷൻ (mRNA സന്ദേശമനുസരിച്ച് റൈബോസോമിൽ പ്രോട്ടീൻ നിർമ്മാണം).</li>
+          <li>ഗ്രിഗർ ജോഹാൻ മെൻഡൽ തോട്ടപ്പയർ ചെടിയിൽ (Pisum sativum) നടത്തിയ വർഗസങ്കരണ പരീക്ഷണങ്ങളാണ് ജനിതകശാസ്ത്രത്തിന് അടിത്തറയായത്.</li>
+          <li>മോണോഹൈബ്രിഡ് ക്രോസിൽ F2 തലമുറയിൽ പ്രകടഗുണവും ഗൂപ്തഗുണവും തമ്മിലുള്ള അനുപാതം 3:1 ആണ്; ഡൈഹൈബ്രിഡ് ക്രോസിൽ ഇത് 9:3:3:1 ആണ്.</li>
+          <li>ഇൻകംപ്ലീറ്റ് ഡോമിനൻസ്, കോ-ഡോമിനൻസ്, മൾട്ടിപ്പിൾ അലീലിസം (ABO രക്തഗ്രൂപ്പ്), പോളിജീനിക് ഇൻഹെറിറ്റൻസ് (ത്വക്കിന്റെ നിറം) എന്നിവ നോൺ-മെൻഡേലിയൻ ഇൻഹെറിറ്റൻസിന് ഉദാഹരണങ്ങളാണ്.</li>
+          <li>ക്രോസിങ് ഓവർ, മ്യൂട്ടേഷൻ എന്നിവയാണ് ജീവികളിൽ വ്യതിയാനങ്ങൾക്ക് കാരണമാകുന്ന പ്രധാന ജനിതക പ്രക്രിയകൾ.</li>
+        </ul>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Chapter Summary</h2>
+        <ul>
+          <li>The 2020 Nobel Prize in Chemistry was awarded to Emmanuelle Charpentier and Jennifer A. Doudna for developing the CRISPR-Cas9 gene editing method.</li>
+          <li>Genetic information is stored in the order: cell → nucleus → chromosome → DNA.</li>
+          <li>In 1953, James Watson and Francis Crick proposed the Double Helix model of DNA; Rosalind Franklin's X-ray diffraction image (Photo 51) was crucial to this discovery.</li>
+          <li>The basic unit of DNA is the nucleotide — made of a sugar (deoxyribose), a phosphate group and a nitrogen base.</li>
+          <li>A chromosome is made of DNA and histone proteins; DNA wound around a histone octamer forms a nucleosome.</li>
+          <li>Humans have 23 pairs (46) of chromosomes — 22 pairs of somatic (autosomal) chromosomes and 1 pair of sex chromosomes (XX/XY).</li>
+          <li>A gene is a specific sequence of nucleotides in DNA; proteins made as directed by genes shape an organism's characteristics.</li>
+          <li>Protein synthesis occurs in two stages — Transcription (mRNA formed from DNA) and Translation (protein built at the ribosome as directed by mRNA).</li>
+          <li>Gregor Johann Mendel's hybridisation experiments on the garden pea (Pisum sativum) laid the foundation of genetics.</li>
+          <li>In a monohybrid cross, the F2 ratio of dominant to recessive trait is 3:1; in a dihybrid cross it is 9:3:3:1.</li>
+          <li>Incomplete dominance, co-dominance, multiple allelism (ABO blood group) and polygenic inheritance (skin colour) are examples of Non-Mendelian inheritance.</li>
+          <li>Crossing over and mutation are the key genetic processes responsible for variation in organisms.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUICK REVISION ================= -->
+  <section class="panel" id="revision">
+    <div class="card revision-sheet">
+      <div class="lang-ml">
+        <h2 class="section-title">⚡ ക്വിക്ക് റിവിഷൻ ഷീറ്റ്</h2>
+        <h3 class="sub-title">🔹 ജനിതക വിവരത്തിന്റെ ശ്രേണി</h3>
+        <div class="formula-box">കോശം → ന്യൂക്ലിയസ് → ക്രോമസോം → DNA → ജീൻ</div>
+        <h3 class="sub-title">🔹 DNA vs RNA</h3>
+        <table class="compact"><tr><th>സവിശേഷത</th><th>DNA</th><th>RNA</th></tr>
+          <tr><td>ഇഴകൾ</td><td>2 (ചുറ്റുഗോവണി)</td><td>1</td></tr>
+          <tr><td>പഞ്ചസാര</td><td>ഡിഓക്സിറൈബോസ്</td><td>റൈബോസ്</td></tr>
+          <tr><td>ബേസുകൾ</td><td>A, T, G, C</td><td>A, U, G, C</td></tr></table>
+        <h3 class="sub-title">🔹 മനുഷ്യരിലെ ക്രോമസോമുകൾ</h3>
+        <table class="compact"><tr><th>വിഭാഗം</th><th>സ്ത്രീ</th><th>പുരുഷൻ</th></tr>
+          <tr><td>ആകെ</td><td>46 (44+XX)</td><td>46 (44+XY)</td></tr>
+          <tr><td>സ്വരൂപം</td><td>44</td><td>44</td></tr>
+          <tr><td>ലിംഗനിർണ്ണയം</td><td>XX</td><td>XY</td></tr></table>
+        <h3 class="sub-title">🔹 പ്രോട്ടീൻ നിർമ്മാണം — 2 ഘട്ടങ്ങൾ</h3>
+        <div class="formula-box">1) ട്രാൻസ്ക്രിപ്ഷൻ (ന്യൂക്ലിയസ്: DNA → mRNA) → 2) ട്രാൻസ്ലേഷൻ (റൈബോസോം: mRNA → പ്രോട്ടീൻ)</div>
+        <h3 class="sub-title">🔹 മെൻഡലിന്റെ ക്രോസുകൾ</h3>
+        <table class="compact"><tr><th>ക്രോസ്</th><th>സ്വഭാവങ്ങൾ</th><th>F2 അനുപാതം</th></tr>
+          <tr><td>മോണോഹൈബ്രിഡ്</td><td>1</td><td>3 : 1</td></tr>
+          <tr><td>ഡൈഹൈബ്രിഡ്</td><td>2</td><td>9 : 3 : 3 : 1</td></tr></table>
+        <h3 class="sub-title">🔹 നോൺ-മെൻഡേലിയൻ ഇൻഹെറിറ്റൻസ്</h3>
+        <table class="compact"><tr><th>പ്രതിഭാസം</th><th>ഉദാഹരണം</th></tr>
+          <tr><td>ഇൻകംപ്ലീറ്റ് ഡോമിനൻസ്</td><td>ചുവപ്പ്×വെള്ള → പിങ്ക് പൂവ്</td></tr>
+          <tr><td>കോ-ഡോമിനൻസ്</td><td>റോൺ കോട്ട് കന്നുകാലി</td></tr>
+          <tr><td>മൾട്ടിപ്പിൾ അലീലിസം</td><td>ABO രക്തഗ്രൂപ്പ്</td></tr>
+          <tr><td>പോളിജീനിക്</td><td>ത്വക്കിന്റെ നിറം</td></tr></table>
+        <h3 class="sub-title">🔹 വ്യതിയാനത്തിന് കാരണമാകുന്നവ</h3>
+        <div class="formula-box">ക്രോസിങ് ഓവർ (മയോസിസിൽ) &nbsp;|&nbsp; മ്യൂട്ടേഷൻ (DNA യിലെ ആകസ്മിക മാറ്റം) &nbsp;|&nbsp; ബീജസംയോഗത്തിലെ അലീൽ ചേർച്ച</div>
+        <p class="exam-tip">📌 പരീക്ഷാ ടിപ്പ്: ഫീനോടൈപ്പ് = പ്രകടരൂപം, ജീനോടൈപ്പ് = ജനിതകഘടന. TT, Tt എന്നിവ ജീനോടൈപ്പ്; ഉയരം കൂടിയത്/കുറഞ്ഞത് ഫീനോടൈപ്പ്.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">⚡ Quick Revision Sheet</h2>
+        <h3 class="sub-title">🔹 Hierarchy of Genetic Information</h3>
+        <div class="formula-box">Cell → Nucleus → Chromosome → DNA → Gene</div>
+        <h3 class="sub-title">🔹 DNA vs RNA</h3>
+        <table class="compact"><tr><th>Feature</th><th>DNA</th><th>RNA</th></tr>
+          <tr><td>Strands</td><td>2 (double helix)</td><td>1</td></tr>
+          <tr><td>Sugar</td><td>Deoxyribose</td><td>Ribose</td></tr>
+          <tr><td>Bases</td><td>A, T, G, C</td><td>A, U, G, C</td></tr></table>
+        <h3 class="sub-title">🔹 Human Chromosomes</h3>
+        <table class="compact"><tr><th>Category</th><th>Female</th><th>Male</th></tr>
+          <tr><td>Total</td><td>46 (44+XX)</td><td>46 (44+XY)</td></tr>
+          <tr><td>Somatic</td><td>44</td><td>44</td></tr>
+          <tr><td>Sex chromosomes</td><td>XX</td><td>XY</td></tr></table>
+        <h3 class="sub-title">🔹 Protein Synthesis — 2 Stages</h3>
+        <div class="formula-box">1) Transcription (nucleus: DNA → mRNA) → 2) Translation (ribosome: mRNA → protein)</div>
+        <h3 class="sub-title">🔹 Mendel's Crosses</h3>
+        <table class="compact"><tr><th>Cross</th><th>Traits</th><th>F2 Ratio</th></tr>
+          <tr><td>Monohybrid</td><td>1</td><td>3 : 1</td></tr>
+          <tr><td>Dihybrid</td><td>2</td><td>9 : 3 : 3 : 1</td></tr></table>
+        <h3 class="sub-title">🔹 Non-Mendelian Inheritance</h3>
+        <table class="compact"><tr><th>Phenomenon</th><th>Example</th></tr>
+          <tr><td>Incomplete dominance</td><td>Red × White → Pink flower</td></tr>
+          <tr><td>Co-dominance</td><td>Roan coat cattle</td></tr>
+          <tr><td>Multiple allelism</td><td>ABO blood group</td></tr>
+          <tr><td>Polygenic</td><td>Skin colour</td></tr></table>
+        <h3 class="sub-title">🔹 Causes of Variation</h3>
+        <div class="formula-box">Crossing over (during meiosis) &nbsp;|&nbsp; Mutation (random change in DNA) &nbsp;|&nbsp; Allele combination at fertilisation</div>
+        <p class="exam-tip">📌 Exam tip: Phenotype = the visible trait, Genotype = the genetic makeup. TT, Tt are genotypes; tall/short is the phenotype.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DNA & CHROMOSOME ================= -->
+  <section class="panel" id="dna">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">DNA-യുടെ ഘടനയും ക്രോമസോമും</h2>
+        <h3 class="sub-title">1. DNA-യുടെ കണ്ടെത്തൽ</h3>
+        <p>1953-ൽ ജെയിംസ് വാട്സണും ഫ്രാൻസിസ് ക്രിക്കും DNA-യുടെ ചുറ്റുഗോവണി മാതൃക (Double Helix Model) അവതരിപ്പിച്ചു. റോസലിൻഡ് ഫ്രാങ്ക്ലിൻ, മോറിസ് വിൽക്കിൻസ് എന്നിവരുടെ എക്സ്-റേ പഠനങ്ങളെ ആസ്പദമാക്കിയാണ് ഈ കണ്ടെത്തൽ നടന്നത്. ഫ്രാങ്ക്ലിൻ എടുത്ത "ഫോട്ടോ 51" എന്ന ചിത്രമാണ് നിർണായക വിവരങ്ങൾ നൽകിയത്. 1962-ൽ വാട്സൺ, ക്രിക്ക്, വിൽക്കിൻസ് എന്നിവർക്ക് മെഡിസിനുള്ള നോബൽ സമ്മാനം ലഭിച്ചു (ഫ്രാങ്ക്ലിൻ 1958-ൽ അന്തരിച്ചിരുന്നു).</p>
+        <h3 class="sub-title">2. ന്യൂക്ലിയോടൈഡ് (Nucleotide)</h3>
+        <p>DNA-യുടെ അടിസ്ഥാന നിർമ്മാണ ഘടകമാണ് ന്യൂക്ലിയോടൈഡ്. ഓരോ ന്യൂക്ലിയോടൈഡിലും:</p>
+        <ul>
+          <li><b>ഡിഓക്സിറൈബോസ് പഞ്ചസാര</b> — 5 കാർബൺ പഞ്ചസാര</li>
+          <li><b>ഫോസ്ഫേറ്റ് ഗ്രൂപ്പ്</b> — ന്യൂക്ലിയോടൈഡുകളെ പരസ്പരം ബന്ധിപ്പിക്കുന്നു</li>
+          <li><b>നൈട്രജൻ ബേസ്</b> — അഡിനിൻ (A), തൈമിൻ (T), ഗ്വാനിൻ (G), സൈറ്റോസിൻ (C)</li>
+        </ul>
+        <div class="formula-box">ഇഴകൾ = പഞ്ചസാര + ഫോസ്ഫേറ്റ് &nbsp;|&nbsp; പടികൾ = ബേസ് ജോടികൾ (A–T, G–C)</div>
+        <h3 class="sub-title">3. ക്രോമസോം (Chromosome)</h3>
+        <p>DNA-യും ഹിസ്റ്റോൺ പ്രോട്ടീനുകളും ചേർന്നതാണ് ക്രോമസോം. എട്ട് ഹിസ്റ്റോണുകൾ ചേർന്ന് ഒരു <b>ഹിസ്റ്റോൺ ഒക്ടാമർ</b> രൂപപ്പെടുന്നു. ഇതിനെ DNA ഇഴകൾ വലയം ചെയ്ത് <b>ന്യൂക്ലിയോസോം</b> ഉണ്ടാകുന്നു. നിരവധി ന്യൂക്ലിയോസോമുകൾ ചുരുളുകളാക്കി ക്രോമസോം രൂപപ്പെടുന്നു. ഒരു ക്രോമസോമിനെ <b>സെൻട്രോമിയർ</b> വഴി ബന്ധിപ്പിച്ചിരിക്കുന്ന ഭാഗങ്ങളാണ് <b>ക്രൊമാറ്റിഡുകൾ</b>.</p>
+        <h3 class="sub-title">4. മനുഷ്യരിലെ ക്രോമസോമുകൾ</h3>
+        <table><tr><th>വിഭാഗം</th><th>എണ്ണം</th><th>വിവരണം</th></tr>
+          <tr><td>സ്വരൂപ ക്രോമസോമുകൾ (Somatic)</td><td>22 ജോടി (44)</td><td>ശാരീരിക സവിശേഷതകളെ നിയന്ത്രിക്കുന്നു</td></tr>
+          <tr><td>ലിംഗനിർണ്ണയ ക്രോമസോമുകൾ (Sex)</td><td>1 ജോടി (2)</td><td>X, Y — സ്ത്രീ: XX, പുരുഷൻ: XY</td></tr></table>
+        <p>Y ക്രോമസോമിലെ <b>SRY ജീൻ</b> ആണ് ഭ്രൂണത്തിൽ പുരുഷ ലൈംഗിക വളർച്ചയ്ക്ക് കാരണമാകുന്നത്.</p>
+        <h3 class="sub-title">5. ജീനും ജീൻ എക്സ്പ്രഷനും</h3>
+        <p>DNA-യിലെ നിശ്ചിത ന്യൂക്ലിയോടൈഡ് ശ്രേണിയാണ് <b>ജീൻ</b>. ജീനുകളുടെ നിർദേശപ്രകാരം നിർമ്മിക്കുന്ന പ്രോട്ടീനുകളാണ് സ്വഭാവ സവിശേഷതകൾ രൂപപ്പെടുത്തുന്നതും മെറ്റാബോളിക് പ്രവർത്തനങ്ങളെ നിയന്ത്രിക്കുന്നതും.</p>
+        <h3 class="sub-title">6. RNA-യും പ്രോട്ടീൻ നിർമ്മാണവും</h3>
+        <p>DNA-യെപ്പോലെ മറ്റൊരു ന്യൂക്ലിക് ആസിഡാണ് <b>RNA</b>. ഇത് ഒരു ഇഴ മാത്രമുള്ളതും, റൈബോസ് പഞ്ചസാര ഉള്ളതും, തൈമിനു പകരം <b>യുറാസിൽ (U)</b> ഉള്ളതുമാണ്.</p>
+        <table><tr><th>ഘട്ടം</th><th>നടക്കുന്ന സ്ഥലം</th><th>വിവരണം</th></tr>
+          <tr><td>1. ട്രാൻസ്ക്രിപ്ഷൻ</td><td>ന്യൂക്ലിയസ്</td><td>DNA-യിലെ ജീനിൽ നിന്ന് mRNA രൂപപ്പെടുന്നു</td></tr>
+          <tr><td>2. ട്രാൻസ്ലേഷൻ</td><td>റൈബോസോം</td><td>tRNA അമിനോ ആസിഡുകളെ എത്തിക്കുന്നു; rRNA യുടെ സഹായത്താൽ പ്രോട്ടീൻ നിർമ്മിക്കുന്നു</td></tr></table>
+        <div class="pill-row">
+          <span class="pill">mRNA — സന്ദേശം വഹിക്കുന്നു</span>
+          <span class="pill">tRNA — അമിനോ ആസിഡ് എത്തിക്കുന്നു</span>
+          <span class="pill">rRNA — റൈബോസോമിന്റെ ഭാഗം</span>
+        </div>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Structure of DNA & Chromosome</h2>
+        <h3 class="sub-title">1. Discovery of DNA</h3>
+        <p>In 1953, James Watson and Francis Crick proposed the Double Helix model of DNA, based on the X-ray studies of Rosalind Franklin and Maurice Wilkins. Franklin's famous "Photo 51" provided the crucial data. In 1962, Watson, Crick and Wilkins received the Nobel Prize in Medicine (Franklin had passed away in 1958).</p>
+        <h3 class="sub-title">2. Nucleotide</h3>
+        <p>The basic building block of DNA is the nucleotide. Each nucleotide contains:</p>
+        <ul>
+          <li><b>Deoxyribose sugar</b> — a 5-carbon sugar</li>
+          <li><b>Phosphate group</b> — links nucleotides together</li>
+          <li><b>Nitrogen base</b> — Adenine (A), Thymine (T), Guanine (G), Cytosine (C)</li>
+        </ul>
+        <div class="formula-box">Strands = sugar + phosphate &nbsp;|&nbsp; Rungs = base pairs (A–T, G–C)</div>
+        <h3 class="sub-title">3. Chromosome</h3>
+        <p>A chromosome is made of DNA and histone proteins. Eight histones join to form a <b>histone octamer</b>. DNA wound around this forms a <b>nucleosome</b>. Many nucleosomes coil up repeatedly to form a chromosome. The regions of a chromosome joined by the <b>centromere</b> are called <b>chromatids</b>.</p>
+        <h3 class="sub-title">4. Human Chromosomes</h3>
+        <table><tr><th>Category</th><th>Number</th><th>Description</th></tr>
+          <tr><td>Somatic chromosomes</td><td>22 pairs (44)</td><td>Control bodily characteristics</td></tr>
+          <tr><td>Sex chromosomes</td><td>1 pair (2)</td><td>X, Y — Female: XX, Male: XY</td></tr></table>
+        <p>The <b>SRY gene</b> on the Y chromosome is responsible for the development of male reproductive organs in the embryo.</p>
+        <h3 class="sub-title">5. Gene and Gene Expression</h3>
+        <p>A <b>gene</b> is a specific sequence of nucleotides in DNA. Proteins made as directed by genes shape characteristic traits and control metabolic activities.</p>
+        <h3 class="sub-title">6. RNA and Protein Synthesis</h3>
+        <p><b>RNA</b> is another nucleic acid like DNA. It is single-stranded, contains ribose sugar, and has <b>Uracil (U)</b> instead of Thymine.</p>
+        <table><tr><th>Stage</th><th>Location</th><th>Description</th></tr>
+          <tr><td>1. Transcription</td><td>Nucleus</td><td>mRNA is formed from a gene in DNA</td></tr>
+          <tr><td>2. Translation</td><td>Ribosome</td><td>tRNA brings amino acids; rRNA helps build the protein</td></tr></table>
+        <div class="pill-row">
+          <span class="pill">mRNA — carries the message</span>
+          <span class="pill">tRNA — delivers amino acids</span>
+          <span class="pill">rRNA — part of the ribosome</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MENDELIAN GENETICS ================= -->
+  <section class="panel" id="genetics">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">മെൻഡലും ജനിതകശാസ്ത്രവും</h2>
+        <h3 class="sub-title">1. പാരമ്പര്യവും വ്യതിയാനവും</h3>
+        <p><b>പാരമ്പര്യം (Heredity):</b> മാതാപിതാക്കളുടെ സവിശേഷതകൾ സന്തുനങ്ങളിലേക്ക് വ്യാപരിക്കുന്നത്.<br>
+        <b>വ്യതിയാനങ്ങൾ (Variations):</b> മാതാപിതാക്കളിൽ നിന്ന് വ്യത്യസ്തമായി സന്തുനങ്ങളിൽ പ്രകടമാകുന്ന സവിശേഷതകൾ.</p>
+        <h3 class="sub-title">2. ഗ്രിഗർ ജോഹാൻ മെൻഡൽ (1822-1884)</h3>
+        <p>ജനിതകശാസ്ത്രത്തിന്റെ പിതാവായി കണക്കാക്കപ്പെടുന്നു. 1856-ൽ തോട്ടപ്പയർ ചെടിയിൽ (Pisum sativum) ഏഴ് പ്രത്യേക സ്വഭാവങ്ങൾ അധികരിച്ച് വർഗസങ്കരണ പരീക്ഷണങ്ങൾ നടത്തി. 1865-ൽ കണ്ടെത്തലുകൾ അവതരിപ്പിച്ചെങ്കിലും 1900-ൽ ഹ്യൂഗോ ഡി വ്രീസ്, കാൾ കോറൻസ്, എറിക് വോൺ ഷെർമാക് എന്നിവർ ഇത് വീണ്ടും കണ്ടെത്തുന്നത് വരെ പ്രാധാന്യം ലഭിച്ചിരുന്നില്ല.</p>
+        <h3 class="sub-title">3. ഘടകങ്ങൾ (Factors) — അലീലുകൾ</h3>
+        <p>സ്വഭാവ സവിശേഷതകൾ ലിംഗകോശങ്ങളിലൂടെ കൈമാറ്റം ചെയ്യപ്പെടുന്ന ഘടകങ്ങളിലൂടെയാണെന്ന് മെൻഡൽ അനുമാനിച്ചു. ഇവയാണ് പിന്നീട് <b>ജീൻ</b> എന്ന് അറിയപ്പെട്ടത്. ഒരു ജീനിന്റെ വ്യത്യസ്ത തരങ്ങളെ <b>അലീലുകൾ (Alleles)</b> എന്ന് വിളിക്കുന്നു.</p>
+        <div class="formula-box">ഫീനോടൈപ്പ് (Phenotype) = പ്രകടരൂപം &nbsp;|&nbsp; ജീനോടൈപ്പ് (Genotype) = ജനിതകഘടന</div>
+        <h3 class="sub-title">4. മോണോഹൈബ്രിഡ് ക്രോസ് (ഒരു ജോടി വിപരീത ഗുണങ്ങൾ)</h3>
+        <p>ഉയരം കൂടിയ ചെടി (TT) × ഉയരം കുറഞ്ഞ ചെടി (tt)</p>
+        <table><tr><th>തലമുറ</th><th>ജീനോടൈപ്പ്</th><th>ഫീനോടൈപ്പ്</th></tr>
+          <tr><td>F1</td><td>Tt (100%)</td><td>ഉയരം കൂടിയത് (പ്രകടഗുണം പ്രകടമാകുന്നു)</td></tr>
+          <tr><td>F2</td><td>1 TT : 2 Tt : 1 tt</td><td>3 ഉയരം കൂടിയത് : 1 ഉയരം കുറഞ്ഞത്</td></tr></table>
+        <div class="formula-box">F2 ഫീനോടൈപ്പ് അനുപാതം = 3 : 1 (787 : 277 ≈ 3:1 — മെൻഡലിന്റെ യഥാർത്ഥ പരീക്ഷണം)</div>
+        <h3 class="sub-title">5. മെൻഡലിന്റെ അനുമാനങ്ങൾ (ഒന്നാം നിയമം)</h3>
+        <ul class="step-list">
+          <li>ഒരു സ്വഭാവത്തെ നിയന്ത്രിക്കുന്നത് രണ്ട് ഘടകങ്ങൾ ചേർന്നാണ്.</li>
+          <li>ഒന്നാം തലമുറയിൽ പ്രകടഗുണം (Dominant) മാത്രം പ്രകടമാകുന്നു; ഗൂഢഗുണം (Recessive) മറഞ്ഞിരിക്കുന്നു.</li>
+          <li>ലിംഗകോശങ്ങൾ (Gametes) ഉണ്ടാകുമ്പോൾ ഘടകങ്ങൾ കൂടിക്കലരാതെ വേർപിരിയുന്നു (Law of Segregation).</li>
+          <li>F2 തലമുറയിൽ പ്രകടഗുണം : ഗൂഢഗുണം അനുപാതം 3 : 1 ആണ്.</li>
+        </ul>
+        <h3 class="sub-title">6. ഡൈഹൈബ്രിഡ് ക്രോസ് (രണ്ട് ജോടി വിപരീത ഗുണങ്ങൾ)</h3>
+        <p>ഉയരം കൂടിയത്, ഉരുണ്ട വിത്ത് (TTRR) × ഉയരം കുറഞ്ഞത്, ചുളുങ്ങിയ വിത്ത് (ttrr)</p>
+        <div class="formula-box">F1 = TtRr (ഉയരം കൂടിയത്, ഉരുണ്ട വിത്ത്) &nbsp;→&nbsp; F2 ഫീനോടൈപ്പ് അനുപാതം = 9 : 3 : 3 : 1</div>
+        <h3 class="sub-title">7. സ്വതന്ത്ര വേർപെടൽ നിയമം (രണ്ടാം നിയമം)</h3>
+        <p>രണ്ടോ അതിലധികമോ വ്യത്യസ്ത സ്വഭാവങ്ങൾ കൂടിച്ചേരുമ്പോൾ, അവയിൽ ഓരോ സ്വഭാവവും പരസ്പരം കൂടിക്കലരാതെ സ്വതന്ത്രമായി അടുത്ത തലമുറയിലേക്ക് വ്യാപരിക്കുന്നു.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Mendel and Genetics</h2>
+        <h3 class="sub-title">1. Heredity and Variation</h3>
+        <p><b>Heredity:</b> The transmission of parental characteristics to offspring.<br>
+        <b>Variations:</b> Characteristics that appear in offspring differently from their parents.</p>
+        <h3 class="sub-title">2. Gregor Johann Mendel (1822-1884)</h3>
+        <p>Considered the father of genetics. In 1856, he began hybridisation experiments on the garden pea (Pisum sativum), focusing on seven distinct traits. He presented his findings in 1865, but they gained recognition only in 1900 when Hugo de Vries, Carl Correns and Erich von Tschermak rediscovered them.</p>
+        <h3 class="sub-title">3. Factors — Alleles</h3>
+        <p>Mendel deduced that traits are transmitted through factors carried in gametes. These factors are now known as <b>genes</b>. The different forms of a gene are called <b>alleles</b>.</p>
+        <div class="formula-box">Phenotype = the visible expression &nbsp;|&nbsp; Genotype = the genetic makeup</div>
+        <h3 class="sub-title">4. Monohybrid Cross (one pair of contrasting traits)</h3>
+        <p>Tall plant (TT) × Short plant (tt)</p>
+        <table><tr><th>Generation</th><th>Genotype</th><th>Phenotype</th></tr>
+          <tr><td>F1</td><td>Tt (100%)</td><td>Tall (the dominant trait is expressed)</td></tr>
+          <tr><td>F2</td><td>1 TT : 2 Tt : 1 tt</td><td>3 Tall : 1 Short</td></tr></table>
+        <div class="formula-box">F2 phenotype ratio = 3 : 1 (787 : 277 ≈ 3:1 — Mendel's actual experiment)</div>
+        <h3 class="sub-title">5. Mendel's Inferences (First Law)</h3>
+        <ul class="step-list">
+          <li>A trait is controlled by two factors.</li>
+          <li>In the first generation, only the dominant trait is expressed; the recessive trait is masked.</li>
+          <li>When gametes are formed, the factors separate without mixing (Law of Segregation).</li>
+          <li>In the F2 generation, the ratio of dominant to recessive is 3 : 1.</li>
+        </ul>
+        <h3 class="sub-title">6. Dihybrid Cross (two pairs of contrasting traits)</h3>
+        <p>Tall, round seed (TTRR) × Short, wrinkled seed (ttrr)</p>
+        <div class="formula-box">F1 = TtRr (Tall, round seed) &nbsp;→&nbsp; F2 phenotype ratio = 9 : 3 : 3 : 1</div>
+        <h3 class="sub-title">7. Law of Independent Assortment (Second Law)</h3>
+        <p>When two or more distinct traits combine, each trait segregates independently into the next generation without mixing with the other.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= NON-MENDELIAN ================= -->
+  <section class="panel" id="nonmendel">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">നോൺ-മെൻഡേലിയൻ ഇൻഹെറിറ്റൻസ്</h2>
+        <p>ജീവികളിലെ സ്വഭാവഗുണങ്ങളുടെ വൈവിധ്യത്തെ പൂർണ്ണമായി വിശദീകരിക്കാൻ മെൻഡലിന്റെ നിയമങ്ങൾക്ക് കഴിഞ്ഞില്ല. ജീനുകൾ, പരിസ്ഥിതി, മറ്റ് ഘടകങ്ങൾ എന്നിവ തമ്മിലുള്ള സങ്കീർണ്ണമായ ഇടപെടലുകളാണ് ഇതിന് കാരണം.</p>
+        <table><tr><th>പ്രതിഭാസം</th><th>കാരണം</th><th>ഉദാഹരണം</th></tr>
+          <tr><td>ഇൻകംപ്ലീറ്റ് ഡോമിനൻസ്</td><td>പ്രകടഗുണത്തിന്റെ അലീലിന് ഗൂഢഗുണത്തിന്റെ അലീലിനെ പൂർണ്ണമായും മറയ്ക്കാൻ സാധിക്കുന്നില്ല</td><td>ചുവന്ന പൂവ് × വെള്ളപ്പൂവ് → പിങ്ക് പൂവ്</td></tr>
+          <tr><td>കോ-ഡോമിനൻസ്</td><td>രണ്ട് അലീലുകളുടെയും ലക്ഷണങ്ങൾ ഒരേസമയം പ്രകടമാകുന്നു</td><td>കന്നുകാലികളിലും കുതിരകളിലും കാണുന്ന റോൺ കോട്ട്</td></tr>
+          <tr><td>മൾട്ടിപ്പിൾ അലീലിസം</td><td>ഒരു ജീനിന് മനുഷ്യഗണത്തിൽ രണ്ടിലധികം അലീലുകൾ ഉണ്ട്</td><td>ABO രക്തഗ്രൂപ്പ് (I<sup>A</sup>, I<sup>B</sup>, i)</td></tr>
+          <tr><td>പോളിജീനിക് ഇൻഹെറിറ്റൻസ്</td><td>ഒന്നിലധികം ജീനുകൾ ചേർന്ന് ഒരു സ്വഭാവത്തെ നിയന്ത്രിക്കുന്നു</td><td>ത്വക്കിന്റെ നിറം (മെലാനിൻ)</td></tr></table>
+        <h3 class="sub-title">ABO രക്തഗ്രൂപ്പ് — മൾട്ടിപ്പിൾ അലീലിസത്തിന്റെ ഉദാഹരണം</h3>
+        <p>രക്തഗ്രൂപ്പ് നിർണ്ണയിക്കുന്ന ജീനിന് മൂന്ന് അലീലുകളുണ്ട്: I<sup>A</sup>, I<sup>B</sup>, i. I<sup>A</sup>, I<sup>B</sup> എന്നിവ പരസ്പരം കോ-ഡോമിനന്റ് ആണ്; i എന്നത് ഗൂഢഗുണമാണ്.</p>
+        <table class="compact"><tr><th>ജീനോടൈപ്പ്</th><th>രക്തഗ്രൂപ്പ്</th></tr>
+          <tr><td>I<sup>A</sup>I<sup>A</sup>, I<sup>A</sup>i</td><td>A</td></tr>
+          <tr><td>I<sup>B</sup>I<sup>B</sup>, I<sup>B</sup>i</td><td>B</td></tr>
+          <tr><td>I<sup>A</sup>I<sup>B</sup></td><td>AB</td></tr>
+          <tr><td>ii</td><td>O</td></tr></table>
+        <h3 class="sub-title">ത്വക്കിന്റെ നിറവ്യത്യാസം — പോളിജീനിക് ഇൻഹെറിറ്റൻസ്</h3>
+        <p>ത്വക്കിന്റെ നിറത്തെ നിയന്ത്രിക്കുന്നത് ഒന്നിലധികം ജീനുകൾ ചേർന്നാണ്. മെലാനിന്റെ ഉൽപാദനത്തിലുണ്ടാകുന്ന ഏറ്റക്കുറച്ചിലാണ് നിറവ്യത്യാസത്തിന് കാരണം. സൂര്യപ്രകാശം, ഭക്ഷണം, വിറ്റാമിൻ ഡി എന്നിവയും ത്വക്കിന്റെ നിറത്തെ സ്വാധീനിക്കുന്നു.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Non-Mendelian Inheritance</h2>
+        <p>Mendel's laws could not fully explain the diversity of traits seen in organisms. This is due to the complex interactions between genes, environment, and other factors.</p>
+        <table><tr><th>Phenomenon</th><th>Cause</th><th>Example</th></tr>
+          <tr><td>Incomplete dominance</td><td>The dominant allele cannot fully mask the recessive allele</td><td>Red flower × White flower → Pink flower</td></tr>
+          <tr><td>Co-dominance</td><td>Both alleles are expressed simultaneously</td><td>Roan coat seen in cattle and horses</td></tr>
+          <tr><td>Multiple allelism</td><td>A gene has more than two alleles in the human population</td><td>ABO blood group (I<sup>A</sup>, I<sup>B</sup>, i)</td></tr>
+          <tr><td>Polygenic inheritance</td><td>Multiple genes together control one trait</td><td>Skin colour (melanin)</td></tr></table>
+        <h3 class="sub-title">ABO Blood Group — an Example of Multiple Allelism</h3>
+        <p>The gene determining blood group has three alleles: I<sup>A</sup>, I<sup>B</sup>, i. I<sup>A</sup> and I<sup>B</sup> are co-dominant to each other; i is recessive.</p>
+        <table class="compact"><tr><th>Genotype</th><th>Blood group</th></tr>
+          <tr><td>I<sup>A</sup>I<sup>A</sup>, I<sup>A</sup>i</td><td>A</td></tr>
+          <tr><td>I<sup>B</sup>I<sup>B</sup>, I<sup>B</sup>i</td><td>B</td></tr>
+          <tr><td>I<sup>A</sup>I<sup>B</sup></td><td>AB</td></tr>
+          <tr><td>ii</td><td>O</td></tr></table>
+        <h3 class="sub-title">Variation in Skin Colour — Polygenic Inheritance</h3>
+        <p>Skin colour is controlled by multiple genes together. Variation in melanin production is the main reason for the difference in skin colour. Sunlight, diet and vitamin D are among the environmental factors that also influence skin colour.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VARIATION ================= -->
+  <section class="panel" id="variation">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">വ്യതിയാനങ്ങൾക്ക് കാരണമായ ജനിതക പ്രക്രിയകൾ</h2>
+        <h3 class="sub-title">1. ക്രോസിങ് ഓവർ (Crossing Over)</h3>
+        <p>ലിംഗകോശങ്ങളുടെ രൂപപ്പെടലിന് കാരണമായ കോശവിഭജന രീതിയാണ് <b>മയോസിസ് (Meiosis)</b>. ഇതിന്റെ ആദ്യഘട്ടത്തിലാണ് ക്രോസിങ് ഓവർ നടക്കുന്നത്.</p>
+        <ul class="step-list">
+          <li><b>ഘട്ടം 1:</b> സമരൂപ ക്രോമസോമുകൾ (ഒരു ജീവിയുടെ മാതാപിതാക്കളിൽ നിന്ന് ലഭിക്കുന്ന സമാനമായ ക്രോമസോമുകൾ) പരസ്പരം ജോടി ചേരുന്നു.</li>
+          <li><b>ഘട്ടം 2:</b> ക്രോമസോമുകൾ ജോടി ചേരുന്ന ഭാഗത്തെ <b>കയാസ്മ (Chiasma)</b> എന്ന് പറയുന്നു; ഈ ഭാഗത്ത് ക്രൊമാറ്റിഡുകൾ മുറിയുന്നു.</li>
+          <li><b>ഘട്ടം 3:</b> മുറിഞ്ഞ ഭാഗങ്ങൾ പരസ്പരം കൈമാറുന്നു — ഈ കൈമാറ്റത്തിലൂടെ അലീൽ പുനഃസംയോജനം നടക്കുന്നു.</li>
+        </ul>
+        <div class="formula-box">ക്രോസിങ് ഓവർ → പുതിയ അലീൽ കോമ്പിനേഷനുകൾ → സന്തുനങ്ങളിൽ പുതിയ സ്വഭാവങ്ങൾ പ്രത്യക്ഷപ്പെടാൻ കാരണമാകുന്നു</div>
+        <h3 class="sub-title">2. മ്യൂട്ടേഷൻ (Mutation)</h3>
+        <p>ജനിതകഘടനയിൽ ആകസ്മികമായി ഉണ്ടാകുന്നതും അടുത്ത തലമുറയിലേക്ക് കൈമാറ്റം ചെയ്യപ്പെടുന്നതുമായ മാറ്റങ്ങളാണ് <b>മ്യൂട്ടേഷൻ</b>.</p>
+        <table><tr><th>കാരണങ്ങൾ</th><th>വിവരണം</th></tr>
+          <tr><td>DNA ഇരട്ടിക്കൽ തകരാറുകൾ</td><td>DNA പകർപ്പെടുക്കുമ്പോൾ സംഭവിക്കുന്ന പിഴവുകൾ</td></tr>
+          <tr><td>രാസവസ്തുക്കൾ (Chemicals)</td><td>ചില പ്രത്യേക രാസവസ്തുക്കൾ DNA-യെ ബാധിക്കുന്നു</td></tr>
+          <tr><td>വികിരണങ്ങൾ (Radiation)</td><td>അൾട്രാ വയലറ്റ്, X-റേ പോലുള്ള വികിരണങ്ങൾ</td></tr></table>
+        <p>മ്യൂട്ടേഷൻ ജീനുകളിൽ മാറ്റമുണ്ടാക്കുന്നു; ഈ ജീനുകൾ തലമുറകളിലൂടെ കൈമാറി സ്വഭാവ വ്യതിയാനങ്ങളിലേക്ക് നയിക്കുന്നു. ജീവപരിണാമത്തിൽ മ്യൂട്ടേഷനുകൾക്ക് വലിയ പ്രാധാന്യമുണ്ട്.</p>
+        <h3 class="sub-title">3. ജനിതക വ്യതിയാനത്തിന്റെ ഉറവിടങ്ങൾ — സംഗ്രഹം</h3>
+        <div class="pill-row">
+          <span class="pill">ബീജസംയോഗത്തിലെ അലീൽ ചേർച്ച</span>
+          <span class="pill">ക്രോസിങ് ഓവർ</span>
+          <span class="pill">മ്യൂട്ടേഷൻ</span>
+        </div>
+        <h3 class="sub-title">4. ജനിതകശാസ്ത്രം — തൊഴിൽസാധ്യതകൾ</h3>
+        <p>തന്മാത്രാ ജനിതകശാസ്ത്രം, ജനസംഖ്യാ ജനിതകശാസ്ത്രം, മെഡിക്കൽ ജനിതകശാസ്ത്രം, സൈറ്റോജെനറ്റിക്‌സ്, ബിഹേവിയറൽ ജനിതകശാസ്ത്രം, ജീനോമിക്‌സ് എന്നിവയുൾപ്പെടെ വൈവിധ്യമാർന്ന ജനിതകശാസ്ത്ര ശാഖകളുണ്ട്. ജനിതക കൗൺസിലിങ്, ജീനോമിക്സ്, മെഡിക്കൽ ജനറ്റിക്സ്, ഫോറൻസിക് സയൻസ് തുടങ്ങിയ മേഖലകളിൽ അവസരങ്ങളുണ്ട്.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Genetic Processes Causing Variation</h2>
+        <h3 class="sub-title">1. Crossing Over</h3>
+        <p><b>Meiosis</b> is the type of cell division responsible for the formation of gametes. Crossing over occurs during its early stage.</p>
+        <ul class="step-list">
+          <li><b>Step 1:</b> Homologous chromosomes (similar chromosomes received from an organism's parents) pair up with each other.</li>
+          <li><b>Step 2:</b> The point where the paired chromosomes touch is called the <b>chiasma</b>; the chromatids break at this point.</li>
+          <li><b>Step 3:</b> The broken segments are exchanged between the chromatids — this exchange results in allele recombination.</li>
+        </ul>
+        <div class="formula-box">Crossing over → new allele combinations → causes new traits to appear in offspring</div>
+        <h3 class="sub-title">2. Mutation</h3>
+        <p><b>Mutation</b> is a sudden, random change in the genetic makeup that gets passed on to the next generation.</p>
+        <table><tr><th>Causes</th><th>Description</th></tr>
+          <tr><td>DNA replication errors</td><td>Mistakes that occur while copying DNA</td></tr>
+          <tr><td>Chemicals</td><td>Certain chemicals can affect DNA</td></tr>
+          <tr><td>Radiation</td><td>Radiation such as UV rays and X-rays</td></tr></table>
+        <p>Mutations cause changes in genes; these genes are passed down through generations, leading to variations in traits. Mutations play a major role in evolution.</p>
+        <h3 class="sub-title">3. Sources of Genetic Variation — Summary</h3>
+        <div class="pill-row">
+          <span class="pill">Allele combination at fertilisation</span>
+          <span class="pill">Crossing over</span>
+          <span class="pill">Mutation</span>
+        </div>
+        <h3 class="sub-title">4. Genetics — Career Opportunities</h3>
+        <p>Genetics has many branches, including molecular genetics, population genetics, medical genetics, cytogenetics, behavioural genetics, and genomics. Advanced degrees open doors in genetic counselling, genomics, medical genetics, and forensic science, among other fields.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="panel" id="quiz">
+    <div class="card">
+      <h2 class="section-title" data-ml="ക്വിക്ക് ക്വിസ്" data-en="Quick Quiz">ക്വിക്ക് ക്വിസ്</h2>
+      <div class="score-bar">
+        <span>
+          <span data-ml="സ്കോർ:" data-en="Score:">സ്കോർ:</span> <b id="scoreVal">0</b> / <span id="totalVal">0</span>
+          &nbsp;·&nbsp; <span data-ml="ചോദ്യം" data-en="Question">ചോദ്യം</span> <b id="qPos">1</b> / <span id="qTotal">0</span>
+        </span>
+        <span style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn" onclick="shareScore()" data-ml="🔗 സ്കോർ പങ്കിടുക" data-en="🔗 Share Score">🔗 സ്കോർ പങ്കിടുക</button>
+          <button class="btn secondary" onclick="resetQuiz()" data-ml="വീണ്ടും ചെയ്യുക" data-en="Retry">വീണ്ടും ചെയ്യുക</button>
+        </span>
+      </div>
+      <div class="teacher-share no-print">
+        <button class="btn" onclick="shareQuizLink()" data-ml="🔗 ക്വിസ് ലിങ്ക് പങ്കിടുക" data-en="🔗 Share Quiz Link">🔗 ക്വിസ് ലിങ്ക് പങ്കിടുക</button>
+        <button class="btn secondary" onclick="shareQuestions()" data-ml="📤 ചോദ്യങ്ങൾ ടെക്സ്റ്റ് ആയി അയക്കുക" data-en="📤 Send Questions as Text">📤 ചോദ്യങ്ങൾ ടെക്സ്റ്റ് ആയി അയക്കുക</button>
+      </div>
+      <div id="quizContainer"></div>
+      <div class="quiz-nav">
+        <button class="btn secondary" id="prevBtn" onclick="prevQuestion()" data-ml="← മുമ്പത്തേത്" data-en="← Previous">← മുമ്പത്തേത്</button>
+        <button class="btn" id="nextBtn" onclick="nextQuestion()" data-ml="അടുത്തത് →" data-en="Next →">അടുത്തത് →</button>
+      </div>
+      <div id="shareToast" class="share-toast"></div>
+    </div>
+  </section>
+
+  <!-- ================= MODEL QUESTION PAPER ================= -->
+  <section class="panel" id="mqp">
+    <div class="card print-target" id="mqpCard">
+      <div class="lang-ml">
+        <div class="mqp-header">
+          <h2>ജീവശാസ്ത്രം — മാതൃകാ ചോദ്യപേപ്പർ</h2>
+          <p>യൂണിറ്റ് 1: ജീവന്റെ ജനിതകം</p>
+        </div>
+        <div class="mqp-meta"><span>സമയം: 45 മിനിറ്റ്</span><span>ആകെ സ്കോർ: 20</span></div>
+        <div class="mqp-section-title">Section A — 1 സ്കോർ വീതം (5 × 1 = 5)</div>
+        <div class="mqp-q">1. DNA-യിലെ അടിസ്ഥാന നിർമ്മാണ യൂണിറ്റ് ഏത്?</div>
+        <div class="mqp-q">2. DNA-യുടെ ചുറ്റുഗോവണി മാതൃക കണ്ടെത്തിയത് ആരൊക്കെ?</div>
+        <div class="mqp-q">3. RNA-യിൽ തൈമിനു പകരം കാണപ്പെടുന്ന ബേസ് ഏത്?</div>
+        <div class="mqp-q">4. മനുഷ്യരിലെ ആകെ ക്രോമസോമുകളുടെ എണ്ണം എത്ര?</div>
+        <div class="mqp-q">5. ജനിതകശാസ്ത്രത്തിന്റെ പിതാവായി കണക്കാക്കുന്നത് ആരെ?</div>
+        <div class="mqp-section-title">Section B — 2 സ്കോർ വീതം (4 × 2 = 8)</div>
+        <div class="mqp-q">6. ട്രാൻസ്ക്രിപ്ഷനും ട്രാൻസ്ലേഷനും തമ്മിലുള്ള വ്യത്യാസം എന്ത്?</div>
+        <div class="mqp-q">7. ഫീനോടൈപ്പും ജീനോടൈപ്പും തമ്മിലുള്ള വ്യത്യാസം ഉദാഹരണസഹിതം വിശദീകരിക്കുക.</div>
+        <div class="mqp-q">8. ഇൻകംപ്ലീറ്റ് ഡോമിനൻസും കോ-ഡോമിനൻസും തമ്മിലുള്ള വ്യത്യാസം എന്ത്?</div>
+        <div class="mqp-q">9. ക്രോസിങ് ഓവർ എന്നാൽ എന്ത്? ഇത് എപ്പോൾ നടക്കുന്നു?</div>
+        <div class="mqp-section-title">Section C — 3 സ്കോർ വീതം (2 × 3 = 6)</div>
+        <div class="mqp-q">10. ഒരു മോണോഹൈബ്രിഡ് ക്രോസ് ചിത്രീകരിച്ച് F1, F2 തലമുറകളിലെ ജീനോടൈപ്പും ഫീനോടൈപ്പ് അനുപാതവും കണ്ടെത്തുക (ഉയരം കൂടിയത് TT × ഉയരം കുറഞ്ഞത് tt).</div>
+        <div class="mqp-q">11. ABO രക്തഗ്രൂപ്പ് സംവിധാനത്തിൽ മൾട്ടിപ്പിൾ അലീലിസവും കോ-ഡോമിനൻസും എങ്ങനെ പ്രവർത്തിക്കുന്നു എന്ന് വിശദീകരിക്കുക.</div>
+        <div class="mqp-section-title">Section D — ഉപന്യാസ തരം (1 × 1 = 1)</div>
+        <div class="mqp-q">12. DNA-യുടെ ഘടന, ക്രോമസോമിന്റെ രൂപീകരണം, പ്രോട്ടീൻ നിർമ്മാണത്തിന്റെ ഘട്ടങ്ങൾ എന്നിവ വിശദമായി എഴുതുക.</div>
+      </div>
+      <div class="lang-en">
+        <div class="mqp-header">
+          <h2>Biology — Model Question Paper</h2>
+          <p>Unit 1: Genetics of Life</p>
+        </div>
+        <div class="mqp-meta"><span>Time: 45 minutes</span><span>Total score: 20</span></div>
+        <div class="mqp-section-title">Section A — 1 score each (5 × 1 = 5)</div>
+        <div class="mqp-q">1. What is the basic building unit of DNA?</div>
+        <div class="mqp-q">2. Who discovered the double helix model of DNA?</div>
+        <div class="mqp-q">3. Which base is found in RNA in place of thymine?</div>
+        <div class="mqp-q">4. What is the total number of chromosomes in humans?</div>
+        <div class="mqp-q">5. Who is considered the father of genetics?</div>
+        <div class="mqp-section-title">Section B — 2 scores each (4 × 2 = 8)</div>
+        <div class="mqp-q">6. What is the difference between transcription and translation?</div>
+        <div class="mqp-q">7. Explain the difference between phenotype and genotype with an example.</div>
+        <div class="mqp-q">8. What is the difference between incomplete dominance and co-dominance?</div>
+        <div class="mqp-q">9. What is crossing over? When does it occur?</div>
+        <div class="mqp-section-title">Section C — 3 scores each (2 × 3 = 6)</div>
+        <div class="mqp-q">10. Illustrate a monohybrid cross and determine the genotype and phenotype ratio in the F1 and F2 generations (Tall TT × Short tt).</div>
+        <div class="mqp-q">11. Explain how multiple allelism and co-dominance operate in the ABO blood group system.</div>
+        <div class="mqp-section-title">Section D — Essay type (1 × 1 = 1)</div>
+        <div class="mqp-q">12. Write in detail about the structure of DNA, the formation of a chromosome, and the stages of protein synthesis.</div>
+      </div>
+    </div>
+    <div class="no-print" style="margin-top:10px;">
+      <button class="btn secondary" onclick="printCurrent()" data-ml="🖨️ പ്രിന്റ് ചെയ്യുക" data-en="🖨️ Print">🖨️ പ്രിന്റ് ചെയ്യുക</button>
+    </div>
+  </section>
+
+</div>
+
+<footer class="note" data-ml="Abacus Academy · Class 10 Biology · Prepared for self-study" data-en="Abacus Academy · Class 10 Biology · Prepared for self-study">Abacus Academy · Class 10 Biology · Prepared for self-study</footer>
+
+<script>
+/* ===================== LANGUAGE TOGGLE ===================== */
+let currentLang = 'ml';
+function setLang(lang){
+  currentLang = lang;
+  document.body.classList.toggle('show-en', lang === 'en');
+  document.getElementById('langMlBtn').classList.toggle('active', lang === 'ml');
+  document.getElementById('langEnBtn').classList.toggle('active', lang === 'en');
+  document.querySelectorAll('[data-ml][data-en]').forEach(el=>{
+    el.textContent = (lang === 'ml') ? el.dataset.ml : el.dataset.en;
+  });
+  quizData = (lang === 'ml') ? quizDataML : quizDataEN;
+  renderQuestion();
+}
+
+/* ===================== TABS ===================== */
+const tabButtons = document.querySelectorAll('nav.tabs button[data-tab]');
+const panels = document.querySelectorAll('.panel');
+let currentTab = 'notes';
+tabButtons.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    tabButtons.forEach(b=>b.classList.remove('active'));
+    panels.forEach(p=>{p.classList.remove('active'); p.classList.remove('print-target');});
+    btn.classList.add('active');
+    currentTab = btn.dataset.tab;
+    document.getElementById(currentTab).classList.add('active');
+  });
+});
+function printCurrent(){
+  panels.forEach(p=>p.classList.remove('print-target'));
+  document.getElementById(currentTab).classList.add('print-target');
+  window.print();
+}
+
+/* ===================== QUIZ DATA (bilingual) ===================== */
+const quizDataML = [
+  { q:"DNA-യുടെ അടിസ്ഥാന നിർമ്മാണ യൂണിറ്റ് ഏത്?", opts:["ന്യൂക്ലിയോടൈഡ്","അമിനോ ആസിഡ്","ഗ്ലൂക്കോസ്","പ്രോട്ടീൻ"], ans:0 },
+  { q:"DNA-യുടെ ചുറ്റുഗോവണി മാതൃക അവതരിപ്പിച്ചത് ആരൊക്കെ?", opts:["മെൻഡലും ഡാർവിനും","വാട്സണും ക്രിക്കും","ഫ്രാങ്ക്ലിനും വിൽക്കിൻസും","ഡാർവിനും വാലസും"], ans:1 },
+  { q:"RNA-യിൽ കാണപ്പെടുന്ന, DNA-യിൽ ഇല്ലാത്ത ബേസ് ഏത്?", opts:["അഡിനിൻ","തൈമിൻ","യുറാസിൽ","ഗ്വാനിൻ"], ans:2 },
+  { q:"മനുഷ്യരിലെ ആകെ ക്രോമസോമുകളുടെ എണ്ണം?", opts:["23","44","46","48"], ans:2 },
+  { q:"Y ക്രോമസോമിലെ ഏത് ജീനാണ് പുരുഷ ലൈംഗിക വളർച്ചയ്ക്ക് കാരണമാകുന്നത്?", opts:["SRY","ABO","TT","Rh"], ans:0 },
+  { q:"ട്രാൻസ്ക്രിപ്ഷൻ നടക്കുന്നത് എവിടെയാണ്?", opts:["റൈബോസോം","ന്യൂക്ലിയസ്","മൈറ്റോകോൺഡ്രിയ","കോശഭിത്തി"], ans:1 },
+  { q:"മോണോഹൈബ്രിഡ് ക്രോസിൽ F2 തലമുറയിലെ ഫീനോടൈപ്പ് അനുപാതം എത്ര?", opts:["1:1","9:3:3:1","3:1","1:2:1"], ans:2 },
+  { q:"ചുവന്ന പൂവും വെള്ളപ്പൂവും ചേർന്ന് പിങ്ക് പൂവ് ഉണ്ടാകുന്നത് ഏത് പ്രതിഭാസത്തിന് ഉദാഹരണം?", opts:["കോ-ഡോമിനൻസ്","ഇൻകംപ്ലീറ്റ് ഡോമിനൻസ്","മൾട്ടിപ്പിൾ അലീലിസം","പോളിജീനിക് ഇൻഹെറിറ്റൻസ്"], ans:1 },
+  { q:"ABO രക്തഗ്രൂപ്പ് ഏത് ജനിതക പ്രതിഭാസത്തിന് ഉദാഹരണമാണ്?", opts:["ഇൻകംപ്ലീറ്റ് ഡോമിനൻസ്","പോളിജീനിക് ഇൻഹെറിറ്റൻസ്","മൾട്ടിപ്പിൾ അലീലിസം","ക്രോസിങ് ഓവർ"], ans:2 },
+  { q:"ക്രോസിങ് ഓവർ നടക്കുന്നത് ഏത് പ്രക്രിയയുടെ ഘട്ടത്തിലാണ്?", opts:["മൈറ്റോസിസ്","മയോസിസ്","ട്രാൻസ്ക്രിപ്ഷൻ","ട്രാൻസ്ലേഷൻ"], ans:1 }
+];
+const quizDataEN = [
+  { q:"What is the basic building unit of DNA?", opts:["Nucleotide","Amino acid","Glucose","Protein"], ans:0 },
+  { q:"Who proposed the double helix model of DNA?", opts:["Mendel and Darwin","Watson and Crick","Franklin and Wilkins","Darwin and Wallace"], ans:1 },
+  { q:"Which base is found in RNA but not in DNA?", opts:["Adenine","Thymine","Uracil","Guanine"], ans:2 },
+  { q:"What is the total number of chromosomes in humans?", opts:["23","44","46","48"], ans:2 },
+  { q:"Which gene on the Y chromosome causes male sexual development?", opts:["SRY","ABO","TT","Rh"], ans:0 },
+  { q:"Where does transcription take place?", opts:["Ribosome","Nucleus","Mitochondria","Cell wall"], ans:1 },
+  { q:"In a monohybrid cross, what is the F2 phenotype ratio?", opts:["1:1","9:3:3:1","3:1","1:2:1"], ans:2 },
+  { q:"A red flower and a white flower producing a pink flower is an example of?", opts:["Co-dominance","Incomplete dominance","Multiple allelism","Polygenic inheritance"], ans:1 },
+  { q:"The ABO blood group is an example of which genetic phenomenon?", opts:["Incomplete dominance","Polygenic inheritance","Multiple allelism","Crossing over"], ans:2 },
+  { q:"Crossing over occurs during which process?", opts:["Mitosis","Meiosis","Transcription","Translation"], ans:1 }
+];
+let quizData = quizDataML;
+
+let score = 0;
+let currentQ = 0;
+let userAnswers = new Array(quizDataML.length).fill(null);
+
+function renderQuestion(){
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  document.getElementById('totalVal').textContent = quizData.length;
+  document.getElementById('qTotal').textContent = quizData.length;
+  document.getElementById('qPos').textContent = currentQ + 1;
+
+  const item = quizData[currentQ];
+  const qDiv = document.createElement('div');
+  qDiv.innerHTML = `<p><b>${currentQ+1}.</b> ${item.q}</p><div class="quiz-opts"></div>`;
+  const optsDiv = qDiv.querySelector('.quiz-opts');
+  const alreadyAnswered = userAnswers[currentQ] !== null;
+
+  item.opts.forEach((opt, oIdx)=>{
+    const b = document.createElement('button');
+    b.textContent = opt;
+    if(alreadyAnswered){
+      b.disabled = true;
+      if(oIdx === item.ans) b.classList.add('correct');
+      else if(oIdx === userAnswers[currentQ]) b.classList.add('wrong');
+    }
+    b.addEventListener('click', ()=>{
+      if(b.disabled) return;
+      const allBtns = optsDiv.querySelectorAll('button');
+      allBtns.forEach(x=>x.disabled=true);
+      userAnswers[currentQ] = oIdx;
+      if(oIdx === item.ans){ b.classList.add('correct'); score++; }
+      else { b.classList.add('wrong'); allBtns[item.ans].classList.add('correct'); }
+      document.getElementById('scoreVal').textContent = score;
+    });
+    optsDiv.appendChild(b);
+  });
+  container.appendChild(qDiv);
+  document.getElementById('prevBtn').disabled = (currentQ === 0);
+  document.getElementById('nextBtn').disabled = (currentQ === quizData.length - 1);
+}
+
+function nextQuestion(){ if(currentQ < quizData.length - 1){ currentQ++; renderQuestion(); } }
+function prevQuestion(){ if(currentQ > 0){ currentQ--; renderQuestion(); } }
+
+function resetQuiz(){
+  score = 0; currentQ = 0;
+  userAnswers = new Array(quizData.length).fill(null);
+  document.getElementById('scoreVal').textContent = 0;
+  renderQuestion();
+}
+
+/* ===================== SHARE ===================== */
+const QUIZ_SHARE_URL = "https://munees-dot.github.io/sslcbiologyunit1/quiz_share.html";
+
+function shareQuizLink(){
+  if(!QUIZ_SHARE_URL){
+    const toast = document.getElementById('shareToast');
+    toast.textContent = currentLang === 'ml' ? '⚠️ ക്വിസ് ലിങ്ക് ഇതുവരെ സെറ്റ് ചെയ്തിട്ടില്ല' : '⚠️ Quiz link has not been set yet';
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 3000);
+    return;
+  }
+  const text = currentLang === 'ml'
+    ? `ക്വിക്ക് ക്വിസ് — ജീവന്റെ ജനിതകം\nഈ ലിങ്കിൽ ക്വിസ് ചെയ്യൂ:\n${QUIZ_SHARE_URL}`
+    : `Quick Quiz — Genetics of Life\nTake the quiz here:\n${QUIZ_SHARE_URL}`;
+  runShare(text, currentLang === 'ml' ? '✅ ലിങ്ക് കോപ്പി ചെയ്തു' : '✅ Link copied');
+}
+
+function shareScore(){
+  const answeredCount = userAnswers.filter(a=>a!==null).length;
+  const text = currentLang === 'ml'
+    ? `ജീവന്റെ ജനിതകം — ക്വിക്ക് ക്വിസ്\nഎന്റെ സ്കോർ: ${score} / ${quizData.length} (${answeredCount} ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകി)`
+    : `Genetics of Life — Quick Quiz\nMy score: ${score} / ${quizData.length} (${answeredCount} questions answered)`;
+  runShare(text, currentLang === 'ml' ? '✅ സ്കോർ കോപ്പി ചെയ്തു' : '✅ Score copied');
+}
+
+function shareQuestions(){
+  const letters = ['A','B','C','D'];
+  let text = currentLang === 'ml'
+    ? 'ക്വിക്ക് ക്വിസ് — ജീവന്റെ ജനിതകം\n(യൂണിറ്റ് 1, ജീവശാസ്ത്രം, സ്റ്റാൻഡേർഡ് 10)\n\n'
+    : 'Quick Quiz — Genetics of Life\n(Unit 1, Biology, Class 10)\n\n';
+  quizData.forEach((item, idx)=>{
+    text += `${idx+1}. ${item.q}\n`;
+    item.opts.forEach((opt, oIdx)=>{ text += `   ${letters[oIdx]}) ${opt}\n`; });
+    text += '\n';
+  });
+  runShare(text, currentLang === 'ml' ? '✅ ചോദ്യങ്ങൾ കോപ്പി ചെയ്തു' : '✅ Questions copied');
+}
+
+function runShare(text, copySuccessMsg){
+  if(navigator.share){
+    navigator.share({ title: currentLang === 'ml' ? 'ക്വിക്ക് ക്വിസ്' : 'Quick Quiz', text: text }).catch(()=>{});
+  } else if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=>{
+      const toast = document.getElementById('shareToast');
+      toast.textContent = copySuccessMsg;
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'), 2500);
+    });
+  } else {
+    alert(text);
+  }
+}
+
+renderQuestion();
+</script>
+
+</body>
+</html>
