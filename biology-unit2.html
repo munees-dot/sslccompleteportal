@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<title>Unit 2 — Ways of Evolution | Study Tool</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root{
+  --ink:#1f2937;
+  --paper:#f6f4fb;
+  --helix:#2d4f8a;
+  --helix-dark:#1a2f5c;
+  --gene:#7b3fa0;
+  --gene-light:#ede1f5;
+  --trait:#2e8b57;
+  --line:#dcd6ea;
+  --card:#ffffff;
+  --mono: 'Courier New', ui-monospace, monospace;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:'Noto Sans Malayalam','Manjari',system-ui,sans-serif;
+  line-height:1.55;
+}
+header{
+  background:linear-gradient(135deg,var(--helix-dark),var(--helix) 65%);
+  color:#fff; padding:20px 18px 60px; position:relative; overflow:hidden;
+}
+header .backbone{ position:absolute; inset:0; opacity:.15;
+  background-image: repeating-linear-gradient(115deg, transparent 0 38px, #fff 38px 40px); }
+header h1{ margin:0 0 4px; font-size:1.5rem; position:relative; z-index:1; }
+header p.sub{ margin:0 0 12px; opacity:.85; font-size:.92rem; position:relative; z-index:1; }
+.lang-toggle{ position:relative; z-index:1; display:inline-flex; gap:4px; background:rgba(255,255,255,.15); padding:4px; border-radius:20px; }
+.lang-toggle button{
+  border:none; background:transparent; color:#fff; padding:6px 16px; border-radius:16px;
+  cursor:pointer; font-family:inherit; font-size:.85rem; font-weight:600; opacity:.7;
+}
+.lang-toggle button.active{ background:#fff; color:var(--helix-dark); opacity:1; }
+.wrap{ max-width:960px; margin:-40px auto 40px; padding:0 14px; position:relative; z-index:2; }
+nav.tabs{
+  display:flex; flex-wrap:wrap; gap:8px; background:var(--card); border-radius:14px;
+  padding:10px; box-shadow:0 8px 24px rgba(26,47,92,.12); margin-bottom:18px;
+  position:sticky; top:10px; z-index:5;
+}
+nav.tabs button{
+  border:none; background:var(--paper); color:var(--helix-dark); padding:9px 14px;
+  border-radius:9px; cursor:pointer; font-size:.9rem; font-weight:600; font-family:inherit; transition:.15s;
+}
+nav.tabs button.active{ background:var(--helix); color:#fff; }
+nav.tabs button:hover{ filter:brightness(1.05); }
+.panel{ display:none; }
+.panel.active{ display:block; animation:fade .25s ease; }
+@keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+.card{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(31,41,55,.04); }
+h2.section-title{ color:var(--helix-dark); border-bottom:3px solid var(--gene); display:inline-block; padding-bottom:4px; margin-top:0; font-size:1.15rem; }
+h3.sub-title{ color:var(--gene); margin:18px 0 8px; font-size:1rem; }
+.formula-box{ background:var(--gene-light); border-left:4px solid var(--gene); padding:10px 14px; border-radius:8px; font-family:var(--mono); margin:10px 0; font-size:.95rem; overflow-x:auto; }
+table{ width:100%; border-collapse:collapse; margin:10px 0; font-size:.92rem; }
+th,td{ border:1px solid var(--line); padding:8px 10px; text-align:left; }
+th{ background:var(--helix); color:#fff; }
+tr:nth-child(even) td{ background:#f4f1fa; }
+table.compact th, table.compact td{ padding:5px 8px; font-size:.85rem; }
+ul{ padding-left:20px; } li{ margin-bottom:6px; }
+.tag{ display:inline-block; background:var(--gene); color:#fff; font-size:.72rem; padding:2px 8px; border-radius:20px; margin-left:6px; }
+.step-list li{ margin-bottom:10px; }
+.quiz-opts button{ display:block; width:100%; text-align:left; margin:6px 0; padding:10px 14px; border:1px solid var(--line); background:#fff; border-radius:9px; cursor:pointer; font-family:inherit; font-size:.92rem; }
+.quiz-opts button.correct{ background:#dff3e8; border-color:var(--trait); font-weight:600; }
+.quiz-opts button.wrong{ background:#fbe4e0; border-color:var(--gene); }
+.quiz-opts button[disabled]{ cursor:default; }
+.quiz-nav{ display:flex; justify-content:space-between; margin-top:14px; }
+.quiz-nav button:disabled{ opacity:.4; cursor:default; }
+.score-bar{ background:var(--helix-dark); color:#fff; border-radius:10px; padding:10px 16px; margin-bottom:14px; font-size:.9rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+.btn{ background:var(--gene); color:#fff; border:none; padding:9px 16px; border-radius:8px; cursor:pointer; font-family:inherit; font-weight:600; }
+.btn.secondary{ background:var(--helix); }
+.teacher-share{ margin-bottom:14px; display:flex; gap:8px; flex-wrap:wrap; }
+.teacher-share .btn{ background:var(--gene); flex:1; min-width:200px; }
+.teacher-share .btn.secondary{ background:var(--helix); }
+.share-toast{ display:none; margin-top:12px; background:var(--helix-dark); color:#fff; padding:9px 14px; border-radius:8px; font-size:.85rem; text-align:center; }
+.share-toast.show{ display:block; }
+.mqp-header{ text-align:center; margin-bottom:14px; }
+.mqp-header h2{ margin:2px 0; color:var(--helix-dark); }
+.mqp-meta{ display:flex; justify-content:space-between; font-size:.85rem; margin:6px 0 16px; }
+.mqp-section-title{ background:var(--gene); color:#fff; padding:5px 12px; border-radius:6px; display:inline-block; margin:14px 0 8px; font-size:.9rem; }
+.mqp-q{ margin-bottom:12px; } .mqp-q b{ color:var(--helix-dark); }
+.exam-tip{ background:#eef4f8; border:1px solid var(--helix); border-radius:8px; padding:10px 14px; margin-top:16px; font-size:.9rem; }
+.revision-sheet h3.sub-title{ margin-top:16px; }
+.pill-row{ display:flex; gap:10px; flex-wrap:wrap; margin:10px 0; }
+.pill{ background:var(--gene-light); color:var(--helix-dark); padding:8px 14px; border-radius:20px; font-size:.85rem; font-weight:600; }
+footer.note{ text-align:center; font-size:.78rem; color:#8a8067; margin:30px 0 10px; }
+
+.lang-en{ display:none; }
+body.show-en .lang-ml{ display:none; }
+body.show-en .lang-en{ display:block; }
+
+@media print{
+  header, nav.tabs, .no-print{ display:none !important; }
+  .panel{ display:none !important; }
+  .panel.print-target{ display:block !important; }
+  .wrap{ margin:0; }
+  .card{ box-shadow:none; border:1px solid #999; }
+  body{ background:#fff; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="backbone"></div>
+  <h1>Ways of Evolution</h1>
+  <p class="sub">Biology · Class 10 · Unit 2 — Complete Study Tool</p>
+  <div class="lang-toggle no-print">
+    <button id="langMlBtn" class="active" onclick="setLang('ml')">മലയാളം</button>
+    <button id="langEnBtn" onclick="setLang('en')">English</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav class="tabs no-print">
+    <button data-tab="notes" class="active" data-ml="📘 സംഗ്രഹം" data-en="📘 Notes">📘 സംഗ്രഹം</button>
+    <button data-tab="revision" data-ml="⚡ ക്വിക്ക് റിവിഷൻ" data-en="⚡ Quick Revision">⚡ ക്വിക്ക് റിവിഷൻ</button>
+    <button data-tab="theories" data-ml="🌿 പരിണാമ സിദ്ധാന്തങ്ങൾ" data-en="🌿 Theories of Evolution">🌿 പരിണാമ സിദ്ധാന്തങ്ങൾ</button>
+    <button data-tab="evidence" data-ml="🦴 തെളിവുകൾ & മനുഷ്യപരിണാമം" data-en="🦴 Evidence & Human Evolution">🦴 തെളിവുകൾ & മനുഷ്യപരിണാമം</button>
+    <button data-tab="neuron" data-ml="🧠 നാഡീകോശവും തലച്ചോറും" data-en="🧠 Neuron & Brain">🧠 നാഡീകോശവും തലച്ചോറും</button>
+    <button data-tab="synapse" data-ml="⚡ സിനാപ്സും റിഫ്ലക്സും" data-en="⚡ Synapse & Reflex">⚡ സിനാപ്സും റിഫ്ലക്സും</button>
+    <button data-tab="quiz" data-ml="✅ ക്വിസ്" data-en="✅ Quiz">✅ ക്വിസ്</button>
+    <button data-tab="mqp" data-ml="📝 മാതൃകാ ചോദ്യപേപ്പർ" data-en="📝 Model Question Paper">📝 മാതൃകാ ചോദ്യപേപ്പർ</button>
+    <button id="printBtn" onclick="printCurrent()" style="margin-left:auto;background:var(--helix-dark);color:#fff;" data-ml="🖨️ പ്രിന്റ് ചെയ്യുക" data-en="🖨️ Print">🖨️ പ്രിന്റ് ചെയ്യുക</button>
+  </nav>
+
+  <!-- ================= NOTES ================= -->
+  <section class="panel active" id="notes">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">ചുരുക്ക സംഗ്രഹം</h2>
+        <ul>
+          <li>ക്ഷയരോഗാണുക്കൾ ആന്റിബയോട്ടിക്കുകളെ പ്രതിരോധിക്കാൻ ശേഷി നേടിയത് ഒരു പ്രത്യേക ജീനിന് സംഭവിച്ച മ്യൂട്ടേഷൻ മൂലമാണ് — ഇത് ജീവപരിണാമത്തിന്റെ ഒരു ജീവിക്കുന്ന ഉദാഹരണമാണ്.</li>
+          <li>ജീൻ ബാപ്റ്റിസ്റ്റ് ലാമാർക്ക് മുന്നോട്ടുവച്ച <b>ലാമാർക്കിസം</b> അനുസരിച്ച് ആർജിത സ്വഭാവങ്ങൾ തലമുറകളിലൂടെ കൈമാറ്റം ചെയ്യപ്പെടും എന്നാണ് വാദം — ഇത് പിൽക്കാല ശാസ്ത്രജ്ഞർ തള്ളിക്കളഞ്ഞു.</li>
+          <li>ചാൾസ് ഡാർവിൻ അവതരിപ്പിച്ച <b>ഡാർവിനിസം (പ്രകൃതിനിർധാരണ സിദ്ധാന്തം)</b> ആണ് ആധുനിക പരിണാമശാസ്ത്രത്തിന്റെ അടിത്തറ. ഗാലപ്പഗോസ് ദ്വീപുകളിലെ കുരുവികളുടെ കൊക്കിന്റെ വൈവിധ്യം ഇതിന് നിർണായക തെളിവായി.</li>
+          <li>അമിതോൽപാദനം, വ്യതിയാനങ്ങൾ, നിലനിൽപ്പിനുവേണ്ടിയുള്ള മത്സരം, അർഹതയുള്ളവരുടെ അതിജീവനം, പ്രകൃതിനിർധാരണം എന്നിവയാണ് ഡാർവിനിസത്തിന്റെ പ്രധാന ഘട്ടങ്ങൾ.</li>
+          <li>മെൻഡലിന്റെ ജനിതകശാസ്ത്ര കണ്ടെത്തലുകളും ജീനുകളെക്കുറിച്ചുള്ള ധാരണകളും ഡാർവിനിസത്തോട് കൂട്ടിച്ചേർത്തതാണ് <b>നിയോഡാർവിനിസം</b>.</li>
+          <li>തന്മാത്രാജീവശാസ്ത്രം (ഗ്ലോബിൻ തന്മാത്രാ താരതമ്യം), ആന്തരഘടനാ താരതമ്യം (ഹോമോലോഗസ് അവയവങ്ങൾ), ഫോസിൽ തെളിവുകൾ എന്നിവ പരിണാമത്തിന് ശക്തമായ തെളിവുകൾ നൽകുന്നു.</li>
+          <li>പ്രൈമേറ്റുകളിൽ നിന്ന് മനുഷ്യരിലേക്കുള്ള പരിണാമപാതയിൽ സഹെലാന്ത്രോപസ് ചാഡൻസിസ്, ആസ്ട്രാലോപിത്തിക്കസ്, ഹോമോ ഹെബിലിസ്, ഹോമോ ഇറക്റ്റസ്, ഹോമോ നിയാണ്ടർതാലൻസിസ്, ഹോമോ സാപിയൻസ് എന്നിവ ഉൾപ്പെടുന്നു.</li>
+          <li>നാഡീവ്യവസ്ഥയുടെ അടിസ്ഥാന ഘടകം <b>ന്യൂറോൺ</b> ആണ്; ഇതിന് കോശശരീരം, ഡെൻഡ്രൈറ്റ്, ആക്സോൺ, സിനാപ്റ്റിക് നോബ് എന്നീ ഭാഗങ്ങളുണ്ട്.</li>
+          <li>കേന്ദ്ര നാഡീവ്യവസ്ഥ (മസ്തിഷ്കം, സുഷുമ്ന), പെരിഫെറൽ നാഡീവ്യവസ്ഥ (നാഡികൾ, ഗ്രാഹികൾ, ഗാംഗ്ലിയോണുകൾ) എന്നിങ്ങനെ നാഡീവ്യവസ്ഥ രണ്ടായി തിരിച്ചിരിക്കുന്നു.</li>
+          <li>മസ്തിഷ്കത്തിലെ പ്രധാന ഭാഗങ്ങൾ — സെറിബ്രം, സെറിബെല്ലം, തലാമസ്, ഹൈപ്പോതലാമസ്, മിഡ് ബ്രെയിൻ, പോൺസ്, മെഡുല്ല ഒബ്ലോംഗേറ്റ — ഓരോന്നും വ്യത്യസ്ത ധർമ്മങ്ങൾ നിർവഹിക്കുന്നു.</li>
+          <li>നാഡീകോശങ്ങൾക്കിടയിലുള്ള സന്ദേശകൈമാറ്റം നടക്കുന്ന ഭാഗമാണ് <b>സിനാപ്സ്</b>; ന്യൂറോട്രാൻസ്മിറ്ററുകൾ വഴിയാണ് ഇത് സാധ്യമാകുന്നത്.</li>
+          <li>സ്വതന്ത്രമായി ശരീരപ്രവർത്തനങ്ങളെ നിയന്ത്രിക്കുന്ന <b>സ്വതന്ത്രനാഡീവ്യവസ്ഥ</b>യിൽ സിംപതറ്റിക്, പാരാസിംപതറ്റിക് എന്നീ രണ്ട് ഉപവ്യവസ്ഥകളുണ്ട്.</li>
+          <li>ബോധപൂർവമല്ലാതെ ആകസ്മികമായി നടക്കുന്ന പ്രതികരണങ്ങളാണ് <b>റിഫ്ലക്സ് പ്രവർത്തനങ്ങൾ</b>; ഇവയുടെ പാതയാണ് റിഫ്ലക്സ് ആർക്ക്.</li>
+        </ul>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Chapter Summary</h2>
+        <ul>
+          <li>Tuberculosis bacteria gaining resistance to antibiotics — due to a mutation in a specific gene — is a living example of evolution in action.</li>
+          <li><b>Lamarckism</b>, proposed by Jean-Baptiste Lamarck, argued that acquired characteristics are passed down through generations — this was later rejected by scientists.</li>
+          <li><b>Darwinism (Theory of Natural Selection)</b>, proposed by Charles Darwin, is the foundation of modern evolutionary science. The variation in beak shapes among Galapagos finches provided crucial evidence.</li>
+          <li>Overproduction, variations, struggle for existence, survival of the fittest, and natural selection are the key stages of Darwinism.</li>
+          <li><b>Neo-Darwinism</b> combines Mendel's genetic discoveries and the understanding of genes with Darwinism.</li>
+          <li>Molecular biology (globin molecule comparison), comparative anatomy (homologous organs), and fossil evidence together provide strong support for evolution.</li>
+          <li>The evolutionary path from primates to humans includes Sahelanthropus tchadensis, Australopithecus, Homo habilis, Homo erectus, Homo neanderthalensis, and Homo sapiens.</li>
+          <li>The basic unit of the nervous system is the <b>neuron</b>, which consists of a cell body, dendrites, an axon, and a synaptic knob.</li>
+          <li>The nervous system is divided into the Central Nervous System (brain, spinal cord) and the Peripheral Nervous System (nerves, receptors, ganglia).</li>
+          <li>Key parts of the brain — cerebrum, cerebellum, thalamus, hypothalamus, midbrain, pons, and medulla oblongata — each perform distinct functions.</li>
+          <li>The <b>synapse</b> is the junction where signals pass between neurons, made possible through neurotransmitters.</li>
+          <li>The <b>autonomic nervous system</b>, which independently regulates body functions, has two subdivisions: sympathetic and parasympathetic.</li>
+          <li><b>Reflex actions</b> are sudden, involuntary responses; the pathway of a reflex is called the reflex arc.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUICK REVISION ================= -->
+  <section class="panel" id="revision">
+    <div class="card revision-sheet">
+      <div class="lang-ml">
+        <h2 class="section-title">⚡ ക്വിക്ക് റിവിഷൻ ഷീറ്റ്</h2>
+        <h3 class="sub-title">🔹 ലാമാർക്കിസം vs ഡാർവിനിസം</h3>
+        <table class="compact"><tr><th>ലാമാർക്കിസം</th><th>ഡാർവിനിസം</th></tr>
+          <tr><td>ഉപയോഗവും നിരുപയോഗവും വഴി സ്വഭാവം മാറുന്നു</td><td>നിലവിലുള്ള വ്യതിയാനങ്ങളിൽ നിന്ന് അനുകൂലമായവ തിരഞ്ഞെടുക്കപ്പെടുന്നു</td></tr>
+          <tr><td>ആർജിത സ്വഭാവങ്ങൾ പാരമ്പര്യമായി കൈമാറും</td><td>ജനിതകമാറ്റങ്ങൾ മാത്രമേ കൈമാറൂ</td></tr></table>
+        <h3 class="sub-title">🔹 ഡാർവിനിസത്തിന്റെ ഘട്ടങ്ങൾ</h3>
+        <div class="formula-box">അമിതോൽപാദനം → വ്യതിയാനങ്ങൾ → നിലനിൽപ്പിനുള്ള മത്സരം → അർഹതയുള്ളവരുടെ അതിജീവനം → പ്രകൃതിനിർധാരണം</div>
+        <h3 class="sub-title">🔹 പരിണാമത്തിന്റെ തെളിവുകൾ</h3>
+        <table class="compact"><tr><th>തെളിവ്</th><th>ഉദാഹരണം</th></tr>
+          <tr><td>തന്മാത്രാജീവശാസ്ത്രം</td><td>ചിമ്പാൻസി-മനുഷ്യൻ ഗ്ലോബിൻ വ്യത്യാസം 0</td></tr>
+          <tr><td>ആന്തരഘടന</td><td>മനുഷ്യൻ/പൂച്ച/തിമിംഗലം/വവ്വാൽ അസ്ഥികൾ സമാനം</td></tr>
+          <tr><td>ഫോസിലുകൾ</td><td>ആർക്കിയോപ്റ്റെറിക്സ് (ഇടനില ഫോസിൽ)</td></tr></table>
+        <h3 class="sub-title">🔹 മനുഷ്യപരിണാമ പാത</h3>
+        <div class="formula-box">സഹെലാന്ത്രോപസ് → ആസ്ട്രാലോപിത്തിക്കസ് → ഹോമോ ഹെബിലിസ് → ഹോമോ ഇറക്റ്റസ് → ഹോമോ നിയാണ്ടർതാലൻസിസ് → ഹോമോ സാപിയൻസ്</div>
+        <h3 class="sub-title">🔹 ന്യൂറോണിന്റെ ഭാഗങ്ങൾ</h3>
+        <table class="compact"><tr><th>ഭാഗം</th><th>ധർമ്മം</th></tr>
+          <tr><td>ഡെൻഡ്രൈറ്റ്</td><td>സന്ദേശം സ്വീകരിക്കുന്നു</td></tr>
+          <tr><td>കോശശരീരം</td><td>ന്യൂക്ലിയസ്, കോശാംഗങ്ങൾ</td></tr>
+          <tr><td>ആക്സോൺ</td><td>സന്ദേശം കൈമാറുന്നു</td></tr>
+          <tr><td>സിനാപ്റ്റിക് നോബ്</td><td>അടുത്ത കോശത്തിലേക്ക് സന്ദേശം കൈമാറുന്നു</td></tr></table>
+        <h3 class="sub-title">🔹 മസ്തിഷ്ക ഭാഗങ്ങളും ധർമ്മവും</h3>
+        <table class="compact"><tr><th>ഭാഗം</th><th>പ്രധാന ധർമ്മം</th></tr>
+          <tr><td>സെറിബ്രം</td><td>ചിന്ത, ബുദ്ധി, ഓർമ്മ, ഐച്ഛിക ചലനങ്ങൾ</td></tr>
+          <tr><td>സെറിബെല്ലം</td><td>പേശീ ഏകോപനം, ശരീരതുലനം</td></tr>
+          <tr><td>ഹൈപ്പോതലാമസ്</td><td>ശരീരോഷ്മാവ്, വിശപ്പ്, ദാഹം നിയന്ത്രണം</td></tr>
+          <tr><td>മെഡുല്ല ഒബ്ലോംഗേറ്റ</td><td>ഹൃദയമിടിപ്പ്, ശ്വാസോച്ഛാസം നിയന്ത്രണം</td></tr></table>
+        <h3 class="sub-title">🔹 സിംപതറ്റിക് vs പാരാസിംപതറ്റിക്</h3>
+        <table class="compact"><tr><th>പ്രവർത്തനം</th><th>സിംപതറ്റിക്</th><th>പാരാസിംപതറ്റിക്</th></tr>
+          <tr><td>ഹൃദയമിടിപ്പ്</td><td>കൂടുന്നു</td><td>കുറയുന്നു</td></tr>
+          <tr><td>ദഹനം</td><td>മന്ദഗതി</td><td>ഉദ്ദീപനം</td></tr></table>
+        <p class="exam-tip">📌 പരീക്ഷാ ടിപ്പ്: റിഫ്ലക്സ് ആർക്ക് ക്രമം — ഗ്രാഹി → സംവേദന ന്യൂറോൺ → ഇന്റർന്യൂറോൺ → പ്രേരക ന്യൂറോൺ → പേശി/ഗ്രന്ഥി.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">⚡ Quick Revision Sheet</h2>
+        <h3 class="sub-title">🔹 Lamarckism vs Darwinism</h3>
+        <table class="compact"><tr><th>Lamarckism</th><th>Darwinism</th></tr>
+          <tr><td>Traits change through use and disuse</td><td>Favourable variations already present are selected</td></tr>
+          <tr><td>Acquired characters are inherited</td><td>Only genetic changes are inherited</td></tr></table>
+        <h3 class="sub-title">🔹 Stages of Darwinism</h3>
+        <div class="formula-box">Overproduction → Variations → Struggle for existence → Survival of the fittest → Natural selection</div>
+        <h3 class="sub-title">🔹 Evidence of Evolution</h3>
+        <table class="compact"><tr><th>Evidence</th><th>Example</th></tr>
+          <tr><td>Molecular biology</td><td>Chimp-human globin difference = 0</td></tr>
+          <tr><td>Comparative anatomy</td><td>Human/cat/whale/bat bones are similar</td></tr>
+          <tr><td>Fossils</td><td>Archaeopteryx (a transitional fossil)</td></tr></table>
+        <h3 class="sub-title">🔹 Human Evolutionary Path</h3>
+        <div class="formula-box">Sahelanthropus → Australopithecus → Homo habilis → Homo erectus → Homo neanderthalensis → Homo sapiens</div>
+        <h3 class="sub-title">🔹 Parts of a Neuron</h3>
+        <table class="compact"><tr><th>Part</th><th>Function</th></tr>
+          <tr><td>Dendrite</td><td>Receives signal</td></tr>
+          <tr><td>Cell body</td><td>Nucleus, organelles</td></tr>
+          <tr><td>Axon</td><td>Carries signal</td></tr>
+          <tr><td>Synaptic knob</td><td>Passes signal to next cell</td></tr></table>
+        <h3 class="sub-title">🔹 Brain Parts and Functions</h3>
+        <table class="compact"><tr><th>Part</th><th>Main Function</th></tr>
+          <tr><td>Cerebrum</td><td>Thought, intelligence, memory, voluntary movements</td></tr>
+          <tr><td>Cerebellum</td><td>Muscle coordination, balance</td></tr>
+          <tr><td>Hypothalamus</td><td>Regulates body temperature, hunger, thirst</td></tr>
+          <tr><td>Medulla oblongata</td><td>Regulates heartbeat, breathing</td></tr></table>
+        <h3 class="sub-title">🔹 Sympathetic vs Parasympathetic</h3>
+        <table class="compact"><tr><th>Function</th><th>Sympathetic</th><th>Parasympathetic</th></tr>
+          <tr><td>Heart rate</td><td>Increases</td><td>Decreases</td></tr>
+          <tr><td>Digestion</td><td>Slows</td><td>Stimulated</td></tr></table>
+        <p class="exam-tip">📌 Exam tip: Reflex arc sequence — Receptor → sensory neuron → interneuron → motor neuron → muscle/gland.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= THEORIES OF EVOLUTION ================= -->
+  <section class="panel" id="theories">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">പരിണാമ സിദ്ധാന്തങ്ങൾ</h2>
+        <h3 class="sub-title">1. ലാമാർക്കിസം (സ്വയാർജിത സ്വഭാവങ്ങളുടെ പാരമ്പര്യ പ്രേഷണ സിദ്ധാന്തം)</h3>
+        <p>ജീവപരിണാമവുമായി ബന്ധപ്പെട്ട ആദ്യകാല ചർച്ചകൾക്ക് തുടക്കമിട്ട ഫ്രഞ്ച് ജീവശാസ്ത്രകാരനാണ് <b>ജീൻ ബാപ്റ്റിസ്റ്റ് ലാമാർക്ക് (1744-1829)</b>. അദ്ദേഹത്തിന്റെ ആശയങ്ങൾ <b>ലാമാർക്കിസം</b> എന്നറിയപ്പെടുന്നു.</p>
+        <div class="formula-box">പരിസ്ഥിതിയിലെ മാറ്റം → സ്വയാർജിത സ്വഭാവത്തിന്റെ രൂപപ്പെടൽ → ഈ സ്വഭാവം അടുത്ത തലമുറയിലേക്ക് കൈമാറൽ</div>
+        <p>ഉദാഹരണം: ജിറാഫുകൾ ഉയരം കൂടിയ ചില്ലകളിലെ ഇലകൾ കഴിക്കാൻ കഴുത്ത് നീട്ടിയതിന്റെ ഫലമായി കഴുത്തിന് നീളം കൂടി; ഈ ആർജിത സ്വഭാവം തലമുറകളിലൂടെ കൈമാറ്റം ചെയ്യപ്പെട്ട് നീളം കൂടിയ കഴുത്തുള്ള ജിറാഫുകളുടെ ആവിർഭാവത്തിന് കാരണമായി എന്നാണ് ലാമാർക്ക് വാദിച്ചത്.</p>
+        <p><b>പരിമിതി:</b> സ്വയാർജിത വ്യതിയാനങ്ങൾ ജീവികളുടെ ജനിതകഘടനയിൽ മാറ്റം വരുത്തില്ല എന്നതിനാൽ അവ പാരമ്പര്യമായി കൈമാറുന്നില്ല എന്ന് പിൽക്കാല ശാസ്ത്രജ്ഞർ തെളിയിച്ചു.</p>
+        <h3 class="sub-title">2. ഡാർവിനിസം (പ്രകൃതിനിർധാരണ സിദ്ധാന്തം)</h3>
+        <p>ഇംഗ്ലീഷ് പ്രകൃതിശാസ്ത്രജ്ഞനായ <b>ചാൾസ് ഡാർവിൻ (1809-1882)</b> അവതരിപ്പിച്ച സിദ്ധാന്തമാണ് ആധുനിക പരിണാമശാസ്ത്ര വീക്ഷണങ്ങൾക്ക് അടിത്തറയായത്. 1831-ൽ HMS ബീഗിൾ എന്ന കപ്പലിൽ ഭൂപടനിർമ്മാണത്തിനായി അഞ്ചു വർഷത്തെ യാത്ര നടത്തിയപ്പോൾ തെക്കേ അമേരിക്ക, ഗാലപ്പഗോസ് ദ്വീപുകൾ എന്നിവിടങ്ങളിലെ ജീവജാലങ്ങളെ അദ്ദേഹം സൂക്ഷ്മമായി നിരീക്ഷിച്ചു.</p>
+        <p>ഗാലപ്പഗോസ് ദ്വീപുകളിലെ പതിന്നാലോളം വ്യത്യസ്ത സ്പീഷീസ് കുരുവികളുടെ കൊക്കിന്റെ ആകൃതിയും വലുപ്പവും അവയുടെ ഭക്ഷണശീലത്തിന് അനുസൃതമായി വ്യത്യാസപ്പെട്ടിരിക്കുന്നത് ഡാർവിനെ പരിണാമസിദ്ധാന്തത്തിലേക്ക് നയിച്ചു.</p>
+        <h3 class="sub-title">3. ഡാർവിനിസത്തിന്റെ അഞ്ച് ഘട്ടങ്ങൾ</h3>
+        <table><tr><th>ഘട്ടം</th><th>വിവരണം</th></tr>
+          <tr><td>അമിതോൽപാദനം</td><td>പരിസ്ഥിതിക്ക് നിലനിർത്താൻ കഴിയുന്നതിനേക്കാൾ കൂടുതൽ സന്തതികളെ ജീവികൾ ഉൽപാദിപ്പിക്കുന്നു</td></tr>
+          <tr><td>വ്യതിയാനങ്ങൾ</td><td>ജീവികൾ പരസ്പരം സവിശേഷതകളിൽ വ്യത്യാസങ്ങൾ കാണിക്കുന്നു</td></tr>
+          <tr><td>നിലനിൽപ്പിനുവേണ്ടിയുള്ള മത്സരം</td><td>ഭക്ഷണം, സ്ഥലം, ഇണകൾ എന്നിവയ്ക്കായി ജീവികൾ മത്സരിക്കുന്നു</td></tr>
+          <tr><td>അർഹതയുള്ളവരുടെ അതിജീവനം</td><td>അനുകൂല വ്യതിയാനങ്ങളുള്ള ജീവികൾ മത്സരത്തെ അതിജീവിക്കുന്നു</td></tr>
+          <tr><td>പ്രകൃതിനിർധാരണം</td><td>അനുകൂല വ്യതിയാനങ്ങൾ വരുംതലമുറകളിലേക്ക് കൈമാറി പുതിയ സ്പീഷീസ് രൂപപ്പെടുന്നു</td></tr></table>
+        <h3 class="sub-title">4. നിയോഡാർവിനിസം (Neo-Darwinism)</h3>
+        <p>വ്യതിയാനത്തിന്റെയും പാരമ്പര്യപ്രേഷണത്തിന്റെയും ജനിതക അടിത്തറയെക്കുറിച്ച് ഡാർവിന് ധാരണയില്ലായിരുന്നു. എന്നാൽ ഗ്രിഗർ മെൻഡലിന്റെ കണ്ടെത്തലുകളും ക്രോമസോമുകളെയും ജീനുകളെയും കുറിച്ചുള്ള ധാരണകളും ഡാർവിനിസത്തോട് കൂട്ടിച്ചേർത്തതോടെ <b>നിയോഡാർവിനിസം</b> രൂപപ്പെട്ടു. ജീനിക മാറ്റങ്ങൾ, ലൈംഗിക പ്രത്യുൽപാദന സമയത്തെ ജനിതകപുനഃസംയോജനം, ജീൻ പ്രവാഹം എന്നിവയാണ് വ്യതിയാനങ്ങൾക്ക് കാരണമെന്ന് ഇത് വിശദീകരിക്കുന്നു.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Theories of Evolution</h2>
+        <h3 class="sub-title">1. Lamarckism (Theory of Inheritance of Acquired Characteristics)</h3>
+        <p><b>Jean-Baptiste Lamarck (1744-1829)</b> was the French biologist who initiated early discussions related to biological evolution. His ideas are known as <b>Lamarckism</b>.</p>
+        <div class="formula-box">Change in environment → formation of an acquired characteristic → this characteristic is passed to the next generation</div>
+        <p>Example: Lamarck argued that giraffes stretched their necks to reach leaves on taller branches, which lengthened their necks; this acquired trait was passed down through generations, leading to the appearance of long-necked giraffes.</p>
+        <p><b>Limitation:</b> Later scientists proved that acquired variations do not change an organism's genetic makeup and are therefore not inherited.</p>
+        <h3 class="sub-title">2. Darwinism (Theory of Natural Selection)</h3>
+        <p>The theory proposed by English naturalist <b>Charles Darwin (1809-1882)</b> laid the foundation for modern evolutionary science. During his five-year mapping voyage aboard HMS Beagle starting in 1831, he closely observed the life forms of South America and the Galapagos Islands.</p>
+        <p>Darwin was led to the theory of evolution by observing that the beak shape and size of about fourteen distinct species of Galapagos finches varied according to their feeding habits.</p>
+        <h3 class="sub-title">3. The Five Stages of Darwinism</h3>
+        <table><tr><th>Stage</th><th>Description</th></tr>
+          <tr><td>Overproduction</td><td>Organisms produce more offspring than the environment can sustain</td></tr>
+          <tr><td>Variations</td><td>Organisms show differences in characteristics among themselves</td></tr>
+          <tr><td>Struggle for existence</td><td>Organisms compete for food, space, and mates</td></tr>
+          <tr><td>Survival of the fittest</td><td>Organisms with favourable variations survive the competition</td></tr>
+          <tr><td>Natural selection</td><td>Favourable variations are passed to future generations, forming new species</td></tr></table>
+        <h3 class="sub-title">4. Neo-Darwinism</h3>
+        <p>Darwin had no understanding of the genetic basis of variation and heredity. But Gregor Mendel's discoveries and the understanding of chromosomes and genes were combined with Darwinism to form <b>Neo-Darwinism</b>. It explains that genetic mutations, genetic recombination during sexual reproduction, and gene flow are the causes of variation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EVIDENCE & HUMAN EVOLUTION ================= -->
+  <section class="panel" id="evidence">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">പരിണാമത്തിന്റെ തെളിവുകൾ & മനുഷ്യപരിണാമം</h2>
+        <h3 class="sub-title">1. തന്മാത്രാജീവശാസ്ത്രം (Molecular Biology)</h3>
+        <p>ജീവികളുടെ DNA-യിലെ ന്യൂക്ലിയോടൈഡ് ക്രമവും പ്രോട്ടീനുകളിലെ അമിനോ ആസിഡുകളുടെ ക്രമവും താരതമ്യം ചെയ്യുന്നതിലൂടെ ജീവികൾ തമ്മിലുള്ള പരിണാമപരമായ ബന്ധം കണ്ടെത്താനാകും.</p>
+        <table><tr><th>ജീവി</th><th>ബീറ്റാ ഗ്ലോബിനിലെ അമിനോ ആസിഡ് വ്യത്യാസം (മനുഷ്യരുമായി)</th></tr>
+          <tr><td>ചിമ്പാൻസി</td><td>0</td></tr>
+          <tr><td>ഗൊറില്ല</td><td>1</td></tr>
+          <tr><td>എലി</td><td>31</td></tr></table>
+        <p>വ്യത്യാസം കുറയുന്തോറും പരിണാമപരമായ ബന്ധം കൂടുതൽ അടുത്തതാണെന്ന് മനസ്സിലാക്കാം — ചിമ്പാൻസിക്ക് മനുഷ്യരുമായി ഏറ്റവും അടുത്ത ബന്ധമുണ്ട്.</p>
+        <h3 class="sub-title">2. ആന്തരഘടനാ താരതമ്യം (Comparative Anatomy)</h3>
+        <p>മനുഷ്യന്റെ കൈ, പൂച്ചയുടെ മുൻകാലുകൾ, തിമിംഗലത്തിന്റെ ഫ്ലിപ്പർ, വവ്വാലിന്റെ ചിറക് എന്നിവയിലെ അസ്ഥികൾ അടിസ്ഥാനപരമായി സമാനമാണെങ്കിലും ബാഹ്യഘടനയിലും പ്രവർത്തനത്തിലും വ്യത്യസ്തമാണ്. ഇത്തരം അവയവങ്ങളെ <b>ഹോമോലോഗസ് അവയവങ്ങൾ</b> എന്ന് വിളിക്കുന്നു — ഇവ പൊതു പൂർവികനിൽ നിന്നുള്ള പരിണാമത്തിന്റെ തെളിവാണ്.</p>
+        <h3 class="sub-title">3. ഫോസിൽ തെളിവുകൾ (Fossil Evidence)</h3>
+        <table><tr><th>ഫോസിൽ തരം</th><th>ഉദാഹരണം</th><th>നൽകുന്ന തെളിവ്</th></tr>
+          <tr><td>ക്രമാനുഗത ഫോസിലുകൾ</td><td>കുതിരയുടെ പൂർവികരുടെ കാലുകൾ</td><td>ജീവപരിണാമം ക്രമാനുഗതമായ പ്രക്രിയയാണ്</td></tr>
+          <tr><td>ഇടനില ഫോസിലുകൾ</td><td>ആർക്കിയോപ്റ്റെറിക്സ് (ഉരഗം + പക്ഷി ലക്ഷണങ്ങൾ)</td><td>ജീവികൾ തമ്മിലുള്ള പരിണാമപരമായ ബന്ധം</td></tr>
+          <tr><td>വംശനാശം സംഭവിച്ച ജീവികളുടെ ഫോസിലുകൾ</td><td>ദിനോസറുകൾ, മാമ്മത്തുകൾ</td><td>നിരവധി ജീവികൾക്ക് വംശനാശം സംഭവിച്ചു</td></tr></table>
+        <h3 class="sub-title">4. LUCA, MRCA, സ്പീഷിയേഷൻ</h3>
+        <p>എല്ലാ സ്പീഷീസുകളും അവസാനത്തെ സാർവത്രിക പൊതുപൂർവികനിൽ (<b>LUCA</b> - Last Universal Common Ancestor) നിന്ന് രൂപപ്പെട്ടതായും വ്യത്യസ്ത സ്പീഷീസുകൾക്ക് ഏറ്റവും അടുത്ത പൊതു പൂർവികർ (<b>MRCA</b> - Most Recent Common Ancestor) ഉണ്ടാകാമെന്നും കണക്കാക്കപ്പെടുന്നു. ഒരു പൊതു പൂർവിക സ്പീഷീസിൽ നിന്ന് പുതിയ സ്പീഷീസുകൾ ഉണ്ടാകുന്ന പ്രക്രിയയാണ് <b>സ്പീഷിയേഷൻ (Speciation)</b>.</p>
+        <h3 class="sub-title">5. മനുഷ്യപരിണാമ പാത</h3>
+        <table><tr><th>ജീവി</th><th>മസ്തിഷ്കവലുപ്പം</th><th>പ്രത്യേകത</th></tr>
+          <tr><td>സഹെലാന്ത്രോപസ് ചാഡൻസിസ്</td><td>350 cm³</td><td>മനുഷ്യപരിണാമ പരമ്പരയിലെ ആദ്യകണ്ണി</td></tr>
+          <tr><td>ആസ്ട്രാലോപിത്തിക്കസ്</td><td>450 cm³</td><td>ഇരുകാലുകളിലുള്ള നടത്തം സ്ഥിരീകരിക്കുന്ന അസ്ഥികൂടഘടന</td></tr>
+          <tr><td>ഹോമോ ഹെബിലിസ്</td><td>600 cm³</td><td>കല്ലുകൊണ്ടുള്ള ഉപകരണങ്ങൾ നിർമ്മിച്ചു</td></tr>
+          <tr><td>ഹോമോ ഇറക്റ്റസ്</td><td>900 cm³</td><td>ഇരുകാലുകളിൽ നിവർന്ന് നടക്കാൻ കഴിവുള്ളവർ</td></tr>
+          <tr><td>ഹോമോ നിയാണ്ടർതാലൻസിസ്</td><td>1450 cm³</td><td>ശവശരീരങ്ങൾ മറവു ചെയ്തിരുന്നു</td></tr>
+          <tr><td>ഹോമോ സാപിയൻസ്</td><td>1350 cm³</td><td>ആധുനിക മനുഷ്യൻ — സാങ്കേതികവിദ്യയും കൃഷിരീതികളും വികസിപ്പിച്ചു</td></tr></table>
+        <p>നിയാണ്ടർതാലുകൾക്കും ആധുനിക മനുഷ്യർക്കും പൊതു പൂർവികജീവിയുണ്ട്. ആഫ്രിക്കൻ ഇതര ആധുനിക മനുഷ്യർക്ക് ഏകദേശം 1-2% നിയാണ്ടർതാൽ DNA ഉണ്ടെന്ന് ജനിതക തെളിവുകൾ കാണിക്കുന്നു. നിയാണ്ടർതാലുകൾക്ക് ഏകദേശം 40,000 വർഷങ്ങൾക്ക് മുമ്പ് വംശനാശം സംഭവിച്ചു.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Evidence of Evolution & Human Evolution</h2>
+        <h3 class="sub-title">1. Molecular Biology</h3>
+        <p>By comparing the sequence of nucleotides in an organism's DNA and the sequence of amino acids in its proteins, we can discover the evolutionary relationship between organisms.</p>
+        <table><tr><th>Organism</th><th>Amino acid differences in Beta globin (vs Human)</th></tr>
+          <tr><td>Chimpanzee</td><td>0</td></tr>
+          <tr><td>Gorilla</td><td>1</td></tr>
+          <tr><td>Mouse</td><td>31</td></tr></table>
+        <p>The smaller the difference, the closer the evolutionary relationship — chimpanzees have the closest relationship to humans.</p>
+        <h3 class="sub-title">2. Comparative Anatomy</h3>
+        <p>The bones in a human hand, a cat's forelimb, a whale's flipper, and a bat's wing are fundamentally similar, though different in external structure and function. Such organs are called <b>homologous organs</b> — they are evidence of evolution from a common ancestor.</p>
+        <h3 class="sub-title">3. Fossil Evidence</h3>
+        <table><tr><th>Fossil type</th><th>Example</th><th>Evidence provided</th></tr>
+          <tr><td>Sequential fossils</td><td>Legs of horse ancestors</td><td>Evolution is a gradual process</td></tr>
+          <tr><td>Transitional fossils</td><td>Archaeopteryx (reptile + bird features)</td><td>Evolutionary link between organisms</td></tr>
+          <tr><td>Fossils of extinct organisms</td><td>Dinosaurs, mammoths</td><td>Many organisms have gone extinct</td></tr></table>
+        <h3 class="sub-title">4. LUCA, MRCA, and Speciation</h3>
+        <p>All species are believed to have arisen from a Last Universal Common Ancestor (<b>LUCA</b>), and different species may share a Most Recent Common Ancestor (<b>MRCA</b>). <b>Speciation</b> is the process by which new species arise from a common ancestor species.</p>
+        <h3 class="sub-title">5. The Human Evolutionary Path</h3>
+        <table><tr><th>Organism</th><th>Brain size</th><th>Distinctive feature</th></tr>
+          <tr><td>Sahelanthropus tchadensis</td><td>350 cm³</td><td>The earliest link in the human evolutionary lineage</td></tr>
+          <tr><td>Australopithecus</td><td>450 cm³</td><td>Skeletal structure confirms bipedal walking</td></tr>
+          <tr><td>Homo habilis</td><td>600 cm³</td><td>Made stone tools</td></tr>
+          <tr><td>Homo erectus</td><td>900 cm³</td><td>Capable of walking upright on two legs</td></tr>
+          <tr><td>Homo neanderthalensis</td><td>1450 cm³</td><td>Buried their dead</td></tr>
+          <tr><td>Homo sapiens</td><td>1350 cm³</td><td>Modern humans — developed technology and farming methods</td></tr></table>
+        <p>Neanderthals and modern humans share a common ancestor. Genetic evidence shows that modern non-African humans carry about 1-2% Neanderthal DNA. Neanderthals went extinct about 40,000 years ago.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= NEURON & BRAIN ================= -->
+  <section class="panel" id="neuron">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">നാഡീകോശവും (ന്യൂറോൺ) തലച്ചോറും</h2>
+        <h3 class="sub-title">1. ന്യൂറോണിന്റെ ഘടന</h3>
+        <p>നാഡീവ്യവസ്ഥയുടെ അടിസ്ഥാന നിർമ്മാണ ഘടകമാണ് <b>ന്യൂറോൺ (നാഡീകോശം)</b>. ഉദ്ദീപനങ്ങളെ സ്വീകരിച്ച് ഉചിതമായ സന്ദേശങ്ങൾ രൂപപ്പെടുത്താൻ കഴിവുള്ള സവിശേഷ കോശങ്ങളാണിവ.</p>
+        <table><tr><th>ഭാഗം</th><th>ധർമ്മം</th></tr>
+          <tr><td>കോശശരീരം</td><td>ന്യൂക്ലിയസ്, കോശദ്രവ്യം, കോശാംഗങ്ങൾ എന്നിവയടങ്ങിയ ന്യൂറോണിന്റെ കേന്ദ്രം</td></tr>
+          <tr><td>ഡെൻഡ്രോണുകൾ / ഡെൻഡ്രൈറ്റുകൾ</td><td>കോശശരീരത്തിൽ നിന്ന് പുറപ്പെടുന്ന ശാഖകൾ — മറ്റ് നാഡീകോശങ്ങളിൽ നിന്നുള്ള സന്ദേശങ്ങൾ സ്വീകരിക്കുന്നു</td></tr>
+          <tr><td>ആക്സോൺ</td><td>കോശശരീരത്തിൽ നിന്നുള്ള നീളം കൂടിയ തന്തുവ് — സന്ദേശങ്ങളെ മറ്റ് കോശങ്ങളിലേക്ക് കൈമാറുന്നു</td></tr>
+          <tr><td>ആക്സോണൈറ്റുകൾ</td><td>ആക്സോണിന്റെ ശാഖകൾ</td></tr>
+          <tr><td>സിനാപ്റ്റിക് നോബ്</td><td>ആക്സോണൈറ്റിന്റെ അഗ്രഭാഗം — ന്യൂറോട്രാൻസ്മിറ്ററുകൾ വഴി രാസസന്ദേശങ്ങൾ കൈമാറുന്നു</td></tr></table>
+        <h3 class="sub-title">2. ന്യൂറോഗ്ലിയൽ കോശങ്ങൾ</h3>
+        <p>മസ്തിഷ്കത്തിലും സുഷുമ്നയിലും ന്യൂറോണുകളെക്കാൾ കൂടുതലുള്ള കോശങ്ങളാണ് <b>ന്യൂറോഗ്ലിയൽ കോശങ്ങൾ</b>. ഇവയ്ക്ക് ഉദ്ദീപനങ്ങളെ സ്വീകരിക്കാനോ സന്ദേശങ്ങൾ കടത്തിവിടാനോ കഴിവില്ല. ഇവ:</p>
+        <ul>
+          <li>നാഡികോശങ്ങൾക്ക് ആവശ്യമായ പോഷണം എത്തിക്കുന്നു</li>
+          <li>മാലിന്യങ്ങൾ നീക്കം ചെയ്യുന്നു</li>
+          <li>പ്രതിരോധ കോശങ്ങളായി പ്രവർത്തിക്കുന്നു (മൈക്രോഗ്ലിയൽ കോശം)</li>
+          <li>മയലിൻ ഷീത്ത് നിർമ്മിക്കുന്നു (ഒളിഗോഡെൻഡ്രോസൈറ്റ്, ഷ്വാൻ കോശം)</li>
+        </ul>
+        <h3 class="sub-title">3. മയലിൻ ഷീത്തും വൈറ്റ്/ഗ്രേ മാറ്ററും</h3>
+        <p>ചില ന്യൂറോണുകളിൽ ആക്സോണിനെ പൊതിഞ്ഞ് <b>മയലിൻ ഷീത്ത്</b> കാണപ്പെടുന്നു — ഇത് സന്ദേശപ്രസരണ വേഗത വർധിപ്പിക്കുന്നു. മസ്തിഷ്കത്തിലും സുഷുമ്നയിലും മയലിൻ ഷീത്തുള്ള ഭാഗത്തെ <b>വൈറ്റ് മാറ്റർ</b> എന്നും ഇല്ലാത്ത ഭാഗത്തെ <b>ഗ്രേ മാറ്റർ</b> എന്നും വിളിക്കുന്നു.</p>
+        <h3 class="sub-title">4. നാഡീവ്യവസ്ഥയുടെ ഭാഗങ്ങൾ</h3>
+        <div class="formula-box">നാഡീവ്യവസ്ഥ = കേന്ദ്രനാഡീവ്യവസ്ഥ (മസ്തിഷ്കം + സുഷുമ്ന) + പെരിഫെറൽ നാഡീവ്യവസ്ഥ (12 ജോടി ശിരോനാഡികൾ + 31 ജോടി സുഷുമ്നാനാഡികൾ + ഗ്രാഹികൾ + ഗാംഗ്ലിയോണുകൾ)</div>
+        <h3 class="sub-title">5. മസ്തിഷ്ക ഭാഗങ്ങളും ധർമ്മങ്ങളും</h3>
+        <table><tr><th>ഭാഗം</th><th>ധർമ്മം</th></tr>
+          <tr><td>സെറിബ്രം</td><td>ഏറ്റവും വലിയ ഭാഗം. പ്രശ്നപരിഹാരം, ആസൂത്രണം, ഐച്ഛിക ചലനങ്ങൾ, ഓർമ്മ, ബുദ്ധി, ചിന്ത, ഭാവന, ഇന്ദ്രിയാനുഭവങ്ങൾ</td></tr>
+          <tr><td>സെറിബെല്ലം</td><td>പേശീപ്രവർത്തനങ്ങളെ ഏകോപിപ്പിച്ച് ശരീരതുലനം കൈവരിക്കാൻ സഹായിക്കുന്നു</td></tr>
+          <tr><td>തലാമസ്</td><td>സെറിബ്രത്തിലേക്കും തിരിച്ചുമുള്ള സന്ദേശങ്ങളുടെ പുനഃപ്രസരണ കേന്ദ്രം. വേദനാസംഹാരികൾ പ്രവർത്തിക്കുന്നത് ഇവിടെയാണ്</td></tr>
+          <tr><td>ഹൈപ്പോതലാമസ്</td><td>ശരീരോഷ്മാവ്, വിശപ്പ്, ദാഹം, വികാരങ്ങൾ എന്നിവ നിയന്ത്രിച്ച് ആന്തരസമസ്ഥിതി പാലനത്തിന് സഹായിക്കുന്നു</td></tr>
+          <tr><td>മിഡ് ബ്രെയിൻ</td><td>കാഴ്ച, കേൾവി എന്നിവയുമായി ബന്ധപ്പെട്ട സന്ദേശങ്ങൾ; കണ്ണുകളുടെയും പുരികങ്ങളുടെയും ചലനത്തിൽ പങ്ക്</td></tr>
+          <tr><td>പോൺസ്</td><td>കണ്ണിലും മുഖത്തുമുള്ള പേശികളുടെ പ്രവർത്തനങ്ങളെ ഏകോപിപ്പിക്കുന്നു; ശ്വാസോച്ഛാസ നിരക്കിനെ നിയന്ത്രിക്കുന്നു</td></tr>
+          <tr><td>മെഡുല്ല ഒബ്ലോംഗേറ്റ</td><td>ഹൃദയമിടിപ്പ്, ശ്വാസോച്ഛാസം, ചർദ്ദി, ചുമ, തുമ്മൽ തുടങ്ങിയ അനൈച്ഛിക പ്രവർത്തനങ്ങളെ നിയന്ത്രിക്കുന്നു</td></tr></table>
+        <p>മിഡ് ബ്രെയിൻ, പോൺസ്, മെഡുല്ല ഒബ്ലോംഗേറ്റ എന്നിവ ചേർന്നതാണ് <b>ബ്രെയിൻ സ്റ്റെം</b>.</p>
+        <h3 class="sub-title">6. സുഷുമ്ന (Spinal Cord)</h3>
+        <p>മെഡുല്ല ഒബ്ലോംഗേറ്റയുടെ തുടർച്ചയായി കാണപ്പെടുന്ന കേന്ദ്രനാഡീവ്യവസ്ഥയുടെ ഭാഗമാണ് <b>സുഷുമ്ന</b>. ശരീരത്തിന്റെ വിവിധ ഭാഗങ്ങളിൽ നിന്നുള്ള സന്ദേശങ്ങളെ മസ്തിഷ്കത്തിലെത്തിക്കുകയും തിരിച്ചുള്ള നിർദേശങ്ങൾ കൈമാറുകയും ചെയ്യുന്നു.</p>
+        <table class="compact"><tr><th>ഭാഗം</th><th>ധർമ്മം</th></tr>
+          <tr><td>സെൻട്രൽ കനാൽ</td><td>സെറിബ്രോസ്പൈനൽ ദ്രവം നിറഞ്ഞിരിക്കുന്ന ഭാഗം</td></tr>
+          <tr><td>ഡോർസൽ റൂട്ട്</td><td>ശരീരത്തിൽ നിന്നുള്ള സന്ദേശങ്ങളെ സുഷുമ്നയിലേക്ക് കടത്തിവിടുന്നു</td></tr>
+          <tr><td>വെൻട്രൽ റൂട്ട്</td><td>സുഷുമ്നയിൽ നിന്നുള്ള നിർദേശങ്ങൾ ശരീരത്തിലേക്ക് കൈമാറുന്നു</td></tr></table>
+        <h3 class="sub-title">7. മെനിഞ്ജസും സെറിബ്രോസ്പൈനൽ ദ്രവവും</h3>
+        <p>മസ്തിഷ്കത്തെയും സുഷുമ്നയെയും പൊതിഞ്ഞ് മൂന്ന് പാളികളോട് കൂടിയ <b>മെനിഞ്ജസ്</b> കാണപ്പെടുന്നു. ഈ പാളികൾക്കിടയിൽ നിറഞ്ഞിരിക്കുന്ന ദ്രാവകമാണ് <b>സെറിബ്രോസ്പൈനൽ ദ്രവം</b>. ഇത്:</p>
+        <ul>
+          <li>കലകൾക്ക് ഓക്സിജനും പോഷണവും നൽകുന്നു</li>
+          <li>മാലിന്യങ്ങളെ നീക്കം ചെയ്യുന്നു</li>
+          <li>മർദ്ദം ക്രമീകരിക്കുന്നു</li>
+          <li>ബാഹ്യക്ഷതങ്ങളിൽ നിന്നും സംരക്ഷിക്കുന്നു</li>
+        </ul>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Neuron and Brain</h2>
+        <h3 class="sub-title">1. Structure of a Neuron</h3>
+        <p>The <b>neuron (nerve cell)</b> is the basic building block of the nervous system. These are specialised cells capable of receiving stimuli and forming appropriate signals.</p>
+        <table><tr><th>Part</th><th>Function</th></tr>
+          <tr><td>Cell body</td><td>The neuron's centre, containing the nucleus, cytoplasm, and organelles</td></tr>
+          <tr><td>Dendrons / Dendrites</td><td>Branches arising from the cell body — receive signals from other neurons</td></tr>
+          <tr><td>Axon</td><td>A long fibre from the cell body — carries signals to other cells</td></tr>
+          <tr><td>Axonites</td><td>Branches of the axon</td></tr>
+          <tr><td>Synaptic knob</td><td>The tip of an axonite — transmits chemical signals via neurotransmitters</td></tr></table>
+        <h3 class="sub-title">2. Neuroglial Cells</h3>
+        <p><b>Neuroglial cells</b> outnumber neurons in the brain and spinal cord. They cannot receive stimuli or transmit signals. They:</p>
+        <ul>
+          <li>Deliver necessary nourishment to nerve cells</li>
+          <li>Remove waste materials</li>
+          <li>Act as immune cells (microglial cells)</li>
+          <li>Form the myelin sheath (oligodendrocytes, Schwann cells)</li>
+        </ul>
+        <h3 class="sub-title">3. Myelin Sheath and White/Grey Matter</h3>
+        <p>In some neurons, a <b>myelin sheath</b> covers the axon — this increases the speed of signal transmission. In the brain and spinal cord, regions with more myelinated neurons are called <b>white matter</b>, and those without are called <b>grey matter</b>.</p>
+        <h3 class="sub-title">4. Parts of the Nervous System</h3>
+        <div class="formula-box">Nervous system = Central Nervous System (brain + spinal cord) + Peripheral Nervous System (12 pairs of cranial nerves + 31 pairs of spinal nerves + receptors + ganglia)</div>
+        <h3 class="sub-title">5. Brain Parts and Functions</h3>
+        <table><tr><th>Part</th><th>Function</th></tr>
+          <tr><td>Cerebrum</td><td>The largest part. Problem-solving, planning, voluntary movements, memory, intelligence, thought, imagination, sensory experiences</td></tr>
+          <tr><td>Cerebellum</td><td>Coordinates muscle activity to help achieve body balance</td></tr>
+          <tr><td>Thalamus</td><td>Relay centre for signals to and from the cerebrum. This is where painkillers act</td></tr>
+          <tr><td>Hypothalamus</td><td>Regulates body temperature, hunger, thirst, and emotions to help maintain internal homeostasis</td></tr>
+          <tr><td>Midbrain</td><td>Handles signals related to vision and hearing; involved in eye and eyebrow movement</td></tr>
+          <tr><td>Pons</td><td>Coordinates muscle activity in the eyes and face; regulates breathing rate</td></tr>
+          <tr><td>Medulla oblongata</td><td>Controls involuntary functions like heartbeat, breathing, vomiting, coughing, and sneezing</td></tr></table>
+        <p>The midbrain, pons, and medulla oblongata together form the <b>brain stem</b>.</p>
+        <h3 class="sub-title">6. Spinal Cord</h3>
+        <p>The <b>spinal cord</b> is the part of the central nervous system that appears as a continuation of the medulla oblongata. It relays messages from various body parts to the brain and carries instructions back from the brain.</p>
+        <table class="compact"><tr><th>Part</th><th>Function</th></tr>
+          <tr><td>Central canal</td><td>The part filled with cerebrospinal fluid</td></tr>
+          <tr><td>Dorsal root</td><td>Carries signals from the body into the spinal cord</td></tr>
+          <tr><td>Ventral root</td><td>Carries instructions from the spinal cord to the body</td></tr></table>
+        <h3 class="sub-title">7. Meninges and Cerebrospinal Fluid</h3>
+        <p>The brain and spinal cord are covered by three layers called the <b>meninges</b>. The fluid filling the space between these layers is the <b>cerebrospinal fluid</b>. It:</p>
+        <ul>
+          <li>Supplies oxygen and nutrients to tissues</li>
+          <li>Removes waste products</li>
+          <li>Regulates pressure</li>
+          <li>Protects against external injuries</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SYNAPSE & REFLEX ================= -->
+  <section class="panel" id="synapse">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">സിനാപ്സും റിഫ്ലക്സ് പ്രവർത്തനവും</h2>
+        <h3 class="sub-title">1. നാഡീയ ആവേഗങ്ങളുടെ പ്രേഷണം</h3>
+        <p>നാഡീകോശങ്ങൾ ഉൾപ്പെടെയുള്ള എല്ലാ കോശങ്ങളും വൈദ്യുതചാർജുള്ളവയാണ് — ഉദ്ദീപിക്കാത്ത അവസ്ഥയിൽ കോശസ്തരത്തിന് പുറത്ത് പോസിറ്റീവ് ചാർജും അകത്ത് നെഗറ്റീവ് ചാർജും നിലനിൽക്കുന്നു. ഉദ്ദീപിപ്പിക്കപ്പെടുമ്പോൾ പോസിറ്റീവ് ചാർജ്ജുള്ള അയോണുകൾ കോശത്തിനുള്ളിലേക്ക് പ്രവേശിച്ച് ചാർജ് വ്യതിയാനം ഉണ്ടാക്കുന്നു — ഇതാണ് <b>നാഡീയ ആവേഗം</b>.</p>
+        <h3 class="sub-title">2. സിനാപ്സിന്റെ ഘടന</h3>
+        <p>ഒരു ന്യൂറോണിൽ നിന്ന് മറ്റൊന്നിലേക്ക് ആവേഗം കൈമാറുന്ന ഭാഗമാണ് <b>സിനാപ്സ്</b>.</p>
+        <table><tr><th>ഭാഗം</th><th>വിവരണം</th></tr>
+          <tr><td>സിനാപ്റ്റിക് നോബ്</td><td>ന്യൂറോട്രാൻസ്മിറ്ററുകൾ നിറഞ്ഞ വെസിക്കിളുകൾ ഉള്ള ആക്സോണൈറ്റിന്റെ അഗ്രഭാഗം</td></tr>
+          <tr><td>സിനാപ്റ്റിക് വിടവ്</td><td>ന്യൂറോണുകൾക്കിടയിലുള്ള ചെറിയ വിടവ്</td></tr>
+          <tr><td>പോസ്റ്റ്സിനാപ്റ്റിക് സ്തരം</td><td>ന്യൂറോട്രാൻസ്മിറ്ററുകളെ സ്വീകരിക്കുന്ന റിസപ്റ്ററുകൾ ഉള്ള ഡെൻഡ്രൈറ്റിന്റെ അഗ്രഭാഗം</td></tr></table>
+        <p>ആവേഗം സിനാപ്റ്റിക് നോബിൽ എത്തുമ്പോൾ ന്യൂറോട്രാൻസ്മിറ്ററുകൾ സിനാപ്റ്റിക് വിടവിലേക്ക് സ്രവിക്കുന്നു; ഇവ പോസ്റ്റ്സിനാപ്റ്റിക് സ്തരത്തിലെ റിസപ്റ്ററുകളുമായി ചേർന്ന് അടുത്ത ന്യൂറോണിനെ ഉദ്ദീപിപ്പിക്കുന്നു. സിനാപ്സുകൾ ആവേഗങ്ങളെ ഒരു ദിശയിൽ മാത്രം കടത്തിവിടുന്നു.</p>
+        <h3 class="sub-title">3. വിവിധതരം ന്യൂറോണുകൾ</h3>
+        <table><tr><th>ന്യൂറോൺ</th><th>ധർമ്മം</th></tr>
+          <tr><td>സംവേദന ന്യൂറോൺ</td><td>ഗ്രാഹികളിൽ നിന്നുള്ള സന്ദേശങ്ങളെ കേന്ദ്രനാഡീവ്യവസ്ഥയിലേക്ക് എത്തിക്കുന്നു</td></tr>
+          <tr><td>പ്രേരക ന്യൂറോൺ</td><td>കേന്ദ്രനാഡീവ്യവസ്ഥയിൽ നിന്നുള്ള നിർദേശങ്ങൾ അവയവങ്ങളിലേക്ക് (പേശി/ഗ്രന്ഥി) എത്തിക്കുന്നു</td></tr>
+          <tr><td>ഇന്റർന്യൂറോൺ</td><td>കേന്ദ്രനാഡീവ്യവസ്ഥയിൽ സംവേദന-പ്രേരക ന്യൂറോണുകളെ ബന്ധിപ്പിക്കുന്നു</td></tr></table>
+        <h3 class="sub-title">4. നാഡികളുടെ വർഗ്ഗീകരണം</h3>
+        <table><tr><th>നാഡി</th><th>നിർമ്മാണ ഘടകം</th><th>ധർമ്മം</th></tr>
+          <tr><td>സംവേദനാടി</td><td>സംവേദന ന്യൂറോൺ</td><td>ഗ്രാഹികളിൽ നിന്നുള്ള സന്ദേശം കൈമാറുന്നു</td></tr>
+          <tr><td>പ്രേരകനാഡി</td><td>പ്രേരക ന്യൂറോൺ</td><td>കേന്ദ്രനാഡീവ്യവസ്ഥയിൽ നിന്നുള്ള നിർദേശങ്ങൾ അവയവങ്ങളിലെത്തിക്കുന്നു</td></tr>
+          <tr><td>സമ്മിശ്രനാഡി</td><td>സംവേദന + പ്രേരക ന്യൂറോൺ</td><td>രണ്ട് ദിശയിലും സന്ദേശം കൈമാറുന്നു</td></tr></table>
+        <h3 class="sub-title">5. സ്വതന്ത്രനാഡീവ്യവസ്ഥ (Autonomous Nervous System)</h3>
+        <p>പെരിഫെറൽ നാഡീവ്യവസ്ഥയുടെ ഭാഗമായ സ്വതന്ത്രനാഡീവ്യവസ്ഥ ശാരീരികപ്രവർത്തനങ്ങളെ ബോധപൂർവമല്ലാതെ സ്വയം നിയന്ത്രിക്കുന്നു.</p>
+        <table><tr><th>അവയവം</th><th>സിംപതറ്റിക് വ്യവസ്ഥ</th><th>പാരാസിംപതറ്റിക് വ്യവസ്ഥ</th></tr>
+          <tr><td>ഹൃദയം</td><td>മിടിപ്പ് കൂടുന്നു</td><td>മിടിപ്പ് കുറയുന്നു</td></tr>
+          <tr><td>ശ്വസനിക</td><td>വികസിക്കുന്നു</td><td>ചുരുങ്ങുന്നു</td></tr>
+          <tr><td>ആമാശയം</td><td>ദഹനപ്രക്രിയ മന്ദഗതി</td><td>ദഹനപ്രക്രിയ ഉദ്ദീപനം</td></tr>
+          <tr><td>മൂത്രാശയം</td><td>മൂത്രം നിലനിർത്തുന്നു</td><td>ശൂന്യമാക്കപ്പെടുന്നു</td></tr></table>
+        <p>അടിയന്തിര സാഹചര്യങ്ങളിൽ ശരീരത്തെ പ്രതികരിക്കാൻ സജ്ജമാക്കുന്നത് <b>സിംപതറ്റിക് വ്യവസ്ഥ</b>യാണ്; വിശ്രമിക്കാനും ദഹനം പോലുള്ള ദൈനംദിന പ്രവർത്തനങ്ങൾക്കും ശരീരത്തെ സജ്ജമാക്കുന്നത് <b>പാരാസിംപതറ്റിക് വ്യവസ്ഥ</b>യാണ്.</p>
+        <h3 class="sub-title">6. റിഫ്ലക്സ് പ്രവർത്തനവും റിഫ്ലക്സ് ആർക്കും</h3>
+        <p>ഉദ്ദീപനത്തിനനുസരിച്ച് ആകസ്മികമായും അനൈച്ഛികമായും നടക്കുന്ന പ്രതികരണങ്ങളാണ് <b>റിഫ്ലക്സ് പ്രവർത്തനങ്ങൾ (Reflex action)</b>. ആവേഗങ്ങളുടെ സഞ്ചാരപാതയാണ് <b>റിഫ്ലക്സ് ആർക്ക് (Reflex arc)</b>.</p>
+        <div class="formula-box">ഗ്രാഹി → സംവേദന ന്യൂറോൺ → ഇന്റർന്യൂറോൺ (സുഷുമ്നയിൽ) → പ്രേരക ന്യൂറോൺ → പേശി/ഗ്രന്ഥി</div>
+        <p>ഉദാഹരണം: ചൂടുള്ള വസ്തു തൊടുമ്പോൾ അറിയാതെ കൈ പിൻവലിക്കുന്നത്, കണ്ണിലേക്ക് പ്രകാശം പതിക്കുമ്പോൾ കണ്ണ് ചിമ്മുന്നത്.</p>
+        <h3 class="sub-title">7. വിവിധ ജീവികളിലെ നാഡീവ്യവസ്ഥ</h3>
+        <table><tr><th>ജീവി</th><th>നാഡീവ്യവസ്ഥ</th></tr>
+          <tr><td>ഹൈഡ്ര</td><td>നിയന്ത്രണകേന്ദ്രമില്ലാത്ത നാഡീജാലിക</td></tr>
+          <tr><td>പ്ലനേറിയ</td><td>തലയുടെ ഭാഗത്തുള്ള ഒരു ജോടി നാഡീഗാംഗ്ലിയകൾ നിർദേശങ്ങളെ ഏകോപിപ്പിക്കുന്നു</td></tr>
+          <tr><td>ഷഡ്പദങ്ങൾ</td><td>വ്യക്തവും വികാസം പ്രാപിച്ചതുമായ മസ്തിഷ്കമായി പരിണമിച്ചിരിക്കുന്നു; ഓരോ അറയിലും ഗാംഗ്ലിയോണുകൾ കാണപ്പെടുന്നു</td></tr></table>
+        <p>ലളിതമായ നാഡീഘടനയിൽ നിന്ന് സങ്കീർണ്ണഘടനയുള്ള നാഡീവ്യവസ്ഥകളിലേക്കുള്ള ശ്രദ്ധേയമായ പരിവർത്തനം കൂടി ജീവപരിണാമം നൽകുന്നു. നിയോകോർട്ടക്സിന്റെ വികാസമാണ് ഭാഷ, ബുദ്ധി, സർഗാത്മകത തുടങ്ങിയ ഉന്നത മാനസിക പ്രവർത്തനങ്ങൾ വഴി മനുഷ്യനെ മറ്റ് ജീവികളിൽ നിന്ന് വ്യത്യസ്തനാക്കുന്നത്.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Synapse and Reflex Action</h2>
+        <h3 class="sub-title">1. Transmission of Nerve Impulses</h3>
+        <p>All cells, including neurons, are electrically charged — in the unstimulated state, the outside of the cell membrane is positively charged while the inside is negatively charged. When stimulated, positively charged ions enter the cell, causing a change in charge — this is the <b>nerve impulse</b>.</p>
+        <h3 class="sub-title">2. Structure of the Synapse</h3>
+        <p>The <b>synapse</b> is the point where an impulse is transferred from one neuron to another.</p>
+        <table><tr><th>Part</th><th>Description</th></tr>
+          <tr><td>Synaptic knob</td><td>The tip of the axonite, containing vesicles filled with neurotransmitters</td></tr>
+          <tr><td>Synaptic cleft</td><td>The small gap between neurons</td></tr>
+          <tr><td>Postsynaptic membrane</td><td>The tip of the dendrite, containing receptors that receive neurotransmitters</td></tr></table>
+        <p>When an impulse reaches the synaptic knob, neurotransmitters are released into the synaptic cleft; these bind to receptors on the postsynaptic membrane, stimulating the next neuron. Synapses allow impulses to travel in only one direction.</p>
+        <h3 class="sub-title">3. Types of Neurons</h3>
+        <table><tr><th>Neuron</th><th>Function</th></tr>
+          <tr><td>Sensory neuron</td><td>Carries signals from receptors to the central nervous system</td></tr>
+          <tr><td>Motor neuron</td><td>Carries instructions from the central nervous system to organs (muscle/gland)</td></tr>
+          <tr><td>Interneuron</td><td>Connects sensory and motor neurons within the central nervous system</td></tr></table>
+        <h3 class="sub-title">4. Classification of Nerves</h3>
+        <table><tr><th>Nerve</th><th>Composed of</th><th>Function</th></tr>
+          <tr><td>Sensory nerve</td><td>Sensory neurons</td><td>Carries signals from receptors</td></tr>
+          <tr><td>Motor nerve</td><td>Motor neurons</td><td>Carries instructions from the CNS to organs</td></tr>
+          <tr><td>Mixed nerve</td><td>Sensory + motor neurons</td><td>Carries signals in both directions</td></tr></table>
+        <h3 class="sub-title">5. Autonomic Nervous System</h3>
+        <p>The autonomic nervous system, a part of the peripheral nervous system, regulates bodily functions independently and involuntarily.</p>
+        <table><tr><th>Organ</th><th>Sympathetic system</th><th>Parasympathetic system</th></tr>
+          <tr><td>Heart</td><td>Increases heart rate</td><td>Decreases heart rate</td></tr>
+          <tr><td>Bronchi</td><td>Dilate</td><td>Constrict</td></tr>
+          <tr><td>Stomach</td><td>Slows digestion</td><td>Stimulates digestion</td></tr>
+          <tr><td>Bladder</td><td>Retains urine</td><td>Empties</td></tr></table>
+        <p>The <b>sympathetic system</b> prepares the body to respond to emergencies; the <b>parasympathetic system</b> prepares the body to rest and carry out everyday activities like digestion.</p>
+        <h3 class="sub-title">6. Reflex Action and the Reflex Arc</h3>
+        <p><b>Reflex actions</b> are sudden, involuntary responses to a stimulus. The pathway of impulses is called the <b>reflex arc</b>.</p>
+        <div class="formula-box">Receptor → sensory neuron → interneuron (in spinal cord) → motor neuron → muscle/gland</div>
+        <p>Example: withdrawing your hand unknowingly when touching something hot, or blinking when light falls on the eye.</p>
+        <h3 class="sub-title">7. Nervous Systems Across Organisms</h3>
+        <table><tr><th>Organism</th><th>Nervous system</th></tr>
+          <tr><td>Hydra</td><td>A nerve net with no central control</td></tr>
+          <tr><td>Planaria</td><td>A pair of nerve ganglia in the head region coordinates instructions</td></tr>
+          <tr><td>Arthropods</td><td>Has evolved into a distinct, developed brain; ganglia are found in each segment</td></tr></table>
+        <p>Evolution has also brought about a remarkable transition from simple nerve structures to complex nervous systems. It is the development of the neocortex that gives humans higher mental functions like language, intelligence, and creativity — setting them apart from other organisms.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="panel" id="quiz">
+    <div class="card">
+      <h2 class="section-title" data-ml="ക്വിക്ക് ക്വിസ്" data-en="Quick Quiz">ക്വിക്ക് ക്വിസ്</h2>
+      <div class="score-bar">
+        <span>
+          <span data-ml="സ്കോർ:" data-en="Score:">സ്കോർ:</span> <b id="scoreVal">0</b> / <span id="totalVal">0</span>
+          &nbsp;·&nbsp; <span data-ml="ചോദ്യം" data-en="Question">ചോദ്യം</span> <b id="qPos">1</b> / <span id="qTotal">0</span>
+        </span>
+        <span style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn" onclick="shareScore()" data-ml="🔗 സ്കോർ പങ്കിടുക" data-en="🔗 Share Score">🔗 സ്കോർ പങ്കിടുക</button>
+          <button class="btn secondary" onclick="resetQuiz()" data-ml="വീണ്ടും ചെയ്യുക" data-en="Retry">വീണ്ടും ചെയ്യുക</button>
+        </span>
+      </div>
+      <div class="teacher-share no-print">
+        <button class="btn" onclick="shareQuizLink()" data-ml="🔗 ക്വിസ് ലിങ്ക് പങ്കിടുക" data-en="🔗 Share Quiz Link">🔗 ക്വിസ് ലിങ്ക് പങ്കിടുക</button>
+        <button class="btn secondary" onclick="shareQuestions()" data-ml="📤 ചോദ്യങ്ങൾ ടെക്സ്റ്റ് ആയി അയക്കുക" data-en="📤 Send Questions as Text">📤 ചോദ്യങ്ങൾ ടെക്സ്റ്റ് ആയി അയക്കുക</button>
+      </div>
+      <div id="quizContainer"></div>
+      <div class="quiz-nav">
+        <button class="btn secondary" id="prevBtn" onclick="prevQuestion()" data-ml="← മുമ്പത്തേത്" data-en="← Previous">← മുമ്പത്തേത്</button>
+        <button class="btn" id="nextBtn" onclick="nextQuestion()" data-ml="അടുത്തത് →" data-en="Next →">അടുത്തത് →</button>
+      </div>
+      <div id="shareToast" class="share-toast"></div>
+    </div>
+  </section>
+
+  <!-- ================= MODEL QUESTION PAPER ================= -->
+  <section class="panel" id="mqp">
+    <div class="card print-target" id="mqpCard">
+      <div class="lang-ml">
+        <div class="mqp-header">
+          <h2>ജീവശാസ്ത്രം — മാതൃകാ ചോദ്യപേപ്പർ</h2>
+          <p>യൂണിറ്റ് 2: പരിണാമത്തിന്റെ വഴികൾ</p>
+        </div>
+        <div class="mqp-meta"><span>സമയം: 45 മിനിറ്റ്</span><span>ആകെ സ്കോർ: 20</span></div>
+        <div class="mqp-section-title">Section A — 1 സ്കോർ വീതം (5 × 1 = 5)</div>
+        <div class="mqp-q">1. ലാമാർക്കിസം അവതരിപ്പിച്ചത് ആര്?</div>
+        <div class="mqp-q">2. ഡാർവിൻ യാത്ര ചെയ്ത കപ്പലിന്റെ പേരെന്ത്?</div>
+        <div class="mqp-q">3. ഒരു ജീവിയിൽ നിന്ന് പുതിയ സ്പീഷീസ് ഉണ്ടാകുന്ന പ്രക്രിയയ്ക്ക് പറയുന്ന പേരെന്ത്?</div>
+        <div class="mqp-q">4. നാഡീവ്യവസ്ഥയുടെ അടിസ്ഥാന ഘടകം ഏത്?</div>
+        <div class="mqp-q">5. ഹൃദയമിടിപ്പും ശ്വാസോച്ഛാസവും നിയന്ത്രിക്കുന്ന മസ്തിഷ്ക ഭാഗം ഏത്?</div>
+        <div class="mqp-section-title">Section B — 2 സ്കോർ വീതം (4 × 2 = 8)</div>
+        <div class="mqp-q">6. ലാമാർക്കിസവും ഡാർവിനിസവും തമ്മിലുള്ള പ്രധാന വ്യത്യാസം എന്ത്?</div>
+        <div class="mqp-q">7. ഹോമോലോഗസ് അവയവങ്ങൾ എന്നാൽ എന്ത്? ഒരു ഉദാഹരണം നൽകുക.</div>
+        <div class="mqp-q">8. സിനാപ്സിന്റെ ഘടന വിശദീകരിക്കുക.</div>
+        <div class="mqp-q">9. സിംപതറ്റിക്, പാരാസിംപതറ്റിക് നാഡീവ്യവസ്ഥകൾ തമ്മിലുള്ള വ്യത്യാസം എന്ത്?</div>
+        <div class="mqp-section-title">Section C — 3 സ്കോർ വീതം (2 × 3 = 6)</div>
+        <div class="mqp-q">10. ഡാർവിനിസത്തിന്റെ അഞ്ച് ഘട്ടങ്ങൾ ഉദാഹരണസഹിതം വിശദീകരിക്കുക.</div>
+        <div class="mqp-q">11. റിഫ്ലക്സ് ആർക്കിന്റെ ഘടകങ്ങൾ ചിത്രസഹായത്തോടെ വിശദീകരിക്കുക.</div>
+        <div class="mqp-section-title">Section D — ഉപന്യാസ തരം (1 × 1 = 1)</div>
+        <div class="mqp-q">12. മനുഷ്യപരിണാമ പാതയിലെ പ്രധാന ജീവിവിഭാഗങ്ങളെയും അവയുടെ പ്രത്യേകതകളെയും വിശദമായി എഴുതുക.</div>
+      </div>
+      <div class="lang-en">
+        <div class="mqp-header">
+          <h2>Biology — Model Question Paper</h2>
+          <p>Unit 2: Ways of Evolution</p>
+        </div>
+        <div class="mqp-meta"><span>Time: 45 minutes</span><span>Total score: 20</span></div>
+        <div class="mqp-section-title">Section A — 1 score each (5 × 1 = 5)</div>
+        <div class="mqp-q">1. Who proposed Lamarckism?</div>
+        <div class="mqp-q">2. What is the name of the ship Darwin travelled on?</div>
+        <div class="mqp-q">3. What is the term for the process by which new species arise from an organism?</div>
+        <div class="mqp-q">4. What is the basic unit of the nervous system?</div>
+        <div class="mqp-q">5. Which part of the brain regulates heartbeat and breathing?</div>
+        <div class="mqp-section-title">Section B — 2 scores each (4 × 2 = 8)</div>
+        <div class="mqp-q">6. What is the main difference between Lamarckism and Darwinism?</div>
+        <div class="mqp-q">7. What are homologous organs? Give an example.</div>
+        <div class="mqp-q">8. Explain the structure of a synapse.</div>
+        <div class="mqp-q">9. What is the difference between the sympathetic and parasympathetic nervous systems?</div>
+        <div class="mqp-section-title">Section C — 3 scores each (2 × 3 = 6)</div>
+        <div class="mqp-q">10. Explain the five stages of Darwinism with examples.</div>
+        <div class="mqp-q">11. Explain the components of the reflex arc with the help of a diagram.</div>
+        <div class="mqp-section-title">Section D — Essay type (1 × 1 = 1)</div>
+        <div class="mqp-q">12. Write in detail about the major organisms in the human evolutionary path and their distinctive features.</div>
+      </div>
+    </div>
+    <div class="no-print" style="margin-top:10px;">
+      <button class="btn secondary" onclick="printCurrent()" data-ml="🖨️ പ്രിന്റ് ചെയ്യുക" data-en="🖨️ Print">🖨️ പ്രിന്റ് ചെയ്യുക</button>
+    </div>
+  </section>
+
+</div>
+
+<footer class="note">Abacus Academy · Class 10 Biology · Prepared for self-study</footer>
+
+<script>
+/* ===================== LANGUAGE TOGGLE ===================== */
+let currentLang = 'ml';
+function setLang(lang){
+  currentLang = lang;
+  document.body.classList.toggle('show-en', lang === 'en');
+  document.getElementById('langMlBtn').classList.toggle('active', lang === 'ml');
+  document.getElementById('langEnBtn').classList.toggle('active', lang === 'en');
+  document.querySelectorAll('[data-ml][data-en]').forEach(el=>{
+    el.textContent = (lang === 'ml') ? el.dataset.ml : el.dataset.en;
+  });
+  quizData = (lang === 'ml') ? quizDataML : quizDataEN;
+  renderQuestion();
+}
+
+/* ===================== TABS ===================== */
+const tabButtons = document.querySelectorAll('nav.tabs button[data-tab]');
+const panels = document.querySelectorAll('.panel');
+let currentTab = 'notes';
+tabButtons.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    tabButtons.forEach(b=>b.classList.remove('active'));
+    panels.forEach(p=>{p.classList.remove('active'); p.classList.remove('print-target');});
+    btn.classList.add('active');
+    currentTab = btn.dataset.tab;
+    document.getElementById(currentTab).classList.add('active');
+  });
+});
+function printCurrent(){
+  panels.forEach(p=>p.classList.remove('print-target'));
+  document.getElementById(currentTab).classList.add('print-target');
+  window.print();
+}
+
+/* ===================== QUIZ DATA (bilingual) ===================== */
+const quizDataML = [
+  { q:"ലാമാർക്കിസം അവതരിപ്പിച്ചത് ആര്?", opts:["ചാൾസ് ഡാർവിൻ","ഗ്രിഗർ മെൻഡൽ","ജീൻ ബാപ്റ്റിസ്റ്റ് ലാമാർക്ക്","ആൽഫ്രഡ് വാലസ്"], ans:2 },
+  { q:"ഡാർവിൻ യാത്ര ചെയ്ത കപ്പലിന്റെ പേരെന്ത്?", opts:["HMS ബീഗിൾ","HMS വിക്ടറി","HMS എൻഡവർ","HMS ടൈറ്റാനിക്"], ans:0 },
+  { q:"ഗാലപ്പഗോസ് ദ്വീപുകളിലെ കുരുവികളിൽ ഏറ്റവും വ്യത്യാസം കാണിച്ചത് ഏത് ഭാഗമാണ്?", opts:["ചിറക്", "കൊക്ക്", "കാലുകൾ", "വാൽ"], ans:1 },
+  { q:"ഡാർവിനിസത്തിന്റെ ഘട്ടങ്ങളിൽ ആദ്യത്തേത് ഏത്?", opts:["പ്രകൃതിനിർധാരണം","അമിതോൽപാദനം","അതിജീവനം","വ്യതിയാനങ്ങൾ"], ans:1 },
+  { q:"ചിമ്പാൻസിയുടെ ബീറ്റാ ഗ്ലോബിനിൽ മനുഷ്യരുമായുള്ള അമിനോ ആസിഡ് വ്യത്യാസം എത്ര?", opts:["0","1","31","10"], ans:0 },
+  { q:"താഴെപ്പറയുന്നവയിൽ ഹോമോലോഗസ് അവയവങ്ങൾക്ക് ഉദാഹരണമല്ലാത്തത് ഏത്?", opts:["മനുഷ്യന്റെ കൈ","പൂച്ചയുടെ മുൻകാൽ","തിമിംഗലത്തിന്റെ ഫ്ലിപ്പർ","ഈച്ചയുടെ ചിറക്"], ans:3 },
+  { q:"മനുഷ്യപരിണാമ പാതയിലെ ആദ്യകണ്ണി ഏത്?", opts:["ഹോമോ ഹെബിലിസ്","സഹെലാന്ത്രോപസ് ചാഡൻസിസ്","ഹോമോ ഇറക്റ്റസ്","ആസ്ട്രാലോപിത്തിക്കസ്"], ans:1 },
+  { q:"ന്യൂറോണിന്റെ ഏത് ഭാഗമാണ് സന്ദേശം സ്വീകരിക്കുന്നത്?", opts:["ആക്സോൺ","ഡെൻഡ്രൈറ്റ്","സിനാപ്റ്റിക് നോബ്","കോശശരീരം"], ans:1 },
+  { q:"ഹൃദയമിടിപ്പും ശ്വാസോച്ഛാസവും നിയന്ത്രിക്കുന്ന മസ്തിഷ്ക ഭാഗം ഏത്?", opts:["സെറിബ്രം","സെറിബെല്ലം","മെഡുല്ല ഒബ്ലോംഗേറ്റ","തലാമസ്"], ans:2 },
+  { q:"റിഫ്ലക്സ് ആർക്കിലെ ശരിയായ ക്രമം ഏത്?", opts:["ഗ്രാഹി→പ്രേരകൻ→ഇന്റർന്യൂറോൺ→സംവേദനൻ→പേശി","ഗ്രാഹി→സംവേദനൻ→ഇന്റർന്യൂറോൺ→പ്രേരകൻ→പേശി","പേശി→പ്രേരകൻ→ഗ്രാഹി→സംവേദനൻ","ഗ്രാഹി→ഇന്റർന്യൂറോൺ→പേശി"], ans:1 }
+];
+const quizDataEN = [
+  { q:"Who proposed Lamarckism?", opts:["Charles Darwin","Gregor Mendel","Jean-Baptiste Lamarck","Alfred Wallace"], ans:2 },
+  { q:"What is the name of the ship Darwin travelled on?", opts:["HMS Beagle","HMS Victory","HMS Endeavour","HMS Titanic"], ans:0 },
+  { q:"Which body part showed the most variation among Galapagos finches?", opts:["Wings", "Beak", "Legs", "Tail"], ans:1 },
+  { q:"Which is the first stage of Darwinism?", opts:["Natural selection","Overproduction","Survival","Variations"], ans:1 },
+  { q:"How many amino acid differences exist between chimpanzee and human beta globin?", opts:["0","1","31","10"], ans:0 },
+  { q:"Which of the following is NOT an example of homologous organs?", opts:["Human hand","Cat's forelimb","Whale's flipper","Insect's wing"], ans:3 },
+  { q:"Which is the earliest link in the human evolutionary lineage?", opts:["Homo habilis","Sahelanthropus tchadensis","Homo erectus","Australopithecus"], ans:1 },
+  { q:"Which part of a neuron receives signals?", opts:["Axon","Dendrite","Synaptic knob","Cell body"], ans:1 },
+  { q:"Which brain part controls heartbeat and breathing?", opts:["Cerebrum","Cerebellum","Medulla oblongata","Thalamus"], ans:2 },
+  { q:"What is the correct sequence in a reflex arc?", opts:["Receptor→motor→interneuron→sensory→muscle","Receptor→sensory→interneuron→motor→muscle","Muscle→motor→receptor→sensory","Receptor→interneuron→muscle"], ans:1 }
+];
+let quizData = quizDataML;
+
+let score = 0;
+let currentQ = 0;
+let userAnswers = new Array(quizDataML.length).fill(null);
+
+function renderQuestion(){
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  document.getElementById('totalVal').textContent = quizData.length;
+  document.getElementById('qTotal').textContent = quizData.length;
+  document.getElementById('qPos').textContent = currentQ + 1;
+
+  const item = quizData[currentQ];
+  const qDiv = document.createElement('div');
+  qDiv.innerHTML = `<p><b>${currentQ+1}.</b> ${item.q}</p><div class="quiz-opts"></div>`;
+  const optsDiv = qDiv.querySelector('.quiz-opts');
+  const alreadyAnswered = userAnswers[currentQ] !== null;
+
+  item.opts.forEach((opt, oIdx)=>{
+    const b = document.createElement('button');
+    b.textContent = opt;
+    if(alreadyAnswered){
+      b.disabled = true;
+      if(oIdx === item.ans) b.classList.add('correct');
+      else if(oIdx === userAnswers[currentQ]) b.classList.add('wrong');
+    }
+    b.addEventListener('click', ()=>{
+      if(b.disabled) return;
+      const allBtns = optsDiv.querySelectorAll('button');
+      allBtns.forEach(x=>x.disabled=true);
+      userAnswers[currentQ] = oIdx;
+      if(oIdx === item.ans){ b.classList.add('correct'); score++; }
+      else { b.classList.add('wrong'); allBtns[item.ans].classList.add('correct'); }
+      document.getElementById('scoreVal').textContent = score;
+    });
+    optsDiv.appendChild(b);
+  });
+  container.appendChild(qDiv);
+  document.getElementById('prevBtn').disabled = (currentQ === 0);
+  document.getElementById('nextBtn').disabled = (currentQ === quizData.length - 1);
+}
+
+function nextQuestion(){ if(currentQ < quizData.length - 1){ currentQ++; renderQuestion(); } }
+function prevQuestion(){ if(currentQ > 0){ currentQ--; renderQuestion(); } }
+
+function resetQuiz(){
+  score = 0; currentQ = 0;
+  userAnswers = new Array(quizData.length).fill(null);
+  document.getElementById('scoreVal').textContent = 0;
+  renderQuestion();
+}
+
+/* ===================== SHARE ===================== */
+const QUIZ_SHARE_URL = "";
+
+function shareQuizLink(){
+  if(!QUIZ_SHARE_URL){
+    const toast = document.getElementById('shareToast');
+    toast.textContent = currentLang === 'ml' ? '⚠️ ക്വിസ് ലിങ്ക് ഇതുവരെ സെറ്റ് ചെയ്തിട്ടില്ല' : '⚠️ Quiz link has not been set yet';
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 3000);
+    return;
+  }
+  const text = currentLang === 'ml'
+    ? `ക്വിക്ക് ക്വിസ് — പരിണാമത്തിന്റെ വഴികൾ\nഈ ലിങ്കിൽ ക്വിസ് ചെയ്യൂ:\n${QUIZ_SHARE_URL}`
+    : `Quick Quiz — Ways of Evolution\nTake the quiz here:\n${QUIZ_SHARE_URL}`;
+  runShare(text, currentLang === 'ml' ? '✅ ലിങ്ക് കോപ്പി ചെയ്തു' : '✅ Link copied');
+}
+
+function shareScore(){
+  const answeredCount = userAnswers.filter(a=>a!==null).length;
+  const text = currentLang === 'ml'
+    ? `പരിണാമത്തിന്റെ വഴികൾ — ക്വിക്ക് ക്വിസ്\nഎന്റെ സ്കോർ: ${score} / ${quizData.length} (${answeredCount} ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകി)`
+    : `Ways of Evolution — Quick Quiz\nMy score: ${score} / ${quizData.length} (${answeredCount} questions answered)`;
+  runShare(text, currentLang === 'ml' ? '✅ സ്കോർ കോപ്പി ചെയ്തു' : '✅ Score copied');
+}
+
+function shareQuestions(){
+  const letters = ['A','B','C','D'];
+  let text = currentLang === 'ml'
+    ? 'ക്വിക്ക് ക്വിസ് — പരിണാമത്തിന്റെ വഴികൾ\n(യൂണിറ്റ് 2, ജീവശാസ്ത്രം, സ്റ്റാൻഡേർഡ് 10)\n\n'
+    : 'Quick Quiz — Ways of Evolution\n(Unit 2, Biology, Class 10)\n\n';
+  quizData.forEach((item, idx)=>{
+    text += `${idx+1}. ${item.q}\n`;
+    item.opts.forEach((opt, oIdx)=>{ text += `   ${letters[oIdx]}) ${opt}\n`; });
+    text += '\n';
+  });
+  runShare(text, currentLang === 'ml' ? '✅ ചോദ്യങ്ങൾ കോപ്പി ചെയ്തു' : '✅ Questions copied');
+}
+
+function runShare(text, copySuccessMsg){
+  if(navigator.share){
+    navigator.share({ title: currentLang === 'ml' ? 'ക്വിക്ക് ക്വിസ്' : 'Quick Quiz', text: text }).catch(()=>{});
+  } else if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=>{
+      const toast = document.getElementById('shareToast');
+      toast.textContent = copySuccessMsg;
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'), 2500);
+    });
+  } else {
+    alert(text);
+  }
+}
+
+renderQuestion();
+</script>
+
+</body>
+</html>
