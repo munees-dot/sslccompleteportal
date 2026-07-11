@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz — In the Attic</title>
+<meta name="description" content="Take the 20-question quiz on In the Attic — Class X English, Unit 1.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#FBF3E4;
+    --parchment-dark:#F0E4CC;
+    --ink:#2B1E14;
+    --ink-soft:#5A4632;
+    --rust:#A63D2F;
+    --amber:#E8934A;
+    --teal:#1E6E67;
+    --gold:#C9932F;
+    --card-shadow: 0 10px 30px rgba(43,30,20,0.12);
+    --radius: 14px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(232,147,74,0.15), transparent 40%),
+      radial-gradient(circle at 90% 10%, rgba(30,110,103,0.10), transparent 40%),
+      var(--parchment);
+    color:var(--ink);
+    font-family:'Source Serif 4', serif;
+    line-height:1.65;
+    min-height:100vh;
+  }
+
+  header.hero{
+    position:relative;
+    padding:40px 20px 28px;
+    text-align:center;
+    overflow:hidden;
+    background:linear-gradient(180deg, #FDEBD3 0%, var(--parchment) 100%);
+    border-bottom:2px solid var(--parchment-dark);
+  }
+  .eyebrow{
+    letter-spacing:3px; text-transform:uppercase; font-size:12px;
+    color:var(--teal); font-weight:600;
+  }
+  h1.title{
+    font-family:'Playfair Display', serif; font-weight:700; color:var(--rust);
+    font-size:clamp(22px, 4.5vw, 34px); margin:8px 0 6px;
+  }
+  .subtitle{ color:var(--ink-soft); font-size:14.5px; margin:0;}
+  .feather-divider{ width:100px; height:24px; margin:14px auto 0; opacity:0.85; }
+  .back-link{
+    display:inline-block; margin-top:16px; font-size:13px; color:var(--teal);
+    text-decoration:none; font-weight:600;
+  }
+  .back-link:hover{ text-decoration:underline; }
+
+  main{ max-width:640px; margin:0 auto; padding:28px 20px 70px; }
+
+  .card{
+    background:#fff; border:1px solid var(--parchment-dark); border-radius:var(--radius);
+    box-shadow:var(--card-shadow); padding:24px 26px; margin-bottom:18px;
+  }
+
+  .quiz-header-row{
+    display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:14px;
+  }
+  h2.section-title{
+    font-family:'Playfair Display', serif; color:var(--teal); font-size:20px; margin:0;
+  }
+  .btn{
+    background:var(--rust); color:#fff; border:none; padding:11px 20px;
+    border-radius:999px; font-size:14.5px; cursor:pointer; font-family:'Source Serif 4',serif;
+  }
+  .btn:hover{ background:#8B3226; }
+  .btn:disabled{ opacity:0.4; cursor:not-allowed; }
+  .btn-outline{ background:transparent; color:var(--rust); border:1.5px solid var(--rust); }
+  .btn-outline:hover{ background:var(--rust); color:#fff; }
+  .invite-btn{ font-size:13px; padding:8px 16px; white-space:nowrap; }
+
+  #invite-fallback, #share-fallback{ max-width:100%; margin:0 0 14px; font-size:13px; color:var(--ink-soft); }
+  #invite-fallback textarea, #share-fallback textarea{
+    width:100%; min-height:60px; margin-top:6px; padding:10px;
+    border:1px solid var(--parchment-dark); border-radius:8px;
+    font-family:'Source Serif 4',serif; font-size:13px; background:#FBF6EA;
+  }
+
+  .quiz-progress{ display:flex; gap:5px; justify-content:center; margin-bottom:20px; flex-wrap:wrap; }
+  .quiz-dot{ width:9px; height:9px; border-radius:50%; background:var(--parchment-dark); transition:all .2s; }
+  .quiz-dot.done{ background:var(--gold); }
+  .quiz-dot.active{ background:var(--rust); transform:scale(1.3); }
+
+  .quiz-q{ margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--parchment-dark);}
+  .quiz-q strong{ font-size:16px; }
+  .quiz-options label{
+    display:block; padding:10px 14px; margin:7px 0;
+    border:1.5px solid var(--parchment-dark); border-radius:8px; cursor:pointer; transition:all .15s;
+  }
+  .quiz-options label:hover{ border-color:var(--amber); }
+  .quiz-options input{ margin-right:8px; }
+  .quiz-nav{ display:flex; justify-content:space-between; margin-top:18px; }
+  .quiz-final-actions{ display:flex; gap:12px; margin-top:14px; flex-wrap:wrap; }
+  #quiz-result{ font-family:'Playfair Display',serif; font-size:20px; color:var(--teal); margin-top:6px; }
+
+  footer{ text-align:center; padding:22px; color:var(--ink-soft); font-size:12.5px; }
+  footer a{ color:var(--teal); text-decoration:none; }
+  footer a:hover{ text-decoration:underline; }
+
+  .print-btn{
+    position:fixed; bottom:20px; right:20px; z-index:60;
+    background:var(--teal); color:#fff; border:none;
+    padding:12px 18px; border-radius:999px; font-size:14px; cursor:pointer;
+    font-family:'Source Serif 4',serif; box-shadow:0 6px 16px rgba(30,110,103,0.35);
+    display:flex; align-items:center; gap:6px;
+  }
+  .print-btn:hover{ background:#15544F; }
+
+  @media print{
+    .print-btn, .invite-btn, #invite-fallback, #share-fallback,
+    .quiz-nav, .quiz-progress, .quiz-final-actions, header.hero .feather-divider,
+    #quiz-active, #quiz-final, .back-link, .lock-screen{ display:none !important; }
+    body{ background:#fff; }
+    .card{ box-shadow:none; border:1px solid #ccc; }
+    .print-only{ display:block !important; }
+  }
+  .print-only{ display:none; }
+  .print-only .pq{ margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--parchment-dark); }
+  .print-only .pq strong{ display:block; margin-bottom:6px; }
+  .print-only .popt{ margin:3px 0 3px 14px; }
+
+  .lock-screen{ text-align:center; padding:30px 10px; }
+  .lock-screen .lock-icon{ font-size:40px; margin-bottom:14px; }
+  .lock-screen h3{
+    font-family:'Playfair Display',serif; color:var(--rust); font-size:20px; margin:0 0 10px;
+  }
+  .lock-screen p{ color:var(--ink-soft); font-size:14.5px; max-width:400px; margin:0 auto 6px; }
+  .lock-screen .lock-score{
+    display:inline-block; margin-top:14px; font-family:'Playfair Display',serif;
+    font-size:22px; color:var(--teal); background:#EAF3E9; padding:10px 22px; border-radius:999px;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">Class X · English · Unit 1</div>
+  <h1 class="title">In the Attic — Quiz</h1>
+  <p class="subtitle">Test what you remember about the story!</p>
+  <svg class="feather-divider" viewBox="0 0 120 28" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10,20 Q35,0 60,14 Q85,0 110,20" stroke="#C9932F" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="60" cy="14" r="3" fill="#A63D2F"/>
+  </svg>
+  <br>
+  <a class="back-link" href="english-in-the-attic.html">&larr; Back to Full Study Portal</a>
+</header>
+
+<main>
+  <div class="card">
+    <div class="quiz-header-row">
+      <h2 class="section-title">20 Questions</h2>
+      <button id="invite-share" class="btn btn-outline invite-btn" type="button">↗ Share This Quiz</button>
+    </div>
+    <div id="invite-fallback"></div>
+    <div id="quiz-progress" class="quiz-progress"></div>
+
+    <div id="quiz-locked" style="display:none;" class="lock-screen"></div>
+
+    <div id="quiz-active">
+      <div id="quiz-question-wrap" class="quiz-q"></div>
+      <div class="quiz-nav">
+        <button id="quiz-prev" class="btn btn-outline" type="button">Previous</button>
+        <button id="quiz-next" class="btn" type="button">Next</button>
+      </div>
+    </div>
+
+    <div id="quiz-final" style="display:none;">
+      <div id="quiz-result"></div>
+      <div class="quiz-final-actions">
+        <button id="quiz-share" class="btn" type="button">Share Result</button>
+      </div>
+      <div id="share-fallback"></div>
+    </div>
+
+    <div id="print-worksheet" class="print-only"></div>
+  </div>
+</main>
+
+<button class="print-btn" onclick="window.print()" type="button">🖨️ Print</button>
+
+<footer>In the Attic · Class X English · Unit 1</footer>
+
+<script>
+const quizData = [
+  { q: "1. Where does Szpilman say he is hiding when the officer asks?",
+    options: ["In the basement", "In the attic", "In the larder", "In the garden"], answer: 1 },
+  { q: "2. What was Szpilman's profession?",
+    options: ["A writer", "A painter", "A pianist", "A teacher"], answer: 2 },
+  { q: "3. What piece of music does Szpilman play for the officer?",
+    options: ["Beethoven's Symphony", "Chopin's Nocturne in C sharp minor", "Mozart's Requiem", "Bach's Fugue"], answer: 1 },
+  { q: "4. What does the officer discover above the attic entrance?",
+    options: ["A secret door", "A hidden loft", "A store room", "A window"], answer: 1 },
+  { q: "5. What does the officer bring Szpilman on his second visit?",
+    options: ["Medicine", "Clothes", "Loaves of bread and jam", "A radio"], answer: 2 },
+  { q: "6. What does the officer urge Szpilman to do?",
+    options: ["Surrender to the Germans", "Hang on for a few more weeks", "Escape to another country", "Stop playing music"], answer: 1 },
+  { q: "7. What does the officer leave Szpilman on his last visit?",
+    options: ["A gun", "A warm eiderdown and coat", "Money", "A map"], answer: 1 },
+  { q: "8. What does Szpilman give the officer before he leaves for the last time?",
+    options: ["A piece of music", "His name", "A photograph", "A letter"], answer: 1 },
+  { q: "9. Why does a woman scream when she sees Szpilman after liberation?",
+    options: ["She recognised him", "She mistook him for a German because of his coat", "She thought he was a ghost", "She was scared of strangers"], answer: 1 },
+  { q: "10. What happened to Wilm Hosenfeld, the officer who saved Szpilman?",
+    options: ["He escaped to another country", "He was honoured after the war", "He died in a Soviet prison in 1952", "He met Szpilman again after the war"], answer: 2 },
+  { q: "11. What was Szpilman doing when the officer first found him?",
+    options: ["Sleeping soundly", "Slumped on a chair by the larder door", "Cooking food", "Reading a book"], answer: 1 },
+  { q: "12. How long had it been since Szpilman last practiced the piano?",
+    options: ["Six months", "One year", "Two and a half years", "Five years"], answer: 2 },
+  { q: "13. What did Szpilman hear immediately after he finished playing the piano?",
+    options: ["Applause", "A shot down below outside the building", "Footsteps approaching", "Silence only"], answer: 1 },
+  { q: "14. What was the officer's nationality?",
+    options: ["Polish", "Russian", "German", "Austrian"], answer: 2 },
+  { q: "15. How did Szpilman respond when the officer suggested moving him to a village?",
+    options: ["He agreed at once", "He said he couldn't leave that place", "He asked for more time to think", "He asked the officer to come with him"], answer: 1 },
+  { q: "16. What did soldiers often carry up and down the stairs near the attic?",
+    options: ["Weapons", "Large packages", "Furniture", "Food supplies for themselves"], answer: 1 },
+  { q: "17. On what date did the officer make his last visit to Szpilman?",
+    options: ["25 November", "12 December", "1 January", "15 January"], answer: 1 },
+  { q: "18. What did the radio loudspeakers announce?",
+    options: ["A ceasefire negotiation", "The defeat of Germany and the liberation of Warsaw", "A curfew order", "A call for volunteers"], answer: 1 },
+  { q: "19. What did the Polish lieutenant shout when he first saw Szpilman?",
+    options: ["\"Don't shoot!\"", "\"Hands up!\"", "\"Run away!\"", "\"Who are you?\""], answer: 1 },
+  { q: "20. Why was Szpilman's situation described as 'absurd' after liberation?",
+    options: ["He had nowhere to live", "He was almost shot by Polish soldiers, his own countrymen", "He lost his piano", "He couldn't find his family"], answer: 1 }
+];
+
+let currentQ = 0;
+const userAnswers = new Array(quizData.length).fill(null);
+
+const progressEl = document.getElementById('quiz-progress');
+const qWrap = document.getElementById('quiz-question-wrap');
+const prevBtn = document.getElementById('quiz-prev');
+const nextBtn = document.getElementById('quiz-next');
+const activeBlock = document.getElementById('quiz-active');
+const finalBlock = document.getElementById('quiz-final');
+
+function buildProgress(){
+  progressEl.innerHTML = '';
+  quizData.forEach((_, i)=>{
+    const dot = document.createElement('div');
+    dot.className = 'quiz-dot';
+    dot.id = `dot-${i}`;
+    progressEl.appendChild(dot);
+  });
+}
+
+function updateProgress(){
+  quizData.forEach((_, i)=>{
+    const dot = document.getElementById(`dot-${i}`);
+    dot.classList.remove('active','done');
+    if(i === currentQ) dot.classList.add('active');
+    else if(userAnswers[i] !== null) dot.classList.add('done');
+  });
+}
+
+function renderQuestion(){
+  const item = quizData[currentQ];
+  const optsHtml = item.options.map((opt, j)=>{
+    const checked = userAnswers[currentQ] === j ? 'checked' : '';
+    return `<label><input type="radio" name="qcurrent" value="${j}" ${checked}> ${opt}</label>`;
+  }).join('');
+  qWrap.innerHTML = `<div><strong>${item.q}</strong></div><div class="quiz-options">${optsHtml}</div>`;
+
+  qWrap.querySelectorAll('input[name="qcurrent"]').forEach(input=>{
+    input.addEventListener('change', (e)=>{
+      userAnswers[currentQ] = parseInt(e.target.value);
+      updateProgress();
+    });
+  });
+
+  prevBtn.disabled = currentQ === 0;
+  nextBtn.textContent = currentQ === quizData.length - 1 ? 'Finish' : 'Next';
+  updateProgress();
+}
+
+prevBtn.addEventListener('click', ()=>{
+  if(currentQ > 0){ currentQ--; renderQuestion(); }
+});
+
+nextBtn.addEventListener('click', ()=>{
+  if(currentQ < quizData.length - 1){
+    currentQ++;
+    renderQuestion();
+  } else {
+    finishQuiz();
+  }
+});
+
+function finishQuiz(){
+  let score = 0;
+  quizData.forEach((item, i)=>{ if(userAnswers[i] === item.answer) score++; });
+  activeBlock.style.display = 'none';
+  finalBlock.style.display = 'block';
+  document.getElementById('quiz-result').textContent = `You scored ${score} out of ${quizData.length}!`;
+  document.getElementById('share-fallback').innerHTML = '';
+  document.getElementById('quiz-share').dataset.score = score;
+  saveAttempt(score);
+}
+
+document.getElementById('quiz-share').addEventListener('click', async ()=>{
+  const score = document.getElementById('quiz-share').dataset.score;
+  const shareText = `I scored ${score}/${quizData.length} on the "In the Attic" quiz! Try it yourself.`;
+  const url = window.location.href;
+  const fallback = document.getElementById('share-fallback');
+
+  if(navigator.share){
+    try{ await navigator.share({ title: 'In the Attic Quiz Result', text: shareText, url }); return; }
+    catch(err){}
+  }
+  try{
+    await navigator.clipboard.writeText(`${shareText}\n${url}`);
+    fallback.innerHTML = `Copied! Paste it anywhere.<br><textarea readonly>${shareText}\n${url}</textarea>`;
+  }catch(err){
+    fallback.innerHTML = `<textarea readonly>${shareText}\n${url}</textarea>`;
+  }
+});
+
+document.getElementById('invite-share').addEventListener('click', async ()=>{
+  const url = window.location.href;
+  const shareData = {
+    title: 'In the Attic Quiz',
+    text: 'Take this quiz on "In the Attic" (Class X English, Unit 1) and test what you know!',
+    url
+  };
+  const fallback = document.getElementById('invite-fallback');
+
+  if(navigator.share){
+    try{ await navigator.share(shareData); return; }
+    catch(err){}
+  }
+  try{
+    await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
+    fallback.innerHTML = `Quiz link copied! Paste it to invite others.<br><textarea readonly>${shareData.text}\n${shareData.url}</textarea>`;
+  }catch(err){
+    fallback.innerHTML = `<textarea readonly>${shareData.text}\n${shareData.url}</textarea>`;
+  }
+});
+
+/* ============================================================
+   TIME-GATE + SINGLE-ATTEMPT-PER-DAY LOCK
+   Quiz is only open 9:30 PM – 10:30 PM, once per day.
+   ============================================================ */
+const QUIZ_ID = 'in_the_attic';
+const WINDOW_START = { h: 21, m: 30 }; // 9:30 PM
+const WINDOW_END   = { h: 22, m: 30 }; // 10:30 PM
+
+function todayKey(){
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function attemptStorageKey(){
+  return `quiz_attempt_${QUIZ_ID}_${todayKey()}`;
+}
+
+function isWithinWindow(){
+  const now = new Date();
+  const mins = now.getHours()*60 + now.getMinutes();
+  const startMins = WINDOW_START.h*60 + WINDOW_START.m;
+  const endMins = WINDOW_END.h*60 + WINDOW_END.m;
+  return mins >= startMins && mins <= endMins;
+}
+
+function formatTimeRange(){
+  return "9:30 PM – 10:30 PM";
+}
+
+function saveAttempt(score){
+  try{
+    localStorage.setItem(attemptStorageKey(), JSON.stringify({
+      score, total: quizData.length, time: new Date().toISOString()
+    }));
+  }catch(err){}
+}
+
+function getTodayAttempt(){
+  try{
+    const raw = localStorage.getItem(attemptStorageKey());
+    return raw ? JSON.parse(raw) : null;
+  }catch(err){ return null; }
+}
+
+function showLock(html){
+  document.getElementById('quiz-active').style.display = 'none';
+  document.getElementById('quiz-final').style.display = 'none';
+  document.getElementById('quiz-progress').style.display = 'none';
+  const lock = document.getElementById('quiz-locked');
+  lock.style.display = 'block';
+  lock.innerHTML = html;
+}
+
+function checkAccess(){
+  const existingAttempt = getTodayAttempt();
+
+  if(existingAttempt){
+    showLock(`
+      <div class="lock-icon">✅</div>
+      <h3>You've already attempted today's quiz</h3>
+      <p>Come back tomorrow between ${formatTimeRange()} for a new attempt.</p>
+      <div class="lock-score">Your Score: ${existingAttempt.score} / ${existingAttempt.total}</div>
+    `);
+    return false;
+  }
+
+  if(!isWithinWindow()){
+    showLock(`
+      <div class="lock-icon">🔒</div>
+      <h3>Quiz is not open right now</h3>
+      <p>This quiz can only be attempted daily between <strong>${formatTimeRange()}</strong>. Please come back during that time.</p>
+    `);
+    return false;
+  }
+
+  return true;
+}
+
+if(checkAccess()){
+  buildProgress();
+  renderQuestion();
+}
+
+// Printable worksheet version
+const pw = document.getElementById('print-worksheet');
+let pwHtml = '<h2 class="section-title" style="margin-bottom:14px;">Printable Worksheet</h2>';
+quizData.forEach((item)=>{
+  pwHtml += `<div class="pq"><strong>${item.q}</strong>`;
+  item.options.forEach((opt, j)=>{
+    pwHtml += `<div class="popt">${String.fromCharCode(65+j)}. ${opt}</div>`;
+  });
+  pwHtml += `</div>`;
+});
+pwHtml += '<h3 style="margin-top:20px;">Answer Key</h3><p>';
+pwHtml += quizData.map((item,i)=> `${i+1}-${String.fromCharCode(65+item.answer)}`).join('&nbsp;&nbsp;');
+pwHtml += '</p>';
+pw.innerHTML = pwHtml;
+</script>
+</body>
+</html>

@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>In the Attic — Study Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#FBF3E4;
+    --parchment-dark:#F0E4CC;
+    --ink:#2B1E14;
+    --ink-soft:#5A4632;
+    --rust:#A63D2F;
+    --amber:#E8934A;
+    --teal:#1E6E67;
+    --gold:#C9932F;
+    --card-shadow: 0 10px 30px rgba(43,30,20,0.12);
+    --radius: 14px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(232,147,74,0.15), transparent 40%),
+      radial-gradient(circle at 90% 10%, rgba(30,110,103,0.10), transparent 40%),
+      var(--parchment);
+    color:var(--ink);
+    font-family:'Source Serif 4', serif;
+    line-height:1.65;
+  }
+  .malayalam{font-family:'Noto Sans Malayalam','Source Serif 4',serif;}
+
+  header.hero{
+    position:relative;
+    padding:56px 24px 40px;
+    text-align:center;
+    overflow:hidden;
+    background:linear-gradient(180deg, #FDEBD3 0%, var(--parchment) 100%);
+    border-bottom:2px solid var(--parchment-dark);
+  }
+  header.hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(ellipse at 50% 120%, rgba(166,61,47,0.10), transparent 60%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    letter-spacing:3px; text-transform:uppercase; font-size:12px;
+    color:var(--teal); font-weight:600; font-family:'Source Serif 4',serif;
+  }
+  h1.title{
+    font-family:'Playfair Display', serif; font-weight:700; color:var(--rust);
+    font-size:clamp(28px, 5vw, 48px); margin:8px 0 6px;
+  }
+  .subtitle{ font-style:italic; color:var(--ink-soft); font-size:16px; margin:0 0 4px; }
+  .byline{color:var(--ink-soft); font-size:14px;}
+  .feather-divider{ width:120px; height:28px; margin:18px auto 0; opacity:0.85; }
+
+  nav.tabs{
+    position:sticky; top:0; z-index:50;
+    display:flex; flex-wrap:wrap; gap:6px; justify-content:center;
+    padding:12px 16px;
+    background:rgba(251,243,228,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--parchment-dark);
+  }
+  nav.tabs button{
+    font-family:'Source Serif 4', serif; font-size:14px;
+    padding:9px 16px; border-radius:999px; border:1.5px solid transparent;
+    background:transparent; color:var(--ink-soft); cursor:pointer; transition:all .2s ease;
+  }
+  nav.tabs button:hover{ border-color:var(--gold); color:var(--ink); }
+  nav.tabs button.active{
+    background:var(--rust); color:#fff; border-color:var(--rust);
+    box-shadow:0 4px 10px rgba(166,61,47,0.3);
+  }
+
+  main{ max-width:920px; margin:0 auto; padding:32px 20px 80px; }
+  .panel{ display:none; animation:fade .35s ease; }
+  .panel.active{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  .card{
+    background:#fff; border:1px solid var(--parchment-dark); border-radius:var(--radius);
+    box-shadow:var(--card-shadow); padding:24px 26px; margin-bottom:22px;
+  }
+  h2.section-title{
+    font-family:'Playfair Display', serif; color:var(--teal); font-size:24px;
+    margin-top:0; border-bottom:2px solid var(--parchment-dark); padding-bottom:10px;
+  }
+  h3{ color:var(--rust); font-family:'Playfair Display', serif; font-size:18px;}
+
+  .torn-card{
+    background:#F5F0E4; border-radius:2px; padding:22px 26px; position:relative;
+    box-shadow:var(--card-shadow); margin-bottom:22px;
+  }
+  .torn-card::after{
+    content:""; position:absolute; right:-2px; top:0; bottom:0; width:14px;
+    background:repeating-linear-gradient(-45deg, var(--parchment) 0 6px, transparent 6px 12px);
+  }
+
+  table{ width:100%; border-collapse:collapse; margin:14px 0; font-size:15px;}
+  th, td{ border:1px solid var(--parchment-dark); padding:10px 12px; text-align:left; vertical-align:top;}
+  th{ background:var(--teal); color:#fff; font-family:'Playfair Display',serif; font-weight:600;}
+  tr:nth-child(even) td{ background:#FBF6EA; }
+
+  .glossary-term{ font-weight:700; color:var(--rust); }
+  .glossary-item{ padding:10px 0; border-bottom:1px dashed var(--parchment-dark); }
+  .glossary-item:last-child{ border-bottom:none; }
+
+  .btn{
+    background:var(--rust); color:#fff; border:none; padding:12px 22px;
+    border-radius:999px; font-size:15px; cursor:pointer; font-family:'Source Serif 4',serif;
+  }
+  .btn:hover{ background:#8B3226; }
+  .btn:disabled{ opacity:0.4; cursor:not-allowed; }
+  .btn-outline{ background:transparent; color:var(--rust); border:1.5px solid var(--rust); }
+  .btn-outline:hover{ background:var(--rust); color:#fff; }
+
+  .quiz-q{ margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--parchment-dark);}
+  .quiz-options label{
+    display:block; padding:8px 12px; margin:6px 0; border:1.5px solid var(--parchment-dark);
+    border-radius:8px; cursor:pointer; transition:all .15s;
+  }
+  .quiz-options label:hover{ border-color:var(--amber); }
+  .quiz-options input{ margin-right:8px; }
+  #quiz-result{ font-family:'Playfair Display',serif; font-size:20px; color:var(--teal); margin-top:16px; }
+
+  .quiz-progress{ display:flex; gap:6px; justify-content:center; margin-bottom:20px; flex-wrap:wrap; }
+  .quiz-header-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+  .quiz-invite-btn{ font-size:13px; padding:8px 16px; white-space:nowrap; }
+  #quiz-invite-fallback{ max-width:420px; margin:0 0 14px; font-size:13px; color:var(--ink-soft); }
+  #quiz-invite-fallback textarea{
+    width:100%; min-height:60px; margin-top:6px; padding:10px; border:1px solid var(--parchment-dark);
+    border-radius:8px; font-family:'Source Serif 4',serif; font-size:13px; background:#FBF6EA;
+  }
+  .quiz-dot{ width:10px; height:10px; border-radius:50%; background:var(--parchment-dark); transition:all .2s; }
+  .quiz-dot.done{ background:var(--gold); }
+  .quiz-dot.active{ background:var(--rust); transform:scale(1.3); }
+  .quiz-nav{ display:flex; justify-content:space-between; margin-top:18px; }
+  .quiz-final-actions{ display:flex; gap:12px; margin-top:14px; flex-wrap:wrap; }
+  #share-fallback{ margin-top:12px; font-size:13.5px; color:var(--ink-soft); }
+  #share-fallback textarea{
+    width:100%; min-height:70px; margin-top:6px; padding:10px; border:1px solid var(--parchment-dark);
+    border-radius:8px; font-family:'Source Serif 4',serif; font-size:13.5px; background:#FBF6EA;
+  }
+
+  .qa-item{ margin-bottom:14px; }
+  .qa-item .q{ font-weight:600; color:var(--rust); }
+  .qa-item .a{ margin-top:4px; color:var(--ink-soft); }
+  .qa-subhead{ font-family:'Playfair Display',serif; color:var(--teal); font-size:17px; margin:22px 0 10px; }
+
+  .ep-group{ margin-bottom:26px; }
+  .ep-tag{
+    display:inline-block; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+    background:var(--teal); color:#fff; padding:3px 10px; border-radius:999px; margin-bottom:8px;
+  }
+  .ep-marks{ float:right; color:var(--ink-soft); font-size:13px; font-style:italic; }
+  .ep-passage{
+    background:#F5F0E4; border-left:4px solid var(--gold); padding:12px 16px; margin:10px 0;
+    font-style:italic; font-size:14.5px; border-radius:4px;
+  }
+  .ep-q{ margin:10px 0 6px; }
+  .ep-options{ margin:6px 0 6px 18px; color:var(--ink-soft); font-size:14.5px; }
+  .ep-options div{ margin:2px 0; }
+  .reveal-btn{
+    background:transparent; border:1.5px solid var(--teal); color:var(--teal);
+    padding:5px 14px; border-radius:999px; font-size:13px; cursor:pointer; margin-top:6px;
+  }
+  .reveal-btn:hover{ background:var(--teal); color:#fff; }
+  .ep-answer{
+    display:none; margin-top:10px; padding:10px 14px; background:#EAF3E9;
+    border-left:4px solid #5A9A4A; border-radius:4px; font-size:14.5px; color:var(--ink);
+  }
+  .ep-answer.show{ display:block; }
+  .ep-table{ width:100%; border-collapse:collapse; font-size:14px; margin:10px 0; }
+  .ep-table td, .ep-table th{ border:1px solid var(--parchment-dark); padding:6px 10px; }
+
+  footer{ text-align:center; padding:24px; color:var(--ink-soft); font-size:13px; }
+
+  .print-btn{
+    position:fixed; bottom:20px; right:20px; z-index:60;
+    background:var(--teal); color:#fff; border:none; padding:12px 18px; border-radius:999px;
+    font-size:14px; cursor:pointer; font-family:'Source Serif 4',serif;
+    box-shadow:0 6px 16px rgba(30,110,103,0.35); display:flex; align-items:center; gap:6px;
+  }
+  .print-btn:hover{ background:#15544F; }
+
+  @media print{
+    nav.tabs, .print-btn, .reveal-btn, .quiz-nav, .quiz-progress,
+    .quiz-header-row .quiz-invite-btn, #quiz-invite-fallback, #share-fallback,
+    .quiz-final-actions, header.hero .feather-divider{ display:none !important; }
+    body{ background:#fff; }
+    .panel{ display:block !important; page-break-after:always; }
+    .card, .torn-card{ box-shadow:none; border:1px solid #ccc; }
+    .ep-answer{ display:block !important; }
+  }
+
+  @media (max-width:600px){
+    nav.tabs{ justify-content:flex-start; overflow-x:auto; flex-wrap:nowrap; }
+    nav.tabs button{ flex:0 0 auto; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()" type="button">🖨️ Print</button>
+
+<header class="hero">
+  <div class="eyebrow">Class X · English · Unit 1 — Trials and Triumphs</div>
+  <h1 class="title">In the Attic</h1>
+  <p class="subtitle">Władysław Szpilman</p>
+  <p class="byline">Survivor Testimony · Adapted from <em>The Pianist</em></p>
+  <svg class="feather-divider" viewBox="0 0 120 28" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10,20 Q35,0 60,14 Q85,0 110,20" stroke="#C9932F" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="60" cy="14" r="3" fill="#A63D2F"/>
+  </svg>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button data-tab="overview" class="active">Overview</button>
+  <button data-tab="summary">Summary</button>
+  <button data-tab="malayalam">മലയാളം സംഗ്രഹം</button>
+  <button data-tab="characters">Characters</button>
+  <button data-tab="glossary">Glossary</button>
+  <button data-tab="qa">Q &amp; A</button>
+  <button data-tab="examprep">Exam Practice</button>
+  <button data-tab="quiz">Quiz</button>
+</nav>
+
+<main>
+
+  <!-- OVERVIEW -->
+  <section class="panel active" id="overview">
+    <div class="card">
+      <h2 class="section-title">About the Chapter</h2>
+      <p>This survivor testimony belongs to Unit 1, <em>Trials and Triumphs</em>. It records Władysław Szpilman's real experience of hiding from the Nazis in war-torn Warsaw during World War II, and how an unexpected act of humanity from a German officer, Wilm Hosenfeld, kept him alive.</p>
+      <p>Szpilman, a Polish Jew, was forced into the Warsaw ghetto, where he witnessed the horrors of the Holocaust. In hiding, starving and in despair, he is discovered by a German officer — but instead of being harmed, he is protected, fed, and encouraged to hold on until the war ends.</p>
+    </div>
+    <div class="card">
+      <h2 class="section-title">About the Author</h2>
+      <p><strong>Władysław Szpilman</strong> (1911–2000) was a Polish pianist and classical composer. His memoir <em>The Pianist</em> was published in 1946 and later adapted into an award-winning film by Roman Polanski in 2002. Szpilman composed over 500 works, including piano pieces, songs, and film scores.</p>
+    </div>
+    <div class="torn-card">
+      <h3>A Note on the German Officer</h3>
+      <p>Wilm Hosenfeld, the soldier who saved Szpilman, also saved many other individuals during the war. He was captured by the Red Army towards its end, could not contact Szpilman again, and died in a Soviet prison in 1952.</p>
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section class="panel" id="summary">
+    <div class="card">
+      <h2 class="section-title">Summary (English)</h2>
+      <p>Hiding among the ruins of a bombed building in Warsaw, Szpilman is discovered by a German officer. Terrified, he refuses to move, but the officer reassures him he means no harm and asks what he does for a living. Learning that Szpilman is a pianist, the officer leads him to a room with a piano and asks him to play.</p>
+      <p>With stiff, trembling fingers — unpracticed for over two years — Szpilman plays Chopin's Nocturne in C sharp minor. The officer listens in silence, then urges him to leave the city for safety. When Szpilman refuses, insisting he cannot leave, the officer realises he is hiding because he is Jewish. Rather than turning him in, the officer inspects Szpilman's hiding place, finds a hidden loft above the attic, and advises him to hide there instead. He promises to bring food.</p>
+      <p>Over the following weeks, the officer returns periodically with bread and supplies, encouraging Szpilman to "hang on," insisting the war will end soon. Szpilman endures freezing cold, isolation, and the constant fear of discovery, surviving on hope and the officer's occasional visits. On his last visit, the officer brings extra food and a warm eiderdown, revealing he must leave with his unit — but not before Szpilman insists on giving him his name, in case he can ever return the favour.</p>
+      <p>Eventually, Warsaw is liberated. Szpilman nearly loses his life again — this time almost shot by Polish soldiers who mistake him for a German because of the coat the officer had given him. Once they realise he is Polish, he is cared for, and finally walks free through the ruined streets of Warsaw for the first time in six years.</p>
+      <p><strong>Theme:</strong> The story is a real, first-hand testimony to how compassion and humanity can survive even in the most brutal circumstances — and how one act of kindness, regardless of the side of a war someone is on, can save a life.</p>
+    </div>
+  </section>
+
+  <!-- MALAYALAM SUMMARY -->
+  <section class="panel malayalam" id="malayalam">
+    <div class="card malayalam">
+      <h2 class="section-title malayalam">മലയാളം സംഗ്രഹം</h2>
+      <p>വാർസോയിലെ തകർന്ന കെട്ടിടത്തിന്റെ അവശിഷ്ടങ്ങൾക്കിടയിൽ ഒളിച്ചിരിക്കുന്ന സ്പിൽമാനെ ഒരു ജർമ്മൻ ഓഫീസർ കണ്ടെത്തുന്നു. ഭയന്ന സ്പിൽമാൻ അനങ്ങാൻ വിസമ്മതിക്കുന്നു, എന്നാൽ താൻ ഉപദ്രവിക്കില്ലെന്ന് ഓഫീസർ ഉറപ്പുനൽകുന്നു. സ്പിൽമാൻ ഒരു പിയാനിസ്റ്റാണെന്നറിഞ്ഞ ഓഫീസർ അയാളെ പിയാനോ ഇരിക്കുന്ന മുറിയിലേക്ക് കൊണ്ടുപോയി വായിക്കാൻ ആവശ്യപ്പെടുന്നു.</p>
+      <p>രണ്ട് വർഷത്തിലേറെയായി പരിശീലിക്കാത്ത വിറയ്ക്കുന്ന വിരലുകളോടെ, സ്പിൽമാൻ ചോപിന്റെ നോക്ടേൺ വായിക്കുന്നു. ഓഫീസർ നിശബ്ദമായി കേട്ടിരുന്ന ശേഷം, നഗരം വിട്ടുപോകാൻ അയാളെ ഉപദേശിക്കുന്നു. തനിക്ക് ഇവിടം വിട്ടുപോകാൻ കഴിയില്ലെന്ന് സ്പിൽമാൻ പറയുമ്പോൾ, അയാൾ ജൂതനായതിനാലാണ് ഒളിച്ചിരിക്കുന്നതെന്ന് ഓഫീസർ മനസ്സിലാക്കുന്നു. ഒറ്റിക്കൊടുക്കുന്നതിന് പകരം, ഓഫീസർ ഒളിസങ്കേതം പരിശോധിച്ച്, മാളികയ്ക്ക് മുകളിലുള്ള ഒരു തട്ട് കണ്ടെത്തി, അവിടെ ഒളിക്കാൻ നിർദ്ദേശിക്കുന്നു. ഭക്ഷണം കൊണ്ടുവരാമെന്ന് വാഗ്ദാനം ചെയ്യുന്നു.</p>
+      <p>തുടർന്നുള്ള ആഴ്ചകളിൽ, ഓഫീസർ ഇടയ്ക്കിടെ റൊട്ടിയും സാധനങ്ങളുമായി വന്ന്, "പിടിച്ചുനിൽക്കൂ" എന്ന് പ്രോത്സാഹിപ്പിക്കുന്നു, യുദ്ധം ഉടൻ അവസാനിക്കുമെന്ന് ഉറപ്പിച്ചു പറയുന്നു. കൊടും തണുപ്പും ഏകാന്തതയും കണ്ടെത്തപ്പെടുമെന്ന നിരന്തര ഭയവും സ്പിൽമാൻ സഹിക്കുന്നു, പ്രതീക്ഷയിലും ഓഫീസറുടെ സന്ദർശനങ്ങളിലും അതിജീവിക്കുന്നു. അവസാന സന്ദർശനത്തിൽ, ഓഫീസർ കൂടുതൽ ഭക്ഷണവും ഒരു ചൂടുള്ള കമ്പിളിയും കൊണ്ടുവന്ന്, തന്റെ സൈനിക വിഭാഗത്തോടൊപ്പം പോകേണ്ടിവരുമെന്ന് വെളിപ്പെടുത്തുന്നു — അതിനുമുൻപ്, എപ്പോഴെങ്കിലും സഹായം തിരികെ നൽകാൻ കഴിയുമെങ്കിൽ എന്ന പ്രതീക്ഷയിൽ സ്പിൽമാൻ തന്റെ പേര് ഓഫീസറെ അറിയിക്കാൻ നിർബന്ധിക്കുന്നു.</p>
+      <p>ഒടുവിൽ, വാർസോ മോചിപ്പിക്കപ്പെടുന്നു. ഓഫീസർ നൽകിയ കോട്ട് ധരിച്ചിരുന്നതിനാൽ ജർമ്മൻകാരനാണെന്ന് തെറ്റിദ്ധരിച്ച് പോളിഷ് സൈനികർ വെടിവയ്ക്കാൻ ഒരുങ്ങുമ്പോൾ സ്പിൽമാൻ വീണ്ടും മരണത്തിന്റെ വക്കിലെത്തുന്നു. അയാൾ പോളിഷ് ആണെന്ന് മനസ്സിലാക്കിയ ശേഷം, അയാളെ പരിചരിക്കുന്നു, ആറ് വർഷത്തിനുശേഷം ആദ്യമായി വാർസോയിലെ തകർന്ന തെരുവുകളിലൂടെ സ്വതന്ത്രനായി നടക്കുന്നു.</p>
+      <p><strong>ആശയം:</strong> യുദ്ധത്തിന്റെ ഏറ്റവും ക്രൂരമായ സാഹചര്യങ്ങളിലും മനുഷ്യത്വവും കരുണയും അതിജീവിക്കുമെന്നും, ഏത് പക്ഷത്തായാലും ഒരു ചെറിയ ദയാപ്രവൃത്തി ഒരു ജീവൻ രക്ഷിക്കുമെന്നും ഈ യഥാർത്ഥ അനുഭവസാക്ഷ്യം തെളിയിക്കുന്നു.</p>
+    </div>
+  </section>
+
+  <!-- CHARACTERS -->
+  <section class="panel" id="characters">
+    <div class="card">
+      <h2 class="section-title">Character Sketches</h2>
+      <table>
+        <tr><th>Trait Type</th><th>Władysław Szpilman</th><th>The German Officer (Wilm Hosenfeld)</th></tr>
+        <tr>
+          <td>Physical/Situation</td>
+          <td>Starving, unwashed, stiff-fingered from years without practice, hiding in an attic</td>
+          <td>A German army officer stationed in occupied Warsaw</td>
+        </tr>
+        <tr>
+          <td>Personality</td>
+          <td>Frightened yet firm and determined; clings to hope and dignity despite despair; grateful and generous even in his own desperation</td>
+          <td>Compassionate, remorseful about the war, quietly brave in risking his own safety to help a Jewish fugitive</td>
+        </tr>
+        <tr>
+          <td>Significance</td>
+          <td>Represents the endurance of ordinary people caught in extraordinary suffering</td>
+          <td>Represents humanity and conscience surviving even within a brutal system — proof that individual choice matters more than uniform or nationality</td>
+        </tr>
+      </table>
+      <p style="margin-top:14px;"><strong>Bond of trust:</strong> Despite being on opposite sides of the war, the two men form a quiet bond built on music, honesty, and mutual risk — the officer protects Szpilman with no guarantee of anything in return, and Szpilman offers his name and gratitude, hoping to repay the debt one day.</p>
+    </div>
+  </section>
+
+  <!-- GLOSSARY -->
+  <section class="panel" id="glossary">
+    <div class="card">
+      <h2 class="section-title">Glossary (My Words)</h2>
+      <div class="glossary-item"><span class="glossary-term">Slumped</span> — sat or fell heavily and suddenly, from exhaustion or despair. <span class="malayalam">(തളർന്നു വീണു)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Larder</span> — a small room or cupboard used for storing food. <span class="malayalam">(ഭക്ഷണം സൂക്ഷിക്കുന്ന അറ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Loft</span> — a raised platform or space, often just under a roof. <span class="malayalam">(മാളിക/തട്ട്)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Artillery</span> — large-calibre guns used in warfare. <span class="malayalam">(പീരങ്കി)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Eiderdown</span> — a warm quilt filled with soft down feathers. <span class="malayalam">(തൂവൽ കൊണ്ടുള്ള കമ്പിളി)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Detachment</span> — a group of troops or ships sent away from the main force for a special duty. <span class="malayalam">(പ്രത്യേക ചുമതലയ്ക്കുള്ള സൈനിക സംഘം)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Inferno</span> — a large, intense, and destructive fire; used here to mean a hellish situation. <span class="malayalam">(നരകതുല്യമായ അവസ്ഥ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Embarrassed</span> — feeling awkward, self-conscious, or shy. <span class="malayalam">(ജാള്യത)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Naive</span> — showing a lack of experience or worldly wisdom; innocently simple. <span class="malayalam">(നിഷ്കളങ്കമായ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Resonant</span> — deep, clear, and continuing to sound or ring. <span class="malayalam">(പ്രതിധ്വനിക്കുന്ന)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Lieutenant</span> — a junior officer rank in the army. <span class="malayalam">(ലെഫ്റ്റനന്റ്)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Ghetto</span> — a part of a city where a minority group was forced to live, often in poor conditions. <span class="malayalam">(ന്യൂനപക്ഷങ്ങളെ ഒറ്റപ്പെടുത്തി താമസിപ്പിച്ചിരുന്ന പ്രദേശം)</span></div>
+      <div class="glossary-item"><span class="glossary-term">En masse</span> — all together, as a group. <span class="malayalam">(കൂട്ടത്തോടെ)</span></div>
+    </div>
+  </section>
+
+  <!-- Q&A -->
+  <section class="panel" id="qa">
+    <div class="card">
+      <h2 class="section-title">While We Read — Q &amp; A</h2>
+      <div class="qa-item"><div class="q">a. What was the officer's attitude to Szpilman?</div><div class="a">He was calm, reassuring, and non-threatening — he made it clear from the start that he had no intention of harming Szpilman.</div></div>
+      <div class="qa-item"><div class="q">b. Why do you think the officer asked Szpilman to play the piano?</div><div class="a">He was curious about Szpilman's profession and perhaps wanted a moment of humanity and beauty amid the surrounding devastation of war.</div></div>
+      <div class="qa-item"><div class="q">c. Why was Szpilman hesitant to play the piano?</div><div class="a">He feared that if anyone heard the piano being played, his hiding place would be discovered and he would be caught.</div></div>
+      <div class="qa-item"><div class="q">d. How does the officer help Szpilman?</div><div class="a">He finds a safer hiding spot (the loft above the attic), brings him food regularly, gives him a warm eiderdown and coat, and encourages him to keep hope alive.</div></div>
+      <div class="qa-item"><div class="q">e. What was the officer ashamed of?</div><div class="a">He was ashamed of being German, given everything the Nazis had done during the war.</div></div>
+      <div class="qa-item"><div class="q">f. "Just hang on a few more weeks — the war will be over by spring at the latest." What is surprising about this statement?</div><div class="a">It is surprising that a German officer is expressing hope for Germany's defeat and offering comfort to a Jewish fugitive — the opposite of what his uniform would suggest.</div></div>
+      <div class="qa-item"><div class="q">g. What does the conversation between the officer and Szpilman reveal about the bond between them?</div><div class="a">It reveals mutual trust and quiet respect that transcended their opposing sides in the war — built through shared risk and honesty.</div></div>
+      <div class="qa-item"><div class="q">h. Why was there less artillery fire after a few weeks?</div><div class="a">It suggests the war was gradually shifting, with fighting moving away or slowing down, hinting that liberation was approaching.</div></div>
+      <div class="qa-item"><div class="q">i. Why does Szpilman say that his hiding place was well chosen?</div><div class="a">Because no one ever thought to search the hidden loft above the attic — it kept him undiscovered for a long time.</div></div>
+      <div class="qa-item"><div class="q">j. What do you think of Szpilman's advice to the German officer?</div><div class="a">It shows deep gratitude and a genuine wish to help in return — offering his name so the officer could reach him if he ever needed help, despite Szpilman's own desperate situation.</div></div>
+      <div class="qa-item"><div class="q">k. What sounds did Szpilman hear from the attic?</div><div class="a">Artillery fire, soldiers' footsteps, rustling rats and mice, and eventually radio announcements of Germany's defeat.</div></div>
+      <div class="qa-item"><div class="q">l. Why does Szpilman say that he had to be alone if he wanted to live?</div><div class="a">Because being with others increased the risk of discovery — solitude, though painful, was necessary for survival.</div></div>
+      <div class="qa-item"><div class="q">m. What were the radio announcements about?</div><div class="a">They announced the defeat of Germany and the liberation of Warsaw.</div></div>
+      <div class="qa-item"><div class="q">n. How does Szpilman survive the freezing cold?</div><div class="a">With the eiderdown and the German military overcoat left for him by the officer.</div></div>
+      <div class="qa-item"><div class="q">o. What information did Szpilman hope to gather?</div><div class="a">He wanted to know whether Warsaw had truly been liberated and whether it was safe to come out of hiding.</div></div>
+      <div class="qa-item"><div class="q">p. Why does the woman cry out when she sees Szpilman?</div><div class="a">She mistook him for a German soldier because of the military coat he was wearing, and cried out in fear/warning.</div></div>
+      <div class="qa-item"><div class="q">q. What is the absurd situation Szpilman found himself in?</div><div class="a">Having survived years of Nazi occupation as a hidden Jew, he now risked being shot by Polish soldiers — his own countrymen — in newly liberated Warsaw, mistaken for a German.</div></div>
+    </div>
+
+    <div class="card">
+      <h2 class="qa-subhead" style="margin-top:0;">Let's Rewind</h2>
+      <div class="qa-item"><div class="q">1. Why does the German officer help Szpilman and save his life?</div><div class="a">Moved by compassion and remorse over the war, and perhaps by the shared humanity revealed through music, he chooses conscience over duty.</div></div>
+      <div class="qa-item"><div class="q">2. How does Szpilman maintain hope in extreme hardship and danger?</div><div class="a">Through the officer's encouragement, small acts of kindness, and his own will to survive and reunite with a sense of normal life.</div></div>
+      <div class="qa-item"><div class="q">3. Why was Szpilman afraid of being killed by Polish soldiers, his own countrymen?</div><div class="a">Because he was wearing the German coat given to him, making him look like an enemy soldier to the very people who had just been liberated.</div></div>
+      <div class="qa-item"><div class="q">4. How do luck, chance and human kindness help Szpilman to survive?</div><div class="a">Chance led the officer to discover him rather than someone crueler; luck kept his hiding place unnoticed; kindness from a stranger on the "enemy" side provided food and hope.</div></div>
+      <div class="qa-item"><div class="q">5. Was it risky for the German officer to help Szpilman? Why?</div><div class="a">Yes — helping or hiding a Jewish person was a crime under Nazi rule, and discovery could have cost the officer his own life or freedom.</div></div>
+      <div class="qa-item"><div class="q">6. Why is Szpilman's memoir classified as 'survivor testimony'? How does it enrich our understanding of the world?</div><div class="a">It is a first-hand account of surviving genocide and war, told from lived experience rather than fiction. Such testimonies preserve historical truth, humanise statistics of tragedy, and remind readers of the value of compassion and resilience.</div></div>
+      <div class="qa-item"><div class="q">7–9. On the expression 'en masse'</div><div class="a">'En masse' means "all together, as a group" — borrowed from French. It's similar to other borrowed phrases used in English (like "déjà vu" or "vice versa" from Latin), differing from native English idioms in that they retain their original foreign spelling and pronunciation.</div></div>
+    </div>
+  </section>
+
+  <!-- EXAM PRACTICE -->
+  <section class="panel" id="examprep">
+    <div class="card">
+      <h2 class="section-title">Exam-Pattern Practice Questions</h2>
+      <p style="color:var(--ink-soft); font-size:14.5px;">Modelled on the SSLC Term I Summative Assessment pattern. Tap <strong>Show Answer</strong> to check your response.</p>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Comprehension</span><span class="ep-marks">5×1=5</span>
+      <div class="ep-passage">"Three days passed before he reappeared. It was evening and pitch dark when I heard a whisper under my loft. 'Hello, are you there?' 'Yes, I'm here,' I replied. Soon afterwards, something heavy landed beside me. Through the paper, I felt several loaves and something soft, which later turned out to be jam wrapped in greaseproof paper."</div>
+      <div class="ep-q">1. How long had it been since the officer's last visit?</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Three days had passed before he reappeared.</div>
+
+      <div class="ep-q">2. What did the officer bring for Szpilman this time?</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Several loaves of bread and jam wrapped in greaseproof paper.</div>
+
+      <div class="ep-q">3. Why does the officer whisper instead of speaking normally?</div>
+      <div class="ep-options">
+        <div>A. He was cold and could barely speak</div>
+        <div>B. He needed to avoid being overheard by guards</div>
+        <div>C. He was unsure if Szpilman was still there</div>
+        <div>D. He was very shy by nature</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Correct answer: B</div>
+
+      <div class="ep-q">4. What can we infer about the officer's situation from this excerpt?</div>
+      <div class="ep-options">
+        <div>A. He had unlimited freedom to visit whenever he liked</div>
+        <div>B. He was taking a real risk each time he came</div>
+        <div>C. He no longer cared about Szpilman's survival</div>
+        <div>D. He was ordered by his commanders to help</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Correct answer: B</div>
+
+      <div class="ep-q">5. Identify the Noun Phrase in the subject position and the Verb Phrase in: "Something heavy landed beside me."</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Noun Phrase (subject): <em>Something heavy</em>. Verb Phrase: <em>landed</em>.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Statement-based MCQ</span><span class="ep-marks">2×1=2</span>
+      <div class="ep-q">6. Which of the following statements are <strong>NOT TRUE</strong> about the officer's help to Szpilman?</div>
+      <div class="ep-options">
+        <div>A. He found Szpilman a safer hiding place.</div>
+        <div>B. He reported Szpilman to his commanders.</div>
+        <div>C. He brought Szpilman food regularly.</div>
+        <div>D. He gave Szpilman a coat and eiderdown.</div>
+      </div>
+      <div class="ep-options"><div>i. A and C are false &nbsp; ii. B only is false &nbsp; iii. A and D are false &nbsp; iv. B and D are false</div></div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Correct answer: ii. B only is false.</div>
+
+      <div class="ep-q">7. Which of the following are true about Szpilman's ordeal after liberation?</div>
+      <div class="ep-options">
+        <div>A. He was immediately safe once Germany was defeated.</div>
+        <div>B. He was almost shot by Polish soldiers.</div>
+        <div>C. A woman mistook him for a German.</div>
+        <div>D. He walked free through Warsaw after being cleared.</div>
+      </div>
+      <div class="ep-options"><div>i. A, B and C are true &nbsp; ii. B, C and D are true &nbsp; iii. Only D is true &nbsp; iv. All are true</div></div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Correct answer: ii. B, C and D are true.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Write-up (choice)</span><span class="ep-marks">1×7=7</span>
+      <div class="ep-q">8. <strong>[A]</strong> Based on your reading of <em>In the Attic</em>, prepare a <strong>write-up</strong> on the topic 'Be humane, make the world beautiful.'<br><strong>OR [B]</strong> Prepare a <strong>review</strong> of the testimony focusing on how it shows both the horror of war and the survival of human decency within it.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Guidance</button>
+      <div class="ep-answer"><strong>[A]</strong> Define humanity/compassion → the officer's choice to help despite danger to himself → contrast with the brutality of the ghetto/war around them → conclude that small acts of kindness can transform even the darkest situations.<br><strong>[B]</strong> Mention the testimony's authenticity → the horrors of hiding, hunger, and fear → the surprising bond formed between "enemies" → the theme of hope surviving through kindness.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Character Sketch</span><span class="ep-marks">1×6=6</span>
+      <div class="ep-q">9. Prepare a <strong>character sketch</strong> of the German officer, highlighting the traits that made him risk his own safety to help Szpilman.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Guidance</button>
+      <div class="ep-answer">Cover: calm and reassuring manner → compassion overriding loyalty to his side in the war → shame about German actions → quiet courage in repeatedly visiting a hidden fugitive → his final act of trust and gratitude when Szpilman gives him his name.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Functional Writing (choice)</span><span class="ep-marks">1×6=6</span>
+      <div class="ep-q">10. <strong>[A]</strong> Imagine Szpilman is back at Polish Radio after the war. Prepare the likely <strong>script of a radio podcast</strong> where he recalls his time in hiding.<br><strong>OR [B]</strong> Write a <strong>letter</strong> from Szpilman to the German officer's family, years later, expressing his gratitude.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Guidance</button>
+      <div class="ep-answer"><strong>[A]</strong> Include a host introduction → Szpilman recalling the piano scene → describing the officer's visits and kindness → reflecting on survival and hope → a closing message about compassion in war.<br><strong>[B]</strong> Formal letter format → express gratitude → describe how the officer's actions saved his life → mention his own life after the war → convey sorrow at not being able to help the officer in return.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Paragraph</span><span class="ep-marks">1×4=4</span>
+      <div class="ep-q">11. Prepare a <strong>paragraph</strong> on why Szpilman's memoir is classified as survivor testimony, and how such testimonies enhance our understanding of history.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Table-based Sketch</span><span class="ep-marks">1×6=6</span>
+      <div class="ep-q">12. Using the details below, prepare character sketches of Szpilman and the officer, highlighting their bond of trust.</div>
+      <table class="ep-table">
+        <tr><th>The Pianist</th><th>Feelings/Emotions</th><th>German Officer</th><th>Feelings/Emotions</th></tr>
+        <tr><td>I slumped on the chair by the larder door</td><td>exhaustion, fear</td><td>I've no intention of doing anything to you</td><td>reassuring</td></tr>
+        <tr><td>I can't leave this place</td><td>fear of death, resolve</td><td>He asked if I had anything to eat</td><td>compassionate</td></tr>
+        <tr><td>I took his hand and began speaking urgently</td><td>gratitude</td><td>Ashamed of being German</td><td>remorseful</td></tr>
+      </table>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Editing</span><span class="ep-marks">6×½=3</span>
+      <div class="ep-q">13. Edit the passage. Errors are given in bold.</div>
+      <div class="ep-passage">The officer <strong>find</strong> (a) Szpilman hiding in the attic. He <strong>don't</strong> (b) report him to his commanders. Szpilman <strong>were</strong> (c) frightened at first. The officer <strong>bring</strong> (d) food every few days. Szpilman <strong>survive</strong> (e) the freezing winter. Finally, Warsaw <strong>become</strong> (f) a free city.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">(a) found &nbsp; (b) didn't &nbsp; (c) was &nbsp; (d) brought &nbsp; (e) survived &nbsp; (f) became</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Phrasal Verbs</span><span class="ep-marks">5×1=5</span>
+      <div class="ep-q">14. Complete the paragraph using appropriate forms of the phrasal verbs given in brackets: <em>(hang on, look out, come across, hold on, run out of)</em></div>
+      <div class="ep-passage">Szpilman had to ……(a)…… hope during the darkest days in the attic. The officer told him to ……(b)…… just a few more weeks. Fearing he might ……(c)…… food, Szpilman rationed what little he had. Whenever soldiers passed below, he would ……(d)…… of his window carefully. Eventually, he ……(e)…… the news of Germany's defeat on the radio.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">(a) hold on to &nbsp; (b) hang on &nbsp; (c) run out of &nbsp; (d) look out &nbsp; (e) came across</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Prepositions / Articles</span><span class="ep-marks">6×½=3</span>
+      <div class="ep-q">15. Complete the passage choosing the right words from the bracket: <em>(in, a, the, of, on, without)</em></div>
+      <div class="ep-passage">……(a)…… officer discovered Szpilman hiding ……(b)…… the attic. He gave him ……(c)…… warm coat to survive the cold. Szpilman remained ……(d)…… fear every single day. He lived ……(e)…… food for long stretches. Finally, he walked free ……(f)…… the streets of Warsaw.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">(a) The &nbsp; (b) in &nbsp; (c) a &nbsp; (d) in &nbsp; (e) without &nbsp; (f) on</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Dialogue Completion</span><span class="ep-marks">5×1=5</span>
+      <div class="ep-q">16. Complete the conversation between Szpilman and the German officer.</div>
+      <div class="ep-passage">
+        Officer: I've no intention of doing anything to you. ……(a)……?<br>
+        Szpilman: ……(b)……………………?<br>
+        Officer: I'm asking because I want to help you if I can.<br>
+        Szpilman: ……(c)…………… I'm a pianist, but I haven't played in years.<br>
+        Officer: ……(d)……………? Come with me.<br>
+        Szpilman: ……(e)……………?
+      </div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Sample Answer</button>
+      <div class="ep-answer">(a) What do you do for a living &nbsp; (b) Why are you asking me this &nbsp; (c) I'll tell you the truth &nbsp; (d) Would you like to play something &nbsp; (e) Are you sure it's safe</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Reported Speech</span><span class="ep-marks">2×1=2</span>
+      <div class="ep-q">17. Report the following dialogue.</div>
+      <div class="ep-passage">Officer: You shouldn't stay here. I'll take you to a village.<br>Szpilman: I can't leave this place.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">The officer said that he shouldn't stay there and that he would take him to a village. Szpilman replied that he couldn't leave that place.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Caption Writing</span><span class="ep-marks">2×1=2</span>
+      <div class="ep-q">18. Create pairs using the words given in the box to provide apt captions for scenes from the story: <em>(hope, hidden, humanity, fear, survival, silence)</em></div>
+      <div class="ep-options">
+        <div>a. A scene of Szpilman alone in the freezing attic → ……………</div>
+        <div>b. A scene of the officer quietly bringing food → ……………</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Sample Answer</button>
+      <div class="ep-answer">a. "Hidden in fear, holding on to hope" &nbsp;&nbsp; b. "Humanity in silence"</div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="panel" id="quiz">
+    <div class="card">
+      <div class="quiz-header-row">
+        <h2 class="section-title" style="border:none; margin:0; padding:0;">Quiz Time</h2>
+        <button id="quiz-invite-share" class="btn btn-outline quiz-invite-btn" type="button">↗ Share Quiz</button>
+      </div>
+      <div id="quiz-invite-fallback"></div>
+      <div id="quiz-progress" class="quiz-progress"></div>
+      <div id="quiz-active">
+        <div id="quiz-question-wrap" class="quiz-q"></div>
+        <div class="quiz-nav">
+          <button id="quiz-prev" class="btn btn-outline" type="button">Previous</button>
+          <button id="quiz-next" class="btn" type="button">Next</button>
+        </div>
+      </div>
+      <div id="quiz-final" style="display:none;">
+        <div id="quiz-result"></div>
+        <div class="quiz-final-actions">
+          <button id="quiz-restart" class="btn btn-outline" type="button">Retake Quiz</button>
+          <button id="quiz-share" class="btn" type="button">Share Result</button>
+        </div>
+        <div id="share-fallback"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>Study Portal · Class X English · Unit 1 — In the Attic</footer>
+
+<script>
+function toggleAns(btn){
+  const ans = btn.nextElementSibling;
+  ans.classList.toggle('show');
+  btn.textContent = ans.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+}
+
+const tabs = document.querySelectorAll('nav.tabs button');
+const panels = document.querySelectorAll('.panel');
+
+function activateTab(tabId, scroll=true){
+  const targetBtn = Array.from(tabs).find(b => b.dataset.tab === tabId);
+  if(!targetBtn) return;
+  tabs.forEach(b=>b.classList.remove('active'));
+  panels.forEach(p=>p.classList.remove('active'));
+  targetBtn.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+  if(scroll) window.scrollTo({top:0, behavior:'smooth'});
+}
+
+tabs.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    activateTab(btn.dataset.tab);
+    window.location.hash = btn.dataset.tab;
+  });
+});
+
+const initialHash = window.location.hash.replace('#','');
+if(initialHash && document.getElementById(initialHash)){
+  activateTab(initialHash, false);
+} else {
+  activateTab('overview', false);
+}
+
+const quizData = [
+  { q: "1. Where does Szpilman say he is hiding when the officer asks?",
+    options: ["In the basement", "In the attic", "In the larder", "In the garden"], answer: 1 },
+  { q: "2. What was Szpilman's profession?",
+    options: ["A writer", "A painter", "A pianist", "A teacher"], answer: 2 },
+  { q: "3. What piece of music does Szpilman play for the officer?",
+    options: ["Beethoven's Symphony", "Chopin's Nocturne in C sharp minor", "Mozart's Requiem", "Bach's Fugue"], answer: 1 },
+  { q: "4. What does the officer discover above the attic entrance?",
+    options: ["A secret door", "A hidden loft", "A store room", "A window"], answer: 1 },
+  { q: "5. What does the officer bring Szpilman on his second visit?",
+    options: ["Medicine", "Clothes", "Loaves of bread and jam", "A radio"], answer: 2 },
+  { q: "6. What does the officer urge Szpilman to do?",
+    options: ["Surrender to the Germans", "Hang on for a few more weeks", "Escape to another country", "Stop playing music"], answer: 1 },
+  { q: "7. What does the officer leave Szpilman on his last visit?",
+    options: ["A gun", "A warm eiderdown and coat", "Money", "A map"], answer: 1 },
+  { q: "8. What does Szpilman give the officer before he leaves for the last time?",
+    options: ["A piece of music", "His name", "A photograph", "A letter"], answer: 1 },
+  { q: "9. Why does a woman scream when she sees Szpilman after liberation?",
+    options: ["She recognised him", "She mistook him for a German because of his coat", "She thought he was a ghost", "She was scared of strangers"], answer: 1 },
+  { q: "10. What happened to Wilm Hosenfeld, the officer who saved Szpilman?",
+    options: ["He escaped to another country", "He was honoured after the war", "He died in a Soviet prison in 1952", "He met Szpilman again after the war"], answer: 2 },
+  { q: "11. What was Szpilman doing when the officer first found him?",
+    options: ["Sleeping soundly", "Slumped on a chair by the larder door", "Cooking food", "Reading a book"], answer: 1 },
+  { q: "12. How long had it been since Szpilman last practiced the piano?",
+    options: ["Six months", "One year", "Two and a half years", "Five years"], answer: 2 },
+  { q: "13. What did Szpilman hear immediately after he finished playing the piano?",
+    options: ["Applause", "A shot down below outside the building", "Footsteps approaching", "Silence only"], answer: 1 },
+  { q: "14. What was the officer's nationality?",
+    options: ["Polish", "Russian", "German", "Austrian"], answer: 2 },
+  { q: "15. How did Szpilman respond when the officer suggested moving him to a village?",
+    options: ["He agreed at once", "He said he couldn't leave that place", "He asked for more time to think", "He asked the officer to come with him"], answer: 1 },
+  { q: "16. What did soldiers often carry up and down the stairs near the attic?",
+    options: ["Weapons", "Large packages", "Furniture", "Food supplies for themselves"], answer: 1 },
+  { q: "17. On what date did the officer make his last visit to Szpilman?",
+    options: ["25 November", "12 December", "1 January", "15 January"], answer: 1 },
+  { q: "18. What did the radio loudspeakers announce?",
+    options: ["A ceasefire negotiation", "The defeat of Germany and the liberation of Warsaw", "A curfew order", "A call for volunteers"], answer: 1 },
+  { q: "19. What did the Polish lieutenant shout when he first saw Szpilman?",
+    options: ["\"Don't shoot!\"", "\"Hands up!\"", "\"Run away!\"", "\"Who are you?\""], answer: 1 },
+  { q: "20. Why was Szpilman's situation described as 'absurd' after liberation?",
+    options: ["He had nowhere to live", "He was almost shot by Polish soldiers, his own countrymen", "He lost his piano", "He couldn't find his family"], answer: 1 }
+];
+
+let currentQ = 0;
+const userAnswers = new Array(quizData.length).fill(null);
+
+const progressEl = document.getElementById('quiz-progress');
+const qWrap = document.getElementById('quiz-question-wrap');
+const prevBtn = document.getElementById('quiz-prev');
+const nextBtn = document.getElementById('quiz-next');
+const activeBlock = document.getElementById('quiz-active');
+const finalBlock = document.getElementById('quiz-final');
+
+function buildProgress(){
+  progressEl.innerHTML = '';
+  quizData.forEach((_, i)=>{
+    const dot = document.createElement('div');
+    dot.className = 'quiz-dot';
+    dot.id = `dot-${i}`;
+    progressEl.appendChild(dot);
+  });
+}
+
+function updateProgress(){
+  quizData.forEach((_, i)=>{
+    const dot = document.getElementById(`dot-${i}`);
+    dot.classList.remove('active','done');
+    if(i === currentQ) dot.classList.add('active');
+    else if(userAnswers[i] !== null) dot.classList.add('done');
+  });
+}
+
+function renderQuestion(){
+  const item = quizData[currentQ];
+  const optsHtml = item.options.map((opt, j)=>{
+    const checked = userAnswers[currentQ] === j ? 'checked' : '';
+    return `<label><input type="radio" name="qcurrent" value="${j}" ${checked}> ${opt}</label>`;
+  }).join('');
+  qWrap.innerHTML = `<div><strong>${item.q}</strong></div><div class="quiz-options">${optsHtml}</div>`;
+
+  qWrap.querySelectorAll('input[name="qcurrent"]').forEach(input=>{
+    input.addEventListener('change', (e)=>{
+      userAnswers[currentQ] = parseInt(e.target.value);
+      updateProgress();
+    });
+  });
+
+  prevBtn.disabled = currentQ === 0;
+  nextBtn.textContent = currentQ === quizData.length - 1 ? 'Finish' : 'Next';
+  updateProgress();
+}
+
+prevBtn.addEventListener('click', ()=>{
+  if(currentQ > 0){ currentQ--; renderQuestion(); }
+});
+
+nextBtn.addEventListener('click', ()=>{
+  if(currentQ < quizData.length - 1){
+    currentQ++;
+    renderQuestion();
+  } else {
+    finishQuiz();
+  }
+});
+
+function finishQuiz(){
+  let score = 0;
+  quizData.forEach((item, i)=>{ if(userAnswers[i] === item.answer) score++; });
+  activeBlock.style.display = 'none';
+  finalBlock.style.display = 'block';
+  document.getElementById('quiz-result').textContent = `You scored ${score} out of ${quizData.length}!`;
+  document.getElementById('share-fallback').innerHTML = '';
+  document.getElementById('quiz-share').dataset.score = score;
+}
+
+document.getElementById('quiz-restart').addEventListener('click', ()=>{
+  currentQ = 0;
+  userAnswers.fill(null);
+  activeBlock.style.display = 'block';
+  finalBlock.style.display = 'none';
+  document.getElementById('share-fallback').innerHTML = '';
+  renderQuestion();
+});
+
+document.getElementById('quiz-share').addEventListener('click', async ()=>{
+  const score = document.getElementById('quiz-share').dataset.score;
+  const quizUrl = window.location.origin + window.location.pathname.replace('english-in-the-attic.html', 'english-in-the-attic-quiz.html');
+  const shareText = `I scored ${score}/${quizData.length} on the "In the Attic" quiz! Try it yourself.`;
+  const fallback = document.getElementById('share-fallback');
+
+  if(navigator.share){
+    try{
+      await navigator.share({ title: 'In the Attic Quiz Result', text: shareText, url: quizUrl });
+      return;
+    }catch(err){}
+  }
+  try{
+    await navigator.clipboard.writeText(`${shareText}\n${quizUrl}`);
+    fallback.innerHTML = `Result copied to clipboard! You can paste it anywhere.<br><textarea readonly>${shareText}\n${quizUrl}</textarea>`;
+  }catch(err){
+    fallback.innerHTML = `<textarea readonly>${shareText}\n${quizUrl}</textarea>`;
+  }
+});
+
+document.getElementById('quiz-invite-share').addEventListener('click', async ()=>{
+  const quizUrl = window.location.origin + window.location.pathname.replace('english-in-the-attic.html', 'english-in-the-attic-quiz.html');
+  const shareData = {
+    title: 'In the Attic Quiz',
+    text: 'Take this quiz on "In the Attic" (Class X English, Unit 1) and test what you know!',
+    url: quizUrl
+  };
+  const fallback = document.getElementById('quiz-invite-fallback');
+
+  if(navigator.share){
+    try{
+      await navigator.share(shareData);
+      return;
+    }catch(err){}
+  }
+  try{
+    await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
+    fallback.innerHTML = `Quiz link copied! Paste it to invite others.<br><textarea readonly>${shareData.text}\n${shareData.url}</textarea>`;
+  }catch(err){
+    fallback.innerHTML = `<textarea readonly>${shareData.text}\n${shareData.url}</textarea>`;
+  }
+});
+
+buildProgress();
+renderQuestion();
+</script>
+</body>
+</html>
