@@ -95,8 +95,24 @@ footer.note{ text-align:center; font-size:.78rem; color:#8a8067; padding:14px; }
 
 <div class="wrap">
 
+  <!-- ================= ALREADY ATTEMPTED SCREEN ================= -->
+  <div id="attemptedScreen" class="card hidden" style="text-align:center;">
+    <div style="font-size:2.2rem; margin-bottom:6px;">✅</div>
+    <h2 id="attemptedHeading" style="margin:0 0 8px; color:var(--helix-dark);">ഇന്ന് നിങ്ങൾ ഈ ക്വിസ് പൂർത്തിയാക്കിക്കഴിഞ്ഞു</h2>
+    <p id="attemptedMsg" style="margin:0 0 6px; color:var(--ink);">ഒരു ഉപകരണത്തിൽ നിന്ന് ദിവസത്തിൽ ഒരു തവണ മാത്രമേ ക്വിസ് ചെയ്യാൻ അനുവാദമുള്ളൂ.</p>
+    <p id="attemptedScoreLine" style="margin:10px 0 0; font-weight:700; color:var(--gene);"></p>
+  </div>
+
+  <!-- ================= LOCKED SCREEN (outside quiz window) ================= -->
+  <div id="lockedScreen" class="card hidden" style="text-align:center;">
+    <div style="font-size:2.2rem; margin-bottom:6px;">🔒</div>
+    <h2 id="lockedHeading" style="margin:0 0 8px; color:var(--helix-dark);">ക്വിസ് ഇപ്പോൾ അടച്ചിരിക്കുന്നു</h2>
+    <p id="lockedMsg" style="margin:0; color:var(--ink);">ഈ ക്വിസ് എല്ലാ ദിവസവും രാത്രി <b>9:30 – 10:30</b> സമയത്ത് മാത്രമേ ലഭ്യമാകൂ. ദയവായി ആ സമയത്ത് വീണ്ടും വരൂ.</p>
+    <p id="lockedNow" style="margin:14px 0 0; font-size:.82rem; color:var(--gene); font-weight:600;"></p>
+  </div>
+
   <!-- ================= NAME SCREEN ================= -->
-  <div id="nameScreen" class="card">
+  <div id="nameScreen" class="card hidden">
     <h2 id="nameHeading">👋 തുടങ്ങുന്നതിന് മുൻപ്...</h2>
     <p id="namePrompt">നിങ്ങളുടെ പേര് നൽകുക:</p>
     <input type="text" id="studentNameInput" placeholder="നിങ്ങളുടെ പേര്" autocomplete="off">
@@ -122,7 +138,6 @@ footer.note{ text-align:center; font-size:.78rem; color:#8a8067; padding:14px; }
     <div id="submitStatus"></div>
     <div class="btn-row">
       <button class="btn" id="shareBtn" onclick="shareResult()">🔗 സ്കോർ ഷെയർ ചെയ്യുക</button>
-      <button class="btn outline" id="retryBtn" onclick="retryQuiz()">വീണ്ടും ചെയ്യുക</button>
     </div>
   </div>
 
@@ -159,7 +174,13 @@ const uiText = {
     connMsg: "⚠️ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിക്കുക",
     shareTitle: "ക്വിക്ക് ക്വിസ് സ്കോർ",
     shareTextTemplate: (name, score, total) => `ക്വിക്ക് ക്വിസ് — പരിണാമത്തിന്റെ വഴികൾ\n${name} ന്റെ സ്കോർ: ${score} / ${total}`,
-    copiedMsg: "സ്കോർ കോപ്പി ചെയ്തു!"
+    copiedMsg: "സ്കോർ കോപ്പി ചെയ്തു!",
+    lockedHeading: "ക്വിസ് ഇപ്പോൾ അടച്ചിരിക്കുന്നു",
+    lockedMsg: "ഈ ക്വിസ് എല്ലാ ദിവസവും രാത്രി <b>9:30 – 10:30</b> സമയത്ത് മാത്രമേ ലഭ്യമാകൂ. ദയവായി ആ സമയത്ത് വീണ്ടും വരൂ.",
+    lockedNowPrefix: "ഇപ്പോഴത്തെ സമയം: ",
+    attemptedHeading: "ഇന്ന് നിങ്ങൾ ഈ ക്വിസ് പൂർത്തിയാക്കിക്കഴിഞ്ഞു",
+    attemptedMsg: "ഒരു ഉപകരണത്തിൽ നിന്ന് ദിവസത്തിൽ ഒരു തവണ മാത്രമേ ക്വിസ് ചെയ്യാൻ അനുവാദമുള്ളൂ.",
+    attemptedScoreLine: (name, score, total) => `${name} ന്റെ സ്കോർ: ${score} / ${total}`
   },
   en: {
     nameHeading: "👋 Before you start...",
@@ -177,7 +198,13 @@ const uiText = {
     connMsg: "⚠️ Please check your internet connection",
     shareTitle: "Quick Quiz Score",
     shareTextTemplate: (name, score, total) => `Quick Quiz — Ways of Evolution\n${name}'s score: ${score} / ${total}`,
-    copiedMsg: "Score copied!"
+    copiedMsg: "Score copied!",
+    lockedHeading: "Quiz is currently closed",
+    lockedMsg: "This quiz is only available daily between <b>9:30 – 10:30 PM</b>. Please come back during that time.",
+    lockedNowPrefix: "Current time: ",
+    attemptedHeading: "You've already completed this quiz today",
+    attemptedMsg: "Only one attempt per device is allowed per day.",
+    attemptedScoreLine: (name, score, total) => `${name}'s score: ${score} / ${total}`
   }
 };
 
@@ -196,13 +223,91 @@ function setLang(lang){
   document.getElementById('qLabel').textContent = t.qLabel;
   document.getElementById('resultHeading').textContent = t.resultHeading;
   document.getElementById('shareBtn').textContent = t.shareBtn;
-  document.getElementById('retryBtn').textContent = t.retryBtn;
+  document.getElementById('lockedHeading').textContent = t.lockedHeading;
+  document.getElementById('lockedMsg').innerHTML = t.lockedMsg;
+  document.getElementById('attemptedHeading').textContent = t.attemptedHeading;
+  document.getElementById('attemptedMsg').textContent = t.attemptedMsg;
 
   quizData = (lang === 'ml') ? quizDataML : quizDataEN;
 
   if(!document.getElementById('quizScreen').classList.contains('hidden')){
     renderQuestion();
   }
+  updateLockedNowText();
+  refreshAttemptedScoreLine();
+}
+
+/* ===================== ONE ATTEMPT PER DEVICE PER DAY ===================== */
+function todayKey(){
+  const now = new Date();
+  return `unit2quiz_attempt_${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()}`;
+}
+
+function getTodayAttempt(){
+  try{
+    const raw = localStorage.getItem(todayKey());
+    return raw ? JSON.parse(raw) : null;
+  } catch(e){ return null; }
+}
+
+function saveTodayAttempt(name, sc, total){
+  try{
+    localStorage.setItem(todayKey(), JSON.stringify({ name, score: sc, total, ts: Date.now() }));
+  } catch(e){ /* ignore storage errors */ }
+}
+
+function refreshAttemptedScoreLine(){
+  const attempt = getTodayAttempt();
+  if(!attempt) return;
+  const t = uiText[currentLang];
+  document.getElementById('attemptedScoreLine').textContent = t.attemptedScoreLine(attempt.name, attempt.score, attempt.total);
+}
+
+/* ===================== TIME GATE (9:30 PM – 10:30 PM daily) ===================== */
+const QUIZ_OPEN_HOUR = 21;   // 9 PM
+const QUIZ_OPEN_MIN  = 30;   // :30 -> 9:30 PM
+const QUIZ_CLOSE_HOUR = 22;  // 10 PM
+const QUIZ_CLOSE_MIN  = 30;  // :30 -> 10:30 PM
+
+function isWithinQuizWindow(){
+  const now = new Date();
+  const mins = now.getHours() * 60 + now.getMinutes();
+  const openMins = QUIZ_OPEN_HOUR * 60 + QUIZ_OPEN_MIN;
+  const closeMins = QUIZ_CLOSE_HOUR * 60 + QUIZ_CLOSE_MIN;
+  return mins >= openMins && mins < closeMins;
+}
+
+function updateLockedNowText(){
+  const t = uiText[currentLang];
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString(currentLang === 'ml' ? 'ml-IN' : 'en-IN', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('lockedNow').textContent = t.lockedNowPrefix + timeStr;
+}
+
+function applyTimeGate(){
+  const open = isWithinQuizWindow();
+  const quizActive = !document.getElementById('quizScreen').classList.contains('hidden');
+  const resultActive = !document.getElementById('resultScreen').classList.contains('hidden');
+
+  // Don't disturb an in-progress quiz or a just-finished result screen
+  if(quizActive || resultActive){
+    updateLockedNowText();
+    return;
+  }
+
+  const attempt = getTodayAttempt();
+  if(attempt){
+    document.getElementById('lockedScreen').classList.add('hidden');
+    document.getElementById('nameScreen').classList.add('hidden');
+    document.getElementById('attemptedScreen').classList.remove('hidden');
+    refreshAttemptedScoreLine();
+    return;
+  }
+
+  document.getElementById('attemptedScreen').classList.add('hidden');
+  document.getElementById('lockedScreen').classList.toggle('hidden', open);
+  document.getElementById('nameScreen').classList.toggle('hidden', !open);
+  updateLockedNowText();
 }
 
 /* ===================== QUIZ DATA (bilingual) ===================== */
@@ -293,6 +398,7 @@ function finishQuiz(){
   document.getElementById('scoreCircle').style.setProperty('--pct', pct);
   document.getElementById('scoreText').textContent = `${score}/${quizData.length}`;
   document.getElementById('resultName').textContent = studentName;
+  saveTodayAttempt(studentName, score, quizData.length);
   submitResult();
 }
 
@@ -341,11 +447,9 @@ function shareResult(){
   }
 }
 
-function retryQuiz(){
-  document.getElementById('resultScreen').classList.add('hidden');
-  document.getElementById('nameScreen').classList.remove('hidden');
-  document.getElementById('studentNameInput').value = studentName;
-}
+/* Initial gate check + periodic recheck so the page unlocks/locks live without a refresh */
+applyTimeGate();
+setInterval(applyTimeGate, 30000);
 </script>
 
 </body>
