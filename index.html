@@ -41,21 +41,113 @@
   .topbar-inner{
     max-width:1080px; margin:0 auto;
     display:flex; align-items:center; justify-content:space-between;
-    padding:16px 28px;
+    padding:14px 28px;
+    gap:20px;
   }
   .brand{
     display:flex; align-items:center; gap:10px;
     font-family:'Poppins',sans-serif; font-weight:700; font-size:16px;
+    white-space:nowrap;
   }
   .brand-mark{
     width:30px; height:30px; border-radius:9px;
     background:linear-gradient(135deg, var(--physics), var(--hindi));
     display:flex; align-items:center; justify-content:center;
     color:#fff; font-size:14px; font-weight:800;
+    flex-shrink:0;
   }
+  .nav-links{
+    display:flex; align-items:center; gap:4px;
+    flex:1;
+  }
+  .nav-link{
+    font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:600;
+    color:var(--ink-soft); text-decoration:none;
+    padding:8px 12px; border-radius:10px;
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .nav-link:hover{ background:var(--physics-soft); color:var(--physics); }
+  .nav-dropdown{ position:relative; }
+  .nav-dropdown > button{
+    font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:600;
+    color:var(--ink-soft); background:none; border:none; cursor:pointer;
+    padding:8px 12px; border-radius:10px;
+    display:flex; align-items:center; gap:5px;
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .nav-dropdown > button:hover, .nav-dropdown.open > button{ background:var(--physics-soft); color:var(--physics); }
+  .nav-dropdown svg{ width:12px; height:12px; transition:transform 0.15s ease; }
+  .nav-dropdown.open svg{ transform:rotate(180deg); }
+  .dropdown-menu{
+    position:absolute; top:calc(100% + 8px); left:0;
+    background:var(--panel); border:1px solid var(--ring); border-radius:16px;
+    box-shadow:0 16px 32px -12px rgba(30,35,80,0.22);
+    padding:8px; min-width:230px;
+    display:grid; grid-template-columns:1fr 1fr; gap:2px;
+    opacity:0; visibility:hidden; transform:translateY(-6px);
+    transition:opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+    z-index:20;
+  }
+  .nav-dropdown.open .dropdown-menu{ opacity:1; visibility:visible; transform:translateY(0); }
+  .dropdown-item{
+    display:flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:600; color:var(--ink);
+    text-decoration:none; padding:8px 10px; border-radius:10px;
+    transition:background 0.15s ease;
+  }
+  .dropdown-item:hover{ background:var(--bg); }
+  .dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
   .badge-year{
     font-size:12px; font-weight:600; color:var(--physics);
     background:var(--physics-soft); padding:6px 14px; border-radius:20px;
+    white-space:nowrap;
+  }
+
+  .search-wrap{
+    position:relative;
+    max-width:460px; margin:26px auto 0 auto;
+  }
+  .search-box{
+    display:flex; align-items:center; gap:10px;
+    background:var(--panel); border:1.5px solid var(--ring); border-radius:16px;
+    padding:13px 18px;
+    box-shadow:0 8px 22px -12px rgba(30,35,80,0.16);
+    transition:border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .search-box:focus-within{
+    border-color:var(--physics);
+    box-shadow:0 8px 24px -10px rgba(76,110,245,0.35);
+  }
+  .search-box svg{ width:18px; height:18px; stroke:var(--ink-soft); flex-shrink:0; }
+  .search-box input{
+    border:none; outline:none; background:none;
+    font-family:'Inter',sans-serif; font-size:14.5px; color:var(--ink);
+    width:100%;
+  }
+  .search-box input::placeholder{ color:var(--ink-soft); }
+  .search-results{
+    position:absolute; top:calc(100% + 8px); left:0; right:0;
+    background:var(--panel); border:1px solid var(--ring); border-radius:16px;
+    box-shadow:0 16px 32px -12px rgba(30,35,80,0.22);
+    max-height:340px; overflow-y:auto;
+    display:none; z-index:15;
+    text-align:left;
+  }
+  .search-results.show{ display:block; }
+  .search-result{
+    display:flex; align-items:center; gap:10px;
+    padding:11px 16px; text-decoration:none; color:var(--ink);
+    border-bottom:1px solid var(--ring);
+  }
+  .search-result:last-child{ border-bottom:none; }
+  .search-result:hover{ background:var(--bg); }
+  .search-result .dot{ width:7px; height:7px; }
+  .search-result-title{ font-size:13.5px; font-weight:600; }
+  .search-result-sub{ font-size:11px; color:var(--ink-soft); }
+  .search-empty{ padding:16px; font-size:13px; color:var(--ink-soft); text-align:center; }
+
+  @media (max-width:760px){
+    .nav-links{ display:none; }
   }
 
   header{
@@ -252,6 +344,26 @@
       <span class="brand-mark">S</span>
       SSLC Study Portal
     </div>
+    <div class="nav-links">
+      <a class="nav-link" href="index.html">Home</a>
+      <div class="nav-dropdown" id="subjectsDropdown">
+        <button type="button" onclick="document.getElementById('subjectsDropdown').classList.toggle('open')">
+          Subjects
+          <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="physics.html"><span class="dot" style="background:var(--physics)"></span>Physics</a>
+          <a class="dropdown-item" href="chemistry.html"><span class="dot" style="background:var(--chemistry)"></span>Chemistry</a>
+          <a class="dropdown-item" href="biology.html"><span class="dot" style="background:var(--biology)"></span>Biology</a>
+          <a class="dropdown-item" href="maths.html"><span class="dot" style="background:var(--maths)"></span>Maths</a>
+          <a class="dropdown-item" href="english.html"><span class="dot" style="background:var(--english)"></span>English</a>
+          <a class="dropdown-item" href="hindi.html"><span class="dot" style="background:var(--hindi)"></span>Hindi</a>
+          <a class="dropdown-item" href="history.html"><span class="dot" style="background:var(--history)"></span>History</a>
+          <a class="dropdown-item" href="geography.html"><span class="dot" style="background:var(--geography)"></span>Geography</a>
+        </div>
+      </div>
+      <a class="nav-link" href="class9.html">Class 9 &#8594;</a>
+    </div>
     <span class="badge-year">Batch 2026&ndash;27</span>
   </div>
 </div>
@@ -259,6 +371,14 @@
 <header>
   <h1>Everything needed for<br>the SSLC exam is here</h1>
   <p class="subtitle">Class 10 &middot; Kerala SCERT syllabus &middot; bite-sized chapters, quizzes and quick revision, all in one place.</p>
+
+  <div class="search-wrap">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="chapterSearch" placeholder="Search any chapter — e.g. Lenses, ലെൻസുകൾ, Quadratic..." autocomplete="off">
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
 
   <div class="stats">
     <div class="stat"><b style="color:var(--physics)">8</b><span>Subjects</span></div>
@@ -343,6 +463,111 @@
 </main>
 
 <footer>All 8 subjects are live &mdash; <strong>chapters are being added week by week.</strong></footer>
+
+<script>
+// Close subjects dropdown when clicking outside
+document.addEventListener('click', (e)=>{
+  const dd = document.getElementById('subjectsDropdown');
+  if(dd && !dd.contains(e.target)) dd.classList.remove('open');
+});
+
+// Chapter search index — subject + unit/lesson titles (English + Malayalam/Hindi)
+const searchIndex = [
+  {subject:'Physics', color:'--physics', title:'Sound Waves', ml:'ശബ്ദതരംഗങ്ങൾ', href:'physics-unit1.html'},
+  {subject:'Physics', color:'--physics', title:'Lenses', ml:'ലെൻസുകൾ', href:'physics-unit2.html'},
+  {subject:'Physics', color:'--physics', title:'Vision and the World of Colours', ml:'കാഴ്ചയും വർണ്ണങ്ങളുടെ ലോകവും', href:'physics-unit3.html'},
+  {subject:'Physics', color:'--physics', title:'Magnetic Effect of Electricity', ml:'വൈദ്യുതിയുടെ കാന്തികഫലം', href:'physics-unit4.html'},
+  {subject:'Physics', color:'--physics', title:'Electric Energy: Consumption and Conservation', ml:'വൈദ്യുതോർജം', href:'physics-unit5.html'},
+  {subject:'Physics', color:'--physics', title:'Electromagnetic Induction in Daily Life', ml:'വൈദ്യുതകാന്തികപ്രേരണം', href:'physics-unit6.html'},
+  {subject:'Physics', color:'--physics', title:'Mechanical Advantage in Practice', ml:'യാന്ത്രികലാഭം', href:'physics-unit7.html'},
+
+  {subject:'Chemistry', color:'--chemistry', title:'Nomenclature and Isomerism of Organic Compounds', ml:'നാമകരണവും ഐസോമെറിസവും', href:'chemistry-unit1.html'},
+  {subject:'Chemistry', color:'--chemistry', title:'Chemical Reactions of Organic Compounds', ml:'രാസപ്രവർത്തനങ്ങൾ', href:'chemistry-unit2.html'},
+  {subject:'Chemistry', color:'--chemistry', title:'Periodic Table and Electron Configuration', ml:'പീരിയോഡിക് ടേബിൾ', href:'chemistry-unit3.html'},
+  {subject:'Chemistry', color:'--chemistry', title:'Gas Laws and the Mole Concept', ml:'വാതകനിയമങ്ങളും മോൾ സങ്കല്പനവും', href:'chemistry-unit4.html'},
+
+  {subject:'Biology', color:'--biology', title:'Genetics of Life', ml:'ജീവന്റെ ജനിതകം', href:'biology-unit1.html'},
+  {subject:'Biology', color:'--biology', title:'Pathways of Evolution', ml:'പരിണാമത്തിന്റെ വഴികൾ', href:'biology-unit2.html'},
+  {subject:'Biology', color:'--biology', title:'Behind the Senses', ml:'സംവേദനങ്ങൾക്കുപിന്നിൽ', href:'biology-unit3.html'},
+
+  {subject:'Maths', color:'--maths', title:'Arithmetic Sequences', ml:'സമാന്തരശ്രേണികൾ', href:'maths-unit1.html'},
+  {subject:'Maths', color:'--maths', title:'Circles and Angles', ml:'വൃത്തങ്ങളും കോണുകളും', href:'maths-unit2.html'},
+  {subject:'Maths', color:'--maths', title:'Arithmetic Sequences and Algebra', ml:'സമാന്തരശ്രേണിയും ബീജഗണിതവും', href:'maths-unit3.html'},
+  {subject:'Maths', color:'--maths', title:'Mathematics of Probability', ml:'സാധ്യതകളുടെ ഗണിതം', href:'maths-unit4.html'},
+  {subject:'Maths', color:'--maths', title:'Quadratic Equations', ml:'രണ്ടാംകൃതി സമവാക്യങ്ങൾ', href:'maths-unit5.html'},
+  {subject:'Maths', color:'--maths', title:'Trigonometry', ml:'ത്രികോണമിതി', href:'maths-unit6.html'},
+  {subject:'Maths', color:'--maths', title:'Exponents / Indices', ml:'സൂചകസംഖ്യകൾ', href:'maths-unit7.html'},
+
+  {subject:'English', color:'--english', title:'A Very Old Man With Enormous Wings', ml:'', href:'english-old-man-wings.html'},
+  {subject:'English', color:'--english', title:'In the Attic', ml:'', href:'english-in-the-attic.html'},
+  {subject:'English', color:'--english', title:'Friends, Romans, Countrymen...', ml:'', href:'english-friends-romans.html'},
+  {subject:'English', color:'--english', title:'Breaking Barriers, I Will Fly', ml:'', href:'english-breaking-barriers.html'},
+  {subject:'English', color:'--english', title:'A Phoenix Rises', ml:'', href:'english-phoenix-rises.html'},
+  {subject:'English', color:'--english', title:'The Seedling (Poem)', ml:'', href:'english-the-seedling.html'},
+  {subject:'English', color:'--english', title:'Another Day in Paradise (Song)', ml:'', href:'english-another-day-paradise.html'},
+  {subject:'English', color:'--english', title:'War', ml:'', href:'english-war.html'},
+  {subject:'English', color:'--english', title:'A Piece of String', ml:'', href:'english-piece-of-string.html'},
+  {subject:'English', color:'--english', title:'Worksheet', ml:'', href:'english-worksheet.html'},
+
+  {subject:'Hindi', color:'--hindi', title:'Khidki', ml:'खिड़की', href:'hindi-unit1-khidki.html'},
+  {subject:'Hindi', color:'--hindi', title:'Zindagi ka Safar', ml:'ज़िंदगी का सफ़र', href:'hindi-unit1-zindagi-ka-safar.html'},
+  {subject:'Hindi', color:'--hindi', title:'Rain Basere Mein', ml:'रैन बसेरे में', href:'hindi-unit1-rain-basere.html'},
+  {subject:'Hindi', color:'--hindi', title:'Meri Duniya ke Tamam Bacche', ml:'मेरी दुनिया के तमाम बच्चे', href:'hindi-unit2-meri-duniya.html'},
+  {subject:'Hindi', color:'--hindi', title:'White Cap', ml:'व्हाइट कैप', href:'hindi-unit2-white-cap.html'},
+  {subject:'Hindi', color:'--hindi', title:'Dilli Mein Uneende', ml:'दिल्ली में उनींदे', href:'hindi-unit3-dilli-mein-uneende.html'},
+  {subject:'Hindi', color:'--hindi', title:'Madhur Vachan', ml:'मधुर वचन', href:'hindi-unit3-madhur-vachan.html'},
+  {subject:'Hindi', color:'--hindi', title:'Ek Tinka', ml:'एक तिनका', href:'hindi-unit3-ek-tinka.html'},
+  {subject:'Hindi', color:'--hindi', title:'Galileo', ml:'गैलीलियो', href:'hindi-unit4-galileo.html'},
+  {subject:'Hindi', color:'--hindi', title:'Paidal Chalta Hua Aadmi', ml:'पैदल चलता हुआ आदमी', href:'hindi-unit4-paidal-chalta.html'},
+  {subject:'Hindi', color:'--hindi', title:'Pari Ladki', ml:'परी लड़की', href:'hindi-unit5-pari-ladki.html'},
+  {subject:'Hindi', color:'--hindi', title:'Sila Beenti Ladkiyan', ml:'सिला बीनती लड़कियाँ', href:'hindi-unit5-sila-beenti.html'},
+
+  {subject:'Geography', color:'--geography', title:'Daily Weather and Climate', ml:'ദിനാന്തരീക്ഷസ്ഥിതിയും കാലാവസ്ഥയും', href:'geography-unit1.html'},
+  {subject:'Geography', color:'--geography', title:'Climate Zones and Climate Change', ml:'കാലാവസ്ഥാമേഖലകളും കാലാവസ്ഥാമാറ്റവും', href:'geography-unit2.html'},
+  {subject:'Geography', color:'--geography', title:'From Rainforests to the Land of Unmelting Snow', ml:'മഴക്കാടുകളിൽ നിന്നും', href:'geography-unit3.html'},
+  {subject:'Geography', color:'--geography', title:'Consumer: Rights and Protection', ml:'ഉപഭോക്താവ്', href:'geography-unit4.html'},
+  {subject:'Geography', color:'--geography', title:'Money and the Economy', ml:'പണവും സമ്പദ്‌വ്യവസ്ഥയും', href:'geography-unit5.html'},
+
+  {subject:'History', color:'--history', title:'Humanism', ml:'മാനവികത', href:'history-unit1.html'},
+  {subject:'History', color:'--history', title:'Liberty, Equality, Fraternity', ml:'സ്വാതന്ത്ര്യം സമത്വം സാഹോദര്യം', href:'history-unit2.html'},
+  {subject:'History', color:'--history', title:'Social Analysis: Through the Concept of Sociology', ml:'സാമൂഹികവിശകലനം', href:'history-unit3.html'},
+  {subject:'History', color:'--history', title:'Wealth and the World', ml:'സമ്പത്തും ലോകവും', href:'history-unit4.html'},
+  {subject:'History', color:'--history', title:'Public Opinion in Democracy', ml:'പൊതുജനാഭിപ്രായം ജനാധിപത്യത്തിൽ', href:'history-unit5.html'}
+];
+
+const searchInput = document.getElementById('chapterSearch');
+const searchResults = document.getElementById('searchResults');
+
+function runSearch(query){
+  const q = query.trim().toLowerCase();
+  if(!q){ searchResults.classList.remove('show'); searchResults.innerHTML=''; return; }
+  const matches = searchIndex.filter(item=>
+    item.title.toLowerCase().includes(q) ||
+    item.ml.includes(query.trim()) ||
+    item.subject.toLowerCase().includes(q)
+  ).slice(0, 8);
+
+  if(matches.length === 0){
+    searchResults.innerHTML = '<div class="search-empty">No chapters found. Try a different word.</div>';
+  } else {
+    searchResults.innerHTML = matches.map(m=>`
+      <a class="search-result" href="${m.href}">
+        <span class="dot" style="background:var(${m.color})"></span>
+        <span>
+          <span class="search-result-title">${m.title}</span><br>
+          <span class="search-result-sub">${m.subject}${m.ml ? ' · ' + m.ml : ''}</span>
+        </span>
+      </a>
+    `).join('');
+  }
+  searchResults.classList.add('show');
+}
+
+searchInput.addEventListener('input', (e)=> runSearch(e.target.value));
+document.addEventListener('click', (e)=>{
+  if(!e.target.closest('.search-wrap')) searchResults.classList.remove('show');
+});
+</script>
 
 </body>
 </html>
