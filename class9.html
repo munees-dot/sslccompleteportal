@@ -43,6 +43,7 @@
     display:flex; align-items:center; justify-content:space-between;
     padding:14px 28px;
     gap:20px;
+    position:relative;
   }
   .brand{
     display:flex; align-items:center; gap:10px;
@@ -146,8 +147,34 @@
   .search-result-sub{ font-size:11px; color:var(--ink-soft); }
   .search-empty{ padding:16px; font-size:13px; color:var(--ink-soft); text-align:center; }
 
+  .hamburger{
+    display:none;
+    background:none; border:none; cursor:pointer;
+    padding:8px; border-radius:10px;
+    align-items:center; justify-content:center;
+  }
+  .hamburger:hover{ background:var(--physics-soft); }
+  .hamburger svg{ width:22px; height:22px; stroke:var(--ink); }
+
   @media (max-width:760px){
-    .nav-links{ display:none; }
+    .nav-links{
+      display:none;
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--panel); border-bottom:1px solid var(--ring);
+      flex-direction:column; align-items:stretch; gap:2px;
+      padding:10px 20px 16px 20px;
+      box-shadow:0 16px 24px -16px rgba(30,35,80,0.2);
+    }
+    .nav-links.mobile-open{ display:flex; }
+    .nav-link, .nav-dropdown > button{ width:100%; justify-content:flex-start; padding:12px 10px; }
+    .nav-dropdown{ width:100%; }
+    .dropdown-menu{
+      position:static; box-shadow:none; border:none; opacity:1; visibility:visible;
+      transform:none; display:none; grid-template-columns:1fr 1fr;
+      padding:4px 0 4px 10px; margin-bottom:4px;
+    }
+    .nav-dropdown.open .dropdown-menu{ display:grid; }
+    .hamburger{ display:flex; }
   }
 
   header{
@@ -344,7 +371,7 @@
       <span class="brand-mark">9</span>
       Class 9 Study Portal
     </div>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a class="nav-link" href="class9.html">Home</a>
       <div class="nav-dropdown" id="subjectsDropdown">
         <button type="button" onclick="document.getElementById('subjectsDropdown').classList.toggle('open')">
@@ -364,6 +391,9 @@
       </div>
       <a class="nav-link" href="index.html">Class 10 &#8594;</a>
     </div>
+    <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
     <span class="badge-year">Batch 2026&ndash;27</span>
   </div>
 </div>
@@ -374,25 +404,25 @@
 
   <div class="stats">
     <div class="stat"><b style="color:var(--physics)">8</b><span>Subjects</span></div>
-    <div class="stat"><b style="color:var(--chemistry)">0</b><span>Live now</span></div>
+    <div class="stat"><b style="color:var(--chemistry)">1</b><span>Live now</span></div>
   </div>
 </header>
 
 <main>
 
   <div class="progress-wrap">
-    <div class="progress-top"><span>Portal build progress</span><b>0 / 8 subjects live</b></div>
-    <div class="progress-bar"><div class="progress-fill" style="width:0%;"></div></div>
+    <div class="progress-top"><span>Portal build progress</span><b>1 / 8 subjects live</b></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:12.5%;"></div></div>
   </div>
 
   <div class="grid">
 
-    <a class="card locked" style="--accent:var(--physics); --accent-soft:var(--physics-soft)" href="javascript:void(0)">
+    <a class="card" style="--accent:var(--physics); --accent-soft:var(--physics-soft)" href="class9-physics.html">
       <div class="card-top">
         <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="2.4"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(120 12 12)"/></svg></div>
-        <div><div class="subj-name">Physics</div><div class="subj-sub">Full syllabus</div></div>
+        <div><div class="subj-name">Physics</div><div class="subj-sub">4 units &middot; ഉള്ളടക്കം</div></div>
       </div>
-      <div class="card-bottom"><span class="pill soon">Coming soon</span></div>
+      <div class="card-bottom"><span class="pill">Start learning</span><span class="go">Go &#8594;</span></div>
     </a>
 
     <a class="card locked" style="--accent:var(--chemistry); --accent-soft:var(--chemistry-soft)" href="javascript:void(0)">
@@ -454,9 +484,24 @@
   </div>
 </main>
 
-<footer>Class 9 materials are being built subject by subject &mdash; <strong>check back soon.</strong></footer>
+<footer>Physics is live &mdash; <strong>more subjects are on the way.</strong></footer>
 
 <script>
+// Mobile hamburger menu toggle
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const navLinks = document.getElementById('navLinks');
+if(hamburgerBtn){
+  hamburgerBtn.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    navLinks.classList.toggle('mobile-open');
+  });
+}
+document.addEventListener('click', (e)=>{
+  if(navLinks && navLinks.classList.contains('mobile-open') && !navLinks.contains(e.target) && e.target !== hamburgerBtn){
+    navLinks.classList.remove('mobile-open');
+  }
+});
+
 // Close subjects dropdown when clicking outside
 document.addEventListener('click', (e)=>{
   const dd = document.getElementById('subjectsDropdown');
