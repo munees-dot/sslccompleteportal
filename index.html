@@ -43,6 +43,7 @@
     display:flex; align-items:center; justify-content:space-between;
     padding:14px 28px;
     gap:20px;
+    position:relative;
   }
   .brand{
     display:flex; align-items:center; gap:10px;
@@ -146,8 +147,34 @@
   .search-result-sub{ font-size:11px; color:var(--ink-soft); }
   .search-empty{ padding:16px; font-size:13px; color:var(--ink-soft); text-align:center; }
 
+  .hamburger{
+    display:none;
+    background:none; border:none; cursor:pointer;
+    padding:8px; border-radius:10px;
+    align-items:center; justify-content:center;
+  }
+  .hamburger:hover{ background:var(--physics-soft); }
+  .hamburger svg{ width:22px; height:22px; stroke:var(--ink); }
+
   @media (max-width:760px){
-    .nav-links{ display:none; }
+    .nav-links{
+      display:none;
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--panel); border-bottom:1px solid var(--ring);
+      flex-direction:column; align-items:stretch; gap:2px;
+      padding:10px 20px 16px 20px;
+      box-shadow:0 16px 24px -16px rgba(30,35,80,0.2);
+    }
+    .nav-links.mobile-open{ display:flex; }
+    .nav-link, .nav-dropdown > button{ width:100%; justify-content:flex-start; padding:12px 10px; }
+    .nav-dropdown{ width:100%; }
+    .dropdown-menu{
+      position:static; box-shadow:none; border:none; opacity:1; visibility:visible;
+      transform:none; display:none; grid-template-columns:1fr 1fr;
+      padding:4px 0 4px 10px; margin-bottom:4px;
+    }
+    .nav-dropdown.open .dropdown-menu{ display:grid; }
+    .hamburger{ display:flex; }
   }
 
   header{
@@ -344,7 +371,7 @@
       <span class="brand-mark">S</span>
       SSLC Study Portal
     </div>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a class="nav-link" href="index.html">Home</a>
       <div class="nav-dropdown" id="subjectsDropdown">
         <button type="button" onclick="document.getElementById('subjectsDropdown').classList.toggle('open')">
@@ -364,6 +391,9 @@
       </div>
       <a class="nav-link" href="class9.html">Class 9 &#8594;</a>
     </div>
+    <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
     <span class="badge-year">Batch 2026&ndash;27</span>
   </div>
 </div>
@@ -465,6 +495,21 @@
 <footer>All 8 subjects are live &mdash; <strong>chapters are being added week by week.</strong></footer>
 
 <script>
+// Mobile hamburger menu toggle
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const navLinks = document.getElementById('navLinks');
+if(hamburgerBtn){
+  hamburgerBtn.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    navLinks.classList.toggle('mobile-open');
+  });
+}
+document.addEventListener('click', (e)=>{
+  if(navLinks && navLinks.classList.contains('mobile-open') && !navLinks.contains(e.target) && e.target !== hamburgerBtn){
+    navLinks.classList.remove('mobile-open');
+  }
+});
+
 // Close subjects dropdown when clicking outside
 document.addEventListener('click', (e)=>{
   const dd = document.getElementById('subjectsDropdown');
