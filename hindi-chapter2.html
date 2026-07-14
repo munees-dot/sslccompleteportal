@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>व्हाइट कैप — SSLC Hindi Study Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Hind:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dusk1:#2a1e3d; --dusk2:#5c3350; --dusk3:#c9622f;
+  --amber:#f2b544; --amber-soft:#f7d38b;
+  --brick:#a4462f; --brick-deep:#7d3323;
+  --steel:#5b6472;
+  --paper:#f7f2e7; --paper2:#efe6d2;
+  --ink:#20232b; --ink-soft:#565b68; --line:#d8cdb0;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Hind',sans-serif;}
+.ui{font-family:'Poppins',sans-serif;}
+h1,h2,h3{font-family:'Hind',sans-serif;font-weight:700;margin:0;}
+.display{font-family:'Yatra One',cursive;}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;background:linear-gradient(180deg,var(--dusk1) 0%,var(--dusk2) 45%,var(--dusk3) 100%);
+  overflow:hidden;padding:38px 20px 46px;color:#fff;text-align:center;
+}
+.eyebrow{font-family:'Poppins',sans-serif;letter-spacing:.18em;font-size:12px;text-transform:uppercase;color:var(--amber-soft);position:relative;z-index:2;}
+.hero h1{font-family:'Yatra One',cursive;font-size:clamp(42px,8.5vw,72px);margin:8px 0 4px;position:relative;z-index:2;
+  text-shadow:0 2px 18px rgba(242,181,68,.35);}
+.hero .sub{font-size:15px;color:#ecd9e3;position:relative;z-index:2;}
+.hero .author-badge{display:inline-flex;gap:10px;align-items:center;margin-top:16px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);border-radius:40px;padding:8px 18px;font-size:13px;position:relative;z-index:2;}
+.hero .author-badge b{color:var(--amber);}
+
+/* construction + cricket strip */
+.site-strip{position:relative;height:90px;margin-top:26px;z-index:2;}
+.ground{position:absolute;bottom:8px;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,#7a5a44 0 10px,transparent 10px 18px);}
+.scaffold{position:absolute;bottom:8px;display:flex;gap:14px;left:6%;opacity:.55;}
+.scaffold .bar{width:4px;height:56px;background:var(--steel);}
+.scaffold .bar.short{height:34px;align-self:flex-end;}
+.scaffold2{position:absolute;bottom:8px;right:6%;display:flex;gap:14px;opacity:.55;}
+.scaffold2 .bar{width:4px;height:44px;background:var(--steel);}
+.ball{position:absolute;bottom:12px;width:14px;height:14px;border-radius:50%;background:var(--brick);
+  box-shadow:0 0 8px 2px rgba(164,70,47,.7);left:-20px;animation:bounce 3.2s ease-in-out infinite;}
+@keyframes bounce{
+  0%{left:-5%; bottom:12px;}
+  15%{bottom:52px;}
+  30%{bottom:12px;}
+  45%{bottom:40px;}
+  60%{bottom:12px;}
+  75%{bottom:30px;}
+  90%{bottom:12px;}
+  100%{left:104%; bottom:12px;}
+}
+@media (prefers-reduced-motion: reduce){ .ball{animation:none;left:45%;} }
+
+/* ===== NAV ===== */
+.tabbar{position:sticky;top:0;z-index:50;background:var(--dusk1);display:flex;overflow-x:auto;gap:4px;padding:8px 10px;
+  box-shadow:0 4px 14px rgba(0,0,0,.25);}
+.tabbar::-webkit-scrollbar{height:0;}
+.tabbtn{font-family:'Poppins',sans-serif;flex:0 0 auto;background:transparent;border:1px solid transparent;color:#e3cdd8;
+  padding:10px 16px 8px;font-size:13.5px;font-weight:600;cursor:pointer;border-radius:10px 10px 4px 4px;position:relative;
+  transition:.2s;white-space:nowrap;}
+.tabbtn:hover{background:rgba(255,255,255,.06);color:#fff;}
+.tabbtn.active{background:var(--paper);color:var(--dusk1);}
+.tabbtn.active:after{content:"";position:absolute;left:14%;right:14%;top:4px;height:3px;background:var(--brick);border-radius:2px;}
+
+/* ===== SECTIONS ===== */
+.wrap{max-width:960px;margin:0 auto;padding:30px 18px 70px;}
+.panel{display:none;}
+.panel.active{display:block;animation:fade .35s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+.window-card{
+  background:var(--paper);border:2px solid var(--dusk1);border-radius:22px 22px 10px 10px;padding:26px 24px 22px;
+  position:relative;margin-bottom:22px;box-shadow:0 6px 0 rgba(42,30,61,.08);
+}
+.window-card:before{content:"";position:absolute;top:-2px;left:16px;right:16px;height:10px;background:var(--brick);
+  border-radius:6px 6px 0 0;opacity:.85;}
+.window-card h3{font-size:20px;color:var(--dusk2);border-bottom:2px dashed var(--line);padding-bottom:10px;margin-bottom:14px;}
+.window-card h3 .tag{font-family:'Poppins',sans-serif;font-size:11px;background:var(--amber);color:var(--dusk1);
+  padding:3px 9px;border-radius:20px;margin-left:8px;font-weight:700;vertical-align:middle;}
+
+p{line-height:1.85;font-size:16.5px;color:var(--ink);}
+.think{background:var(--paper2);border-left:4px solid var(--brick);border-radius:6px;padding:12px 16px;margin:14px 0;
+  font-size:15px;color:var(--ink-soft);}
+.think b{color:var(--brick-deep);font-family:'Poppins',sans-serif;font-size:12.5px;letter-spacing:.03em;}
+.note{background:rgba(242,181,68,.15);border-left:4px solid var(--amber);border-radius:6px;padding:12px 16px;margin:14px 0;
+  font-size:14px;color:var(--ink-soft);}
+
+/* meanings table */
+.search-box{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.search-box input{flex:1;min-width:160px;padding:11px 14px;border-radius:10px;border:2px solid var(--line);font-family:'Hind',sans-serif;
+  font-size:15px;background:#fff;}
+.search-box input:focus{outline:none;border-color:var(--brick);}
+table.meanings{width:100%;border-collapse:collapse;font-size:15.5px;}
+table.meanings th{text-align:left;font-family:'Poppins',sans-serif;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;
+  color:#fff;background:var(--dusk2);padding:10px 12px;}
+table.meanings th:first-child{border-radius:8px 0 0 0;}
+table.meanings th:last-child{border-radius:0 8px 0 0;}
+table.meanings td{padding:11px 12px;border-bottom:1px solid var(--line);}
+table.meanings tr:nth-child(even) td{background:var(--paper2);}
+table.meanings .eng{color:var(--ink-soft);font-family:'Poppins',sans-serif;font-size:12.5px;font-style:italic;}
+table.meanings tr.hide{display:none;}
+
+/* grammar */
+.drill{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px;}
+.drill .q{font-weight:600;margin-bottom:8px;}
+.reveal-btn{font-family:'Poppins',sans-serif;font-size:12.5px;font-weight:600;background:var(--dusk2);color:#fff;
+  border:none;padding:6px 14px;border-radius:20px;cursor:pointer;}
+.reveal-ans{display:none;margin-top:8px;background:var(--paper2);border-radius:8px;padding:10px 12px;color:var(--brick-deep);
+  font-weight:600;}
+.reveal-ans.show{display:block;}
+textarea.ans-box{width:100%;border:1.5px dashed var(--line);border-radius:8px;padding:10px;font-family:'Hind',sans-serif;
+  font-size:15px;min-height:64px;margin-top:8px;resize:vertical;}
+
+/* question bank */
+.mark-group{margin-bottom:18px;}
+.mark-head{display:flex;align-items:center;justify-content:space-between;background:var(--dusk1);color:#fff;padding:10px 16px;
+  border-radius:10px;cursor:pointer;font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;}
+.mark-head .badge{background:var(--amber);color:var(--dusk1);font-size:11.5px;padding:2px 10px;border-radius:20px;}
+.mark-body{display:none;padding:6px 4px 4px;}
+.mark-body.open{display:block;}
+.qitem{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0;}
+.qitem .qtxt{font-weight:600;margin-bottom:8px;}
+.qitem .qtxt .num{color:var(--brick-deep);margin-right:6px;}
+.qtype{display:inline-block;font-family:'Poppins',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.03em;
+  background:var(--amber);color:var(--dusk1);padding:2px 9px;border-radius:20px;margin-bottom:8px;text-transform:uppercase;}
+.qitem .alt{color:var(--ink-soft);font-size:14px;font-style:italic;margin:4px 0 8px;}
+.ans-toggle{font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;color:var(--dusk2);background:var(--paper2);
+  border:1px solid var(--line);padding:5px 12px;border-radius:20px;cursor:pointer;}
+.ans-block{display:none;margin-top:10px;border-top:1px dashed var(--line);padding-top:10px;color:var(--ink);}
+.ans-block.show{display:block;}
+.ans-block b{color:var(--brick-deep);}
+
+/* quiz */
+.quiz-shell{background:var(--dusk1);border-radius:22px;padding:24px;color:#fff;}
+.progress-wrap{height:8px;background:rgba(255,255,255,.15);border-radius:8px;overflow:hidden;margin-bottom:18px;}
+.progress-bar{height:100%;background:var(--amber);border-radius:8px;transition:.3s;width:0%;}
+.quiz-meta{display:flex;justify-content:space-between;font-family:'Poppins',sans-serif;font-size:12.5px;color:#d9c3d0;margin-bottom:10px;}
+.quiz-q{font-size:19px;font-weight:600;margin-bottom:16px;min-height:56px;}
+.quiz-opts{display:grid;gap:10px;}
+.qopt{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.18);border-radius:12px;padding:12px 16px;
+  cursor:pointer;font-size:15.5px;transition:.15s;}
+.qopt:hover{border-color:var(--amber);}
+.qopt.correct{background:rgba(94,193,120,.25);border-color:#5ec178;}
+.qopt.wrong{background:rgba(213,80,80,.25);border-color:#d55050;}
+.qopt.disabled{pointer-events:none;}
+.quiz-explain{margin-top:14px;background:rgba(242,181,68,.12);border-left:3px solid var(--amber);padding:10px 14px;
+  border-radius:6px;font-size:14.5px;display:none;color:#ecd9a8;}
+.quiz-explain.show{display:block;}
+.quiz-nav{display:flex;justify-content:space-between;margin-top:20px;}
+.qbtn{font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;padding:10px 22px;border-radius:24px;border:none;
+  cursor:pointer;background:var(--amber);color:var(--dusk1);}
+.qbtn:disabled{opacity:.35;cursor:default;}
+.qbtn.ghost{background:transparent;color:#e3cdd8;border:1.5px solid rgba(255,255,255,.25);}
+.quiz-result{text-align:center;}
+.quiz-result .score{font-family:'Yatra One',cursive;font-size:60px;color:var(--amber);}
+
+/* buttons / footer */
+.print-btn{position:fixed;right:18px;bottom:18px;z-index:40;font-family:'Poppins',sans-serif;font-weight:600;font-size:13.5px;
+  background:var(--brick);color:#fff;border:none;padding:12px 20px;border-radius:30px;cursor:pointer;box-shadow:0 6px 18px rgba(125,51,35,.4);}
+footer{text-align:center;font-family:'Poppins',sans-serif;font-size:12px;color:var(--ink-soft);padding:22px 10px 40px;}
+footer b{color:var(--brick-deep);}
+
+@media print{
+  .tabbar,.print-btn{display:none!important;}
+  .hero{padding:14px 10px;}
+  .site-strip{display:none;}
+  .panel{display:block!important;}
+  .panel:not(.print-target){display:none!important;}
+  body{background:#fff;}
+}
+@media (max-width:600px){
+  .window-card{padding:20px 16px 18px;}
+  .mark-head{font-size:13px;padding:9px 12px;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <a href="hindi.html" style="position:absolute; top:14px; left:16px; font-size:.8rem; color:#fff; text-decoration:none; opacity:.85; z-index:3;">&larr; Hindi</a>
+  <a href="index.html" title="Home" style="position:absolute; top:14px; right:16px; font-size:1.1rem; color:#fff; text-decoration:none; opacity:.85; z-index:3;">&#127968;</a>
+  <div class="eyebrow">SSLC · Hindi · Chapter 2 · Kahani</div>
+  <h1>व्हाइट कैप</h1>
+  <div class="sub">by Lokbabu</div>
+  <div class="author-badge">Born: <b>10 June 1954</b>, Chhattisgarh &nbsp;|&nbsp; Works: Teele Par Chaand · Jungalgatha · Bastar Bastar</div>
+  <div class="site-strip">
+    <div class="ground"></div>
+    <div class="scaffold"><div class="bar"></div><div class="bar short"></div><div class="bar"></div></div>
+    <div class="scaffold2"><div class="bar short"></div><div class="bar"></div></div>
+    <div class="ball"></div>
+  </div>
+</div>
+
+<div class="tabbar ui" id="tabbar">
+  <button class="tabbtn active" data-tab="intro">Overview</button>
+  <button class="tabbtn" data-tab="summary">Story Summary</button>
+  <button class="tabbtn" data-tab="meanings">Word Meanings</button>
+  <button class="tabbtn" data-tab="grammar">Grammar</button>
+  <button class="tabbtn" data-tab="qbank">Question Bank</button>
+  <button class="tabbtn" data-tab="quiz">Quiz</button>
+  <button class="tabbtn" data-tab="notes">Short Notes</button>
+</div>
+
+<div class="wrap">
+
+  <!-- ================= INTRO ================= -->
+  <section class="panel active" id="intro">
+    <div class="window-card">
+      <h3>लेखक परिचय <span class="tag">Author</span></h3>
+      <p>लोकबाबू का जन्म 10 जून 1954 को छत्तीसगढ़ में हुआ। छत्तीसगढ़ अंचल के लोक-जीवन की संवेदनशील प्रस्तुति उनकी कहानियों की विशेषता है। <i>'टीले पर चाँद'</i>, <i>'बोधिसत्व भी नहीं आए'</i>, <i>'जंगलगाथा'</i>, <i>'बस्तर बस्तर'</i> आदि उनकी प्रमुख रचनाएँ हैं।</p>
+    </div>
+    <div class="window-card">
+      <h3>पाठ के बारे में <span class="tag">About the chapter</span></h3>
+      <p>'व्हाइट कैप' एक कहानी है जो एक निर्माणाधीन शहर के निर्माण-स्थल पर मज़दूरी करने वाले परिवारों के जीवन और उनके बच्चों के सपनों को उजागर करती है। कहानी का केंद्र केशव नाम का आठ वर्षीय बालक है, जो क्रिकेट खेलने का सपना देखता है, पर ग़रीबी के कारण उसके पास न बल्ला है, न गेंद। यह कहानी सामाजिक असमानता, बचपन की मासूमियत, और आपसी समझ से बनते रिश्तों की मार्मिक झलक देती है।</p>
+      <div class="note"><b>ध्यान दें ›</b> उपलब्ध पाठ-अंश में कहानी का आरंभिक भाग तथा गतिविधियों/शब्दार्थ में दिए संकेत शामिल हैं। बीच का पूरा घटनाक्रम पाठ्यपुस्तक के अधूरे पन्नों के कारण इसमें सम्मिलित नहीं है — कथासार को गतिविधि-संकेतों के आधार पर सावधानी से जोड़ा गया है।</div>
+    </div>
+    <div class="window-card">
+      <h3>मुख्य पात्र <span class="tag">Characters</span></h3>
+      <p><b>केशव</b> — आठ वर्षीय, छोटा-सा, नाटा-सा, साँवला बालक; तीसरी कक्षा का विद्यार्थी; क्रिकेट का शौकीन।<br>
+      <b>केशव के माता-पिता</b> — बेमेतरा ज़िले से आए मज़दूर, निर्माणाधीन इमारत के पहरेदार-मज़दूर।<br>
+      <b>दादाजी</b> — केशव के गाँव में रहने वाले बुज़ुर्ग, पोते की ज़िद से हताश।<br>
+      <b>स्थानीय लड़कों की क्रिकेट टीम व कप्तान</b> — जो निर्माण-स्थल के पास खेलते हैं, कहानी के अंत तक जिनका केशव के प्रति नज़रिया बदल जाता है।</p>
+    </div>
+  </section>
+
+  <!-- ================= SUMMARY ================= -->
+  <section class="panel" id="summary">
+    <div class="window-card">
+      <h3>Story Summary <span class="tag">कथासार</span></h3>
+      <p>हर साल नई बसाहटों के कारण शहर की शक्ल बदलती रहती थी। निर्माणाधीन इमारतों में काम करने वाले मज़दूरों का गाँव इतनी दूर होता था कि वे रोज़ वहाँ लौट नहीं सकते थे, इसलिए वे इमारतों के आस-पास ही गठरियाँ रखकर, चूल्हा जलाकर, भोजन बनाकर रात गुज़ारते थे। इन्हीं मज़दूर-पहरेदार परिवारों में एक परिवार केशव का भी था — आठ साल का छोटा-सा, नाटा-सा, साँवला लड़का, जिसके माता-पिता बेमेतरा ज़िले के किसी गाँव से यहाँ पहुँचे थे।</p>
+      <p>फरवरी माह के अंत में, तीसरी कक्षा की वार्षिक परीक्षा देने के बाद, केशव अपने दादाजी से माता-पिता के पास शहर जाने की ज़िद कर बैठा। बुढ़ापे में बचा-खुचा दिमाग जब पोते की ज़िद ने कुतरना शुरू किया तो दादाजी हताश हो गए और आख़िरकार उसे शहर भेजना पड़ा।</p>
+      <p>शहर पहुँचकर केशव अपने माता-पिता के पास तो आ गया, पर वहाँ उसका मन क्रिकेट खेलने को मचलता रहा — पास ही स्थानीय लड़कों की एक टीम मैदान में क्रिकेट खेलती थी, पर केशव के पास न बल्ला था, न गेंद। दिन में वह उदास-सा रहता, पर रात को सपने में वह ख़ुद को क्रिकेट खेलते देखता — हाथों में नया बल्ला, सिर पर झक व्हाइट कैप, टाँगों पर मोटे पैड — और अपनी उस कल्पना पर मन-ही-मन मुस्कुराता।</p>
+      <p>धीरे-धीरे केशव निर्माण-स्थल से जुड़ी अपनी जानकारी और फुर्ती के दम पर टीम के लिए उपयोगी साबित होने लगा — जब भी किसी खिलाड़ी की कमी होती, केशव से उसकी पूर्ति की जाने लगी। लड़कों ने आपस में चंदा जमा कर नई क्रिकेट सामग्री और एक शील्ड भी ख़रीदी। इमारत की हिलती-डुलती अस्थाई चाली से चढ़कर छत तक जाना जोखिम भरा काम था, पर केशव जैसे साथी की मदद से यह भी आसान हो गया। धीरे-धीरे लड़कों का व्यवहार केशव के प्रति बदलने लगा — जो लड़का कभी उपेक्षित था, अब टीम का ज़रूरी हिस्सा बन गया।</p>
+      <p>कहानी के अंत में केशव का परिवार (मज़दूरी का काम पूरा होने पर, जैसा मज़दूर परिवारों के साथ अक्सर होता है) गाँव लौट जाता है। गाँव पहुँचकर केशव अपने अनुभवों को डायरी में दर्ज करता है, और उधर टीम का कप्तान उसे पत्र लिखकर उसकी कमी महसूस करने की बात कहता है — यही इस कहानी का भावुक और मार्मिक अंत है।</p>
+      <div class="think"><b>भाव और संदेश ›</b> कहानी शहर के विकास और मज़दूरों के जीवन के बीच के अंतर को उजागर करती है, और यह भी दिखाती है कि बचपन की दोस्ती और खेल किस तरह वर्ग-भेद की दीवारों को पार कर सकते हैं।</div>
+    </div>
+    <div class="window-card">
+      <h3>शीर्षक की सार्थकता <span class="tag">Why "व्हाइट कैप"?</span></h3>
+      <p>'व्हाइट कैप' केशव के सबसे बड़े सपने का प्रतीक है — क्रिकेट खेलने, समान अवसर पाने और स्वीकृति पाने की चाह का प्रतीक। जो कैप उसके सपनों में चमकती है, वही अंततः उसके वास्तविक जीवन में टीम द्वारा स्वीकार किए जाने के रूप में साकार होती है। इसीलिए यह शीर्षक कहानी के केंद्रीय भाव को बख़ूबी दर्शाता है।</p>
+    </div>
+  </section>
+
+  <!-- ================= MEANINGS ================= -->
+  <section class="panel" id="meanings">
+    <div class="window-card">
+      <h3>शब्दार्थ <span class="tag">Word meanings</span></h3>
+      <div class="search-box">
+        <input type="text" id="meaningSearch" placeholder="शब्द खोजें... (search a word)">
+      </div>
+      <table class="meanings" id="meaningsTable">
+        <tr><th>शब्द (Word)</th><th>अर्थ (Meaning)</th></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= GRAMMAR ================= -->
+  <section class="panel" id="grammar">
+    <div class="window-card">
+      <h3>'से' के विविध प्रयोग <span class="tag">Uses of "से"</span></h3>
+      <p class="think"><b>पाठ से ›</b> नीचे दिए वाक्यों में रेखांकित 'से' प्रत्येक संदर्भ में अलग अर्थ सूचित करता है — साधन/स्रोत, कर्ता (द्वारा), संबोधित व्यक्ति, या मार्ग।</p>
+      <div class="drill"><div class="q">शहर जाकर जमा चंदे <u>से</u> नई क्रिकेट सामग्री के साथ एक शील्ड भी ख़रीद ली।</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">अर्थ देखें</button>
+        <div class="reveal-ans">यहाँ 'से' साधन/स्रोत का बोध कराता है (किस चीज़ के ज़रिए ख़रीदा)।</div></div>
+      <div class="drill"><div class="q">खिलाड़ी की कमी की पूर्ति केशव <u>से</u> की जाती।</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">अर्थ देखें</button>
+        <div class="reveal-ans">यहाँ 'से' कर्ता/माध्यम का बोध कराता है (किसके द्वारा पूर्ति होती थी)।</div></div>
+      <div class="drill"><div class="q">वह लड़का गया और ऑटोवाले <u>से</u> बात की।</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">अर्थ देखें</button>
+        <div class="reveal-ans">यहाँ 'से' संबोधित व्यक्ति का बोध कराता है (किससे बात की)।</div></div>
+      <div class="drill"><div class="q">इमारत के पीछे की हिलती चाली <u>से</u> चढ़कर छत तक जाना उनके लिए मुश्किल काम था।</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">अर्थ देखें</button>
+        <div class="reveal-ans">यहाँ 'से' मार्ग/रास्ते का बोध कराता है (किस रास्ते से चढ़े)।</div></div>
+    </div>
+    <div class="window-card">
+      <h3>अपने वाक्य बनाएँ <span class="tag">Practice</span></h3>
+      <p class="think"><b>निर्देश ›</b> 'से' के हर अलग प्रयोग (साधन, कर्ता, व्यक्ति, मार्ग) को दर्शाते हुए एक-एक नया वाक्य लिखें।</p>
+      <textarea class="ans-box" placeholder="1) साधन के अर्थ में 'से' का वाक्य लिखें..."></textarea>
+      <textarea class="ans-box" placeholder="2) व्यक्ति के अर्थ में 'से' का वाक्य लिखें..." style="margin-top:10px;"></textarea>
+    </div>
+    <div class="window-card">
+      <h3>काल परिवर्तन <span class="tag">Tense change drill</span></h3>
+      <p class="think"><b>नमूना ›</b> बच्चे मैदान में <b>खेलते हैं</b> → बच्चे मैदान में <b>खेल रहे हैं</b></p>
+      <div class="drill"><div class="q">केशव सपना <b>देखता है</b>।</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">उत्तर देखें</button>
+        <div class="reveal-ans">केशव सपना देख रहा है।</div></div>
+      <div class="drill"><div class="q">लड़के क्रिकेट <b>खेलते हैं</b>।</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">उत्तर देखें</button>
+        <div class="reveal-ans">लड़के क्रिकेट खेल रहे हैं।</div></div>
+    </div>
+  </section>
+
+  <!-- ================= QUESTION BANK ================= -->
+  <section class="panel" id="qbank">
+    <div class="window-card">
+      <h3>प्रश्न बैंक <span class="tag">Question bank · परीक्षा पैटर्न अनुसार</span></h3>
+      <p class="think"><b>नोट ›</b> प्रश्न SSLC परीक्षा पैटर्न (बहुविकल्पीय, अतिसंक्षिप्त, व्याकरण, रचनात्मक लेखन) के अनुसार तैयार किए गए हैं। कुछ प्रश्न वास्तविक मार्च-2026 प्रश्नपत्र के ठीक उसी रूप में हैं।</p>
+      <div id="qbankHost"></div>
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="panel" id="quiz">
+    <div class="window-card" style="background:transparent;border:none;box-shadow:none;padding:0;">
+      <div style="display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+        <span class="ui" id="quizWindowBadge" style="font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px;"></span>
+        <a href="hindi-chapter2-quiz.html" target="_blank" class="ui" style="text-decoration:none;font-weight:600;font-size:13px;
+          background:var(--dusk2);color:#fff;padding:9px 18px;border-radius:24px;">🔗 Open Standalone Shareable Quiz</a>
+      </div>
+      <div class="quiz-shell" id="quizShell"></div>
+    </div>
+  </section>
+
+  <!-- ================= SHORT NOTES ================= -->
+  <section class="panel" id="notes">
+    <div class="window-card">
+      <h3>लघु नोट्स — त्वरित पुनरावलोकन <span class="tag">Quick revision</span></h3>
+      <p><b>विधा:</b> कहानी &nbsp;|&nbsp; <b>लेखक:</b> लोकबाबू &nbsp;|&nbsp; <b>अध्याय:</b> 2</p>
+      <p><b>मुख्य पात्र:</b> केशव (8 वर्ष, तीसरी कक्षा) — मज़दूर परिवार का बालक।</p>
+      <p><b>पृष्ठभूमि:</b> निर्माणाधीन इमारतों के आसपास बसे मज़दूर परिवार; केशव की शहर जाने की ज़िद।</p>
+      <p><b>सपना:</b> क्रिकेट खेलना — हाथ में बल्ला, सिर पर व्हाइट कैप, टाँगों पर पैड।</p>
+      <p><b>मोड़:</b> केशव धीरे-धीरे टीम के लिए ज़रूरी खिलाड़ी बन जाता है; लड़कों का नज़रिया बदलता है।</p>
+      <p><b>अंत:</b> केशव गाँव लौटता है, डायरी लिखता है; कप्तान उसे पत्र लिखता है।</p>
+      <p><b>केंद्रीय भाव:</b> वर्ग-भेद, बचपन की मासूमियत, खेल से बनते रिश्ते, शहर के विकास व मज़दूरों के जीवन का अंतर।</p>
+    </div>
+  </section>
+
+</div>
+
+<button class="print-btn ui" onclick="printActive()">🖨️ Print</button>
+<footer>Abacus Academy · SSLC Hindi Study Portal · <b>व्हाइट कैप</b> — Lokbabu</footer>
+
+<script>
+/* ---------- TAB LOGIC ---------- */
+const tabs=document.querySelectorAll('.tabbtn');
+const panels=document.querySelectorAll('.panel');
+tabs.forEach(t=>t.addEventListener('click',()=>{
+  tabs.forEach(x=>x.classList.remove('active'));
+  panels.forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.tab).classList.add('active');
+}));
+function printActive(){
+  panels.forEach(p=>p.classList.remove('print-target'));
+  document.querySelector('.panel.active').classList.add('print-target');
+  window.print();
+}
+
+/* ---------- QUIZ WINDOW BADGE (matches 9:30–10:30 PM gate on standalone quiz) ---------- */
+function updateQuizBadge(){
+  const badge=document.getElementById('quizWindowBadge');
+  if(!badge) return;
+  const now=new Date();
+  const mins=now.getHours()*60+now.getMinutes();
+  const open=21*60+30, close=22*60+30;
+  const isOpen = mins>=open && mins<close;
+  badge.textContent = isOpen ? "🟢 Quiz link OPEN now" : "🔴 Closed — opens 9:30–10:30 PM daily";
+  badge.style.background = isOpen ? "rgba(94,193,120,.18)" : "rgba(213,80,80,.15)";
+  badge.style.color = isOpen ? "#2f7a45" : "#a13d3d";
+}
+updateQuizBadge();
+setInterval(updateQuizBadge, 20000);
+
+/* ---------- MEANINGS DATA ---------- */
+const meanings=[
+ ["बसाहट","वास स्थान (a settlement / dwelling place)"],
+ ["शक्ल","रूप (appearance)"],
+ ["बदलना","परिवर्तित होना (to change)"],
+ ["इमारत","मकान (building)"],
+ ["आसपास","समीप (nearby)"],
+ ["गठरी","कपड़े में बंधा हुआ सामान (a bundle)"],
+ ["चूल्हा","hearth"],
+ ["गुज़ारना","बिताना (to spend / pass time)"],
+ ["पसारना","फैलाना (to spread)"],
+ ["दादा","पिता के पिता (paternal grandfather)"],
+ ["ज़िद","हठ (stubbornness / insistence)"],
+ ["बुढ़ापा","वृद्धावस्था (old age)"],
+ ["बचा-खुचा","बाकी (leftover / remaining)"],
+ ["दिमाग कुतरना","सताना (to pester)"],
+ ["हताश","निराश (dejected / hopeless)"],
+ ["अस्थाई","अस्थिर (temporary)"],
+ ["डेरा","रहने की जगह (dwelling / camp)"],
+ ["मजबूर","विवश (helpless / compelled)"],
+ ["आखिर","अंत में (at last)"],
+ ["अकुलाना","घबराना (to be restless / anxious)"],
+ ["चक्कर लगाना","घूमना (to go around)"],
+ ["ठहरना","रुकना (to stay / halt)"],
+ ["शामिल करना","साथ मिलाना (to include)"],
+ ["खोपड़ी","सिर (head)"],
+ ["हाथ जमा देना","मारना (to strike / hit)"],
+ ["जताना","प्रकट करना (to express)"],
+ ["दुखना","दर्द होना (to ache)"],
+ ["उचककर","ऊपर उठकर (rising up on tiptoe)"],
+ ["पक्का होना","to harden / become firm"],
+ ["भागना","to run"],
+ ["मासूमियत","innocence"],
+ ["हिलना","to shake"],
+ ["चाली","छत पर चढ़ने का अस्थाई प्लेटफ़ॉर्म (a temporary platform to climb to the roof)"],
+ ["कोसना","शाप देना (to curse)"],
+ ["उछल जाना","to bounce up"],
+ ["कमज़ोरी","दोष (weakness / flaw)"],
+ ["भुनभुनाना","गुस्सा होना (to grumble angrily)"],
+ ["चकराना","to be surprised"],
+ ["चकित","विस्मित (astonished)"],
+ ["रमना","आनंद करना (to revel / enjoy)"],
+ ["मुड़े-तुड़े","crumpled"],
+ ["बेसुध","अबोध (unconscious)"],
+ ["छींटे","बूंदें (drops / splashes)"],
+ ["हरकत","movement"],
+ ["कुनमुनाना","to mutter"],
+ ["चौक","जंक्शन (a junction / crossroad)"],
+ ["जतन से","सावधानी से (carefully)"],
+ ["लिटाना","to lay someone down"],
+ ["खबर लाना","समाचार जानना (to bring news)"],
+ ["करवट","lying on one side"],
+ ["घेरना","to surround"],
+ ["तकलीफ","कठिनाई (difficulty)"],
+ ["साबुत","स्वस्थ (whole / intact)"],
+ ["टूट पड़ना","कुछ लेने के लिए एकदम दौड़ पड़ना (to rush at something)"],
+ ["धरना","रखना (to place)"],
+ ["लहराना","to wave"],
+];
+const tbl=document.getElementById('meaningsTable');
+meanings.forEach(([w,m])=>{
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td><b>${w}</b></td><td>${m}</td>`;
+  tr.dataset.key=w;
+  tbl.appendChild(tr);
+});
+document.getElementById('meaningSearch').addEventListener('input',e=>{
+  const v=e.target.value.trim();
+  [...tbl.querySelectorAll('tr')].slice(1).forEach(tr=>{
+    tr.classList.toggle('hide', v && !tr.dataset.key.includes(v) && !tr.textContent.includes(v));
+  });
+});
+
+/* ---------- QUESTION BANK DATA ---------- */
+const qbank={
+ "1 अंक":[
+   {type:"MCQ · सीधा तथ्य",q:"केशव किस कक्षा में पढ़ता था?",
+    opts:"(क) दूसरी  (ख) तीसरी  (ग) चौथी  (घ) पाँचवीं",
+    ans:"(ख) तीसरी — केशव तीसरी कक्षा की अपनी वार्षिक परीक्षा दे चुका था।"},
+   {type:"MCQ · सीधा तथ्य",q:"केशव के माता-पिता किस ज़िले से यहाँ पहुँचे थे?",
+    opts:"(क) दुर्ग  (ख) बेमेतरा  (ग) रायपुर  (घ) बिलासपुर",
+    ans:"(ख) बेमेतरा।"},
+   {type:"MCQ · कथन-चयन (i–iv पैटर्न)",q:"नीचे दिए प्रस्तावों को पढ़ें और सही विकल्प चुनकर लिखें —\n(i) केशव आठ साल का था।\n(ii) केशव अपने दादा के साथ रहकर हमेशा खुश रहता था।\n(iii) केशव सपने में क्रिकेट खेलता देखा करता था।\n(iv) केशव को शहर जाने का कोई शौक नहीं था।",
+    opts:"(क) (i) और (iii) सही हैं।  (ख) (ii) और (iv) सही हैं।  (ग) (i) और (iv) सही हैं।  (घ) (ii) और (iii) सही हैं।",
+    ans:"(क) (i) और (iii) सही हैं — केशव आठ साल का था और सपने में क्रिकेट खेलता था। वह शहर जाने की ज़िद करता है, इसलिए (ii) व (iv) ग़लत हैं।"},
+   {type:"MCQ · शब्द-पहचान (व्याकरण)",q:"विशेषण शब्द चुनकर लिखें।",
+    opts:"(क) साँवला  (ख) दादा  (ग) दिमाग  (घ) चंदा",
+    ans:"(क) साँवला — यह गुणवाचक विशेषण है (केशव के रंग-रूप को बताता है)।"},
+ ],
+ "2 अंक":[
+   {type:"कारण-आधारित (वास्तविक प्रश्नपत्र प्रश्न)",q:"केशव मन-ही-मन मुस्कुराता है। क्यों?",
+    ans:"रात को सपने में केशव ख़ुद को क्रिकेट खेलते देखता — हाथों में नया बल्ला, सिर पर झक व्हाइट कैप, टाँगों पर शानदार मोटे पैड। अपनी इसी कल्पना पर वह मन-ही-मन मुस्कुराता है।"},
+   {type:"कारण-आधारित",q:"दादाजी हताश क्यों हुए?",
+    ans:"पोते केशव की शहर जाने की ज़िद के आगे बुढ़ापे में बचा-खुचा दिमाग जवाब दे गया, इसलिए दादाजी हताश हो गए।"},
+   {type:"व्याकरण · निर्देशानुसार उत्तर",q:"(क) 'उसे लगा कि चाँद भी उसके साथ-साथ चढ़ रहा है' — इस वाक्य में निहित सर्वनाम पहचानें।\n(ख) नमूने के अनुसार लिखें: 'बच्चे मैदान में खेलते हैं।' → 'बच्चे मैदान में खेल रहे हैं।' 'केशव सपना देखता है।' → '.....................'",
+    ans:"(क) 'उसे' — पुरुषवाचक सर्वनाम (कर्म कारक)।\n(ख) केशव सपना देख रहा है।"},
+   {type:"शब्दार्थ-आधारित",q:"'चाली' किसे कहा गया है और यह मज़दूरों के लिए किस प्रकार जोखिम भरी थी?",
+    ans:"'चाली' छत पर चढ़ने के लिए बनाई गई एक अस्थाई प्लेटफ़ॉर्म को कहते हैं। इमारत के पीछे की यह चाली हिलती-डुलती (अस्थिर) थी, इसलिए उससे चढ़कर छत तक जाना मुश्किल व जोखिम भरा काम था।"},
+ ],
+ "3 अंक":[
+   {type:"वाक्य विस्तार (कोष्ठक शब्द)",q:"कोष्ठक के शब्दों की मदद से वाक्य विस्तार करें —\n(निर्माणाधीन इमारत के पास, रोज़, थके-हारे)\nमज़दूर गुज़ारा करते हैं।\n...................................\n...................................\n...................................",
+    ans:"मज़दूर गुज़ारा करते हैं। → मज़दूर निर्माणाधीन इमारत के पास गुज़ारा करते हैं। → मज़दूर निर्माणाधीन इमारत के पास रोज़ गुज़ारा करते हैं। → मज़दूर निर्माणाधीन इमारत के पास रोज़ थके-हारे गुज़ारा करते हैं।"},
+ ],
+ "4 अंक — रचनात्मक लेखन":[
+   {type:"बातचीत / संवाद (वास्तविक प्रश्नपत्र प्रश्न)",q:"अपने सपने के बारे में केशव और माँ के बीच की संभावित बातचीत लिखें।",
+    alt:"अथवा — बल्ला और बॉल न मिलने से केशव बहुत दुखी हुआ। इसपर उसके माता और पिता के बीच की बातचीत लिखें।"},
+   {type:"डायरी (गतिविधि पर आधारित)",q:"कहानी के अंत में केशव के प्रति लड़कों के मनोभाव में बदलाव आता है। गाँव पहुँचने के बाद केशव अपने अनुभव डायरी में लिखता है। वह डायरी लिखें।",
+    alt:"(संकेत: शहर में बिताए दिन, टीम के लड़कों से दोस्ती, व्हाइट कैप का सपना)"},
+   {type:"पत्र (गतिविधि पर आधारित)",q:"केशव के गाँव पहुँचने के बाद कप्तान केशव के नाम पत्र लिखता है। वह पत्र लिखें।",
+    alt:"(संकेत: केशव की कमी महसूस होना, टीम में उसका योगदान, दोबारा मिलने की उम्मीद)"},
+   {type:"पटकथा (स्क्रिप्ट)",q:"केशव के मैदान में क्रिकेट खेलने के दृश्य को पटकथा (स्क्रिप्ट) के रूप में लिखें।",
+    alt:"(संकेत: दृश्य-स्थान — निर्माण-स्थल के पास मैदान; पात्र — केशव, टीम के लड़के, कप्तान; संवाद व क्रिया-निर्देश शामिल करें)"},
+   {type:"चरम सीमा परिवर्तन (अनुबद्ध कार्य)",q:"कहानी की चरम सीमा (climax) को बदलकर लिखें।",
+    alt:"(संकेत: यदि लड़कों का व्यवहार न बदलता, या केशव कभी टीम में शामिल न हो पाता, तो कहानी किस दिशा में जाती?)"},
+ ],
+ "4 अंक — पोस्टर (जागरूकता)":[
+   {type:"पोस्टर",q:"1 जून 'अंतरराष्ट्रीय बाल दिवस' के अवसर पर, सरकारी विद्यालय में मज़दूर परिवारों के बच्चों की शिक्षा और खेल के अधिकार पर एक जागरूकता कार्यक्रम होने वाला है। इसके लिए पोस्टर तैयार करें।",
+    alt:"(संकेत: शीर्षक, स्लोगन, तिथि-स्थान, चित्र-संकेत सहित पोस्टर बनाएँ)"}
+ ]
+};
+const qbHost=document.getElementById('qbankHost');
+Object.entries(qbank).forEach(([mark,list],gi)=>{
+  const group=document.createElement('div'); group.className='mark-group';
+  const head=document.createElement('div'); head.className='mark-head';
+  head.innerHTML=`<span>${mark}</span><span class="badge">${list.length} प्रश्न</span>`;
+  const body=document.createElement('div'); body.className='mark-body'+(gi===0?' open':'');
+  head.addEventListener('click',()=>body.classList.toggle('open'));
+  list.forEach((item,qi)=>{
+    const box=document.createElement('div'); box.className='qitem';
+    let html=`<span class="qtype">${item.type||''}</span>`;
+    html+=`<div class="qtxt"><span class="num">${qi+1}.</span>${item.q.replace(/\n/g,'<br>')}</div>`;
+    if(item.opts) html+=`<div class="alt">${item.opts}</div>`;
+    if(item.alt) html+=`<div class="alt">${item.alt}</div>`;
+    if(item.ans){
+      html+=`<button class="ans-toggle">उत्तर देखें</button><div class="ans-block"><b>उत्तर:</b> ${item.ans.replace(/\n/g,'<br>')}</div>`;
+    } else {
+      html+=`<button class="ans-toggle">संकेत / नमूना बिंदु</button><div class="ans-block">रचनात्मक प्रश्न — शिक्षक द्वारा मूल्यांकन। ऊपर दिए संकेत बिंदुओं के आधार पर उत्तर विस्तृत करें।</div>`;
+    }
+    box.innerHTML=html;
+    box.querySelector('.ans-toggle').addEventListener('click',e=>{
+      box.querySelector('.ans-block').classList.toggle('show');
+    });
+    body.appendChild(box);
+  });
+  group.appendChild(head); group.appendChild(body);
+  qbHost.appendChild(group);
+});
+
+/* ---------- QUIZ ---------- */
+const quizData=[
+ {q:"केशव किस कक्षा में पढ़ता था?",o:["दूसरी","तीसरी","चौथी","पाँचवीं"],a:1,
+  ex:"केशव तीसरी कक्षा की अपनी वार्षिक परीक्षा दे चुका था।"},
+ {q:"केशव के माता-पिता किस ज़िले से आए थे?",o:["दुर्ग","बेमेतरा","रायपुर","बिलासपुर"],a:1,
+  ex:"वे बेमेतरा ज़िले के किसी गाँव से शहर पहुँचे थे।"},
+ {q:"केशव ने किससे शहर जाने की ज़िद की?",o:["माँ से","दादाजी से","शिक्षक से","पड़ोसी से"],a:1,
+  ex:"केशव ने अपने दादाजी से माता-पिता के पास शहर जाने की ज़िद की।"},
+ {q:"सपने में केशव ख़ुद को क्या करते देखता था?",o:["पढ़ाई करते","क्रिकेट खेलते","गाना गाते","चित्र बनाते"],a:1,
+  ex:"रात को सपने में वह अक्सर ख़ुद को क्रिकेट खेलता देखा करता था।"},
+ {q:"सपने में केशव के सिर पर क्या होती थी?",o:["टोपी","पगड़ी","झक व्हाइट कैप","हेलमेट"],a:2,
+  ex:"उसके सिर पर झक व्हाइट कैप होती थी।"},
+ {q:"मज़दूर अपनी गठरियाँ कहाँ रखते थे?",o:["गाँव में","निर्माणाधीन इमारतों के आसपास","बाज़ार में","स्टेशन पर"],a:1,
+  ex:"मज़दूर निर्माणाधीन इमारतों के आस-पास ही अपनी गठरियाँ रखकर रहते थे।"},
+ {q:"लड़कों ने नई क्रिकेट सामग्री किससे ख़रीदी?",o:["उधार लेकर","जमा चंदे से","स्कूल से","इनाम से"],a:1,
+  ex:"शहर जाकर जमा चंदे से नई क्रिकेट सामग्री के साथ एक शील्ड भी ख़रीदी गई।"},
+ {q:"खिलाड़ी की कमी होने पर उसकी पूर्ति किससे की जाती थी?",o:["कप्तान से","केशव से","दादाजी से","ऑटोवाले से"],a:1,
+  ex:"खिलाड़ी की कमी की पूर्ति केशव से की जाती थी।"},
+ {q:"इमारत के पीछे की 'चाली' कैसी थी?",o:["मज़बूत","हिलती (अस्थिर)","नई","चौड़ी"],a:1,
+  ex:"इमारत के पीछे की हिलती चाली से चढ़कर छत तक जाना मुश्किल काम था।"},
+ {q:"केशव की ज़िद के आगे दादाजी की क्या हालत हुई?",o:["वे ख़ुश हो गए","वे हताश हो गए","वे नाराज़ हो गए","उन्हें कुछ फ़र्क नहीं पड़ा"],a:1,
+  ex:"बुढ़ापे में बचा-खुचा दिमाग जब पोते ने कुतरना शुरू किया तो दादाजी हताश हो गए।"},
+ {q:"'व्हाइट कैप' शीर्षक मुख्यतः किसका प्रतीक है?",o:["गर्मी से बचाव का","केशव के क्रिकेट सपने व स्वीकृति का","मज़दूरी के औज़ार का","स्कूल यूनिफ़ॉर्म का"],a:1,
+  ex:"व्हाइट कैप केशव के क्रिकेट खेलने और टीम में स्वीकार किए जाने के सपने का प्रतीक है।"},
+ {q:"'व्हाइट कैप' कहानी के लेखक कौन हैं?",o:["शुक्राचार्य","लोकबाबू","गगन गिल","अरविंद गुप्ता"],a:1,
+  ex:"'व्हाइट कैप' कहानी के लेखक लोकबाबू हैं।"},
+ {q:"लोकबाबू का जन्म कहाँ हुआ?",o:["उत्तर प्रदेश","दिल्ली","छत्तीसगढ़","केरल"],a:2,
+  ex:"लोकबाबू का जन्म छत्तीसगढ़ में हुआ।"},
+ {q:"'व्हाइट कैप' किस विधा की रचना है?",o:["कविता","संस्मरण","कहानी","लेख"],a:2,
+  ex:"'व्हाइट कैप' एक कहानी है।"},
+ {q:"कहानी के अंत में लड़कों के मनोभाव में केशव के प्रति क्या बदलाव आता है?",o:["वे और उपेक्षा करने लगते हैं","उनका व्यवहार सकारात्मक ढंग से बदलता है","वे उसे भूल जाते हैं","कोई बदलाव नहीं आता"],a:1,
+  ex:"कहानी के अंत में केशव के प्रति लड़कों का व्यवहार व नज़रिया सकारात्मक रूप से बदल जाता है — कप्तान उसे पत्र तक लिखता है।"},
+];
+let qi=0, score=0, answered=false;
+const shell=document.getElementById('quizShell');
+function renderQuiz(){
+  if(qi>=quizData.length){ renderResult(); return; }
+  answered=false;
+  const d=quizData[qi];
+  shell.innerHTML=`
+    <div class="progress-wrap"><div class="progress-bar" style="width:${(qi/quizData.length)*100}%"></div></div>
+    <div class="quiz-meta"><span>Question ${qi+1} / ${quizData.length}</span><span>Score: ${score}</span></div>
+    <div class="quiz-q">${d.q}</div>
+    <div class="quiz-opts" id="optsHost"></div>
+    <div class="quiz-explain" id="explainBox">${d.ex}</div>
+    <div class="quiz-nav"><button class="qbtn ghost" id="prevBtn">← Previous</button><button class="qbtn ghost" id="skipBtn">Skip</button><button class="qbtn" id="nextBtn" disabled>Next →</button></div>
+  `;
+  document.getElementById('prevBtn').disabled = (qi===0);
+  const optsHost=document.getElementById('optsHost');
+  d.o.forEach((opt,i)=>{
+    const b=document.createElement('div'); b.className='qopt'; b.textContent=opt;
+    b.addEventListener('click',()=>{
+      if(answered) return; answered=true;
+      [...optsHost.children].forEach(c=>c.classList.add('disabled'));
+      if(i===d.a){ b.classList.add('correct'); score++; }
+      else{ b.classList.add('wrong'); optsHost.children[d.a].classList.add('correct'); }
+      document.getElementById('explainBox').classList.add('show');
+      document.getElementById('nextBtn').disabled=false;
+    });
+    optsHost.appendChild(b);
+  });
+  document.getElementById('prevBtn').addEventListener('click',()=>{ if(qi>0){ qi--; renderQuiz(); } });
+  document.getElementById('skipBtn').addEventListener('click',()=>{ qi++; renderQuiz(); });
+  document.getElementById('nextBtn').addEventListener('click',()=>{ qi++; renderQuiz(); });
+}
+function renderResult(){
+  const pct=Math.round((score/quizData.length)*100);
+  let msg = pct>=80?"बहुत बढ़िया! आप तैयार हैं। 🎉" : pct>=50?"अच्छा प्रयास — दोबारा पाठ पढ़ें। 👍" : "पाठ फिर से पढ़ें, फिर दोबारा कोशिश करें। 📖";
+  const waText = encodeURIComponent("I scored "+score+"/"+quizData.length+" ("+pct+"%) in the व्हाइट कैप (SSLC Hindi) quiz! Try it: "+window.location.href.split('#')[0].replace('hindi-chapter2.html','hindi-chapter2-quiz.html'));
+  shell.innerHTML=`
+    <div class="quiz-result">
+      <div class="score">${score}/${quizData.length}</div>
+      <p style="color:#e9edf5;font-size:16px;">${msg}</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px;">
+        <button class="qbtn" id="restartBtn">दोबारा कोशिश करें</button>
+        <button class="qbtn" style="background:#25D366;" id="shareScoreBtn">📲 Share Score</button>
+      </div>
+    </div>`;
+  document.getElementById('restartBtn').addEventListener('click',()=>{ qi=0; score=0; renderQuiz(); });
+  document.getElementById('shareScoreBtn').addEventListener('click',()=>{
+    window.open('https://wa.me/?text='+waText,'_blank');
+  });
+}
+renderQuiz();
+</script>
+</body>
+</html>
