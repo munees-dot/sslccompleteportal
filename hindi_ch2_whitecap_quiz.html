@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>व्हाइट कैप — Quiz | SSLC Hindi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Hind:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dusk1:#2a1e3d; --dusk2:#5c3350; --dusk3:#c9622f;
+  --amber:#f2b544; --amber-soft:#f7d38b; --brick:#a4462f;
+  --ink:#20232b; --ink-soft:#565b68;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:linear-gradient(180deg,var(--dusk1) 0%,var(--dusk2) 55%,var(--dusk3) 100%);min-height:100vh;
+  font-family:'Hind',sans-serif;color:#fff;}
+.ui{font-family:'Poppins',sans-serif;}
+.wrap{max-width:560px;margin:0 auto;padding:30px 18px 60px;}
+.hero{text-align:center;padding:10px 0 22px;}
+.eyebrow{font-family:'Poppins',sans-serif;letter-spacing:.18em;font-size:11px;text-transform:uppercase;color:var(--amber-soft);}
+.hero h1{font-family:'Yatra One',cursive;font-size:clamp(36px,9vw,54px);margin:6px 0 2px;
+  text-shadow:0 2px 18px rgba(242,181,68,.35);}
+.hero .sub{font-size:13.5px;color:#ecd9e3;}
+
+.card{background:var(--dusk1);border:1.5px solid rgba(255,255,255,.12);border-radius:22px;padding:26px 22px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);}
+
+/* start screen */
+.start input{width:100%;padding:13px 16px;border-radius:12px;border:none;font-family:'Hind',sans-serif;font-size:16px;
+  margin:14px 0;background:#fff;color:var(--ink);}
+.bigbtn{width:100%;font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;padding:14px;border-radius:14px;
+  border:none;cursor:pointer;background:var(--amber);color:var(--dusk1);}
+.bigbtn.ghost{background:transparent;color:#eee0e7;border:1.5px solid rgba(255,255,255,.3);margin-top:10px;}
+.meta-line{font-family:'Poppins',sans-serif;font-size:12.5px;color:#c8b3bf;text-align:center;margin-top:12px;}
+
+/* quiz */
+.progress-wrap{height:8px;background:rgba(255,255,255,.15);border-radius:8px;overflow:hidden;margin-bottom:18px;}
+.progress-bar{height:100%;background:var(--amber);border-radius:8px;transition:.3s;width:0%;}
+.quiz-meta{display:flex;justify-content:space-between;font-family:'Poppins',sans-serif;font-size:12.5px;color:#d9c3d0;margin-bottom:10px;}
+.quiz-q{font-size:19px;font-weight:600;margin-bottom:16px;min-height:56px;}
+.quiz-opts{display:grid;gap:10px;}
+.qopt{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.18);border-radius:12px;padding:12px 16px;
+  cursor:pointer;font-size:15.5px;transition:.15s;}
+.qopt:hover{border-color:var(--amber);}
+.qopt.correct{background:rgba(94,193,120,.25);border-color:#5ec178;}
+.qopt.wrong{background:rgba(213,80,80,.25);border-color:#d55050;}
+.qopt.disabled{pointer-events:none;}
+.quiz-explain{margin-top:14px;background:rgba(242,181,68,.12);border-left:3px solid var(--amber);padding:10px 14px;
+  border-radius:6px;font-size:14.5px;display:none;color:#ecd9a8;}
+.quiz-explain.show{display:block;}
+.quiz-nav{display:flex;justify-content:space-between;gap:8px;margin-top:20px;}
+.qbtn{font-family:'Poppins',sans-serif;font-weight:600;font-size:13.5px;padding:10px 16px;border-radius:24px;border:none;
+  cursor:pointer;background:var(--amber);color:var(--dusk1);flex:1;}
+.qbtn:disabled{opacity:.35;cursor:default;}
+.qbtn.ghost{background:transparent;color:#e3cdd8;border:1.5px solid rgba(255,255,255,.25);}
+
+/* result */
+.quiz-result{text-align:center;}
+.quiz-result .score{font-family:'Yatra One',cursive;font-size:58px;color:var(--amber);}
+.quiz-result .name{font-family:'Poppins',sans-serif;font-size:14px;color:#ecd9e3;margin-bottom:6px;}
+.share-row{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
+.share-btn{font-family:'Poppins',sans-serif;font-weight:700;font-size:14.5px;padding:13px;border-radius:14px;border:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;}
+.share-btn.wa{background:#25D366;color:#0b3d1f;}
+.share-btn.link{background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.25);}
+.copied-msg{font-family:'Poppins',sans-serif;font-size:12px;color:var(--amber-soft);text-align:center;margin-top:6px;display:none;}
+.copied-msg.show{display:block;}
+
+footer{text-align:center;font-family:'Poppins',sans-serif;font-size:11.5px;color:#c8b3bf;padding:20px 10px 10px;}
+footer b{color:var(--amber-soft);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">SSLC · Hindi · Chapter 2 · Standalone Quiz</div>
+    <h1>व्हाइट कैप</h1>
+    <div class="sub">15-Question Quiz · Lokbabu</div>
+  </div>
+
+  <div class="card" id="cardHost"></div>
+</div>
+<footer>Abacus Academy · SSLC Hindi Study Portal · <b>व्हाइट कैप</b> Quiz</footer>
+
+<script>
+const quizData=[
+ {q:"केशव किस कक्षा में पढ़ता था?",o:["दूसरी","तीसरी","चौथी","पाँचवीं"],a:1,
+  ex:"केशव तीसरी कक्षा की अपनी वार्षिक परीक्षा दे चुका था।"},
+ {q:"केशव के माता-पिता किस ज़िले से आए थे?",o:["दुर्ग","बेमेतरा","रायपुर","बिलासपुर"],a:1,
+  ex:"वे बेमेतरा ज़िले के किसी गाँव से शहर पहुँचे थे।"},
+ {q:"केशव ने किससे शहर जाने की ज़िद की?",o:["माँ से","दादाजी से","शिक्षक से","पड़ोसी से"],a:1,
+  ex:"केशव ने अपने दादाजी से माता-पिता के पास शहर जाने की ज़िद की।"},
+ {q:"सपने में केशव ख़ुद को क्या करते देखता था?",o:["पढ़ाई करते","क्रिकेट खेलते","गाना गाते","चित्र बनाते"],a:1,
+  ex:"रात को सपने में वह अक्सर ख़ुद को क्रिकेट खेलता देखा करता था।"},
+ {q:"सपने में केशव के सिर पर क्या होती थी?",o:["टोपी","पगड़ी","झक व्हाइट कैप","हेलमेट"],a:2,
+  ex:"उसके सिर पर झक व्हाइट कैप होती थी।"},
+ {q:"मज़दूर अपनी गठरियाँ कहाँ रखते थे?",o:["गाँव में","निर्माणाधीन इमारतों के आसपास","बाज़ार में","स्टेशन पर"],a:1,
+  ex:"मज़दूर निर्माणाधीन इमारतों के आस-पास ही अपनी गठरियाँ रखकर रहते थे।"},
+ {q:"लड़कों ने नई क्रिकेट सामग्री किससे ख़रीदी?",o:["उधार लेकर","जमा चंदे से","स्कूल से","इनाम से"],a:1,
+  ex:"शहर जाकर जमा चंदे से नई क्रिकेट सामग्री के साथ एक शील्ड भी ख़रीदी गई।"},
+ {q:"खिलाड़ी की कमी होने पर उसकी पूर्ति किससे की जाती थी?",o:["कप्तान से","केशव से","दादाजी से","ऑटोवाले से"],a:1,
+  ex:"खिलाड़ी की कमी की पूर्ति केशव से की जाती थी।"},
+ {q:"इमारत के पीछे की 'चाली' कैसी थी?",o:["मज़बूत","हिलती (अस्थिर)","नई","चौड़ी"],a:1,
+  ex:"इमारत के पीछे की हिलती चाली से चढ़कर छत तक जाना मुश्किल काम था।"},
+ {q:"केशव की ज़िद के आगे दादाजी की क्या हालत हुई?",o:["वे ख़ुश हो गए","वे हताश हो गए","वे नाराज़ हो गए","उन्हें कुछ फ़र्क नहीं पड़ा"],a:1,
+  ex:"बुढ़ापे में बचा-खुचा दिमाग जब पोते ने कुतरना शुरू किया तो दादाजी हताश हो गए।"},
+ {q:"'व्हाइट कैप' शीर्षक मुख्यतः किसका प्रतीक है?",o:["गर्मी से बचाव का","केशव के क्रिकेट सपने व स्वीकृति का","मज़दूरी के औज़ार का","स्कूल यूनिफ़ॉर्म का"],a:1,
+  ex:"व्हाइट कैप केशव के क्रिकेट खेलने और टीम में स्वीकार किए जाने के सपने का प्रतीक है।"},
+ {q:"'व्हाइट कैप' कहानी के लेखक कौन हैं?",o:["शुक्राचार्य","लोकबाबू","गगन गिल","अरविंद गुप्ता"],a:1,
+  ex:"'व्हाइट कैप' कहानी के लेखक लोकबाबू हैं।"},
+ {q:"लोकबाबू का जन्म कहाँ हुआ?",o:["उत्तर प्रदेश","दिल्ली","छत्तीसगढ़","केरल"],a:2,
+  ex:"लोकबाबू का जन्म छत्तीसगढ़ में हुआ।"},
+ {q:"'व्हाइट कैप' किस विधा की रचना है?",o:["कविता","संस्मरण","कहानी","लेख"],a:2,
+  ex:"'व्हाइट कैप' एक कहानी है।"},
+ {q:"कहानी के अंत में लड़कों के मनोभाव में केशव के प्रति क्या बदलाव आता है?",o:["वे और उपेक्षा करने लगते हैं","उनका व्यवहार सकारात्मक ढंग से बदलता है","वे उसे भूल जाते हैं","कोई बदलाव नहीं आता"],a:1,
+  ex:"कहानी के अंत में केशव के प्रति लड़कों का व्यवहार व नज़रिया सकारात्मक रूप से बदल जाता है — कप्तान उसे पत्र तक लिखता है।"},
+];
+
+let qi=0, score=0, answered=false, studentName="";
+const host=document.getElementById('cardHost');
+const PAGE_URL = window.location.href.split('#')[0];
+
+/* ---------- TIME-GATE: quiz open only 9:30 PM – 10:30 PM daily ---------- */
+const OPEN_HOUR=21, OPEN_MIN=30;
+const CLOSE_HOUR=22, CLOSE_MIN=30;
+/* ---------- ONE ATTEMPT PER DEVICE PER DAY ---------- */
+const LOCK_PREFIX='wc_quiz_attempt_';
+function todayKey(){
+  const d=new Date();
+  return LOCK_PREFIX+d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+}
+function alreadyAttempted(){
+  try{ return localStorage.getItem(todayKey())==='done'; }catch(e){ return false; }
+}
+function markAttempted(){
+  try{ localStorage.setItem(todayKey(),'done'); }catch(e){}
+}
+
+function withinWindow(){
+  const now=new Date();
+  const mins = now.getHours()*60+now.getMinutes();
+  const openMins = OPEN_HOUR*60+OPEN_MIN;
+  const closeMins = CLOSE_HOUR*60+CLOSE_MIN;
+  return mins>=openMins && mins<closeMins;
+}
+function fmt(h,m){
+  const ap = h>=12 ? 'PM':'AM';
+  let hh = h%12; if(hh===0) hh=12;
+  return hh+':'+String(m).padStart(2,'0')+' '+ap;
+}
+function renderClosed(){
+  const now=new Date();
+  const mins = now.getHours()*60+now.getMinutes();
+  const openMins = OPEN_HOUR*60+OPEN_MIN;
+  let waitMsg;
+  if(mins < openMins){
+    const diff = openMins-mins;
+    waitMsg = "Opens in "+Math.floor(diff/60)+"h "+(diff%60)+"m";
+  } else {
+    const diff = (24*60 - mins) + openMins;
+    waitMsg = "Opens in "+Math.floor(diff/60)+"h "+(diff%60)+"m";
+  }
+  host.innerHTML=`
+    <div class="start" style="text-align:center;">
+      <div style="font-size:38px;margin-bottom:6px;">🔒</div>
+      <div class="ui" style="font-weight:700;font-size:16px;color:#fff;">Quiz is currently closed</div>
+      <p style="color:#c8b3bf;font-size:14px;line-height:1.7;margin-top:10px;">
+        This quiz opens daily only between<br>
+        <b style="color:var(--amber-soft);">${fmt(OPEN_HOUR,OPEN_MIN)} – ${fmt(CLOSE_HOUR,CLOSE_MIN)}</b>
+      </p>
+      <div class="meta-line" style="margin-top:14px;">⏳ ${waitMsg}</div>
+    </div>`;
+}
+function renderAlreadyDone(){
+  host.innerHTML=`
+    <div class="start" style="text-align:center;">
+      <div style="font-size:38px;margin-bottom:6px;">✅</div>
+      <div class="ui" style="font-weight:700;font-size:16px;color:#fff;">You've already attempted today's quiz</div>
+      <p style="color:#c8b3bf;font-size:14px;line-height:1.7;margin-top:10px;">
+        Only one attempt is allowed per device, per day.<br>
+        Come back tomorrow during the quiz window —<br>
+        <b style="color:var(--amber-soft);">${fmt(OPEN_HOUR,OPEN_MIN)} – ${fmt(CLOSE_HOUR,CLOSE_MIN)}</b>
+      </p>
+    </div>`;
+}
+function checkAccess(){
+  if(!withinWindow()){ renderClosed(); return; }
+  if(alreadyAttempted()){ renderAlreadyDone(); return; }
+  renderStart();
+}
+setInterval(()=>{
+  const stillOpen = withinWindow();
+  const isQuestionScreen = host.querySelector('.quiz-q');
+  const isStartScreen = host.querySelector('#startBtn');
+  if(!stillOpen && (isQuestionScreen || isStartScreen)){
+    renderClosed();
+  } else if(stillOpen && host.textContent.includes('currently closed') && !alreadyAttempted()){
+    renderStart();
+  }
+}, 20000);
+/* ---------------------------------------------------------------------- */
+
+function renderStart(){
+  host.innerHTML=`
+    <div class="start">
+      <div class="ui" style="font-weight:700;font-size:15px;color:#fff;">Enter your name to begin</div>
+      <input type="text" id="nameInput" placeholder="Your name" maxlength="30">
+      <button class="bigbtn" id="startBtn">Start Quiz</button>
+      <div class="meta-line">⚠️ Only one attempt allowed per device today</div>
+    </div>`;
+  document.getElementById('startBtn').addEventListener('click',()=>{
+    const v=document.getElementById('nameInput').value.trim();
+    studentName = v || "Student";
+    markAttempted();
+    qi=0; score=0;
+    renderQuiz();
+  });
+}
+
+function renderQuiz(){
+  if(qi>=quizData.length){ renderResult(); return; }
+  answered=false;
+  const d=quizData[qi];
+  host.innerHTML=`
+    <div class="progress-wrap"><div class="progress-bar" style="width:${(qi/quizData.length)*100}%"></div></div>
+    <div class="quiz-meta"><span>Question ${qi+1} / ${quizData.length}</span><span>Score: ${score}</span></div>
+    <div class="quiz-q">${d.q}</div>
+    <div class="quiz-opts" id="optsHost"></div>
+    <div class="quiz-explain" id="explainBox">${d.ex}</div>
+    <div class="quiz-nav">
+      <button class="qbtn ghost" id="prevBtn">← Previous</button>
+      <button class="qbtn ghost" id="skipBtn">Skip</button>
+      <button class="qbtn" id="nextBtn" disabled>Next →</button>
+    </div>`;
+  document.getElementById('prevBtn').disabled = (qi===0);
+  const optsHost=document.getElementById('optsHost');
+  d.o.forEach((opt,i)=>{
+    const b=document.createElement('div'); b.className='qopt'; b.textContent=opt;
+    b.addEventListener('click',()=>{
+      if(answered) return; answered=true;
+      [...optsHost.children].forEach(c=>c.classList.add('disabled'));
+      if(i===d.a){ b.classList.add('correct'); score++; }
+      else{ b.classList.add('wrong'); optsHost.children[d.a].classList.add('correct'); }
+      document.getElementById('explainBox').classList.add('show');
+      document.getElementById('nextBtn').disabled=false;
+    });
+    optsHost.appendChild(b);
+  });
+  document.getElementById('prevBtn').addEventListener('click',()=>{ if(qi>0){ qi--; renderQuiz(); } });
+  document.getElementById('skipBtn').addEventListener('click',()=>{ qi++; renderQuiz(); });
+  document.getElementById('nextBtn').addEventListener('click',()=>{ qi++; renderQuiz(); });
+}
+
+function renderResult(){
+  const pct=Math.round((score/quizData.length)*100);
+  let msg = pct>=80?"Excellent! You're exam-ready. 🎉" : pct>=50?"Good effort — revise once more. 👍" : "Read the chapter again, then retry tomorrow. 📖";
+  const waText = encodeURIComponent(studentName+" scored "+score+"/"+quizData.length+" ("+pct+"%) in the व्हाइट कैप (SSLC Hindi) quiz!\\nTry it yourself: "+PAGE_URL);
+  host.innerHTML=`
+    <div class="quiz-result">
+      <div class="name">${studentName}'s score</div>
+      <div class="score">${score}/${quizData.length}</div>
+      <p style="color:#f2e6ec;font-size:15px;">${msg}</p>
+      <div class="share-row">
+        <button class="share-btn wa" id="waBtn">📲 Share score on WhatsApp</button>
+        <button class="share-btn link" id="linkBtn">🔗 Copy quiz link</button>
+      </div>
+      <div class="copied-msg" id="copiedMsg">Link copied! Paste it anywhere to share.</div>
+      <div class="meta-line" style="margin-top:14px;">✅ Today's attempt recorded on this device. See you tomorrow!</div>
+    </div>`;
+  document.getElementById('waBtn').addEventListener('click',()=>{
+    window.open('https://wa.me/?text='+waText,'_blank');
+  });
+  document.getElementById('linkBtn').addEventListener('click',()=>{
+    navigator.clipboard.writeText(PAGE_URL).then(()=>{
+      document.getElementById('copiedMsg').classList.add('show');
+      setTimeout(()=>document.getElementById('copiedMsg').classList.remove('show'),2500);
+    });
+  });
+}
+
+checkAccess();
+</script>
+</body>
+</html>
