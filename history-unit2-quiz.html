@@ -196,6 +196,8 @@ let qIndex = 0;
 let score = 0;
 let answers = []; // {selected, correct}
 let shuffled = [];
+let screenState = 'boot'; // 'boot'|'closed'|'done'|'question'|'results'
+let currentAnswered = null; // selected option index for the current question, or null
 
 const app = document.getElementById('app');
 
@@ -230,6 +232,7 @@ function getSavedAttempt(){
 
 /* ---------- RENDER: GATE (locked / already done) ---------- */
 function renderClosedGate(){
+  screenState = 'closed';
   const ms = msUntilStart();
   const h = Math.floor(ms/3600000);
   const m = Math.floor((ms%3600000)/60000);
@@ -269,6 +272,7 @@ function updateCountdown(){
 }
 
 function renderAlreadyDone(){
+  screenState = 'done';
   const rec = getSavedAttempt();
   const pct = rec ? Math.round((rec.score/rec.total)*100) : 0;
   app.innerHTML = `
@@ -287,16 +291,17 @@ function renderAlreadyDone(){
 /* ---------- RENDER: QUIZ ---------- */
 function startQuiz(){
   shuffled = QUESTIONS.map((q,i)=>({...q, idx:i}));
-  qIndex = 0; score = 0; answers = [];
+  qIndex = 0; score = 0; answers = []; currentAnswered = null;
   renderQuestion();
 }
 function renderQuestion(){
+  screenState = 'question';
   const q = shuffled[qIndex];
   const pct = (qIndex/shuffled.length)*100;
   app.innerHTML = `
     <div class="progress-wrap"><div class="progress-bar" style="width:${pct}%"></div></div>
     <div class="q-count">${qIndex+1} / ${shuffled.length}</div>
-    <div class="q-text">${lang==='ml'?q.ml:q.en}</div>
+    <div class="q-text"><span class="ml">${q.ml}</span><span class="en">${q.en}</span></div>
     <div id="opts"></div>
     <button class="next-btn" id="nextBtn">
       <span class="ml">${qIndex===shuffled.length-1?'ഫലം കാണൂ':'അടുത്തത്'}</span>
@@ -306,27 +311,36 @@ function renderQuestion(){
   q.opts.forEach((o,i)=>{
     const b=document.createElement('button');
     b.className='opt';
-    b.textContent = lang==='ml'?o.ml:o.en;
+    b.innerHTML = `<span class="ml">${o.ml}</span><span class="en">${o.en}</span>`;
     b.onclick=()=>selectOption(i);
     optsEl.appendChild(b);
   });
+  if(currentAnswered !== null){ revealAnswer(currentAnswered); }
 }
 function selectOption(i){
+  if(currentAnswered !== null) return; // already answered this question
+  currentAnswered = i;
   const q = shuffled[qIndex];
   const correct = i===q.ans;
   if(correct) score++;
   answers.push({q, selected:i, correct});
+  revealAnswer(i);
+}
+function revealAnswer(i){
+  const q = shuffled[qIndex];
   document.querySelectorAll('.opt').forEach((b,idx)=>{
     b.disabled = true;
     if(idx===q.ans) b.classList.add('correct');
     else if(idx===i) b.classList.add('wrong');
   });
   const nb = document.getElementById('nextBtn');
-  nb.classList.add('ready');
-  nb.onclick = ()=>{
-    if(qIndex < shuffled.length-1){ qIndex++; renderQuestion(); }
-    else { finishQuiz(); }
-  };
+  if(nb){
+    nb.classList.add('ready');
+    nb.onclick = ()=>{
+      if(qIndex < shuffled.length-1){ qIndex++; currentAnswered = null; renderQuestion(); }
+      else { finishQuiz(); }
+    };
+  }
 }
 function finishQuiz(){
   saveAttempt(score);
@@ -340,6 +354,7 @@ function whatsappLink(sc, total){
   return `https://wa.me/?text=${encodeURIComponent(text)}`;
 }
 function renderResults(){
+  screenState = 'results';
   const pct = Math.round((score/shuffled.length)*100);
   let msgMl, msgEn;
   if(pct>=80){msgMl="മികച്ച പ്രകടനം! 🌟";msgEn="Excellent work! 🌟";}
@@ -347,19 +362,16 @@ function renderResults(){
   else{msgMl="വീണ്ടും പഠിച്ച് ശ്രമിക്കൂ 📖";msgEn="Review and try again 📖";}
 
   let reviewHtml = answers.map(a=>{
-    const qm = lang==='ml'?a.q.ml:a.q.en;
-    const yourAns = lang==='ml'?a.q.opts[a.selected].ml:a.q.opts[a.selected].en;
-    const rightAns = lang==='ml'?a.q.opts[a.q.ans].ml:a.q.opts[a.q.ans].en;
     return `<div class="review-item">
-      <b>${qm}</b>
-      <span class="${a.correct?'rq-correct':'rq-wrong'}">${a.correct?'✔':'✘'} ${yourAns}</span>
-      ${!a.correct?`<div class="rq-correct">✔ ${rightAns}</div>`:''}
+      <b><span class="ml">${a.q.ml}</span><span class="en">${a.q.en}</span></b>
+      <span class="${a.correct?'rq-correct':'rq-wrong'}">${a.correct?'✔':'✘'} <span class="ml">${a.q.opts[a.selected].ml}</span><span class="en">${a.q.opts[a.selected].en}</span></span>
+      ${!a.correct?`<div class="rq-correct">✔ <span class="ml">${a.q.opts[a.q.ans].ml}</span><span class="en">${a.q.opts[a.q.ans].en}</span></div>`:''}
     </div>`;
   }).join('');
 
   app.innerHTML = `
     <div class="score-circle" style="--pct:${pct}"><div class="score-inner"><b>${score}/${shuffled.length}</b><span>${pct}%</span></div></div>
-    <div class="result-msg">${lang==='ml'?msgMl:msgEn}</div>
+    <div class="result-msg"><span class="ml">${msgMl}</span><span class="en">${msgEn}</span></div>
     <a class="share-btn" id="waShare">📲 <span class="ml">WhatsApp-ൽ പങ്കിടൂ</span><span class="en">Share on WhatsApp</span></a>
     <div class="locked-note">
       <span class="ml">ഇന്നത്തെ ശ്രമം രേഖപ്പെടുത്തി. നാളെ വീണ്ടും ശ്രമിക്കാം.</span>
@@ -376,6 +388,11 @@ function setLang(l){
   document.body.classList.toggle('show-en', l==='en');
   document.getElementById('btn-ml').classList.toggle('active', l==='ml');
   document.getElementById('btn-en').classList.toggle('active', l==='en');
+  // redraw whichever screen is currently showing so every bit of text updates
+  if(screenState==='closed') renderClosedGate();
+  else if(screenState==='done') renderAlreadyDone();
+  else if(screenState==='question') renderQuestion();
+  else if(screenState==='results') renderResults();
 }
 
 /* ---------- BOOT ---------- */
