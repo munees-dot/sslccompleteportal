@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>സ്വാതന്ത്ര്യം, സമത്വം, സാഹോദര്യം | Liberty, Equality, Fraternity — Unit 2</title>
+<style>
+:root{
+  --navy:#0b2f4a;
+  --navy-dark:#071f31;
+  --gold:#c8963e;
+  --gold-light:#f0d9a8;
+  --cream:#fbf6ec;
+  --paper:#fffdf8;
+  --ink:#26221a;
+  --accent:#8c1f28;
+  --accent-light:#f6e3e0;
+  --line:#e2d5b8;
+  --radius:14px;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:'Noto Sans Malayalam','Noto Sans',system-ui,-apple-system,sans-serif;
+  background:linear-gradient(180deg,#f4ecd8 0%,#fbf6ec 300px,#fbf6ec 100%);
+  color:var(--ink);
+  line-height:1.65;
+}
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:linear-gradient(120deg,var(--navy) 0%,var(--navy-dark) 100%);
+  color:#fff;
+  display:flex;align-items:center;gap:14px;
+  padding:10px 18px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.25);
+}
+.logo-badge{
+  width:44px;height:44px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, var(--gold-light), var(--gold) 70%);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;color:var(--navy-dark);font-size:15px;
+  flex-shrink:0;
+  box-shadow:0 0 0 3px rgba(255,255,255,0.15);
+}
+.brand{display:flex;flex-direction:column;line-height:1.2;}
+.brand b{font-size:15px;letter-spacing:.3px;}
+.brand span{font-size:11px;color:var(--gold-light);}
+.top-actions{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.pill-btn{
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.35);
+  color:#fff;padding:7px 13px;border-radius:20px;
+  font-size:12.5px;cursor:pointer;font-family:inherit;
+  transition:.15s;white-space:nowrap;
+}
+.pill-btn:hover{background:rgba(255,255,255,0.25);}
+.pill-btn.active{background:var(--gold);border-color:var(--gold);color:var(--navy-dark);font-weight:700;}
+
+.hero{
+  max-width:980px;margin:0 auto;padding:26px 18px 10px;text-align:center;
+}
+.hero .unit-tag{
+  display:inline-block;background:var(--accent);color:#fff;
+  padding:4px 14px;border-radius:20px;font-size:12px;letter-spacing:1px;margin-bottom:10px;
+}
+.hero h1{
+  font-size:clamp(22px,4vw,32px);margin:6px 0 4px;color:var(--navy-dark);
+}
+.hero h2{
+  font-size:clamp(15px,2.6vw,19px);margin:0 0 10px;color:var(--accent);font-weight:600;
+}
+.hero p.meta{font-size:13px;color:#6b5f45;}
+
+.container{max-width:980px;margin:0 auto;padding:0 18px 60px;}
+
+.tabs{
+  display:flex;flex-wrap:wrap;gap:7px;justify-content:center;
+  margin:18px 0 22px;padding:12px;
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+}
+.tab-btn{
+  border:1px solid var(--line);background:#fff;color:var(--navy-dark);
+  padding:8px 14px;border-radius:10px;font-size:13px;cursor:pointer;
+  font-family:inherit;font-weight:600;transition:.15s;
+}
+.tab-btn:hover{border-color:var(--gold);}
+.tab-btn.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+.panel{display:none;animation:fade .25s ease;}
+.panel.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+.card{
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 24px;margin-bottom:18px;box-shadow:0 2px 8px rgba(60,40,10,0.05);
+}
+.card h3{
+  margin-top:0;color:var(--navy-dark);font-size:19px;
+  border-bottom:2px solid var(--gold-light);padding-bottom:8px;
+}
+.card h4{color:var(--accent);font-size:15.5px;margin-bottom:6px;}
+.card p{margin:8px 0;}
+.card ul{margin:8px 0;padding-left:22px;}
+.card li{margin-bottom:6px;}
+
+.quote{
+  background:var(--accent-light);border-left:4px solid var(--accent);
+  padding:14px 18px;border-radius:8px;font-style:italic;margin:14px 0;
+  font-size:14.5px;color:#4a2018;
+}
+.info-box{
+  background:#eef4fa;border:1px solid #c8dced;border-radius:10px;
+  padding:14px 18px;margin:14px 0;
+}
+.info-box h5{margin:0 0 6px;color:var(--navy);font-size:14px;}
+.figure-row{display:flex;gap:14px;flex-wrap:wrap;margin:14px 0;}
+.figure-chip{
+  flex:1 1 200px;background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:12px 14px;
+}
+.figure-chip b{display:block;color:var(--accent);margin-bottom:4px;font-size:14px;}
+.figure-chip span{font-size:13px;color:#4a4536;}
+
+.estate-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:14px 0;}
+.estate-card{border-radius:10px;padding:16px;color:#fff;}
+.estate-1{background:linear-gradient(135deg,#7a4b1f,#a56b2f);}
+.estate-2{background:linear-gradient(135deg,#4a2028,#6e2c36);}
+.estate-3{background:linear-gradient(135deg,#1f4a3a,#2f6e56);}
+.estate-card b{font-size:15px;display:block;margin-bottom:6px;}
+.estate-card ul{margin:6px 0 0;padding-left:18px;font-size:13.5px;}
+
+.timeline{border-left:3px solid var(--gold);margin:16px 0 16px 8px;padding-left:20px;}
+.tl-item{margin-bottom:16px;position:relative;}
+.tl-item::before{
+  content:'';position:absolute;left:-26px;top:4px;width:11px;height:11px;
+  border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 2px var(--accent);
+}
+.tl-date{font-weight:700;color:var(--accent);font-size:13.5px;}
+
+.reform-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;}
+.reform-table th{background:var(--navy);color:#fff;padding:10px;text-align:left;}
+.reform-table td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;}
+.reform-table tr:nth-child(even){background:#f7f1e2;}
+
+.thinker-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;}
+.thinker-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;}
+.thinker-card b{color:var(--navy-dark);font-size:14.5px;display:block;margin-bottom:4px;}
+
+.nav-btns{display:flex;justify-content:space-between;margin-top:18px;gap:10px;flex-wrap:wrap;}
+.nav-btns button{
+  flex:1;min-width:140px;padding:10px;border-radius:10px;border:none;
+  background:var(--navy);color:#fff;font-family:inherit;cursor:pointer;font-size:13.5px;font-weight:600;
+}
+.nav-btns button:hover{background:var(--navy-dark);}
+
+.quiz-cta{
+  text-align:center;background:linear-gradient(120deg,var(--navy),var(--navy-dark));
+  color:#fff;border-radius:var(--radius);padding:24px;margin-top:24px;
+}
+.quiz-cta h3{margin-top:0;color:var(--gold-light);border:none;}
+.quiz-cta a{
+  display:inline-block;margin-top:8px;background:var(--gold);color:var(--navy-dark);
+  padding:10px 22px;border-radius:22px;text-decoration:none;font-weight:700;font-size:14px;
+}
+
+footer{text-align:center;padding:22px;font-size:12px;color:#8a7e63;}
+
+/* Language toggle */
+.en{display:none;}
+body.show-en .ml{display:none;}
+body.show-en .en{display:block;}
+body.show-en .en.inline{display:inline;}
+.ml.inline, .en.inline{display:inline;}
+body.show-en .ml.inline{display:none;}
+
+@media print{
+  .topbar,.tabs,.top-actions,.quiz-cta,.nav-btns{display:none !important;}
+  .panel{display:block !important;}
+  body{background:#fff;}
+  .card{break-inside:avoid;border:1px solid #ccc;box-shadow:none;}
+  body::after{
+    content:'Abacus Academy';position:fixed;top:45%;left:20%;
+    font-size:60px;color:rgba(0,0,0,0.06);transform:rotate(-30deg);z-index:-1;
+  }
+}
+@media (max-width:600px){
+  .card{padding:16px;}
+  .brand span{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo-badge">AA</div>
+  <div class="brand">
+    <b>Abacus Academy</b>
+    <span class="ml">SSLC പഠന പോർട്ടൽ · സാമൂഹ്യശാസ്ത്രം</span>
+    <span class="en">SSLC Study Portal · Social Science</span>
+  </div>
+  <div class="top-actions">
+    <button class="pill-btn active" id="btn-ml" onclick="setLang('ml')">മലയാളം</button>
+    <button class="pill-btn" id="btn-en" onclick="setLang('en')">English</button>
+    <a class="pill-btn" href="history-unit2-quiz.html" target="_blank" style="text-decoration:none;">🏆 <span class="ml">ക്വിസ്</span><span class="en">Quiz</span></a>
+    <button class="pill-btn" onclick="window.print()">🖨️ <span class="ml">പ്രിന്റ്</span><span class="en">Print</span></button>
+  </div>
+</div>
+
+<div class="hero">
+  <span class="unit-tag">UNIT 2 · സാമൂഹ്യശാസ്ത്രം I · Class 10</span>
+  <h1 class="ml">സ്വാതന്ത്ര്യം, സമത്വം, സാഹോദര്യം</h1>
+  <h1 class="en">Liberty, Equality, Fraternity</h1>
+  <h2 class="ml">ഫ്രഞ്ച് വിപ്ലവം — 1789</h2>
+  <h2 class="en">The French Revolution — 1789</h2>
+  <p class="meta ml">ജൂൺ 20, 1789 മുതൽ നെപ്പോളിയന്റെ പതനവും വിയന്ന സമ്മേളനവും വരെ</p>
+  <p class="meta en">From June 20, 1789 to the fall of Napoleon and the Congress of Vienna</p>
+</div>
+
+<div class="container">
+
+  <div class="tabs" id="tabs"></div>
+
+  <!-- PANEL 1: OVERVIEW -->
+  <div class="panel" data-panel="0">
+    <div class="card">
+      <h3><span class="ml">ആമുഖം</span><span class="en">Introduction</span></h3>
+      <p class="ml">1789 ജൂൺ 20-ന് ഫ്രാൻസിന്റെ തലസ്ഥാനമായ പാരീസ് കടുത്ത രാഷ്ട്രീയ പ്രതിസന്ധിയിലായിരുന്നു. മൂന്നാം എസ്റ്റേറ്റിന്റെ പ്രതിനിധികൾക്ക് പാർലമെന്റിലേക്ക് പ്രവേശനം നിഷേധിക്കപ്പെട്ടു. അവർ തൊട്ടടുത്തുള്ള ടെന്നീസ് കോർട്ടിൽ സമ്മേളിച്ച്, ഫ്രാൻസിന് ഒരു ലിഖിത ഭരണഘടന ഉണ്ടാക്കുന്നതുവരെ പിരിഞ്ഞുപോകില്ലെന്ന് പ്രതിജ്ഞയെടുത്തു. ഫ്രാൻസിന്റെയും യൂറോപ്പിന്റെയും ചരിത്രത്തെ എന്നന്നേക്കുമായി മാറ്റിമറിച്ച ജനമുന്നേറ്റത്തിന്റെ തുടക്കമായിരുന്നു ഇത്.</p>
+      <p class="en">On June 20, 1789, Paris — the political and cultural heart of Europe — was gripped by crisis. Representatives of the Third Estate were denied entry to the parliament hall. They assembled instead on a nearby tennis court and swore not to disperse until France had a written constitution. This was the beginning of a popular uprising that would permanently reshape the history of France and Europe.</p>
+      <div class="quote ml">"പ്രഭുക്കൾ യുദ്ധം ചെയ്യുന്നു, പുരോഹിതർ പ്രാർത്ഥിക്കുന്നു, സാധാരണക്കാർ നികുതി കൊടുക്കുന്നു."</div>
+      <div class="quote en">"The nobles fight, the clergy pray, the commoners pay taxes."</div>
+    </div>
+    <div class="card">
+      <h3><span class="ml">ഈ അധ്യായത്തിൽ പഠിക്കുന്നത്</span><span class="en">What You Will Learn</span></h3>
+      <ul class="ml">
+        <li>ഫ്രാൻസിലെ സ്വേച്ഛാധിപത്യ ഭരണക്രമവും ദൈവദത്താധികാരസിദ്ധാന്തവും</li>
+        <li>മൂന്ന് എസ്റ്റേറ്റുകളായി വിഭജിക്കപ്പെട്ട ഫ്രഞ്ച് സാമൂഹികവ്യവസ്ഥ</li>
+        <li>മധ്യവർഗത്തിന്റെ ഉദയവും സാമ്പത്തിക പ്രതിസന്ധിയും</li>
+        <li>വോൾട്ടയർ, റൂസ്സോ, മൊണ്ടെസ്ക്യൂ എന്നിവരുടെ ചിന്തകൾ</li>
+        <li>ടെന്നീസ്കോർട്ട് പ്രതിജ്ഞ, ബാസ്റ്റിലിന്റെ പതനം</li>
+        <li>മനുഷ്യാവകാശ പ്രഖ്യാപനവും പുതിയ ഭരണഘടനയും</li>
+        <li>ഭീകരവാഴ്ചയും നെപ്പോളിയന്റെ ഉദയവും</li>
+        <li>വിയന്ന സമ്മേളനവും ഫ്രഞ്ച് വിപ്ലവത്തിന്റെ ലോകവ്യാപക സ്വാധീനവും</li>
+      </ul>
+      <ul class="en">
+        <li>France's autocratic rule and the Divine Right Theory</li>
+        <li>The three-estate structure of French society</li>
+        <li>Rise of the middle class and the economic crisis</li>
+        <li>Ideas of Voltaire, Rousseau, and Montesquieu</li>
+        <li>The Tennis Court Oath and the Fall of the Bastille</li>
+        <li>The Declaration of the Rights of Man and the new constitution</li>
+        <li>The Reign of Terror and the rise of Napoleon</li>
+        <li>The Congress of Vienna and the Revolution's global legacy</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PANEL 2: AUTOCRACY -->
+  <div class="panel" data-panel="1">
+    <div class="card">
+      <h3><span class="ml">ഫ്രാൻസിലെ സ്വേച്ഛാധിപത്യ ഭരണക്രമം</span><span class="en">Absolute Monarchy in France</span></h3>
+      <p class="ml">പതിനേഴു നൂറ്റാണ്ടുകളായി ഫ്രാൻസ് ഭരിച്ചിരുന്നത് ബൂർബൺ രാജവംശമായിരുന്നു. രാജാധികാരം ദൈവദത്തമാണ് എന്നായിരുന്നു അവർ വിശ്വസിച്ചിരുന്നത്. എസ്റ്റേറ്റ്സ് ജനറൽ എന്ന പേരിൽ ഒരു പാർലമെന്റ് ഉണ്ടായിരുന്നെങ്കിലും 1614 മുതൽ അത് വിളിച്ചുചേർക്കപ്പെട്ടിരുന്നില്ല. "ഞാനാണ് രാഷ്ട്രം" എന്ന് പ്രഖ്യാപിച്ച ലൂയി പതിനാലാമൻ ബൂർബൺ രാജാക്കന്മാരിൽ പ്രധാനിയായിരുന്നു.</p>
+      <p class="en">For seventeen decades, France was ruled by the Bourbon dynasty, whose monarchs governed as absolute rulers who believed their authority came directly from God. A parliament called the Estates General existed in name, but it had not been convened since 1614. Louis XIV, who famously declared "I am the State," was the most prominent of the Bourbon kings.</p>
+      <div class="info-box">
+        <h5 class="ml">ദൈവദത്താധികാരസിദ്ധാന്തം (Divine Right Theory)</h5>
+        <h5 class="en">Divine Right Theory</h5>
+        <p class="ml">രാജാവ് ദൈവത്തിന്റെ പ്രതിനിധിയാണ് എന്നും അധികാരം ദൈവത്തിൽ നിന്ന് ലഭിച്ചതാണെന്നും, അതിനാൽ ജനങ്ങളോടല്ല ദൈവത്തോടാണ് കടപ്പെട്ടിരിക്കുന്നത് എന്നുമുള്ള സിദ്ധാന്തം. സ്വേച്ഛാധിപത്യ ഭരണത്തെ പിന്തുണച്ചവർ ഇതിൽ വിശ്വസിച്ചു.</p>
+        <p class="en">The theory held that the king is God's representative on earth, that royal authority comes from God, and therefore the king is accountable to God — not to the people. Supporters of absolute monarchy relied on this theory to justify their rule.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">Louis XIV</div>
+          <p class="ml">"ഞാനാണ് രാഷ്ട്രം" എന്ന് പ്രഖ്യാപിച്ചു; സ്വേച്ഛാധിപത്യം ശക്തിപ്പെടുത്തി.</p>
+          <p class="en">Declared "I am the State"; consolidated absolute power.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Louis XV</div>
+          <p class="ml">തുടർച്ചയായ യുദ്ധങ്ങളും അഴിമതിയും ധൂർത്തും രാജ്യത്തെ ദുരിതത്തിലാക്കി; പുതിയ നികുതികൾ അടിച്ചേൽപ്പിച്ചു.</p>
+          <p class="en">Continuous wars, corruption, and extravagance impoverished the country; imposed new taxes on the people.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Louis XVI</div>
+          <p class="ml">ഭരണകാര്യങ്ങളിൽ താൽപര്യമില്ലായിരുന്നു; വിശ്വസ്തരല്ലാത്ത മന്ത്രിമാരെ ആശ്രയിച്ചു; റാണി മാരി അന്റോയിനറ്റിന്റെ ധൂർത്ത് ജനരോഷം വർധിപ്പിച്ചു.</p>
+          <p class="en">Showed little interest in governance; relied on untrustworthy ministers; Queen Marie Antoinette's extravagance deepened public discontent.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 3: ESTATES -->
+  <div class="panel" data-panel="2">
+    <div class="card">
+      <h3><span class="ml">ഫ്രഞ്ച് സാമൂഹികവ്യവസ്ഥിതി — മൂന്ന് എസ്റ്റേറ്റുകൾ</span><span class="en">French Social Structure — The Three Estates</span></h3>
+      <p class="ml">പതിനെട്ടാം നൂറ്റാണ്ടിലെ ഫ്രഞ്ച് സമൂഹം മൂന്ന് എസ്റ്റേറ്റുകളായി വിഭജിക്കപ്പെട്ടിരുന്നു. ഒന്നും രണ്ടും എസ്റ്റേറ്റുകളിലെ അംഗത്വം പരമ്പരാഗതമായിരുന്നു; മൂന്നാം എസ്റ്റേറ്റിലെ അംഗങ്ങൾ മാത്രം തിരഞ്ഞെടുക്കപ്പെട്ടവരായിരുന്നു.</p>
+      <p class="en">Eighteenth-century French society was divided into three estates. Membership in the First and Second Estates was hereditary; only the Third Estate's representatives were elected.</p>
+      <div class="estate-grid">
+        <div class="estate-card estate-1">
+          <b class="ml">ഒന്നാം എസ്റ്റേറ്റ് — പുരോഹിതർ</b>
+          <b class="en">First Estate — Clergy</b>
+          <ul class="ml">
+            <li>ഭൂസ്വത്തിന്റെ വലിയൊരു ഭാഗം സഭയുടെ ഉടമസ്ഥതയിൽ</li>
+            <li>എല്ലാ നികുതികളിൽനിന്നും ഒഴിവാക്കപ്പെട്ടു</li>
+            <li>കർഷകരിൽനിന്ന് 'ടൈഥ്' (Tithe) എന്ന നികുതി — വിളവിന്റെ പത്തിലൊന്ന്</li>
+          </ul>
+          <ul class="en">
+            <li>Owned a huge share of church land</li>
+            <li>Exempt from all taxes</li>
+            <li>Collected 'Tithe' from peasants — one-tenth of the harvest</li>
+          </ul>
+        </div>
+        <div class="estate-card estate-2">
+          <b class="ml">രണ്ടാം എസ്റ്റേറ്റ് — പ്രഭുക്കൾ</b>
+          <b class="en">Second Estate — Nobility</b>
+          <ul class="ml">
+            <li>ഉയർന്ന ഭരണ-സൈനിക പദവികൾ കൈയടക്കി</li>
+            <li>ഭൂവുടമകൾ; ജനങ്ങളിൽനിന്ന് നികുതികൾ പിരിച്ചെടുത്തു</li>
+            <li>കോർവി, ബെനാലിറ്റി, ബൻവിൻ, പിയേഷ്, ടെറാഷ് തുടങ്ങിയ ചൂഷണരീതികൾ</li>
+          </ul>
+          <ul class="en">
+            <li>Controlled top government and military positions</li>
+            <li>Landowners who levied taxes on the people</li>
+            <li>Exploitative dues: Corvée, Banalité, Banvin, Péage, Terrage</li>
+          </ul>
+        </div>
+        <div class="estate-card estate-3">
+          <b class="ml">മൂന്നാം എസ്റ്റേറ്റ് — സാധാരണക്കാർ</b>
+          <b class="en">Third Estate — Commoners</b>
+          <ul class="ml">
+            <li>മധ്യവർഗം, തൊഴിലാളികൾ, കർഷകർ — ജനസംഖ്യയുടെ ഭൂരിഭാഗം</li>
+            <li>രാജാവിനും പള്ളിക്കും പ്രഭുവിനും നികുതി നൽകണം</li>
+            <li>സൈനികസേവനവും സൗജന്യ മരാമത്തുപണിയും നിർബന്ധം</li>
+          </ul>
+          <ul class="en">
+            <li>Middle class, workers, peasants — the vast majority</li>
+            <li>Paid taxes to king, church, and lord alike</li>
+            <li>Bound to compulsory military and unpaid labour service</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-box">
+        <h5 class="ml">പ്രഭുക്കൾ കർഷകരെ ചൂഷണം ചെയ്ത രീതികൾ</h5>
+        <h5 class="en">Ways Nobles Exploited the Peasantry</h5>
+        <p class="ml"><b>കോർവി:</b> പ്രതിഫലമില്ലാതെ വർഷത്തിൽ 3–4 ദിവസം ജോലി ചെയ്യിക്കൽ &nbsp;|&nbsp; <b>ബെനാലിറ്റി:</b> മില്ല്, അടുപ്പ് തുടങ്ങിയവ ഉപയോഗിക്കുന്നതിനുള്ള നിർബന്ധിത നികുതി &nbsp;|&nbsp; <b>ബൻവിൻ:</b> വീഞ്ഞ് ഉൽപാദനത്തിന്മേലുള്ള കുത്തക നികുതി &nbsp;|&nbsp; <b>പിയേഷ്:</b> പാലങ്ങളുടെയും റോഡുകളുടെയും ചുങ്കം &nbsp;|&nbsp; <b>ടെറാഷ്:</b> വിളവെടുപ്പ് കാലത്തെ പ്രത്യേക കരം</p>
+        <p class="en"><b>Corvée:</b> Unpaid forced labour 3–4 days a year &nbsp;|&nbsp; <b>Banalité:</b> Compulsory fee for using the lord's mill/oven &nbsp;|&nbsp; <b>Banvin:</b> Monopoly tax on wine production &nbsp;|&nbsp; <b>Péage:</b> Toll on bridges and roads &nbsp;|&nbsp; <b>Terrage:</b> Special levy at harvest time</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 4: MIDDLE CLASS & ECONOMY -->
+  <div class="panel" data-panel="3">
+    <div class="card">
+      <h3><span class="ml">മധ്യവർഗത്തിന്റെ ഉദയം</span><span class="en">Rise of the Middle Class</span></h3>
+      <p class="ml">കാർഷിക-വ്യാവസായിക രംഗത്തെ പുരോഗതി മധ്യവർഗത്തിന്റെ ഉദയത്തിന് കാരണമായി. നഗരങ്ങളിലെ തൊഴിൽ സാധ്യതകൾ ഉപയോഗപ്പെടുത്തിയവർ സാമ്പത്തിക പുരോഗതി കൈവരിച്ചു. ഡോക്ടർമാർ, നിയമജ്ഞർ, ബാങ്കർമാർ എന്നിവർ ഈ വർഗത്തിൽ ഉൾപ്പെട്ടിരുന്നു. വിദ്യാഭ്യാസപരമായും സാമ്പത്തികമായും മുൻപന്തിയിലായിരുന്നിട്ടും ഭരണത്തിലും സൈന്യത്തിലും അവർക്ക് അർഹിക്കുന്ന പദവിയോ അധികാരമോ ലഭിച്ചിരുന്നില്ല.</p>
+      <p class="en">Progress in agriculture and industry fuelled the rise of a middle class. Those who seized urban job opportunities achieved economic prosperity — doctors, lawyers, and bankers formed this class. Yet despite leading in education and wealth, they were denied positions or power in government and the military — leaving them deeply dissatisfied.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ml">സാമ്പത്തിക പ്രതിസന്ധി</span><span class="en">The Economic Crisis</span></h3>
+      <p class="ml">1770-കളിൽ ഫ്രാൻസിലെ കാർഷികരംഗം കടുത്ത പ്രതിസന്ധി നേരിട്ടു. 1730 നും 1789 നും ഇടയിൽ ധാന്യങ്ങളുടെ വിലയിൽ 60% വർധനവുണ്ടായപ്പോൾ തൊഴിലാളികളുടെ കൂലിയിലെ വർധന 22% മാത്രമായിരുന്നു. ബ്രിട്ടനുമായുള്ള കച്ചവടക്കരാർ ഫ്രഞ്ച് ഉൽപന്നങ്ങളുടെ വിലയിടിവിനും തൊഴിലില്ലായ്മയ്ക്കും കാരണമായി. ലൂയി പതിനാറാമൻ ബാങ്കർമാരിൽനിന്ന് വൻതുകകൾ വായ്പയായി സ്വീകരിച്ചു; സർക്കാർ ഖജനാവ് ശൂന്യമായി.</p>
+      <p class="en">In the 1770s, French agriculture faced a severe crisis. Between 1730 and 1789, grain prices rose by 60%, while wages rose by only 22%. A trade treaty with Britain flooded the French market with British goods, ruining local artisans. Louis XVI borrowed heavily from bankers, and the state treasury was left empty — while unequal taxation left nobles largely untouched.</p>
+      <div class="info-box">
+        <h5 class="ml">ഗാബെല്ല (Gabelle)</h5>
+        <h5 class="en">Gabelle (Salt Tax)</h5>
+        <p class="ml">പതിമൂന്നാം നൂറ്റാണ്ടുമുതൽ ഉപ്പിന്മേൽ ചുമത്തിയിരുന്ന ഒരു നികുതിയായിരുന്നു ഗാബെല്ല — ജനവിരുദ്ധമായ നികുതിയായി അറിയപ്പെട്ടു.</p>
+        <p class="en">Gabelle was a tax levied on salt since the 13th century, which by the 18th century had become one of the most hated and unequal taxes on the common people.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 5: THINKERS -->
+  <div class="panel" data-panel="4">
+    <div class="card">
+      <h3><span class="ml">ചിന്തകരുടെ സ്വാധീനം</span><span class="en">Influence of Enlightenment Thinkers</span></h3>
+      <p class="ml">ഫ്രഞ്ച് ജനതയെ അനീതിക്കെതിരെ പ്രതികരിക്കാൻ പ്രേരിപ്പിച്ച ചിന്തകരായിരുന്നു വോൾട്ടയർ, റൂസ്സോ, മൊണ്ടെസ്ക്യൂ.</p>
+      <p class="en">Voltaire, Rousseau, and Montesquieu were among the thinkers who inspired the French people to resist injustice.</p>
+      <div class="thinker-grid">
+        <div class="thinker-card">
+          <b class="ml">വോൾട്ടയർ (Voltaire)</b>
+          <p class="ml">തത്വചിന്തകനും ചരിത്രകാരനും ആക്ഷേപഹാസ്യകാരനും. തന്റെ ലേഖനങ്ങളിലൂടെ പുരോഹിതരെയും സ്വേച്ഛാധിപത്യത്തെയും നിരന്തരം വിമർശിച്ചു; ഇക്കാരണത്താൽ ഫ്രാൻസിൽനിന്ന് പുറത്താക്കപ്പെട്ടു.</p>
+          <p class="en">A philosopher, historian, and satirist who repeatedly criticized the clergy and absolute monarchy through his writings — for which he was exiled from France.</p>
+        </div>
+        <div class="thinker-card">
+          <b class="ml">റൂസ്സോ (Rousseau)</b>
+          <p class="ml">തന്റെ കൃതിയായ 'സാമൂഹ്യ ഉടമ്പടി' (The Social Contract) വ്യക്തിയും രാഷ്ട്രവും തമ്മിലുള്ള ബന്ധത്തെ പുനർവിചിന്തനം ചെയ്തു. "മനുഷ്യൻ സ്വതന്ത്രനായി ജനിക്കുന്നു, എന്നാൽ എല്ലായിടത്തും ചങ്ങലയിലാണ്" എന്നായിരുന്നു അദ്ദേഹത്തിന്റെ പ്രശസ്ത വാക്യം.</p>
+          <p class="en">His work 'The Social Contract' reimagined the bond between the individual and the state. His famous line: "Man is born free, and everywhere he is in chains."</p>
+        </div>
+        <div class="thinker-card">
+          <b class="ml">മൊണ്ടെസ്ക്യൂ (Montesquieu)</b>
+          <p class="ml">ഭരണകൂടത്തിന്റെ അധികാരത്തെ നിയമനിർമ്മാണം, ഭരണനിർവഹണം, നീതിന്യായം എന്നിങ്ങനെ മൂന്നായി വിഭജിക്കണമെന്ന് നിർദേശിച്ചു. 'നിയമത്തിന്റെ ആത്മാവ്' (The Spirit of Laws) ആണ് പ്രശസ്ത കൃതി.</p>
+          <p class="en">Proposed dividing state power into legislature, executive, and judiciary. His celebrated work is 'The Spirit of Laws.'</p>
+        </div>
+        <div class="thinker-card">
+          <b class="ml">ജോൺ ലോക്ക് (John Locke)</b>
+          <p class="ml">ബ്രിട്ടീഷ് ചിന്തകൻ. തന്റെ കൃതി 'ട്വോ ട്രീറ്റിസസ് ഓഫ് ഗവൺമെന്റ്' രാജാവിന്റെ ദൈവദത്താധികാരത്തെ നിരാകരിച്ചു.</p>
+          <p class="en">The British thinker whose 'Two Treatises of Government' rejected the divine right of kings.</p>
+        </div>
+      </div>
+      <div class="info-box">
+        <h5 class="ml">സലോണുകളും കോഫി ഹൗസുകളും</h5>
+        <h5 class="en">Salons and Coffee Houses</h5>
+        <p class="ml">ആശയവിനിമയത്തിനും രാഷ്ട്രീയ ചർച്ചകൾക്കും വേദിയായി പ്രവർത്തിച്ച കേന്ദ്രങ്ങളായിരുന്നു സലോണുകളും കോഫി ഹൗസുകളും. ദാർശനികർ, എഴുത്തുകാർ, ചിന്തകർ ഇവിടെ കൂടിച്ചേർന്നു.</p>
+        <p class="en">Salons and coffee houses served as centres for the exchange of ideas and political debate, where philosophers, writers, and thinkers gathered.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 6: ESTATES GENERAL & TENNIS COURT -->
+  <div class="panel" data-panel="5">
+    <div class="card">
+      <h3><span class="ml">എസ്റ്റേറ്റ്സ് ജനറൽ സമ്മേളിക്കുന്നു</span><span class="en">The Estates General Convenes</span></h3>
+      <p class="ml">നെക്കറുടെ നിർദേശപ്രകാരം ലൂയി പതിനാറാമൻ 175 വർഷങ്ങൾക്കുശേഷം എസ്റ്റേറ്റ്സ് ജനറൽ വീണ്ടും വിളിച്ചുചേർക്കാൻ തീരുമാനിച്ചു. മൂന്നാം എസ്റ്റേറ്റിന് 621 അംഗങ്ങളും, ഒന്നും രണ്ടും എസ്റ്റേറ്റുകൾക്ക് യഥാക്രമം 285 ഉം 308 ഉം അംഗങ്ങളുമുണ്ടായിരുന്നു. "ഒരു സഭയ്ക്ക് ഒരു വോട്ട്" എന്ന പഴയ രീതി തുടർന്നാൽ ഒന്നും രണ്ടും എസ്റ്റേറ്റുകൾക്ക് ഒത്തുചേർന്ന് ഭൂരിപക്ഷം നിലനിർത്താം എന്നതിനാൽ മൂന്നാം എസ്റ്റേറ്റ് ഇതിനെ എതിർത്തു.</p>
+      <p class="en">On Necker's advice, Louis XVI decided to convene the Estates General after 175 years. The Third Estate had 621 members, while the First and Second had 285 and 308 respectively. The old "one vote per estate" rule would let the first two estates outvote the third whenever they combined — a system the Third Estate strongly opposed.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ml">ടെന്നീസ്കോർട്ട് പ്രതിജ്ഞ</span><span class="en">The Tennis Court Oath</span></h3>
+      <p class="ml">1789 ജൂൺ 17-ന് മൂന്നാം എസ്റ്റേറ്റിലെ അംഗങ്ങൾ തങ്ങളാണ് ഫ്രാൻസിന്റെ യഥാർത്ഥ ജനപ്രതിനിധികൾ എന്ന് പ്രഖ്യാപിച്ച് 'ഫ്രഞ്ച് ദേശീയസഭ' (French National Assembly) രൂപീകരിച്ചു. ലൂയി പതിനാറാമൻ അവരുടെ ഹാൾ അടച്ചിടുകയും ചെയ്തപ്പോൾ, ഴാങ്-സിൽവിയൻ ബൈലി, അബ്ബേ സിയേസ്, മിറാബോ എന്നിവരുടെ നേതൃത്വത്തിൽ അവർ ടെന്നീസ്കോർട്ടിൽ സമ്മേളിച്ച് ഒരു ഭരണഘടന ഉണ്ടാകുന്നതുവരെ പിരിഞ്ഞുപോകില്ലെന്ന് പ്രഖ്യാപിച്ചു — 'ടെന്നീസ്കോർട്ട് പ്രതിജ്ഞ' എന്ന് ഇത് അറിയപ്പെടുന്നു.</p>
+      <p class="en">On June 17, 1789, the Third Estate declared itself the true representative body of France, forming the 'French National Assembly.' When Louis XVI ordered their hall closed, they gathered instead — led by Jean-Sylvain Bailly, Abbé Sieyès, and Mirabeau — on a nearby tennis court, and vowed not to disperse until France had a proper written constitution. This became known as the 'Tennis Court Oath.'</p>
+      <div class="figure-row">
+        <div class="figure-chip"><b class="ml">തീയതി</b><b class="en">Date</b><span>June 17–20, 1789</span></div>
+        <div class="figure-chip"><b class="ml">നേതാക്കൾ</b><b class="en">Leaders</b><span>Bailly, Sieyès, Mirabeau</span></div>
+        <div class="figure-chip"><b class="ml">ഫലം</b><b class="en">Result</b><span class="ml">ദേശീയസഭയുടെ അംഗീകാരം</span><span class="en">Recognition of the National Assembly</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 7: BASTILLE & WOMEN -->
+  <div class="panel" data-panel="6">
+    <div class="card">
+      <h3><span class="ml">ബാസ്റ്റിലിന്റെ പതനവും വിപ്ലവത്തിന്റെ ആരംഭവും</span><span class="en">The Fall of the Bastille</span></h3>
+      <p class="ml">നെക്കറെ പിരിച്ചുവിട്ട വാർത്ത പാരീസിൽ പടർന്നപ്പോൾ പ്രകോപിതരായ ജനക്കൂട്ടം ധാന്യസംഭരണശാലകളും റൊട്ടിക്കടകളും കയ്യേറി. 1789 ജൂലൈ 14-ന് ആയുധങ്ങൾ സംഭരിച്ച ജനക്കൂട്ടം സ്വേച്ഛാധിപത്യത്തിന്റെ പ്രതീകമായിരുന്ന ബാസ്റ്റിൽകോട്ട തകർത്തു. ബാസ്റ്റിലിന്റെ തകർച്ച ഫ്രഞ്ച് വിപ്ലവത്തിന്റെ ആരംഭമായി കണക്കാക്കപ്പെടുന്നു. ഇതേത്തുടർന്ന് ദേശീയസഭ അടിമത്തം നിർത്തലാക്കൽ, പ്രഭുക്കളുടെ പ്രത്യേക അധികാരങ്ങൾ എടുത്തുകളയൽ, സഭയ്ക്കുള്ള നികുതി നിർത്തലാക്കൽ തുടങ്ങിയ പരിഷ്കാരങ്ങൾ നടപ്പിലാക്കി.</p>
+      <p class="en">When news spread that Louis XVI had dismissed Necker, an enraged mob stormed grain stores and bakeries across Paris. On July 14, 1789, an armed crowd stormed the Bastille — the fortress symbolizing royal despotism. The fall of the Bastille is regarded as the start of the French Revolution. The National Assembly followed with sweeping reforms: abolishing serfdom, ending the special privileges of nobles, and scrapping the church tax.</p>
+      <div class="quote ml">14 ജൂലൈ ഇന്ന് ഫ്രാൻസിന്റെ ദേശീയദിനമായി ആഘോഷിക്കപ്പെടുന്നു.</div>
+      <div class="quote en">July 14 is celebrated today as France's National Day (Bastille Day).</div>
+    </div>
+    <div class="card">
+      <h3><span class="ml">സ്ത്രീകളും ഫ്രഞ്ച് വിപ്ലവവും</span><span class="en">Women and the French Revolution</span></h3>
+      <p class="ml">ഭക്ഷ്യക്ഷാമത്തിൽ പ്രകോപിതരായ പാരീസിലെ സ്ത്രീകൾ ആയിരക്കണക്കിന് പേർ 1789-ൽ വേഴ്‌സായ് കൊട്ടാരത്തിലേക്ക് മാർച്ച് ചെയ്തു, രാജകുടുംബത്തെ പാരീസിലേക്ക് കൊണ്ടുവന്നു. ഒളിമ്പ് ദ ഗൂഷ് എന്ന നാടകകൃത്ത് 'സ്ത്രീയുടെയും സ്ത്രീ പൗരന്റെയും അവകാശ പ്രഖ്യാപനം' എന്ന ഗ്രന്ഥത്തിലൂടെ പുരുഷന്മാർക്ക് ലഭിച്ച അവകാശങ്ങൾ സ്ത്രീകൾക്കും ലഭിക്കണമെന്ന് ആവശ്യപ്പെട്ടു. മാഡം ഷാൻ റോളണ്ട് സ്ത്രീ സമത്വത്തിനുവേണ്ടി വാദിച്ച മറ്റൊരു വനിതയായിരുന്നു.</p>
+      <p class="en">Provoked by food shortages, thousands of Parisian women marched to the Palace of Versailles in 1789 and brought the royal family back to Paris. Playwright Olympe de Gouges demanded equal rights for women in her 'Declaration of the Rights of Woman and of the Female Citizen.' Madame Jeanne Roland was another woman who championed equality for women during this period.</p>
+      <div class="info-box">
+        <h5 class="ml">വസ്ത്രം പ്രതിഷേധത്തിന്റെ പ്രതീകം</h5>
+        <h5 class="en">Clothing as a Symbol of Protest</h5>
+        <p class="ml">തൊഴിലാളികളും കർഷകരും ധരിച്ച നീളൻ ട്രൗസറായ 'പാന്റലോൺ' വിപ്ലവാനുകൂലികളുടെ പ്രതീകമായി മാറി — ഇവർ 'സാൻസ്-കുലോട്ടുകൾ' എന്നറിയപ്പെട്ടു. ചുവപ്പ് 'ഫ്രിജിയൻ തൊപ്പി' സ്വാതന്ത്ര്യത്തിന്റെ പ്രതീകമായി.</p>
+        <p class="en">The long trousers ('Pantalon') worn by workers and peasants became the symbol of revolutionary sympathizers, known as the 'Sans-culottes.' The red 'Phrygian cap' became a symbol of liberty and freedom from bondage.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 8: RIGHTS DECLARATION & NEW GOVERNANCE -->
+  <div class="panel" data-panel="7">
+    <div class="card">
+      <h3><span class="ml">മനുഷ്യാവകാശ പ്രഖ്യാപനം</span><span class="en">Declaration of the Rights of Man and of the Citizen</span></h3>
+      <p class="ml">ദേശീയസഭ തയ്യാറാക്കിയ ഭരണഘടനയുടെ ആമുഖത്തിൽ ഉൾപ്പെടുത്തിയ ഈ പ്രഖ്യാപനം ഫ്രഞ്ച് വിപ്ലവത്തിന്റെ ഏറ്റവും പ്രധാന ഫലങ്ങളിലൊന്നാണ്.</p>
+      <p class="en">Included in the preamble of the constitution drafted by the National Assembly, this Declaration is one of the most significant outcomes of the French Revolution.</p>
+      <ul class="ml">
+        <li>സ്വതന്ത്രനായി ജനിക്കുന്ന മനുഷ്യൻ തുല്യ അവകാശങ്ങളോടെ ജീവിക്കുന്നു</li>
+        <li>സ്വാതന്ത്ര്യം, സ്വത്ത്, സുരക്ഷിതത്വം, അടിച്ചമർത്തലുകളെ ചെറുക്കൽ എന്നിവ അടിസ്ഥാന അവകാശങ്ങൾ</li>
+        <li>എല്ലാ പരമാധികാരവും രാഷ്ട്രത്തിൽ കുടികൊള്ളുന്നു</li>
+        <li>മറ്റുള്ളവർക്ക് ഹാനികരമല്ലാത്ത പ്രവർത്തനങ്ങൾ ചെയ്യാനുള്ള അധികാരമാണ് സ്വാതന്ത്ര്യം</li>
+      </ul>
+      <ul class="en">
+        <li>Man is born free and lives with equal rights</li>
+        <li>Liberty, property, security, and resistance to oppression are natural rights</li>
+        <li>All sovereignty resides in the nation</li>
+        <li>Liberty is the power to act freely so long as it does not harm others</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="ml">ദേശീയസഭയുടെ പരിഷ്കാരങ്ങൾ</span><span class="en">Reforms by the National Assembly</span></h3>
+      <table class="reform-table">
+        <tr><th class="ml">പരിഷ്കാരം</th><th class="ml">വിശദാംശം</th></tr>
+        <tr><td class="ml"><b>ഏകീകൃത ഭരണഘടന</b><br><b class="en">Unified administration</b></td><td class="ml">രാജ്യത്താകമാനം ഏകീകൃത ഭരണഘടന നടപ്പിലാക്കി<br><span class="en">A single administrative structure across France</span></td></tr>
+        <tr><td class="ml"><b>അസൈനാറ്റ്</b><br><b class="en">Assignat</b></td><td class="ml">'അസൈനാറ്റ്' എന്ന പേരിൽ പുതിയ കടലാസ് കറൻസി പുറത്തിറക്കി<br><span class="en">New paper currency called 'Assignat' issued, backed by seized church land</span></td></tr>
+        <tr><td class="ml"><b>സഭാ സ്വത്ത്</b><br><b class="en">Church property</b></td><td class="ml">മതമേധാവികളുടെ നിയന്ത്രണത്തിലായിരുന്ന സ്വത്തുക്കൾ കണ്ടുകെട്ടി<br><span class="en">Property under Church control was confiscated</span></td></tr>
+        <tr><td class="ml"><b>മതസഹിഷ്ണുത</b><br><b class="en">Religious tolerance</b></td><td class="ml">പൂർണ്ണമായ മതസഹിഷ്ണുത പ്രഖ്യാപിച്ചു; പുരോഹിതർ ഗവൺമെന്റിന്റെ ശമ്പളക്കാരായി<br><span class="en">Full religious tolerance declared; clergy became salaried government employees</span></td></tr>
+      </table>
+      <div class="info-box">
+        <h5 class="ml">അസൈനാറ്റിന്റെ പതനം</h5>
+        <h5 class="en">The Collapse of the Assignat</h5>
+        <p class="ml">ഗവൺമെന്റ് ചെലവുകൾ വഹിക്കുന്നതിനായി അമിതമായ അളവിൽ അസൈനാറ്റ് അടിച്ചിറക്കിയത് കറൻസിയുടെ മൂല്യത്തകർച്ചയ്ക്ക് കാരണമായി. 1796 ആയപ്പോഴേക്കും അസൈനാറ്റിന്റെ മൂല്യം പൂർണ്ണമായും നഷ്ടപ്പെട്ടു.</p>
+        <p class="en">Excessive printing of Assignats to cover government expenses caused runaway inflation and currency collapse. By 1796, the Assignat had lost all its value.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 9: REIGN OF TERROR -->
+  <div class="panel" data-panel="8">
+    <div class="card">
+      <h3><span class="ml">ഭീകരവാഴ്ചയും സെപ്റ്റംബർ കൂട്ടക്കൊലയും</span><span class="en">The Reign of Terror</span></h3>
+      <p class="ml">1792-ൽ ദേശീയസഭയുടെ സ്ഥാനത്ത് 'നാഷണൽ കൺവെൻഷൻ' എന്ന പുതിയ ഭരണസമിതി നിലവിൽ വന്നു. ഫ്രാൻസിനെ ഒരു റിപ്പബ്ലിക്കായി പ്രഖ്യാപിക്കുകയും ലൂയി പതിനാറാമനെ വധശിക്ഷയ്ക്ക് വിധേയനാക്കുകയും ചെയ്തു. ജാക്കോബിനുകളുടെ നേതൃത്വത്തിൽ 'പൊതുരക്ഷാ കമ്മിറ്റി' (Committee of Public Safety) രൂപീകരിക്കപ്പെട്ടു; റോബസ്പിയർ ആയിരുന്നു ഇതിന്റെ പ്രധാന നേതാവ്. ആയിരക്കണക്കിന് ജനങ്ങളെ ദിനംപ്രതി രാജ്യദ്രോഹികളെന്ന് മുദ്രകുത്തി അറസ്റ്റ് ചെയ്യുകയും ഗില്ലറ്റിൻ ഉപയോഗിച്ച് വധിക്കുകയും ചെയ്തു.</p>
+      <p class="en">In 1792, a new body called the 'National Convention' replaced the National Assembly. France was declared a republic, and Louis XVI was executed. Under the Jacobins, the 'Committee of Public Safety' was formed, led chiefly by Robespierre. Thousands were branded traitors and arrested daily, many executed by guillotine.</p>
+      <div class="info-box">
+        <h5 class="ml">ജാക്കോബിനുകളും ജിറോണ്ടിസ്റ്റുകളും</h5>
+        <h5 class="en">Jacobins and Girondists</h5>
+        <p class="ml"><b>ജാക്കോബിനുകൾ:</b> ജാക്കോബിൻ കോൺവെന്റിൽ യോഗം ചേർന്നിരുന്ന സംഘം; റോബസ്പിയർ ഇവരുടെ പ്രധാന നേതാവായിരുന്നു; ഫ്രഞ്ച് രാഷ്ട്രീയത്തിൽ വലിയ സ്വാധീനം ചെലുത്തി. <b>ജിറോണ്ടിസ്റ്റുകൾ:</b> ജിറോണ്ട് പ്രദേശത്തുനിന്നും വന്ന ദേശീയ അസംബ്ലിയിലെ അംഗങ്ങൾ; മിതവാദ നിലപാടുകൾ സ്വീകരിച്ചു; ഭൂവുടമകളും വ്യാപാരികളും ഇവരുടെ പ്രതിനിധികളായിരുന്നു.</p>
+        <p class="en"><b>Jacobins:</b> A radical political faction that met at the Jacobin Convent; Robespierre was their key leader; they wielded major influence over French politics. <b>Girondists:</b> Members from the Gironde region who took a more moderate stance, representing landowners and merchants.</p>
+      </div>
+      <p class="ml">തിരക്കുറ്റാൻ വേണ്ടപ്പെട്ട 1500 ഓളം പേരെ പാരീസിലെ തെരുവുകളിൽ വച്ച് കൊലപ്പെടുത്തി — ഇതാണ് 'സെപ്റ്റംബർ കൂട്ടക്കൊല' (September Massacre) എന്നറിയപ്പെടുന്നത്. അതിഭീകരമായ ഭരണം നടത്തിയ റോബസ്പിയർ പിന്നീട് ഇതേ ഗില്ലറ്റിനുതന്നെ വധിക്കപ്പെട്ടു.</p>
+      <p class="en">Around 1,500 alleged prisoners were killed in the streets of Paris in what became known as the 'September Massacre.' Robespierre, who presided over this brutal reign, was himself eventually sent to the guillotine.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ml">ഗില്ലറ്റിനും വിപ്ലവക്കലണ്ടറും</span><span class="en">The Guillotine and the Revolutionary Calendar</span></h3>
+      <p class="ml"><b>ഗില്ലറ്റിൻ:</b> ഫ്രഞ്ച് വിപ്ലവകാലത്ത് (1789–1799) പെട്ടെന്ന് ശിരഛേദം ചെയ്യാൻ ഉപയോഗിച്ച ഭയാനകമായ ഉപകരണം. ഡോ. ജോസഫ്-ഇഗ്നാസ് ഗില്ലോട്ടിന്റെ പേരിലാണ് ഇത് അറിയപ്പെടുന്നത്. ലൂയി പതിനാറാമനെയും മാരി അന്റോയിനറ്റ് രാജ്ഞിയെയും ഗില്ലറ്റിൻ ഉപയോഗിച്ചാണ് വധിച്ചത്.</p>
+      <p class="en"><b>Guillotine:</b> A dreaded device used during the Revolution (1789–1799) to swiftly behead prisoners, named after Dr. Joseph-Ignace Guillotin. Louis XVI and Queen Marie Antoinette were both executed by guillotine.</p>
+      <p class="ml"><b>വിപ്ലവക്കലണ്ടർ:</b> ഫ്രാൻസ് റിപ്പബ്ലിക്കായി മാറിയ 1792 സെപ്റ്റംബർ 22 മുതൽ ആരംഭിക്കുന്ന പുതിയ കലണ്ടർ 1793 ഒക്ടോബറിൽ നിലവിൽ വന്നു. ഏഴ് ദിവസങ്ങളുള്ള ആഴ്ചകൾക്കുപകരം പത്ത് ദിവസങ്ങൾ വീതമുള്ള മൂന്ന് ദശകങ്ങൾ (Decades) ഉണ്ടായിരുന്നു. 1801 വരെ ഇത് പ്രചാരത്തിലിരുന്നു.</p>
+      <p class="en"><b>Revolutionary Calendar:</b> Introduced in October 1793, dating from September 22, 1792 (when France became a republic). It replaced seven-day weeks with three ten-day 'decades' and remained in use until 1801.</p>
+    </div>
+  </div>
+
+  <!-- PANEL 10: DIRECTORY, LEGACY & NAPOLEON -->
+  <div class="panel" data-panel="9">
+    <div class="card">
+      <h3><span class="ml">പുതിയ ഭരണഘടന — ഡയറക്ടറി</span><span class="en">The Directory</span></h3>
+      <p class="ml">ഭീകരവാഴ്ച അവസാനിച്ച ശേഷം 1795-ൽ ഫ്രാൻസിൽ 'ഡയറക്ടറി' എന്ന അഞ്ചംഗ സമിതി ഭരണം നിർവഹിച്ചു. അഴിമതിയും കെടുകാര്യസ്ഥതയും ഇതിന്റെ തകർച്ചയ്ക്ക് കാരണമായി; ജനങ്ങൾ കൂടുതൽ ദാരിദ്ര്യത്തിലേക്ക് നീങ്ങുകയും പുതിയ ഗവൺമെന്റിൽ വിശ്വാസം നഷ്ടപ്പെടുകയും ചെയ്തു.</p>
+      <p class="en">After the Reign of Terror ended, a five-member committee called the 'Directory' governed France from 1795. Corruption and mismanagement led to its collapse, as people slid further into poverty and lost faith in the new government.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ml">ഫ്രഞ്ച് വിപ്ലവത്തിന്റെ അനന്തരഫലങ്ങൾ</span><span class="en">Aftermath of the French Revolution</span></h3>
+      <ul class="ml">
+        <li>ഫ്യൂഡലിസത്തിന്റെ തകർച്ച — പ്രഭുക്കളുടെ ഭൂമി ജനങ്ങളുടെ കൈവശമായി</li>
+        <li>ഏകീകൃത അളവുതൂക്ക സമ്പ്രദായം (മെട്രിക് സമ്പ്രദായം) നടപ്പിലാക്കി</li>
+        <li>ആധുനിക ദേശീയത എന്ന ആശയം പ്രചാരത്തിലായി</li>
+        <li>ജനങ്ങളുടെ പരമാധികാരം എന്ന ആശയത്തിൽ അധിഷ്ഠിതമായ ജനാധിപത്യഭരണക്രമത്തിന് അടിത്തറയിട്ടു</li>
+        <li>പത്തൊൻപത്, ഇരുപത് നൂറ്റാണ്ടുകളിലെ ഏഷ്യൻ, ആഫ്രിക്കൻ ദേശീയ സ്വാതന്ത്ര്യസമരങ്ങളെ സ്വാധീനിച്ചു</li>
+      </ul>
+      <ul class="en">
+        <li>Collapse of feudalism — nobles' land passed into the hands of the people</li>
+        <li>Introduction of a uniform system of weights and measures (metric system)</li>
+        <li>Popularized the modern idea of the nation</li>
+        <li>Laid the foundation for democratic governance based on popular sovereignty</li>
+        <li>Inspired independence movements across Asia and Africa in the 19th and 20th centuries</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="ml">നെപ്പോളിയൻ ബോണപ്പാർട്ട്</span><span class="en">Napoleon Bonaparte</span></h3>
+      <div class="quote ml">"ഫ്രാൻസിന്റെ കിരീടം അഴുക്കുചാലിൽ കിടക്കുന്നത് ഞാൻ കണ്ടു. ഞാനത് വാളുകൊണ്ടെടുത്ത്, വൃത്തിയാക്കി, എന്റെ തലയിൽ തന്നെ വച്ചു."</div>
+      <div class="quote en">"I found the crown of France lying in the gutter. I picked it up with my sword, cleaned it, and placed it on my own head."</div>
+      <p class="ml">അരാജകത്വത്തിലേക്ക് വഴിമാറിയ ഫ്രഞ്ച് സമൂഹത്തെയും ഡയറക്ടറിയെയും പുറത്താക്കി ബ്രിഗേഡിയർ ജനറൽ നെപ്പോളിയൻ ബോണപ്പാർട്ട് അധികാരം പിടിച്ചെടുത്തു. മൂന്ന് കോൺസൽമാർ അടങ്ങിയ ഭരണക്രമം സ്ഥാപിച്ച അദ്ദേഹം ഒന്നാം കോൺസലായി; താമസിയാതെ ഫ്രാൻസിന്റെ ചക്രവർത്തിയായി സ്വയം അധികാരമേറ്റു.</p>
+      <p class="en">Brigadier General Napoleon Bonaparte seized power, sweeping away the failing Directory. He installed a government of three Consuls, becoming First Consul himself, and soon crowned himself Emperor of France.</p>
+      <table class="reform-table">
+        <tr><th class="ml">പരിഷ്കാരം</th><th class="ml">മാറ്റങ്ങൾ</th></tr>
+        <tr><td class="ml"><b>നിയമപരിഷ്കാരങ്ങൾ</b><br><span class="en">Legal reforms</span></td><td class="ml">നെപ്പോളിയന്റെ നിയമസംഹിത (Napoleonic Code) ഫ്യൂഡൽ നിയമങ്ങൾ അവസാനിപ്പിച്ചു; സമത്വവും മതസ്വാതന്ത്ര്യവും അംഗീകരിച്ചു<br><span class="en">The Napoleonic Code ended feudal law and recognized equality and religious freedom</span></td></tr>
+        <tr><td class="ml"><b>കൺകോർഡേറ്റ്</b><br><span class="en">Concordat</span></td><td class="ml">പോപ്പുമായി ഉണ്ടാക്കിയ കരാർ പ്രകാരം കത്തോലിക്കാ സഭയുടെ പ്രവർത്തനസ്വാതന്ത്ര്യം പുനഃസ്ഥാപിച്ചു<br><span class="en">An agreement with the Pope restoring the Catholic Church's operational freedom</span></td></tr>
+        <tr><td class="ml"><b>വിദ്യാഭ്യാസ പരിഷ്കാരങ്ങൾ</b><br><span class="en">Education reforms</span></td><td class="ml">'ലിസെയ്' എന്ന പേരിൽ സർക്കാർ നിയന്ത്രണത്തിലുള്ള വിദ്യാലയങ്ങൾ; യൂണിവേഴ്‌സിറ്റി ഓഫ് ഫ്രാൻസ് ആരംഭിച്ചു<br><span class="en">State-run 'Lycée' schools established; founded the University of France</span></td></tr>
+        <tr><td class="ml"><b>സാമ്പത്തിക പരിഷ്കാരങ്ങൾ</b><br><span class="en">Economic reforms</span></td><td class="ml">ബാങ്ക് ഓഫ് ഫ്രാൻസ് സ്ഥാപിച്ചു; ഏകീകൃത കറൻസി സംവിധാനം<br><span class="en">Established the Bank of France; unified currency system</span></td></tr>
+      </table>
+      <p class="ml">ബ്രിട്ടനെ സാമ്പത്തികമായി തകർക്കാൻ 'കോണ്ടിനെന്റൽ വ്യവസ്ഥ' ആവിഷ്കരിച്ചെങ്കിലും വിജയിച്ചില്ല. 1815-ൽ വാട്ടർലൂ യുദ്ധത്തിൽ ബ്രിട്ടൻ നെപ്പോളിയനുമേൽ അന്തിമ വിജയം നേടി.</p>
+      <p class="en">He devised the 'Continental System' to economically strangle Britain, but it ultimately failed. Britain achieved final victory over Napoleon at the Battle of Waterloo in 1815.</p>
+    </div>
+  </div>
+
+  <!-- PANEL 11: VIENNA & LEGACY -->
+  <div class="panel" data-panel="10">
+    <div class="card">
+      <h3><span class="ml">വിയന്ന സമ്മേളനം</span><span class="en">The Congress of Vienna</span></h3>
+      <p class="ml">നെപ്പോളിയന്റെ പരാജയത്തിനുശേഷം യൂറോപ്യൻ രാജ്യങ്ങൾ 1815-ൽ ഓസ്ട്രിയയിലെ വിയന്നയിൽ യോഗം ചേർന്നു. ഓസ്ട്രിയൻ ചാൻസലറായിരുന്ന മെറ്റേണിച്ച് ആയിരുന്നു ഇതിന് നേതൃത്വം നൽകിയത്.</p>
+      <p class="en">Following Napoleon's defeat, European powers met in Vienna, Austria in 1815. Austrian Chancellor Metternich led the proceedings.</p>
+      <ul class="ml">
+        <li>ഫ്രഞ്ച് വിപ്ലവത്തിന് മുമ്പുള്ള രാജഭരണം യൂറോപ്പിൽ പുനഃസ്ഥാപിക്കുക</li>
+        <li>ഫ്രാൻസിൽ ബൂർബൺ രാജഭരണം പുനഃസ്ഥാപിക്കുക</li>
+        <li>ബ്രിട്ടന്റെ നാവികമേധാവിത്വവും റഷ്യയുടെ കിഴക്കൻ യൂറോപ്പിലെ ആധിപത്യവും അംഗീകരിക്കുക</li>
+        <li>മധ്യയൂറോപ്പിൽ ഓസ്ട്രിയയുടെ മേധാവിത്വം അംഗീകരിക്കുക</li>
+      </ul>
+      <ul class="en">
+        <li>Restore pre-revolutionary monarchies across Europe</li>
+        <li>Restore Bourbon rule in France</li>
+        <li>Recognize British naval supremacy and Russian dominance in eastern Europe</li>
+        <li>Recognize Austrian dominance in central Europe</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="ml">ഫ്രഞ്ച് വിപ്ലവത്തിന്റെ ചരിത്രപ്രാധാന്യം</span><span class="en">Historical Legacy of the French Revolution</span></h3>
+      <p class="ml">ആധുനിക ലോകചരിത്രത്തെ സ്വാധീനിച്ച വിപ്ലവങ്ങളിൽ ഏറ്റവും പ്രധാനപ്പെട്ടതാണ് ഫ്രഞ്ച് വിപ്ലവം. ഫ്രാൻസിലെ സാധാരണക്കാരും മധ്യവർഗവും ചേർന്ന് തങ്ങൾക്ക് നിഷേധിക്കപ്പെട്ട അവകാശങ്ങൾക്കായി നടത്തിയ മുന്നേറ്റമായിരുന്നു ഇത്. ഫ്രഞ്ച് വിപ്ലവം മുന്നോട്ടുവച്ച ആശയങ്ങൾ പിൽക്കാല ലോകത്തെ മുഴുവൻ സ്വാധീനിക്കുകയുണ്ടായി — സ്വാതന്ത്ര്യം, സമത്വം, സാഹോദര്യം എന്നീ ആദർശങ്ങൾ ഇന്നും ജനാധിപത്യ രാഷ്ട്രങ്ങളുടെ അടിസ്ഥാന മൂല്യങ്ങളായി തുടരുന്നു.</p>
+      <p class="en">The French Revolution stands as one of the most influential revolutions in modern world history — a movement by the common people and middle class of France for rights long denied them. Its founding ideals of Liberty, Equality, and Fraternity went on to shape movements across the world and remain foundational democratic values to this day.</p>
+    </div>
+  </div>
+
+  <div class="quiz-cta">
+    <h3><span class="ml">നിങ്ങളുടെ അറിവ് പരിശോധിക്കൂ</span><span class="en">Test Your Knowledge</span></h3>
+    <p class="ml" style="opacity:.85">ദിവസേന രാത്രി 9:30–10:30 ന് ക്വിസ് ലഭ്യമാണ്</p>
+    <p class="en" style="opacity:.85">Quiz available daily 9:30–10:30 PM</p>
+    <a href="history-unit2-quiz.html" target="_blank">🏆 <span class="ml">ക്വിസ് ആരംഭിക്കൂ</span><span class="en">Start Quiz</span></a>
+  </div>
+
+  <div class="nav-btns">
+    <button onclick="go(-1)">← <span class="ml">മുൻ ഭാഗം</span><span class="en">Previous</span></button>
+    <button onclick="go(1)"><span class="ml">അടുത്ത ഭാഗം</span><span class="en">Next</span> →</button>
+  </div>
+
+</div>
+
+<footer>
+  <div class="ml">© Abacus Academy · Parambil Peedika &amp; Puthur Pallikkal · SSLC / Class 10 Social Science</div>
+  <div class="en">© Abacus Academy · Parambil Peedika &amp; Puthur Pallikkal · SSLC / Class 10 Social Science</div>
+</footer>
+
+<script>
+const tabLabelsML=["ആമുഖം","സ്വേച്ഛാധിപത്യം","എസ്റ്റേറ്റുകൾ","മധ്യവർഗം","ചിന്തകർ","ടെന്നീസ്കോർട്ട്","ബാസ്റ്റിൽ","അവകാശപ്രഖ്യാപനം","ഭീകരവാഴ്ച","ഡയറക്ടറി & നെപ്പോളിയൻ","വിയന്ന & പ്രാധാന്യം"];
+const tabLabelsEN=["Overview","Autocracy","Estates","Middle Class","Thinkers","Tennis Court","Bastille","Rights Declaration","Reign of Terror","Directory & Napoleon","Vienna & Legacy"];
+const tabsEl=document.getElementById('tabs');
+let currentLang='ml';
+function buildTabs(){
+  tabsEl.innerHTML='';
+  const labels = currentLang==='ml'?tabLabelsML:tabLabelsEN;
+  labels.forEach((label,i)=>{
+    const b=document.createElement('button');
+    b.className='tab-btn'+(i===activeIdx?' active':'');
+    b.textContent=(i+1)+'. '+label;
+    b.onclick=()=>showPanel(i);
+    tabsEl.appendChild(b);
+  });
+}
+let activeIdx=0;
+function showPanel(i){
+  activeIdx=i;
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector('.panel[data-panel="'+i+'"]').classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach((b,idx)=>b.classList.toggle('active',idx===i));
+  window.scrollTo({top:document.querySelector('.tabs').offsetTop-70,behavior:'smooth'});
+}
+function go(dir){
+  const total=document.querySelectorAll('.panel').length;
+  let next=activeIdx+dir;
+  if(next<0)next=0;
+  if(next>=total)next=total-1;
+  showPanel(next);
+}
+function setLang(lang){
+  currentLang=lang;
+  document.body.classList.toggle('show-en',lang==='en');
+  document.getElementById('btn-ml').classList.toggle('active',lang==='ml');
+  document.getElementById('btn-en').classList.toggle('active',lang==='en');
+  buildTabs();
+}
+buildTabs();
+showPanel(0);
+</script>
+</body>
+</html>

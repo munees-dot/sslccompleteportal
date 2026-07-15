@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ക്വിസ് | Quiz — സ്വാതന്ത്ര്യം, സമത്വം, സാഹോദര്യം (Unit 2)</title>
+<style>
+:root{
+  --navy:#0b2f4a;--navy-dark:#071f31;--gold:#c8963e;--gold-light:#f0d9a8;
+  --cream:#fbf6ec;--paper:#fffdf8;--ink:#26221a;--accent:#8c1f28;
+  --accent-light:#f6e3e0;--line:#e2d5b8;--radius:14px;
+  --good:#1f6e40;--bad:#a5202a;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;min-height:100vh;
+  font-family:'Noto Sans Malayalam','Noto Sans',system-ui,-apple-system,sans-serif;
+  background:linear-gradient(160deg,#0b2f4a 0%,#173b58 40%,#fbf6ec 40%,#fbf6ec 100%);
+  color:var(--ink);line-height:1.6;
+}
+.topbar{
+  background:linear-gradient(120deg,var(--navy),var(--navy-dark));color:#fff;
+  display:flex;align-items:center;gap:12px;padding:12px 18px;
+  box-shadow:0 3px 10px rgba(0,0,0,.25);
+}
+.logo-badge{
+  width:40px;height:40px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,var(--gold-light),var(--gold) 70%);
+  display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--navy-dark);font-size:14px;flex-shrink:0;
+}
+.brand b{font-size:14px;display:block;}
+.brand span{font-size:11px;color:var(--gold-light);}
+.top-actions{margin-left:auto;display:flex;gap:8px;}
+.pill-btn{
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);color:#fff;
+  padding:6px 12px;border-radius:18px;font-size:12px;cursor:pointer;font-family:inherit;
+}
+.pill-btn.active{background:var(--gold);border-color:var(--gold);color:var(--navy-dark);font-weight:700;}
+
+.wrap{max-width:640px;margin:0 auto;padding:26px 16px 50px;}
+
+.hero{text-align:center;color:#fff;padding:6px 8px 22px;}
+.hero .tag{display:inline-block;background:var(--accent);padding:4px 14px;border-radius:20px;font-size:11px;letter-spacing:1px;margin-bottom:10px;}
+.hero h1{font-size:clamp(19px,4vw,25px);margin:6px 0 2px;}
+.hero p{font-size:13px;opacity:.85;margin:0;}
+
+.card{
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px;box-shadow:0 8px 26px rgba(0,0,0,.18);
+}
+
+/* GATE SCREEN */
+.gate-icon{font-size:44px;text-align:center;margin-bottom:8px;}
+.gate h2{text-align:center;color:var(--navy-dark);font-size:19px;margin:6px 0 12px;}
+.gate p{text-align:center;font-size:14px;color:#4a4536;}
+.countdown{
+  display:flex;justify-content:center;gap:10px;margin:18px 0;
+}
+.cd-box{background:var(--navy);color:#fff;border-radius:10px;padding:10px 14px;text-align:center;min-width:58px;}
+.cd-box b{display:block;font-size:20px;}
+.cd-box span{font-size:10px;opacity:.8;}
+.window-note{
+  background:#eef4fa;border:1px solid #c8dced;border-radius:10px;padding:10px 14px;
+  text-align:center;font-size:13px;color:var(--navy-dark);margin-top:14px;
+}
+
+/* QUIZ */
+.progress-wrap{background:#eee0c0;border-radius:20px;height:9px;overflow:hidden;margin-bottom:16px;}
+.progress-bar{background:var(--gold);height:100%;width:0%;transition:width .3s;}
+.q-count{font-size:12px;color:#8a7e63;text-align:right;margin-bottom:6px;}
+.q-text{font-size:16px;font-weight:700;color:var(--navy-dark);margin-bottom:16px;}
+.opt{
+  display:block;width:100%;text-align:left;background:#fff;border:1.5px solid var(--line);
+  border-radius:10px;padding:12px 14px;margin-bottom:10px;font-size:14px;cursor:pointer;
+  font-family:inherit;color:var(--ink);transition:.15s;
+}
+.opt:hover{border-color:var(--gold);}
+.opt.selected{border-color:var(--navy);background:#eef4fa;}
+.opt.correct{border-color:var(--good);background:#e7f5ea;color:var(--good);font-weight:700;}
+.opt.wrong{border-color:var(--bad);background:#fbe9ea;color:var(--bad);font-weight:700;}
+.opt:disabled{cursor:default;}
+.next-btn{
+  width:100%;padding:12px;border:none;border-radius:10px;background:var(--navy);color:#fff;
+  font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;margin-top:6px;opacity:.4;pointer-events:none;
+}
+.next-btn.ready{opacity:1;pointer-events:auto;}
+.next-btn:hover.ready{background:var(--navy-dark);}
+
+/* RESULTS */
+.score-circle{
+  width:120px;height:120px;border-radius:50%;margin:8px auto 18px;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  background:conic-gradient(var(--gold) calc(var(--pct)*1%), #eee0c0 0);
+}
+.score-inner{
+  width:96px;height:96px;border-radius:50%;background:var(--paper);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+}
+.score-inner b{font-size:26px;color:var(--navy-dark);}
+.score-inner span{font-size:11px;color:#8a7e63;}
+.result-msg{text-align:center;font-size:15px;font-weight:700;color:var(--accent);margin-bottom:14px;}
+.share-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;
+  border:none;border-radius:10px;background:#25D366;color:#fff;font-family:inherit;font-weight:700;
+  font-size:14px;cursor:pointer;margin-top:10px;text-decoration:none;
+}
+.locked-note{
+  text-align:center;font-size:12.5px;color:#8a7e63;margin-top:16px;
+  background:#f7f1e2;border-radius:10px;padding:10px;
+}
+.review-item{border-top:1px solid var(--line);padding:10px 0;font-size:13px;}
+.review-item b{display:block;margin-bottom:4px;}
+.rq-correct{color:var(--good);}
+.rq-wrong{color:var(--bad);}
+
+.en{display:none;}
+body.show-en .ml{display:none;}
+body.show-en .en{display:block;}
+.ml.inline,.en.inline{display:inline;}
+body.show-en .ml.inline{display:none;}
+
+@media(max-width:400px){.cd-box{min-width:48px;padding:8px 10px;}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo-badge">AA</div>
+  <div class="brand">
+    <b>Abacus Academy</b>
+    <span class="ml">ദിന ക്വിസ് · Unit 2</span>
+    <span class="en">Daily Quiz · Unit 2</span>
+  </div>
+  <div class="top-actions">
+    <button class="pill-btn active" id="btn-ml" onclick="setLang('ml')">മലയാളം</button>
+    <button class="pill-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <span class="tag ml">UNIT 2 ക്വിസ്</span>
+    <span class="tag en">UNIT 2 QUIZ</span>
+    <h1 class="ml">സ്വാതന്ത്ര്യം, സമത്വം, സാഹോദര്യം</h1>
+    <h1 class="en">Liberty, Equality, Fraternity</h1>
+    <p class="ml">ഫ്രഞ്ച് വിപ്ലവം — 15 ചോദ്യങ്ങൾ</p>
+    <p class="en">The French Revolution — 15 Questions</p>
+  </div>
+
+  <div class="card" id="app"></div>
+</div>
+
+<script>
+/* ---------- CONFIG ---------- */
+const QUIZ_ID = "history_unit2";
+const WINDOW_START = {h:21, m:30}; // 9:30 PM
+const WINDOW_END   = {h:22, m:30}; // 10:30 PM
+const PORTAL_URL = "history-unit2.html";
+
+const QUESTIONS = [
+{ml:"ഫ്രാൻസ് ഭരിച്ചിരുന്ന രാജവംശം ഏതായിരുന്നു?",en:"Which dynasty ruled France before the Revolution?",
+ opts:[{ml:"ബൂർബൺ",en:"Bourbon"},{ml:"ട്യൂഡർ",en:"Tudor"},{ml:"ഹാബ്സ്ബർഗ്",en:"Habsburg"},{ml:"റൊമാനോവ്",en:"Romanov"}],ans:0},
+{ml:"'ഞാനാണ് രാഷ്ട്രം' എന്ന് പ്രഖ്യാപിച്ചത് ആരാണ്?",en:"Who declared \"I am the State\"?",
+ opts:[{ml:"ലൂയി പതിനാറാമൻ",en:"Louis XVI"},{ml:"ലൂയി പതിനാലാമൻ",en:"Louis XIV"},{ml:"ലൂയി പതിനഞ്ചാമൻ",en:"Louis XV"},{ml:"നെപ്പോളിയൻ",en:"Napoleon"}],ans:1},
+{ml:"മൂന്നാം എസ്റ്റേറ്റിൽ ഉൾപ്പെട്ടിരുന്നത് ആരൊക്കെ?",en:"Who made up the Third Estate?",
+ opts:[{ml:"പുരോഹിതർ",en:"Clergy"},{ml:"പ്രഭുക്കൾ",en:"Nobility"},{ml:"സാധാരണക്കാർ",en:"Commoners"},{ml:"സൈന്യം",en:"The military"}],ans:2},
+{ml:"കർഷകരിൽനിന്ന് സഭ പിരിച്ചിരുന്ന നികുതി ഏതാണ്?",en:"What tax did the Church collect from peasants?",
+ opts:[{ml:"ഗാബെല്ല",en:"Gabelle"},{ml:"ടൈഥ്",en:"Tithe"},{ml:"കോർവി",en:"Corvée"},{ml:"പിയേഷ്",en:"Péage"}],ans:1},
+{ml:"'സാമൂഹ്യ ഉടമ്പടി' എന്ന ഗ്രന്ഥം രചിച്ചത് ആരാണ്?",en:"Who wrote 'The Social Contract'?",
+ opts:[{ml:"വോൾട്ടയർ",en:"Voltaire"},{ml:"മൊണ്ടെസ്ക്യൂ",en:"Montesquieu"},{ml:"റൂസ്സോ",en:"Rousseau"},{ml:"ജോൺ ലോക്ക്",en:"John Locke"}],ans:2},
+{ml:"അധികാര വിഭജനം (നിയമനിർമ്മാണം, ഭരണനിർവഹണം, നീതിന്യായം) നിർദേശിച്ചത് ആരാണ്?",en:"Who proposed separation of powers into legislature, executive, and judiciary?",
+ opts:[{ml:"റൂസ്സോ",en:"Rousseau"},{ml:"മൊണ്ടെസ്ക്യൂ",en:"Montesquieu"},{ml:"വോൾട്ടയർ",en:"Voltaire"},{ml:"സിയേസ്",en:"Sieyès"}],ans:1},
+{ml:"ടെന്നീസ്കോർട്ട് പ്രതിജ്ഞ നടന്ന വർഷം ഏതാണ്?",en:"In which year was the Tennis Court Oath taken?",
+ opts:[{ml:"1789",en:"1789"},{ml:"1791",en:"1791"},{ml:"1793",en:"1793"},{ml:"1795",en:"1795"}],ans:0},
+{ml:"ബാസ്റ്റിൽ കോട്ട തകർത്തത് ഏത് തീയതിയിലാണ്?",en:"On which date was the Bastille stormed?",
+ opts:[{ml:"ജൂൺ 20",en:"June 20"},{ml:"ജൂലൈ 14",en:"July 14"},{ml:"ഒക്ടോബർ 5",en:"October 5"},{ml:"സെപ്റ്റംബർ 22",en:"September 22"}],ans:1},
+{ml:"സ്ത്രീകളുടെ അവകാശങ്ങൾക്കുവേണ്ടി വാദിച്ച 'സ്ത്രീയുടെയും സ്ത്രീ പൗരന്റെയും അവകാശ പ്രഖ്യാപനം' എഴുതിയത് ആരാണ്?",en:"Who wrote the 'Declaration of the Rights of Woman and of the Female Citizen'?",
+ opts:[{ml:"മാഡം റോളണ്ട്",en:"Madame Roland"},{ml:"ഒളിമ്പ് ദ ഗൂഷ്",en:"Olympe de Gouges"},{ml:"മാരി അന്റോയിനറ്റ്",en:"Marie Antoinette"},{ml:"ഴാങ്-സിൽവിയൻ ബൈലി",en:"Jean-Sylvain Bailly"}],ans:1},
+{ml:"വിപ്ലവാനുകൂലികളായ തൊഴിലാളികളെ വിളിച്ചിരുന്ന പേര് എന്താണ്?",en:"What were revolutionary sympathizers among workers called?",
+ opts:[{ml:"ജിറോണ്ടിസ്റ്റുകൾ",en:"Girondists"},{ml:"ജാക്കോബിനുകൾ",en:"Jacobins"},{ml:"സാൻസ്-കുലോട്ടുകൾ",en:"Sans-culottes"},{ml:"ബൂർഷ്വാസി",en:"Bourgeoisie"}],ans:2},
+{ml:"'പൊതുരക്ഷാ കമ്മിറ്റി'യുടെ പ്രധാന നേതാവ് ആരായിരുന്നു?",en:"Who was the chief leader of the Committee of Public Safety?",
+ opts:[{ml:"മിറാബോ",en:"Mirabeau"},{ml:"റോബസ്പിയർ",en:"Robespierre"},{ml:"നെക്കർ",en:"Necker"},{ml:"ടർഗോ",en:"Turgot"}],ans:1},
+{ml:"ലൂയി പതിനാറാമനെയും മാരി അന്റോയിനറ്റിനെയും വധിക്കാൻ ഉപയോഗിച്ച ഉപകരണം ഏതാണ്?",en:"What instrument was used to execute Louis XVI and Marie Antoinette?",
+ opts:[{ml:"ഗില്ലറ്റിൻ",en:"Guillotine"},{ml:"വാൾ",en:"Sword"},{ml:"തോക്ക്",en:"Firearm"},{ml:"തൂക്കുകയർ",en:"Noose"}],ans:0},
+{ml:"1795-ൽ ഫ്രാൻസിൽ ഭരണം നടത്തിയ അഞ്ചംഗ സമിതി ഏതാണ്?",en:"What was the five-member committee that ruled France from 1795?",
+ opts:[{ml:"നാഷണൽ കൺവെൻഷൻ",en:"National Convention"},{ml:"ഡയറക്ടറി",en:"The Directory"},{ml:"കൺസൽഷിപ്പ്",en:"Consulate"},{ml:"ദേശീയസഭ",en:"National Assembly"}],ans:1},
+{ml:"നെപ്പോളിയനെ അന്തിമമായി പരാജയപ്പെടുത്തിയ യുദ്ധം ഏതാണ്?",en:"Which battle finally defeated Napoleon?",
+ opts:[{ml:"ട്രഫാൽഗർ",en:"Trafalgar"},{ml:"വാട്ടർലൂ",en:"Waterloo"},{ml:"ഓസ്റ്റർലിറ്റ്സ്",en:"Austerlitz"},{ml:"ലീപ്സിഗ്",en:"Leipzig"}],ans:1},
+{ml:"1815-ൽ യൂറോപ്യൻ രാജ്യങ്ങൾ ഏത് നഗരത്തിലാണ് സമ്മേളിച്ചത്?",en:"In which city did European powers meet in 1815?",
+ opts:[{ml:"പാരീസ്",en:"Paris"},{ml:"ബെർലിൻ",en:"Berlin"},{ml:"വിയന്ന",en:"Vienna"},{ml:"ലണ്ടൻ",en:"London"}],ans:2},
+];
+
+/* ---------- STATE ---------- */
+let lang = "ml";
+let qIndex = 0;
+let score = 0;
+let answers = []; // {selected, correct}
+let shuffled = [];
+
+const app = document.getElementById('app');
+
+function pad(n){return n.toString().padStart(2,'0');}
+function todayKey(){
+  const d = new Date();
+  return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+}
+function storageKey(){return 'quiz_'+QUIZ_ID+'_'+todayKey();}
+
+function inWindow(){
+  const now = new Date();
+  const start = new Date(now); start.setHours(WINDOW_START.h, WINDOW_START.m, 0, 0);
+  const end = new Date(now); end.setHours(WINDOW_END.h, WINDOW_END.m, 0, 0);
+  return now >= start && now <= end;
+}
+function msUntilStart(){
+  const now = new Date();
+  const start = new Date(now); start.setHours(WINDOW_START.h, WINDOW_START.m, 0, 0);
+  if(start < now) start.setDate(start.getDate()+1);
+  return start - now;
+}
+function alreadyAttempted(){
+  try{ return localStorage.getItem(storageKey()) !== null; }catch(e){ return false; }
+}
+function saveAttempt(finalScore){
+  try{ localStorage.setItem(storageKey(), JSON.stringify({score:finalScore,total:QUESTIONS.length,time:new Date().toISOString()})); }catch(e){}
+}
+function getSavedAttempt(){
+  try{ const v = localStorage.getItem(storageKey()); return v?JSON.parse(v):null; }catch(e){ return null; }
+}
+
+/* ---------- RENDER: GATE (locked / already done) ---------- */
+function renderClosedGate(){
+  const ms = msUntilStart();
+  const h = Math.floor(ms/3600000);
+  const m = Math.floor((ms%3600000)/60000);
+  const s = Math.floor((ms%60000)/1000);
+  app.innerHTML = `
+    <div class="gate">
+      <div class="gate-icon">🔒</div>
+      <h2 class="ml">ക്വിസ് ഇപ്പോൾ അടച്ചിരിക്കുന്നു</h2>
+      <h2 class="en">The Quiz Is Currently Closed</h2>
+      <p class="ml">ദിവസേന രാത്രി 9:30 മുതൽ 10:30 വരെ മാത്രമേ ക്വിസ് ലഭ്യമാകൂ.</p>
+      <p class="en">The quiz is open only daily between 9:30 PM and 10:30 PM.</p>
+      <div class="countdown" id="cd"></div>
+      <div class="window-note">
+        <span class="ml">⏰ അടുത്ത ക്വിസ് വിൻഡോ: രാത്രി 9:30 PM</span>
+        <span class="en">⏰ Next quiz window: 9:30 PM</span>
+      </div>
+    </div>`;
+  updateCountdown();
+}
+let cdTimer;
+function updateCountdown(){
+  clearInterval(cdTimer);
+  cdTimer = setInterval(()=>{
+    if(inWindow()){ clearInterval(cdTimer); boot(); return; }
+    const ms = msUntilStart();
+    const h = Math.floor(ms/3600000);
+    const m = Math.floor((ms%3600000)/60000);
+    const s = Math.floor((ms%60000)/1000);
+    const cd = document.getElementById('cd');
+    if(cd){
+      cd.innerHTML = `
+        <div class="cd-box"><b>${pad(h)}</b><span class="ml">മണിക്കൂർ</span><span class="en">HRS</span></div>
+        <div class="cd-box"><b>${pad(m)}</b><span class="ml">മിനിറ്റ്</span><span class="en">MIN</span></div>
+        <div class="cd-box"><b>${pad(s)}</b><span class="ml">സെക്കൻഡ്</span><span class="en">SEC</span></div>`;
+    }
+  },1000);
+}
+
+function renderAlreadyDone(){
+  const rec = getSavedAttempt();
+  const pct = rec ? Math.round((rec.score/rec.total)*100) : 0;
+  app.innerHTML = `
+    <div class="gate">
+      <div class="gate-icon">✅</div>
+      <h2 class="ml">ഇന്നത്തെ ക്വിസ് പൂർത്തിയാക്കി</h2>
+      <h2 class="en">Today's Quiz Already Completed</h2>
+      <div class="score-circle" style="--pct:${pct}"><div class="score-inner"><b>${rec?rec.score:0}/${rec?rec.total:QUESTIONS.length}</b><span>${pct}%</span></div></div>
+      <p class="ml">നാളെ രാത്രി 9:30 ന് വീണ്ടും ശ്രമിക്കൂ!</p>
+      <p class="en">Come back tomorrow at 9:30 PM to try again!</p>
+      <a class="share-btn" id="waShareDone">📲 <span class="ml">ഫലം പങ്കിടൂ</span><span class="en">Share Result</span></a>
+    </div>`;
+  document.getElementById('waShareDone').href = whatsappLink(rec?rec.score:0, rec?rec.total:QUESTIONS.length);
+}
+
+/* ---------- RENDER: QUIZ ---------- */
+function startQuiz(){
+  shuffled = QUESTIONS.map((q,i)=>({...q, idx:i}));
+  qIndex = 0; score = 0; answers = [];
+  renderQuestion();
+}
+function renderQuestion(){
+  const q = shuffled[qIndex];
+  const pct = (qIndex/shuffled.length)*100;
+  app.innerHTML = `
+    <div class="progress-wrap"><div class="progress-bar" style="width:${pct}%"></div></div>
+    <div class="q-count">${qIndex+1} / ${shuffled.length}</div>
+    <div class="q-text">${lang==='ml'?q.ml:q.en}</div>
+    <div id="opts"></div>
+    <button class="next-btn" id="nextBtn">
+      <span class="ml">${qIndex===shuffled.length-1?'ഫലം കാണൂ':'അടുത്തത്'}</span>
+      <span class="en">${qIndex===shuffled.length-1?'See Results':'Next'}</span>
+    </button>`;
+  const optsEl = document.getElementById('opts');
+  q.opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt';
+    b.textContent = lang==='ml'?o.ml:o.en;
+    b.onclick=()=>selectOption(i);
+    optsEl.appendChild(b);
+  });
+}
+function selectOption(i){
+  const q = shuffled[qIndex];
+  const correct = i===q.ans;
+  if(correct) score++;
+  answers.push({q, selected:i, correct});
+  document.querySelectorAll('.opt').forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx===q.ans) b.classList.add('correct');
+    else if(idx===i) b.classList.add('wrong');
+  });
+  const nb = document.getElementById('nextBtn');
+  nb.classList.add('ready');
+  nb.onclick = ()=>{
+    if(qIndex < shuffled.length-1){ qIndex++; renderQuestion(); }
+    else { finishQuiz(); }
+  };
+}
+function finishQuiz(){
+  saveAttempt(score);
+  renderResults();
+}
+function whatsappLink(sc, total){
+  const pct = Math.round((sc/total)*100);
+  const text = lang==='ml'
+    ? `ഞാൻ Abacus Academy ക്വിസിൽ (Unit 2 - ഫ്രഞ്ച് വിപ്ലവം) ${sc}/${total} (${pct}%) നേടി! നിങ്ങളും ശ്രമിക്കൂ.`
+    : `I scored ${sc}/${total} (${pct}%) on the Abacus Academy quiz (Unit 2 - French Revolution)! Try it yourself.`;
+  return `https://wa.me/?text=${encodeURIComponent(text)}`;
+}
+function renderResults(){
+  const pct = Math.round((score/shuffled.length)*100);
+  let msgMl, msgEn;
+  if(pct>=80){msgMl="മികച്ച പ്രകടനം! 🌟";msgEn="Excellent work! 🌟";}
+  else if(pct>=60){msgMl="നല്ല ശ്രമം! 👍";msgEn="Good effort! 👍";}
+  else{msgMl="വീണ്ടും പഠിച്ച് ശ്രമിക്കൂ 📖";msgEn="Review and try again 📖";}
+
+  let reviewHtml = answers.map(a=>{
+    const qm = lang==='ml'?a.q.ml:a.q.en;
+    const yourAns = lang==='ml'?a.q.opts[a.selected].ml:a.q.opts[a.selected].en;
+    const rightAns = lang==='ml'?a.q.opts[a.q.ans].ml:a.q.opts[a.q.ans].en;
+    return `<div class="review-item">
+      <b>${qm}</b>
+      <span class="${a.correct?'rq-correct':'rq-wrong'}">${a.correct?'✔':'✘'} ${yourAns}</span>
+      ${!a.correct?`<div class="rq-correct">✔ ${rightAns}</div>`:''}
+    </div>`;
+  }).join('');
+
+  app.innerHTML = `
+    <div class="score-circle" style="--pct:${pct}"><div class="score-inner"><b>${score}/${shuffled.length}</b><span>${pct}%</span></div></div>
+    <div class="result-msg">${lang==='ml'?msgMl:msgEn}</div>
+    <a class="share-btn" id="waShare">📲 <span class="ml">WhatsApp-ൽ പങ്കിടൂ</span><span class="en">Share on WhatsApp</span></a>
+    <div class="locked-note">
+      <span class="ml">ഇന്നത്തെ ശ്രമം രേഖപ്പെടുത്തി. നാളെ വീണ്ടും ശ്രമിക്കാം.</span>
+      <span class="en">Today's attempt has been recorded. Come back tomorrow to try again.</span>
+    </div>
+    <div id="review" style="margin-top:16px;"></div>`;
+  document.getElementById('waShare').href = whatsappLink(score, shuffled.length);
+  document.getElementById('review').innerHTML = reviewHtml;
+}
+
+/* ---------- LANG ---------- */
+function setLang(l){
+  lang = l;
+  document.body.classList.toggle('show-en', l==='en');
+  document.getElementById('btn-ml').classList.toggle('active', l==='ml');
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+}
+
+/* ---------- BOOT ---------- */
+function boot(){
+  if(!inWindow()){ renderClosedGate(); return; }
+  if(alreadyAttempted()){ renderAlreadyDone(); return; }
+  startQuiz();
+}
+boot();
+</script>
+</body>
+</html>
