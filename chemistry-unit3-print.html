@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>യൂണിറ്റ് 3 പ്രിന്റ് നോട്ട്സ് | Abacus Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{ --ink:#111; --gray:#555; --line:#999; --line-lt:#ccc; }
+*{box-sizing:border-box;}
+body{
+  margin:0; background:#e9e9e9; color:var(--ink);
+  font-family:'Inter',sans-serif;
+}
+.ml{font-family:'Noto Sans Malayalam','Inter',sans-serif;}
+
+/* ===== on-screen toolbar (hidden on print) ===== */
+.toolbar{
+  position:sticky;top:0;z-index:20;display:flex;justify-content:center;gap:12px;
+  padding:12px;background:#222;color:#fff;
+}
+.toolbar button{
+  background:#fff;color:#111;border:none;padding:10px 22px;border-radius:6px;
+  font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;
+}
+.toolbar a.back{
+  color:#fff;text-decoration:none;font-size:13px;border:1px solid #555;padding:9px 16px;border-radius:6px;
+}
+.toolbar .hint{align-self:center;font-size:12.5px;color:#ccc;}
+
+/* ===== page ===== */
+.page{
+  width:210mm;min-height:297mm;margin:18px auto;background:#fff;
+  padding:14mm 15mm 16mm;position:relative;
+  box-shadow:0 2px 14px rgba(0,0,0,.25);
+}
+
+/* header block (page 1 only) */
+.doc-header{display:flex;align-items:center;gap:14px;border-bottom:2.5px solid var(--ink);padding-bottom:10px;margin-bottom:4px;}
+.doc-logo{
+  flex:none;width:52px;height:52px;border:2px solid var(--ink);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;
+}
+.doc-headtext{flex:1;}
+.doc-headtext .aname{font-weight:800;font-size:19px;letter-spacing:.01em;}
+.doc-headtext .tagline{font-size:11px;color:var(--gray);margin-top:1px;}
+.doc-meta{text-align:right;font-size:11px;color:var(--gray);line-height:1.5;}
+
+.title-banner{
+  text-align:center;border:1.5px solid var(--ink);border-radius:6px;
+  padding:10px 14px;margin:14px 0 18px;
+}
+.title-banner .unit{font-size:11px;letter-spacing:.08em;color:var(--gray);text-transform:uppercase;}
+.title-banner h1{margin:4px 0 2px;font-size:19px;}
+.title-banner .sub{font-size:12.5px;color:var(--gray);}
+
+/* content */
+h2.sec{
+  font-size:14.5px;border-bottom:1.5px solid var(--ink);padding-bottom:4px;margin:20px 0 8px;
+  display:flex;align-items:baseline;gap:8px;
+}
+h2.sec .n{
+  flex:none;width:20px;height:20px;border:1.4px solid var(--ink);border-radius:4px;
+  display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;
+}
+h3.sub{font-size:13px;font-weight:700;margin:12px 0 4px;}
+p{font-size:12.5px;line-height:1.65;margin:5px 0;color:#222;}
+p.en{font-size:11px;color:var(--gray);font-style:italic;margin:2px 0 8px;}
+ul,ol{font-size:12.5px;line-height:1.6;margin:5px 0;padding-left:18px;}
+
+table{width:100%;border-collapse:collapse;margin:8px 0 12px;font-size:11.5px;}
+th,td{border:1px solid var(--ink);padding:5px 7px;text-align:center;}
+th{background:#eee;font-weight:700;}
+
+.box{border:1.3px solid var(--ink);border-radius:5px;padding:8px 11px;margin:9px 0;font-size:12px;}
+.box.note{border-style:dashed;}
+.formula{font-family:'Inter',monospace;font-weight:700;border:1px solid var(--ink);border-radius:4px;padding:2px 7px;margin:2px 3px 2px 0;display:inline-block;font-size:12px;}
+
+.mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:9px 0;}
+.mini-grid .cell{border:1px solid var(--ink);border-radius:5px;padding:6px;text-align:center;}
+.mini-grid .cell .k{font-weight:800;font-size:16px;}
+.mini-grid .cell .l{font-size:9.5px;color:var(--gray);margin-top:2px;}
+
+.block-map{display:grid;grid-template-columns:repeat(18,1fr);grid-auto-rows:16px;gap:1.5px;margin:9px 0;}
+.block-map .cell{border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;}
+.block-map .empty{border:none;}
+.block-map .b-s{background:#ddd;}
+.block-map .b-p{background:#bbb;}
+.block-map .b-d{background:#888;color:#fff;}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:9.5px;color:var(--gray);margin-top:3px;}
+.legend i{width:10px;height:10px;display:inline-block;border:1px solid var(--ink);margin-right:3px;vertical-align:-1px;}
+
+.doc-footer{
+  position:absolute;left:15mm;right:15mm;bottom:8mm;
+  display:flex;justify-content:space-between;border-top:1px solid var(--line-lt);
+  padding-top:5px;font-size:9.5px;color:var(--gray);
+}
+
+.avoid-break{break-inside:avoid; page-break-inside:avoid;}
+.page-break{break-before:page; page-break-before:always;}
+
+@media print{
+  body{background:#fff;}
+  .toolbar{display:none!important;}
+  .page{width:auto;min-height:0;margin:0;box-shadow:none;padding:10mm 12mm 14mm;}
+  @page{size:A4;margin:8mm;}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <a class="back" href="chemistry-unit3.html"><span class="ml">← പഠനത്തിലേക്ക്</span></a>
+  <button onclick="window.print()">🖨️ പ്രിന്റ് ചെയ്യൂ / Print</button>
+  <span class="hint">B&amp;W · A4 · ~4 pages — use "More settings → Background graphics OFF, Color → Grayscale" for cleanest photocopy result</span>
+</div>
+
+<!-- ============ PAGE 1 ============ -->
+<div class="page">
+  <div class="doc-header">
+    <div class="doc-logo">Aa</div>
+    <div class="doc-headtext">
+      <div class="aname">ABACUS ACADEMY</div>
+      <div class="tagline">Learn from the best teachers</div>
+    </div>
+    <div class="doc-meta">SSLC Chemistry<br>Unit 3 · Print Notes</div>
+  </div>
+
+  <div class="title-banner">
+    <div class="unit">Unit 3 · Chemistry Standard 10</div>
+    <h1 class="ml">പീരിയോഡിക് ടേബിളും ഇലക്ട്രോൺ വിന്യാസവും</h1>
+    <div class="sub">Periodic Table &amp; Electron Configuration — Revision Notes</div>
+  </div>
+
+  <!-- 1 -->
+  <h2 class="sec"><span class="n">1</span><span class="ml">ക്വാണ്ടം സംഖ്യകൾ</span></h2>
+  <p class="ml">ആറ്റം മാതൃകയുടെ അടിസ്ഥാനത്തിൽ ഓർബിറ്റലുകളുടെയും ഇലക്ട്രോണുകളുടെയും സവിശേഷതകൾ വിശദീകരിക്കാൻ ഉപയോഗിക്കുന്ന സംഖ്യകളാണ് ക്വാണ്ടം നമ്പറുകൾ.</p>
+  <p class="en">Quantum numbers describe the properties of orbitals and electrons based on quantum mechanics.</p>
+
+  <h3 class="sub">1. Principal Quantum Number (n) — <span class="ml">ഷെല്ലിനെ സൂചിപ്പിക്കുന്നു</span></h3>
+  <table>
+    <tr><th>n</th><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+    <tr><th class="ml">ഷെൽ</th><td>K</td><td>L</td><td>M</td><td>N</td></tr>
+  </table>
+
+  <h3 class="sub">2. Azimuthal Quantum Number (l) — <span class="ml">സബ്‌ഷെല്ലിനെ (ആകൃതി) സൂചിപ്പിക്കുന്നു</span></h3>
+  <p><span class="formula">l=0 → s</span><span class="formula">l=1 → p</span><span class="formula">l=2 → d</span><span class="formula">l=3 → f</span></p>
+  <div class="box note ml">നിയമം: l ന്റെ വില 0 മുതൽ (n−1) വരെയാണ്.</div>
+
+  <h3 class="sub">3. Magnetic Quantum Number (m) — <span class="ml">ഓർബിറ്റലിന്റെ ഓറിയന്റേഷൻ</span></h3>
+  <p><span class="formula">m = (2l+1) values</span></p>
+  <div class="mini-grid">
+    <div class="cell"><div class="k">s</div><div class="l ml">1 ഓർബിറ്റൽ</div></div>
+    <div class="cell"><div class="k">p</div><div class="l ml">3 ഓർബിറ്റലുകൾ</div></div>
+    <div class="cell"><div class="k">d</div><div class="l ml">5 ഓർബിറ്റലുകൾ</div></div>
+    <div class="cell"><div class="k">f</div><div class="l ml">7 ഓർബിറ്റലുകൾ</div></div>
+  </div>
+  <p class="ml" style="font-size:11px;color:var(--gray)">ഓർമ്മിക്കുക: ഓരോ ഓർബിറ്റലിലും പരമാവധി 2 ഇലക്ട്രോണുകൾ മാത്രം.</p>
+
+  <!-- 2 -->
+  <h2 class="sec"><span class="n">2</span><span class="ml">ഷെല്ലുകളും സബ്‌ഷെല്ലുകളും — ശേഷി</span></h2>
+  <div class="mini-grid">
+    <div class="cell"><div class="k">n²</div><div class="l ml">ഷെല്ലിലെ ഓർബിറ്റലുകൾ</div></div>
+    <div class="cell"><div class="k">2n²</div><div class="l ml">ഷെല്ലിലെ പരമാവധി e⁻</div></div>
+    <div class="cell"><div class="k">2(2l+1)</div><div class="l ml">സബ്‌ഷെല്ലിലെ പരമാവധി e⁻</div></div>
+    <div class="cell"><div class="k">2</div><div class="l ml">ഓർബിറ്റലിൽ പരമാവധി</div></div>
+  </div>
+  <table>
+    <tr><th class="ml">സബ്‌ഷെൽ</th><td>s</td><td>p</td><td>d</td><td>f</td></tr>
+    <tr><th class="ml">പരമാവധി e⁻</th><td>2</td><td>6</td><td>10</td><td>14</td></tr>
+  </table>
+  <table>
+    <tr><th>K</th><th>L</th><th>M</th><th>N</th></tr>
+    <tr><td>2</td><td>8</td><td>18</td><td>32</td></tr>
+  </table>
+
+  <div class="doc-footer">
+    <span>ABACUS ACADEMY</span>
+    <span class="ml">യൂണിറ്റ് 3 — പീരിയോഡിക് ടേബിൾ &amp; ഇലക്ട്രോൺ വിന്യാസം</span>
+    <span>Page 1</span>
+  </div>
+</div>
+
+<!-- ============ PAGE 2 ============ -->
+<div class="page page-break">
+  <!-- 3 -->
+  <h2 class="sec"><span class="n">3</span><span class="ml">ഇലക്ട്രോൺ പൂരണ നിയമങ്ങൾ — ഓഫ്ബൗ തത്വം</span></h2>
+  <p class="ml">ഊർജം കുറഞ്ഞ സബ്‌ഷെല്ലിൽ നിന്ന് ഊർജം കൂടിയ സബ്‌ഷെല്ലിലേക്ക് ക്രമമായി ഇലക്ട്രോണുകൾ നിറയുന്നു (Aufbau Principle).</p>
+  <h3 class="sub">(n + l) <span class="ml">നിയമം</span></h3>
+  <p class="ml">(n+l) വില കൂടി വരുന്ന ക്രമത്തിലാണ് സബ്‌ഷെല്ലുകളുടെ ഊർജം കൂടുന്നത്. (n+l) തുല്യമെങ്കിൽ, ചെറിയ n ന് ഊർജം കുറവ്.</p>
+  <div class="box" style="text-align:center;font-weight:700;">
+    1s &lt; 2s &lt; 2p &lt; 3s &lt; 3p &lt; 4s &lt; 3d &lt; 4p &lt; 5s &lt; 4d &lt; 5p &lt; 6s &lt; 4f &lt; 5d &lt; 6p &lt; 7s &lt; 5f &lt; 6d
+  </div>
+  <div class="box note ml">ശ്രദ്ധിക്കുക: 4s എപ്പോഴും 3d നു മുൻപ് നിറയും; അയോൺ രൂപീകരണത്തിൽ 4s ൽ നിന്നാണ് ആദ്യം ഇലക്ട്രോൺ നഷ്ടപ്പെടുന്നത്.</div>
+
+  <!-- 4 -->
+  <h2 class="sec avoid-break"><span class="n">4</span><span class="ml">ഇലക്ട്രോൺ വിന്യാസം എഴുതൽ</span></h2>
+  <table>
+    <tr><th class="ml">മൂലകം</th><th>Z</th><th class="ml">സബ്‌ഷെൽ ഇലക്ട്രോൺ വിന്യാസം</th></tr>
+    <tr><td>H</td><td>1</td><td>1s¹</td></tr>
+    <tr><td>He</td><td>2</td><td>1s²</td></tr>
+    <tr><td>Li</td><td>3</td><td>1s² 2s¹</td></tr>
+    <tr><td>Be</td><td>4</td><td>1s² 2s²</td></tr>
+    <tr><td>B</td><td>5</td><td>1s² 2s² 2p¹</td></tr>
+    <tr><td>C</td><td>6</td><td>1s² 2s² 2p²</td></tr>
+    <tr><td>N</td><td>7</td><td>1s² 2s² 2p³</td></tr>
+    <tr><td>O</td><td>8</td><td>1s² 2s² 2p⁴</td></tr>
+    <tr><td>F</td><td>9</td><td>1s² 2s² 2p⁵</td></tr>
+    <tr><td>Ne</td><td>10</td><td>1s² 2s² 2p⁶</td></tr>
+    <tr><td>Na</td><td>11</td><td>1s² 2s² 2p⁶ 3s¹ = [Ne] 3s¹</td></tr>
+    <tr><td>K</td><td>19</td><td>[Ar] 4s¹</td></tr>
+    <tr><td>Ca</td><td>20</td><td>[Ar] 4s²</td></tr>
+    <tr><td>Sc</td><td>21</td><td>[Ar] 4s² 3d¹</td></tr>
+  </table>
+  <p class="ml" style="font-size:11px;color:var(--gray)">നോബിൾ ഗ്യാസ് കോർ നൊട്ടേഷൻ: തൊട്ടുമുൻപുള്ള ഉൽക്കൃഷ്ട വാതകത്തിന്റെ പ്രതീകം [ ] ൽ എഴുതി, ബാക്കി സബ്‌ഷെല്ലുകൾ മാത്രം എഴുതുക.</p>
+
+  <div class="doc-footer">
+    <span>ABACUS ACADEMY</span>
+    <span class="ml">യൂണിറ്റ് 3 — പീരിയോഡിക് ടേബിൾ &amp; ഇലക്ട്രോൺ വിന്യാസം</span>
+    <span>Page 2</span>
+  </div>
+</div>
+
+<!-- ============ PAGE 3 ============ -->
+<div class="page page-break">
+  <!-- 5 -->
+  <h2 class="sec"><span class="n">5</span><span class="ml">Cr, Cu — അപവാദങ്ങൾ</span></h2>
+  <p class="ml">d⁵ (പകുതി നിറഞ്ഞത്), d¹⁰ (പൂർണ്ണമായി നിറഞ്ഞത്) ക്രമീകരണങ്ങൾക്ക് അധിക സ്ഥിരതയുണ്ട്.</p>
+  <table>
+    <tr><th class="ml">മൂലകം</th><th class="ml">പ്രതീക്ഷിത വിന്യാസം</th><th class="ml">യഥാർത്ഥ (സ്ഥിര) വിന്യാസം</th></tr>
+    <tr><td>Cr (Z=24)</td><td>[Ar] 3d⁴ 4s²</td><td><b>[Ar] 3d⁵ 4s¹</b></td></tr>
+    <tr><td>Cu (Z=29)</td><td>[Ar] 3d⁹ 4s²</td><td><b>[Ar] 3d¹⁰ 4s¹</b></td></tr>
+  </table>
+
+  <!-- 6 -->
+  <h2 class="sec avoid-break"><span class="n">6</span><span class="ml">ബ്ലോക്ക് കണ്ടെത്തൽ (s, p, d, f)</span></h2>
+  <p class="ml">അവസാനം ഇലക്ട്രോൺ പൂരണം നടക്കുന്ന സബ്‌ഷെല്ലിന്റെ അടിസ്ഥാനത്തിലാണ് ബ്ലോക്ക് നിശ്ചയിക്കുന്നത്.</p>
+  <div class="block-map">
+    <div class="cell b-s">1</div><div class="cell empty"></div>
+    <div class="cell empty" style="grid-column:span 10"></div>
+    <div class="cell b-p">13</div><div class="cell b-p">14</div><div class="cell b-p">15</div><div class="cell b-p">16</div><div class="cell b-p">17</div><div class="cell b-p">18</div>
+    <div class="cell b-s">2</div><div class="cell empty" style="grid-column:span 10"></div>
+    <div class="cell empty" style="grid-column:span 6"></div>
+    <div class="cell b-s">3</div><div class="cell b-s">4</div>
+    <div class="cell b-d">5</div><div class="cell b-d">6</div><div class="cell b-d">7</div><div class="cell b-d">8</div><div class="cell b-d">9</div><div class="cell b-d">10</div><div class="cell b-d">11</div><div class="cell b-d">12</div>
+    <div class="cell b-p">13</div><div class="cell b-p">14</div><div class="cell b-p">15</div><div class="cell b-p">16</div><div class="cell b-p">17</div><div class="cell b-p">18</div>
+  </div>
+  <div class="legend">
+    <span><i style="background:#ddd"></i>s <span class="ml">(ഗ്രൂപ്പ് 1,2)</span></span>
+    <span><i style="background:#bbb"></i>p <span class="ml">(ഗ്രൂപ്പ് 13–18)</span></span>
+    <span><i style="background:#888"></i>d <span class="ml">(ഗ്രൂപ്പ് 3–12)</span></span>
+  </div>
+  <div class="box">
+    <span class="ml">_8O: 1s² 2s² 2p⁴ → 2p ൽ അവസാന e⁻ → <b>p ബ്ലോക്ക്</b></span><br>
+    <span class="ml">_21Sc: [Ar] 3d¹ 4s² → 3d ൽ അവസാന e⁻ → <b>d ബ്ലോക്ക്</b></span>
+  </div>
+
+  <!-- 7 -->
+  <h2 class="sec avoid-break"><span class="n">7</span><span class="ml">പീരിയഡ് &amp; ഗ്രൂപ്പ് നമ്പർ</span></h2>
+  <p class="ml"><b>പീരിയഡ്:</b> സബ്‌ഷെൽ വിന്യാസത്തിലെ ഏറ്റവും ഉയർന്ന ഷെൽ നമ്പർ (n).</p>
+  <table>
+    <tr><th class="ml">ബ്ലോക്ക്</th><th class="ml">ഗ്രൂപ്പ് നമ്പർ കണ്ടെത്തുന്ന വിധം</th></tr>
+    <tr><td>s</td><td class="ml">ബാഹ്യതമ s ലെ e⁻ എണ്ണം = ഗ്രൂപ്പ് നമ്പർ</td></tr>
+    <tr><td>p</td><td class="ml">(ബാഹ്യതമ s+p ലെ e⁻) + 10 = ഗ്രൂപ്പ് നമ്പർ</td></tr>
+    <tr><td>d</td><td class="ml">(ബാഹ്യതമ s + ഉള്ളിലെ d ലെ e⁻) = ഗ്രൂപ്പ് നമ്പർ</td></tr>
+  </table>
+
+  <div class="doc-footer">
+    <span>ABACUS ACADEMY</span>
+    <span class="ml">യൂണിറ്റ് 3 — പീരിയോഡിക് ടേബിൾ &amp; ഇലക്ട്രോൺ വിന്യാസം</span>
+    <span>Page 3</span>
+  </div>
+</div>
+
+<!-- ============ PAGE 4 ============ -->
+<div class="page page-break">
+  <!-- 8 -->
+  <h2 class="sec"><span class="n">8</span><span class="ml">ക്രമാവർത്തന പ്രവണത — അയോണീകരണ എൻഥാൽപി</span></h2>
+  <p class="ml">വാതകാവസ്ഥയിലുള്ള ഒറ്റപ്പെട്ട ആറ്റത്തിന്റെ ബാഹ്യതമ ഇലക്ട്രോണിനെ നീക്കം ചെയ്യാൻ വേണ്ട ഏറ്റവും കുറഞ്ഞ ഊർജം.</p>
+  <table>
+    <tr><th class="ml">ഗ്രൂപ്പിൽ മുകളിൽ നിന്ന് താഴേക്ക്</th><th class="ml">പീരിയഡിൽ ഇടത്തുനിന്ന് വലത്തോട്ട്</th></tr>
+    <tr><td class="ml">ഷെല്ലുകൾ കൂടുന്നു → എൻഥാൽപി <b>കുറയുന്നു</b></td><td class="ml">ന്യൂക്ലിയർ ചാർജ് കൂടുന്നു → എൻഥാൽപി <b>കൂടുന്നു</b></td></tr>
+  </table>
+  <p class="ml" style="font-size:11px;color:var(--gray)">ഏറ്റവും കുറഞ്ഞ അയോണീകരണ എൻഥാൽപി — സീസിയം, ഫ്രാൻസിയം.</p>
+
+  <!-- 9 -->
+  <h2 class="sec avoid-break"><span class="n">9</span><span class="ml">ബ്ലോക്ക് പ്രത്യേകതകൾ</span></h2>
+  <table>
+    <tr><th class="ml">ബ്ലോക്ക്</th><th class="ml">ബാഹ്യതമ വിന്യാസം</th><th class="ml">പ്രത്യേകതകൾ</th></tr>
+    <tr><td>s</td><td>ns¹⁻²</td><td class="ml">ആൽക്കലി/ആൽക്കലൈൻ എർത്ത് ലോഹങ്ങൾ; +1/+2 ഓക്സീകരണാവസ്ഥ</td></tr>
+    <tr><td>p</td><td>ns² np¹⁻⁶</td><td class="ml">ലോഹം, അലോഹം, ഉപലോഹം എല്ലാം; +/− ഓക്സീകരണാവസ്ഥ</td></tr>
+    <tr><td>d</td><td>(n−1)d¹⁻¹⁰ns¹⁻²</td><td class="ml">സംക്രമണ ലോഹങ്ങൾ; വ്യത്യസ്ത ഓക്സീകരണാവസ്ഥ; നിറമുള്ള സംയുക്തങ്ങൾ</td></tr>
+    <tr><td>f</td><td>(n−2)f¹⁻¹⁴</td><td class="ml">അന്തഃസംക്രമണ മൂലകങ്ങൾ; ലാന്ഥനോയ്ഡ്/ആക്റ്റിനോയ്ഡ്; റേഡിയോ ആക്റ്റീവ്</td></tr>
+  </table>
+
+  <div class="box note ml" style="margin-top:16px;">
+    പരിശീലനത്തിനായി ഡിജിറ്റൽ പോർട്ടലിലെ ക്വിസ് ഭാഗം 1 &amp; 2 ശ്രമിക്കുക — chemistry-unit3-quiz.html
+  </div>
+
+  <div class="doc-footer">
+    <span>ABACUS ACADEMY</span>
+    <span class="ml">യൂണിറ്റ് 3 — പീരിയോഡിക് ടേബിൾ &amp; ഇലക്ട്രോൺ വിന്യാസം</span>
+    <span>Page 4</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ക്വിസ് — യൂണിറ്റ് 3 | Abacus Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-950:#080c17; --navy-900:#0d1428; --navy-800:#131c38; --navy-700:#1c2a4f;
+  --shell-cyan:#4fd8c9; --shell-cyan-dim:#2a5f5a; --orbit-amber:#f2b64d; --nucleus-rose:#ef6f6f;
+  --ok:#4fd88a; --bad:#ef6f6f;
+  --ink-0:#f4f7fb; --ink-1:#c3ccdc; --ink-2:#8894ac; --line:#233256; --radius:14px;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:radial-gradient(1100px 600px at 85% -10%, rgba(79,216,201,.10), transparent 60%),radial-gradient(900px 500px at -10% 20%, rgba(242,182,77,.08), transparent 55%),var(--navy-950);color:var(--ink-0);font-family:'Inter',sans-serif;min-height:100vh;}
+body.lang-ml .en{display:none;} body.lang-en .ml{display:none;}
+.ml{font-family:'Noto Sans Malayalam','Inter',sans-serif;}
+h1,h2,h3{font-family:'Sora','Noto Sans Malayalam',sans-serif;}
+body.lang-ml h1,body.lang-ml h2,body.lang-ml h3{font-family:'Noto Sans Malayalam',sans-serif;}
+
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;padding:12px 22px;background:rgba(8,12,23,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.brand{display:flex;align-items:center;gap:10px;flex:1;min-width:0;}
+.brand-mark{width:36px;height:36px;border-radius:10px;flex:none;background:conic-gradient(from 210deg, var(--shell-cyan), var(--orbit-amber), var(--nucleus-rose), var(--shell-cyan));display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:800;font-size:15px;color:var(--navy-950);}
+.brand-text b{display:block;font-family:'Sora',sans-serif;font-size:14.5px;}
+.brand-text span{display:block;font-size:11px;color:var(--ink-2);}
+.lang-toggle{display:flex;background:var(--navy-800);border:1px solid var(--line);border-radius:999px;padding:3px;}
+.lang-toggle button{border:none;background:transparent;color:var(--ink-2);font-weight:600;font-size:12.5px;padding:6px 13px;border-radius:999px;cursor:pointer;}
+.lang-toggle button.active{background:var(--shell-cyan);color:var(--navy-950);}
+.back-link{flex:none;color:var(--ink-1);text-decoration:none;font-size:13px;border:1px solid var(--line);padding:8px 14px;border-radius:999px;background:var(--navy-800);}
+
+.wrap{max-width:760px;margin:0 auto;padding:34px 20px 80px;}
+.hero{text-align:center;margin-bottom:26px;}
+.hero h1{font-size:clamp(22px,4vw,32px);margin:8px 0 8px;background:linear-gradient(90deg,var(--ink-0),var(--shell-cyan) 60%,var(--orbit-amber));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero p{color:var(--ink-1);font-size:14.5px;}
+
+.part-tabs{display:flex;gap:10px;justify-content:center;margin:18px 0 26px;}
+.part-tabs button{padding:10px 20px;border-radius:999px;border:1px solid var(--line);background:var(--navy-800);color:var(--ink-1);font-weight:600;font-size:13.5px;cursor:pointer;font-family:inherit;}
+.part-tabs button.active{background:var(--shell-cyan);color:var(--navy-950);border-color:var(--shell-cyan);}
+.part-tabs button .badge{display:inline-block;margin-left:6px;font-size:11px;opacity:.85;}
+
+.part{display:none;} .part.active{display:block;}
+
+.q-card{background:linear-gradient(180deg,var(--navy-800),var(--navy-900));border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-bottom:14px;}
+.q-card .qnum{font-family:'Sora',sans-serif;font-size:11px;color:var(--shell-cyan);border:1px solid var(--shell-cyan-dim);background:rgba(79,216,201,.08);padding:3px 9px;border-radius:999px;display:inline-block;margin-bottom:10px;}
+.q-card p.qtext{font-size:15px;color:var(--ink-0);margin:0 0 14px;line-height:1.6;}
+.opts{display:flex;flex-direction:column;gap:8px;}
+.opt{display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:10px;border:1px solid var(--line);background:var(--navy-950);cursor:pointer;font-size:14px;color:var(--ink-1);transition:.15s;}
+.opt:hover{border-color:var(--shell-cyan-dim);}
+.opt.selected{border-color:var(--shell-cyan);background:rgba(79,216,201,.08);color:var(--ink-0);}
+.opt.correct{border-color:var(--ok);background:rgba(79,216,138,.12);color:var(--ink-0);}
+.opt.incorrect{border-color:var(--bad);background:rgba(239,111,111,.12);color:var(--ink-0);}
+.opt .letter{flex:none;width:22px;height:22px;border-radius:6px;background:var(--navy-800);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--ink-2);}
+.explain{display:none;margin-top:12px;padding:10px 12px;border-left:3px solid var(--orbit-amber);background:rgba(242,182,77,.07);border-radius:0 8px 8px 0;font-size:13px;color:var(--ink-1);}
+.explain.show{display:block;}
+
+.submit-bar{position:sticky;bottom:16px;display:flex;justify-content:center;margin-top:20px;}
+.submit-btn{background:var(--shell-cyan);color:var(--navy-950);font-weight:700;font-size:14.5px;padding:13px 32px;border-radius:999px;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(79,216,201,.25);}
+.submit-btn:disabled{opacity:.5;cursor:not-allowed;}
+
+.result-card{text-align:center;background:linear-gradient(120deg,rgba(79,216,201,.12),rgba(242,182,77,.10));border:1px solid var(--shell-cyan-dim);border-radius:var(--radius);padding:28px;margin-top:10px;}
+.result-card .score{font-family:'Sora',sans-serif;font-size:42px;font-weight:800;color:var(--shell-cyan);margin:6px 0;}
+.result-card p{color:var(--ink-1);font-size:14px;}
+.retry-btn{margin-top:14px;background:var(--navy-800);border:1px solid var(--line);color:var(--ink-0);padding:10px 20px;border-radius:999px;cursor:pointer;font-weight:600;font-size:13.5px;}
+</style>
+</head>
+<body class="lang-ml">
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-mark">Aa</div>
+    <div class="brand-text">
+      <b>Abacus Academy</b>
+      <span class="ml">യൂണിറ്റ് 3 ക്വിസ്</span><span class="en">Unit 3 Quiz</span>
+    </div>
+  </div>
+  <div class="lang-toggle">
+    <button id="btn-ml" class="active" onclick="setLang('ml')">മലയാളം</button>
+    <button id="btn-en" onclick="setLang('en')">English</button>
+  </div>
+  <a class="back-link" href="chemistry-unit3.html"><span class="ml">← പഠനത്തിലേക്ക്</span><span class="en">← Back to study</span></a>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <h1><span class="ml">പീരിയോഡിക് ടേബിളും ഇലക്ട്രോൺ വിന്യാസവും</span><span class="en">Periodic Table & Electron Configuration</span></h1>
+    <p class="ml">രണ്ട് ഭാഗങ്ങൾ — ഭാഗം 1 അടിസ്ഥാനം, ഭാഗം 2 പ്രയോഗതലം. ഓരോ ഭാഗവും വെവ്വേറെ സ്കോർ ചെയ്യാം.</p>
+    <p class="en">Two parts — Part 1 is basics, Part 2 is application-level. Each part is scored separately.</p>
+  </div>
+
+  <div class="part-tabs">
+    <button id="tab1" class="active" onclick="showPart(1)"><span class="ml">ഭാഗം 1</span><span class="en">Part 1</span><span class="badge ml">· അടിസ്ഥാനം</span><span class="badge en">· Basics</span></button>
+    <button id="tab2" onclick="showPart(2)"><span class="ml">ഭാഗം 2</span><span class="en">Part 2</span><span class="badge ml">· പ്രയോഗം</span><span class="badge en">· Application</span></button>
+  </div>
+
+  <div id="part1" class="part active"></div>
+  <div id="part2" class="part"></div>
+</div>
+
+<script>
+const QUIZ = {
+  1: [
+    {q:{ml:"അസിമുഥൽ ക്വാണ്ടം നമ്പർ (l) എന്താണ് സൂചിപ്പിക്കുന്നത്?", en:"What does the Azimuthal quantum number (l) represent?"},
+     opts:[{ml:"ഷെല്ലിന്റെ ഊർജനില", en:"The energy level of the shell"},{ml:"ഓർബിറ്റലിന്റെ ത്രിമാന ആകൃതി (സബ്‌ഷെൽ)", en:"The 3-D shape of the orbital (sub-shell)"},{ml:"ഓർബിറ്റലിന്റെ ഓറിയന്റേഷൻ", en:"The orientation of the orbital"},{ml:"ഇലക്ട്രോണിന്റെ സ്പിൻ", en:"The spin of the electron"}],
+     correct:1, exp:{ml:"l ഓർബിറ്റലിന്റെ ത്രിമാന ആകൃതി സൂചിപ്പിക്കുന്നു — s, p, d, f സബ്‌ഷെല്ലുകളെ നിർണ്ണയിക്കുന്നു.", en:"l defines the 3-D shape of the orbital — it determines the s, p, d, f sub-shells."}},
+    {q:{ml:"l = 2 ആണെങ്കിൽ, മാഗ്നറ്റിക് ക്വാണ്ടം നമ്പർ m ന് എത്ര വിലകൾ ഉണ്ടായിരിക്കും?", en:"If l = 2, how many values can the magnetic quantum number m take?"},
+     opts:[{ml:"3",en:"3"},{ml:"5",en:"5"},{ml:"7",en:"7"},{ml:"1",en:"1"}],
+     correct:1, exp:{ml:"m = (2l+1) = (2×2+1) = 5. ഇത് d സബ്‌ഷെല്ലിലെ 5 ഓർബിറ്റലുകളാണ്.", en:"m = (2l+1) = (2×2+1) = 5 — these are the 5 orbitals of the d sub-shell."}},
+    {q:{ml:"M ഷെല്ലിൽ (n=3) ഉൾക്കൊള്ളാവുന്ന പരമാവധി ഇലക്ട്രോണുകളുടെ എണ്ണം എത്ര?", en:"What is the maximum number of electrons the M shell (n=3) can hold?"},
+     opts:[{ml:"8",en:"8"},{ml:"9",en:"9"},{ml:"18",en:"18"},{ml:"32",en:"32"}],
+     correct:2, exp:{ml:"2n² = 2×3² = 18.", en:"2n² = 2×3² = 18."}},
+    {q:{ml:"ഒരു ഓർബിറ്റലിൽ പരമാവധി എത്ര ഇലക്ട്രോണുകൾ ഉൾക്കൊള്ളാം?", en:"What is the maximum number of electrons a single orbital can hold?"},
+     opts:[{ml:"1",en:"1"},{ml:"2",en:"2"},{ml:"6",en:"6"},{ml:"10",en:"10"}],
+     correct:1, exp:{ml:"ഓരോ ഓർബിറ്റലിലും പരമാവധി 2 ഇലക്ട്രോണുകൾ മാത്രം.", en:"Every orbital can hold a maximum of 2 electrons."}},
+    {q:{ml:"സബ്‌ഷെല്ലുകളുടെ ഊർജക്രമം നിർണ്ണയിക്കാൻ ഉപയോഗിക്കുന്ന നിയമം ഏത്?", en:"Which rule is used to determine the energy order of sub-shells?"},
+     opts:[{ml:"പോളി തത്വം", en:"Pauli's principle"},{ml:"(n+l) നിയമം", en:"The (n+l) rule"},{ml:"ഹുണ്ട് നിയമം", en:"Hund's rule"},{ml:"ഹൈസൻബർഗ് തത്വം", en:"Heisenberg's principle"}],
+     correct:1, exp:{ml:"(n+l) വില കൂടി വരുന്ന ക്രമത്തിലാണ് സബ്‌ഷെല്ലുകൾ ഊർജം കൂടി വരുന്നത്.", en:"Sub-shells are arranged in order of increasing (n+l) value."}},
+    {q:{ml:"4s ഉം 3d ഉം താരതമ്യം ചെയ്യുമ്പോൾ ഏതിനാണ് ഊർജം കുറവ്?", en:"Comparing 4s and 3d, which has lower energy?"},
+     opts:[{ml:"3d",en:"3d"},{ml:"4s",en:"4s"},{ml:"രണ്ടും തുല്യം", en:"Both equal"},{ml:"നിർണ്ണയിക്കാൻ കഴിയില്ല", en:"Cannot be determined"}],
+     correct:1, exp:{ml:"4s: n+l=4, 3d: n+l=5 → 4s ന് ഊർജം കുറവ്, അതിനാൽ ആദ്യം നിറയുന്നു.", en:"4s: n+l=4, 3d: n+l=5 → 4s has lower energy and fills first."}},
+    {q:{ml:"സോഡിയത്തിന്റെ (Na, Z=11) നോബിൾ ഗ്യാസ് കോർ നൊട്ടേഷൻ ഏത്?", en:"What is the noble-gas-core notation for sodium (Na, Z=11)?"},
+     opts:[{ml:"[He] 2s¹",en:"[He] 2s¹"},{ml:"[Ne] 3s¹",en:"[Ne] 3s¹"},{ml:"[Ar] 3s¹",en:"[Ar] 3s¹"},{ml:"[Ne] 3p¹",en:"[Ne] 3p¹"}],
+     correct:1, exp:{ml:"Na: 1s² 2s² 2p⁶ 3s¹ — തൊട്ടുമുൻപുള്ള ഉൽക്കൃഷ്ട വാതകം Ne ആണ് → [Ne] 3s¹.", en:"Na: 1s² 2s² 2p⁶ 3s¹ — the nearest preceding noble gas is Ne → [Ne] 3s¹."}},
+    {q:{ml:"താഴെ പറയുന്നവയിൽ സാധ്യതയില്ലാത്ത സബ്‌ഷെൽ ഏത്?", en:"Which of the following sub-shells is NOT possible?"},
+     opts:[{ml:"3p",en:"3p"},{ml:"2d",en:"2d"},{ml:"3d",en:"3d"},{ml:"4f",en:"4f"}],
+     correct:1, exp:{ml:"n=2 ആയാൽ l ന് 0,1 മാത്രമേ സാധ്യമാകൂ (s,p). l=2 (d) സാധ്യമല്ല. അതിനാൽ 2d നിലവിലില്ല.", en:"For n=2, l can only be 0 or 1 (s, p). l=2 (d) is not possible for n=2, so 2d does not exist."}},
+    {q:{ml:"s ബ്ലോക്ക് മൂലകങ്ങളുടെ ബാഹ്യതമ ഇലക്ട്രോൺ വിന്യാസം ഏത് രൂപത്തിലാണ്?", en:"What is the general outer electron configuration of s-block elements?"},
+     opts:[{ml:"ns¹⁻²",en:"ns¹⁻²"},{ml:"ns² np¹⁻⁶",en:"ns² np¹⁻⁶"},{ml:"(n−1)d¹⁻¹⁰ ns¹⁻²",en:"(n−1)d¹⁻¹⁰ ns¹⁻²"},{ml:"(n−2)f¹⁻¹⁴",en:"(n−2)f¹⁻¹⁴"}],
+     correct:0, exp:{ml:"s ബ്ലോക്ക് മൂലകങ്ങളുടെ ബാഹ്യതമ വിന്യാസം ns¹ (ഗ്രൂപ്പ് 1) അല്ലെങ്കിൽ ns² (ഗ്രൂപ്പ് 2) ആണ്.", en:"s-block elements have outer configuration ns¹ (group 1) or ns² (group 2)."}},
+    {q:{ml:"ഒരു ഗ്രൂപ്പിൽ മുകളിൽ നിന്ന് താഴേക്ക് പോകുമ്പോൾ അയോണീകരണ എൻഥാൽപിക്ക് എന്ത് സംഭവിക്കുന്നു?", en:"What happens to ionisation enthalpy when moving down a group?"},
+     opts:[{ml:"കൂടുന്നു",en:"Increases"},{ml:"കുറയുന്നു",en:"Decreases"},{ml:"മാറ്റമില്ല",en:"No change"},{ml:"ആദ്യം കൂടും പിന്നെ കുറയും",en:"First increases then decreases"}],
+     correct:1, exp:{ml:"ഷെല്ലുകൾ കൂടുന്നതിനാൽ ന്യൂക്ലിയസിന്റെ ആകർഷണം കുറയുന്നു → അയോണീകരണ എൻഥാൽപി കുറയുന്നു.", en:"As shells increase, nuclear attraction on the outer electron weakens → ionisation enthalpy decreases."}}
+  ],
+  2: [
+    {q:{ml:"ഗ്രൂപ്പ് 17, 3 ഷെല്ലുകളുള്ള X എന്ന മൂലകത്തിന്റെ സബ്‌ഷെൽ ഇലക്ട്രോൺ വിന്യാസം ഏത്?", en:"Element X is in group 17 with 3 shells. What is its sub-shell electron configuration?"},
+     opts:[{ml:"1s² 2s² 2p⁶ 3s² 3p⁵",en:"1s² 2s² 2p⁶ 3s² 3p⁵"},{ml:"1s² 2s² 2p⁵",en:"1s² 2s² 2p⁵"},{ml:"1s² 2s² 2p⁶ 3s² 3p⁶",en:"1s² 2s² 2p⁶ 3s² 3p⁶"},{ml:"1s² 2s² 2p⁶ 3s¹",en:"1s² 2s² 2p⁶ 3s¹"}],
+     correct:0, exp:{ml:"3 ഷെല്ലുകൾ → n=3 വരെ. ഗ്രൂപ്പ് 17 → s+p ബാഹ്യതമ ഇലക്ട്രോണുകൾ 7 (2+5) → ഇത് ക്ലോറിൻ (Cl) ആണ്: 1s² 2s² 2p⁶ 3s² 3p⁵.", en:"3 shells → up to n=3. Group 17 → outer s+p electrons = 7 (2+5) → this is chlorine (Cl): 1s² 2s² 2p⁶ 3s² 3p⁵."}},
+    {q:{ml:"3p, 4d, 3f, 2d എന്നിവയിൽ സാധ്യതയില്ലാത്ത സബ്‌ഷെല്ലുകൾ ഏവ?", en:"Among 3p, 4d, 3f, 2d — which sub-shells are NOT possible?"},
+     opts:[{ml:"3p, 4d",en:"3p, 4d"},{ml:"3f, 2d",en:"3f, 2d"},{ml:"3p മാത്രം",en:"3p only"},{ml:"നാലും സാധ്യമല്ല",en:"All four impossible"}],
+     correct:1, exp:{ml:"n=3 ന് l പരമാവധി 2 (s,p,d) — f (l=3) സാധ്യമല്ല → 3f തെറ്റ്. n=2 ന് l പരമാവധി 1 (s,p) — d (l=2) സാധ്യമല്ല → 2d തെറ്റ്.", en:"For n=3, max l=2 (s,p,d) — f (l=3) not possible → 3f invalid. For n=2, max l=1 (s,p) — d (l=2) not possible → 2d invalid."}},
+    {q:{ml:"ഒരാറ്റത്തിൽ അവസാന ഇലക്ട്രോൺ നിറയുന്നത് 3d സബ്‌ഷെല്ലിലാണ്, ആ സബ്‌ഷെല്ലിൽ 7 ഇലക്ട്രോണുകൾ ഉണ്ട്. ഈ മൂലകത്തിന്റെ പീരിയഡ് നമ്പർ എത്ര?", en:"An atom's last electron fills the 3d sub-shell, which has 7 electrons. What is this element's period number?"},
+     opts:[{ml:"3",en:"3"},{ml:"4",en:"4"},{ml:"7",en:"7"},{ml:"2",en:"2"}],
+     correct:1, exp:{ml:"സബ്‌ഷെൽ വിന്യാസത്തിലെ ഏറ്റവും ഉയർന്ന n = 4 (4s ഉള്ളതിനാൽ, d-ബ്ലോക്കിൽ 4s എപ്പോഴും ഉണ്ടാകും) → പീരിയഡ് 4. (ഇത് കോബാൾട്ട്, Z=27 ആണ്: [Ar] 3d⁷ 4s²)", en:"The highest n in the configuration is 4 (since 4s is always present alongside 3d in d-block elements) → Period 4. (This is cobalt, Z=27: [Ar] 3d⁷ 4s².)"}},
+    {q:{ml:"Fe (Z=26) രാസപ്രവർത്തനത്തിൽ Fe³⁺ ആയി മാറുമ്പോൾ, ഏത് സബ്‌ഷെല്ലുകളിൽ നിന്നാണ് ആകെ 3 ഇലക്ട്രോണുകൾ നഷ്ടപ്പെടുന്നത്?", en:"When Fe (Z=26) forms Fe³⁺, from which sub-shells are the 3 electrons lost?"},
+     opts:[{ml:"3d ൽ നിന്ന് മാത്രം 3 ഇലക്ട്രോൺ", en:"All 3 from 3d only"},{ml:"4s ൽ നിന്ന് 2, 3d ൽ നിന്ന് 1", en:"2 from 4s, 1 from 3d"},{ml:"3p ൽ നിന്ന് 3", en:"3 from 3p"},{ml:"4s ൽ നിന്ന് 3", en:"3 from 4s"}],
+     correct:1, exp:{ml:"Fe: [Ar] 3d⁶ 4s². ബാഹ്യതമ 4s ലെ 2 ഇലക്ട്രോണുകൾ ആദ്യം നഷ്ടപ്പെടും, തുടർന്ന് 3d ൽ നിന്ന് ഒന്ന് കൂടി നഷ്ടപ്പെടും → Fe³⁺ = [Ar] 3d⁵.", en:"Fe: [Ar] 3d⁶ 4s². The 2 outer 4s electrons are lost first, then one more from 3d → Fe³⁺ = [Ar] 3d⁵."}},
+    {q:{ml:"Cr (Z=24) ന്റെ സ്ഥിരതയുള്ള സബ്‌ഷെൽ ഇലക്ട്രോൺ വിന്യാസം ഏത്?", en:"What is the stable sub-shell electron configuration of Cr (Z=24)?"},
+     opts:[{ml:"[Ar] 3d⁴ 4s²",en:"[Ar] 3d⁴ 4s²"},{ml:"[Ar] 3d⁵ 4s¹",en:"[Ar] 3d⁵ 4s¹"},{ml:"[Ar] 3d⁶",en:"[Ar] 3d⁶"},{ml:"[Ar] 3d³ 4s²",en:"[Ar] 3d³ 4s²"}],
+     correct:1, exp:{ml:"പകുതി നിറഞ്ഞ d⁵ ക്രമീകരണത്തിന്റെ അധിക സ്ഥിരത നേടാൻ 4s ൽ നിന്ന് 3d ലേക്ക് ഒരു ഇലക്ട്രോൺ നീങ്ങുന്നു → [Ar] 3d⁵ 4s¹.", en:"To gain the extra stability of a half-filled d⁵ configuration, one electron shifts from 4s to 3d → [Ar] 3d⁵ 4s¹."}},
+    {q:{ml:"[Ar] 3d² 4s² എന്ന വിന്യാസമുള്ള മൂലകം ഏത് ഗ്രൂപ്പിലാണ്?", en:"An element with configuration [Ar] 3d² 4s² belongs to which group?"},
+     opts:[{ml:"ഗ്രൂപ്പ് 2",en:"Group 2"},{ml:"ഗ്രൂപ്പ് 4",en:"Group 4"},{ml:"ഗ്രൂപ്പ് 12",en:"Group 12"},{ml:"ഗ്രൂപ്പ് 14",en:"Group 14"}],
+     correct:1, exp:{ml:"d ബ്ലോക്ക് ഗ്രൂപ്പ് നമ്പർ = 4s(2) + 3d(2) = 4 → ഗ്രൂപ്പ് 4 (ഇത് ടൈറ്റാനിയം, Ti ആണ്).", en:"d-block group number = 4s(2) + 3d(2) = 4 → Group 4 (this is titanium, Ti)."}},
+    {q:{ml:"[Ne] 3s² 3p⁶ എന്ന വിന്യാസമുള്ള മൂലകം ഏത് ബ്ലോക്കിലും ഏത് ഗ്രൂപ്പിലുമാണ്?", en:"An element with configuration [Ne] 3s² 3p⁶ is in which block and group?"},
+     opts:[{ml:"s ബ്ലോക്ക്, ഗ്രൂപ്പ് 2",en:"s-block, Group 2"},{ml:"p ബ്ലോക്ക്, ഗ്രൂപ്പ് 18",en:"p-block, Group 18"},{ml:"d ബ്ലോക്ക്, ഗ്രൂപ്പ് 8",en:"d-block, Group 8"},{ml:"p ബ്ലോക്ക്, ഗ്രൂപ്പ് 16",en:"p-block, Group 16"}],
+     correct:1, exp:{ml:"അവസാന ഇലക്ട്രോൺ 3p ൽ → p ബ്ലോക്ക്. s+p = 2+6 = 8 → 8+10 = ഗ്രൂപ്പ് 18 (ഇത് ആർഗൺ, Ar ആണ്).", en:"Last electron in 3p → p-block. s+p = 2+6 = 8 → 8+10 = Group 18 (this is argon, Ar)."}},
+    {q:{ml:"d ബ്ലോക്ക് മൂലകങ്ങളുടെ സംയുക്തങ്ങൾ പൊതുവേ നിറമുള്ളവയായിരിക്കാൻ കാരണം?", en:"Why are compounds of d-block elements generally coloured?"},
+     opts:[{ml:"അവ റേഡിയോ ആക്റ്റീവ് ആയതിനാൽ",en:"Because they are radioactive"},{ml:"ബാഹ്യതമ s ഉം തൊട്ടുള്ളിലെ d ഉം തമ്മിലുള്ള ഊർജവ്യത്യാസം കുറവായതിനാൽ d ഇലക്ട്രോണുകളും ബന്ധനത്തിൽ പങ്കെടുക്കുന്നു",en:"Because the small energy gap between outer s and inner d lets d-electrons also take part in bonding"},{ml:"അവയ്ക്ക് ns¹ വിന്യാസമുള്ളതിനാൽ",en:"Because they have ns¹ configuration"},{ml:"അവ ഖരാവസ്ഥയിൽ മാത്രം കാണപ്പെടുന്നതിനാൽ",en:"Because they exist only as solids"}],
+     correct:1, exp:{ml:"ഈ ഊർജസാമീപ്യമാണ് d ബ്ലോക്ക് മൂലകങ്ങളുടെ വ്യത്യസ്ത ഓക്സീകരണാവസ്ഥകൾക്കും നിറമുള്ള സംയുക്തങ്ങൾക്കും കാരണം.", en:"This closeness in energy is why d-block elements show variable oxidation states and form coloured compounds."}},
+    {q:{ml:"6-ാം പീരിയഡിലെ f ബ്ലോക്ക് മൂലകങ്ങൾ ഏത് പേരിൽ അറിയപ്പെടുന്നു?", en:"What are the f-block elements of period 6 called?"},
+     opts:[{ml:"ആക്റ്റിനോയ്ഡുകൾ",en:"Actinoids"},{ml:"ലാന്ഥനോയ്ഡുകൾ",en:"Lanthanoids"},{ml:"സംക്രമണ മൂലകങ്ങൾ",en:"Transition elements"},{ml:"ഉൽക്കൃഷ്ട വാതകങ്ങൾ",en:"Noble gases"}],
+     correct:1, exp:{ml:"6-ാം പീരിയഡിലെ f ബ്ലോക്ക് മൂലകങ്ങൾ ലാന്ഥനോയ്ഡുകൾ എന്നും, 7-ാം പീരിയഡിലേത് ആക്റ്റിനോയ്ഡുകൾ എന്നും അറിയപ്പെടുന്നു.", en:"Period 6 f-block elements are lanthanoids; period 7 f-block elements are actinoids."}},
+    {q:{ml:"s ബ്ലോക്കിനെയും p ബ്ലോക്കിനെയും താരതമ്യം ചെയ്യുമ്പോൾ, ഏതിനാണ് പൊതുവേ അയോണീകരണ എൻഥാൽപി കുറവ്?", en:"Comparing s-block and p-block, which generally has lower ionisation enthalpy?"},
+     opts:[{ml:"s ബ്ലോക്ക്",en:"s-block"},{ml:"p ബ്ലോക്ക്",en:"p-block"},{ml:"ഇരുവർക്കും തുല്യം",en:"Both equal"},{ml:"താരതമ്യം സാധ്യമല്ല",en:"Cannot be compared"}],
+     correct:0, exp:{ml:"s ബ്ലോക്ക് മൂലകങ്ങൾ (പ്രത്യേകിച്ച് ആൽക്കലി ലോഹങ്ങൾ) പൊതുവേ p ബ്ലോക്ക് മൂലകങ്ങളേക്കാൾ കുറഞ്ഞ അയോണീകരണ എൻഥാൽപി പ്രകടിപ്പിക്കുന്നു.", en:"s-block elements (especially alkali metals) generally have lower ionisation enthalpy than p-block elements."}}
+  ]
+};
+
+let state = {1:{}, 2:{}, submitted:{1:false,2:false}};
+
+function renderPart(n){
+  const el = document.getElementById('part'+n);
+  el.innerHTML = '';
+  QUIZ[n].forEach((item, idx)=>{
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    const letters = ['A','B','C','D'];
+    card.innerHTML = `
+      <span class="qnum">${idx+1} / ${QUIZ[n].length}</span>
+      <p class="qtext"><span class="ml">${item.q.ml}</span><span class="en">${item.q.en}</span></p>
+      <div class="opts" data-part="${n}" data-idx="${idx}">
+        ${item.opts.map((o,oi)=>`
+          <div class="opt" data-oi="${oi}" onclick="selectOpt(${n},${idx},${oi})">
+            <span class="letter">${letters[oi]}</span>
+            <span><span class="ml">${o.ml}</span><span class="en">${o.en}</span></span>
+          </div>`).join('')}
+      </div>
+      <div class="explain" id="exp-${n}-${idx}"><span class="ml">${item.exp.ml}</span><span class="en">${item.exp.en}</span></div>
+    `;
+    el.appendChild(card);
+  });
+  const bar = document.createElement('div');
+  bar.className = 'submit-bar';
+  bar.innerHTML = `<button class="submit-btn" id="submit-${n}" onclick="submitPart(${n})" disabled>
+    <span class="ml">സമർപ്പിക്കൂ</span><span class="en">Submit</span>
+  </button>`;
+  el.appendChild(bar);
+  const result = document.createElement('div');
+  result.id = 'result-'+n;
+  el.appendChild(result);
+}
+
+function selectOpt(n, idx, oi){
+  if(state.submitted[n]) return;
+  state[n][idx] = oi;
+  const group = document.querySelector(`.opts[data-part="${n}"][data-idx="${idx}"]`);
+  group.querySelectorAll('.opt').forEach(o=> o.classList.toggle('selected', +o.dataset.oi===oi));
+  const answered = Object.keys(state[n]).length;
+  document.getElementById('submit-'+n).disabled = answered < QUIZ[n].length;
+}
+
+function submitPart(n){
+  let score = 0;
+  QUIZ[n].forEach((item, idx)=>{
+    const group = document.querySelector(`.opts[data-part="${n}"][data-idx="${idx}"]`);
+    const chosen = state[n][idx];
+    group.querySelectorAll('.opt').forEach(o=>{
+      const oi = +o.dataset.oi;
+      if(oi===item.correct) o.classList.add('correct');
+      else if(oi===chosen) o.classList.add('incorrect');
+      o.style.pointerEvents='none';
+    });
+    document.getElementById(`exp-${n}-${idx}`).classList.add('show');
+    if(chosen===item.correct) score++;
+  });
+  state.submitted[n] = true;
+  document.getElementById('submit-'+n).style.display='none';
+  const pct = Math.round((score/QUIZ[n].length)*100);
+  document.getElementById('result-'+n).innerHTML = `
+    <div class="result-card">
+      <p class="ml">നിങ്ങളുടെ സ്കോർ</p><p class="en">Your score</p>
+      <div class="score">${score} / ${QUIZ[n].length}</div>
+      <p>${pct}% ${pct>=70?'🎉':pct>=40?'👍':'💪'}</p>
+      <button class="retry-btn" onclick="retryPart(${n})"><span class="ml">വീണ്ടും ശ്രമിക്കൂ</span><span class="en">Try again</span></button>
+    </div>`;
+  window.scrollTo({top: document.getElementById('result-'+n).offsetTop-20, behavior:'smooth'});
+}
+
+function retryPart(n){
+  state[n] = {}; state.submitted[n]=false;
+  renderPart(n);
+}
+
+function showPart(n){
+  document.getElementById('part1').classList.toggle('active', n===1);
+  document.getElementById('part2').classList.toggle('active', n===2);
+  document.getElementById('tab1').classList.toggle('active', n===1);
+  document.getElementById('tab2').classList.toggle('active', n===2);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function setLang(l){
+  document.body.className = 'lang-'+l;
+  document.getElementById('btn-ml').classList.toggle('active', l==='ml');
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+}
+
+renderPart(1); renderPart(2);
+</script>
+</body>
+</html>
