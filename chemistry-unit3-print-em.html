@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 3 Print Notes (EM) | Abacus Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{ --ink:#111; --gray:#555; --line:#999; --line-lt:#ccc; }
+*{box-sizing:border-box;}
+body{ margin:0; background:#e9e9e9; color:var(--ink); font-family:'Inter',sans-serif; }
+
+.toolbar{ position:sticky;top:0;z-index:20;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:10px;background:#222;color:#fff; }
+.toolbar a.back{ color:#fff;text-decoration:none;font-size:13px;border:1px solid #555;padding:8px 15px;border-radius:6px; }
+.toolbar button{ background:#fff;color:#111;border:none;padding:9px 20px;border-radius:6px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit; }
+.toolbar .hint{ align-self:center;font-size:11.5px;color:#ccc; }
+.toolbar .medium-link{ color:#9ad; text-decoration:none;font-size:12.5px;align-self:center; }
+
+.sheet{ width:210mm;margin:16px auto;background:#fff;padding:12mm 14mm;box-shadow:0 2px 14px rgba(0,0,0,.25); }
+
+.doc-header{ display:flex;align-items:center;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:2px; }
+.doc-logo{ flex:none;width:44px;height:44px;border:2px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px; }
+.doc-headtext .aname{ font-weight:800;font-size:16.5px; }
+.doc-headtext .tagline{ font-size:10px;color:var(--gray); }
+.doc-meta{ margin-left:auto;text-align:right;font-size:10.5px;color:var(--gray);line-height:1.4; }
+
+.title-banner{ text-align:center;border:1.4px solid var(--ink);border-radius:5px;padding:7px 12px;margin:9px 0 12px; }
+.title-banner .unit{ font-size:9.5px;letter-spacing:.07em;color:var(--gray);text-transform:uppercase; }
+.title-banner h1{ margin:2px 0 0;font-size:16.5px; }
+
+h2.sec{ font-size:13px;border-bottom:1.3px solid var(--ink);padding-bottom:3px;margin:13px 0 5px;display:flex;align-items:baseline;gap:7px;break-after:avoid; page-break-after:avoid; }
+h2.sec .n{ flex:none;width:17px;height:17px;border:1.2px solid var(--ink);border-radius:3px;display:inline-flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:800; }
+h3.sub{ font-size:11.5px;font-weight:700;margin:8px 0 3px; }
+p{ font-size:11px;line-height:1.5;margin:3px 0; }
+ul,ol{ font-size:11px;line-height:1.48;margin:3px 0;padding-left:16px; }
+
+table{ width:100%;border-collapse:collapse;margin:5px 0 9px;font-size:10.5px; }
+th,td{ border:1px solid var(--ink);padding:3.5px 6px;text-align:center; }
+th{ background:#eee;font-weight:700; }
+
+.box{ border:1.2px solid var(--ink);border-radius:4px;padding:6px 10px;margin:6px 0;font-size:10.8px; }
+.box.note{ border-style:dashed; }
+.formula{ font-family:'Inter',monospace;font-weight:700;border:1px solid var(--ink);border-radius:3px;padding:1.5px 6px;margin:1.5px 3px 1.5px 0;display:inline-block;font-size:10.8px; }
+
+.mini-grid{ display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin:6px 0; }
+.mini-grid .cell{ border:1px solid var(--ink);border-radius:4px;padding:4px;text-align:center; }
+.mini-grid .cell .k{ font-weight:800;font-size:14px; }
+.mini-grid .cell .l{ font-size:8px;color:var(--gray);margin-top:1px; }
+
+.block-map{ display:grid;grid-template-columns:repeat(18,1fr);grid-auto-rows:14px;gap:1.2px;margin:6px 0; }
+.block-map .cell{ border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:6.5px;font-weight:700; }
+.block-map .empty{ border:none; }
+.block-map .b-s{ background:#ddd; } .block-map .b-p{ background:#bbb; } .block-map .b-d{ background:#888;color:#fff; }
+.legend{ display:flex;flex-wrap:wrap;gap:9px;font-size:8.5px;color:var(--gray);margin-top:2px; }
+.legend i{ width:9px;height:9px;display:inline-block;border:1px solid var(--ink);margin-right:2px;vertical-align:-1px; }
+
+.avoid-break{ break-inside:avoid; page-break-inside:avoid; }
+.doc-end{ margin-top:16px;padding-top:6px;border-top:1px solid var(--line-lt);display:flex;justify-content:space-between;font-size:9px;color:var(--gray); }
+
+@media print{
+  body{ background:#fff; }
+  .toolbar{ display:none!important; }
+  .sheet{ width:auto;margin:0;padding:0;box-shadow:none; }
+  @page{ size:A4;margin:10mm 12mm; }
+  h2.sec{ break-inside:avoid; }
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <a class="back" href="chemistry-unit3.html">&larr; Back to study</a>
+  <button onclick="window.print()">Print</button>
+  <a class="medium-link" href="chemistry-unit3-print-mm.html">Switch to Malayalam Medium</a>
+  <span class="hint">B&amp;W · A4 · compact layout — turn off "background graphics" for cleanest copy</span>
+</div>
+
+<div class="sheet">
+  <div class="doc-header">
+    <div class="doc-logo">Aa</div>
+    <div class="doc-headtext">
+      <div class="aname">ABACUS ACADEMY</div>
+      <div class="tagline">Learn from the best teachers</div>
+    </div>
+    <div class="doc-meta">SSLC Chemistry — English Medium<br>Unit 3 · Print Notes</div>
+  </div>
+
+  <div class="title-banner">
+    <div class="unit">Unit 3 · Chemistry Standard 10</div>
+    <h1>Periodic Table &amp; Electron Configuration — Revision Notes</h1>
+  </div>
+
+  <h2 class="sec"><span class="n">1</span>Quantum Numbers</h2>
+  <p>Quantum numbers describe the properties of orbitals and electrons based on quantum mechanics.</p>
+  <h3 class="sub">1. Principal Quantum Number (n) — represents the shell</h3>
+  <table><tr><th>n</th><td>1</td><td>2</td><td>3</td><td>4</td></tr><tr><th>Shell</th><td>K</td><td>L</td><td>M</td><td>N</td></tr></table>
+  <h3 class="sub">2. Azimuthal Quantum Number (l) — represents the sub-shell (shape)</h3>
+  <p><span class="formula">l=0 → s</span><span class="formula">l=1 → p</span><span class="formula">l=2 → d</span><span class="formula">l=3 → f</span></p>
+  <div class="box note">Rule: l ranges from 0 to (n−1).</div>
+  <h3 class="sub">3. Magnetic Quantum Number (m) — orbital orientation</h3>
+  <p><span class="formula">m = (2l+1) values</span></p>
+  <div class="mini-grid">
+    <div class="cell"><div class="k">s</div><div class="l">1 orbital</div></div>
+    <div class="cell"><div class="k">p</div><div class="l">3 orbitals</div></div>
+    <div class="cell"><div class="k">d</div><div class="l">5 orbitals</div></div>
+    <div class="cell"><div class="k">f</div><div class="l">7 orbitals</div></div>
+  </div>
+  <p style="font-size:9.5px;color:var(--gray)">Every orbital holds a maximum of 2 electrons.</p>
+
+  <h2 class="sec"><span class="n">2</span>Shells &amp; Sub-shells — Capacity</h2>
+  <div class="mini-grid">
+    <div class="cell"><div class="k">n²</div><div class="l">orbitals per shell</div></div>
+    <div class="cell"><div class="k">2n²</div><div class="l">max e⁻ per shell</div></div>
+    <div class="cell"><div class="k">2(2l+1)</div><div class="l">max e⁻ per sub-shell</div></div>
+    <div class="cell"><div class="k">2</div><div class="l">max e⁻ per orbital</div></div>
+  </div>
+  <table><tr><th>Sub-shell</th><td>s</td><td>p</td><td>d</td><td>f</td></tr><tr><th>Max e⁻</th><td>2</td><td>6</td><td>10</td><td>14</td></tr></table>
+  <table><tr><th>K</th><th>L</th><th>M</th><th>N</th></tr><tr><td>2</td><td>8</td><td>18</td><td>32</td></tr></table>
+
+  <h2 class="sec"><span class="n">3</span>Rules for Filling Electrons — Aufbau Principle</h2>
+  <p>Electrons fill sub-shells in order of increasing energy — lowest to highest.</p>
+  <h3 class="sub">The (n + l) Rule</h3>
+  <p>Sub-shells are ordered by increasing (n+l). If two are equal, the one with smaller n has lower energy.</p>
+  <div class="box" style="text-align:center;font-weight:700;">1s &lt; 2s &lt; 2p &lt; 3s &lt; 3p &lt; 4s &lt; 3d &lt; 4p &lt; 5s &lt; 4d &lt; 5p &lt; 6s &lt; 4f &lt; 5d &lt; 6p &lt; 7s &lt; 5f &lt; 6d</div>
+  <div class="box note">Note: 4s always fills before 3d — and 4s electrons are lost first when forming ions.</div>
+
+  <h2 class="sec avoid-break"><span class="n">4</span>Writing Electron Configurations</h2>
+  <table>
+    <tr><th>Element</th><th>Z</th><th>Configuration</th></tr>
+    <tr><td>H</td><td>1</td><td>1s¹</td></tr><tr><td>He</td><td>2</td><td>1s²</td></tr>
+    <tr><td>Li</td><td>3</td><td>1s² 2s¹</td></tr><tr><td>Be</td><td>4</td><td>1s² 2s²</td></tr>
+    <tr><td>B</td><td>5</td><td>1s² 2s² 2p¹</td></tr><tr><td>C</td><td>6</td><td>1s² 2s² 2p²</td></tr>
+    <tr><td>N</td><td>7</td><td>1s² 2s² 2p³</td></tr><tr><td>O</td><td>8</td><td>1s² 2s² 2p⁴</td></tr>
+    <tr><td>F</td><td>9</td><td>1s² 2s² 2p⁵</td></tr><tr><td>Ne</td><td>10</td><td>1s² 2s² 2p⁶</td></tr>
+    <tr><td>Na</td><td>11</td><td>[Ne] 3s¹</td></tr><tr><td>K</td><td>19</td><td>[Ar] 4s¹</td></tr>
+    <tr><td>Ca</td><td>20</td><td>[Ar] 4s²</td></tr><tr><td>Sc</td><td>21</td><td>[Ar] 4s² 3d¹</td></tr>
+  </table>
+  <p style="font-size:9.5px;color:var(--gray)">Noble gas core notation: write the preceding noble gas symbol in [ ], then only the remaining sub-shells.</p>
+
+  <h2 class="sec avoid-break"><span class="n">5</span>Exceptions: Cr &amp; Cu</h2>
+  <p>Half-filled (d⁵) and fully-filled (d¹⁰) configurations are extra stable.</p>
+  <table>
+    <tr><th>Element</th><th>Expected</th><th>Actual (stable)</th></tr>
+    <tr><td>Cr (Z=24)</td><td>[Ar] 3d⁴ 4s²</td><td><b>[Ar] 3d⁵ 4s¹</b></td></tr>
+    <tr><td>Cu (Z=29)</td><td>[Ar] 3d⁹ 4s²</td><td><b>[Ar] 3d¹⁰ 4s¹</b></td></tr>
+  </table>
+
+  <h2 class="sec avoid-break"><span class="n">6</span>Finding the Block (s, p, d, f)</h2>
+  <p>The block is decided by the sub-shell in which the last electron is filled.</p>
+  <div class="block-map">
+    <div class="cell b-s">1</div><div class="cell empty"></div>
+    <div class="cell empty" style="grid-column:span 10"></div>
+    <div class="cell b-p">13</div><div class="cell b-p">14</div><div class="cell b-p">15</div><div class="cell b-p">16</div><div class="cell b-p">17</div><div class="cell b-p">18</div>
+    <div class="cell b-s">2</div><div class="cell empty" style="grid-column:span 10"></div>
+    <div class="cell empty" style="grid-column:span 6"></div>
+    <div class="cell b-s">3</div><div class="cell b-s">4</div>
+    <div class="cell b-d">5</div><div class="cell b-d">6</div><div class="cell b-d">7</div><div class="cell b-d">8</div><div class="cell b-d">9</div><div class="cell b-d">10</div><div class="cell b-d">11</div><div class="cell b-d">12</div>
+    <div class="cell b-p">13</div><div class="cell b-p">14</div><div class="cell b-p">15</div><div class="cell b-p">16</div><div class="cell b-p">17</div><div class="cell b-p">18</div>
+  </div>
+  <div class="legend"><span><i style="background:#ddd"></i>s (groups 1,2)</span><span><i style="background:#bbb"></i>p (groups 13–18)</span><span><i style="background:#888"></i>d (groups 3–12)</span></div>
+  <div class="box">_8O: 1s² 2s² 2p⁴ → last e⁻ in 2p → <b>p-block</b> &nbsp;·&nbsp; _21Sc: [Ar] 3d¹ 4s² → last e⁻ in 3d → <b>d-block</b></div>
+
+  <h2 class="sec avoid-break"><span class="n">7</span>Period &amp; Group Number</h2>
+  <p><b>Period:</b> the highest shell number (n) in the configuration.</p>
+  <table>
+    <tr><th>Block</th><th>How to find group number</th></tr>
+    <tr><td>s</td><td>outer s electrons = group number</td></tr>
+    <tr><td>p</td><td>(outer s+p electrons) + 10 = group number</td></tr>
+    <tr><td>d</td><td>(outer s + inner d electrons) = group number</td></tr>
+  </table>
+
+  <h2 class="sec"><span class="n">8</span>Ionisation Enthalpy — Periodic Trend</h2>
+  <p>The minimum energy needed to remove the most loosely bound electron from an isolated gaseous atom.</p>
+  <table>
+    <tr><th>Down a group</th><th>Across a period</th></tr>
+    <tr><td>Shells increase → enthalpy <b>decreases</b></td><td>Nuclear charge increases → enthalpy <b>increases</b></td></tr>
+  </table>
+  <p style="font-size:9.5px;color:var(--gray)">Lowest ionisation enthalpy — Caesium, Francium.</p>
+
+  <h2 class="sec avoid-break"><span class="n">9</span>Block-wise Properties</h2>
+  <table>
+    <tr><th>Block</th><th>Outer config</th><th>Properties</th></tr>
+    <tr><td>s</td><td>ns¹⁻²</td><td>Alkali/alkaline earth metals; +1/+2 oxidation state</td></tr>
+    <tr><td>p</td><td>ns² np¹⁻⁶</td><td>Metals, non-metals, metalloids; +/− oxidation states</td></tr>
+    <tr><td>d</td><td>(n−1)d¹⁻¹⁰ns¹⁻²</td><td>Transition metals; variable oxidation states; coloured compounds</td></tr>
+    <tr><td>f</td><td>(n−2)f¹⁻¹⁴</td><td>Inner transition (lanthanoid/actinoid); radioactive</td></tr>
+  </table>
+
+  <div class="box note">For practice, try Quiz Part 1 &amp; 2 on the digital portal — chemistry-unit3-quiz.html</div>
+
+  <div class="doc-end">
+    <span>ABACUS ACADEMY</span>
+    <span>Unit 3 — Periodic Table &amp; Electron Configuration (EM)</span>
+  </div>
+</div>
+</body>
+</html>

@@ -219,7 +219,7 @@ tr:hover td{background:rgba(79,216,201,.04);}
     <button id="btn-ml" class="active" onclick="setLang('ml')">മലയാളം</button>
     <button id="btn-en" onclick="setLang('en')">English</button>
   </div>
-  <a class="print-btn" href="chemistry-unit3-print.html" style="text-decoration:none;display:inline-block;">
+  <a class="print-btn" id="printLink" href="chemistry-unit3-print-mm.html" style="text-decoration:none;display:inline-block;">
     <span class="ml">പ്രിന്റ്</span><span class="en">Print</span>
   </a>
 </div>
@@ -588,6 +588,7 @@ function setLang(l){
   document.body.className = 'lang-'+l;
   document.getElementById('btn-ml').classList.toggle('active', l==='ml');
   document.getElementById('btn-en').classList.toggle('active', l==='en');
+  document.getElementById('printLink').href = (l==='ml') ? 'chemistry-unit3-print-mm.html' : 'chemistry-unit3-print-em.html';
 }
 
 buildNav();
