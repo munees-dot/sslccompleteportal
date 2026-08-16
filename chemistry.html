@@ -42,6 +42,9 @@
   .unit-title{ font-family:'Noto Sans Malayalam', sans-serif; font-weight:600; font-size:16.5px; color:var(--ink); }
   .unit-title-en{ font-size:16.5px; font-weight:600; color:var(--ink-soft); margin-top:2px; }
   .go{ font-size:13px; color:var(--accent); font-weight:600; }
+  .extras{ display:flex; gap:8px; margin-top:8px; grid-column:2 / -1; }
+  .extra-tag{ font-family:'Poppins',sans-serif; font-size:11px; font-weight:600; padding:4px 10px; border-radius:20px; border:1px solid var(--ring); color:var(--ink-soft); }
+  .extra-tag:hover{ border-color:var(--accent); color:var(--accent); background:var(--accent-soft); }
 
   @media (max-width:560px){ .toc-row{ grid-template-columns:34px 1fr; } .go{ display:none; } h1{ font-size:28px; } }
 </style>
@@ -83,14 +86,20 @@
       <span class="go">Start &#8594;</span>
     </a>
 
-    <a class="toc-row" href="chemistry-unit3.html">
-      <span class="num">3</span>
-      <div>
-        <div class="unit-title ml">പീരിയോഡിക് ടേബിളും ഇലക്ട്രോൺ വിന്യാസവും</div>
-        <div class="unit-title-en">Periodic Table and Electron Configuration</div>
+    <div class="toc-row" style="cursor:default;">
+      <a class="row-link" href="chemistry-unit3.html" style="display:contents;">
+        <span class="num">3</span>
+        <div>
+          <div class="unit-title ml">പീരിയോഡിക് ടേബിളും ഇലക്ട്രോൺ വിന്യാസവും</div>
+          <div class="unit-title-en">Periodic Table and Electron Configuration</div>
+        </div>
+        <span class="go">Start &#8594;</span>
+      </a>
+      <div class="extras">
+        <a class="extra-tag" href="chemistry-unit3-quiz.html">📝 Quiz</a>
+        <a class="extra-tag" href="chemistry-unit3-print.html">🖨️ Print</a>
       </div>
-      <span class="go">Start &#8594;</span>
-    </a>
+    </div>
 
     <a class="toc-row" href="chemistry-unit4.html">
       <span class="num">4</span>
