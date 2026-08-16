@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ക്വിസ് — യൂണിറ്റ് 4 | Abacus Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-950:#080c17; --navy-900:#0d1428; --navy-800:#131c38; --navy-700:#1c2a4f;
+  --shell-cyan:#4fd8c9; --shell-cyan-dim:#2a5f5a; --orbit-amber:#f2b64d; --nucleus-rose:#ef6f6f;
+  --ok:#4fd88a; --bad:#ef6f6f;
+  --ink-0:#f4f7fb; --ink-1:#c3ccdc; --ink-2:#8894ac; --line:#233256; --radius:14px;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:radial-gradient(1100px 600px at 85% -10%, rgba(79,216,201,.10), transparent 60%),radial-gradient(900px 500px at -10% 20%, rgba(242,182,77,.08), transparent 55%),var(--navy-950);color:var(--ink-0);font-family:'Inter',sans-serif;min-height:100vh;}
+body.lang-ml .en{display:none;} body.lang-en .ml{display:none;}
+.ml{font-family:'Noto Sans Malayalam','Inter',sans-serif;}
+h1,h2,h3{font-family:'Sora','Noto Sans Malayalam',sans-serif;}
+body.lang-ml h1,body.lang-ml h2,body.lang-ml h3{font-family:'Noto Sans Malayalam',sans-serif;}
+
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;padding:12px 22px;background:rgba(8,12,23,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.brand{display:flex;align-items:center;gap:10px;flex:1;min-width:0;}
+.brand-mark{width:36px;height:36px;border-radius:10px;flex:none;background:conic-gradient(from 210deg, var(--shell-cyan), var(--orbit-amber), var(--nucleus-rose), var(--shell-cyan));display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:800;font-size:15px;color:var(--navy-950);}
+.brand-text b{display:block;font-family:'Sora',sans-serif;font-size:14.5px;}
+.brand-text span{display:block;font-size:11px;color:var(--ink-2);}
+.lang-toggle{display:flex;background:var(--navy-800);border:1px solid var(--line);border-radius:999px;padding:3px;}
+.lang-toggle button{border:none;background:transparent;color:var(--ink-2);font-weight:600;font-size:12.5px;padding:6px 13px;border-radius:999px;cursor:pointer;}
+.lang-toggle button.active{background:var(--shell-cyan);color:var(--navy-950);}
+.back-link{flex:none;color:var(--ink-1);text-decoration:none;font-size:13px;border:1px solid var(--line);padding:8px 14px;border-radius:999px;background:var(--navy-800);}
+
+.wrap{max-width:760px;margin:0 auto;padding:34px 20px 80px;}
+.hero{text-align:center;margin-bottom:26px;}
+.hero h1{font-size:clamp(22px,4vw,32px);margin:8px 0 8px;background:linear-gradient(90deg,var(--ink-0),var(--shell-cyan) 60%,var(--orbit-amber));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero p{color:var(--ink-1);font-size:14.5px;}
+
+.part-tabs{display:flex;gap:10px;justify-content:center;margin:18px 0 26px;}
+.part-tabs button{padding:10px 20px;border-radius:999px;border:1px solid var(--line);background:var(--navy-800);color:var(--ink-1);font-weight:600;font-size:13.5px;cursor:pointer;font-family:inherit;}
+.part-tabs button.active{background:var(--shell-cyan);color:var(--navy-950);border-color:var(--shell-cyan);}
+.part-tabs button .badge{display:inline-block;margin-left:6px;font-size:11px;opacity:.85;}
+
+.part{display:none;} .part.active{display:block;}
+
+.q-card{background:linear-gradient(180deg,var(--navy-800),var(--navy-900));border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-bottom:14px;}
+.q-card .qnum{font-family:'Sora',sans-serif;font-size:11px;color:var(--shell-cyan);border:1px solid var(--shell-cyan-dim);background:rgba(79,216,201,.08);padding:3px 9px;border-radius:999px;display:inline-block;margin-bottom:10px;}
+.q-card p.qtext{font-size:15px;color:var(--ink-0);margin:0 0 14px;line-height:1.6;}
+.opts{display:flex;flex-direction:column;gap:8px;}
+.opt{display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:10px;border:1px solid var(--line);background:var(--navy-950);cursor:pointer;font-size:14px;color:var(--ink-1);transition:.15s;}
+.opt:hover{border-color:var(--shell-cyan-dim);}
+.opt.selected{border-color:var(--shell-cyan);background:rgba(79,216,201,.08);color:var(--ink-0);}
+.opt.correct{border-color:var(--ok);background:rgba(79,216,138,.12);color:var(--ink-0);}
+.opt.incorrect{border-color:var(--bad);background:rgba(239,111,111,.12);color:var(--ink-0);}
+.opt .letter{flex:none;width:22px;height:22px;border-radius:6px;background:var(--navy-800);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--ink-2);}
+.explain{display:none;margin-top:12px;padding:10px 12px;border-left:3px solid var(--orbit-amber);background:rgba(242,182,77,.07);border-radius:0 8px 8px 0;font-size:13px;color:var(--ink-1);}
+.explain.show{display:block;}
+
+.submit-bar{position:sticky;bottom:16px;display:flex;justify-content:center;margin-top:20px;}
+.submit-btn{background:var(--shell-cyan);color:var(--navy-950);font-weight:700;font-size:14.5px;padding:13px 32px;border-radius:999px;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(79,216,201,.25);}
+.submit-btn:disabled{opacity:.5;cursor:not-allowed;}
+
+.result-card{text-align:center;background:linear-gradient(120deg,rgba(79,216,201,.12),rgba(242,182,77,.10));border:1px solid var(--shell-cyan-dim);border-radius:var(--radius);padding:28px;margin-top:10px;}
+.result-card .score{font-family:'Sora',sans-serif;font-size:42px;font-weight:800;color:var(--shell-cyan);margin:6px 0;}
+.result-card p{color:var(--ink-1);font-size:14px;}
+.retry-btn{margin-top:14px;background:var(--navy-800);border:1px solid var(--line);color:var(--ink-0);padding:10px 20px;border-radius:999px;cursor:pointer;font-weight:600;font-size:13.5px;}
+
+/* time gate */
+.gate-note{
+  display:flex;align-items:center;justify-content:center;gap:8px;margin:0 0 20px;
+  font-size:12.5px;color:var(--ink-2);border:1px solid var(--line);background:var(--navy-800);
+  padding:8px 16px;border-radius:999px;
+}
+.gate-note b{color:var(--orbit-amber);}
+.locked-wrap{display:flex;align-items:center;justify-content:center;min-height:60vh;text-align:center;padding:20px;}
+.locked-card{max-width:420px;}
+.locked-card .lock-icon{font-size:44px;margin-bottom:14px;}
+.locked-card h2{font-size:20px;margin:0 0 10px;}
+.locked-card p{color:var(--ink-1);font-size:14px;line-height:1.7;margin:0 0 22px;}
+.countdown{
+  display:flex;gap:10px;justify-content:center;margin-bottom:22px;
+}
+.countdown .box{background:var(--navy-800);border:1px solid var(--line);border-radius:10px;padding:12px 16px;min-width:64px;}
+.countdown .box .n{font-family:'Sora',sans-serif;font-size:26px;font-weight:800;color:var(--shell-cyan);}
+.countdown .box .l{font-size:10.5px;color:var(--ink-2);margin-top:2px;text-transform:uppercase;letter-spacing:.04em;}
+.locked-card .window-info{font-size:12.5px;color:var(--ink-2);border-top:1px solid var(--line);padding-top:14px;}
+</style>
+</head>
+<body class="lang-ml">
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-mark">Aa</div>
+    <div class="brand-text">
+      <b>Abacus Academy</b>
+      <span class="ml">യൂണിറ്റ് 4 ക്വിസ്</span><span class="en">Unit 4 Quiz</span>
+    </div>
+  </div>
+  <div class="lang-toggle">
+    <button id="btn-ml" class="active" onclick="setLang('ml')">മലയാളം</button>
+    <button id="btn-en" onclick="setLang('en')">English</button>
+  </div>
+  <a class="back-link" href="chemistry-unit4.html"><span class="ml">← പഠനത്തിലേക്ക്</span><span class="en">← Back to study</span></a>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <h1><span class="ml">വാതകനിയമങ്ങളും മോൾ സങ്കല്പനവും</span><span class="en">Gas Laws & the Mole Concept</span></h1>
+    <p class="ml">രണ്ട് ഭാഗങ്ങൾ — ഭാഗം 1 അടിസ്ഥാനം, ഭാഗം 2 പ്രയോഗതലം. ഓരോ ഭാഗവും വെവ്വേറെ സ്കോർ ചെയ്യാം.</p>
+    <p class="en">Two parts — Part 1 is basics, Part 2 is application-level. Each part is scored separately.</p>
+  </div>
+
+  <div class="part-tabs">
+    <button id="tab1" class="active" onclick="showPart(1)"><span class="ml">ഭാഗം 1</span><span class="en">Part 1</span><span class="badge ml">· അടിസ്ഥാനം</span><span class="badge en">· Basics</span></button>
+    <button id="tab2" onclick="showPart(2)"><span class="ml">ഭാഗം 2</span><span class="en">Part 2</span><span class="badge ml">· പ്രയോഗം</span><span class="badge en">· Application</span></button>
+  </div>
+
+  <div class="gate-note">
+    <span>🕘</span>
+    <span class="ml">ക്വിസ് ദിവസവും രാത്രി <b>9 മണി മുതൽ 12 മണി വരെ</b> മാത്രം തുറന്നിരിക്കും</span>
+    <span class="en">Quiz is open daily from <b>9 PM to midnight</b> only</span>
+  </div>
+
+  <div id="lockedScreen" class="locked-wrap" style="display:none;">
+    <div class="locked-card">
+      <div class="lock-icon">🔒</div>
+      <h2><span class="ml">ക്വിസ് ഇപ്പോൾ അടച്ചിരിക്കുന്നു</span><span class="en">Quiz is closed right now</span></h2>
+      <p class="ml">ദിവസവും രാത്രി 9 മണി മുതൽ 12 മണി വരെ മാത്രമേ ക്വിസ് ലഭ്യമാകൂ. ചുവടെ കാണിച്ചിരിക്കുന്ന സമയം കഴിഞ്ഞാൽ ഇത് സ്വയം തുറക്കും.</p>
+      <p class="en">The quiz is available only from 9 PM to midnight, every day. It will unlock automatically when the countdown below ends.</p>
+      <div class="countdown" id="countdown">
+        <div class="box"><div class="n" id="cdH">00</div><div class="l ml">മണിക്കൂർ</div></div>
+        <div class="box"><div class="n" id="cdM">00</div><div class="l ml">മിനിറ്റ്</div></div>
+        <div class="box"><div class="n" id="cdS">00</div><div class="l ml">സെക്കൻഡ്</div></div>
+      </div>
+      <div class="window-info ml">തുറക്കുന്ന സമയം: രാത്രി 9:00 &nbsp;|&nbsp; അടയ്ക്കുന്ന സമയം: രാത്രി 12:00</div>
+    </div>
+  </div>
+
+  <div id="quizContent">
+  <div id="part1" class="part active"></div>
+  <div id="part2" class="part"></div>
+  </div>
+</div>
+
+<script>
+const QUIZ = {
+  1: [
+    {q:{ml:"വാതക തന്മാത്രകൾ തമ്മിലുള്ള ആകർഷണബലം എങ്ങനെയാണ്?", en:"How strong is the attraction between gas molecules?"},
+     opts:[{ml:"വളരെ കൂടുതൽ",en:"Very strong"},{ml:"വളരെ കുറവ്",en:"Very weak"},{ml:"മിതമായത്",en:"Moderate"},{ml:"ഒന്നുമില്ല, വികർഷണം മാത്രം",en:"None — only repulsion"}],
+     correct:1, exp:{ml:"ഗതികതന്മാത്രാ സിദ്ധാന്തം അനുസരിച്ച് വാതക തന്മാത്രകൾ തമ്മിലുള്ള ആകർഷണബലം വളരെ കുറവാണ്.", en:"By the kinetic theory, the attraction between gas molecules is very weak."}},
+    {q:{ml:"മർദത്തിന്റെ SI യൂണിറ്റ് ഏത്?", en:"What is the SI unit of pressure?"},
+     opts:[{ml:"atm",en:"atm"},{ml:"Pascal (Pa)",en:"Pascal (Pa)"},{ml:"Litre",en:"Litre"},{ml:"Kelvin",en:"Kelvin"}],
+     correct:1, exp:{ml:"മർദത്തിന്റെ SI യൂണിറ്റ് പാസ്കൽ (Pa = N/m²) ആണ്.", en:"The SI unit of pressure is the Pascal (Pa = N/m²)."}},
+    {q:{ml:"1 atm എത്ര Pa ആണ്?", en:"1 atm equals how many Pa?"},
+     opts:[{ml:"1.01325 × 10³ Pa",en:"1.01325 × 10³ Pa"},{ml:"1.01325 × 10⁵ Pa",en:"1.01325 × 10⁵ Pa"},{ml:"1.01325 × 10⁷ Pa",en:"1.01325 × 10⁷ Pa"},{ml:"101.325 Pa",en:"101.325 Pa"}],
+     correct:1, exp:{ml:"1 atm = 1.01325 × 10⁵ Pa ആണ്.", en:"1 atm = 1.01325 × 10⁵ Pa."}},
+    {q:{ml:"K = °C + എത്ര?", en:"K = °C + how much?"},
+     opts:[{ml:"100",en:"100"},{ml:"273",en:"273"},{ml:"32",en:"32"},{ml:"0",en:"0"}],
+     correct:1, exp:{ml:"സെൽഷ്യസ് താപനിലയെ കെൽവിനിലേക്ക് മാറ്റാൻ 273 കൂട്ടിയാൽ മതി.", en:"To convert Celsius to Kelvin, add 273."}},
+    {q:{ml:"ബോയിൽ നിയമം അനുസരിച്ച്, സ്ഥിര താപനിലയിൽ വ്യാപ്പം എന്തിനോട് ആനുപാതികമാണ്?", en:"By Boyle's Law, at constant temperature, volume is proportional to what?"},
+     opts:[{ml:"മർദം (P)",en:"Pressure (P)"},{ml:"1/മർദം (1/P)",en:"1/Pressure (1/P)"},{ml:"താപനില (T)",en:"Temperature (T)"},{ml:"തന്മാത്രകളുടെ എണ്ണം (N)",en:"Number of molecules (N)"}],
+     correct:1, exp:{ml:"ബോയിൽ നിയമം: V ∝ 1/P (താപനില, മാസ് സ്ഥിരം).", en:"Boyle's Law: V ∝ 1/P (at constant temperature and mass)."}},
+    {q:{ml:"ചാൾസ് നിയമം അനുസരിച്ച്, സ്ഥിര മർദത്തിൽ വ്യാപ്പം എന്തിനോട് ആനുപാതികമാണ്?", en:"By Charles's Law, at constant pressure, volume is proportional to what?"},
+     opts:[{ml:"മർദം (P)",en:"Pressure (P)"},{ml:"കെൽവിൻ താപനില (T)",en:"Temperature in Kelvin (T)"},{ml:"തന്മാത്രകളുടെ എണ്ണം (N)",en:"Number of molecules (N)"},{ml:"സാന്ദ്രത",en:"Density"}],
+     correct:1, exp:{ml:"ചാൾസ് നിയമം: V ∝ T (മർദം, മാസ് സ്ഥിരം; T കെൽവിനിൽ).", en:"Charles's Law: V ∝ T (at constant pressure and mass; T in Kelvin)."}},
+    {q:{ml:"കേവല പൂജ്യം (Absolute Zero) എത്ര °C ആണ്?", en:"What is absolute zero in °C?"},
+     opts:[{ml:"0°C",en:"0°C"},{ml:"−100°C",en:"−100°C"},{ml:"−273.15°C",en:"−273.15°C"},{ml:"100°C",en:"100°C"}],
+     correct:2, exp:{ml:"−273.15°C ൽ വാതകത്തിന്റെ വ്യാപ്പം സൈദ്ധാന്തികമായി പൂജ്യമാകും — ഇതാണ് കേവല പൂജ്യം.", en:"At −273.15°C, gas volume theoretically becomes zero — this is absolute zero."}},
+    {q:{ml:"അവൊഗാഡ്രോ നിയമം അനുസരിച്ച്, സ്ഥിര താപനിലയിലും മർദത്തിലും തുല്യ വ്യാപ്പമുള്ള വാതകങ്ങളിൽ എന്താണ് തുല്യമായിരിക്കുക?", en:"By Avogadro's Law, equal volumes of gases at the same temperature and pressure have equal what?"},
+     opts:[{ml:"മാസ്",en:"Mass"},{ml:"തന്മാത്രകളുടെ എണ്ണം",en:"Number of molecules"},{ml:"സാന്ദ്രത",en:"Density"},{ml:"നിറം",en:"Colour"}],
+     correct:1, exp:{ml:"സ്ഥിര താപനിലയിലും മർദത്തിലും തുല്യ വ്യാപ്പമുള്ള ഏതൊരു വാതകത്തിലും തന്മാത്രകളുടെ എണ്ണം തുല്യമായിരിക്കും.", en:"Equal volumes of any gas at the same temperature and pressure contain an equal number of molecules."}},
+    {q:{ml:"1 മോൾ എന്നത് എത്ര കണികകൾ ആണ്?", en:"How many particles are in 1 mole?"},
+     opts:[{ml:"6.022 × 10²⁰",en:"6.022 × 10²⁰"},{ml:"6.022 × 10²³",en:"6.022 × 10²³"},{ml:"1.008 × 10²³",en:"1.008 × 10²³"},{ml:"3.14 × 10²³",en:"3.14 × 10²³"}],
+     correct:1, exp:{ml:"1 മോൾ = 6.022 × 10²³ കണികകൾ (അവൊഗാഡ്രോ സംഖ്യ).", en:"1 mole = 6.022 × 10²³ particles (Avogadro's number)."}},
+    {q:{ml:"STP യിൽ ഏതൊരു വാതകത്തിന്റെയും 1 മോളിന്റെ വ്യാപ്പം എത്ര?", en:"At STP, what is the volume of 1 mole of any gas?"},
+     opts:[{ml:"1 L",en:"1 L"},{ml:"11.2 L",en:"11.2 L"},{ml:"22.4 L",en:"22.4 L"},{ml:"44.8 L",en:"44.8 L"}],
+     correct:2, exp:{ml:"STP (273 K, 1 atm) യിൽ ഏതൊരു വാതകത്തിന്റെയും 1 മോളിന് 22.4 L വ്യാപ്പം ഉണ്ടായിരിക്കും — ഇത് STP യിലെ മോളാർ വ്യാപ്പം.", en:"At STP (273 K, 1 atm), 1 mole of any gas occupies 22.4 L — the molar volume at STP."}}
+  ],
+  2: [
+    {q:{ml:"ഒരു നിശ്ചിത മാസ് വാതകത്തിന്റെ വ്യാപ്പം 2 atm മർദത്തിൽ 10 L ആണ്. താപനില സ്ഥിരമായി നിലനിർത്തി മർദം 4 atm ആക്കിയാൽ വ്യാപ്പം എത്രയാകും?", en:"A fixed mass of gas has volume 10 L at 2 atm. At constant temperature, if pressure becomes 4 atm, what is the new volume?"},
+     opts:[{ml:"20 L",en:"20 L"},{ml:"5 L",en:"5 L"},{ml:"2.5 L",en:"2.5 L"},{ml:"40 L",en:"40 L"}],
+     correct:1, exp:{ml:"P₁V₁ = P₂V₂ → 2×10 = 4×V₂ → V₂ = 20/4 = 5 L.", en:"P₁V₁ = P₂V₂ → 2×10 = 4×V₂ → V₂ = 20/4 = 5 L."}},
+    {q:{ml:"300 K താപനിലയിൽ ഒരു നിശ്ചിത മാസ് ഹൈഡ്രജൻ വാതകത്തിന്റെ വ്യാപ്പം 60 mL ആണ്. ഏത് താപനിലയിലാണ് ഈ വാതകത്തിന്റെ വ്യാപ്പം 20 mL ആയി മാറുന്നത് (മർദം സ്ഥിരം)?", en:"At 300 K, a fixed mass of hydrogen gas has volume 60 mL. At what temperature does its volume become 20 mL (constant pressure)?"},
+     opts:[{ml:"900 K",en:"900 K"},{ml:"200 K",en:"200 K"},{ml:"100 K",en:"100 K"},{ml:"50 K",en:"50 K"}],
+     correct:2, exp:{ml:"V₁/T₁ = V₂/T₂ → 60/300 = 20/T₂ → T₂ = (20×300)/60 = 100 K.", en:"V₁/T₁ = V₂/T₂ → 60/300 = 20/T₂ → T₂ = (20×300)/60 = 100 K."}},
+    {q:{ml:"27°C ലും 1 atm മർദത്തിലും ഒരു വാതകത്തിന്റെ വ്യാപ്പം 100 mL ആണെങ്കിൽ, 273 K താപനിലയിലും 2 atm മർദത്തിലും വാതകത്തിന്റെ വ്യാപ്പം എത്രയായിരിക്കും?", en:"A gas has volume 100 mL at 27°C and 1 atm. What is its volume at 273 K and 2 atm?"},
+     opts:[{ml:"45.5 mL",en:"45.5 mL"},{ml:"200 mL",en:"200 mL"},{ml:"91 mL",en:"91 mL"},{ml:"22.75 mL",en:"22.75 mL"}],
+     correct:0, exp:{ml:"27°C = 300 K. P₁V₁/T₁ = P₂V₂/T₂ → (1×100)/300 = (2×V₂)/273 → V₂ = (100×273)/(300×2) = 45.5 mL.", en:"27°C = 300 K. P₁V₁/T₁ = P₂V₂/T₂ → (1×100)/300 = (2×V₂)/273 → V₂ = (100×273)/(300×2) = 45.5 mL."}},
+    {q:{ml:"88 g CO₂ ൽ എത്ര മോൾ അടങ്ങിയിരിക്കുന്നു? (CO₂ യുടെ മോളാർ മാസ് = 44 g)", en:"How many moles are in 88 g of CO₂? (Molar mass of CO₂ = 44 g)"},
+     opts:[{ml:"1 mol",en:"1 mol"},{ml:"2 mol",en:"2 mol"},{ml:"4 mol",en:"4 mol"},{ml:"0.5 mol",en:"0.5 mol"}],
+     correct:1, exp:{ml:"മോളുകളുടെ എണ്ണം = തന്നിരിക്കുന്ന മാസ് / മോളാർ മാസ് = 88/44 = 2 mol.", en:"Number of moles = given mass / molar mass = 88/44 = 2 mol."}},
+    {q:{ml:"2 മോൾ CO₂ യിൽ എത്ര തന്മാത്രകൾ അടങ്ങിയിരിക്കുന്നു?", en:"How many molecules are in 2 moles of CO₂?"},
+     opts:[{ml:"6.022 × 10²³",en:"6.022 × 10²³"},{ml:"2 × 6.022 × 10²³",en:"2 × 6.022 × 10²³"},{ml:"44 × 6.022 × 10²³",en:"44 × 6.022 × 10²³"},{ml:"6.022 × 10²³ / 2",en:"6.022 × 10²³ / 2"}],
+     correct:1, exp:{ml:"1 മോളിൽ 6.022×10²³ തന്മാത്രകൾ ഉള്ളതിനാൽ 2 മോളിൽ 2 × 6.022×10²³ തന്മാത്രകൾ ഉണ്ടാകും.", en:"Since 1 mole contains 6.022×10²³ molecules, 2 moles contain 2 × 6.022×10²³ molecules."}},
+    {q:{ml:"85 g NH₃ (മോളാർ മാസ് 17 g) ൽ എത്ര മോൾ ഉണ്ട്?", en:"How many moles are in 85 g of NH₃ (molar mass 17 g)?"},
+     opts:[{ml:"3 mol",en:"3 mol"},{ml:"5 mol",en:"5 mol"},{ml:"7 mol",en:"7 mol"},{ml:"17 mol",en:"17 mol"}],
+     correct:1, exp:{ml:"മോളുകളുടെ എണ്ണം = 85/17 = 5 mol.", en:"Number of moles = 85/17 = 5 mol."}},
+    {q:{ml:"STP യിൽ 448 L വാതകത്തിൽ എത്ര മോൾ ഉണ്ട്?", en:"How many moles are in 448 L of a gas at STP?"},
+     opts:[{ml:"10 mol",en:"10 mol"},{ml:"15 mol",en:"15 mol"},{ml:"20 mol",en:"20 mol"},{ml:"22.4 mol",en:"22.4 mol"}],
+     correct:2, exp:{ml:"മോളുകൾ = വ്യാപ്പം / 22.4 = 448/22.4 = 20 mol.", en:"Moles = volume / 22.4 = 448/22.4 = 20 mol."}},
+    {q:{ml:"N₂ + 3H₂ → 2NH₃ എന്ന സമവാക്യമനുസരിച്ച്, 6 മോൾ NH₃ ഉണ്ടാക്കാൻ എത്ര മോൾ H₂ വേണം?", en:"By N₂ + 3H₂ → 2NH₃, how many moles of H₂ are needed to make 6 moles of NH₃?"},
+     opts:[{ml:"3 mol",en:"3 mol"},{ml:"6 mol",en:"6 mol"},{ml:"9 mol",en:"9 mol"},{ml:"12 mol",en:"12 mol"}],
+     correct:2, exp:{ml:"2 മോൾ NH₃ ന് 3 മോൾ H₂ വേണം → 1 മോൾ NH₃ ന് 3/2 മോൾ → 6 മോൾ NH₃ ന് (3/2)×6 = 9 മോൾ H₂.", en:"2 moles of NH₃ need 3 moles of H₂ → 1 mole needs 3/2 → 6 moles of NH₃ need (3/2)×6 = 9 moles of H₂."}},
+    {q:{ml:"4 g H₂ പൂർണ്ണമായും O₂ യുമായി പ്രവർത്തിച്ചാൽ 36 g H₂O ലഭിക്കും. 40 g H₂ പൂർണ്ണമായും പ്രവർത്തിച്ചാൽ എത്ര g ജലം ലഭിക്കും?", en:"4 g H₂ reacting fully with O₂ gives 36 g H₂O. How much water is formed from 40 g H₂?"},
+     opts:[{ml:"90 g",en:"90 g"},{ml:"180 g",en:"180 g"},{ml:"360 g",en:"360 g"},{ml:"400 g",en:"400 g"}],
+     correct:2, exp:{ml:"4 g H₂ → 36 g H₂O ⟹ 1 g H₂ → 9 g H₂O ⟹ 40 g H₂ → 9×40 = 360 g H₂O.", en:"4 g H₂ → 36 g H₂O ⟹ 1 g H₂ → 9 g H₂O ⟹ 40 g H₂ → 9×40 = 360 g H₂O."}},
+    {q:{ml:"ക്ലോറിന്റെ Cl-35 (75%), Cl-37 (25%) എന്നീ ഐസോടോപ്പുകളുടെ ശരാശരി അറ്റോമിക മാസ് എത്ര?", en:"What is the average atomic mass of chlorine, given Cl-35 (75%) and Cl-37 (25%)?"},
+     opts:[{ml:"35 u",en:"35 u"},{ml:"35.5 u",en:"35.5 u"},{ml:"36 u",en:"36 u"},{ml:"37 u",en:"37 u"}],
+     correct:1, exp:{ml:"ശരാശരി മാസ് = [(35×75)+(37×25)]/100 = 3550/100 = 35.5 u.", en:"Average mass = [(35×75)+(37×25)]/100 = 3550/100 = 35.5 u."}}
+  ]
+};
+
+let state = {1:{}, 2:{}, submitted:{1:false,2:false}};
+
+function renderPart(n){
+  const el = document.getElementById('part'+n);
+  el.innerHTML = '';
+  QUIZ[n].forEach((item, idx)=>{
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    const letters = ['A','B','C','D'];
+    card.innerHTML = `
+      <span class="qnum">${idx+1} / ${QUIZ[n].length}</span>
+      <p class="qtext"><span class="ml">${item.q.ml}</span><span class="en">${item.q.en}</span></p>
+      <div class="opts" data-part="${n}" data-idx="${idx}">
+        ${item.opts.map((o,oi)=>`
+          <div class="opt" data-oi="${oi}" onclick="selectOpt(${n},${idx},${oi})">
+            <span class="letter">${letters[oi]}</span>
+            <span><span class="ml">${o.ml}</span><span class="en">${o.en}</span></span>
+          </div>`).join('')}
+      </div>
+      <div class="explain" id="exp-${n}-${idx}"><span class="ml">${item.exp.ml}</span><span class="en">${item.exp.en}</span></div>
+    `;
+    el.appendChild(card);
+  });
+  const bar = document.createElement('div');
+  bar.className = 'submit-bar';
+  bar.innerHTML = `<button class="submit-btn" id="submit-${n}" onclick="submitPart(${n})" disabled>
+    <span class="ml">സമർപ്പിക്കൂ</span><span class="en">Submit</span>
+  </button>`;
+  el.appendChild(bar);
+  const result = document.createElement('div');
+  result.id = 'result-'+n;
+  el.appendChild(result);
+}
+
+function selectOpt(n, idx, oi){
+  if(state.submitted[n]) return;
+  state[n][idx] = oi;
+  const group = document.querySelector(`.opts[data-part="${n}"][data-idx="${idx}"]`);
+  group.querySelectorAll('.opt').forEach(o=> o.classList.toggle('selected', +o.dataset.oi===oi));
+  const answered = Object.keys(state[n]).length;
+  document.getElementById('submit-'+n).disabled = answered < QUIZ[n].length;
+}
+
+function submitPart(n){
+  let score = 0;
+  QUIZ[n].forEach((item, idx)=>{
+    const group = document.querySelector(`.opts[data-part="${n}"][data-idx="${idx}"]`);
+    const chosen = state[n][idx];
+    group.querySelectorAll('.opt').forEach(o=>{
+      const oi = +o.dataset.oi;
+      if(oi===item.correct) o.classList.add('correct');
+      else if(oi===chosen) o.classList.add('incorrect');
+      o.style.pointerEvents='none';
+    });
+    document.getElementById(`exp-${n}-${idx}`).classList.add('show');
+    if(chosen===item.correct) score++;
+  });
+  state.submitted[n] = true;
+  document.getElementById('submit-'+n).style.display='none';
+  const pct = Math.round((score/QUIZ[n].length)*100);
+  document.getElementById('result-'+n).innerHTML = `
+    <div class="result-card">
+      <p class="ml">നിങ്ങളുടെ സ്കോർ</p><p class="en">Your score</p>
+      <div class="score">${score} / ${QUIZ[n].length}</div>
+      <p>${pct}% ${pct>=70?'🎉':pct>=40?'👍':'💪'}</p>
+      <button class="retry-btn" onclick="retryPart(${n})"><span class="ml">വീണ്ടും ശ്രമിക്കൂ</span><span class="en">Try again</span></button>
+    </div>`;
+  window.scrollTo({top: document.getElementById('result-'+n).offsetTop-20, behavior:'smooth'});
+}
+
+function retryPart(n){
+  state[n] = {}; state.submitted[n]=false;
+  renderPart(n);
+}
+
+function showPart(n){
+  document.getElementById('part1').classList.toggle('active', n===1);
+  document.getElementById('part2').classList.toggle('active', n===2);
+  document.getElementById('tab1').classList.toggle('active', n===1);
+  document.getElementById('tab2').classList.toggle('active', n===2);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function setLang(l){
+  document.body.className = 'lang-'+l;
+  document.getElementById('btn-ml').classList.toggle('active', l==='ml');
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+}
+
+renderPart(1); renderPart(2);
+
+/* ===== 9 PM – midnight daily gate ===== */
+function isQuizWindowOpen(now){
+  return now.getHours() >= 21; // 21:00 through 23:59:59
+}
+
+function pad(n){ return String(n).padStart(2,'0'); }
+
+function updateGate(){
+  const now = new Date();
+  const open = isQuizWindowOpen(now);
+  document.getElementById('lockedScreen').style.display = open ? 'none' : 'flex';
+  document.getElementById('quizContent').style.display = open ? 'block' : 'none';
+  document.querySelector('.part-tabs').style.display = open ? 'flex' : 'none';
+  if(!open){
+    let target = new Date(now);
+    target.setHours(21,0,0,0);
+    if(target <= now) target.setDate(target.getDate()+1);
+    const diff = Math.max(0, target - now);
+    const h = Math.floor(diff/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    document.getElementById('cdH').textContent = pad(h);
+    document.getElementById('cdM').textContent = pad(m);
+    document.getElementById('cdS').textContent = pad(s);
+  }
+}
+
+updateGate();
+setInterval(updateGate, 1000);
+</script>
+</body>
+</html>

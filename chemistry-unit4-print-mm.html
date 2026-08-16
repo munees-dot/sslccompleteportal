@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>യൂണിറ്റ് 4 പ്രിന്റ് നോട്ട്സ് (MM) | Abacus Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700;800&family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{ --ink:#111; --gray:#555; --line:#999; --line-lt:#ccc; }
+*{box-sizing:border-box;}
+body{ margin:0; background:#e9e9e9; color:var(--ink); font-family:'Noto Sans Malayalam',sans-serif; }
+
+.toolbar{ position:sticky;top:0;z-index:20;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:10px;background:#222;color:#fff;font-family:'Inter',sans-serif; }
+.toolbar a.back{ color:#fff;text-decoration:none;font-size:13px;border:1px solid #555;padding:8px 15px;border-radius:6px; }
+.toolbar button{ background:#fff;color:#111;border:none;padding:9px 20px;border-radius:6px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit; }
+.toolbar .hint{ align-self:center;font-size:11.5px;color:#ccc; }
+.toolbar .medium-link{ color:#9ad; text-decoration:none;font-size:12.5px;align-self:center; }
+
+.sheet{ width:210mm;margin:16px auto;background:#fff;padding:12mm 14mm;box-shadow:0 2px 14px rgba(0,0,0,.25); }
+
+.doc-header{ display:flex;align-items:center;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:2px;font-family:'Inter',sans-serif; }
+.doc-logo{ flex:none;width:44px;height:44px;border:2px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px; }
+.doc-headtext .aname{ font-weight:800;font-size:16.5px; }
+.doc-headtext .tagline{ font-size:10px;color:var(--gray); }
+.doc-meta{ margin-left:auto;text-align:right;font-size:10.5px;color:var(--gray);line-height:1.4; }
+
+.title-banner{ text-align:center;border:1.4px solid var(--ink);border-radius:5px;padding:7px 12px;margin:9px 0 12px; }
+.title-banner .unit{ font-size:9.5px;letter-spacing:.03em;color:var(--gray);font-family:'Inter',sans-serif;text-transform:uppercase; }
+.title-banner h1{ margin:2px 0 0;font-size:16.5px; }
+
+h2.sec{ font-size:13.5px;border-bottom:1.3px solid var(--ink);padding-bottom:3px;margin:13px 0 5px;display:flex;align-items:baseline;gap:7px;break-after:avoid; page-break-after:avoid; }
+h2.sec .n{ flex:none;width:17px;height:17px;border:1.2px solid var(--ink);border-radius:3px;display:inline-flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:800;font-family:'Inter',sans-serif; }
+h3.sub{ font-size:12px;font-weight:700;margin:8px 0 3px; }
+p{ font-size:12px;line-height:1.55;margin:3px 0; }
+ul,ol{ font-size:12px;line-height:1.5;margin:3px 0;padding-left:16px; }
+
+table{ width:100%;border-collapse:collapse;margin:5px 0 9px;font-size:11px; }
+th,td{ border:1px solid var(--ink);padding:3.5px 6px;text-align:center; }
+th{ background:#eee;font-weight:700; }
+
+.box{ border:1.2px solid var(--ink);border-radius:4px;padding:6px 10px;margin:6px 0;font-size:11.3px; }
+.box.note{ border-style:dashed; }
+.formula{ font-family:'Inter',monospace;font-weight:700;border:1px solid var(--ink);border-radius:3px;padding:1.5px 6px;margin:1.5px 3px 1.5px 0;display:inline-block;font-size:11px; }
+
+.mini-grid{ display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin:6px 0; }
+.mini-grid .cell{ border:1px solid var(--ink);border-radius:4px;padding:4px;text-align:center; }
+.mini-grid .cell .k{ font-weight:800;font-size:14px;font-family:'Inter',sans-serif; }
+.mini-grid .cell .l{ font-size:8.5px;color:var(--gray);margin-top:1px; }
+
+.block-map{ display:grid;grid-template-columns:repeat(18,1fr);grid-auto-rows:14px;gap:1.2px;margin:6px 0; }
+.block-map .cell{ border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:6.5px;font-weight:700;font-family:'Inter',sans-serif; }
+.block-map .empty{ border:none; }
+.block-map .b-s{ background:#ddd; } .block-map .b-p{ background:#bbb; } .block-map .b-d{ background:#888;color:#fff; }
+.legend{ display:flex;flex-wrap:wrap;gap:9px;font-size:9px;color:var(--gray);margin-top:2px; }
+.legend i{ width:9px;height:9px;display:inline-block;border:1px solid var(--ink);margin-right:2px;vertical-align:-1px; }
+
+.avoid-break{ break-inside:avoid; page-break-inside:avoid; }
+.doc-end{ margin-top:16px;padding-top:6px;border-top:1px solid var(--line-lt);display:flex;justify-content:space-between;font-size:9.5px;color:var(--gray);font-family:'Inter',sans-serif; }
+
+@media print{
+  body{ background:#fff; }
+  .toolbar{ display:none!important; }
+  .sheet{ width:auto;margin:0;padding:0;box-shadow:none; }
+  @page{ size:A4;margin:10mm 12mm; }
+  h2.sec{ break-inside:avoid; }
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <a class="back" href="chemistry-unit4.html">← പഠനത്തിലേക്ക്</a>
+  <button onclick="window.print()">പ്രിന്റ് ചെയ്യൂ</button>
+  <a class="medium-link" href="chemistry-unit4-print-em.html">English Medium ലേക്ക് മാറുക</a>
+  <span class="hint">B&amp;W · A4 · കോംപാക്റ്റ് — "background graphics" ഓഫ് ചെയ്യൂ</span>
+</div>
+
+<div class="sheet">
+  <div class="doc-header">
+    <div class="doc-logo">Aa</div>
+    <div class="doc-headtext">
+      <div class="aname">ABACUS ACADEMY</div>
+      <div class="tagline">Learn from the best teachers</div>
+    </div>
+    <div class="doc-meta">SSLC രസതന്ത്രം — Malayalam Medium<br>Unit 4 · Print Notes</div>
+  </div>
+
+  <div class="title-banner">
+    <div class="unit">Unit 4 · Chemistry Standard 10</div>
+    <h1>വാതകനിയമങ്ങളും മോൾ സങ്കല്പനവും — റിവിഷൻ നോട്ട്സ്</h1>
+  </div>
+
+  <h2 class="sec"><span class="n">1</span>ഗതികതന്മാത്രാ സിദ്ധാന്തം</h2>
+  <ul>
+    <li>വാതകങ്ങൾ സൂക്ഷ്മകണികകളാൽ (ആറ്റങ്ങൾ/തന്മാത്രകൾ) നിർമ്മിതമാണ്.</li>
+    <li>വാതക തന്മാത്രകൾ തമ്മിൽ ആകർഷണബലം വളരെ കുറവാണ്.</li>
+    <li>തന്മാത്രകൾ തമ്മിലുള്ള അകലം കൂടുതലായതിനാൽ, അവ ഉൾക്കൊള്ളുന്ന വ്യാപ്പം നിസാരമാണ്.</li>
+    <li>തന്മാത്രകൾ എല്ലാ ദിശകളിലേക്കും ചലിക്കുന്നു; ഭിത്തിയിലെ കൂട്ടിയിടിയാണ് മർദത്തിന് കാരണം.</li>
+    <li>കൂട്ടിയിടികൾ ഇലാസ്റ്റികമാണ് — ആകെ ഗതികോർജം സ്ഥിരമായിരിക്കും.</li>
+    <li>ശരാശരി ഗതികോർജം താപനിലയ്ക്ക് നേർഅനുപാതത്തിലാണ്.</li>
+  </ul>
+  <table>
+    <tr><th>സവിശേഷത</th><th>ഖരം</th><th>ദ്രാവകം</th><th>വാതകം</th></tr>
+    <tr><td>അകലം</td><td>വളരെ കുറവ്</td><td>കുറവ്</td><td>വളരെ കൂടുതൽ</td></tr>
+    <tr><td>ആകർഷണബലം</td><td>വളരെ കൂടുതൽ</td><td>മിതം</td><td>വളരെ കുറവ്</td></tr>
+    <tr><td>ചലനസ്വാതന്ത്ര്യം</td><td>ഇല്ല</td><td>പരിമിതം</td><td>പൂർണ്ണം</td></tr>
+  </table>
+
+  <h2 class="sec"><span class="n">2</span>വ്യാപ്പം, മർദം, താപനില</h2>
+  <h3 class="sub">വ്യാപ്പം (Volume)</h3>
+  <p>ഒരു പദാർത്ഥത്തിന് സ്ഥിതി ചെയ്യാൻ ആവശ്യമായ സ്ഥലം. വാതകത്തിന്റെ വ്യാപ്പം അത് സ്ഥിതിചെയ്യുന്ന പാത്രത്തിന്റെ വ്യാപ്പമാണ്.</p>
+  <p><span class="formula">1000 cm³ = 1000 mL = 1 L</span><span class="formula">1 m³ = 1000 L</span></p>
+  <h3 class="sub">മർദം (Pressure)</h3>
+  <p>പാത്രഭിത്തിയിലെ കൂട്ടിയിടിയുടെ ഫലമായി പ്രതലത്തിൽ അനുഭവപ്പെടുന്ന ബലം.</p>
+  <p><span class="formula">P = F / A</span></p>
+  <div class="box note">SI യൂണിറ്റ്: പാസ്കൽ (Pa=N/m²). സാധാരണ യൂണിറ്റ്: atm. <span class="formula">1 atm = 1.01325 × 10⁵ Pa</span>. മാനോമീറ്റർ ഉപയോഗിച്ച് അളക്കുന്നു.</div>
+  <h3 class="sub">താപനില (Temperature)</h3>
+  <p>SI യൂണിറ്റ്: കെൽവിൻ (K). <span class="formula">K = °C + 273</span></p>
+
+  <h2 class="sec"><span class="n">3</span>ബോയിൽ നിയമം</h2>
+  <div class="box note">താപനില സ്ഥിരമായിരിക്കുമ്പോൾ, ഒരു നിശ്ചിത മാസ് വാതകത്തിന്റെ വ്യാപ്പം മർദത്തിന് വിപരീതാനുപാതത്തിലായിരിക്കും.</div>
+  <p><span class="formula">V ∝ 1/P</span><span class="formula">PV = k</span><span class="formula">P₁V₁ = P₂V₂</span></p>
+  <p style="font-size:9px;color:var(--gray)">P–V ഗ്രാഫ് ഹൈപ്പർബോള ആകൃതിയിലാണ്; എല്ലാ ബിന്ദുക്കളിലും PV സ്ഥിരമാണ്.</p>
+  <div class="box"><b>ഉദാഹരണം:</b> 1 atm ൽ V=44L. 4 atm ൽ V?<br>1×44 = 4×V₂ → V₂ = <b>11 L</b></div>
+  <p style="font-size:9px;color:var(--gray)">നിത്യജീവിതം: കാലാവസ്ഥാ ബലൂണുകൾ ഉയരുന്തോറും വലിപ്പം കൂടുന്നു; സമുദ്രത്തിന്റെ അടിത്തട്ടിൽ നിന്നുയരുന്ന കുമിളകൾ വലുതാകുന്നു.</p>
+
+  <h2 class="sec avoid-break"><span class="n">4</span>ചാൾസ് നിയമം</h2>
+  <div class="box note">മർദം സ്ഥിരം ആയിരിക്കുമ്പോൾ, ഒരു നിശ്ചിത മാസ് വാതകത്തിന്റെ വ്യാപ്പം കെൽവിൻ താപനിലയ്ക്ക് നേർഅനുപാതത്തിലായിരിക്കും.</div>
+  <p><span class="formula">V ∝ T</span><span class="formula">V/T = k</span><span class="formula">V₁/T₁ = V₂/T₂</span></p>
+  <p>വ്യാപ്പം–താപനില ഗ്രാഫ് പിന്നിലേക്ക് നീട്ടിയാൽ എല്ലാ രേഖകളും −273.15°C ൽ സന്ധിക്കുന്നു — ഇതാണ് <b>കേവല പൂജ്യം</b>. ഇതിനെ അടിസ്ഥാനമാക്കി ലോർഡ് കെൽവിൻ കെൽവിൻ സ്കെയിൽ ആവിഷ്കരിച്ചു.</p>
+  <table><tr><th>സെൽഷ്യസ്</th><th>കെൽവിൻ</th></tr><tr><td>−273°C</td><td>0 K (കേവല പൂജ്യം)</td></tr><tr><td>0°C</td><td>273 K</td></tr><tr><td>100°C</td><td>373 K</td></tr></table>
+  <div class="box"><b>ഉദാഹരണം:</b> 27°C(300K) ൽ V=150L. 0°C(273K) ൽ V?<br>150/300 = V₂/273 → V₂ = <b>136.5 L</b></div>
+
+  <h2 class="sec avoid-break"><span class="n">5</span>അവൊഗാഡ്രോ നിയമം & സംയോജിത വാതക സമവാക്യം</h2>
+  <div class="box note">സ്ഥിര താപനിലയിലും മർദത്തിലും, വാതകങ്ങളുടെ വ്യാപ്പം തന്മാത്രകളുടെ എണ്ണത്തിന് നേർഅനുപാതത്തിലായിരിക്കും.</div>
+  <p><span class="formula">V ∝ N</span></p>
+  <p>ബോയിൽ നിയമവും (V∝1/P) ചാൾസ് നിയമവും (V∝T) സംയോജിപ്പിച്ചാൽ:</p>
+  <div class="box" style="text-align:center;font-weight:700;">P₁V₁/T₁ = P₂V₂/T₂</div>
+  <div class="box"><b>ഉദാഹരണം:</b> 1atm,300K ൽ V=30L. 0.5atm,273K ൽ V?<br>(1×30)/300 = (0.5×V₂)/273 → V₂ = <b>54.6 L</b></div>
+
+  <h2 class="sec avoid-break"><span class="n">6</span>മോൾ സങ്കൽപനവും അവൊഗാഡ്രോ സംഖ്യയും</h2>
+  <p>6.022 × 10²³ കണികകൾ (ആറ്റങ്ങൾ/തന്മാത്രകൾ/അയോണുകൾ) അടങ്ങിയ അളവാണ് <b>മോൾ</b> — ഇത് അമിഡിയോ അവൊഗാഡ്രോയുടെ ബഹുമാനാർത്ഥം അവൊഗാഡ്രോ സംഖ്യ (Nₐ) എന്നറിയപ്പെടുന്നു.</p>
+  <table><tr><th>1 ഡസൻ</th><th>1 സ്കോർ</th><th>1 ഗ്രോസ്</th><th>1 മോൾ</th></tr><tr><td>12</td><td>20</td><td>144</td><td>6.022×10²³</td></tr></table>
+
+  <h2 class="sec avoid-break"><span class="n">7</span>ആപേക്ഷിക അറ്റോമിക മാസും മോളാർ മാസും</h2>
+  <p>ആപേക്ഷിക അറ്റോമിക മാസ്: ഒരു C-12 ആറ്റത്തിന്റെ മാസിന്റെ 1/12 വുമായി താരതമ്യം ചെയ്ത മാസ്.</p>
+  <table><tr><th>മൂലകം</th><th>ആപേക്ഷിക അറ്റോമിക മാസ്</th><th>ഗ്രാം അറ്റോമിക മാസ്</th></tr><tr><td>H</td><td>1</td><td>1 g</td></tr><tr><td>O</td><td>16</td><td>16 g</td></tr><tr><td>Na</td><td>23</td><td>23 g</td></tr></table>
+  <div class="box note">ഒരു മൂലകത്തിന്റെ ഗ്രാം അറ്റോമിക മാസ് എടുത്താൽ അതിൽ 6.022×10²³ ആറ്റങ്ങൾ (1 മോൾ) ഉണ്ടാകും.</div>
+  <p><b>മോളിക്യുലാർ/മോളാർ മാസ്</b> — ആറ്റങ്ങളുടെ മാസുകളുടെ തുക, ഗ്രാമിൽ. ഉദാ: CO₂ = 12+2×16 = <b>44</b> (മോളാർ മാസ് 44 g).</p>
+  <table><tr><th>സംയുക്തം</th><th>സൂത്രം</th><th>മോളിക്യുലാർ മാസ്</th></tr><tr><td>അമോണിയ</td><td>NH₃</td><td>17</td></tr><tr><td>ജലം</td><td>H₂O</td><td>18</td></tr><tr><td>ഗ്ലൂക്കോസ്</td><td>C₆H₁₂O₆</td><td>180</td></tr></table>
+
+  <h2 class="sec avoid-break"><span class="n">8</span>STP-യിലെ മോളാർ വ്യാപ്പവും ആദർശ വാതക സമവാക്യവും</h2>
+  <p>STP: <span class="formula">273 K, 1 atm</span></p>
+  <div class="box note">STP യിൽ ഏതൊരു വാതകത്തിന്റെയും 1 മോളിന് <b>22.4 L</b> വ്യാപ്പം — ഇത് STP യിലെ മോളാർ വ്യാപ്പം.</div>
+  <p><span class="formula">മോളുകൾ = വ്യാപ്പം (L) / 22.4</span></p>
+  <p>ബോയിൽ, ചാൾസ്, അവൊഗാഡ്രോ നിയമങ്ങൾ സംയോജിപ്പിച്ചാൽ:</p>
+  <div class="box" style="text-align:center;font-weight:700;">PV = nRT</div>
+  <p style="font-size:9px;color:var(--gray)">R = വാതക സ്ഥിരാങ്കം (Universal Gas Constant). എല്ലാ T, P യിലും ഇത് അനുസരിക്കുന്ന വാതകങ്ങൾ ആദർശ വാതകങ്ങൾ.</p>
+
+  <h2 class="sec avoid-break"><span class="n">9</span>മോൾ സങ്കൽപനവും രാസസമവാക്യങ്ങളും</h2>
+  <p>ബാലൻസ് ചെയ്ത സമവാക്യത്തിലെ ഗുണകങ്ങൾ പ്രവർത്തകങ്ങളുടെയും ഉൽപന്നങ്ങളുടെയും മോൾ അനുപാതം സൂചിപ്പിക്കുന്നു.</p>
+  <div class="box">2H₂ + O₂ → 2H₂O &nbsp;·&nbsp; 4 g H₂ + 32 g O₂ → <b>36 g H₂O</b></div>
+  <p><b>ഉദാഹരണം:</b> 40 g H₂ പൂർണ്ണമായി പ്രവർത്തിച്ചാൽ ജലം?<br>4g→36g ⟹ 1g→9g ⟹ 40g→9×40 = <b>360 g H₂O</b></p>
+  <div class="box note">N₂ + 3H₂ → 2NH₃ — മോൾ അനുപാതം N:H:NH₃ = 1:3:2. ഒരു അഭികാരകം കുറവാണെങ്കിൽ ഉൽപന്നം അതിന് ആനുപാതികം മാത്രം.</div>
+
+  <div class="doc-end">
+    <span>ABACUS ACADEMY</span>
+    <span>Unit 4 — Gas Laws &amp; the Mole Concept (MM)</span>
+  </div>
+</div>
+</div>
+</body>
+</html>
