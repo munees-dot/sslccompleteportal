@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>കാഴ്ചയും വർണ്ണങ്ങളുടെ ലോകവും | Vision and the World of Colours — Class 10 Physics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16202e; --ink-soft:#48566a; --paper:#eceee8; --card:#ffffff;
+    --wave:#4f46e5; --wave-deep:#3730a3; --amp:#ea580c; --reso:#0d9488;
+    --line:#d6d9d1; --good:#108a5b; --bad:#c0392b;
+    --shadow:0 1px 0 rgba(22,32,46,.04), 0 8px 24px -16px rgba(22,32,46,.35);
+    --r:14px;
+    --violet:#7c3aed; --indigo:#4f46e5; --sblue:#2563eb; --sgreen:#16a34a;
+    --syellow:#eab308; --sorange:#f97316; --sred:#dc2626;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Noto Sans Malayalam",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  .mono{font-family:"Space Mono","Noto Sans Malayalam",monospace;}
+  .wrap{max-width:900px;margin:0 auto;padding:0 18px;}
+
+  /* ===== BILINGUAL SWITCH ===== */
+  .t-en{display:none;}
+  body.lang-en .t-ml{display:none;}
+  body.lang-en .t-en{display:revert;}
+
+  /* ---------- header ---------- */
+  header{background:var(--ink);color:#eef2f6;position:relative;overflow:hidden;border-bottom:3px solid var(--wave);}
+  .scope{position:absolute;inset:0;width:100%;height:100%;opacity:.55;}
+  .scope .ray{fill:none;stroke-width:1.6;}
+  .scope .white{stroke:#c7cdf5;stroke-width:1.8;}
+  .scope .prism{fill:rgba(129,140,248,.10);stroke:#a5b4fc;stroke-width:2;}
+  .scope .axis{stroke:#3b4a5e;stroke-width:1;stroke-dasharray:5 6;}
+  @keyframes drift{from{transform:translateX(0);}to{transform:translateX(-220px);}}
+  .scope #scopeG{animation:drift 7s linear infinite;}
+  .hero{position:relative;z-index:2;padding:40px 18px 30px;max-width:900px;margin:0 auto;}
+  .eyebrow{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:12px;letter-spacing:2px;
+    text-transform:uppercase;color:#a5b4fc;margin:0 0 8px;}
+  .hero h1{font-weight:800;font-size:clamp(30px,6.6vw,54px);margin:0;line-height:1.1;letter-spacing:-.5px;}
+  .hero .sub{margin:10px 0 0;color:#aebccb;font-size:15px;max-width:580px;}
+  .hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+  .pill{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:11px;letter-spacing:.5px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
+    color:#cfe0ec;padding:5px 11px;border-radius:30px;}
+
+  /* language toggle */
+  .langbar{position:absolute;top:16px;right:18px;z-index:5;display:flex;
+    background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:30px;padding:3px;}
+  .langbar button{border:none;background:none;cursor:pointer;color:#cfe0ec;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:12.5px;
+    padding:6px 14px;border-radius:30px;transition:.15s;}
+  .langbar button.on{background:var(--wave);color:#fff;}
+
+  /* ---------- tabs ---------- */
+  nav.tabs{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--line);}
+  .tabwrap{max-width:900px;margin:0 auto;display:flex;gap:2px;overflow-x:auto;padding:0 10px;}
+  .tab{flex:0 0 auto;border:none;background:none;cursor:pointer;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:600;font-size:14.5px;
+    color:var(--ink-soft);padding:14px 16px;border-bottom:3px solid transparent;white-space:nowrap;transition:color .15s;}
+  .tab:hover{color:var(--ink);}
+  .tab.active{color:var(--wave-deep);border-bottom-color:var(--wave);}
+
+  /* ---------- panels ---------- */
+  .panel{display:none;padding:26px 0 60px;}
+  .panel.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .lead{color:var(--ink-soft);font-size:15px;margin:0 0 22px;}
+
+  details.topic{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+    margin:0 0 12px;box-shadow:var(--shadow);overflow:hidden;}
+  summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:12px;}
+  summary::-webkit-details-marker{display:none;}
+  .tnum{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-weight:700;font-size:13px;
+    color:#fff;background:var(--wave);min-width:30px;height:30px;border-radius:8px;
+    display:grid;place-items:center;flex:0 0 auto;}
+  details[open] .tnum{background:var(--amp);}
+  .ttitle{font-weight:700;font-size:18px;flex:1;line-height:1.25;}
+  .chev{transition:transform .2s;color:var(--ink-soft);font-size:13px;}
+  details[open] .chev{transform:rotate(90deg);}
+  .tbody{padding:2px 18px 20px 18px;border-top:1px solid var(--line);}
+  .tbody p{margin:14px 0 0;}
+  .tbody ul{margin:12px 0 0;padding-left:0;list-style:none;}
+  .tbody li{position:relative;padding-left:22px;margin:7px 0;}
+  .tbody li::before{content:"";position:absolute;left:4px;top:12px;width:8px;height:8px;border-radius:50%;background:var(--wave);}
+  .def{background:#f1f1fb;border-left:4px solid var(--wave);border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0 0;}
+  .def b{color:var(--wave-deep);}
+  .note{font-size:13.5px;color:var(--ink-soft);}
+  .mini-tbl{width:100%;border-collapse:collapse;margin:14px 0 0;font-size:14px;}
+  .mini-tbl th,.mini-tbl td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+  .mini-tbl th{background:#f1f1fb;color:var(--wave-deep);font-weight:700;}
+  .mini-tbl td:first-child{background:#faf7f3;font-weight:600;}
+
+  /* spectrum + colour swatches (new for this chapter) */
+  .spectrum-bar{height:46px;border-radius:10px;margin:14px 0 6px;
+    background:linear-gradient(90deg,var(--violet),var(--indigo),var(--sblue),var(--sgreen),var(--syellow),var(--sorange),var(--sred));
+    box-shadow:var(--shadow);}
+  .spectrum-lbl{display:flex;justify-content:space-between;font-family:"Space Mono","Noto Sans Malayalam",monospace;
+    font-size:11px;color:var(--ink-soft);padding:0 2px;}
+  .swatchgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin:14px 0 0;}
+  .swatch{border-radius:10px;padding:14px 10px;text-align:center;font-weight:700;font-size:13.5px;
+    box-shadow:var(--shadow);color:#fff;}
+  .swatch small{display:block;font-weight:500;font-size:11px;opacity:.9;margin-top:3px;}
+  .sw-r{background:var(--sred);} .sw-g{background:var(--sgreen);} .sw-b{background:var(--sblue);}
+  .sw-y{background:var(--syellow);color:#5b4600;} .sw-m{background:#c0289a;} .sw-c{background:#0aa3a3;}
+  .sw-w{background:#e7e9e3;color:var(--ink);border:1px solid var(--line);} .sw-k{background:#20242a;}
+
+  .fgrid{display:grid;grid-template-columns:1fr;gap:16px;}
+  .fcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow);}
+  .fcard .fname{font-weight:600;font-size:16px;color:var(--ink-soft);margin:0 0 12px;}
+  .formula{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-weight:700;
+    font-size:clamp(20px,4.6vw,28px);color:var(--wave-deep);background:#f3f3fc;
+    border:1px dashed var(--wave);border-radius:10px;padding:14px 18px;text-align:center;letter-spacing:1px;}
+  .where{margin-top:14px;display:grid;gap:6px;}
+  .where div{font-size:14.5px;}
+  .where .sym{font-family:"Space Mono","Noto Sans Malayalam",monospace;color:var(--amp);font-weight:700;}
+
+  .fcwrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+  .flip{perspective:1200px;height:180px;cursor:pointer;}
+  .flip-inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d;}
+  .flip.on .flip-inner{transform:rotateY(180deg);}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    padding:18px;text-align:center;box-shadow:var(--shadow);}
+  .face.front{background:var(--card);border:1px solid var(--line);}
+  .face.front .term{font-weight:700;font-size:19px;color:var(--ink);}
+  .face.front .sec{font-size:12.5px;color:var(--ink-soft);margin-top:6px;font-style:italic;}
+  .face.front .hint{position:absolute;bottom:10px;font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:10px;color:var(--wave);letter-spacing:1px;}
+  .face.back{background:var(--wave-deep);color:#eef0fb;transform:rotateY(180deg);
+    border:1px solid var(--wave-deep);font-size:14px;line-height:1.55;}
+
+  /* share bar */
+  .sharebar{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:0 0 18px;}
+  .sbtn{border:none;cursor:pointer;text-decoration:none;display:inline-block;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;
+    font-size:13.5px;padding:10px 18px;border-radius:10px;transition:.15s;}
+  .sbtn.open{background:var(--wave);color:#fff;}
+  .sbtn.open:hover{background:var(--wave-deep);}
+  .sbtn.share{background:var(--reso);color:#fff;}
+  .sbtn.share:hover{background:#0b7a6b;}
+  .sbtn.wa{background:#1f9e50;color:#fff;}
+  .sbtn.wa:hover{background:#177d3e;}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#eef2f6;padding:11px 20px;border-radius:30px;font-size:13.5px;
+    opacity:0;pointer-events:none;transition:.25s;z-index:99;box-shadow:0 8px 24px -8px rgba(0,0,0,.5);}
+  .toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  .quiz-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+    box-shadow:var(--shadow);padding:24px;max-width:680px;margin:0 auto;}
+  .qmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+  .qcount,.qscore{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:12px;letter-spacing:1px;}
+  .qcount{color:var(--ink-soft);} .qscore{color:var(--amp);font-weight:700;}
+  .qbar{height:6px;background:#e7eae3;border-radius:6px;overflow:hidden;margin-bottom:18px;}
+  .qbar i{display:block;height:100%;background:var(--wave);transition:width .3s;}
+  .qtext{font-weight:600;font-size:19px;line-height:1.4;margin:0 0 18px;}
+  .opt{display:block;width:100%;text-align:left;background:#f6f8f3;border:2px solid var(--line);
+    border-radius:11px;padding:13px 16px;margin:9px 0;cursor:pointer;
+    font-family:"Noto Sans Malayalam",sans-serif;font-size:15.5px;color:var(--ink);transition:all .15s;}
+  .opt:hover:not(:disabled){border-color:var(--wave);background:#eeeefb;}
+  .opt:disabled{cursor:default;}
+  .opt.correct{border-color:var(--good);background:#e7f6ee;color:#0a5e3d;font-weight:600;}
+  .opt.wrong{border-color:var(--bad);background:#fbecea;color:#8e2118;}
+  .qfb{margin-top:14px;padding:12px 15px;border-radius:10px;font-size:14.5px;display:none;}
+  .qfb.show{display:block;}
+  .qfb.ok{background:#e7f6ee;color:#0a5e3d;border-left:4px solid var(--good);}
+  .qfb.no{background:#fbecea;color:#8e2118;border-left:4px solid var(--bad);}
+  .qnext{margin-top:18px;width:100%;border:none;cursor:pointer;background:var(--wave);color:#fff;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:16px;padding:13px;border-radius:11px;transition:background .15s;}
+  .qnext:hover{background:var(--wave-deep);}
+  .qnext[disabled]{background:#aeb8c2;cursor:not-allowed;}
+  .result{text-align:center;padding:14px 0;}
+  .result .big{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-weight:700;font-size:54px;color:var(--wave-deep);line-height:1;}
+  .result .lbl{font-weight:600;font-size:20px;margin-top:8px;}
+  .result .msg{color:var(--ink-soft);margin-top:6px;}
+  .retry{margin-top:20px;background:var(--amp);color:#fff;border:none;cursor:pointer;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:15px;padding:11px 26px;border-radius:10px;}
+
+  .gsearch{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:11px;
+    font-family:"Noto Sans Malayalam",sans-serif;font-size:15px;margin-bottom:18px;background:var(--card);}
+  .gsearch:focus{outline:none;border-color:var(--wave);}
+  table.gloss{width:100%;border-collapse:collapse;background:var(--card);
+    border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);}
+  .gloss th{background:var(--ink);color:#dfe7ee;font-weight:600;text-align:left;padding:12px 16px;font-size:14px;}
+  .gloss td{padding:11px 16px;border-top:1px solid var(--line);font-size:15px;vertical-align:top;}
+  .gloss td.gen{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:13px;color:var(--wave-deep);}
+  .gloss tr:hover td{background:#f6f8f3;}
+
+  .qb-tools{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px;}
+  .qb-btn{border:none;cursor:pointer;font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;
+    font-size:14px;padding:10px 18px;border-radius:10px;}
+  .qb-btn.show{background:var(--wave);color:#fff;}
+  .qb-btn.show:hover{background:var(--wave-deep);}
+  .qb-btn.prn{background:var(--reso);color:#fff;}
+  .qb-sec{margin:0 0 30px;}
+  .qb-head{display:flex;align-items:center;gap:12px;margin:0 0 4px;border-bottom:2px solid var(--wave);padding-bottom:8px;}
+  .qb-head .sl{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-weight:700;font-size:13px;color:#fff;
+    background:var(--wave-deep);padding:4px 11px;border-radius:7px;flex:0 0 auto;}
+  .qb-head h3{font-weight:800;font-size:19px;margin:0;flex:1;line-height:1.2;}
+  .qb-head .mk{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:12px;color:var(--amp);font-weight:700;}
+  .qb-item{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px;margin:12px 0;box-shadow:var(--shadow);}
+  .qb-q{display:flex;gap:10px;font-size:16px;font-weight:600;line-height:1.5;}
+  .qb-q .n{font-family:"Space Mono","Noto Sans Malayalam",monospace;color:var(--amp);font-weight:700;flex:0 0 auto;}
+  .qb-opts{list-style:none;padding:0;margin:10px 0 0 26px;display:grid;gap:5px;}
+  .qb-opts li{font-size:15px;color:var(--ink-soft);}
+  .qb-opts li b{color:var(--wave-deep);font-family:"Space Mono","Noto Sans Malayalam",monospace;margin-right:6px;}
+  .qb-ans{margin:12px 0 0;padding:11px 14px;border-radius:9px;background:#e7f6ee;
+    border-left:4px solid var(--good);color:#0a5e3d;font-size:14.5px;line-height:1.6;display:none;}
+  .qb-ans.on{display:block;}
+  body.lang-en .qb-ans.on .t-ml{display:none;}
+  .qb-ans b{color:#084d33;}
+  .qb-rev{margin-top:10px;background:none;border:1px dashed var(--good);color:var(--good);cursor:pointer;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:12.5px;padding:5px 12px;border-radius:8px;}
+  .qb-rev:hover{background:#eafaf1;}
+
+  .sn-paper{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:26px 28px;}
+  .sn-paper h2{font-weight:800;font-size:22px;text-align:center;margin:0 0 4px;color:var(--ink);}
+  .sn-paper .sn-sub{text-align:center;color:var(--ink-soft);font-size:13px;margin:0 0 20px;
+    font-family:"Space Mono","Noto Sans Malayalam",monospace;letter-spacing:1px;}
+  .sn-block{margin:0 0 18px;break-inside:avoid;}
+  .sn-block h4{font-weight:800;font-size:15.5px;margin:0 0 7px;color:var(--wave-deep);display:flex;align-items:center;gap:8px;}
+  .sn-block h4 .dot{width:9px;height:9px;border-radius:50%;background:var(--amp);flex:0 0 auto;}
+  .sn-block ul{list-style:none;padding:0;margin:0;}
+  .sn-block li{position:relative;padding-left:16px;margin:4px 0;font-size:14px;line-height:1.55;}
+  .sn-block li::before{content:"▸";position:absolute;left:0;color:var(--wave);font-size:11px;top:2px;}
+  .sn-block li b{color:var(--ink);}
+  .sn-key{background:#f3f3fc;border:1px dashed var(--wave);border-radius:9px;padding:10px 14px;margin:4px 0;
+    font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:14px;color:var(--wave-deep);font-weight:700;}
+  .sn-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 18px;}
+  .sn-grid .sn-key{margin:0;}
+  @media(max-width:560px){.sn-grid{grid-template-columns:1fr;}}
+
+  .prnbtn{background:var(--reso);color:#fff;border:none;cursor:pointer;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:15px;padding:11px 28px;border-radius:11px;}
+
+  footer{background:var(--ink);color:#8ea0b2;text-align:center;padding:26px 18px;font-size:13px;}
+  footer b{color:#cfe0ec;}
+
+  @media print{
+    nav.tabs,.scope,.hero .meta,.langbar,footer,.qnext,.retry,.gsearch,.flip .hint,
+    .qb-tools,.qb-rev,.no-print,.prnbtn{display:none!important;}
+    .panel{display:block!important;page-break-before:always;padding:0;}
+    body{background:#fff;}
+    details.topic{break-inside:avoid;border:1px solid #ccc;}
+    summary{pointer-events:none;}
+    .flip-inner{transform:none!important;}
+    .face.back{position:relative;transform:none;}
+    .qb-item,.sn-block{break-inside:avoid;}
+    body.print-one .panel{display:none!important;page-break-before:auto;}
+    body.print-one .panel.print-me{display:block!important;page-break-before:auto;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .scope #scopeG{animation:none;} .panel.active{animation:none;} .flip-inner{transition:none;}
+  }
+  @media (max-width:560px){
+    .hero{padding:56px 18px 24px;} .ttitle{font-size:16px;}
+    .langbar{top:12px;right:12px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="scope" id="scope" viewBox="0 0 900 240" preserveAspectRatio="none" aria-hidden="true">
+    <line class="axis" x1="0" y1="120" x2="900" y2="120"/>
+    <g id="scopeG"></g>
+  </svg>
+
+  <div class="langbar">
+    <button id="btnML" class="on">മലയാളം</button>
+    <button id="btnEN">English</button>
+  </div>
+
+  <div class="hero">
+    <p class="eyebrow">Class 10 · Physics · Unit 3</p>
+    <h1><span class="t-ml">കാഴ്ചയും വർണ്ണങ്ങളുടെ ലോകവും</span><span class="t-en">Vision and the World of Colours</span></h1>
+    <p class="sub">
+      <span class="t-ml">പ്രകാശപ്രകീർണ്ണനം മുതൽ കണ്ണിന്റെ കാഴ്ചാ ന്യൂനതകൾ വരെ — കുറിപ്പുകൾ, പ്രധാന വസ്തുതകൾ, ഫ്ലാഷ്കാർഡ്, ക്വിസ് എല്ലാം ഒരിടത്ത്.</span>
+      <span class="t-en">From dispersion of light to defects of vision — notes, key facts, flashcards and quizzes, all in one place.</span>
+    </p>
+    <div class="meta">
+      <span class="pill">VIBGYOR</span>
+      <span class="pill">25 cm</span>
+      <span class="pill">1/16 s</span>
+      <span class="pill">3×10⁸ m/s</span>
+      <span class="pill">SCERT 2025</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabwrap">
+    <button class="tab active" data-p="notes"><span class="t-ml">കുറിപ്പുകൾ</span><span class="t-en">Notes</span></button>
+    <button class="tab" data-p="formula"><span class="t-ml">പ്രധാന വസ്തുതകൾ</span><span class="t-en">Key Facts</span></button>
+    <button class="tab" data-p="flash"><span class="t-ml">ഫ്ലാഷ്കാർഡ്</span><span class="t-en">Flashcards</span></button>
+    <button class="tab" data-p="quiz"><span class="t-ml">ക്വിസ്</span><span class="t-en">Quiz</span></button>
+    <button class="tab" data-p="qbank"><span class="t-ml">ചോദ്യബാങ്ക്</span><span class="t-en">Question Bank</span></button>
+    <button class="tab" data-p="short"><span class="t-ml">ഷോർട്ട് നോട്ട്</span><span class="t-en">Short Note</span></button>
+    <button class="tab" data-p="gloss"><span class="t-ml">പദാവലി</span><span class="t-en">Glossary</span></button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ================= NOTES ================= -->
+<section class="panel active" id="notes">
+  <p class="lead">
+    <span class="t-ml">ഓരോ ടൈറ്റിലിലും ക്ലിക്ക് ചെയ്ത് ആ ഭാഗം തുറക്കാം. പ്രധാന നിർവചനങ്ങൾ <b style="color:var(--wave-deep)">നീല ബോക്സിൽ</b> അടയാളപ്പെടുത്തിയിരിക്കുന്നു.</span>
+    <span class="t-en">Click any title to open that section. Key definitions are marked in <b style="color:var(--wave-deep)">blue boxes</b>.</span>
+  </p>
+
+  <details class="topic" open>
+    <summary><span class="tnum">1</span><span class="ttitle"><span class="t-ml">പ്രകാശപ്രകീർണ്ണനം (Dispersion of Light)</span><span class="t-en">Dispersion of Light</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <p>
+        <span class="t-ml">ഗ്ലാസ് പ്രിസത്തിലൂടെ സൂര്യപ്രകാശം (ധവളപ്രകാശം) കടത്തിവിടുമ്പോൾ ചുമരിൽ ഒരു വർണ്ണരാജി പ്രത്യക്ഷപ്പെടുന്നു — മഴവില്ലിലേതുപോലുള്ള ഏഴ് വർണ്ണങ്ങൾ.</span>
+        <span class="t-en">When sunlight (white light) is passed through a glass prism, a band of colours — like a rainbow — appears on a screen.</span>
+      </p>
+      <div class="spectrum-bar"></div>
+      <div class="spectrum-lbl"><span>VIOLET</span><span>INDIGO</span><span>BLUE</span><span>GREEN</span><span>YELLOW</span><span>ORANGE</span><span>RED</span></div>
+      <div class="def">
+        <span class="t-ml"><b>സമന്വിതപ്രകാശം (Composite light):</b> വ്യത്യസ്ത വർണ്ണങ്ങൾ ചേർന്നുണ്ടാകുന്ന പ്രകാശം. സൂര്യപ്രകാശം ഇതിന് ഉദാഹരണം.</span>
+        <span class="t-en"><b>Composite light:</b> Light made up of different colours. Sunlight is an example.</span>
+      </div>
+      <div class="def">
+        <span class="t-ml"><b>പ്രകാശപ്രകീർണ്ണനം (Dispersion of light):</b> ഒരു സമന്വിതപ്രകാശം ഘടകവർണ്ണങ്ങളായി വേർപിരിയുന്ന പ്രതിഭാസം. ഘടകവർണ്ണങ്ങളുടെ ക്രമമായ വിതരണത്തെ <b>വർണ്ണരാജി (Spectrum)</b> എന്നു പറയുന്നു.</span>
+        <span class="t-en"><b>Dispersion of light:</b> The phenomenon in which a composite light splits into its component colours. The ordered band of these colours is called a <b>spectrum</b>.</span>
+      </div>
+      <p><b><span class="t-ml">വർണ്ണക്രമം — VIBGYOR:</span><span class="t-en">Order of colours — VIBGYOR:</span></b></p>
+      <p class="note">
+        <span class="t-ml">വയലറ്റ് (Violet) → ഇൻഡിഗോ (Indigo) → നീല (Blue) → പച്ച (Green) → മഞ്ഞ (Yellow) → ഓറഞ്ച് (Orange) → ചുവപ്പ് (Red)</span>
+        <span class="t-en">Violet → Indigo → Blue → Green → Yellow → Orange → Red</span>
+      </p>
+      <table class="mini-tbl t-ml">
+        <tr><th>വർണ്ണം</th><th>ഏകദേശ തരംഗദൈർഘ്യം (nm)</th></tr>
+        <tr><td>വയലറ്റ് (V)</td><td>380 – 440</td></tr>
+        <tr><td>ഇൻഡിഗോ (I)</td><td>440 – 460</td></tr>
+        <tr><td>നീല (B)</td><td>460 – 500</td></tr>
+        <tr><td>പച്ച (G)</td><td>500 – 570</td></tr>
+        <tr><td>മഞ്ഞ (Y)</td><td>570 – 590</td></tr>
+        <tr><td>ഓറഞ്ച് (O)</td><td>590 – 620</td></tr>
+        <tr><td>ചുവപ്പ് (R)</td><td>620 – 750</td></tr>
+      </table>
+      <table class="mini-tbl t-en">
+        <tr><th>Colour</th><th>Approx. wavelength (nm)</th></tr>
+        <tr><td>Violet (V)</td><td>380 – 440</td></tr>
+        <tr><td>Indigo (I)</td><td>440 – 460</td></tr>
+        <tr><td>Blue (B)</td><td>460 – 500</td></tr>
+        <tr><td>Green (G)</td><td>500 – 570</td></tr>
+        <tr><td>Yellow (Y)</td><td>570 – 590</td></tr>
+        <tr><td>Orange (O)</td><td>590 – 620</td></tr>
+        <tr><td>Red (R)</td><td>620 – 750</td></tr>
+      </table>
+      <p class="note">
+        <span class="t-ml"><b>കാരണം:</b> ധവളപ്രകാശം പ്രിസത്തിലേക്ക് കടക്കുമ്പോഴും പുറത്തേക്ക് വരുമ്പോഴും അപവർത്തനത്തിന് വിധേയമാകുന്നു. ഓരോ വർണ്ണത്തിന്റെയും വ്യതിയാനം അതിന്റെ തരംഗദൈർഘ്യത്തെ ആശ്രയിച്ചിരിക്കുന്നു — തരംഗദൈർഘ്യം <b>കുറഞ്ഞ വയലറ്റിന്</b> ഏറ്റവും കൂടുതൽ വ്യതിയാനവും, തരംഗദൈർഘ്യം <b>കൂടിയ ചുവപ്പിന്</b> ഏറ്റവും കുറഞ്ഞ വ്യതിയാനവും സംഭവിക്കുന്നു.</span>
+        <span class="t-en"><b>Cause:</b> White light refracts both while entering and leaving the prism. The deviation of each colour depends on its wavelength — <b>violet</b> (shortest wavelength) deviates the most, and <b>red</b> (longest wavelength) deviates the least.</span>
+      </p>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">2</span><span class="ttitle"><span class="t-ml">മഴവില്ല് (Rainbow)</span><span class="t-en">Rainbow</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <p>
+        <span class="t-ml">ആകാശത്തെ ജലകണികകൾ പ്രകൃതിദത്ത പ്രിസങ്ങളായി പ്രവർത്തിക്കുമ്പോൾ രൂപപ്പെടുന്ന വർണ്ണരാജിയാണ് മഴവില്ല്.</span>
+        <span class="t-en">A rainbow is the spectrum formed when raindrops in the sky act as natural prisms.</span>
+      </p>
+      <div class="def">
+        <span class="t-ml"><b>രൂപീകരണം:</b> സൂര്യപ്രകാശം ജലകണികയിലേക്ക് കടക്കുമ്പോൾ ഒരു <b>അപവർത്തനവും</b>, കണികയുടെ പിന്നിലെ പ്രതലത്തിൽ ഒരു <b>ആന്തരപ്രതിപതനവും</b>, പുറത്തേക്ക് വരുമ്പോൾ വീണ്ടും ഒരു <b>അപവർത്തനവും</b> സംഭവിക്കുന്നു. ഈ മൂന്ന് ഘട്ടങ്ങളുടെ സമന്വിത ഫലമായാണ് മഴവില്ല് ഉണ്ടാകുന്നത്.</span>
+        <span class="t-en"><b>Formation:</b> Sunlight undergoes one <b>refraction</b> as it enters a water droplet, one <b>total internal reflection</b> at the back surface, and another <b>refraction</b> as it exits. The combined effect of these three steps produces the rainbow.</span>
+      </div>
+      <ul>
+        <li><span class="t-ml">മഴവില്ല് എപ്പോഴും സൂര്യന്റെ <b>എതിർദിശയിലാണ്</b> കാണപ്പെടുന്നത്.</span>
+            <span class="t-en">A rainbow always appears in the direction <b>opposite</b> to the Sun.</span></li>
+        <li><span class="t-ml">നല്ല സൂര്യപ്രകാശമുള്ളപ്പോൾ അന്തരീക്ഷത്തിലേക്ക് വെള്ളം സ്പ്രേ ചെയ്താലും കൃത്രിമമായി മഴവില്ല് ഉണ്ടാക്കാം.</span>
+            <span class="t-en">A rainbow can be created artificially by spraying water into the air when the Sun is shining brightly.</span></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">3</span><span class="ttitle"><span class="t-ml">വർണ്ണങ്ങളുടെ പുനഃസംയോജനവും ന്യൂട്ടൺസ് കളർ ഡിസ്കും</span><span class="t-en">Recombination of Colours & Newton's Colour Disc</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <div class="def">
+        <span class="t-ml"><b>വർണ്ണങ്ങളുടെ പുനഃസംയോജനം (Recombination of colours):</b> ഒരു പ്രിസത്തിലൂടെ വേർപിരിഞ്ഞ ഘടകവർണ്ണങ്ങളെ, ആ പാതയിൽ വച്ചിരിക്കുന്ന മറ്റൊരു സമാന പ്രിസത്തിലൂടെ കടത്തിവിട്ടാൽ അവ വീണ്ടും ചേർന്ന് ധവളപ്രകാശം ലഭിക്കും.</span>
+        <span class="t-en"><b>Recombination of colours:</b> If the component colours split by one prism are passed through a second, identical prism placed in their path, they recombine to give white light.</span>
+      </div>
+      <p><b><span class="t-ml">ന്യൂട്ടൺസ് കളർ ഡിസ്ക് (Newton's colour disc):</span><span class="t-en">Newton's colour disc:</span></b></p>
+      <ul>
+        <li><span class="t-ml">വർണ്ണരാജിയിലെ ഏഴ് വർണ്ണങ്ങളും അതേ ക്രമത്തിലും അനുപാതത്തിലും പെയിന്റ് ചെയ്ത ഒരു വൃത്താകൃതി ഡിസ്ക്.</span>
+            <span class="t-en">A circular disc painted with the seven spectral colours in the same order and proportion.</span></li>
+        <li><span class="t-ml">ഇത് വളരെ വേഗത്തിൽ കറക്കുമ്പോൾ എല്ലാ നിറങ്ങളും ഒന്നിച്ചു കാണുന്ന പ്രതീതി ഉണ്ടാവുകയും, ഡിസ്ക് ഏകദേശം <b>വെളുത്ത നിറമായി</b> തോന്നുകയും ചെയ്യുന്നു.</span>
+            <span class="t-en">When spun very fast, all the colours appear to blend together and the disc looks almost <b>white</b>.</span></li>
+        <li><span class="t-ml">ഇത് സാധ്യമാകുന്നത് കണ്ണിന്റെ <b>വീക്ഷണസ്ഥിരത</b> എന്ന പ്രത്യേകത കൊണ്ടാണ്.</span>
+            <span class="t-en">This happens because of the eye's <b>persistence of vision</b>.</span></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">4</span><span class="ttitle"><span class="t-ml">പ്രാഥമിക, ദ്വിതീയ, പൂരക വർണ്ണങ്ങൾ</span><span class="t-en">Primary, Secondary & Complementary Colours</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <div class="def">
+        <span class="t-ml"><b>പ്രാഥമിക വർണ്ണങ്ങൾ (Primary colours of light):</b> ചുവപ്പ്, പച്ച, നീല (RGB). ഇവ ഉപയോഗിച്ച് ധവളപ്രകാശം ഉൾപ്പെടെ മറ്റെല്ലാ വർണ്ണപ്രകാശവും ഉണ്ടാക്കാം.</span>
+        <span class="t-en"><b>Primary colours (of light):</b> Red, Green, Blue (RGB). Using these, white light — and every other colour of light — can be produced.</span>
+      </div>
+      <div class="def">
+        <span class="t-ml"><b>ദ്വിതീയ വർണ്ണം (Secondary colour):</b> ഏതെങ്കിലും രണ്ട് പ്രാഥമിക വർണ്ണപ്രകാശങ്ങൾ തുല്യ തീവ്രതയിൽ ചേരുമ്പോൾ ലഭിക്കുന്ന വർണ്ണപ്രകാശം.</span>
+        <span class="t-en"><b>Secondary colour:</b> The colour of light obtained when two primary colour-lights of equal intensity combine.</span>
+      </div>
+      <p><b><span class="t-ml">നിറങ്ങൾ കൂട്ടിച്ചേർക്കൽ:</span><span class="t-en">Colour addition:</span></b></p>
+      <div class="swatchgrid">
+        <div class="swatch sw-y">R + G<small>Yellow / മഞ്ഞ</small></div>
+        <div class="swatch sw-c">G + B<small>Cyan / സയൻ</small></div>
+        <div class="swatch sw-m">B + R<small>Magenta / മജന്ത</small></div>
+        <div class="swatch sw-w">R + G + B<small>White / ധവളം</small></div>
+      </div>
+      <div class="def">
+        <span class="t-ml"><b>പൂരകവർണ്ണങ്ങൾ (Complementary colours):</b> ഒരു ദ്വിതീയവർണ്ണത്തോട് ചേരുമ്പോൾ ധവളപ്രകാശം നൽകുന്ന വർണ്ണജോഡികൾ — അതായത് ദ്വിതീയവർണ്ണത്തിൽ ഇല്ലാത്ത പ്രാഥമിക വർണ്ണം.</span>
+        <span class="t-en"><b>Complementary colours:</b> Colour pairs that give white light when combined — i.e. a secondary colour and the one primary colour missing from it.</span>
+      </div>
+      <table class="mini-tbl t-ml">
+        <tr><th>ദ്വിതീയവർണ്ണം</th><th>ഘടകവർണ്ണങ്ങൾ</th><th>പൂരകവർണ്ണം</th></tr>
+        <tr><td>മഞ്ഞ</td><td>ചുവപ്പ് + പച്ച</td><td>നീല</td></tr>
+        <tr><td>മജന്ത</td><td>ചുവപ്പ് + നീല</td><td>പച്ച</td></tr>
+        <tr><td>സയൻ</td><td>പച്ച + നീല</td><td>ചുവപ്പ്</td></tr>
+      </table>
+      <table class="mini-tbl t-en">
+        <tr><th>Secondary colour</th><th>Component colours</th><th>Complementary colour</th></tr>
+        <tr><td>Yellow</td><td>Red + Green</td><td>Blue</td></tr>
+        <tr><td>Magenta</td><td>Red + Blue</td><td>Green</td></tr>
+        <tr><td>Cyan</td><td>Green + Blue</td><td>Red</td></tr>
+      </table>
+      <p class="note">
+        <span class="t-ml"><b>ശ്രദ്ധിക്കുക:</b> പ്രകാശത്തിന്റെ പ്രാഥമികവർണ്ണങ്ങൾ RGB ആണെങ്കിലും, ചായങ്ങളുടെ/പ്രിന്റിന്റെ പ്രാഥമികചായങ്ങൾ (Primary dyes/pigments) സയൻ, മജന്ത, മഞ്ഞ (CMY) ആണ്.</span>
+        <span class="t-en"><b>Note:</b> While the primary colours of light are RGB, the primary dyes/pigments (used in printing) are Cyan, Magenta and Yellow (CMY).</span>
+      </p>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">5</span><span class="ttitle"><span class="t-ml">വീക്ഷണസ്ഥിരത (Persistence of Vision)</span><span class="t-en">Persistence of Vision</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <div class="def">
+        <span class="t-ml"><b>വീക്ഷണസ്ഥിരത (Persistence of vision):</b> നാം കണ്ടുകൊണ്ടിരിക്കുന്ന ഒരു വസ്തുവിനെ നമ്മുടെ ദൃഷ്ടിപഥത്തിൽ നിന്ന് മാറ്റിയാലും അതിന്റെ ദൃശ്യാനുഭവം ഏകദേശം <b>1/16 സെക്കൻഡ്</b> സമയത്തേക്ക് നിലനിൽക്കുന്ന പ്രത്യേകത.</span>
+        <span class="t-en"><b>Persistence of vision:</b> Even after an object is removed from our line of sight, its visual impression stays on the retina for about <b>1/16 of a second</b>.</span>
+      </div>
+      <ul>
+        <li><span class="t-ml">കത്തുന്ന ചന്ദനത്തിരി വേഗത്തിൽ ചുഴറ്റുമ്പോൾ അഗ്നിവലയമായി കാണുന്നത് ഈ പ്രതിഭാസം കൊണ്ടാണ്.</span>
+            <span class="t-en">A burning incense stick swirled fast appears as a continuous ring of fire because of this effect.</span></li>
+        <li><span class="t-ml">ന്യൂട്ടൺസ് കളർ ഡിസ്കിലെ വർണ്ണങ്ങൾ വേഗത്തിൽ കറങ്ങുമ്പോൾ ഏകദേശം വെളുപ്പായി തോന്നുന്നതും ഇതേ കാരണത്താൽ.</span>
+            <span class="t-en">This is also why the colours of a rapidly spinning Newton's disc appear to merge into near-white.</span></li>
+        <li><span class="t-ml">സിനിമയും ആനിമേഷനും പ്രവർത്തിക്കുന്നത് ഈ തത്വത്തിലാണ് — വേഗത്തിൽ മാറിവരുന്ന നിശ്ചലചിത്രങ്ങൾ തുടർച്ചയായ ചലനമായി തോന്നുന്നു.</span>
+            <span class="t-en">Cinema and animation work on this principle — a rapid sequence of still images appears as continuous motion.</span></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">6</span><span class="ttitle"><span class="t-ml">സുതാര്യ, അതാര്യ വസ്തുക്കളുടെ നിറം</span><span class="t-en">Colour of Transparent & Opaque Objects</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <div class="def">
+        <span class="t-ml"><b>സുതാര്യ വസ്തുക്കൾ (ഫിൽട്ടറുകൾ):</b> ഒരു ഫിൽട്ടർ അതിന്റെ സ്വന്തം നിറത്തെയും അതിന്റെ ഘടകവർണ്ണങ്ങളെയും മാത്രം കടത്തിവിടുകയും, മറ്റ് വർണ്ണങ്ങളെ ആഗിരണം ചെയ്യുകയും ചെയ്യുന്നു.</span>
+        <span class="t-en"><b>Transparent objects (filters):</b> A filter transmits only its own colour and its component colours, and absorbs the rest.</span>
+      </div>
+      <ul>
+        <li><span class="t-ml">ഉദാ: ചുവപ്പ് ഫിൽട്ടറിലൂടെ ധവളപ്രകാശം കടത്തിവിട്ടാൽ ചുവപ്പ് മാത്രം കടന്നുപോകും.</span>
+            <span class="t-en">e.g. If white light is passed through a red filter, only red passes through.</span></li>
+        <li><span class="t-ml">ഒരു ദ്വിതീയവർണ്ണത്തിലുള്ള ഫിൽട്ടർ (ഉദാ: മഞ്ഞ) അതിന്റെ ഘടകവർണ്ണങ്ങളെയും (ചുവപ്പ്, പച്ച) കടത്തിവിടും; പൂരകവർണ്ണത്തെ (നീല) തടയും.</span>
+            <span class="t-en">A secondary-colour filter (e.g. yellow) transmits its component colours (red, green) too, but blocks the complementary colour (blue).</span></li>
+      </ul>
+      <div class="def">
+        <span class="t-ml"><b>അതാര്യ വസ്തുക്കൾ:</b> ഒരു അതാര്യ വസ്തുവിൽ നിന്ന് ഏത് പ്രകാശവർണ്ണമാണോ നമ്മുടെ കണ്ണിൽ പതിക്കുന്നത്, ആ നിറത്തിലാണ് നാം ആ വസ്തുവിനെ കാണുന്നത് — അതായത് വസ്തു ആ വർണ്ണത്തെ <b>പ്രതിപതിപ്പിക്കുകയും</b> (reflect), മറ്റെല്ലാ വർണ്ണങ്ങളെയും <b>ആഗിരണം ചെയ്യുകയും</b> (absorb) ചെയ്യുന്നു.</span>
+        <span class="t-en"><b>Opaque objects:</b> We see an opaque object in whichever colour of light it reflects into our eyes — the object <b>reflects</b> that colour and <b>absorbs</b> all other colours.</span>
+      </div>
+      <ul>
+        <li><span class="t-ml">എല്ലാ വർണ്ണങ്ങളെയും പ്രതിപതിപ്പിക്കുന്ന പ്രതലം <b>ധവളനിറത്തിൽ</b> കാണപ്പെടും.</span>
+            <span class="t-en">A surface that reflects all colours appears <b>white</b>.</span></li>
+        <li><span class="t-ml">എല്ലാ വർണ്ണങ്ങളെയും ആഗിരണം ചെയ്യുന്ന പ്രതലം <b>ഇരുണ്ട (കറുപ്പ്) നിറത്തിൽ</b> കാണപ്പെടും.</span>
+            <span class="t-en">A surface that absorbs all colours appears <b>dark (black)</b>.</span></li>
+      </ul>
+      <p class="note">
+        <span class="t-ml">ഇക്കാരണത്താൽ, ജനലിലൂടെ വരുന്ന വെളുത്ത പ്രകാശത്തിൽ പച്ച ഇല വച്ചാൽ അത് പച്ചയായി കാണപ്പെടും; എന്നാൽ ചുവന്ന വെളിച്ചത്തിൽ (റെഡ് ബൾബിൽ) വച്ചാൽ അതേ ഇല ഇരുണ്ടതായി കാണപ്പെടും — കാരണം ഇലയ്ക്ക് പ്രതിപതിപ്പിക്കാൻ പച്ചവർണ്ണം ലഭ്യമല്ല.</span>
+        <span class="t-en">This is why a green leaf looks green under white light, but appears dark under pure red light — the leaf has no green light available to reflect.</span>
+      </p>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">7</span><span class="ttitle"><span class="t-ml">പ്രകാശത്തിന്റെ വിസരണം (Scattering of Light)</span><span class="t-en">Scattering of Light</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <div class="def">
+        <span class="t-ml"><b>വിസരണം (Scattering):</b> മാധ്യമത്തിലെ കണങ്ങളിൽ തട്ടി പ്രകാശത്തിന് സംഭവിക്കുന്ന ക്രമരഹിതവും ഭാഗികവുമായ ദിശാവ്യതിയാനം.</span>
+        <span class="t-en"><b>Scattering:</b> The random, partial change in direction of light when it strikes fine particles in a medium.</span>
+      </div>
+      <ul>
+        <li><span class="t-ml">തരംഗദൈർഘ്യം <b>കുറഞ്ഞ</b> വർണ്ണങ്ങൾക്ക് (വയലറ്റ്, ഇൻഡിഗോ, നീല) വിസരണം <b>കൂടുതലാണ്</b>; തരംഗദൈർഘ്യം കൂടിയ ചുവപ്പിന് വിസരണം കുറവാണ്.</span>
+            <span class="t-en">Colours with <b>shorter</b> wavelength (violet, indigo, blue) undergo <b>more</b> scattering; longer-wavelength red scatters the least.</span></li>
+        <li><span class="t-ml">വിസരണത്തിന്റെ അളവ് കണങ്ങളുടെ വലുപ്പത്തെയും ആശ്രയിച്ചിരിക്കുന്നു — കണങ്ങൾ വലുതാകുന്തോറും വിസരണം കൂടും.</span>
+            <span class="t-en">The extent of scattering also depends on particle size — larger particles cause more scattering.</span></li>
+      </ul>
+      <div class="def">
+        <span class="t-ml"><b>ടിന്റൽ പ്രഭാവം (Tyndall effect):</b> ഒരു കൊളോയ്ഡൽ ദ്രാവകത്തിലൂടെയോ സസ്പെൻഷനിലൂടെയോ പ്രകാശം കടന്നുപോകുമ്പോൾ, ചെറിയ കണികകൾ പ്രകാശത്തെ വിസരണം ചെയ്യുന്നതു കൊണ്ട് പ്രകാശപാത ദൃശ്യമാകുന്ന പ്രതിഭാസം.</span>
+        <span class="t-en"><b>Tyndall effect:</b> The phenomenon where the path of light becomes visible while passing through a colloidal liquid or suspension, because fine particles scatter the light.</span>
+      </div>
+      <ul>
+        <li><span class="t-ml">ഉദാ: മഞ്ഞുകാലത്ത് ശിഖരങ്ങൾക്കിടയിലൂടെ കടന്നുവരുന്ന പ്രകാശപാത വ്യക്തമായി കാണുന്നത്.</span>
+            <span class="t-en">e.g. The visible beam of light streaming through tree branches on a foggy morning.</span></li>
+      </ul>
+      <p><b><span class="t-ml">ആകാശനീലിമ (Blue colour of the sky):</span><span class="t-en">Blue colour of the sky:</span></b></p>
+      <p>
+        <span class="t-ml">അന്തരീക്ഷത്തിലെ വാതകതന്മാത്രകൾ തരംഗദൈർഘ്യം കുറഞ്ഞ വയലറ്റ്, ഇൻഡിഗോ, നീല വർണ്ണങ്ങളെ ഏറ്റവും കൂടുതൽ വിസരണം ചെയ്യുന്നു. ഇതിൽ കണ്ണിന് ഏറ്റവും സംവേദനക്ഷമത കൂടുതലുള്ള നീലനിറം ആകാശത്ത് വ്യാപിച്ചു കാണപ്പെടുന്നു — അതിനാൽ ആകാശം നീലനിറത്തിൽ കാണുന്നു.</span>
+        <span class="t-en">Air molecules in the atmosphere scatter short-wavelength violet, indigo and blue light the most. Since the eye is most sensitive to blue, the sky appears blue.</span>
+      </p>
+      <p><b><span class="t-ml">ഉദയാസ്തമയ സമയങ്ങളിൽ സൂര്യന്റെ നിറം:</span><span class="t-en">Colour of the setting/rising Sun:</span></b></p>
+      <p>
+        <span class="t-ml">ഉദയാസ്തമയ സമയങ്ങളിൽ സൂര്യരശ്മികൾക്ക് നിരീക്ഷകന്റെ കണ്ണിലെത്താൻ അന്തരീക്ഷത്തിലൂടെ കൂടുതൽ ദൂരം സഞ്ചരിക്കേണ്ടിവരുന്നു. ഈ ദൂരത്തിൽ തരംഗദൈർഘ്യം കുറഞ്ഞ വർണ്ണങ്ങൾ (നീല മുതലായവ) ഏറെക്കുറെ പൂർണ്ണമായി വിസരണം ചെയ്ത് നീങ്ങിപ്പോകുന്നു; തരംഗദൈർഘ്യം കൂടിയ ചുവപ്പ്, ഓറഞ്ച്, മഞ്ഞ വർണ്ണങ്ങൾ മാത്രമേ അവശേഷിച്ച് നമ്മുടെ കണ്ണിലെത്തുന്നുള്ളൂ. അതിനാൽ ഈ സമയങ്ങളിൽ സൂര്യൻ ചുവപ്പോ മഞ്ഞയോ ഓറഞ്ചോ ആയി കാണപ്പെടുന്നു.</span>
+        <span class="t-en">At sunrise/sunset, sunlight must travel a much longer path through the atmosphere to reach the observer. Over this distance, short-wavelength colours (blue etc.) are almost completely scattered away; only the long-wavelength red, orange and yellow remain to reach the eye. This is why the Sun appears red, yellow or orange at these times.</span>
+      </p>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">8</span><span class="ttitle"><span class="t-ml">വൈദ്യുതകാന്തികസ്പെക്ട്രം (Electromagnetic Spectrum)</span><span class="t-en">Electromagnetic Spectrum</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <p>
+        <span class="t-ml">സൂര്യരശ്മികളിൽ ദൃശ്യപ്രകാശത്തെ കൂടാതെ ഇൻഫ്രാറെഡ് വികിരണങ്ങളും അൾട്രാവയലറ്റ് വികിരണങ്ങളും അടങ്ങിയിട്ടുണ്ട്. ഇവയെല്ലാം ഉൾപ്പെടുന്നതാണ് വൈദ്യുതകാന്തിക വികിരണങ്ങൾ (Electromagnetic radiations).</span>
+        <span class="t-en">Sunlight contains, besides visible light, infrared radiation and ultraviolet radiation. Together with several others, these make up the electromagnetic radiations.</span>
+      </p>
+      <div class="def">
+        <span class="t-ml"><b>വൈദ്യുതകാന്തികസ്പെക്ട്രം (Electromagnetic spectrum):</b> വൈദ്യുതകാന്തിക വികിരണങ്ങളുടെ ക്രമമായ വിതരണം.</span>
+        <span class="t-en"><b>Electromagnetic spectrum:</b> The ordered distribution of electromagnetic radiations.</span>
+      </div>
+      <p class="note">
+        <span class="t-ml">തരംഗദൈർഘ്യത്തിന്റെ ആരോഹണക്രമത്തിൽ: ഗാമ വികിരണം → X വികിരണം → അൾട്രാവയലറ്റ് വികിരണം → ദൃശ്യപ്രകാശം → ഇൻഫ്രാറെഡ് വികിരണം → റേഡിയോതരംഗങ്ങൾ.</span>
+        <span class="t-en">In increasing order of wavelength: Gamma rays → X-rays → Ultraviolet radiation → Visible light → Infrared radiation → Radio waves.</span>
+      </p>
+      <ul>
+        <li><span class="t-ml">ഇവയെല്ലാം ശൂന്യതയിലൂടെ സെക്കൻഡിൽ <b>3 × 10⁸ മീറ്റർ</b> വേഗത്തിൽ സഞ്ചരിക്കുന്നു.</span>
+            <span class="t-en">All of them travel through vacuum at <b>3 × 10⁸ m/s</b>.</span></li>
+        <li><span class="t-ml"><b>ഇൻഫ്രാറെഡ് വികിരണം:</b> സൂര്യരശ്മികളിലെ താപത്തിന് പ്രധാന കാരണം. ലെൻസ് ഉപയോഗിച്ച് കേന്ദ്രീകരിച്ചാൽ വസ്തുക്കൾ കത്തിക്കാൻ കഴിയും.</span>
+            <span class="t-en"><b>Infrared radiation:</b> mainly responsible for the heat in sunlight. Can be focused with a lens to burn objects.</span></li>
+        <li><span class="t-ml"><b>അൾട്രാവയലറ്റ് വികിരണം:</b> ശരീരത്തിൽ വിറ്റാമിൻ D ഉൽപാദിപ്പിക്കാൻ സഹായിക്കുന്നു.</span>
+            <span class="t-en"><b>Ultraviolet radiation:</b> helps the body synthesise vitamin D.</span></li>
+      </ul>
+      <p class="note">
+        <span class="t-ml">സൗരവികിരണങ്ങൾ ശൂന്യതയിലൂടെയും വായുവിലൂടെയും ശരാശരി 15 കോടി കിലോമീറ്റർ സഞ്ചരിച്ചാണ് ഭൂമിയിൽ എത്തുന്നത്; വായുവിലൂടെ സഞ്ചരിക്കുന്ന ദൂരം ശൂന്യതയെ അപേക്ഷിച്ച് വളരെ കുറവാണ്.</span>
+        <span class="t-en">Solar radiation travels an average of 150 million km, mostly through vacuum, before reaching Earth; the distance travelled through air is very small in comparison.</span>
+      </p>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">9</span><span class="ttitle"><span class="t-ml">കണ്ണും കാഴ്ചയും (Eye and Vision)</span><span class="t-en">Eye and Vision</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <p>
+        <span class="t-ml">നമ്മുടെ കണ്ണിലെ ലെൻസ് ഒരു കോൺവെക്സ് ലെൻസ് പോലെ പ്രവർത്തിച്ച്, കാണുന്ന വസ്തുവിന്റെ യഥാർഥവും തലകീഴായതുമായ ഒരു ചെറിയ പ്രതിബിംബം <b>റെറ്റിനയിൽ</b> രൂപപ്പെടുത്തുന്നു.</span>
+        <span class="t-en">The lens in our eye works like a convex lens, forming a real, inverted, diminished image of the object on the <b>retina</b>.</span>
+      </p>
+      <div class="def">
+        <span class="t-ml"><b>സമഞ്ജനക്ഷമത (Power of accommodation):</b> വസ്തുക്കളുടെ സ്ഥാനം എവിടെയായിരുന്നാലും പ്രതിബിംബം റെറ്റിനയിൽ തന്നെ പതിക്കത്തക്ക വിധം ലെൻസിന്റെ വക്രത വ്യത്യാസപ്പെടുത്തി ഫോക്കസ് ദൂരം ക്രമീകരിക്കാനുള്ള കണ്ണിന്റെ കഴിവ്.</span>
+        <span class="t-en"><b>Power of accommodation:</b> The eye's ability to adjust the focal length of its lens — by varying the curvature — so that the image always forms on the retina, whatever the object's distance.</span>
+      </div>
+      <ul>
+        <li><span class="t-ml"><b>സീലിയറി പേശികൾ</b> സങ്കോചിക്കുമ്പോൾ ലെൻസിന്റെ വക്രത കൂടുകയും ഫോക്കസ്ദൂരം കുറയുകയും ചെയ്യുന്നു (അടുത്ത വസ്തുക്കൾ കാണാൻ).</span>
+            <span class="t-en">When the <b>ciliary muscles</b> contract, the lens curvature increases and the focal length decreases (to view nearby objects).</span></li>
+        <li><span class="t-ml">അകലെയുള്ള വസ്തുവിനെ നോക്കുമ്പോൾ ലെൻസ് പരന്നതാവുകയും ഫോക്കസ്ദൂരം കൂടുകയും ചെയ്യുന്നു.</span>
+            <span class="t-en">When viewing distant objects, the lens flattens and the focal length increases.</span></li>
+      </ul>
+      <div class="def">
+        <span class="t-ml"><b>നിയർ പോയിന്റ് (Near point):</b> ഒരു വസ്തുവിനെ വ്യക്തമായി കാണാൻ കഴിയുന്ന ഏറ്റവും അടുത്തുള്ള ബിന്ദു. ആരോഗ്യമുള്ള കണ്ണിന് ഇത് <b>25 cm</b> ആണെന്ന് കണക്കാക്കിയിരിക്കുന്നു — ഇതിനെ <b>വ്യക്തമായ കാഴ്ചയ്ക്കുള്ള കുറഞ്ഞ ദൂരം (Least distance of distinct vision)</b> എന്നും പറയുന്നു.</span>
+        <span class="t-en"><b>Near point:</b> The closest point at which an object can be seen distinctly. For a healthy eye this is taken as <b>25 cm</b> — also called the <b>least distance of distinct vision</b>.</span>
+      </div>
+      <div class="def">
+        <span class="t-ml"><b>ഫാർ പോയിന്റ് (Far point):</b> ഒരു വസ്തുവിനെ വ്യക്തമായി കാണാൻ കഴിയുന്ന ഏറ്റവും അകലെയുള്ള ബിന്ദു. ആരോഗ്യമുള്ള കണ്ണിന് ഇത് <b>അനന്തത</b> ആയി കണക്കാക്കുന്നു.</span>
+        <span class="t-en"><b>Far point:</b> The farthest point at which an object can be seen distinctly. For a healthy eye this is taken as <b>infinity</b>.</span>
+      </div>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">10</span><span class="ttitle"><span class="t-ml">കാഴ്ചാ ന്യൂനതകൾ (Defects of Vision)</span><span class="t-en">Defects of Vision</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <div class="def">
+        <span class="t-ml"><b>ഹ്രസ്വദൃഷ്ടി (Short sightedness / Myopia):</b> അടുത്തുള്ള വസ്തുക്കളെ വ്യക്തമായി കാണാൻ കഴിയുമെങ്കിലും അകലെയുള്ളവ വ്യക്തമായി കാണാൻ കഴിയാത്ത ന്യൂനത. ഫാർ പോയിന്റ് അനന്തതയിലായിരിക്കില്ല — ഒരു നിശ്ചിത അകലത്തിലായിരിക്കും.</span>
+        <span class="t-en"><b>Myopia (short sightedness):</b> Nearby objects can be seen clearly, but distant objects cannot. The far point is not at infinity but at some finite distance.</span>
+      </div>
+      <ul>
+        <li><span class="t-ml"><b>കാരണം:</b> നേത്രഗോളത്തിന്റെ വലുപ്പം കൂടുതലാവുകയോ ലെൻസിന്റെ പവർ കൂടുതലാവുകയോ ചെയ്യുന്നത്.</span>
+            <span class="t-en"><b>Cause:</b> An elongated eyeball, or excessive power of the eye lens.</span></li>
+        <li><span class="t-ml"><b>പരിഹാരം:</b> അനുയോജ്യമായ പവറുള്ള <b>കോൺകേവ് ലെൻസ്</b> ഉപയോഗിച്ച്.</span>
+            <span class="t-en"><b>Correction:</b> Using a <b>concave lens</b> of suitable power.</span></li>
+      </ul>
+      <div class="def">
+        <span class="t-ml"><b>ദീർഘദൃഷ്ടി (Long sightedness / Hypermetropia):</b> അകലെയുള്ള വസ്തുക്കളെ വ്യക്തമായി കാണാൻ കഴിയുമെങ്കിലും അടുത്തുള്ളവ വ്യക്തമായി കാണാൻ കഴിയാത്ത ന്യൂനത. നിയർ പോയിന്റ് 25 cm-ൽ കൂടുതലായിരിക്കും.</span>
+        <span class="t-en"><b>Hypermetropia (long sightedness):</b> Distant objects can be seen clearly, but nearby objects cannot. The near point is farther than 25 cm.</span>
+      </div>
+      <ul>
+        <li><span class="t-ml"><b>കാരണം:</b> നേത്രഗോളത്തിന്റെ വലുപ്പം കുറവാവുകയോ ലെൻസിന്റെ പവർ കുറവാവുകയോ ചെയ്യുന്നത്.</span>
+            <span class="t-en"><b>Cause:</b> A shortened eyeball, or insufficient power of the eye lens.</span></li>
+        <li><span class="t-ml"><b>പരിഹാരം:</b> അനുയോജ്യമായ പവറുള്ള <b>കോൺവെക്സ് ലെൻസ്</b> ഉപയോഗിച്ച്.</span>
+            <span class="t-en"><b>Correction:</b> Using a <b>convex lens</b> of suitable power.</span></li>
+      </ul>
+      <div class="def">
+        <span class="t-ml"><b>വെള്ളെഴുത്ത് (Presbyopia):</b> പ്രായമാകുന്തോറും സീലിയറി പേശികളുടെ ക്ഷമത കുറയുന്നതിനാൽ സമഞ്ജനക്ഷമത കുറയുകയും, നിയർ പോയിന്റ് 25 cm-ൽ കൂടുതലായി അകലുകയും ചെയ്യുന്ന ന്യൂനത.</span>
+        <span class="t-en"><b>Presbyopia:</b> A defect where, with advancing age, the weakening of the ciliary muscles reduces the power of accommodation, pushing the near point beyond 25 cm.</span>
+      </div>
+      <table class="mini-tbl t-ml">
+        <tr><th>ന്യൂനത</th><th>പ്രശ്നം</th><th>പരിഹാരം</th></tr>
+        <tr><td>ഹ്രസ്വദൃഷ്ടി</td><td>അകലെയുള്ളവ കാണാൻ കഴിയില്ല</td><td>കോൺകേവ് ലെൻസ്</td></tr>
+        <tr><td>ദീർഘദൃഷ്ടി</td><td>അടുത്തുള്ളവ കാണാൻ കഴിയില്ല</td><td>കോൺവെക്സ് ലെൻസ്</td></tr>
+        <tr><td>വെള്ളെഴുത്ത്</td><td>സമഞ്ജനക്ഷമത കുറയുന്നു (പ്രായാധിക്യം)</td><td>കോൺവെക്സ് ലെൻസ് (റീഡിങ് ഗ്ലാസ്)</td></tr>
+      </table>
+      <table class="mini-tbl t-en">
+        <tr><th>Defect</th><th>Problem</th><th>Correction</th></tr>
+        <tr><td>Myopia</td><td>Cannot see distant objects</td><td>Concave lens</td></tr>
+        <tr><td>Hypermetropia</td><td>Cannot see nearby objects</td><td>Convex lens</td></tr>
+        <tr><td>Presbyopia</td><td>Reduced accommodation (old age)</td><td>Convex lens (reading glasses)</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary><span class="tnum">11</span><span class="ttitle"><span class="t-ml">പ്രകാശമലിനീകരണം (Light Pollution)</span><span class="t-en">Light Pollution</span></span><span class="chev">▶</span></summary>
+    <div class="tbody">
+      <div class="def">
+        <span class="t-ml"><b>പ്രകാശമലിനീകരണം (Light pollution):</b> അമിതമായ അളവിലും തീവ്രതയിലും കൃത്രിമ പ്രകാശം സൃഷ്ടിക്കപ്പെടുന്നത്, ഇത് ജീവമണ്ഡലത്തിലെ സ്വാഭാവിക ആവാസവ്യവസ്ഥയ്ക്ക് ദോഷകരമാകുന്നു.</span>
+        <span class="t-en"><b>Light pollution:</b> Excessive amount and intensity of artificial light, which harms the natural habitats within the biosphere.</span>
+      </div>
+      <ul>
+        <li><span class="t-ml">നിശാചരികളായ പല ജീവികളുടെയും പ്രജനനത്തെയും ഇരതേടലിനെയും ദോഷകരമായി ബാധിക്കുന്നു.</span>
+            <span class="t-en">Adversely affects the breeding and feeding patterns of many nocturnal animals.</span></li>
+        <li><span class="t-ml">രാത്രികാലങ്ങളിലെ ഡ്രൈവിങിന് ബുദ്ധിമുട്ട് ഉണ്ടാക്കുന്നു.</span>
+            <span class="t-en">Causes difficulty for night-time driving.</span></li>
+        <li><span class="t-ml">ആകാശക്കാഴ്ച മറയ്ക്കുന്നതു മൂലം വാനനിരീക്ഷണം ബുദ്ധിമുട്ടാക്കുന്നു.</span>
+            <span class="t-en">Obscures the night sky, making astronomical observation difficult.</span></li>
+        <li><span class="t-ml">ഉയർന്ന ഫ്ളാറ്റുകളിലെ പ്രകാശം ദേശാടനപ്പക്ഷികളുടെ ദിശ തെറ്റിക്കുന്നു.</span>
+            <span class="t-en">Lights from tall buildings disorient migratory birds.</span></li>
+        <li><span class="t-ml">മനുഷ്യരുടെ സ്വാഭാവിക പ്രവർത്തനങ്ങളെയും ഉറക്കത്തെയും മാനസികാരോഗ്യത്തെയും ബാധിക്കുന്നു.</span>
+            <span class="t-en">Affects natural human activity, sleep, and mental health.</span></li>
+      </ul>
+      <p class="note">
+        <span class="t-ml"><b>ബോണസ് വസ്തുത — ഫോട്ടോപീരിയോഡിസം:</b> പകലിന്റെ ദൈർഘ്യത്തിലെ (പ്രകാശകാലയളവ്) മാറ്റത്തിനനുസരിച്ച് സസ്യങ്ങളും ജീവികളും അവയുടെ പ്രവർത്തനങ്ങൾ ക്രമീകരിക്കുന്ന പ്രതിഭാസം (പൂക്കൽ, ഇലപൊഴിക്കൽ തുടങ്ങിയവ). അമിത കൃത്രിമപ്രകാശം ഇതിനെ താളം തെറ്റിക്കും.</span>
+        <span class="t-en"><b>Bonus fact — Photoperiodism:</b> The phenomenon by which plants and animals adjust their activities (flowering, shedding leaves, etc.) according to changes in day length. Excessive artificial light can disrupt this rhythm.</span>
+      </p>
+    </div>
+  </details>
+
+  <p style="text-align:center;margin-top:26px">
+    <button class="prnbtn" onclick="printPanel('notes')">🖨️ <span class="t-ml">കുറിപ്പുകൾ പ്രിന്റ് ചെയ്യാം</span><span class="t-en">Print notes</span></button>
+  </p>
+</section>
+
+<!-- ================= KEY FACTS ================= -->
+<section class="panel" id="formula">
+  <p class="lead">
+    <span class="t-ml">ഈ അധ്യായത്തിലെ പ്രധാന അക്കങ്ങളും ബന്ധങ്ങളും ഒറ്റ നോട്ടത്തിൽ.</span>
+    <span class="t-en">The key numbers and relations from this chapter, at a glance.</span>
+  </p>
+  <div class="fgrid">
+    <div class="fcard">
+      <p class="fname"><span class="t-ml">വർണ്ണരാജി (VIBGYOR)</span><span class="t-en">Spectrum (VIBGYOR)</span></p>
+      <div class="spectrum-bar"></div>
+      <div class="where">
+        <div><span class="t-ml">തരംഗദൈർഘ്യപരിധി: <b>380 nm (വയലറ്റ്) — 750 nm (ചുവപ്പ്)</b></span><span class="t-en">Wavelength range: <b>380 nm (violet) — 750 nm (red)</b></span></div>
+        <div class="note"><span class="t-ml">⤷ വയലറ്റിന് ഏറ്റവും കൂടിയ വ്യതിയാനവും വിസരണവും · ചുവപ്പിന് ഏറ്റവും കുറഞ്ഞത്</span><span class="t-en">⤷ Violet deviates & scatters the most · red the least</span></div>
+      </div>
+    </div>
+    <div class="fcard">
+      <p class="fname"><span class="t-ml">നിറങ്ങൾ കൂട്ടിച്ചേർക്കൽ (പ്രകാശം)</span><span class="t-en">Colour addition (light)</span></p>
+      <div class="formula">R + G + B = White</div>
+      <div class="where">
+        <div>R + G = <span class="sym">Yellow</span> &nbsp;·&nbsp; G + B = <span class="sym">Cyan</span> &nbsp;·&nbsp; B + R = <span class="sym">Magenta</span></div>
+        <div class="note"><span class="t-ml">⤷ പ്രാഥമികചായങ്ങൾ (dyes/pigments): സയൻ, മജന്ത, മഞ്ഞ (CMY)</span><span class="t-en">⤷ Primary dyes/pigments: Cyan, Magenta, Yellow (CMY)</span></div>
+      </div>
+    </div>
+    <div class="fcard">
+      <p class="fname"><span class="t-ml">വീക്ഷണസ്ഥിരതയുടെ കാലയളവ്</span><span class="t-en">Duration of persistence of vision</span></p>
+      <div class="formula">≈ 1/16 s</div>
+      <div class="where">
+        <div class="note"><span class="t-ml">⤷ സിനിമ, ആനിമേഷൻ, ന്യൂട്ടൺസ് ഡിസ്ക് എന്നിവയുടെ അടിസ്ഥാനം</span><span class="t-en">⤷ The basis of cinema, animation, and Newton's colour disc</span></div>
+      </div>
+    </div>
+    <div class="fcard">
+      <p class="fname"><span class="t-ml">വ്യക്തമായ കാഴ്ചയ്ക്കുള്ള കുറഞ്ഞ ദൂരം</span><span class="t-en">Least distance of distinct vision</span></p>
+      <div class="formula">≈ 25 cm</div>
+      <div class="where">
+        <div><span class="t-ml">നിയർ പോയിന്റ് = 25 cm &nbsp;·&nbsp; ഫാർ പോയിന്റ് = അനന്തത (ആരോഗ്യമുള്ള കണ്ണ്)</span><span class="t-en">Near point = 25 cm &nbsp;·&nbsp; Far point = infinity (healthy eye)</span></div>
+      </div>
+    </div>
+    <div class="fcard">
+      <p class="fname"><span class="t-ml">വൈദ്യുതകാന്തിക വികിരണങ്ങളുടെ വേഗം</span><span class="t-en">Speed of electromagnetic radiation</span></p>
+      <div class="formula">3 × 10⁸ m/s</div>
+      <div class="where">
+        <div class="note"><span class="t-ml">⤷ ശൂന്യതയിൽ; ദൃശ്യപ്രകാശം, ഇൻഫ്രാറെഡ്, അൾട്രാവയലറ്റ് എല്ലാം ഇതേ വേഗത്തിൽ</span><span class="t-en">⤷ In vacuum; visible light, infrared and ultraviolet all travel at this speed</span></div>
+      </div>
+    </div>
+    <div class="fcard" style="background:#eef7f6;border-color:#a7e0d8;">
+      <p class="fname" style="color:var(--reso)"><span class="t-ml">കാഴ്ചാ ന്യൂനതകളും പരിഹാരവും</span><span class="t-en">Vision defects and their correction</span></p>
+      <div class="where" style="margin-top:0">
+        <div><span class="t-ml">ഹ്രസ്വദൃഷ്ടി (Myopia)</span><span class="t-en">Myopia</span> → <span class="sym"><span class="t-ml">കോൺകേവ് ലെൻസ്</span><span class="t-en">Concave lens</span></span></div>
+        <div><span class="t-ml">ദീർഘദൃഷ്ടി (Hypermetropia)</span><span class="t-en">Hypermetropia</span> → <span class="sym"><span class="t-ml">കോൺവെക്സ് ലെൻസ്</span><span class="t-en">Convex lens</span></span></div>
+        <div><span class="t-ml">വെള്ളെഴുത്ത് (Presbyopia)</span><span class="t-en">Presbyopia</span> → <span class="sym"><span class="t-ml">കോൺവെക്സ് ലെൻസ്</span><span class="t-en">Convex lens</span></span></div>
+      </div>
+    </div>
+    <div class="fcard" style="background:#f4f0fb;border-color:#d9c9f5;">
+      <p class="fname" style="color:#6d28d9"><span class="t-ml">ഓർത്തിരിക്കാൻ — സ്ഥിര വസ്തുതകൾ</span><span class="t-en">Facts worth memorising</span></p>
+      <div class="where" style="margin-top:0">
+        <div><span class="t-ml">വർണ്ണരാജി ക്രമം → <span class="sym">VIBGYOR</span></span><span class="t-en">Order of the spectrum → <span class="sym">VIBGYOR</span></span></div>
+        <div><span class="t-ml">ആകാശം നീലയായി കാണുന്നത് → <span class="sym">വിസരണം</span> കാരണം</span><span class="t-en">Sky looks blue → because of <span class="sym">scattering</span></span></div>
+        <div><span class="t-ml">മഴവില്ല് → <span class="sym">2 അപവർത്തനം + 1 ആന്തരപ്രതിപതനം</span></span><span class="t-en">Rainbow → <span class="sym">2 refractions + 1 internal reflection</span></span></div>
+        <div><span class="t-ml">യഥാർഥ പ്രതിബിംബം റെറ്റിനയിൽ → <span class="sym">തലകീഴ്</span></span><span class="t-en">Real image on retina → <span class="sym">inverted</span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FLASHCARDS ================= -->
+<section class="panel" id="flash">
+  <p class="lead">
+    <span class="t-ml">ഓരോ കാർഡിലും ടാപ്പ് ചെയ്ത് ഉത്തരം നോക്കാം. റിവിഷന് ഉത്തമം!</span>
+    <span class="t-en">Tap any card to reveal the answer. Great for revision!</span>
+  </p>
+  <div class="fcwrap" id="fcwrap"></div>
+</section>
+
+<!-- ================= QUIZ ================= -->
+<section class="panel" id="quiz">
+  <p class="lead">
+    <span class="t-ml">ഓരോ ചോദ്യത്തിനും ഉത്തരം തിരഞ്ഞെടുക്കൂ — ഉടനെ ശരി/തെറ്റ് അറിയാം.</span>
+    <span class="t-en">Choose an answer for each question — you'll see instantly whether it's right or wrong.</span>
+  </p>
+
+  <div class="sharebar no-print">
+    <a class="sbtn open" href="kazhchayum-varnnangalum-quiz.html" target="_blank" rel="noopener">
+      🚀 <span class="t-ml">ക്വിസ് പേജ് തുറക്കുക</span><span class="t-en">Open quiz page</span></a>
+    <button class="sbtn share" id="shareBtn">
+      🔗 <span class="t-ml">ക്വിസ് ലിങ്ക് പകർത്തുക</span><span class="t-en">Copy quiz link</span></button>
+    <button class="sbtn wa" id="waBtn">
+      📲 <span class="t-ml">WhatsApp-ൽ അയക്കുക</span><span class="t-en">Send on WhatsApp</span></button>
+  </div>
+  <p class="lead" style="text-align:center;font-size:13px;margin:-10px 0 22px">
+    <span class="t-ml">ലിങ്ക് പങ്കിട്ടാൽ കുട്ടികൾക്ക് ക്വിസ് മാത്രമുള്ള പ്രത്യേക പേജ് തുറക്കും.</span>
+    <span class="t-en">Sharing the link opens a separate, quiz-only page for students.</span>
+  </p>
+
+  <div class="quiz-card" id="quizCard"></div>
+</section>
+
+<!-- ================= QUESTION BANK ================= -->
+<section class="panel" id="qbank">
+  <p class="lead">
+    <span class="t-ml">പരീക്ഷയ്ക്കുള്ള ചോദ്യബാങ്ക്. ഓരോ ചോദ്യത്തിനും താഴെ <b style="color:var(--good)">ഉത്തരം കാണിക്കുക</b> അമർത്തി ഉത്തരം പരിശോധിക്കാം.</span>
+    <span class="t-en">Exam question bank. Press <b style="color:var(--good)">Show answer</b> below each question to check your answer.</span>
+  </p>
+
+  <div class="qb-tools no-print">
+    <button class="qb-btn show" id="qbToggleAll">📖 <span class="t-ml">എല്ലാ ഉത്തരങ്ങളും കാണിക്കുക</span><span class="t-en">Show all answers</span></button>
+    <button class="qb-btn prn" onclick="printPanel('qbank')">🖨️ <span class="t-ml">ചോദ്യപ്പേപ്പർ പ്രിന്റ് ചെയ്യാം</span><span class="t-en">Print question paper</span></button>
+  </div>
+
+  <div class="qb-sec">
+    <div class="qb-head"><span class="sl">A</span><h3><span class="t-ml">ശരിയുത്തരം തിരഞ്ഞെടുക്കുക</span><span class="t-en">Choose the correct answer</span></h3><span class="mk">1 × 6 = 6</span></div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">1.</span><span><span class="t-ml">വർണ്ണരാജിയിൽ ഏറ്റവും കൂടുതൽ വ്യതിയാനം സംഭവിക്കുന്ന വർണ്ണം ഏത്?</span><span class="t-en">Which colour undergoes the greatest deviation in the spectrum?</span></span></div>
+      <ul class="qb-opts">
+        <li><b>a)</b> <span class="t-ml">ചുവപ്പ്</span><span class="t-en">Red</span></li>
+        <li><b>b)</b> <span class="t-ml">മഞ്ഞ</span><span class="t-en">Yellow</span></li>
+        <li><b>c)</b> <span class="t-ml">വയലറ്റ്</span><span class="t-en">Violet</span></li>
+        <li><b>d)</b> <span class="t-ml">പച്ച</span><span class="t-en">Green</span></li>
+      </ul>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: c) വയലറ്റ്</b> — ഏറ്റവും കുറഞ്ഞ തരംഗദൈർഘ്യമുള്ളതിനാൽ ഏറ്റവും കൂടുതൽ വ്യതിയാനം.</span><span class="t-en"><b>Answer: c) Violet</b> — having the shortest wavelength, it deviates the most.</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">2.</span><span><span class="t-ml">ചുവപ്പും പച്ചയും ചേരുമ്പോൾ ലഭിക്കുന്ന വർണ്ണം ഏത്?</span><span class="t-en">What colour is obtained when red and green combine?</span></span></div>
+      <ul class="qb-opts">
+        <li><b>a)</b> <span class="t-ml">സയൻ</span><span class="t-en">Cyan</span></li>
+        <li><b>b)</b> <span class="t-ml">മഞ്ഞ</span><span class="t-en">Yellow</span></li>
+        <li><b>c)</b> <span class="t-ml">മജന്ത</span><span class="t-en">Magenta</span></li>
+        <li><b>d)</b> <span class="t-ml">ധവളം</span><span class="t-en">White</span></li>
+      </ul>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: b) മഞ്ഞ</b></span><span class="t-en"><b>Answer: b) Yellow</b></span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">3.</span><span><span class="t-ml">വീക്ഷണസ്ഥിരതയുടെ ഏകദേശ കാലയളവ് എത്ര?</span><span class="t-en">What is the approximate duration of persistence of vision?</span></span></div>
+      <ul class="qb-opts">
+        <li><b>a)</b> 1/60 s</li>
+        <li><b>b)</b> 1/16 s</li>
+        <li><b>c)</b> 1 s</li>
+        <li><b>d)</b> 1/4 s</li>
+      </ul>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: b) 1/16 സെക്കൻഡ്</b></span><span class="t-en"><b>Answer: b) 1/16 second</b></span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">4.</span><span><span class="t-ml">ആകാശം നീലനിറത്തിൽ കാണാനുള്ള കാരണം എന്ത്?</span><span class="t-en">What causes the sky to appear blue?</span></span></div>
+      <ul class="qb-opts">
+        <li><b>a)</b> <span class="t-ml">അപവർത്തനം</span><span class="t-en">Refraction</span></li>
+        <li><b>b)</b> <span class="t-ml">പ്രതിഫലനം</span><span class="t-en">Reflection</span></li>
+        <li><b>c)</b> <span class="t-ml">വിസരണം</span><span class="t-en">Scattering</span></li>
+        <li><b>d)</b> <span class="t-ml">പ്രകീർണ്ണനം മാത്രം</span><span class="t-en">Dispersion alone</span></li>
+      </ul>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: c) വിസരണം</b> — തരംഗദൈർഘ്യം കുറഞ്ഞ നീല വർണ്ണം ഏറ്റവും കൂടുതൽ വിസരണം ചെയ്യപ്പെടുന്നു.</span><span class="t-en"><b>Answer: c) Scattering</b> — short-wavelength blue light is scattered the most.</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">5.</span><span><span class="t-ml">ഹ്രസ്വദൃഷ്ടി പരിഹരിക്കാൻ ഉപയോഗിക്കുന്ന ലെൻസ് ഏത്?</span><span class="t-en">Which lens is used to correct myopia?</span></span></div>
+      <ul class="qb-opts">
+        <li><b>a)</b> <span class="t-ml">കോൺവെക്സ്</span><span class="t-en">Convex</span></li>
+        <li><b>b)</b> <span class="t-ml">കോൺകേവ്</span><span class="t-en">Concave</span></li>
+        <li><b>c)</b> <span class="t-ml">ബൈഫോക്കൽ</span><span class="t-en">Bifocal</span></li>
+        <li><b>d)</b> <span class="t-ml">സിലിണ്ടർ ലെൻസ്</span><span class="t-en">Cylindrical lens</span></li>
+      </ul>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: b) കോൺകേവ്</b></span><span class="t-en"><b>Answer: b) Concave</b></span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">6.</span><span><span class="t-ml">വൈദ്യുതകാന്തികസ്പെക്ട്രത്തിൽ ദൃശ്യപ്രകാശത്തേക്കാൾ തരംഗദൈർഘ്യം കൂടിയ വികിരണം ഏത്?</span><span class="t-en">Which radiation in the EM spectrum has a longer wavelength than visible light?</span></span></div>
+      <ul class="qb-opts">
+        <li><b>a)</b> <span class="t-ml">അൾട്രാവയലറ്റ്</span><span class="t-en">Ultraviolet</span></li>
+        <li><b>b)</b> <span class="t-ml">X വികിരണം</span><span class="t-en">X-rays</span></li>
+        <li><b>c)</b> <span class="t-ml">ഇൻഫ്രാറെഡ്</span><span class="t-en">Infrared</span></li>
+        <li><b>d)</b> <span class="t-ml">ഗാമ വികിരണം</span><span class="t-en">Gamma rays</span></li>
+      </ul>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: c) ഇൻഫ്രാറെഡ്</b></span><span class="t-en"><b>Answer: c) Infrared</b></span></div>
+    </div>
+  </div>
+
+  <div class="qb-sec">
+    <div class="qb-head"><span class="sl">B</span><h3><span class="t-ml">ഒറ്റ വാക്കിൽ / ഒരു വാക്യത്തിൽ ഉത്തരം</span><span class="t-en">Answer in one word / one sentence</span></h3><span class="mk">1 × 6 = 6</span></div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">7.</span><span><span class="t-ml">ഘടകവർണ്ണങ്ങളുടെ ക്രമമായ വിതരണത്തെ എന്തു വിളിക്കുന്നു?</span><span class="t-en">What is the ordered distribution of component colours called?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>വർണ്ണരാജി (Spectrum)</b></span><span class="t-en"><b>Spectrum</b></span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">8.</span><span><span class="t-ml">പ്രകാശത്തിന്റെ പ്രാഥമിക വർണ്ണങ്ങൾ ഏവ?</span><span class="t-en">What are the primary colours of light?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ചുവപ്പ്, പച്ച, നീല (RGB)</b></span><span class="t-en"><b>Red, Green, Blue (RGB)</b></span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">9.</span><span><span class="t-ml">ആരോഗ്യമുള്ള കണ്ണിന്റെ നിയർ പോയിന്റ് എത്ര?</span><span class="t-en">What is the near point of a healthy eye?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>25 cm</b></span><span class="t-en"><b>25 cm</b></span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">10.</span><span><span class="t-ml">കൊളോയ്ഡിലൂടെ പ്രകാശം കടക്കുമ്പോൾ പ്രകാശപാത ദൃശ്യമാകുന്ന പ്രതിഭാസത്തിന്റെ പേര്?</span><span class="t-en">What is the phenomenon called where the light path becomes visible in a colloid?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>ടിന്റൽ പ്രഭാവം (Tyndall effect)</b></span><span class="t-en"><b>Tyndall effect</b></span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">11.</span><span><span class="t-ml">പ്രായാധിക്യം മൂലം കാഴ്ചാ ന്യൂനത ഉണ്ടാകുന്നതിനെ എന്തു വിളിക്കുന്നു?</span><span class="t-en">What is age-related loss of accommodation called?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>വെള്ളെഴുത്ത് (Presbyopia)</b></span><span class="t-en"><b>Presbyopia</b></span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">12.</span><span><span class="t-ml">ശൂന്യതയിൽ വൈദ്യുതകാന്തിക വികിരണങ്ങളുടെ വേഗം എത്ര?</span><span class="t-en">What is the speed of electromagnetic radiation in vacuum?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml"><b>3 × 10⁸ m/s</b></span><span class="t-en"><b>3 × 10⁸ m/s</b></span></div>
+    </div>
+  </div>
+
+  <div class="qb-sec">
+    <div class="qb-head"><span class="sl">C</span><h3><span class="t-ml">ചെറിയ ഉത്തരം</span><span class="t-en">Short answer</span></h3><span class="mk">2 × 5 = 10</span></div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">13.</span><span><span class="t-ml">പ്രകാശപ്രകീർണ്ണനം എന്നാൽ എന്ത്? ഒരു ഉദാഹരണം എഴുതുക.</span><span class="t-en">What is dispersion of light? Give one example.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml">സമന്വിതപ്രകാശം ഘടകവർണ്ണങ്ങളായി വേർപിരിയുന്ന പ്രതിഭാസം. ഉദാ: ഗ്ലാസ് പ്രിസത്തിലൂടെ സൂര്യപ്രകാശം കടത്തിവിടുമ്പോൾ VIBGYOR വർണ്ണരാജി ലഭിക്കുന്നത്.</span><span class="t-en">The splitting of composite light into its component colours. e.g. Passing sunlight through a glass prism produces the VIBGYOR spectrum.</span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">14.</span><span><span class="t-ml">പൂരകവർണ്ണങ്ങൾ എന്നാൽ എന്ത്? ഒരു ജോഡി എഴുതുക.</span><span class="t-en">What are complementary colours? Give one pair.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml">ചേരുമ്പോൾ ധവളപ്രകാശം നൽകുന്ന വർണ്ണജോഡികൾ. ഉദാ: മഞ്ഞയും നീലയും.</span><span class="t-en">Pairs of colours that give white light when combined. e.g. Yellow and blue.</span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">15.</span><span><span class="t-ml">ഒരു അതാര്യ വസ്തുവിന്റെ നിറം എങ്ങനെ നിർണയിക്കപ്പെടുന്നു?</span><span class="t-en">How is the colour of an opaque object determined?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml">വസ്തു ഏത് വർണ്ണത്തെ പ്രതിപതിപ്പിക്കുന്നോ ആ നിറത്തിലാണ് നാം അതിനെ കാണുന്നത്; മറ്റെല്ലാ വർണ്ണങ്ങളും അത് ആഗിരണം ചെയ്യുന്നു.</span><span class="t-en">We see it in whichever colour it reflects; it absorbs all other colours.</span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">16.</span><span><span class="t-ml">ഹ്രസ്വദൃഷ്ടിയും ദീർഘദൃഷ്ടിയും തമ്മിലുള്ള ഒരു വ്യത്യാസം എഴുതുക.</span><span class="t-en">Write one difference between myopia and hypermetropia.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml">ഹ്രസ്വദൃഷ്ടിയിൽ അകലെയുള്ളവ കാണാൻ കഴിയില്ല (കോൺകേവ് ലെൻസ് വേണം); ദീർഘദൃഷ്ടിയിൽ അടുത്തുള്ളവ കാണാൻ കഴിയില്ല (കോൺവെക്സ് ലെൻസ് വേണം).</span><span class="t-en">In myopia distant objects can't be seen (needs a concave lens); in hypermetropia nearby objects can't be seen (needs a convex lens).</span></div>
+    </div>
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">17.</span><span><span class="t-ml">ഉദയാസ്തമയ സമയങ്ങളിൽ സൂര്യൻ ചുവപ്പായി കാണുന്നത് എന്തുകൊണ്ട്?</span><span class="t-en">Why does the Sun appear red at sunrise and sunset?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml">ഈ സമയത്ത് പ്രകാശം അന്തരീക്ഷത്തിലൂടെ കൂടുതൽ ദൂരം സഞ്ചരിക്കുന്നു; തരംഗദൈർഘ്യം കുറഞ്ഞ വർണ്ണങ്ങൾ വിസരണം ചെയ്ത് നീങ്ങിപ്പോകുകയും, തരംഗദൈർഘ്യം കൂടിയ ചുവപ്പ് മാത്രം അവശേഷിക്കുകയും ചെയ്യുന്നു.</span><span class="t-en">Light travels a longer path through the atmosphere at these times; short-wavelength colours scatter away, leaving mainly long-wavelength red to reach the eye.</span></div>
+    </div>
+  </div>
+
+  <div class="qb-sec">
+    <div class="qb-head"><span class="sl">D</span><h3><span class="t-ml">വിശദമായ ഉത്തരം</span><span class="t-en">Descriptive answer</span></h3><span class="mk">3 × 5 = 15</span></div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">18.</span><span><span class="t-ml">മഴവില്ല് എങ്ങനെ രൂപപ്പെടുന്നു എന്ന് വിശദീകരിക്കുക.</span><span class="t-en">Explain how a rainbow is formed.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml">സൂര്യപ്രകാശം ജലകണികയിലേക്ക് കടക്കുമ്പോൾ ഒരു അപവർത്തനവും, കണികയുടെ പിന്നിലെ പ്രതലത്തിൽ ഒരു ആന്തരപ്രതിപതനവും, പുറത്തേക്ക് വരുമ്പോൾ വീണ്ടും ഒരു അപവർത്തനവും സംഭവിക്കുന്നു. ഇവ മൂന്നിന്റെയും സമന്വിതഫലമായി പ്രകാശം ഘടകവർണ്ണങ്ങളായി വേർപിരിഞ്ഞ് മഴവില്ല് ഉണ്ടാകുന്നു. മഴവില്ല് എപ്പോഴും സൂര്യന്റെ എതിർദിശയിലാണ് കാണുന്നത്.</span><span class="t-en">Sunlight undergoes one refraction entering a water droplet, one total internal reflection at its back surface, and another refraction while exiting. The combined effect splits the light into its component colours, forming the rainbow, which always appears opposite the Sun.</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">19.</span><span><span class="t-ml">ആകാശം നീലനിറത്തിലും ഉദയാസ്തമയത്തിൽ സൂര്യൻ ചുവപ്പുനിറത്തിലും കാണുന്നത് എന്തുകൊണ്ട് എന്ന് വിസരണം ഉപയോഗിച്ച് വിശദീകരിക്കുക.</span><span class="t-en">Using scattering, explain why the sky is blue and why the Sun appears red at sunrise/sunset.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml">തരംഗദൈർഘ്യം കുറഞ്ഞ വർണ്ണങ്ങൾക്ക് (നീല മുതലായവ) വിസരണം കൂടുതലാണ്. പകൽ, സൂര്യൻ നടുവിലായിരിക്കുമ്പോൾ പ്രകാശം അന്തരീക്ഷത്തിലൂടെ കുറഞ്ഞ ദൂരം സഞ്ചരിക്കുന്നു — നീലനിറം വിസരണം ചെയ്ത് ആകാശത്ത് വ്യാപിക്കുന്നു. ഉദയാസ്തമയത്തിൽ പ്രകാശം കൂടുതൽ ദൂരം സഞ്ചരിക്കേണ്ടിവരുന്നതിനാൽ നീല ഏറെക്കുറെ പൂർണ്ണമായി വിസരണം ചെയ്ത് നീങ്ങുകയും, ചുവപ്പ് മാത്രം അവശേഷിച്ച് കണ്ണിലെത്തുകയും ചെയ്യുന്നു.</span><span class="t-en">Shorter-wavelength colours (like blue) scatter more. At midday, light travels a shorter path through the atmosphere, so scattered blue spreads across the sky. At sunrise/sunset, light must travel a much longer path, so blue is almost fully scattered away, leaving mainly red to reach the eye.</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">20.</span><span><span class="t-ml">പ്രാഥമിക വർണ്ണങ്ങൾ, ദ്വിതീയ വർണ്ണങ്ങൾ, പൂരകവർണ്ണങ്ങൾ എന്നിവ ഉദാഹരണസഹിതം വിശദീകരിക്കുക.</span><span class="t-en">Explain primary, secondary and complementary colours with examples.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml">പ്രാഥമിക വർണ്ണങ്ങൾ — ചുവപ്പ്, പച്ച, നീല — ഇവ ഉപയോഗിച്ച് മറ്റെല്ലാ വർണ്ണങ്ങളും ഉണ്ടാക്കാം. ദ്വിതീയ വർണ്ണം — രണ്ട് പ്രാഥമിക വർണ്ണങ്ങൾ തുല്യ അളവിൽ ചേരുമ്പോൾ ലഭിക്കുന്നത് (ഉദാ: ചുവപ്പ്+പച്ച=മഞ്ഞ). പൂരകവർണ്ണങ്ങൾ — ഒരു ദ്വിതീയവർണ്ണത്തോട് ചേരുമ്പോൾ ധവളം നൽകുന്ന ജോഡി (ഉദാ: മഞ്ഞ, നീല).</span><span class="t-en">Primary colours — red, green, blue — can produce every other colour. Secondary colour — obtained when two primary colours combine equally (e.g. red+green=yellow). Complementary colours — a pair that gives white when combined (e.g. yellow and blue).</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">21.</span><span><span class="t-ml">ഹ്രസ്വദൃഷ്ടിയുടെ കാരണവും പരിഹാരവും വിശദീകരിക്കുക.</span><span class="t-en">Explain the cause and correction of myopia.</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml">നേത്രഗോളത്തിന്റെ വലുപ്പം കൂടുതലാവുകയോ ലെൻസിന്റെ പവർ കൂടുതലാവുകയോ ചെയ്യുമ്പോൾ, അകലെയുള്ള വസ്തുവിന്റെ പ്രതിബിംബം റെറ്റിനയ്ക്ക് മുന്നിൽ രൂപപ്പെടുന്നു — അകലെയുള്ളവ വ്യക്തമായി കാണാൻ കഴിയാതെ വരുന്നു. അനുയോജ്യമായ പവറുള്ള കോൺകേവ് ലെൻസ് ഉപയോഗിച്ച് പ്രതിബിംബത്തെ റെറ്റിനയിലേക്ക് നീക്കി ഇത് പരിഹരിക്കാം.</span><span class="t-en">When the eyeball is too elongated or the lens power too high, the image of a distant object forms in front of the retina, so distant objects cannot be seen clearly. This is corrected using a concave lens of suitable power, which shifts the image back onto the retina.</span></div>
+    </div>
+
+    <div class="qb-item">
+      <div class="qb-q"><span class="n">22.</span><span><span class="t-ml">വീക്ഷണസ്ഥിരത എന്നാൽ എന്ത്? ഇത് ന്യൂട്ടൺസ് കളർ ഡിസ്കിൽ എങ്ങനെ പ്രകടമാകുന്നു?</span><span class="t-en">What is persistence of vision? How is it demonstrated in Newton's colour disc?</span></span></div>
+      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
+      <div class="qb-ans"><span class="t-ml">ഒരു വസ്തുവിന്റെ ദൃശ്യാനുഭവം അതിനെ കാഴ്ചയിൽ നിന്ന് മാറ്റിയാലും ഏകദേശം 1/16 സെക്കൻഡ് നിലനിൽക്കുന്ന കണ്ണിന്റെ പ്രത്യേകത. ന്യൂട്ടൺസ് ഡിസ്കിലെ ഏഴ് വർണ്ണങ്ങളും വേഗത്തിൽ കറങ്ങുമ്പോൾ, ഓരോ വർണ്ണത്തിന്റെയും ദൃശ്യാനുഭവം അടുത്ത വർണ്ണം എത്തുന്നതു വരെ നിലനിൽക്കുന്നതിനാൽ എല്ലാം ഒന്നിച്ചു ചേർന്ന് ഏകദേശം വെളുപ്പായി തോന്നുന്നു.</span><span class="t-en">The eye's tendency for a visual impression to persist for about 1/16 s after the object is removed from sight. When the seven colours on Newton's disc spin fast, each colour's impression lasts until the next one arrives, so they blend and the disc appears nearly white.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SHORT NOTE ================= -->
+<section class="panel" id="short">
+  <p class="lead no-print">
+    <span class="t-ml">പരീക്ഷയ്ക്ക് മുൻപുള്ള അവസാന റിവിഷന് — മുഴുവൻ അധ്യായവും ഒറ്റ ഷീറ്റിൽ.</span>
+    <span class="t-en">Last-minute revision — the whole chapter on a single sheet.</span>
+  </p>
+  <p style="text-align:center;margin:0 0 20px" class="no-print">
+    <button class="prnbtn" onclick="printPanel('short')">🖨️ <span class="t-ml">ഷോർട്ട് നോട്ട് പ്രിന്റ് ചെയ്യാം</span><span class="t-en">Print short note</span></button>
+  </p>
+
+  <div class="sn-paper">
+    <h2><span class="t-ml">കാഴ്ചയും വർണ്ണങ്ങളുടെ ലോകവും — ഷോർട്ട് നോട്ട്</span><span class="t-en">Vision and the World of Colours — Short Note</span></h2>
+    <p class="sn-sub">CLASS 10 · PHYSICS · UNIT 3 · QUICK REVISION</p>
+
+    <div class="sn-block">
+      <h4><span class="dot"></span><span class="t-ml">1. പ്രകാശപ്രകീർണ്ണനം</span><span class="t-en">1. Dispersion of light</span></h4>
+      <ul class="t-ml">
+        <li><b>സമന്വിതപ്രകാശം:</b> വ്യത്യസ്ത വർണ്ണങ്ങൾ ചേർന്നത് (സൂര്യപ്രകാശം).</li>
+        <li><b>പ്രകീർണ്ണനം:</b> സമന്വിതപ്രകാശം ഘടകവർണ്ണങ്ങളായി വേർപിരിയൽ → VIBGYOR.</li>
+        <li>വയലറ്റ് → ഏറ്റവും കൂടിയ വ്യതിയാനം (കുറഞ്ഞ λ) · ചുവപ്പ് → ഏറ്റവും കുറഞ്ഞ വ്യതിയാനം (കൂടിയ λ).</li>
+      </ul>
+      <ul class="t-en">
+        <li><b>Composite light:</b> made of different colours (sunlight).</li>
+        <li><b>Dispersion:</b> splitting of composite light into components → VIBGYOR.</li>
+        <li>Violet → greatest deviation (short λ) · Red → least deviation (long λ).</li>
+      </ul>
+    </div>
+
+    <div class="sn-block">
+      <h4><span class="dot"></span><span class="t-ml">2. മഴവില്ലും പുനഃസംയോജനവും</span><span class="t-en">2. Rainbow & recombination</span></h4>
+      <ul class="t-ml">
+        <li>മഴവില്ല്: അപവർത്തനം + ആന്തരപ്രതിപതനം + അപവർത്തനം (ജലകണിക).</li>
+        <li>രണ്ടാമത്തെ പ്രിസത്തിലൂടെ കടത്തിവിട്ടാൽ വർണ്ണങ്ങൾ ധവളപ്രകാശമായി പുനഃസംയോജിക്കും.</li>
+        <li>ന്യൂട്ടൺസ് ഡിസ്ക് വേഗം കറക്കിയാൽ ഏകദേശം വെളുപ്പായി തോന്നും (വീക്ഷണസ്ഥിരത).</li>
+      </ul>
+      <ul class="t-en">
+        <li>Rainbow: refraction + internal reflection + refraction (water droplet).</li>
+        <li>Passing colours through a second prism recombines them into white light.</li>
+        <li>Newton's disc spun fast looks nearly white (persistence of vision).</li>
+      </ul>
+    </div>
+
+    <div class="sn-block">
+      <h4><span class="dot"></span><span class="t-ml">3. വർണ്ണങ്ങളുടെ തരങ്ങൾ</span><span class="t-en">3. Types of colours</span></h4>
+      <div class="sn-grid t-ml">
+        <div class="sn-key">പ്രാഥമികം: R, G, B</div>
+        <div class="sn-key">R+G+B = ധവളം</div>
+        <div class="sn-key">R+G = മഞ്ഞ</div>
+        <div class="sn-key">G+B = സയൻ</div>
+        <div class="sn-key">B+R = മജന്ത</div>
+        <div class="sn-key">ചായങ്ങൾ: CMY</div>
+      </div>
+      <div class="sn-grid t-en">
+        <div class="sn-key">Primary: R, G, B</div>
+        <div class="sn-key">R+G+B = White</div>
+        <div class="sn-key">R+G = Yellow</div>
+        <div class="sn-key">G+B = Cyan</div>
+        <div class="sn-key">B+R = Magenta</div>
+        <div class="sn-key">Dyes: CMY</div>
+      </div>
+    </div>
+
+    <div class="sn-block">
+      <h4><span class="dot"></span><span class="t-ml">4. വസ്തുക്കളുടെ നിറം & വിസരണം</span><span class="t-en">4. Colour of objects & scattering</span></h4>
+      <ul class="t-ml">
+        <li>ഫിൽട്ടർ: സ്വന്തം + ഘടകവർണ്ണങ്ങൾ കടത്തിവിടും, ബാക്കി ആഗിരണം.</li>
+        <li>അതാര്യ വസ്തു: പ്രതിപതിപ്പിക്കുന്ന നിറത്തിൽ കാണപ്പെടും. വെളുപ്പ് = എല്ലാം പ്രതിഫലനം; കറുപ്പ് = എല്ലാം ആഗിരണം.</li>
+        <li>വിസരണം: കണങ്ങളിൽ തട്ടിയുള്ള ക്രമരഹിത ദിശാവ്യതിയാനം. ടിന്റൽ പ്രഭാവം ഇതിന് ഉദാഹരണം.</li>
+        <li>ആകാശം നീല → നീലയുടെ കൂടിയ വിസരണം. ഉദയാസ്തമയം ചുവപ്പ് → നീണ്ട പാതയിൽ നീല വിസരണം ചെയ്ത് നീങ്ങുന്നു.</li>
+      </ul>
+      <ul class="t-en">
+        <li>Filter: transmits its own + component colours, absorbs the rest.</li>
+        <li>Opaque object: seen in the colour it reflects. White = reflects all; black = absorbs all.</li>
+        <li>Scattering: random deviation off fine particles. Tyndall effect is an example.</li>
+        <li>Sky blue → blue scatters most. Sunset/sunrise red → blue scatters away over the long path.</li>
+      </ul>
+    </div>
+
+    <div class="sn-block">
+      <h4><span class="dot"></span><span class="t-ml">5. EM സ്പെക്ട്രവും കണ്ണും</span><span class="t-en">5. EM spectrum & the eye</span></h4>
+      <div class="sn-key">ഗാമ &lt; X-ray &lt; UV &lt; ദൃശ്യപ്രകാശം &lt; IR &lt; റേഡിയോ (λ ആരോഹണം)</div>
+      <div class="sn-key">3 × 10⁸ m/s (ശൂന്യതയിൽ)</div>
+      <ul class="t-ml">
+        <li>റെറ്റിനയിൽ യഥാർഥ, തലകീഴ്, ചെറിയ പ്രതിബിംബം.</li>
+        <li>സമഞ്ജനക്ഷമത: സീലിയറി പേശികൾ ലെൻസ് വക്രത ക്രമീകരിക്കുന്നു.</li>
+        <li>നിയർ പോയിന്റ് = 25 cm · ഫാർ പോയിന്റ് = അനന്തത.</li>
+      </ul>
+      <ul class="t-en">
+        <li>Real, inverted, diminished image on the retina.</li>
+        <li>Accommodation: ciliary muscles adjust the lens curvature.</li>
+        <li>Near point = 25 cm · Far point = infinity.</li>
+      </ul>
+    </div>
+
+    <div class="sn-block">
+      <h4><span class="dot"></span><span class="t-ml">6. കാഴ്ചാ ന്യൂനതകൾ</span><span class="t-en">6. Vision defects</span></h4>
+      <div class="sn-grid t-ml">
+        <div class="sn-key">ഹ്രസ്വദൃഷ്ടി → കോൺകേവ്</div>
+        <div class="sn-key">ദീർഘദൃഷ്ടി → കോൺവെക്സ്</div>
+        <div class="sn-key">വെള്ളെഴുത്ത് → കോൺവെക്സ്</div>
+        <div class="sn-key">പ്രകാശമലിനീകരണം → കൃത്രിമ പ്രകാശ ആധിക്യം</div>
+      </div>
+      <div class="sn-grid t-en">
+        <div class="sn-key">Myopia → Concave</div>
+        <div class="sn-key">Hypermetropia → Convex</div>
+        <div class="sn-key">Presbyopia → Convex</div>
+        <div class="sn-key">Light pollution → excess artificial light</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GLOSSARY ================= -->
+<section class="panel" id="gloss">
+  <p class="lead">
+    <span class="t-ml">ഇംഗ്ലീഷ് — മലയാളം പദങ്ങൾ. തിരയാൻ ടൈപ്പ് ചെയ്യൂ.</span>
+    <span class="t-en">English — Malayalam terms with meanings. Type to search.</span>
+  </p>
+  <input class="gsearch" id="gsearch" placeholder="🔍 dispersion, scattering, വിസരണം...">
+  <table class="gloss">
+    <thead><tr>
+      <th style="width:30%"><span class="t-ml">മലയാളം</span><span class="t-en">Malayalam</span></th>
+      <th style="width:26%">English</th>
+      <th><span class="t-ml">അർഥം</span><span class="t-en">Meaning</span></th>
+    </tr></thead>
+    <tbody id="glossBody"></tbody>
+  </table>
+</section>
+
+</main>
+
+<footer>
+  <b><span class="t-ml">കാഴ്ചയും വർണ്ണങ്ങളുടെ ലോകവും</span><span class="t-en">Vision and the World of Colours</span></b> · Class 10 Physics (SCERT Kerala, 2025)<br>
+  <span class="t-ml">പഠനസഹായി — കുറിപ്പുകൾ · പ്രധാന വസ്തുതകൾ · ഫ്ലാഷ്കാർഡ് · ക്വിസ് · ചോദ്യബാങ്ക് · ഷോർട്ട് നോട്ട്</span>
+  <span class="t-en">Study portal — notes · key facts · flashcards · quiz · question bank · short note</span>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- header prism-dispersion motif ---------- */
+(function(){
+  const g=document.getElementById('scopeG'); if(!g)return;
+  const colours=['#7c3aed','#4f46e5','#2563eb','#16a34a','#eab308','#f97316','#dc2626'];
+  const W=220; let svg='';
+  for(let X=-220;X<=1100;X+=W){
+    const px=X+110;
+    svg+=`<line class="ray white" x1="${X}" y1="120" x2="${px-14}" y2="120"/>`;
+    svg+=`<path class="prism" d="M ${px} 82 L ${px+26} 158 L ${px-26} 158 Z"/>`;
+    colours.forEach((c,i)=>{
+      const dy = (i-3)*12;
+      svg+=`<line class="ray" style="stroke:${c};opacity:.85" x1="${px+8}" y1="128" x2="${X+220}" y2="${120+dy}"/>`;
+    });
+  }
+  g.innerHTML=svg;
+})();
+
+/* ---------- language state ---------- */
+let LANG='ml';
+const btnML=document.getElementById('btnML'), btnEN=document.getElementById('btnEN');
+function setLang(l){
+  LANG=l;
+  document.body.classList.toggle('lang-en', l==='en');
+  document.documentElement.lang = l;
+  btnML.classList.toggle('on', l==='ml');
+  btnEN.classList.toggle('on', l==='en');
+  buildFlash(); buildGloss(); renderQ();
+  document.getElementById('gsearch').value='';
+}
+btnML.addEventListener('click',()=>setLang('ml'));
+btnEN.addEventListener('click',()=>setLang('en'));
+
+/* ---------- tabs ---------- */
+const tabs=document.querySelectorAll('.tab'), panels=document.querySelectorAll('.panel');
+tabs.forEach(t=>t.addEventListener('click',()=>{
+  tabs.forEach(x=>x.classList.remove('active'));
+  panels.forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.p).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+
+/* ---------- bilingual term data ---------- */
+const cards=[
+  {ml:"സമന്വിതപ്രകാശം",en:"Composite light",
+   bml:"വ്യത്യസ്ത വർണ്ണങ്ങൾ ചേർന്നുണ്ടാകുന്ന പ്രകാശം. സൂര്യപ്രകാശം ഉദാഹരണം.",
+   ben:"Light made up of different colours, e.g. sunlight."},
+  {ml:"പ്രകാശപ്രകീർണ്ണനം",en:"Dispersion of light",
+   bml:"സമന്വിതപ്രകാശം ഘടകവർണ്ണങ്ങളായി വേർപിരിയുന്ന പ്രതിഭാസം.",
+   ben:"The splitting of composite light into its component colours."},
+  {ml:"വർണ്ണരാജി",en:"Spectrum",
+   bml:"ഘടകവർണ്ണങ്ങളുടെ ക്രമമായ വിതരണം — VIBGYOR.",
+   ben:"The ordered band of component colours — VIBGYOR."},
+  {ml:"മഴവില്ല്",en:"Rainbow",
+   bml:"ജലകണികകളിലെ അപവർത്തനവും ആന്തരപ്രതിപതനവും മൂലം ഉണ്ടാകുന്ന വർണ്ണരാജി.",
+   ben:"The spectrum formed by refraction and internal reflection in water droplets."},
+  {ml:"വർണ്ണങ്ങളുടെ പുനഃസംയോജനം",en:"Recombination of colours",
+   bml:"വേർപിരിഞ്ഞ ഘടകവർണ്ണങ്ങൾ വീണ്ടും ചേർന്ന് ധവളപ്രകാശമാകുന്നത്.",
+   ben:"Split component colours combining again to give white light."},
+  {ml:"ന്യൂട്ടൺസ് കളർ ഡിസ്ക്",en:"Newton's colour disc",
+   bml:"ഏഴ് വർണ്ണങ്ങൾ പെയിന്റ് ചെയ്ത ഡിസ്ക്; വേഗം കറങ്ങുമ്പോൾ ഏകദേശം വെളുപ്പായി തോന്നും.",
+   ben:"A disc painted with the seven spectral colours; appears nearly white when spun fast."},
+  {ml:"പ്രാഥമിക വർണ്ണങ്ങൾ",en:"Primary colours",
+   bml:"ചുവപ്പ്, പച്ച, നീല — എല്ലാ വർണ്ണപ്രകാശവും ഉണ്ടാക്കാൻ ഉപയോഗിക്കുന്നവ.",
+   ben:"Red, Green, Blue — used to produce every other colour of light."},
+  {ml:"ദ്വിതീയ വർണ്ണം",en:"Secondary colour",
+   bml:"രണ്ട് പ്രാഥമിക വർണ്ണങ്ങൾ ചേരുമ്പോൾ ലഭിക്കുന്നത് — മഞ്ഞ, മജന്ത, സയൻ.",
+   ben:"Obtained by combining two primary colours — yellow, magenta, cyan."},
+  {ml:"പൂരകവർണ്ണങ്ങൾ",en:"Complementary colours",
+   bml:"ചേരുമ്പോൾ ധവളപ്രകാശം നൽകുന്ന വർണ്ണജോഡികൾ.",
+   ben:"Colour pairs that give white light when combined."},
+  {ml:"വീക്ഷണസ്ഥിരത",en:"Persistence of vision",
+   bml:"ഒരു വസ്തുവിന്റെ ദൃശ്യാനുഭവം ഏകദേശം 1/16 സെക്കൻഡ് നിലനിൽക്കുന്ന കണ്ണിന്റെ പ്രത്യേകത.",
+   ben:"The eye retains a visual impression for about 1/16 second after the object is removed."},
+  {ml:"വിസരണം",en:"Scattering",
+   bml:"മാധ്യമത്തിലെ കണങ്ങളിൽ തട്ടി പ്രകാശത്തിന് സംഭവിക്കുന്ന ക്രമരഹിത ദിശാവ്യതിയാനം.",
+   ben:"The random change in direction of light on striking fine particles in a medium."},
+  {ml:"ടിന്റൽ പ്രഭാവം",en:"Tyndall effect",
+   bml:"കൊളോയ്ഡ്/സസ്പെൻഷനിലൂടെ പ്രകാശം കടക്കുമ്പോൾ പ്രകാശപാത ദൃശ്യമാകുന്ന പ്രതിഭാസം.",
+   ben:"The visible light path seen when light passes through a colloid or suspension."},
+  {ml:"ആകാശനീലിമ",en:"Blue colour of the sky",
+   bml:"തരംഗദൈർഘ്യം കുറഞ്ഞ നീലവർണ്ണത്തിന്റെ കൂടിയ വിസരണം മൂലം ആകാശം നീലയായി കാണുന്നത്.",
+   ben:"The sky looks blue because short-wavelength blue light scatters the most."},
+  {ml:"വൈദ്യുതകാന്തികസ്പെക്ട്രം",en:"Electromagnetic spectrum",
+   bml:"വൈദ്യുതകാന്തിക വികിരണങ്ങളുടെ ക്രമമായ വിതരണം.",
+   ben:"The ordered distribution of electromagnetic radiations."},
+  {ml:"ഇൻഫ്രാറെഡ് വികിരണം",en:"Infrared radiation",
+   bml:"സൂര്യരശ്മികളിലെ താപത്തിന് പ്രധാന കാരണം.",
+   ben:"Mainly responsible for the heat in sunlight."},
+  {ml:"അൾട്രാവയലറ്റ് വികിരണം",en:"Ultraviolet radiation",
+   bml:"ശരീരത്തിൽ വിറ്റാമിൻ D ഉൽപാദിപ്പിക്കാൻ സഹായിക്കുന്നു.",
+   ben:"Helps the body synthesise vitamin D."},
+  {ml:"സമഞ്ജനക്ഷമത",en:"Power of accommodation",
+   bml:"ലെൻസിന്റെ ഫോക്കസ്ദൂരം ക്രമീകരിച്ച് പ്രതിബിംബം റെറ്റിനയിൽ പതിപ്പിക്കാനുള്ള കണ്ണിന്റെ കഴിവ്.",
+   ben:"The eye's ability to adjust the lens focal length so the image forms on the retina."},
+  {ml:"നിയർ പോയിന്റ്",en:"Near point",
+   bml:"വ്യക്തമായി കാണാൻ കഴിയുന്ന ഏറ്റവും അടുത്ത ബിന്ദു — ആരോഗ്യമുള്ള കണ്ണിന് 25 cm.",
+   ben:"The closest point of distinct vision — 25 cm for a healthy eye."},
+  {ml:"ഫാർ പോയിന്റ്",en:"Far point",
+   bml:"വ്യക്തമായി കാണാൻ കഴിയുന്ന ഏറ്റവും അകലെയുള്ള ബിന്ദു — ആരോഗ്യമുള്ള കണ്ണിന് അനന്തത.",
+   ben:"The farthest point of distinct vision — infinity for a healthy eye."},
+  {ml:"ഹ്രസ്വദൃഷ്ടി",en:"Myopia (short sightedness)",
+   bml:"അകലെയുള്ളവ വ്യക്തമായി കാണാൻ കഴിയാത്ത ന്യൂനത. കോൺകേവ് ലെൻസ് കൊണ്ട് പരിഹരിക്കാം.",
+   ben:"Inability to see distant objects clearly. Corrected with a concave lens."},
+  {ml:"ദീർഘദൃഷ്ടി",en:"Hypermetropia (long sightedness)",
+   bml:"അടുത്തുള്ളവ വ്യക്തമായി കാണാൻ കഴിയാത്ത ന്യൂനത. കോൺവെക്സ് ലെൻസ് കൊണ്ട് പരിഹരിക്കാം.",
+   ben:"Inability to see nearby objects clearly. Corrected with a convex lens."},
+  {ml:"വെള്ളെഴുത്ത്",en:"Presbyopia",
+   bml:"പ്രായാധിക്യം മൂലം സമഞ്ജനക്ഷമത കുറയുന്ന ന്യൂനത.",
+   ben:"Age-related decline in the power of accommodation."},
+  {ml:"പ്രകാശമലിനീകരണം",en:"Light pollution",
+   bml:"അമിതമായ കൃത്രിമ പ്രകാശം സ്വാഭാവിക ആവാസവ്യവസ്ഥയ്ക്ക് ദോഷകരമാകുന്നത്.",
+   ben:"Excessive artificial light that harms natural habitats."},
+  {ml:"ഫോട്ടോപീരിയോഡിസം",en:"Photoperiodism",
+   bml:"പകലിന്റെ ദൈർഘ്യത്തിനനുസരിച്ച് ജീവികൾ പ്രവർത്തനം ക്രമീകരിക്കുന്ന പ്രതിഭാസം.",
+   ben:"Organisms adjusting their activity according to day length."}
+];
+
+/* ---------- flashcards ---------- */
+const fcwrap=document.getElementById('fcwrap');
+function buildFlash(){
+  fcwrap.innerHTML='';
+  cards.forEach(c=>{
+    const front = LANG==='ml' ? c.ml : c.en;
+    const sec   = LANG==='ml' ? c.en : c.ml;
+    const back  = LANG==='ml' ? c.bml : c.ben;
+    const hint  = LANG==='ml' ? 'ടാപ്പ് ▸' : 'TAP ▸';
+    const d=document.createElement('div');
+    d.className='flip';
+    d.innerHTML=`<div class="flip-inner">
+      <div class="face front"><div class="term">${front}</div><div class="sec">${sec}</div><div class="hint">${hint}</div></div>
+      <div class="face back">${back}</div></div>`;
+    d.addEventListener('click',()=>d.classList.toggle('on'));
+    fcwrap.appendChild(d);
+  });
+}
+
+/* ---------- glossary ---------- */
+const glossBody=document.getElementById('glossBody');
+function buildGloss(){
+  glossBody.innerHTML='';
+  cards.slice().sort((a,b)=>a.en.localeCompare(b.en)).forEach(c=>{
+    const meaning = LANG==='ml' ? c.bml : c.ben;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${c.ml}</td><td class="gen">${c.en}</td><td>${meaning}</td>`;
+    tr.dataset.s=(c.ml+' '+c.en+' '+meaning).toLowerCase();
+    glossBody.appendChild(tr);
+  });
+}
+document.getElementById('gsearch').addEventListener('input',e=>{
+  const q=e.target.value.toLowerCase().trim();
+  glossBody.querySelectorAll('tr').forEach(tr=>{ tr.style.display=tr.dataset.s.includes(q)?'':'none'; });
+});
+
+/* ---------- bilingual quiz ---------- */
+const quiz=[
+  {qml:"വർണ്ണരാജിയിൽ ഏറ്റവും കൂടുതൽ വ്യതിയാനം സംഭവിക്കുന്ന വർണ്ണം ഏത്?", qen:"Which colour deviates the most in the spectrum?",
+   oml:["ചുവപ്പ്","മഞ്ഞ","വയലറ്റ്","പച്ച"], oen:["Red","Yellow","Violet","Green"], a:2,
+   fml:"വയലറ്റിന് ഏറ്റവും കുറഞ്ഞ തരംഗദൈർഘ്യമുള്ളതിനാൽ ഏറ്റവും കൂടുതൽ വ്യതിയാനം.",
+   fen:"Violet has the shortest wavelength, so it deviates the most."},
+  {qml:"ചുവപ്പും പച്ചയും ചേരുമ്പോൾ ലഭിക്കുന്ന വർണ്ണം ഏത്?", qen:"What colour results from combining red and green light?",
+   oml:["സയൻ","മഞ്ഞ","മജന്ത","ധവളം"], oen:["Cyan","Yellow","Magenta","White"], a:1,
+   fml:"ചുവപ്പ് + പച്ച = മഞ്ഞ.", fen:"Red + Green = Yellow."},
+  {qml:"പ്രകാശത്തിന്റെ പ്രാഥമിക വർണ്ണങ്ങൾ ഏവ?", qen:"What are the primary colours of light?",
+   oml:["സയൻ, മജന്ത, മഞ്ഞ","ചുവപ്പ്, പച്ച, നീല","കറുപ്പ്, വെളുപ്പ്, ചാരം","ചുവപ്പ്, മഞ്ഞ, നീല"],
+   oen:["Cyan, Magenta, Yellow","Red, Green, Blue","Black, White, Grey","Red, Yellow, Blue"], a:1,
+   fml:"RGB — ചുവപ്പ്, പച്ച, നീല.", fen:"RGB — Red, Green, Blue."},
+  {qml:"വീക്ഷണസ്ഥിരതയുടെ ഏകദേശ കാലയളവ്?", qen:"Approximate duration of persistence of vision?",
+   oml:["1 s","1/60 s","1/16 s","1/4 s"], oen:["1 s","1/60 s","1/16 s","1/4 s"], a:2,
+   fml:"ഏകദേശം 1/16 സെക്കൻഡ്.", fen:"About 1/16 of a second."},
+  {qml:"ആകാശം നീലനിറത്തിൽ കാണാനുള്ള കാരണം?", qen:"What causes the sky to appear blue?",
+   oml:["അപവർത്തനം","പ്രതിഫലനം","വിസരണം","ധ്രുവീകരണം"], oen:["Refraction","Reflection","Scattering","Polarisation"], a:2,
+   fml:"തരംഗദൈർഘ്യം കുറഞ്ഞ നീല വർണ്ണം ഏറ്റവും കൂടുതൽ വിസരണം ചെയ്യപ്പെടുന്നു.",
+   fen:"Short-wavelength blue light is scattered the most by air molecules."},
+  {qml:"ഹ്രസ്വദൃഷ്ടി പരിഹരിക്കാൻ ഉപയോഗിക്കുന്ന ലെൻസ്?", qen:"Which lens corrects myopia?",
+   oml:["കോൺവെക്സ്","കോൺകേവ്","സിലിണ്ടർ","ബൈഫോക്കൽ"], oen:["Convex","Concave","Cylindrical","Bifocal"], a:1,
+   fml:"ഹ്രസ്വദൃഷ്ടി കോൺകേവ് ലെൻസ് കൊണ്ട് പരിഹരിക്കുന്നു.", fen:"Myopia is corrected with a concave lens."},
+  {qml:"ദീർഘദൃഷ്ടിയുള്ള ഒരാളുടെ നിയർ പോയിന്റ്?", qen:"The near point of a person with hypermetropia is…",
+   oml:["25 cm-ൽ കുറവ്","25 cm-ന് തുല്യം","25 cm-ൽ കൂടുതൽ","അനന്തത"], oen:["Less than 25 cm","Equal to 25 cm","More than 25 cm","Infinity"], a:2,
+   fml:"ദീർഘദൃഷ്ടിയിൽ നിയർ പോയിന്റ് 25 cm-ൽ കൂടുതലായിരിക്കും.",
+   fen:"In hypermetropia the near point is farther than 25 cm."},
+  {qml:"ടിന്റൽ പ്രഭാവത്തിന് കാരണമാകുന്നത്?", qen:"The Tyndall effect is caused by…",
+   oml:["അപവർത്തനം","വിസരണം","പ്രകീർണ്ണനം","ആന്തരപ്രതിപതനം"], oen:["Refraction","Scattering","Dispersion","Internal reflection"], a:1,
+   fml:"കൊളോയ്ഡ്/സസ്പെൻഷനിലെ കണികകൾ പ്രകാശത്തെ വിസരണം ചെയ്യുന്നതു കൊണ്ടാണ്.",
+   fen:"Fine particles in a colloid/suspension scatter the light."},
+  {qml:"മഞ്ഞ ഫിൽട്ടറിലൂടെ ധവളപ്രകാശം കടത്തിവിട്ടാൽ തടയപ്പെടുന്ന വർണ്ണം?", qen:"Which colour is blocked when white light passes through a yellow filter?",
+   oml:["ചുവപ്പ്","പച്ച","നീല","മഞ്ഞ"], oen:["Red","Green","Blue","Yellow"], a:2,
+   fml:"മഞ്ഞ = ചുവപ്പ് + പച്ച; അതിന്റെ പൂരകവർണ്ണമായ നീല തടയപ്പെടും.",
+   fen:"Yellow = Red + Green; its complementary colour, blue, is blocked."},
+  {qml:"വൈദ്യുതകാന്തികസ്പെക്ട്രത്തിൽ ദൃശ്യപ്രകാശത്തേക്കാൾ തരംഗദൈർഘ്യം കൂടിയത്?", qen:"Which has a longer wavelength than visible light in the EM spectrum?",
+   oml:["അൾട്രാവയലറ്റ്","X വികിരണം","ഇൻഫ്രാറെഡ്","ഗാമ വികിരണം"], oen:["Ultraviolet","X-rays","Infrared","Gamma rays"], a:2,
+   fml:"ഇൻഫ്രാറെഡിന് ദൃശ്യപ്രകാശത്തേക്കാൾ കൂടിയ തരംഗദൈർഘ്യമുണ്ട്.", fen:"Infrared has a longer wavelength than visible light."},
+  {qml:"ശരീരത്തിൽ വിറ്റാമിൻ D ഉൽപാദിപ്പിക്കാൻ സഹായിക്കുന്ന വികിരണം?", qen:"Which radiation helps the body synthesise vitamin D?",
+   oml:["ഇൻഫ്രാറെഡ്","അൾട്രാവയലറ്റ്","റേഡിയോ","ഗാമ"], oen:["Infrared","Ultraviolet","Radio","Gamma"], a:1,
+   fml:"അൾട്രാവയലറ്റ് വികിരണം.", fen:"Ultraviolet radiation."},
+  {qml:"എല്ലാ വർണ്ണങ്ങളെയും പ്രതിപതിപ്പിക്കുന്ന പ്രതലം ഏത് നിറത്തിൽ കാണപ്പെടും?", qen:"A surface that reflects all colours appears…",
+   oml:["കറുപ്പ്","ചാരം","ധവളം","മഞ്ഞ"], oen:["Black","Grey","White","Yellow"], a:2,
+   fml:"എല്ലാ വർണ്ണങ്ങളും പ്രതിഫലിക്കുന്നതിനാൽ ധവളമായി കാണപ്പെടും.", fen:"Since all colours are reflected, it appears white."},
+  {qml:"റെറ്റിനയിൽ രൂപപ്പെടുന്ന പ്രതിബിംബത്തിന്റെ സ്വഭാവം?", qen:"The nature of the image formed on the retina is…",
+   oml:["മിഥ്യ, നിവർന്നത്","യഥാർഥം, തലകീഴ്","യഥാർഥം, നിവർന്നത്","മിഥ്യ, തലകീഴ്"],
+   oen:["Virtual, erect","Real, inverted","Real, erect","Virtual, inverted"], a:1,
+   fml:"കണ്ണിലെ ലെൻസ് കോൺവെക്സ് ലെൻസ് പോലെ പ്രവർത്തിച്ച് യഥാർഥ, തലകീഴായ പ്രതിബിംബം ഉണ്ടാക്കുന്നു.",
+   fen:"The eye lens acts like a convex lens, forming a real, inverted image."},
+  {qml:"ആരോഗ്യമുള്ള കണ്ണിന്റെ ഫാർ പോയിന്റ്?", qen:"The far point of a healthy eye is…",
+   oml:["25 cm","1 m","അനന്തത","50 cm"], oen:["25 cm","1 m","Infinity","50 cm"], a:2,
+   fml:"ആരോഗ്യമുള്ള കണ്ണിന് ഫാർ പോയിന്റ് അനന്തതയായി കണക്കാക്കുന്നു.", fen:"The far point of a healthy eye is taken as infinity."},
+  {qml:"വെള്ളെഴുത്തിന് കാരണം?", qen:"Presbyopia is caused by…",
+   oml:["നേത്രഗോളം വലുതാകൽ","സീലിയറി പേശികളുടെ ക്ഷമത കുറയൽ","കോർണിയയുടെ കേടുപാട്","റെറ്റിന അടർച്ച"],
+   oen:["Elongated eyeball","Weakening of ciliary muscles","Corneal damage","Retinal detachment"], a:1,
+   fml:"പ്രായാധിക്യം മൂലം സീലിയറി പേശികളുടെ ക്ഷമത കുറയുന്നു.", fen:"Age-related weakening of the ciliary muscles."},
+  {qml:"സൂര്യരശ്മികളിലെ താപത്തിന് പ്രധാന കാരണമായ വികിരണം?", qen:"Which radiation is mainly responsible for the heat in sunlight?",
+   oml:["അൾട്രാവയലറ്റ്","ഇൻഫ്രാറെഡ്","ദൃശ്യപ്രകാശം","X വികിരണം"], oen:["Ultraviolet","Infrared","Visible light","X-rays"], a:1,
+   fml:"ഇൻഫ്രാറെഡ് വികിരണം.", fen:"Infrared radiation."},
+  {qml:"മഴവില്ല് കാണപ്പെടുന്നത് സൂര്യന്റെ ഏത് ദിശയിലാണ്?", qen:"A rainbow appears in which direction relative to the Sun?",
+   oml:["അതേ ദിശയിൽ","എതിർദിശയിൽ","90° ദിശയിൽ","ദിശയുമായി ബന്ധമില്ല"], oen:["Same direction","Opposite direction","At 90°","No relation to direction"], a:1,
+   fml:"മഴവില്ല് എപ്പോഴും സൂര്യന്റെ എതിർദിശയിലാണ് കാണപ്പെടുന്നത്.", fen:"A rainbow always appears opposite the Sun."},
+  {qml:"പ്രകാശമലിനീകരണത്തിന്റെ ഒരു ദോഷഫലം ഏത്?", qen:"Which is an effect of light pollution?",
+   oml:["വാനനിരീക്ഷണം എളുപ്പമാകുന്നു","ദേശാടനപ്പക്ഷികളുടെ ദിശ തെറ്റുന്നു","സസ്യങ്ങളുടെ ഫോട്ടോസിന്തസിസ് കൂടുന്നു","ഒന്നും സംഭവിക്കില്ല"],
+   oen:["Makes astronomy easier","Disorients migratory birds","Increases photosynthesis in plants","No effect"], a:1,
+   fml:"ഉയർന്ന കെട്ടിടങ്ങളിലെ പ്രകാശം ദേശാടനപ്പക്ഷികളുടെ ദിശ തെറ്റിക്കുന്നു.", fen:"Lights from tall buildings disorient migratory birds."}
+];
+
+let qi=0,score=0,answered=false;
+const qc=document.getElementById('quizCard');
+function renderQ(){
+  answered=false; qi=Math.min(qi,quiz.length-1);
+  const t=T[LANG], item=quiz[qi];
+  const qtext = LANG==='ml'?item.qml:item.qen;
+  const opts  = LANG==='ml'?item.oml:item.oen;
+  qc.innerHTML=`
+    <div class="qmeta">
+      <span class="qcount">${t.q} ${qi+1} / ${quiz.length}</span>
+      <span class="qscore">${t.score}: ${score}</span>
+    </div>
+    <div class="qbar"><i style="width:${qi/quiz.length*100}%"></i></div>
+    <p class="qtext">${qtext}</p>
+    <div id="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div>
+    <div class="qfb" id="qfb"></div>
+    <button class="qnext" id="qnext" disabled>${qi===quiz.length-1?t.result:t.next}</button>`;
+  qc.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',pick));
+  document.getElementById('qnext').addEventListener('click',()=>{qi++;qi<quiz.length?renderQ():showResult();});
+}
+function pick(e){
+  if(answered)return; answered=true;
+  const t=T[LANG], chosen=+e.currentTarget.dataset.i, correct=quiz[qi].a;
+  qc.querySelectorAll('.opt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===correct)b.classList.add('correct');
+    if(i===chosen&&chosen!==correct)b.classList.add('wrong');
+  });
+  const fb=document.getElementById('qfb');
+  const expl = LANG==='ml'?quiz[qi].fml:quiz[qi].fen;
+  if(chosen===correct){score++;fb.className='qfb show ok';fb.innerHTML='✓ '+expl;}
+  else{fb.className='qfb show no';fb.innerHTML='✗ '+expl;}
+  document.querySelector('.qscore').textContent=t.score+': '+score;
+  document.getElementById('qnext').disabled=false;
+}
+function showResult(){
+  const t=T[LANG], pct=Math.round(score/quiz.length*100);
+  const msg = pct>=80?t.good : pct>=50?t.mid : t.low;
+  qc.innerHTML=`<div class="result">
+    <div class="big">${score}<span style="font-size:24px;color:var(--ink-soft)">/${quiz.length}</span></div>
+    <div class="lbl">${pct}% ${t.correct}</div>
+    <div class="msg">${msg}</div>
+    <button class="retry" id="retry">${t.retry}</button>
+  </div>`;
+  document.getElementById('retry').addEventListener('click',()=>{qi=0;score=0;renderQ();});
+}
+
+const T={
+  ml:{q:"ചോദ്യം",score:"സ്കോർ",next:"അടുത്ത ചോദ്യം ▸",result:"ഫലം കാണാം ▸",correct:"ശരി",retry:"വീണ്ടും ശ്രമിക്കാം ↻",
+      good:"മികച്ചത്! നന്നായി പഠിച്ചു 🌟",mid:"നന്നായി വരുന്നു — ഒന്നു കൂടി റിവിഷൻ ചെയ്യാം 👍",low:"കുറിപ്പുകൾ ഒന്നുകൂടി വായിച്ച് വീണ്ടും ശ്രമിക്കാം 📘",
+      showAll:"📖 എല്ലാ ഉത്തരങ്ങളും കാണിക്കുക",hideAll:"🙈 എല്ലാ ഉത്തരങ്ങളും മറയ്ക്കുക",
+      showOne:"ഉത്തരം കാണിക്കുക ▾",hideOne:"ഉത്തരം മറയ്ക്കുക ▴"},
+  en:{q:"Question",score:"Score",next:"Next question ▸",result:"See result ▸",correct:"correct",retry:"Try again ↻",
+      good:"Excellent! Well studied 🌟",mid:"Coming along nicely — one more revision 👍",low:"Read the notes once more and try again 📘",
+      showAll:"📖 Show all answers",hideAll:"🙈 Hide all answers",
+      showOne:"Show answer ▾",hideOne:"Hide answer ▴"}
+};
+
+/* ---------- question bank reveal ---------- */
+document.querySelectorAll('#qbank .qb-rev').forEach(btn=>{
+  btn.addEventListener('click',()=>{ btn.nextElementSibling.classList.toggle('on'); });
+});
+const qbToggleAll=document.getElementById('qbToggleAll');
+let qbAllOn=false;
+qbToggleAll.addEventListener('click',()=>{
+  qbAllOn=!qbAllOn;
+  document.querySelectorAll('#qbank .qb-ans').forEach(a=>a.classList.toggle('on',qbAllOn));
+  qbToggleAll.innerHTML = qbAllOn
+    ? `🙈 <span class="t-ml">എല്ലാ ഉത്തരങ്ങളും മറയ്ക്കുക</span><span class="t-en">Hide all answers</span>`
+    : `📖 <span class="t-ml">എല്ലാ ഉത്തരങ്ങളും കാണിക്കുക</span><span class="t-en">Show all answers</span>`;
+});
+
+/* ---------- targeted single-panel print ---------- */
+function printPanel(id){
+  const el=document.getElementById(id);
+  document.body.classList.add('print-one');
+  el.classList.add('print-me');
+  const wasClosed=[...el.querySelectorAll('details:not([open])')];
+  wasClosed.forEach(d=>d.open=true);
+  const cleanup=()=>{
+    document.body.classList.remove('print-one');
+    el.classList.remove('print-me');
+    wasClosed.forEach(d=>d.open=false);
+    window.removeEventListener('afterprint',cleanup);
+  };
+  window.addEventListener('afterprint',cleanup);
+  window.print();
+  setTimeout(cleanup,800);
+}
+
+/* ---------- share the standalone quiz page ---------- */
+const toastEl=document.getElementById('toast');
+let toastT;
+function toast(msg){
+  toastEl.textContent=msg; toastEl.classList.add('on');
+  clearTimeout(toastT); toastT=setTimeout(()=>toastEl.classList.remove('on'),2200);
+}
+function quizURL(){
+  const base=window.location.href.split('#')[0].split('?')[0];
+  return base.replace(/[^/]*$/, 'kazhchayum-varnnangalum-quiz.html');
+}
+async function copyQuizLink(){
+  const url=quizURL();
+  const title = LANG==='ml' ? 'കാഴ്ചയും വർണ്ണങ്ങളുടെ ലോകവും — ക്വിസ് (Class 10 Physics)' : 'Vision and the World of Colours — Quiz (Class 10 Physics)';
+  if(navigator.share){
+    try{ await navigator.share({title, text:title, url}); return; }catch(e){ if(e.name==='AbortError')return; }
+  }
+  try{
+    await navigator.clipboard.writeText(url);
+    toast(LANG==='ml'?'ക്വിസ് ലിങ്ക് കോപ്പി ചെയ്തു ✓':'Quiz link copied ✓');
+  }catch(e){
+    const ta=document.createElement('textarea');
+    ta.value=url; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); toast(LANG==='ml'?'ക്വിസ് ലിങ്ക് കോപ്പി ചെയ്തു ✓':'Quiz link copied ✓'); }
+    catch(_){ toast(url); }
+    document.body.removeChild(ta);
+  }
+}
+document.getElementById('shareBtn').addEventListener('click',copyQuizLink);
+document.getElementById('waBtn').addEventListener('click',()=>{
+  const msg = (LANG==='ml'
+    ? 'കാഴ്ചയും വർണ്ണങ്ങളുടെ ലോകവും (Class 10 Physics) ക്വിസ് — ഇവിടെ ചെയ്യാം:\n'
+    : 'Vision and the World of Colours (Class 10 Physics) quiz — try it here:\n') + quizURL();
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank','noopener');
+});
+
+/* ---------- init ---------- */
+setLang('ml');
+</script>
+</body>
+</html>
