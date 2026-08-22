@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<title>Unit 3 — Behind the Senses | Study Tool</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root{
+  --ink:#1f2937;
+  --paper:#f6f4fb;
+  --helix:#2d4f8a;
+  --helix-dark:#1a2f5c;
+  --gene:#7b3fa0;
+  --gene-light:#ede1f5;
+  --trait:#2e8b57;
+  --line:#dcd6ea;
+  --card:#ffffff;
+  --mono: 'Courier New', ui-monospace, monospace;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:'Noto Sans Malayalam','Manjari',system-ui,sans-serif;
+  line-height:1.55;
+}
+header{
+  background:linear-gradient(135deg,var(--helix-dark),var(--helix) 65%);
+  color:#fff; padding:20px 18px 60px; position:relative; overflow:hidden;
+}
+header .backbone{ position:absolute; inset:0; opacity:.15;
+  background-image: repeating-linear-gradient(115deg, transparent 0 38px, #fff 38px 40px); }
+header h1{ margin:0 0 4px; font-size:1.5rem; position:relative; z-index:1; }
+header p.sub{ margin:0 0 12px; opacity:.85; font-size:.92rem; position:relative; z-index:1; }
+.lang-toggle{ position:relative; z-index:1; display:inline-flex; gap:4px; background:rgba(255,255,255,.15); padding:4px; border-radius:20px; }
+.lang-toggle button{
+  border:none; background:transparent; color:#fff; padding:6px 16px; border-radius:16px;
+  cursor:pointer; font-family:inherit; font-size:.85rem; font-weight:600; opacity:.7;
+}
+.lang-toggle button.active{ background:#fff; color:var(--helix-dark); opacity:1; }
+.wrap{ max-width:960px; margin:-40px auto 40px; padding:0 14px; position:relative; z-index:2; }
+nav.tabs{
+  display:flex; flex-wrap:wrap; gap:8px; background:var(--card); border-radius:14px;
+  padding:10px; box-shadow:0 8px 24px rgba(26,47,92,.12); margin-bottom:18px;
+  position:sticky; top:10px; z-index:5;
+}
+nav.tabs button{
+  border:none; background:var(--paper); color:var(--helix-dark); padding:9px 14px;
+  border-radius:9px; cursor:pointer; font-size:.9rem; font-weight:600; font-family:inherit; transition:.15s;
+}
+nav.tabs button.active{ background:var(--helix); color:#fff; }
+nav.tabs button:hover{ filter:brightness(1.05); }
+.panel{ display:none; }
+.panel.active{ display:block; animation:fade .25s ease; }
+@keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+.card{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(31,41,55,.04); }
+h2.section-title{ color:var(--helix-dark); border-bottom:3px solid var(--gene); display:inline-block; padding-bottom:4px; margin-top:0; font-size:1.15rem; }
+h3.sub-title{ color:var(--gene); margin:18px 0 8px; font-size:1rem; }
+.formula-box{ background:var(--gene-light); border-left:4px solid var(--gene); padding:10px 14px; border-radius:8px; font-family:var(--mono); margin:10px 0; font-size:.95rem; overflow-x:auto; }
+table{ width:100%; border-collapse:collapse; margin:10px 0; font-size:.92rem; }
+th,td{ border:1px solid var(--line); padding:8px 10px; text-align:left; }
+th{ background:var(--helix); color:#fff; }
+tr:nth-child(even) td{ background:#f4f1fa; }
+table.compact th, table.compact td{ padding:5px 8px; font-size:.85rem; }
+ul{ padding-left:20px; } li{ margin-bottom:6px; }
+.tag{ display:inline-block; background:var(--gene); color:#fff; font-size:.72rem; padding:2px 8px; border-radius:20px; margin-left:6px; }
+.step-list li{ margin-bottom:10px; }
+.quiz-opts button{ display:block; width:100%; text-align:left; margin:6px 0; padding:10px 14px; border:1px solid var(--line); background:#fff; border-radius:9px; cursor:pointer; font-family:inherit; font-size:.92rem; }
+.quiz-opts button.correct{ background:#dff3e8; border-color:var(--trait); font-weight:600; }
+.quiz-opts button.wrong{ background:#fbe4e0; border-color:var(--gene); }
+.quiz-opts button[disabled]{ cursor:default; }
+.quiz-nav{ display:flex; justify-content:space-between; margin-top:14px; }
+.quiz-nav button:disabled{ opacity:.4; cursor:default; }
+.score-bar{ background:var(--helix-dark); color:#fff; border-radius:10px; padding:10px 16px; margin-bottom:14px; font-size:.9rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+.btn{ background:var(--gene); color:#fff; border:none; padding:9px 16px; border-radius:8px; cursor:pointer; font-family:inherit; font-weight:600; }
+.btn.secondary{ background:var(--helix); }
+.teacher-share{ margin-bottom:14px; display:flex; gap:8px; flex-wrap:wrap; }
+.teacher-share .btn{ background:var(--gene); flex:1; min-width:200px; }
+.teacher-share .btn.secondary{ background:var(--helix); }
+.share-toast{ display:none; margin-top:12px; background:var(--helix-dark); color:#fff; padding:9px 14px; border-radius:8px; font-size:.85rem; text-align:center; }
+.share-toast.show{ display:block; }
+.mqp-header{ text-align:center; margin-bottom:14px; }
+.mqp-header h2{ margin:2px 0; color:var(--helix-dark); }
+.mqp-meta{ display:flex; justify-content:space-between; font-size:.85rem; margin:6px 0 16px; }
+.mqp-section-title{ background:var(--gene); color:#fff; padding:5px 12px; border-radius:6px; display:inline-block; margin:14px 0 8px; font-size:.9rem; }
+.mqp-q{ margin-bottom:12px; } .mqp-q b{ color:var(--helix-dark); }
+.exam-tip{ background:#eef4f8; border:1px solid var(--helix); border-radius:8px; padding:10px 14px; margin-top:16px; font-size:.9rem; }
+.revision-sheet h3.sub-title{ margin-top:16px; }
+.pill-row{ display:flex; gap:10px; flex-wrap:wrap; margin:10px 0; }
+.pill{ background:var(--gene-light); color:var(--helix-dark); padding:8px 14px; border-radius:20px; font-size:.85rem; font-weight:600; }
+footer.note{ text-align:center; font-size:.78rem; color:#8a8067; margin:30px 0 10px; }
+
+.lang-en{ display:none; }
+body.show-en .lang-ml{ display:none; }
+body.show-en .lang-en{ display:block; }
+
+@media print{
+  header, nav.tabs, .no-print{ display:none !important; }
+  .panel{ display:none !important; }
+  .panel.print-target{ display:block !important; }
+  .wrap{ margin:0; }
+  .card{ box-shadow:none; border:1px solid #999; }
+  body{ background:#fff; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="backbone"></div>
+  <h1>Behind the Senses</h1>
+  <p class="sub">Biology · Class 10 · Unit 3 — Complete Study Tool</p>
+  <div class="lang-toggle no-print">
+    <button id="langMlBtn" class="active" onclick="setLang('ml')">മലയാളം</button>
+    <button id="langEnBtn" onclick="setLang('en')">English</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav class="tabs no-print">
+    <button data-tab="notes" class="active" data-ml="📘 സംഗ്രഹം" data-en="📘 Notes">📘 സംഗ്രഹം</button>
+    <button data-tab="revision" data-ml="⚡ ക്വിക്ക് റിവിഷൻ" data-en="⚡ Quick Revision">⚡ ക്വിക്ക് റിവിഷൻ</button>
+    <button data-tab="receptors" data-ml="🔎 ഉദ്ദീപനവും ഗ്രാഹികളും" data-en="🔎 Stimuli & Receptors">🔎 ഉദ്ദീപനവും ഗ്രാഹികളും</button>
+    <button data-tab="eye" data-ml="👁️ കണ്ണ്" data-en="👁️ The Eye">👁️ കണ്ണ്</button>
+    <button data-tab="ear" data-ml="👂 ചെവി" data-en="👂 The Ear">👂 ചെവി</button>
+    <button data-tab="smelltaste" data-ml="👃 ഗന്ധവും രുചിയും" data-en="👃 Smell & Taste">👃 ഗന്ധവും രുചിയും</button>
+    <button data-tab="skin" data-ml="🖐️ ത്വക്കും വേദനയും" data-en="🖐️ Skin & Pain">🖐️ ത്വക്കും വേദനയും</button>
+    <button data-tab="quiz" data-ml="✅ ക്വിസ്" data-en="✅ Quiz">✅ ക്വിസ്</button>
+    <button data-tab="mqp" data-ml="📝 മാതൃകാ ചോദ്യപേപ്പർ" data-en="📝 Model Question Paper">📝 മാതൃകാ ചോദ്യപേപ്പർ</button>
+    <button id="printBtn" onclick="printCurrent()" style="margin-left:auto;background:var(--helix-dark);color:#fff;" data-ml="🖨️ പ്രിന്റ് ചെയ്യുക" data-en="🖨️ Print">🖨️ പ്രിന്റ് ചെയ്യുക</button>
+  </nav>
+
+  <!-- ================= NOTES ================= -->
+  <section class="panel active" id="notes">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">ചുരുക്ക സംഗ്രഹം</h2>
+        <ul>
+          <li><b>ഉദ്ദീപനങ്ങൾ</b> (ബാഹ്യ/ആന്തര) ജീവികളിൽ പ്രതികരണങ്ങൾ ഉണ്ടാക്കുന്നു; ഇവയെ തിരിച്ചറിയുന്ന പ്രത്യേക കോശങ്ങളാണ് <b>ഗ്രാഹികൾ (Receptors)</b>.</li>
+          <li>ഗ്രാഹികളിൽ ഉണ്ടാകുന്ന വൈദ്യുത സന്ദേശം <b>റിസപ്റ്റർ പൊട്ടൻഷ്യൽ</b> എന്നും, ന്യൂറോണുകളിലൂടെ സഞ്ചരിക്കുന്ന നാഡീയാവേഗം <b>ആക്ഷൻ പൊട്ടൻഷ്യൽ</b> എന്നും അറിയപ്പെടുന്നു.</li>
+          <li>സംവേദനങ്ങളെ <b>പൊതുസംവേദനങ്ങൾ</b> (സ്പർശം, വേദന, ചൂട്, മർദ്ദം — ത്വക്ക്/പേശികൾ/സന്ധികളിൽ വ്യാപിച്ചവ), <b>പ്രത്യേക സംവേദനങ്ങൾ</b> (കാഴ്ച, കേൾവി, രുചി, ഗന്ധം — പ്രത്യേക ഇന്ദ്രിയങ്ങളിൽ കേന്ദ്രീകരിച്ചവ) എന്നിങ്ങനെ തരംതിരിക്കാം.</li>
+          <li><b>കണ്ണ്:</b> നേത്രാവരണവും കണ്ണുനീർ ഗ്രന്ഥികളും സംരക്ഷണം നൽകുന്നു. ദൃഢപടലം (Sclera), രക്തപടലം (Choroid), ദൃഷ്ടിപടലം (Retina) എന്നീ മൂന്ന് പാളികളാണുള്ളത്.</li>
+          <li>അക്വസ് ദ്രവവും വിട്രിയസ് ദ്രവവും കണ്ണിന്റെ ആകൃതി നിലനിർത്തുകയും ലെൻസിനും കോർണിയയ്ക്കും പോഷണം നൽകുകയും ചെയ്യുന്നു.</li>
+          <li>ഐറിസിലെ വലയ-റേഡിയൽ പേശികൾ പ്യൂപ്പിളിന്റെ വലുപ്പം നിയന്ത്രിക്കുന്നു; സീലിയറി പേശികളും ലിഗമെന്റുകളും ചേർന്ന് ലെൻസിന്റെ വക്രത മാറ്റി അടുത്തും അകലെയുമുള്ള വസ്തുക്കളിൽ ഫോക്കസ് ചെയ്യുന്നു (<b>അക്കോമൊഡേഷൻ</b>).</li>
+          <li>റെറ്റിനയിലെ <b>റോഡ് കോശങ്ങൾ</b> (റോഡോപ്സിൻ, മങ്ങിയ വെളിച്ചത്തിലെ കാഴ്ച) <b>കോൺ കോശങ്ങൾ</b> (ഫോട്ടോപ്സിൻ, തീവ്രപ്രകാശത്തിലെ വർണ്ണക്കാഴ്ച) എന്നിവയാണ് പ്രകാശഗ്രാഹികൾ. മൂന്ന് തരം കോൺ കോശങ്ങൾ (S, M, L) ചേർന്നാണ് വർണ്ണക്കാഴ്ച സാധ്യമാകുന്നത്; ഇതിലെ ജീൻ വൈകല്യമാണ് വർണ്ണാന്ധതയ്ക്ക് കാരണം.</li>
+          <li>രണ്ട് കണ്ണുകളിലെയും ചിത്രങ്ങൾ വിഷ്വൽ കോർട്ടക്സിൽ സംയോജിപ്പിക്കുന്ന പ്രക്രിയയാണ് <b>ബൈനോക്കുലർ ഫ്യൂഷൻ</b> — ഇത് 3D കാഴ്ചയും ആഴം മനസ്സിലാക്കാനുള്ള കഴിവും നൽകുന്നു.</li>
+          <li><b>ചെവി:</b> ബാഹ്യ, മധ്യ, ആന്തര കർണ്ണം എന്നിങ്ങനെ മൂന്ന് ഭാഗങ്ങൾ. കർണ്ണപടത്തിന്റെ കമ്പനം അസ്ഥിശൃംഖല (മാലിയസ്-ഇൻകസ്-സ്റ്റേപിസ്) വഴി കോക്ലിയയിലേക്ക് കൈമാറുന്നു.</li>
+          <li>കോക്ലിയയിലെ <b>ഓർഗൻ ഓഫ് കോർട്ടി</b>യിലാണ് ശബ്ദ ആവേഗങ്ങൾ രൂപപ്പെടുന്നത്; ഇവ ശ്രവണനാഡി വഴി മസ്തിഷ്കത്തിലെത്തി കേൾവി എന്ന അനുഭവം ഉണ്ടാക്കുന്നു.</li>
+          <li>സെമിസർക്കുലാർ കനാലുകൾ, യൂട്രിക്കിൾ, സാക്യുൾ എന്നിവ ചേർന്ന <b>വെസ്റ്റിബ്യുലാർ സിസ്റ്റം</b> ശരീരതുലനനില പാലിക്കുന്നു.</li>
+          <li><b>ഗന്ധം:</b> ഗന്ധകണികകൾ ശ്ലേഷ്മസ്തരത്തിലെ ഗന്ധഗ്രാഹികളെ ഉദ്ദീപിപ്പിച്ച് ഗന്ധനാഡി വഴി മസ്തിഷ്കത്തിലെത്തുന്നു.</li>
+          <li><b>രുചി:</b> നാവിലെ പാപ്പില, രുചിമുകുളങ്ങൾ, രാസഗ്രാഹികൾ വഴി മധുരം, പുളിപ്പ്, ഉപ്പ്, ചവർപ്പ്, കയ്പ്പ്, ഉമാമി എന്നീ ആറ് പ്രധാന രുചികൾ തിരിച്ചറിയുന്നു.</li>
+          <li><b>ത്വക്ക്:</b> മെർക്കൽ ഡിസ്ക്, മേയ്സ്നർ കോർപ്പസൽ, ക്രൗസ് എൻഡ് ബൾബ്, റുഫിനി എൻഡ് ഓർഗൻ, പസീനിയൻ കോർപ്പസൽ തുടങ്ങിയ വിവിധ ഗ്രാഹികൾ സ്പർശം, മർദ്ദം, ചൂട്, തണുപ്പ്, വേദന എന്നിവ തിരിച്ചറിയുന്നു. അപകടസൂചന നൽകുന്ന വേദനാ സംവേദനത്തെ <b>നോസിസെപ്ഷൻ</b> എന്ന് വിളിക്കുന്നു.</li>
+          <li>ജീവികളിൽ സംവേദനവൈവിധ്യം കാണാം — നായയ്ക്ക് അതിസൂക്ഷ്മ ഗന്ധഗ്രാഹികൾ, വവ്വാലിന് ഇക്കോലൊക്കേഷൻ, പാമ്പിന് ജേക്കബ്സൺസ് അവയവം, ആനയ്ക്ക് ഏറ്റവും കൂടുതൽ ഗന്ധ ജീനുകൾ.</li>
+        </ul>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Chapter Summary</h2>
+        <ul>
+          <li><b>Stimuli</b> (external or internal) trigger responses in organisms; the specialised cells that detect them are called <b>Receptors</b>.</li>
+          <li>The electrical signal generated in a receptor is called a <b>Receptor Potential</b>; the impulse travelling along neurons is called an <b>Action Potential</b>.</li>
+          <li>Senses are grouped into <b>General Senses</b> (touch, pain, temperature, pressure — detected widely in skin, muscles, joints) and <b>Special Senses</b> (vision, hearing, taste, smell — detected by receptors localised to specific organs).</li>
+          <li><b>The Eye:</b> the conjunctiva and lacrimal glands protect it. It has three layers — the Sclera, the Choroid, and the Retina.</li>
+          <li>Aqueous humor and vitreous humor maintain the eye's shape and nourish the lens and cornea.</li>
+          <li>The circular and radial muscles of the iris control pupil size; the ciliary muscles and ligaments adjust the lens's curvature to focus on near and far objects — a process called <b>accommodation</b>.</li>
+          <li>The retina's <b>rod cells</b> (containing rhodopsin, for dim-light vision) and <b>cone cells</b> (containing photopsin, for bright-light colour vision) are the photoreceptors. Three types of cone cells (S, M, L) together enable colour vision; a defect in the related genes causes colour blindness.</li>
+          <li><b>Binocular fusion</b> is the process by which the images from both eyes are combined in the visual cortex, giving 3D vision and depth perception.</li>
+          <li><b>The Ear:</b> has three parts — outer, middle, and inner ear. Vibrations of the eardrum are passed through the ossicles (malleus, incus, stapes) to the cochlea.</li>
+          <li>The <b>Organ of Corti</b> in the cochlea generates sound impulses, which travel via the auditory nerve to the brain, producing the experience of hearing.</li>
+          <li>The <b>vestibular system</b> — semicircular canals, utricle, and saccule — maintains the body's balance.</li>
+          <li><b>Smell:</b> odour particles stimulate olfactory receptors in the mucous membrane, and signals travel via the olfactory nerve to the brain.</li>
+          <li><b>Taste:</b> papillae on the tongue contain taste buds with chemoreceptors that detect the six basic tastes — sweet, sour, salty, bitter, astringent (tangy), and umami.</li>
+          <li><b>Skin:</b> receptors such as Merkel discs, Meissner's corpuscles, Krause end bulbs, Ruffini endings, and Pacinian corpuscles detect touch, pressure, heat, cold, and pain. The sensation of pain that warns of danger is called <b>nociception</b>.</li>
+          <li>Sensory diversity across organisms: dogs have highly sensitive smell receptors, bats use echolocation, snakes have the Jacobson's organ, and elephants have the largest number of olfactory genes among mammals.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUICK REVISION ================= -->
+  <section class="panel" id="revision">
+    <div class="card revision-sheet">
+      <div class="lang-ml">
+        <h2 class="section-title">⚡ ക്വിക്ക് റിവിഷൻ ഷീറ്റ്</h2>
+        <h3 class="sub-title">🔹 പൊതു vs പ്രത്യേക സംവേദനങ്ങൾ</h3>
+        <table class="compact"><tr><th>പൊതുസംവേദനങ്ങൾ</th><th>പ്രത്യേക സംവേദനങ്ങൾ</th></tr>
+          <tr><td>സ്പർശം, വേദന, ചൂട്, മർദ്ദം</td><td>കാഴ്ച, കേൾവി, രുചി, ഗന്ധം</td></tr>
+          <tr><td>ത്വക്ക്/പേശി/സന്ധികളിൽ വ്യാപകം</td><td>പ്രത്യേക ഇന്ദ്രിയങ്ങളിൽ കേന്ദ്രീകൃതം</td></tr></table>
+        <h3 class="sub-title">🔹 ഗ്രാഹി മുതൽ അനുഭവം വരെ</h3>
+        <div class="formula-box">ഉദ്ദീപനം → ഗ്രാഹി → റിസപ്റ്റർ പൊട്ടൻഷ്യൽ → ആക്ഷൻ പൊട്ടൻഷ്യൽ (ന്യൂറോൺ) → നാഡി → തലച്ചോറിലെ കേന്ദ്രം → ഇന്ദ്രിയാനുഭവം</div>
+        <h3 class="sub-title">🔹 കണ്ണിലെ പാളികൾ</h3>
+        <table class="compact"><tr><th>പാളി</th><th>ധർമ്മം</th></tr>
+          <tr><td>ദൃഢപടലം (Sclera)</td><td>ഉറപ്പും സംരക്ഷണവും</td></tr>
+          <tr><td>രക്തപടലം (Choroid)</td><td>പോഷണവും ഓക്സിജനും</td></tr>
+          <tr><td>ദൃഷ്ടിപടലം (Retina)</td><td>പ്രകാശഗ്രാഹീ കോശങ്ങൾ, പ്രതിബിംബ രൂപീകരണം</td></tr></table>
+        <h3 class="sub-title">🔹 കണ്ണിലെ ദ്രവങ്ങൾ</h3>
+        <table class="compact"><tr><th>ദ്രവം</th><th>സ്ഥാനം</th></tr>
+          <tr><td>അക്വസ് ദ്രവം</td><td>കോർണിയയ്ക്കും ലെൻസിനും ഇടയിൽ</td></tr>
+          <tr><td>വിട്രിയസ് ദ്രവം</td><td>ലെൻസിനും റെറ്റിനയ്ക്കും ഇടയിൽ</td></tr></table>
+        <h3 class="sub-title">🔹 റോഡ് vs കോൺ കോശങ്ങൾ</h3>
+        <table class="compact"><tr><th>റോഡ് കോശങ്ങൾ</th><th>കോൺ കോശങ്ങൾ</th></tr>
+          <tr><td>സിലിണ്ടർ ആകൃതി, ~9 കോടിയിലധികം</td><td>കോൺ ആകൃതി, ~50 ലക്ഷം</td></tr>
+          <tr><td>റോഡോപ്സിൻ വർണ്ണകം</td><td>ഫോട്ടോപ്സിൻ വർണ്ണകം</td></tr>
+          <tr><td>മങ്ങിയ വെളിച്ചത്തിലെ കാഴ്ച</td><td>തീവ്രപ്രകാശം, വർണ്ണക്കാഴ്ച</td></tr></table>
+        <h3 class="sub-title">🔹 പ്യൂപ്പിൾ നിയന്ത്രണം</h3>
+        <table class="compact"><tr><th>പ്രകാശം</th><th>പേശി പ്രവർത്തനം</th><th>ഫലം</th></tr>
+          <tr><td>തീവ്രം</td><td>റേഡിയൽ പേശികൾ സങ്കോചിക്കുന്നു</td><td>പ്യൂപ്പിൾ ചെറുതാകുന്നു</td></tr>
+          <tr><td>മങ്ങിയത്</td><td>വലയപേശികൾ സങ്കോചിക്കുന്നു</td><td>പ്യൂപ്പിൾ വലുതാകുന്നു</td></tr></table>
+        <h3 class="sub-title">🔹 ചെവിയുടെ ഭാഗങ്ങൾ</h3>
+        <table class="compact"><tr><th>ഭാഗം</th><th>പ്രധാന ഘടകങ്ങൾ</th></tr>
+          <tr><td>ബാഹ്യകർണ്ണം</td><td>ചെവിക്കുട, കർണ്ണനാളം</td></tr>
+          <tr><td>മധ്യകർണ്ണം</td><td>കർണ്ണപടം, മാലിയസ്-ഇൻകസ്-സ്റ്റേപിസ്, യൂസ്റ്റേഷ്യൻ കനാൽ</td></tr>
+          <tr><td>ആന്തരകർണ്ണം</td><td>കോക്ലിയ, വെസ്റ്റിബ്യുൾ, സെമിസർക്കുലാർ കനാലുകൾ</td></tr></table>
+        <h3 class="sub-title">🔹 കേൾവിയുടെ പാത</h3>
+        <div class="formula-box">ചെവിക്കുട → കർണ്ണപടം → മാലിയസ്-ഇൻകസ്-സ്റ്റേപിസ് → ഓവൽ വിൻഡോ → കോക്ലിയ (ഓർഗൻ ഓഫ് കോർട്ടി) → ശ്രവണനാഡി → മസ്തിഷ്കം</div>
+        <h3 class="sub-title">🔹 ഗന്ധത്തിന്റെ പാത</h3>
+        <div class="formula-box">ഗന്ധകണിക → ശ്ലേഷ്മസ്തരം → ഗന്ധഗ്രാഹി → ഗന്ധനാഡി → മസ്തിഷ്കം</div>
+        <h3 class="sub-title">🔹 പ്രധാന രുചികൾ</h3>
+        <div class="pill-row">
+          <span class="pill">മധുരം</span><span class="pill">പുളിപ്പ്</span><span class="pill">ഉപ്പ്</span>
+          <span class="pill">ചവർപ്പ്</span><span class="pill">കയ്പ്പ്</span><span class="pill">ഉമാമി</span>
+        </div>
+        <h3 class="sub-title">🔹 ത്വക്കിലെ പ്രധാന ഗ്രാഹികൾ</h3>
+        <table class="compact"><tr><th>ഗ്രാഹി</th><th>ധർമ്മം</th></tr>
+          <tr><td>മെർക്കൽ ഡിസ്ക്</td><td>സ്പർശം, സമ്മർദ്ദം</td></tr>
+          <tr><td>മേയ്സ്നർ കോർപ്പസൽ</td><td>വസ്തുവിന്റെ ആകൃതി/ഘടന</td></tr>
+          <tr><td>ക്രൗസ് എൻഡ് ബൾബ്</td><td>തണുപ്പ്</td></tr>
+          <tr><td>റുഫിനി എൻഡ് ഓർഗൻ</td><td>തീവ്ര സ്പർശം, ചൂട്</td></tr>
+          <tr><td>പസീനിയൻ കോർപ്പസൽ</td><td>കമ്പനം, ഉയർന്ന മർദ്ദം</td></tr></table>
+        <p class="exam-tip">📌 പരീക്ഷാ ടിപ്പ്: കണ്ണിലെ മൂന്ന് പാളികളും ചെവിയുടെ മൂന്ന് ഭാഗങ്ങളും ക്രമത്തിൽ എഴുതാൻ പരിശീലിക്കുക — ഡയഗ്രം ചോദ്യങ്ങൾക്ക് ഇത് ഉപകാരപ്പെടും.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">⚡ Quick Revision Sheet</h2>
+        <h3 class="sub-title">🔹 General vs Special Senses</h3>
+        <table class="compact"><tr><th>General Senses</th><th>Special Senses</th></tr>
+          <tr><td>Touch, pain, temperature, pressure</td><td>Vision, hearing, taste, smell</td></tr>
+          <tr><td>Widespread — skin/muscle/joints</td><td>Localised to specific organs</td></tr></table>
+        <h3 class="sub-title">🔹 From Receptor to Experience</h3>
+        <div class="formula-box">Stimulus → Receptor → Receptor potential → Action potential (neuron) → Nerve → Brain centre → Sensory experience</div>
+        <h3 class="sub-title">🔹 Layers of the Eye</h3>
+        <table class="compact"><tr><th>Layer</th><th>Function</th></tr>
+          <tr><td>Sclera</td><td>Strength and protection</td></tr>
+          <tr><td>Choroid</td><td>Nourishment and oxygen</td></tr>
+          <tr><td>Retina</td><td>Photoreceptor cells, image formation</td></tr></table>
+        <h3 class="sub-title">🔹 Humors of the Eye</h3>
+        <table class="compact"><tr><th>Humor</th><th>Location</th></tr>
+          <tr><td>Aqueous humor</td><td>Between cornea and lens</td></tr>
+          <tr><td>Vitreous humor</td><td>Between lens and retina</td></tr></table>
+        <h3 class="sub-title">🔹 Rod vs Cone Cells</h3>
+        <table class="compact"><tr><th>Rod cells</th><th>Cone cells</th></tr>
+          <tr><td>Cylindrical, 90+ million</td><td>Cone-shaped, ~5 million</td></tr>
+          <tr><td>Pigment: rhodopsin</td><td>Pigment: photopsin</td></tr>
+          <tr><td>Dim-light vision</td><td>Bright light, colour vision</td></tr></table>
+        <h3 class="sub-title">🔹 Pupil Control</h3>
+        <table class="compact"><tr><th>Light</th><th>Muscle action</th><th>Effect</th></tr>
+          <tr><td>Bright</td><td>Radial muscles contract</td><td>Pupil shrinks</td></tr>
+          <tr><td>Dim</td><td>Circular muscles contract</td><td>Pupil widens</td></tr></table>
+        <h3 class="sub-title">🔹 Parts of the Ear</h3>
+        <table class="compact"><tr><th>Part</th><th>Key structures</th></tr>
+          <tr><td>Outer ear</td><td>Pinna, ear canal</td></tr>
+          <tr><td>Middle ear</td><td>Eardrum, malleus-incus-stapes, Eustachian tube</td></tr>
+          <tr><td>Inner ear</td><td>Cochlea, vestibule, semicircular canals</td></tr></table>
+        <h3 class="sub-title">🔹 Path of Hearing</h3>
+        <div class="formula-box">Pinna → Eardrum → Malleus-Incus-Stapes → Oval window → Cochlea (Organ of Corti) → Auditory nerve → Brain</div>
+        <h3 class="sub-title">🔹 Path of Smell</h3>
+        <div class="formula-box">Odour particle → Mucous membrane → Olfactory receptor → Olfactory nerve → Brain</div>
+        <h3 class="sub-title">🔹 Basic Tastes</h3>
+        <div class="pill-row">
+          <span class="pill">Sweet</span><span class="pill">Sour</span><span class="pill">Salty</span>
+          <span class="pill">Astringent</span><span class="pill">Bitter</span><span class="pill">Umami</span>
+        </div>
+        <h3 class="sub-title">🔹 Key Skin Receptors</h3>
+        <table class="compact"><tr><th>Receptor</th><th>Function</th></tr>
+          <tr><td>Merkel disc</td><td>Touch, pressure</td></tr>
+          <tr><td>Meissner's corpuscle</td><td>Shape/texture of objects</td></tr>
+          <tr><td>Krause end bulb</td><td>Cold</td></tr>
+          <tr><td>Ruffini ending</td><td>Sustained touch, heat</td></tr>
+          <tr><td>Pacinian corpuscle</td><td>Vibration, deep pressure</td></tr></table>
+        <p class="exam-tip">📌 Exam Tip: Practice writing the three eye layers and three ear parts in order — this helps with diagram-based questions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STIMULI & RECEPTORS ================= -->
+  <section class="panel" id="receptors">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">ഉദ്ദീപനങ്ങളും ഗ്രാഹികളും</h2>
+        <h3 class="sub-title">1. ഉദ്ദീപനങ്ങളും പ്രതികരണങ്ങളും (Stimuli and Responses)</h3>
+        <p>ജീവികളിൽ പ്രതികരണങ്ങൾക്കിടയാക്കുന്ന സാഹചര്യങ്ങളാണ് <b>ഉദ്ദീപനങ്ങൾ (Stimuli)</b>. ഇവയെ <b>ബാഹ്യ ഉദ്ദീപനങ്ങൾ</b> (ചുറ്റുപാടിൽ നിന്നുള്ളവ — വെളിച്ചം, ശബ്ദം, ചൂട്) എന്നും <b>ആന്തര ഉദ്ദീപനങ്ങൾ</b> (ശരീരത്തിനകത്ത് നിന്നുള്ളവ — വിശപ്പ്, ദാഹം) എന്നും തിരിക്കാം.</p>
+        <p>ഉദാഹരണങ്ങൾ: വിശക്കുമ്പോൾ ഭക്ഷണം കഴിക്കുന്നു, അപകടം കണ്ടാൽ ഓടിപ്പോകുന്നു, തണുപ്പുകാലത്ത് പുതയ്ക്കുന്നു, മഴ നനയാതിരിക്കാൻ കുട ചൂടുന്നു, രോഗബാധയുണ്ടാകുമ്പോൾ ശരീരോഷ്മാവ് കൂടുന്നു.</p>
+        <h3 class="sub-title">2. ഗ്രാഹികളും സന്ദേശങ്ങളും (Receptors and Signals)</h3>
+        <p>വിവിധതരം ഉദ്ദീപനങ്ങളെ ശരീരം തിരിച്ചറിയുന്നത് സവിശേഷ കോശങ്ങളോ നാഡികളുടെ അഗ്രഭാഗങ്ങളോ വഴിയാണ്. ഇവ <b>ഗ്രാഹികൾ (Sensory Receptors)</b> എന്നറിയപ്പെടുന്നു.</p>
+        <ul>
+          <li>ഉദ്ദീപനങ്ങൾക്കനുസരിച്ച് ഗ്രാഹികളിൽ വൈദ്യുത സന്ദേശങ്ങൾ ഉണ്ടാകുന്നു — ഇത് <b>റിസപ്റ്റർ പൊട്ടൻഷ്യൽ (Receptor Potential)</b> എന്നറിയപ്പെടുന്നു.</li>
+          <li>ഉയർന്ന അളവിൽ ഈ സന്ദേശങ്ങൾ ഗ്രാഹികളുമായി ബന്ധപ്പെട്ട ന്യൂറോണുകളിൽ <b>ആക്ഷൻ പൊട്ടൻഷ്യൽ (Action Potential)</b> രൂപപ്പെടുത്തുന്നു.</li>
+          <li>ആക്ഷൻ പൊട്ടൻഷ്യൽ ന്യൂറോണുകളിലൂടെ നാഡീയ ആവേഗങ്ങളായി സഞ്ചരിച്ച് മസ്തിഷ്കത്തിലെ ബന്ധപ്പെട്ട ഭാഗങ്ങളിലെത്തുന്നു.</li>
+          <li>മസ്തിഷ്കം ഈ സന്ദേശം വിശകലനം ചെയ്ത് ഉചിതമായ പ്രതികരണ നിർദേശം പേശികൾക്കോ ഗ്രന്ഥികൾക്കോ നൽകുന്നു.</li>
+        </ul>
+        <div class="formula-box">ഉദ്ദീപനം → ഗ്രാഹി → റിസപ്റ്റർ പൊട്ടൻഷ്യൽ → ആക്ഷൻ പൊട്ടൻഷ്യൽ → നാഡീയ ആവേഗം → മസ്തിഷ്കം → പ്രതികരണം</div>
+        <h3 class="sub-title">3. ഗ്രാഹികളും സംവേദനങ്ങളും (Receptors and Senses)</h3>
+        <p>ഗ്രാഹികളിലൂടെ തിരിച്ചറിയാവുന്ന സംവേദനങ്ങളെ രണ്ടായി തിരിക്കാം:</p>
+        <table><tr><th>തരം</th><th>ഉദാഹരണങ്ങൾ</th><th>ഗ്രാഹികളുടെ വിന്യാസം</th></tr>
+          <tr><td>പൊതുസംവേദനങ്ങൾ (General Senses)</td><td>സ്പർശം, വേദന, ചൂട്, മർദ്ദം</td><td>ത്വക്ക്, പേശികൾ, സന്ധികൾ, ആന്തരികാവയവങ്ങൾ, രക്തക്കുഴലുകൾ എന്നിവയിൽ വ്യാപകമായി</td></tr>
+          <tr><td>പ്രത്യേക സംവേദനങ്ങൾ (Special Senses)</td><td>കാഴ്ച, കേൾവി, രുചി, ഗന്ധം</td><td>ചില പ്രത്യേക ഇന്ദ്രിയങ്ങളിൽ മാത്രം കേന്ദ്രീകരിച്ച്</td></tr></table>
+        <table><tr><th>ഇന്ദ്രിയം</th><th>ഗ്രാഹികൾ</th><th>ഉദ്ദീപനം</th></tr>
+          <tr><td>കണ്ണ്</td><td>പ്രകാശഗ്രാഹികൾ</td><td>പ്രകാശം</td></tr>
+          <tr><td>ചെവി</td><td>ശബ്ദഗ്രാഹികൾ</td><td>ശബ്ദം</td></tr>
+          <tr><td>നാവ്</td><td>രാസഗ്രാഹികൾ</td><td>ലയിച്ച രാസവസ്തുക്കൾ (രുചി)</td></tr>
+          <tr><td>ത്വക്ക്</td><td>സ്പർശഗ്രാഹികൾ, താപഗ്രാഹികൾ</td><td>സ്പർശം, മർദ്ദം, ചൂട്, തണുപ്പ്</td></tr>
+          <tr><td>മൂക്ക്</td><td>ഗന്ധഗ്രാഹികൾ</td><td>ഗന്ധം</td></tr></table>
+        <p class="exam-tip">📌 നാവിന് രുചി അറിയാനാകുമെങ്കിലും ചെവികൾക്ക് ആ കഴിവില്ല — കാരണം ഓരോ ഇന്ദ്രിയത്തിലും അതത് പ്രത്യേക സംവേദനത്തിന് ആവശ്യമായ പ്രത്യേക തരം ഗ്രാഹികൾ മാത്രമേ കാണപ്പെടുന്നുള്ളൂ.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Stimuli and Receptors</h2>
+        <h3 class="sub-title">1. Stimuli and Responses</h3>
+        <p>Conditions that trigger responses in organisms are called <b>Stimuli</b>. These can be divided into <b>external stimuli</b> (from the surroundings — light, sound, heat) and <b>internal stimuli</b> (from within the body — hunger, thirst).</p>
+        <p>Examples: eating when hungry, running away on seeing danger, wrapping up warm in cold weather, using an umbrella to stay dry, and a rise in body temperature during infection.</p>
+        <h3 class="sub-title">2. Receptors and Signals</h3>
+        <p>The body detects various stimuli through specialised cells or the tips of nerves. These are known as <b>Sensory Receptors</b>.</p>
+        <ul>
+          <li>Depending on the stimulus, receptors generate electrical signals known as the <b>Receptor Potential</b>.</li>
+          <li>At a sufficient level, these signals generate an <b>Action Potential</b> in the neurons connected to the receptors.</li>
+          <li>The action potential travels along neurons as nerve impulses and reaches the relevant parts of the brain.</li>
+          <li>The brain analyses this message and issues appropriate response instructions to muscles or glands.</li>
+        </ul>
+        <div class="formula-box">Stimulus → Receptor → Receptor potential → Action potential → Nerve impulse → Brain → Response</div>
+        <h3 class="sub-title">3. Receptors and Senses</h3>
+        <p>Senses detected through receptors can be divided into two types:</p>
+        <table><tr><th>Type</th><th>Examples</th><th>Distribution of receptors</th></tr>
+          <tr><td>General Senses</td><td>Touch, pain, temperature, pressure</td><td>Widely spread in skin, muscles, joints, internal organs, blood vessels</td></tr>
+          <tr><td>Special Senses</td><td>Vision, hearing, taste, smell</td><td>Concentrated in certain specific organs only</td></tr></table>
+        <table><tr><th>Organ</th><th>Receptors</th><th>Stimulus</th></tr>
+          <tr><td>Eye</td><td>Photoreceptors</td><td>Light</td></tr>
+          <tr><td>Ear</td><td>Sound receptors</td><td>Sound</td></tr>
+          <tr><td>Tongue</td><td>Chemoreceptors</td><td>Dissolved chemicals (taste)</td></tr>
+          <tr><td>Skin</td><td>Touch receptors, thermoreceptors</td><td>Touch, pressure, heat, cold</td></tr>
+          <tr><td>Nose</td><td>Olfactory receptors</td><td>Smell</td></tr></table>
+        <p class="exam-tip">📌 The tongue can detect taste but the ears cannot — because each organ contains only the specific type of receptor needed for its particular special sense.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EYE ================= -->
+  <section class="panel" id="eye">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">കണ്ണ് (Eye)</h2>
+        <p>ബാഹ്യലോകത്തെക്കുറിച്ച് ധാരണ നൽകുന്ന പ്രധാനപ്പെട്ട ഇന്ദ്രിയമാണ് കണ്ണ്.</p>
+        <h3 class="sub-title">1. നേത്രാവരണവും കണ്ണുനീർ ഗ്രന്ഥികളും</h3>
+        <table><tr><th>ഭാഗം</th><th>ധർമ്മം</th></tr>
+          <tr><td>നേത്രാവരണം (Conjunctiva)</td><td>കോർണിയ ഒഴികെ കണ്ണിന്റെ മുൻഭാഗത്തെ പൊതിഞ്ഞ് സംരക്ഷിക്കുന്നു, ഈർപ്പം നിലനിർത്തുന്നു, പൊടി/രോഗാണുക്കൾ കടക്കുന്നത് തടയുന്നു</td></tr>
+          <tr><td>കണ്ണുനീർ ഗ്രന്ഥികൾ (Lacrimal Glands)</td><td>കണ്ണുനീർ ഉൽപാദിപ്പിക്കുന്നു — ഈർപ്പം, പോഷണം, മാലിന്യനിർമാർജ്ജനം എന്നിവയ്ക്ക് സഹായിക്കുന്നു; ലൈസോസൈം എന്ന എൻസൈം അണുബാധയിൽ നിന്ന് സംരക്ഷിക്കുന്നു</td></tr></table>
+        <h3 class="sub-title">2. കണ്ണിലെ പാളികളും അനുബന്ധ ഭാഗങ്ങളും</h3>
+        <table><tr><th>പാളി</th><th>അനുബന്ധ ഭാഗങ്ങൾ</th><th>ധർമ്മം</th></tr>
+          <tr><td>ദൃഢപടലം (Sclera) — ബാഹ്യപാളി</td><td>കോർണിയ</td><td>കണ്ണിന് ഉറപ്പും സംരക്ഷണവും നൽകുന്നു; കോർണിയ പ്രകാശത്തെ കണ്ണിലേക്ക് പ്രവേശിപ്പിക്കുന്നു</td></tr>
+          <tr><td>രക്തപടലം (Choroid) — മധ്യപാളി</td><td>സീലിയറി പേശികൾ, ഐറിസ്, ലെൻസ്</td><td>റെറ്റിനയ്ക്ക് പോഷണവും ഓക്സിജനും നൽകുന്നു; ഐറിസ് പ്യൂപ്പിളിന്റെ വലുപ്പം നിയന്ത്രിക്കുന്നു (മെലാനിൻ വർണ്ണകം); ലെൻസ് പ്രതിബിംബം റെറ്റിനയിൽ കേന്ദ്രീകരിക്കുന്നു</td></tr>
+          <tr><td>ദൃഷ്ടിപടലം (Retina) — ആന്തരപാളി</td><td>പ്രകാശഗ്രാഹീ പാളി, ബൈപോളാർ കോശപാളി, ഗാംഗ്ലിയോൺ കോശപാളി</td><td>പ്രകാശഗ്രാഹികൾ (റോഡ്, കോൺ) പ്രകാശത്തെ വൈദ്യുത സന്ദേശമാക്കി മാറ്റുന്നു; ബൈപോളാർ കോശങ്ങൾ സന്ദേശം ഗാംഗ്ലിയോൺ കോശങ്ങളിലേക്കും, അവ നേത്രനാഡിയിലേക്കും കൈമാറുന്നു</td></tr></table>
+        <p>നേത്രനാഡി ആരംഭിക്കുന്ന ഭാഗത്ത് പ്രകാശഗ്രാഹീ കോശങ്ങളില്ല — ഈ ഭാഗം <b>അന്ധബിന്ദു (Blind Spot)</b> എന്നറിയപ്പെടുന്നു. കോൺകോശങ്ങൾ ഏറ്റവും കൂടുതൽ കാണപ്പെടുന്ന റെറ്റിനയുടെ മധ്യഭാഗമാണ് <b>പീതബിന്ദു (Macula)</b>.</p>
+        <h3 class="sub-title">3. കണ്ണിലെ അറകളും ദ്രവങ്ങളും</h3>
+        <table><tr><th>അറ</th><th>സ്ഥാനം</th><th>ദ്രവം</th><th>ധർമ്മം</th></tr>
+          <tr><td>അക്വസ് അറ</td><td>കോർണിയയ്ക്കും ലെൻസിനും ഇടയിൽ</td><td>അക്വസ് ദ്രവം (ജലസദൃശ്യം)</td><td>ലെൻസിനും കോർണിയയ്ക്കും പോഷണവും ഓക്സിജനും നൽകുന്നു; അറയിലെ മർദ്ദം ക്രമീകരിക്കുന്നു</td></tr>
+          <tr><td>വിടിയസ് അറ</td><td>ലെൻസിനും റെറ്റിനയ്ക്കും ഇടയിൽ</td><td>വിടിയസ് ദ്രവം (ജെല്ലിപോലെയുള്ളത്)</td><td>നേത്രഗോളത്തിന്റെ ആകൃതി നിലനിർത്തുന്നു</td></tr></table>
+        <h3 class="sub-title">4. പ്യൂപ്പിളും ഐറിസും</h3>
+        <p>ഐറിസിന്റെ മധ്യഭാഗത്തെ സുഷിരമാണ് <b>പ്യൂപ്പിൾ</b> (സാധാരണ വലുപ്പം 2–3 മില്ലിമീറ്റർ). ഐറിസിലെ വലയപേശികളും റേഡിയൽ പേശികളും ചേർന്നാണ് പ്യൂപ്പിളിന്റെ വലുപ്പം നിയന്ത്രിക്കുന്നത്:</p>
+        <table class="compact"><tr><th>പ്രകാശം</th><th>പേശി പ്രവർത്തനം</th><th>പ്യൂപ്പിൾ</th></tr>
+          <tr><td>തീവ്രപ്രകാശം</td><td>റേഡിയൽ പേശികൾ സങ്കോചിക്കുന്നു</td><td>ചെറുതാകുന്നു</td></tr>
+          <tr><td>മങ്ങിയ പ്രകാശം</td><td>വലയപേശികൾ സങ്കോചിക്കുന്നു</td><td>വലുതാകുന്നു</td></tr></table>
+        <h3 class="sub-title">5. ലെൻസ്</h3>
+        <p>ഇലാസ്റ്റിക് സ്വഭാവമുള്ള <b>കാപ്സ്യൂൾ</b>, അതിനുള്ളിൽ <b>ലെൻസ് നാരുകൾ</b>, <b>എപ്പിത്തീലിയം</b> എന്നിവ ചേർന്നതാണ് ലെൻസ്. മുഖ്യ നിർമാണഘടകം <b>ക്രിസ്റ്റലിൻ (Crystallin)</b> എന്ന പ്രോട്ടീനാണ്. അക്വസ് ദ്രവത്തിൽ നിന്നാണ് ലെൻസ് പോഷകങ്ങൾ സ്വീകരിക്കുന്നത്.</p>
+        <p><b>ലിഗമെന്റുകൾ</b> ലെൻസിനെ സീലിയറി പേശികളിലേക്ക് ഘടിപ്പിക്കുന്നു. അടുത്തും അകലെയുമുള്ള വസ്തുക്കൾ വ്യക്തമായി കാണാൻ ലെൻസിന്റെ വക്രത ക്രമീകരിക്കുന്ന കഴിവിനെ <b>പവർ ഓഫ് അക്കോമൊഡേഷൻ</b> എന്ന് വിളിക്കുന്നു — സീലിയറി പേശികളുടെ പ്രവർത്തനത്താൽ ലെൻസിന്റെ വക്രതയിൽ വ്യത്യാസം വരുത്തിയാണ് ഇത് സാധ്യമാകുന്നത്.</p>
+        <table class="compact"><tr><th>നോക്കുന്ന വസ്തു</th><th>സീലിയറി പേശികൾ</th><th>ലിഗമെന്റുകൾ</th><th>ലെൻസ്</th></tr>
+          <tr><td>അകലെയുള്ളത്</td><td>വിശ്രമാവസ്ഥ</td><td>വലിഞ്ഞിരിക്കുന്നു</td><td>പരന്നത്</td></tr>
+          <tr><td>അടുത്തുള്ളത്</td><td>സങ്കോചിക്കുന്നു</td><td>അയവുള്ളത്</td><td>കൂടുതൽ വൃത്താകൃതി</td></tr></table>
+        <h3 class="sub-title">6. റെറ്റിന (Retina)</h3>
+        <p>പ്രകാശഗ്രാഹികളായ <b>റോഡ് കോശങ്ങളും കോൺ കോശങ്ങളും</b> റെറ്റിനയിലുണ്ട്. റോഡ് കോശങ്ങൾക്ക് സിലിണ്ടർ ആകൃതിയും കോൺകോശങ്ങൾക്ക് കോൺ ആകൃതിയുമാണ്. റോഡ് കോശങ്ങൾ ഒമ്പത് കോടിയിലധികവും കോൺകോശങ്ങൾ ഏകദേശം 50 ലക്ഷവുമാണ്.</p>
+        <table><tr><th></th><th>റോഡ് കോശങ്ങൾ</th><th>കോൺ കോശങ്ങൾ</th></tr>
+          <tr><td>വർണ്ണകം</td><td>റോഡോപ്സിൻ</td><td>ഫോട്ടോപ്സിൻ</td></tr>
+          <tr><td>പ്രവർത്തനം</td><td>ഇരുണ്ട വെളിച്ചത്തിലും കുറഞ്ഞ വെളിച്ചത്തിലും കാഴ്ച</td><td>തീവ്രപ്രകാശത്തിലെ കാഴ്ചയും വർണ്ണക്കാഴ്ചയും</td></tr></table>
+        <p>രണ്ട് വർണ്ണകങ്ങളും ഓപ്സിൻ (Opsin) എന്ന പ്രോട്ടീനും വിറ്റാമിൻ A യിൽ നിന്ന് രൂപപ്പെടുന്ന റെറ്റിനാൽ (Retinal) എന്ന ഘടകവും ചേർന്നുണ്ടാകുന്നു — എന്നാൽ ഇവയുടെ രാസഘടന വ്യത്യസ്തമാണ്.</p>
+        <h3 class="sub-title">7. പ്രകാശഗ്രാഹികളിൽ നിന്ന് മസ്തിഷ്കത്തിലേക്ക്</h3>
+        <p>പ്രകാശഗ്രാഹികളിലെ പ്രാഥമിക ന്യൂറോട്രാൻസ്മിറ്ററായി പ്രവർത്തിക്കുന്നത് <b>ഗ്ലൂട്ടാമേറ്റ്</b> ആണ്. ഗ്ലൂട്ടാമേറ്റ് ഉൽപാദനത്തിലെ ഏറ്റക്കുറച്ചിലാണ് പ്രകാശം, ഇരുട്ട് എന്നിവയെക്കുറിച്ച് ബോധമുണ്ടാക്കുന്നത്:</p>
+        <table class="compact"><tr><th>അവസ്ഥ</th><th>ഗ്ലൂട്ടാമേറ്റ്</th><th>ഓൺ ബൈപോളാർ</th><th>ഓഫ് ബൈപോളാർ</th><th>ബോധം</th></tr>
+          <tr><td>ഇരുട്ട്</td><td>തുടർച്ചയായി ഉൽപാദനം</td><td>പ്രവർത്തനരഹിതം</td><td>ഉത്തേജിക്കപ്പെടുന്നു</td><td>ഇരുട്ട്</td></tr>
+          <tr><td>പ്രകാശം</td><td>ഉൽപാദനം നിലയ്ക്കുന്നു</td><td>സജീവമാകുന്നു</td><td>പ്രവർത്തനരഹിതം</td><td>കാഴ്ച</td></tr></table>
+        <h3 class="sub-title">8. വർണ്ണക്കാഴ്ച (Colour Vision)</h3>
+        <p>റെറ്റിനയിൽ മൂന്ന് തരം കോൺ കോശങ്ങളുണ്ട് — <b>എസ്-കോണുകൾ</b> (ഹ്രസ്വ തരംഗദൈർഘ്യം/നീല വെളിച്ചം), <b>എം-കോണുകൾ</b> (ഇടത്തരം/പച്ച വെളിച്ചം), <b>എൽ-കോണുകൾ</b> (ദീർഘ തരംഗദൈർഘ്യം/ചുവന്ന വെളിച്ചം). ഇവ വ്യത്യസ്ത അനുപാതത്തിൽ ഉദ്ദീപിപ്പിക്കപ്പെടുന്നതിനാലാണ് വർണ്ണക്കാഴ്ച സാധ്യമാകുന്നത്.</p>
+        <p>പച്ച, ചുവപ്പ് കോൺ കോശങ്ങളിലെ വർണ്ണകത്തിന്റെ ഉൽപാദനത്തിനുള്ള ജീൻ <b>X ക്രോമസോമിലാണ്</b> കാണപ്പെടുന്നത്. നീല കോണിലെ ജീൻ ക്രോമസോം 7 ലാണുള്ളത്. ഇക്കാരണത്താൽ വർണ്ണാന്ധത പുരുഷന്മാരെ കൂടുതലായി ബാധിക്കുന്നു.</p>
+        <h3 class="sub-title">9. ബൈനോക്കുലർ ഫ്യൂഷൻ (Binocular Fusion)</h3>
+        <p>ഓരോ കണ്ണും വ്യത്യസ്ത കോണുകളിൽ നിന്ന് പ്രകാശം സ്വീകരിക്കുന്നതിനാൽ റെറ്റിനയിൽ അല്പം വ്യത്യസ്തമായ രണ്ട് പ്രതിബിംബങ്ങൾ ഉണ്ടാകുന്നു. ഈ ചിത്രങ്ങൾ നേത്രനാഡി വഴി മസ്തിഷ്കത്തിലെ <b>വിഷ്വൽ കോർട്ടക്സി</b>ൽ എത്തി താരതമ്യം ചെയ്യപ്പെടുകയും ഒന്നിനൊന്ന് ലയിപ്പിക്കപ്പെടുകയും ചെയ്യുന്നു (ഫ്യൂഷൻ). ഈ പ്രക്രിയ 3D കാഴ്ചയും ആഴം മനസ്സിലാക്കാനുള്ള കഴിവും നൽകുന്നു.</p>
+        <h3 class="sub-title">10. നേത്രരോഗങ്ങളും വൈകല്യങ്ങളും</h3>
+        <table><tr><th>രോഗം/വൈകല്യം</th><th>കാരണം</th><th>ചികിത്സ</th></tr>
+          <tr><td>ഹ്രസ്വദൃഷ്ടി (Myopia)</td><td>ദൈർഘ്യമുള്ള നേത്രഗോളം</td><td>കോൺകേവ് ലെൻസ് ഉള്ള കണ്ണട/കോൺടാക്ട് ലെൻസ്, സർജറി</td></tr>
+          <tr><td>ദീർഘദൃഷ്ടി (Hyperopia)</td><td>ചെറിയ നേത്രഗോളം</td><td>കോൺവെക്സ് ലെൻസ്</td></tr>
+          <tr><td>അസ്റ്റിഗ്മാറ്റിസം</td><td>കോർണിയയുടെ അസമമായ വക്രത</td><td>സിലിണ്ട്രിക്കൽ ലെൻസ്</td></tr>
+          <tr><td>തിമിരം (Cataract)</td><td>നേത്ര ലെൻസ് അതാര്യമാകുന്നു</td><td>ശസ്ത്രക്രിയ (ലെൻസ് മാറ്റിവയ്ക്കൽ)</td></tr>
+          <tr><td>ഗ്ലോക്കോമ</td><td>അക്വസ് ദ്രവത്തിന്റെ പുനരാഗിരണം തടസ്സപ്പെടുന്നു; മർദ്ദം കൂടി നേത്രനാഡി തകരാറിലാകുന്നു</td><td>നേരത്തേ കണ്ടെത്തിയാൽ മരുന്ന്/ശസ്ത്രക്രിയ</td></tr>
+          <tr><td>ചെങ്കണ്ണ്</td><td>നേത്രാവരണത്തിലെ അണുബാധ</td><td>ആന്റിബയോട്ടിക് തുള്ളിമരുന്ന്</td></tr>
+          <tr><td>ഡയബറ്റിക് റെറ്റിനോപ്പതി</td><td>പ്രമേഹം നിയന്ത്രണ വിധേയമല്ലാത്ത അവസ്ഥ</td><td>പ്രമേഹ നിയന്ത്രണം, ലേസർ ചികിത്സ</td></tr>
+          <tr><td>നിശാന്ധത (Night blindness)</td><td>വിറ്റാമിൻ A യുടെ അഭാവം</td><td>വിറ്റാമിൻ A സപ്ലിമെന്റ്</td></tr>
+          <tr><td>സീറോഫ്താൽമിയ</td><td>ദീർഘകാല വിറ്റാമിൻ A അഭാവം മൂലം കോർണിയ അതാര്യമാകുന്നു</td><td>വിറ്റാമിൻ A ചികിത്സ, നേരത്തേ ഇടപെടൽ</td></tr></table>
+        <h3 class="sub-title">11. നേത്രസംരക്ഷണം</h3>
+        <ul>
+          <li>കണ്ണുകൾ ശുദ്ധജലം ഉപയോഗിച്ച് കഴുകുക</li>
+          <li>വിറ്റാമിൻ A സമ്പുഷ്ടമായ ഭക്ഷണം കഴിക്കുക</li>
+          <li>സ്ക്രീൻ ഉപയോഗ സമയം കുറയ്ക്കുക — 5 വയസ്സിൽ താഴെയുള്ള കുട്ടികൾക്ക് ഒരു മണിക്കൂറോ അതിൽ കുറവോ, ഒരു വയസ്സിൽ താഴെയുള്ളവർ ഡിജിറ്റൽ ഉപകരണങ്ങൾ ഉപയോഗിക്കരുത് (WHO ശുപാർശ)</li>
+          <li>പതിവ് കാഴ്ച പരിശോധനകൾ നടത്തുക</li>
+          <li>നേത്രദാനത്തിന് സന്നദ്ധരാവുക — കോർണിയ തകരാറുമൂലം കാഴ്ചശക്തി നഷ്ടപ്പെട്ടവർക്ക് ശസ്ത്രക്രിയയിലൂടെ കോർണിയ മാറ്റിവയ്ക്കാം</li>
+        </ul>
+        <p>കാഴ്ചവ്യക്തത പരിശോധിക്കാൻ <b>സ്നെല്ലൻ ചാർട്ട് (Snellen Chart)</b> ഉപയോഗിക്കുന്നു — 20 അടി അകലെ നിന്ന് വ്യക്തി വായിക്കാൻ കഴിയുന്ന ഏറ്റവും ചെറിയ വരി കണ്ടെത്തി കാഴ്ചശക്തി രേഖപ്പെടുത്തുന്നു.</p>
+        <div class="exam-tip">💡 <b>ഒഫ്താൽമോളജി:</b> നേത്രരോഗങ്ങൾ ചികിത്സിക്കുന്ന വൈദ്യശാഖ. ശസ്ത്രക്രിയാ പരിശീലനം നേടിയ ഡോക്ടറെ <b>ഒഫ്താൽമോളജിസ്റ്റ്</b> എന്നും, നേത്രപരിശോധന/ലെൻസ് ക്രമീകരണം നടത്തുന്നയാളെ <b>ഒപ്റ്റോമെട്രിസ്റ്റ്</b> എന്നും വിളിക്കുന്നു.</div>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">The Eye</h2>
+        <p>The eye is the principal organ that gives us an understanding of the external world.</p>
+        <h3 class="sub-title">1. Conjunctiva and Lacrimal Glands</h3>
+        <table><tr><th>Part</th><th>Function</th></tr>
+          <tr><td>Conjunctiva</td><td>Covers and protects the front of the eye (except the cornea), keeps it moist, and prevents dust/pathogens from entering</td></tr>
+          <tr><td>Lacrimal Glands</td><td>Produce tears — help keep the surface moist, provide nourishment, and remove waste; contain the enzyme lysozyme, which protects against infection</td></tr></table>
+        <h3 class="sub-title">2. Layers of the Eye and Associated Parts</h3>
+        <table><tr><th>Layer</th><th>Associated parts</th><th>Function</th></tr>
+          <tr><td>Sclera — outer layer</td><td>Cornea</td><td>Gives the eye strength and protection; the cornea lets light enter the eye</td></tr>
+          <tr><td>Choroid — middle layer</td><td>Ciliary muscles, Iris, Lens</td><td>Nourishes the retina and supplies oxygen; the iris (with the pigment melanin) controls pupil size; the lens focuses the image onto the retina</td></tr>
+          <tr><td>Retina — inner layer</td><td>Photoreceptor layer, bipolar cell layer, ganglion cell layer</td><td>Photoreceptors (rods, cones) convert light into electrical signals; bipolar cells pass the signal to ganglion cells, which pass it to the optic nerve</td></tr></table>
+        <p>The region where the optic nerve begins has no photoreceptor cells — this area is called the <b>Blind Spot</b>. The central region of the retina with the highest concentration of cone cells is called the <b>Macula</b>.</p>
+        <h3 class="sub-title">3. Eye Chambers and Humors</h3>
+        <table><tr><th>Chamber</th><th>Location</th><th>Humor</th><th>Function</th></tr>
+          <tr><td>Aqueous chamber</td><td>Between cornea and lens</td><td>Aqueous humor (water-like)</td><td>Nourishes the lens and cornea with nutrients and oxygen; regulates pressure in the chamber</td></tr>
+          <tr><td>Vitreous chamber</td><td>Between lens and retina</td><td>Vitreous humor (jelly-like)</td><td>Maintains the shape of the eyeball</td></tr></table>
+        <h3 class="sub-title">4. Pupil and Iris</h3>
+        <p>The opening at the centre of the iris is the <b>pupil</b> (normal diameter 2–3 mm). The circular and radial muscles of the iris together control pupil size:</p>
+        <table class="compact"><tr><th>Light</th><th>Muscle action</th><th>Pupil</th></tr>
+          <tr><td>Bright</td><td>Radial muscles contract</td><td>Shrinks</td></tr>
+          <tr><td>Dim</td><td>Circular muscles contract</td><td>Widens</td></tr></table>
+        <h3 class="sub-title">5. The Lens</h3>
+        <p>The lens consists of an elastic <b>capsule</b>, <b>lens fibres</b> inside it, and an <b>epithelium</b> found only at the front, between the fibres and the capsule. Its main structural protein is <b>Crystallin</b>. The lens receives nutrients from the aqueous humor.</p>
+        <p><b>Ligaments</b> attach the lens to the ciliary muscles. The ability to adjust the lens's curvature to see near and far objects clearly is called the <b>power of accommodation</b> — made possible by changes in lens curvature driven by the ciliary muscles.</p>
+        <table class="compact"><tr><th>Object viewed</th><th>Ciliary muscles</th><th>Ligaments</th><th>Lens</th></tr>
+          <tr><td>Distant</td><td>Relaxed</td><td>Taut</td><td>Flatter</td></tr>
+          <tr><td>Near</td><td>Contract</td><td>Loose</td><td>More rounded</td></tr></table>
+        <h3 class="sub-title">6. The Retina</h3>
+        <p>The photoreceptors <b>rod cells and cone cells</b> are found in the retina. Rod cells are cylindrical and cone cells are cone-shaped. There are over 90 million rod cells and about 5 million cone cells.</p>
+        <table><tr><th></th><th>Rod cells</th><th>Cone cells</th></tr>
+          <tr><td>Pigment</td><td>Rhodopsin</td><td>Photopsin</td></tr>
+          <tr><td>Function</td><td>Vision in dim/low light</td><td>Vision in bright light and colour vision</td></tr></table>
+        <p>Both pigments consist of the protein Opsin combined with Retinal (derived from vitamin A) — but the chemical structure of the retinal in rhodopsin and photopsin differs.</p>
+        <h3 class="sub-title">7. Photoreceptors to Brain</h3>
+        <p>The primary neurotransmitter released by photoreceptors is <b>glutamate</b>. It is the rise and fall in glutamate release that creates the perception of light and darkness:</p>
+        <table class="compact"><tr><th>Condition</th><th>Glutamate</th><th>ON bipolar</th><th>OFF bipolar</th><th>Perception</th></tr>
+          <tr><td>Darkness</td><td>Continuously released</td><td>Inactive</td><td>Stimulated</td><td>Darkness</td></tr>
+          <tr><td>Light</td><td>Release stops</td><td>Activated</td><td>Inactive</td><td>Vision</td></tr></table>
+        <h3 class="sub-title">8. Colour Vision</h3>
+        <p>The retina has three types of cone cells — <b>S-cones</b> (short wavelength/blue light), <b>M-cones</b> (medium wavelength/green light), and <b>L-cones</b> (long wavelength/red light). Colour vision is made possible because these three types are stimulated in different proportions.</p>
+        <p>The genes responsible for pigment production in the green- and red-sensitive cones are found on the <b>X chromosome</b>. The gene for the blue-sensitive cone is found on chromosome 7. This is why colour blindness affects men more often.</p>
+        <h3 class="sub-title">9. Binocular Fusion</h3>
+        <p>Since each eye receives light from a slightly different angle, two slightly different images form on the retinas. These images travel via the optic nerve to the <b>visual cortex</b> of the brain, where they are compared and merged into one (fusion). This process gives us 3D vision and the ability to judge depth and distance.</p>
+        <h3 class="sub-title">10. Eye Diseases and Disorders</h3>
+        <table><tr><th>Disease/Disorder</th><th>Cause</th><th>Treatment</th></tr>
+          <tr><td>Myopia (short-sightedness)</td><td>Elongated eyeball</td><td>Concave-lens glasses/contact lenses, surgery</td></tr>
+          <tr><td>Hyperopia (long-sightedness)</td><td>Shortened eyeball</td><td>Convex lenses</td></tr>
+          <tr><td>Astigmatism</td><td>Uneven curvature of the cornea</td><td>Cylindrical lenses</td></tr>
+          <tr><td>Cataract</td><td>Clouding of the eye lens</td><td>Surgery (lens replacement)</td></tr>
+          <tr><td>Glaucoma</td><td>Blocked reabsorption of aqueous humor; increased pressure damages the optic nerve</td><td>Medication/surgery if detected early</td></tr>
+          <tr><td>Conjunctivitis</td><td>Infection of the conjunctiva</td><td>Antibiotic eye drops</td></tr>
+          <tr><td>Diabetic retinopathy</td><td>Poorly controlled diabetes</td><td>Diabetes management, laser treatment</td></tr>
+          <tr><td>Night blindness</td><td>Vitamin A deficiency</td><td>Vitamin A supplementation</td></tr>
+          <tr><td>Xerophthalmia</td><td>Prolonged vitamin A deficiency clouding the cornea</td><td>Vitamin A treatment, early intervention</td></tr></table>
+        <h3 class="sub-title">11. Protection of the Eye</h3>
+        <ul>
+          <li>Wash the eyes with clean water</li>
+          <li>Eat foods rich in vitamin A</li>
+          <li>Reduce screen time — WHO recommends one hour or less for children under 5, and none for children under 1</li>
+          <li>Undergo regular eye check-ups</li>
+          <li>Consider eye donation — those who lose vision due to corneal damage can regain it through corneal transplant surgery</li>
+        </ul>
+        <p>Visual clarity is tested using the <b>Snellen Chart</b> — a person's vision is recorded based on the smallest line of letters they can read clearly from 20 feet away.</p>
+        <div class="exam-tip">💡 <b>Ophthalmology</b> is the medical field that treats eye diseases. A surgically-trained eye doctor is an <b>Ophthalmologist</b>; a professional who performs eye exams and prescribes lenses is an <b>Optometrist</b>.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EAR ================= -->
+  <section class="panel" id="ear">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">കേൾവി (Hearing)</h2>
+        <p>ചെവികളും മസ്തിഷ്കവും ചേർന്നുതരുന്ന അനുഭവമാണ് കേൾവി. ശരീരതുലനാവസ്ഥ പാലിക്കുന്നതിലും ചെവി പ്രധാന പങ്ക് വഹിക്കുന്നു.</p>
+        <h3 class="sub-title">1. ചെവിയുടെ മൂന്ന് ഭാഗങ്ങൾ</h3>
+        <table><tr><th>ഭാഗം</th><th>പ്രധാന ഘടകങ്ങൾ</th><th>ധർമ്മം</th></tr>
+          <tr><td>ബാഹ്യകർണ്ണം (Outer Ear)</td><td>ചെവിക്കുട (Pinna), കർണ്ണനാളം</td><td>ശബ്ദതരംഗങ്ങളെ കർണ്ണനാളത്തിലേക്ക് നയിക്കുന്നു; ദിശ തിരിച്ചറിയാൻ സഹായിക്കുന്നു; അന്യവസ്തുക്കളിൽ നിന്ന് സംരക്ഷിക്കുന്നു</td></tr>
+          <tr><td>മധ്യകർണ്ണം (Middle Ear)</td><td>കർണ്ണപടം, അസ്ഥിശൃംഖല (മാലിയസ്, ഇൻകസ്, സ്റ്റേപിസ്), യൂസ്റ്റേഷ്യൻ കനാൽ</td><td>കർണ്ണപടത്തിന്റെ കമ്പനം അസ്ഥികളിലൂടെ ആന്തരകർണ്ണത്തിലേക്ക് കൈമാറുന്നു</td></tr>
+          <tr><td>ആന്തരകർണ്ണം (Inner Ear)</td><td>കോക്ലിയ, വെസ്റ്റിബ്യുൾ, സെമിസർക്കുലാർ കനാലുകൾ</td><td>ശബ്ദ ആവേഗങ്ങൾ ഉണ്ടാക്കുന്നു; ശരീരതുലനനില പാലിക്കുന്നു</td></tr></table>
+        <h3 class="sub-title">2. കർണ്ണനാളവും കർണ്ണപടവും</h3>
+        <p>കർണ്ണനാളം ശബ്ദതരംഗങ്ങളെ കർണ്ണപടത്തിലേക്ക് നയിക്കുന്നതിനൊപ്പം കർണ്ണപടത്തെ സംരക്ഷിക്കുകയും ചെയ്യുന്നു. കർണ്ണനാളത്തിലെ രോമങ്ങളും ഗ്രന്ഥികൾ ഉൽപാദിപ്പിക്കുന്ന കർണ്ണമെഴുകും (സെബവും) പൊടിയും പ്രാണികളും ചെവിക്കുള്ളിലേക്ക് പ്രവേശിക്കുന്നത് തടയുന്നു; ഇതിന് അണുനാശക സ്വഭാവവുമുണ്ട്.</p>
+        <p><b>കർണ്ണപടം (Ear Drum / Tympanum)</b> ഏകദേശം 9–10 മില്ലിമീറ്റർ വ്യാസവും 0.1 മില്ലിമീറ്റർ കനവുമുള്ളതാണ്.</p>
+        <h3 class="sub-title">3. മധ്യകർണ്ണവും അസ്ഥിശൃംഖലയും</h3>
+        <p>കർണ്ണപടത്തോട് ചേർന്ന് ക്രമീകരിച്ചിരിക്കുന്ന മൂന്ന് ചെറിയ അസ്ഥികളാണ് <b>മാലിയസ്, ഇൻകസ്, സ്റ്റേപിസ്</b>. ശബ്ദതരംഗങ്ങൾക്കനുസരിച്ച് കർണ്ണപടം കമ്പനം ചെയ്യുന്നു; ഈ കമ്പനങ്ങൾ അസ്ഥികളെ കമ്പനം ചെയ്യിപ്പിക്കുകയും ഓവൽ വിൻഡോ വഴി ആന്തരകർണ്ണത്തിലേക്ക് കൈമാറുകയും ചെയ്യുന്നു.</p>
+        <h3 class="sub-title">4. യൂസ്റ്റേഷ്യൻ കനാൽ (Eustachian Canal)</h3>
+        <p>മധ്യകർണ്ണത്തെ ഗ്രസനിയുമായി ബന്ധിപ്പിക്കുന്ന ഏകദേശം 4 സെന്റിമീറ്റർ നീളമുള്ള കുഴലാണ് യൂസ്റ്റേഷ്യൻ കനാൽ. സാധാരണ ഇത് അടഞ്ഞിരിക്കുമെങ്കിലും ചവയ്ക്കുമ്പോഴും മൂക്കുചീറ്റുമ്പോഴും തുറക്കപ്പെടും. കർണ്ണപടത്തിന്റെ ഇരുവശത്തുമുള്ള (മധ്യകർണ്ണവും ബാഹ്യകർണ്ണത്തിലെ അന്തരീക്ഷ വായുവും) വായുമർദ്ദം തുല്യമാക്കാൻ ഇത് സഹായിക്കുന്നു; കൂടാതെ ശ്ലേഷ്മം/ദ്രാവകങ്ങൾ ഗ്രസനിയിലേക്ക് ഒഴുകാനും സഹായിക്കുന്നു.</p>
+        <h3 class="sub-title">5. ആന്തരകർണ്ണവും കോക്ലിയയും</h3>
+        <p><b>കോക്ലിയ</b> ഒച്ചിന്റെ തോടിന്റെ ആകൃതിയുള്ളതും മൂന്ന് അറകളുള്ളതുമാണ് — മുകളിലത്തെ അറ, മധ്യ അറ, താഴെത്തെ അറ. മുകളിലത്തെയും താഴെത്തെയും അറകളിൽ <b>പെരിലിംഫ്</b> എന്ന ദ്രവം നിറഞ്ഞിരിക്കുന്നു; മധ്യഅറയിൽ <b>എൻഡോലിംഫ്</b> ഉണ്ട്.</p>
+        <p>മധ്യഅറയുടെയും താഴെത്തെ അറയുടെയും ഇടയ്ക്കുള്ള <b>ബേസിലാർ സ്തരത്തിലാണ്</b> ശബ്ദഗ്രാഹികൾ സ്ഥിതി ചെയ്യുന്ന <b>ഓർഗൻ ഓഫ് കോർട്ടി (Organ of Corti)</b> കാണപ്പെടുന്നത്. ഇവിടെയുള്ള രോമകോശങ്ങളിലെത്തുന്ന കമ്പനം ആവേഗങ്ങളുണ്ടാക്കുകയും ശ്രവണനാഡി വഴി മസ്തിഷ്കത്തിലെത്തുകയും ചെയ്യുന്നതോടെ കേൾവി എന്ന അനുഭവം ഉണ്ടാകുന്നു.</p>
+        <div class="formula-box">ചെവിക്കുട → കർണ്ണനാളം → കർണ്ണപടം → മാലിയസ്-ഇൻകസ്-സ്റ്റേപിസ് → ഓവൽ വിൻഡോ → പെരിലിംഫ്/എൻഡോലിംഫ് കമ്പനം → ബേസിലാർ സ്തരം → ഓർഗൻ ഓഫ് കോർട്ടി → ശ്രവണനാഡി → മസ്തിഷ്കം</div>
+        <h3 class="sub-title">6. ശരീരതുലനനില പാലനം (Balance)</h3>
+        <p><b>വെസ്റ്റിബ്യുലാർ സിസ്റ്റം</b> — മൂന്ന് സെമിസർക്കുലാർ കനാലുകൾ, വെസ്റ്റിബ്യുൾ (യൂട്രിക്കിൾ, സാക്യുൾ), രോമകോശങ്ങൾ എന്നിവ ചേർന്നത് — ആന്തരകർണ്ണത്തിലെ ശരീരതുലനനില പാലിക്കുന്ന ഭാഗമാണ്. പരസ്പരം ലംബമായി ക്രമീകരിച്ചിരിക്കുന്ന മൂന്ന് കനാലുകളും എൻഡോലിംഫിന്റെ ഭ്രമണചലനങ്ങൾക്കനുസരിച്ച് ചലിക്കും. തലയുടെ രേഖീയചലനങ്ങൾ യൂട്രിക്കിളിലെയും സാക്യുളിലെയും രോമകോശങ്ങളിൽ ആവേഗങ്ങളുണ്ടാക്കുന്നു. ഈ ആവേഗങ്ങൾ വെസ്റ്റിബ്യുലാർ നാഡി വഴി മസ്തിഷ്കത്തിലെത്തുമ്പോൾ കണ്ണുകളിൽ നിന്നും പേശികളിൽ നിന്നുമുള്ള മറ്റ് ആവേഗങ്ങളെയും സ്വീകരിച്ച് ശരീരം തുലനനില പാലിക്കുന്നു.</p>
+        <h3 class="sub-title">7. ശബ്ദ മലിനീകരണം</h3>
+        <p>ശബ്ദതീവ്രത അളക്കുന്നത് <b>ഡെസിബെൽ (dB)</b> യൂണിറ്റിലാണ്. സാധാരണ സംഭാഷണം 40–50 dB, ഉച്ചത്തിലുള്ള സംസാരം ~60 dB, കാറിന്റെ ഹോൺ ~70 dB, ഏയർഹോൺ 100–110 dB വരെയാകാം. 80 dB ന് മുകളിലുള്ള ശബ്ദം തുടർച്ചയായി കേൾക്കുന്നത് ദോഷകരമാണ്. അമിതമായ ശബ്ദം (85 dB ന് മുകളിൽ) കുറച്ചുസമയമോ, കുറഞ്ഞ ശബ്ദം (55 dB ന് മുകളിൽ) കൂടുതൽ സമയമോ കേൾക്കുന്നത് സ്ഥായിയായ കേൾവിക്കുറവിന് കാരണമാകാം.</p>
+        <p class="exam-tip">📌 5 വയസ്സിൽ താഴെയുള്ള കുട്ടികൾ ഡിജിറ്റൽ ഉപകരണങ്ങളിൽ ഒരു മണിക്കൂറോ അതിൽ കുറവോ മാത്രം ചെലവഴിക്കണം എന്നാണ് ലോകാരോഗ്യ സംഘടനയുടെ (WHO) ശുപാർശ — ദീർഘനേരം ഇയർഫോൺ ഉപയോഗിക്കുന്നതും ശ്രവണ ആരോഗ്യത്തെ ബാധിക്കും.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Hearing</h2>
+        <p>Hearing is an experience created jointly by the ears and the brain. The ear also plays a key role in maintaining body balance.</p>
+        <h3 class="sub-title">1. The Three Parts of the Ear</h3>
+        <table><tr><th>Part</th><th>Key structures</th><th>Function</th></tr>
+          <tr><td>Outer Ear</td><td>Pinna, ear canal</td><td>Directs sound waves into the ear canal; helps identify direction; protects from foreign objects</td></tr>
+          <tr><td>Middle Ear</td><td>Eardrum, ossicles (malleus, incus, stapes), Eustachian canal</td><td>Transfers eardrum vibrations through the ossicles to the inner ear</td></tr>
+          <tr><td>Inner Ear</td><td>Cochlea, vestibule, semicircular canals</td><td>Generates sound impulses; maintains body balance</td></tr></table>
+        <h3 class="sub-title">2. Ear Canal and Eardrum</h3>
+        <p>The ear canal directs sound waves to the eardrum while also protecting it. Hairs in the canal, along with earwax (sebum) produced by glands, prevent dust and insects from entering, and also have antimicrobial properties.</p>
+        <p>The <b>Ear Drum (Tympanum)</b> is about 9–10 mm in diameter and only about 0.1 mm thick.</p>
+        <h3 class="sub-title">3. Middle Ear and Ossicles</h3>
+        <p>Three tiny bones arranged next to the eardrum are the <b>Malleus, Incus, and Stapes</b>. The eardrum vibrates in response to sound waves; these vibrations set the ossicles vibrating, which pass the vibration into the inner ear via the oval window.</p>
+        <h3 class="sub-title">4. The Eustachian Canal</h3>
+        <p>The Eustachian canal is a roughly 4 cm long tube connecting the middle ear to the throat. It is normally closed but opens during chewing or sneezing. It equalises air pressure on both sides of the eardrum (middle ear and outer atmospheric air), and also allows mucus and fluid to drain from the middle ear into the throat.</p>
+        <h3 class="sub-title">5. Inner Ear and the Cochlea</h3>
+        <p>The <b>cochlea</b> is shaped like a snail's shell and has three chambers — an upper chamber, a middle chamber, and a lower chamber. The upper and lower chambers are filled with a fluid called <b>perilymph</b>; the middle chamber contains <b>endolymph</b>.</p>
+        <p>The <b>Organ of Corti</b>, which houses the sound receptors, lies on the <b>basilar membrane</b> between the middle and lower chambers. Vibrations reaching the hair cells there generate impulses, which travel via the auditory nerve to the brain, producing the experience of hearing.</p>
+        <div class="formula-box">Pinna → Ear canal → Eardrum → Malleus-Incus-Stapes → Oval window → Perilymph/Endolymph vibration → Basilar membrane → Organ of Corti → Auditory nerve → Brain</div>
+        <h3 class="sub-title">6. Maintaining Balance</h3>
+        <p>The <b>vestibular system</b> — consisting of three semicircular canals, the vestibule (utricle and saccule), and hair cells — is the part of the inner ear responsible for balance. The three canals, arranged perpendicular to each other, respond to the rotational movement of endolymph. Linear movements of the head generate impulses in the hair cells of the utricle and saccule. These impulses travel via the vestibular nerve to the brain, where they combine with signals from the eyes and muscles to help the body maintain balance.</p>
+        <h3 class="sub-title">7. Noise Pollution</h3>
+        <p>Sound intensity is measured in <b>decibels (dB)</b>. Normal conversation is about 40–50 dB, loud talking around 60 dB, a car horn about 70 dB, and an air horn 100–110 dB. Continuous exposure to sounds above 80 dB is harmful. Exposure to very loud sound (above 85 dB) for a short time, or moderately loud sound (above 55 dB) for a longer time, can cause permanent hearing loss.</p>
+        <p class="exam-tip">📌 The World Health Organization (WHO) recommends that children under 5 spend no more than an hour on digital devices — prolonged earphone use also affects hearing health.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SMELL & TASTE ================= -->
+  <section class="panel" id="smelltaste">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">ഗന്ധവും (Olfaction) രുചിയും (Taste)</h2>
+        <h3 class="sub-title">1. ഗന്ധം (Olfaction)</h3>
+        <p>ഇന്ദ്രിയങ്ങളിൽ പരസ്പരം ബന്ധപ്പെട്ട് പ്രവർത്തിക്കുന്ന രണ്ട് അവയവങ്ങളാണ് നാക്കും മൂക്കും — രുചിയും ഗന്ധവും തിരിച്ചറിയാൻ ഇവ ഒരുമിച്ച് പ്രവർത്തിക്കുന്നു.</p>
+        <div class="formula-box">ഗന്ധകണിക → ശ്ലേഷ്മസ്തരം → ഗന്ധഗ്രാഹി ന്യൂറോൺ → ഗന്ധനാഡികളുടെ കൂട്ടം → ആവേഗങ്ങൾ → മസ്തിഷ്കം</div>
+        <p>ശ്വസിക്കുമ്പോൾ ഗന്ധകണികകൾ നാസാഗഹ്വരത്തിൽ പ്രവേശിച്ച് ശ്ലേഷ്മസ്തരം ഉൽപാദിപ്പിക്കുന്ന ശ്ലേഷ്മത്തിൽ ലയിക്കുന്നു. ശ്ലേഷ്മസ്തരത്തിലെ ദശലക്ഷക്കണക്കിന് ഗന്ധഗ്രാഹികളായ ന്യൂറോണുകൾ ഓരോന്നും പ്രത്യേകതരം ഗന്ധകണികകളാൽ ഉദ്ദീപിപ്പിക്കപ്പെടുന്നു. ഈ ഗ്രാഹികളിലുണ്ടാകുന്ന ആവേഗങ്ങൾ ഗന്ധനാഡി വഴി മസ്തിഷ്കത്തിലെ ഗന്ധം തിരിച്ചറിയുന്ന ഭാഗത്തെത്തി ഗന്ധം എന്ന അനുഭവം ഉണ്ടാക്കുന്നു.</p>
+        <p class="exam-tip">📌 ആനകളിലാണ് സസ്തനികളിൽ ഗന്ധം തിരിച്ചറിയാനുള്ള ജീനുകൾ ഏറ്റവും കൂടുതൽ കാണപ്പെടുന്നത് (~2000). മനുഷ്യരിൽ ഇത് ~400 എണ്ണമേയുള്ളൂ.</p>
+        <h3 class="sub-title">2. രുചി (Taste)</h3>
+        <p>രുചിക്കുന്നതിന് മുമ്പ് തന്നെ, ഭക്ഷണത്തിന്റെ ഗന്ധം തിരിച്ചറിയുന്നതിലൂടെ വൈവിധ്യമാർന്ന രുചികൾ ആസ്വദിക്കാൻ കഴിയുന്നു. ഭക്ഷണത്തിന്റെ സ്വാഭാവിക രുചികൾ മനസ്സിലാക്കാൻ സഹായിക്കുന്ന <b>രുചിമുകുളങ്ങൾ</b> ഭക്ഷണം ആസ്വദിക്കുന്നതിൽ നിർണായക പങ്ക് വഹിക്കുന്നു.</p>
+        <div class="formula-box">നാക്ക് → പാപ്പില → രുചിമുകുളം → രാസഗ്രാഹികൾ → ന്യൂറോൺ → നാഡി → മസ്തിഷ്കം (രുചി)</div>
+        <p>ഒരു രുചിമുകുളത്തിൽ നൂറോളം രാസഗ്രാഹികളുണ്ടാകും. ഓരോ രാസഗ്രാഹിയിൽ നിന്നും ഓരോ മൈക്രോവില്ലസ് പാപ്പിലകളിലെ സൂക്ഷ്മസുഷിരത്തിലേക്കെത്തുന്നു. ഈ സുഷിരത്തിലൂടെ ഉമിനീർ ഉള്ളിലേക്ക് കടക്കുന്നു. രുചിയറിയിക്കേണ്ട പദാർത്ഥങ്ങൾ ഉമിനീരിൽ ലയിച്ച് രാസഗ്രാഹികളെ ഉദ്ദീപിപ്പിക്കുന്നു. ഈ തന്മാത്രകൾ രാസഗ്രാഹികളിലുണ്ടാക്കുന്ന ആവേഗങ്ങൾ നാഡിവഴി മസ്തിഷ്കത്തിലെത്തി <b>രുചി</b> എന്ന അനുഭവം ഉണ്ടാക്കുന്നു.</p>
+        <p>നാം തിരിച്ചറിയുന്ന പ്രധാന രുചികൾ: <b>മധുരം, പുളിപ്പ്, ഉപ്പ്, ചവർപ്പ്, കയ്പ്പ്, ഉമാമി</b>.</p>
+        <p class="exam-tip">📌 കൃത്രിമ അഡിറ്റീവുകളോ ദോഷകരമായ വസ്തുക്കളോ നൽകുന്ന രുചിയെക്കാൾ, പ്രകൃതിദത്തചേരുവകൾ തരുന്ന രുചികരമായ ഭക്ഷണമാണ് സുരക്ഷിതവും ആരോഗ്യകരവും.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Smell (Olfaction) and Taste</h2>
+        <h3 class="sub-title">1. Olfaction (Smell)</h3>
+        <p>The tongue and nose are two organs among our senses that work closely together — they combine to help us fully appreciate taste and smell.</p>
+        <div class="formula-box">Odour particle → Mucous membrane → Olfactory receptor neuron → Bundle of olfactory nerves → Impulses → Brain</div>
+        <p>While breathing, odour particles enter the nasal cavity and dissolve in the mucus produced by the mucous membrane. Millions of olfactory receptor neurons in the mucous membrane are each stimulated by a specific type of odour particle. The impulses generated in these receptors travel via the olfactory nerve to the smell-processing region of the brain, producing the experience of smell.</p>
+        <p class="exam-tip">📌 Among mammals, elephants have the largest number of genes for detecting smell (~2000). Humans have only about 400.</p>
+        <h3 class="sub-title">2. Taste</h3>
+        <p>Even before tasting food, we can appreciate a variety of flavours by recognising its smell. <b>Taste buds</b>, which help us perceive the natural flavours of food, play a crucial role in enjoying what we eat.</p>
+        <div class="formula-box">Tongue → Papilla → Taste bud → Chemoreceptors → Neuron → Nerve → Brain (taste)</div>
+        <p>A single taste bud contains around a hundred chemoreceptors. Each chemoreceptor reaches a microscopic pore in the microvilli of the papillae. Saliva enters through this pore. Substances to be tasted dissolve in the saliva and stimulate the chemoreceptors. The impulses these molecules generate in the receptors travel via nerves to the brain, producing the experience of <b>taste</b>.</p>
+        <p>The main tastes we perceive are: <b>sweet, sour, salty, astringent, bitter, and umami</b>.</p>
+        <p class="exam-tip">📌 Food that is naturally flavourful and safe is healthier than food made tasty through artificial additives or harmful substances.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SKIN & PAIN ================= -->
+  <section class="panel" id="skin">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">ത്വക്ക് (Skin), വേദന, സംവേദന വൈവിധ്യം</h2>
+        <h3 class="sub-title">1. ത്വക്കിലെ ഗ്രാഹികൾ</h3>
+        <table><tr><th>ഗ്രാഹി</th><th>ധർമ്മം</th></tr>
+          <tr><td>സ്വതന്ത്ര നാഡീയാഗ്രങ്ങൾ (Free nerve endings)</td><td>വേദന, താപനില മാറ്റങ്ങൾ</td></tr>
+          <tr><td>മെർക്കൽ ഡിസ്ക്</td><td>സ്പർശം, സമ്മർദ്ദം, രോമങ്ങളുടെ ചലനം</td></tr>
+          <tr><td>മേയ്സ്നർ കോർപ്പസൽ</td><td>വസ്തുക്കളുടെ ആകൃതി, അളവ്, ഘടന</td></tr>
+          <tr><td>ക്രൗസ് എൻഡ് ബൾബ്</td><td>തണുപ്പ്, സ്പർശം</td></tr>
+          <tr><td>റുഫിനി എൻഡ് ഓർഗൻ</td><td>തീവ്രമായ സ്പർശം, സമ്മർദ്ദം, ചൂട്</td></tr>
+          <tr><td>റൂട്ട് ഹെയർ പ്ലെക്സസ്</td><td>രോമങ്ങളുടെ ചലനം കണ്ടെത്താൻ സഹായിക്കുന്നു</td></tr>
+          <tr><td>പസീനിയൻ കോർപ്പസൽ</td><td>കമ്പനം, ഉയർന്ന ആവൃത്തിയിലുള്ള സ്പർശം</td></tr></table>
+        <h3 class="sub-title">2. വേദന (Pain)</h3>
+        <p>ക്ഷതം, മുറിവ്, രോഗാണുബാധ എന്നിവപോലുള്ള അപകടത്തെക്കുറിച്ച് ശരീരത്തിന് മുന്നറിയിപ്പ് നൽകുന്ന സംവേദനമാണ് <b>വേദന</b>. വേദന തിരിച്ചറിയുന്ന പ്രവർത്തനം <b>നോസിസെപ്ഷൻ (Nociception)</b> എന്നാണ് അറിയപ്പെടുന്നത്. <b>നോസിസെപ്റ്ററുകൾ</b> എന്ന സവിശേഷഗ്രാഹികൾ ത്വക്ക്, പേശികൾ, ആന്തരിക അവയവങ്ങൾ എന്നിവയിലെ അഗ്രഭാഗങ്ങളിൽ കാണപ്പെടുന്ന നാഡീയാഗ്രങ്ങളാണ്.</p>
+        <ul>
+          <li>ചൂടുള്ള പാത്രത്തിൽ തൊടുമ്പോൾ അനുഭവപ്പെടുന്ന വേദനയാണ് <b>നോസിസെപ്റ്റീവ് പെയിൻ</b> — സംവേദന ന്യൂറോൺ അല്ലെങ്കിൽ നോസിസെപ്റ്റർ ആവേഗങ്ങളെ സുഷുമ്നാനാഡി വഴി മസ്തിഷ്കത്തിലേക്ക് കൈമാറി വേദന അനുഭവവേദ്യമാക്കുന്നു.</li>
+          <li>അണുബാധ അല്ലെങ്കിൽ കലകൾക്കുണ്ടാകുന്ന ക്ഷതം മൂലം ശരീരം സൈറ്റോകൈനുകൾ, കീമോകൈനുകൾ തുടങ്ങിയ തന്മാത്രകൾ ഉൽപാദിപ്പിക്കുന്നു. ഇവയും വേദന ഉളവാക്കുന്നു.</li>
+          <li>പെരിഫറൽ നാഡിക്ക് കേടുപാടുകൾ സംഭവിക്കുന്ന ന്യൂറോപ്പതി പോലുള്ള അവസ്ഥകളിലും വേദന അനുഭവപ്പെടും.</li>
+        </ul>
+        <h3 class="sub-title">3. ജീവികളിലെ സംവേദന വൈവിധ്യം</h3>
+        <table><tr><th>ജീവി</th><th>പ്രത്യേകത</th></tr>
+          <tr><td>അമീബ / ബാക്ടീരിയ</td><td>ചുറ്റുപാടിലെ രാസവസ്തുക്കളുടെ സാന്നിധ്യം തിരിച്ചറിഞ്ഞ് അവയ്ക്കെതിരെ നീങ്ങുന്നു</td></tr>
+          <tr><td>യൂഗ്ലീന</td><td>പ്രകാശം തിരിച്ചറിഞ്ഞ് അതിന് നേരെ നീങ്ങാൻ ഐസ്പോട്ട് (സ്റ്റിഗ്മ) സഹായിക്കുന്നു</td></tr>
+          <tr><td>ഷഡ്പദങ്ങൾ</td><td>ഒമാറ്റീഡിയയാൽ നിർമ്മിച്ച സംയുക്തനേത്രം; ഗന്ധവും സ്പർശവും തിരിച്ചറിയാൻ സഹായിക്കുന്ന ആന്റീന</td></tr>
+          <tr><td>വവ്വാൽ</td><td>ചെവികളും പ്രത്യേകതരത്തിലുള്ള ഇക്കോലൊക്കേഷൻ അവയവവുമുണ്ട് — ഇത് ഇരപിടിക്കാനും സഞ്ചരിക്കാനും സഹായിക്കുന്നു</td></tr>
+          <tr><td>പരുന്ത്</td><td>കാഴ്ചശക്തി കൂടിയ കണ്ണുകൾ, വളരെ ദൂരെയുള്ള കാഴ്ചകൾ തിരിച്ചറിയാനും അൾട്രാവയലറ്റ് രശ്മി തിരിച്ചറിയാനുമുള്ള സംവിധാനങ്ങൾ</td></tr>
+          <tr><td>പാമ്പ്</td><td>ഗന്ധം തിരിച്ചറിയുന്നതിന് ജേക്കബ്സൺസ് അവയവം സഹായിക്കുന്നു</td></tr>
+          <tr><td>നായ</td><td>സംവേദനക്ഷമത കൂടിയ ഗന്ധഗ്രാഹികൾ (~300 ദശലക്ഷം) കാണപ്പെടുന്നു</td></tr></table>
+        <p class="exam-tip">📌 ആനകൾക്ക് ഗന്ധം തിരിച്ചറിയാനുള്ള ജീനുകൾ ഏറ്റവും കൂടുതലാണ് (~2000). അവ ആശ്രയിക്കുന്നത് പ്രധാനമായും ഗന്ധത്തെയാണ്, കാഴ്ചയെയല്ല. 19 കിലോമീറ്റർ അകലെ നിന്നുപോലും ജലത്തിന്റെ സാന്നിധ്യം കണ്ടെത്താൻ അവയ്ക്ക് കഴിയും. തുമ്പിക്കൈ ഉപയോഗിച്ച് നിലത്തു നിന്ന് കമ്പനം തിരിച്ചറിയാനും ആനയ്ക്ക് കഴിയും.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Skin, Pain, and Sensory Diversity</h2>
+        <h3 class="sub-title">1. Receptors in the Skin</h3>
+        <table><tr><th>Receptor</th><th>Function</th></tr>
+          <tr><td>Free nerve endings</td><td>Pain, changes in temperature</td></tr>
+          <tr><td>Merkel disc</td><td>Touch, pressure, hair movement</td></tr>
+          <tr><td>Meissner's corpuscle</td><td>Shape, size, and texture of objects</td></tr>
+          <tr><td>Krause end bulb</td><td>Cold, touch</td></tr>
+          <tr><td>Ruffini ending</td><td>Sustained touch, pressure, heat</td></tr>
+          <tr><td>Root hair plexus</td><td>Helps detect hair movement</td></tr>
+          <tr><td>Pacinian corpuscle</td><td>Vibration, high-frequency touch</td></tr></table>
+        <h3 class="sub-title">2. Pain</h3>
+        <p><b>Pain</b> is the sensation that warns the body of potential danger such as injury, wounds, or infection. The process of detecting pain is called <b>Nociception</b>. <b>Nociceptors</b> are specialised receptors — the tips of nerve endings found in the skin, muscles, and internal organs.</p>
+        <ul>
+          <li>The pain felt when touching a hot object is called <b>nociceptive pain</b> — a sensory neuron or nociceptor carries the impulse via the spinal nerve to the brain, making the pain perceptible.</li>
+          <li>Infection or tissue damage causes the body to produce molecules such as cytokines and chemokines, which also generate pain.</li>
+          <li>Pain also occurs in conditions such as neuropathy, where the peripheral nerve itself is damaged.</li>
+        </ul>
+        <h3 class="sub-title">3. Sensory Diversity Among Organisms</h3>
+        <table><tr><th>Organism</th><th>Special feature</th></tr>
+          <tr><td>Amoeba / Bacteria</td><td>Detect chemicals in the surroundings and move away from them</td></tr>
+          <tr><td>Euglena</td><td>An eyespot (stigma) helps it detect light and move towards it</td></tr>
+          <tr><td>Arthropods</td><td>Compound eyes made of ommatidia; antennae that detect smell and touch</td></tr>
+          <tr><td>Bats</td><td>Ears plus a specialised echolocation organ that helps in hunting and navigation</td></tr>
+          <tr><td>Eagles/Hawks</td><td>Highly acute eyes able to spot distant objects and detect ultraviolet light</td></tr>
+          <tr><td>Snakes</td><td>The Jacobson's organ assists in detecting smell</td></tr>
+          <tr><td>Dogs</td><td>Highly sensitive olfactory receptors (~300 million)</td></tr></table>
+        <p class="exam-tip">📌 Elephants have the highest number of smell-detecting genes (~2000) and rely mainly on smell rather than vision. They can detect the presence of water from as far as 19 km away, and can sense ground vibrations using their trunk.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="panel" id="quiz">
+    <div class="card">
+      <h2 class="section-title" data-ml="ക്വിക്ക് ക്വിസ്" data-en="Quick Quiz">ക്വിക്ക് ക്വിസ്</h2>
+      <div class="score-bar">
+        <span>
+          <span data-ml="സ്കോർ:" data-en="Score:">സ്കോർ:</span> <b id="scoreVal">0</b> / <span id="totalVal">0</span>
+          &nbsp;·&nbsp; <span data-ml="ചോദ്യം" data-en="Question">ചോദ്യം</span> <b id="qPos">1</b> / <span id="qTotal">0</span>
+        </span>
+        <span style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn" onclick="shareScore()" data-ml="🔗 സ്കോർ പങ്കിടുക" data-en="🔗 Share Score">🔗 സ്കോർ പങ്കിടുക</button>
+          <button class="btn secondary" onclick="resetQuiz()" data-ml="വീണ്ടും ചെയ്യുക" data-en="Retry">വീണ്ടും ചെയ്യുക</button>
+        </span>
+      </div>
+      <div class="teacher-share no-print">
+        <button class="btn" onclick="shareQuizLink()" data-ml="🔗 ക്വിസ് ലിങ്ക് പങ്കിടുക" data-en="🔗 Share Quiz Link">🔗 ക്വിസ് ലിങ്ക് പങ്കിടുക</button>
+        <button class="btn secondary" onclick="shareQuestions()" data-ml="📤 ചോദ്യങ്ങൾ ടെക്സ്റ്റ് ആയി അയക്കുക" data-en="📤 Send Questions as Text">📤 ചോദ്യങ്ങൾ ടെക്സ്റ്റ് ആയി അയക്കുക</button>
+      </div>
+      <div id="quizContainer"></div>
+      <div class="quiz-nav">
+        <button class="btn secondary" id="prevBtn" onclick="prevQuestion()" data-ml="← മുമ്പത്തേത്" data-en="← Previous">← മുമ്പത്തേത്</button>
+        <button class="btn" id="nextBtn" onclick="nextQuestion()" data-ml="അടുത്തത് →" data-en="Next →">അടുത്തത് →</button>
+      </div>
+      <div id="shareToast" class="share-toast"></div>
+    </div>
+  </section>
+
+  <!-- ================= MODEL QUESTION PAPER ================= -->
+  <section class="panel" id="mqp">
+    <div class="card print-target" id="mqpCard">
+      <div class="lang-ml">
+        <div class="mqp-header">
+          <h2>ജീവശാസ്ത്രം — മാതൃകാ ചോദ്യപേപ്പർ</h2>
+          <p>യൂണിറ്റ് 3: സംവേദനങ്ങൾക്കുപിന്നിൽ</p>
+        </div>
+        <div class="mqp-meta"><span>സമയം: 45 മിനിറ്റ്</span><span>ആകെ സ്കോർ: 20</span></div>
+        <div class="mqp-section-title">Section A — 1 സ്കോർ വീതം (5 × 1 = 5)</div>
+        <div class="mqp-q">1. ഗ്രാഹികളിൽ ഉണ്ടാകുന്ന വൈദ്യുത സന്ദേശത്തിന്റെ പേരെന്ത്?</div>
+        <div class="mqp-q">2. കണ്ണിന്റെ ബാഹ്യപാളിയായ ദൃഢപടലത്തിന്റെ ഇംഗ്ലീഷ് പേരെന്ത്?</div>
+        <div class="mqp-q">3. റോഡ് കോശങ്ങളിലെ വർണ്ണകത്തിന്റെ പേരെന്ത്?</div>
+        <div class="mqp-q">4. മധ്യകർണ്ണത്തിലെ മൂന്ന് അസ്ഥികൾ ഏതെല്ലാം?</div>
+        <div class="mqp-q">5. ശബ്ദഗ്രാഹികൾ സ്ഥിതി ചെയ്യുന്ന കോക്ലിയയിലെ ഭാഗത്തിന്റെ പേരെന്ത്?</div>
+        <div class="mqp-section-title">Section B — 2 സ്കോർ വീതം (4 × 2 = 8)</div>
+        <div class="mqp-q">6. പൊതുസംവേദനങ്ങളും പ്രത്യേക സംവേദനങ്ങളും തമ്മിലുള്ള വ്യത്യാസം എന്ത്?</div>
+        <div class="mqp-q">7. പ്യൂപ്പിളിന്റെ വലുപ്പം ഐറിസ് എങ്ങനെയാണ് നിയന്ത്രിക്കുന്നത്?</div>
+        <div class="mqp-q">8. യൂസ്റ്റേഷ്യൻ കനാലിന്റെ ധർമ്മം വിശദീകരിക്കുക.</div>
+        <div class="mqp-q">9. നോസിസെപ്ഷൻ എന്നാൽ എന്ത്? ഒരു ഉദാഹരണം നൽകുക.</div>
+        <div class="mqp-section-title">Section C — 3 സ്കോർ വീതം (2 × 3 = 6)</div>
+        <div class="mqp-q">10. കണ്ണിലെ മൂന്ന് പാളികളും അവയുടെ ധർമ്മങ്ങളും വിശദീകരിക്കുക.</div>
+        <div class="mqp-q">11. കേൾവി എന്ന അനുഭവം ഉണ്ടാകുന്നതിന്റെ ഘട്ടങ്ങൾ ചിത്രസഹായത്തോടെ വിശദീകരിക്കുക.</div>
+        <div class="mqp-section-title">Section D — ഉപന്യാസ തരം (1 × 1 = 1)</div>
+        <div class="mqp-q">12. കണ്ണിലെ പ്രകാശഗ്രാഹികളെയും വർണ്ണക്കാഴ്ച സാധ്യമാകുന്നതെങ്ങനെയെന്നും വിശദമായി എഴുതുക.</div>
+      </div>
+      <div class="lang-en">
+        <div class="mqp-header">
+          <h2>Biology — Model Question Paper</h2>
+          <p>Unit 3: Behind the Senses</p>
+        </div>
+        <div class="mqp-meta"><span>Time: 45 minutes</span><span>Total score: 20</span></div>
+        <div class="mqp-section-title">Section A — 1 score each (5 × 1 = 5)</div>
+        <div class="mqp-q">1. What is the electrical signal generated in a receptor called?</div>
+        <div class="mqp-q">2. What is the English name of the eye's outer layer, ദൃഢപടലം?</div>
+        <div class="mqp-q">3. What is the pigment found in rod cells called?</div>
+        <div class="mqp-q">4. Name the three bones (ossicles) of the middle ear.</div>
+        <div class="mqp-q">5. What is the name of the part of the cochlea where sound receptors are located?</div>
+        <div class="mqp-section-title">Section B — 2 scores each (4 × 2 = 8)</div>
+        <div class="mqp-q">6. What is the difference between general senses and special senses?</div>
+        <div class="mqp-q">7. How does the iris regulate pupil size?</div>
+        <div class="mqp-q">8. Explain the function of the Eustachian canal.</div>
+        <div class="mqp-q">9. What is nociception? Give one example.</div>
+        <div class="mqp-section-title">Section C — 3 scores each (2 × 3 = 6)</div>
+        <div class="mqp-q">10. Explain the three layers of the eye and their functions.</div>
+        <div class="mqp-q">11. Explain, with the help of a diagram, the stages by which the experience of hearing is produced.</div>
+        <div class="mqp-section-title">Section D — Essay type (1 × 1 = 1)</div>
+        <div class="mqp-q">12. Write in detail about the photoreceptors of the eye and how colour vision is made possible.</div>
+      </div>
+    </div>
+    <div class="no-print" style="margin-top:10px;">
+      <button class="btn secondary" onclick="printCurrent()" data-ml="🖨️ പ്രിന്റ് ചെയ്യുക" data-en="🖨️ Print">🖨️ പ്രിന്റ് ചെയ്യുക</button>
+    </div>
+  </section>
+
+</div>
+
+<footer class="note">Abacus Academy · Class 10 Biology · Prepared for self-study</footer>
+
+<script>
+/* ===================== LANGUAGE TOGGLE ===================== */
+let currentLang = 'ml';
+function setLang(lang){
+  currentLang = lang;
+  document.body.classList.toggle('show-en', lang === 'en');
+  document.getElementById('langMlBtn').classList.toggle('active', lang === 'ml');
+  document.getElementById('langEnBtn').classList.toggle('active', lang === 'en');
+  document.querySelectorAll('[data-ml][data-en]').forEach(el=>{
+    el.textContent = (lang === 'ml') ? el.dataset.ml : el.dataset.en;
+  });
+  quizData = (lang === 'ml') ? quizDataML : quizDataEN;
+  renderQuestion();
+}
+
+/* ===================== TABS ===================== */
+const tabButtons = document.querySelectorAll('nav.tabs button[data-tab]');
+const panels = document.querySelectorAll('.panel');
+let currentTab = 'notes';
+tabButtons.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    tabButtons.forEach(b=>b.classList.remove('active'));
+    panels.forEach(p=>{p.classList.remove('active'); p.classList.remove('print-target');});
+    btn.classList.add('active');
+    currentTab = btn.dataset.tab;
+    document.getElementById(currentTab).classList.add('active');
+  });
+});
+function printCurrent(){
+  panels.forEach(p=>p.classList.remove('print-target'));
+  document.getElementById(currentTab).classList.add('print-target');
+  window.print();
+}
+
+/* ===================== QUIZ DATA (bilingual) ===================== */
+const quizDataML = [
+  { q:"ജീവികളിൽ പ്രതികരണത്തിന് കാരണമാകുന്ന സാഹചര്യങ്ങളെ എന്ത് വിളിക്കുന്നു?", opts:["ഗ്രാഹികൾ","ഉദ്ദീപനങ്ങൾ","ന്യൂറോണുകൾ","ഹോർമോണുകൾ"], ans:1 },
+  { q:"ഗ്രാഹികളിൽ ഉണ്ടാകുന്ന വൈദ്യുത സന്ദേശത്തിന്റെ പേരെന്ത്?", opts:["ആക്ഷൻ പൊട്ടൻഷ്യൽ","റെസ്റ്റിംഗ് പൊട്ടൻഷ്യൽ","റിസപ്റ്റർ പൊട്ടൻഷ്യൽ","സിനാപ്റ്റിക് പൊട്ടൻഷ്യൽ"], ans:2 },
+  { q:"കണ്ണിന്റെ മധ്യപാളി (Choroid) യുടെ മലയാളം പേരെന്ത്?", opts:["ദൃഢപടലം","രക്തപടലം","ദൃഷ്ടിപടലം","നേത്രാവരണം"], ans:1 },
+  { q:"മങ്ങിയ വെളിച്ചത്തിൽ കാഴ്ച സാധ്യമാക്കുന്ന പ്രകാശഗ്രാഹീ കോശങ്ങൾ ഏത്?", opts:["കോൺ കോശങ്ങൾ","റോഡ് കോശങ്ങൾ","ബൈപോളാർ കോശങ്ങൾ","ഗാംഗ്ലിയോൺ കോശങ്ങൾ"], ans:1 },
+  { q:"റോഡ് കോശങ്ങളിലെ വർണ്ണകത്തിന്റെ പേരെന്ത്?", opts:["ഫോട്ടോപ്സിൻ","ക്രിസ്റ്റലിൻ","റോഡോപ്സിൻ","മെലാനിൻ"], ans:2 },
+  { q:"മധ്യകർണ്ണത്തിലെ മൂന്ന് അസ്ഥികളിൽ ആദ്യത്തേത് ഏത്?", opts:["ഇൻകസ്","സ്റ്റേപിസ്","മാലിയസ്","കോക്ലിയ"], ans:2 },
+  { q:"മധ്യകർണ്ണത്തെ ഗ്രസനിയുമായി ബന്ധിപ്പിക്കുന്ന കുഴൽ ഏത്?", opts:["കോക്ലിയ","യൂസ്റ്റേഷ്യൻ കനാൽ","സെമിസർക്കുലാർ കനാൽ","കർണ്ണനാളം"], ans:1 },
+  { q:"ശബ്ദഗ്രാഹികൾ സ്ഥിതി ചെയ്യുന്ന കോക്ലിയയിലെ ഭാഗം ഏത്?", opts:["ഓവൽ വിൻഡോ","ഓർഗൻ ഓഫ് കോർട്ടി","റൗണ്ട് വിൻഡോ","വെസ്റ്റിബ്യുൾ"], ans:1 },
+  { q:"അപകട സൂചന നൽകുന്ന വേദനാ സംവേദനത്തെ എന്ത് വിളിക്കുന്നു?", opts:["നോസിസെപ്ഷൻ","അക്കോമൊഡേഷൻ","ബൈനോക്കുലർ ഫ്യൂഷൻ","ഓൾഫാക്ഷൻ"], ans:0 },
+  { q:"താഴെപ്പറയുന്നവയിൽ നാം തിരിച്ചറിയുന്ന അടിസ്ഥാന രുചിയല്ലാത്തത് ഏത്?", opts:["മധുരം","ഉപ്പ്", "തണുപ്പ്", "ഉമാമി"], ans:2 }
+];
+const quizDataEN = [
+  { q:"What are the conditions that trigger responses in organisms called?", opts:["Receptors","Stimuli","Neurons","Hormones"], ans:1 },
+  { q:"What is the electrical signal generated in a receptor called?", opts:["Action potential","Resting potential","Receptor potential","Synaptic potential"], ans:2 },
+  { q:"What is the middle layer of the eye called?", opts:["Sclera","Choroid","Retina","Conjunctiva"], ans:1 },
+  { q:"Which photoreceptor cells enable vision in dim light?", opts:["Cone cells","Rod cells","Bipolar cells","Ganglion cells"], ans:1 },
+  { q:"What is the pigment found in rod cells called?", opts:["Photopsin","Crystallin","Rhodopsin","Melanin"], ans:2 },
+  { q:"Which is the first of the three middle-ear ossicles?", opts:["Incus","Stapes","Malleus","Cochlea"], ans:2 },
+  { q:"Which tube connects the middle ear to the throat?", opts:["Cochlea","Eustachian canal","Semicircular canal","Ear canal"], ans:1 },
+  { q:"Which part of the cochlea houses the sound receptors?", opts:["Oval window","Organ of Corti","Round window","Vestibule"], ans:1 },
+  { q:"What is the sensation of pain that warns of danger called?", opts:["Nociception","Accommodation","Binocular fusion","Olfaction"], ans:0 },
+  { q:"Which of these is NOT one of the basic tastes we perceive?", opts:["Sweet","Salty","Cold","Umami"], ans:2 }
+];
+let quizData = quizDataML;
+
+let score = 0;
+let currentQ = 0;
+let userAnswers = new Array(quizDataML.length).fill(null);
+
+function renderQuestion(){
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  document.getElementById('totalVal').textContent = quizData.length;
+  document.getElementById('qTotal').textContent = quizData.length;
+  document.getElementById('qPos').textContent = currentQ + 1;
+
+  const item = quizData[currentQ];
+  const qDiv = document.createElement('div');
+  qDiv.innerHTML = `<p><b>${currentQ+1}.</b> ${item.q}</p><div class="quiz-opts"></div>`;
+  const optsDiv = qDiv.querySelector('.quiz-opts');
+  const alreadyAnswered = userAnswers[currentQ] !== null;
+
+  item.opts.forEach((opt, oIdx)=>{
+    const b = document.createElement('button');
+    b.textContent = opt;
+    if(alreadyAnswered){
+      b.disabled = true;
+      if(oIdx === item.ans) b.classList.add('correct');
+      else if(oIdx === userAnswers[currentQ]) b.classList.add('wrong');
+    }
+    b.addEventListener('click', ()=>{
+      if(b.disabled) return;
+      const allBtns = optsDiv.querySelectorAll('button');
+      allBtns.forEach(x=>x.disabled=true);
+      userAnswers[currentQ] = oIdx;
+      if(oIdx === item.ans){ b.classList.add('correct'); score++; }
+      else { b.classList.add('wrong'); allBtns[item.ans].classList.add('correct'); }
+      document.getElementById('scoreVal').textContent = score;
+    });
+    optsDiv.appendChild(b);
+  });
+  container.appendChild(qDiv);
+  document.getElementById('prevBtn').disabled = (currentQ === 0);
+  document.getElementById('nextBtn').disabled = (currentQ === quizData.length - 1);
+}
+
+function nextQuestion(){ if(currentQ < quizData.length - 1){ currentQ++; renderQuestion(); } }
+function prevQuestion(){ if(currentQ > 0){ currentQ--; renderQuestion(); } }
+
+function resetQuiz(){
+  score = 0; currentQ = 0;
+  userAnswers = new Array(quizData.length).fill(null);
+  document.getElementById('scoreVal').textContent = 0;
+  renderQuestion();
+}
+
+/* ===================== SHARE ===================== */
+const QUIZ_SHARE_URL = "https://munees-dot.github.io/sslccompleteportal/biology-unit3quiz.html";
+
+function shareQuizLink(){
+  if(!QUIZ_SHARE_URL){
+    const toast = document.getElementById('shareToast');
+    toast.textContent = currentLang === 'ml' ? '⚠️ ക്വിസ് ലിങ്ക് ഇതുവരെ സെറ്റ് ചെയ്തിട്ടില്ല' : '⚠️ Quiz link has not been set yet';
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 3000);
+    return;
+  }
+  const text = currentLang === 'ml'
+    ? `ക്വിക്ക് ക്വിസ് — സംവേദനങ്ങൾക്കുപിന്നിൽ\nഈ ലിങ്കിൽ ക്വിസ് ചെയ്യൂ:\n${QUIZ_SHARE_URL}`
+    : `Quick Quiz — Behind the Senses\nTake the quiz here:\n${QUIZ_SHARE_URL}`;
+  runShare(text, currentLang === 'ml' ? '✅ ലിങ്ക് കോപ്പി ചെയ്തു' : '✅ Link copied');
+}
+
+function shareScore(){
+  const answeredCount = userAnswers.filter(a=>a!==null).length;
+  const text = currentLang === 'ml'
+    ? `സംവേദനങ്ങൾക്കുപിന്നിൽ — ക്വിക്ക് ക്വിസ്\nഎന്റെ സ്കോർ: ${score} / ${quizData.length} (${answeredCount} ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകി)`
+    : `Behind the Senses — Quick Quiz\nMy score: ${score} / ${quizData.length} (${answeredCount} questions answered)`;
+  runShare(text, currentLang === 'ml' ? '✅ സ്കോർ കോപ്പി ചെയ്തു' : '✅ Score copied');
+}
+
+function shareQuestions(){
+  const letters = ['A','B','C','D'];
+  let text = currentLang === 'ml'
+    ? 'ക്വിക്ക് ക്വിസ് — സംവേദനങ്ങൾക്കുപിന്നിൽ\n(യൂണിറ്റ് 3, ജീവശാസ്ത്രം, സ്റ്റാൻഡേർഡ് 10)\n\n'
+    : 'Quick Quiz — Behind the Senses\n(Unit 3, Biology, Class 10)\n\n';
+  quizData.forEach((item, idx)=>{
+    text += `${idx+1}. ${item.q}\n`;
+    item.opts.forEach((opt, oIdx)=>{ text += `   ${letters[oIdx]}) ${opt}\n`; });
+    text += '\n';
+  });
+  runShare(text, currentLang === 'ml' ? '✅ ചോദ്യങ്ങൾ കോപ്പി ചെയ്തു' : '✅ Questions copied');
+}
+
+function runShare(text, copySuccessMsg){
+  if(navigator.share){
+    navigator.share({ title: currentLang === 'ml' ? 'ക്വിക്ക് ക്വിസ്' : 'Quick Quiz', text: text }).catch(()=>{});
+  } else if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=>{
+      const toast = document.getElementById('shareToast');
+      toast.textContent = copySuccessMsg;
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'), 2500);
+    });
+  } else {
+    alert(text);
+  }
+}
+
+renderQuestion();
+</script>
+
+</body>
+</html>
