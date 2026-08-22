@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<title>Quick Quiz — Chemical Communication in Organisms | Unit 4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root{
+  --ink:#1f2937;
+  --paper:#f6f4fb;
+  --helix:#2d4f8a;
+  --helix-dark:#1a2f5c;
+  --gene:#7b3fa0;
+  --gene-light:#ede1f5;
+  --trait:#2e8b57;
+  --line:#dcd6ea;
+  --card:#ffffff;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:'Noto Sans Malayalam','Manjari',system-ui,sans-serif;
+  line-height:1.55;
+}
+header{
+  background:linear-gradient(135deg,var(--helix-dark),var(--helix) 65%);
+  color:#fff; padding:20px 18px 50px; position:relative; overflow:hidden; text-align:center;
+}
+header .backbone{ position:absolute; inset:0; opacity:.15;
+  background-image: repeating-linear-gradient(115deg, transparent 0 38px, #fff 38px 40px); }
+header h1{ margin:0 0 4px; font-size:1.3rem; position:relative; z-index:1; }
+header p.sub{ margin:0 0 12px; opacity:.85; font-size:.88rem; position:relative; z-index:1; }
+.lang-toggle{ position:relative; z-index:1; display:inline-flex; gap:4px; background:rgba(255,255,255,.15); padding:4px; border-radius:20px; }
+.lang-toggle button{
+  border:none; background:transparent; color:#fff; padding:6px 16px; border-radius:16px;
+  cursor:pointer; font-family:inherit; font-size:.85rem; font-weight:600; opacity:.7;
+}
+.lang-toggle button.active{ background:#fff; color:var(--helix-dark); opacity:1; }
+.wrap{ max-width:560px; margin:-32px auto 40px; padding:0 14px; position:relative; z-index:2; }
+.card{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px; margin-bottom:16px; box-shadow:0 8px 24px rgba(26,47,92,.1); }
+h2.section-title{ color:var(--helix-dark); border-bottom:3px solid var(--gene); display:inline-block; padding-bottom:4px; margin-top:0; font-size:1.1rem; }
+.quiz-opts button{ display:block; width:100%; text-align:left; margin:6px 0; padding:12px 14px; border:1px solid var(--line); background:#fff; border-radius:9px; cursor:pointer; font-family:inherit; font-size:.95rem; }
+.quiz-opts button.correct{ background:#dff3e8; border-color:var(--trait); font-weight:600; }
+.quiz-opts button.wrong{ background:#fbe4e0; border-color:var(--gene); }
+.quiz-opts button[disabled]{ cursor:default; }
+.quiz-nav{ display:flex; justify-content:space-between; margin-top:14px; }
+.quiz-nav button:disabled{ opacity:.4; cursor:default; }
+.score-bar{ background:var(--helix-dark); color:#fff; border-radius:10px; padding:10px 16px; margin-bottom:14px; font-size:.9rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+.btn{ background:var(--gene); color:#fff; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; font-family:inherit; font-weight:600; }
+.btn.secondary{ background:var(--helix); }
+.btn.block{ width:100%; margin-top:8px; }
+.share-toast{ display:none; margin-top:12px; background:var(--helix-dark); color:#fff; padding:9px 14px; border-radius:8px; font-size:.85rem; text-align:center; }
+.share-toast.show{ display:block; }
+.result-box{ text-align:center; padding:20px 10px; }
+.result-box .big{ font-size:2.4rem; font-weight:700; color:var(--helix-dark); margin:6px 0; }
+footer.note{ text-align:center; font-size:.78rem; color:#8a8067; margin:30px 0 10px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="backbone"></div>
+  <h1>Quick Quiz — Chemical Communication</h1>
+  <p class="sub">Biology · Class 10 · Unit 4</p>
+  <div class="lang-toggle">
+    <button id="langMlBtn" class="active" onclick="setLang('ml')">മലയാളം</button>
+    <button id="langEnBtn" onclick="setLang('en')">English</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="card">
+    <h2 class="section-title" data-ml="ക്വിക്ക് ക്വിസ്" data-en="Quick Quiz">ക്വിക്ക് ക്വിസ്</h2>
+    <div class="score-bar">
+      <span>
+        <span data-ml="സ്കോർ:" data-en="Score:">സ്കോർ:</span> <b id="scoreVal">0</b> / <span id="totalVal">0</span>
+        &nbsp;·&nbsp; <span data-ml="ചോദ്യം" data-en="Question">ചോദ്യം</span> <b id="qPos">1</b> / <span id="qTotal">0</span>
+      </span>
+    </div>
+    <div id="quizContainer"></div>
+    <div id="resultContainer" style="display:none;"></div>
+    <div class="quiz-nav">
+      <button class="btn secondary" id="prevBtn" onclick="prevQuestion()" data-ml="← മുമ്പത്തേത്" data-en="← Previous">← മുമ്പത്തേത്</button>
+      <button class="btn" id="nextBtn" onclick="nextQuestion()" data-ml="അടുത്തത് →" data-en="Next →">അടുത്തത് →</button>
+    </div>
+    <button class="btn secondary block" onclick="shareScore()" data-ml="🔗 സ്കോർ പങ്കിടുക" data-en="🔗 Share Score">🔗 സ്കോർ പങ്കിടുക</button>
+    <button class="btn block" style="background:var(--helix-dark);" onclick="resetQuiz()" data-ml="വീണ്ടും ചെയ്യുക" data-en="Retry">വീണ്ടും ചെയ്യുക</button>
+    <div id="shareToast" class="share-toast"></div>
+  </div>
+</div>
+
+<footer class="note">Abacus Academy · Class 10 Biology · Unit 3 Quiz</footer>
+
+<script>
+let currentLang = 'ml';
+function setLang(lang){
+  currentLang = lang;
+  document.getElementById('langMlBtn').classList.toggle('active', lang === 'ml');
+  document.getElementById('langEnBtn').classList.toggle('active', lang === 'en');
+  document.querySelectorAll('[data-ml][data-en]').forEach(el=>{
+    el.textContent = (lang === 'ml') ? el.dataset.ml : el.dataset.en;
+  });
+  quizData = (lang === 'ml') ? quizDataML : quizDataEN;
+  renderQuestion();
+}
+
+const quizDataML = [
+  { q:"ഓട്സ് സസ്യത്തിന്റെ ബീജശീർഷാഗ്രം ഉപയോഗിച്ച് ഓക്സിൻ കണ്ടെത്തിയ ശാസ്ത്രജ്ഞൻ ആര്?", opts:["ചാൾസ് ഡാർവിൻ","F.W. വെന്റ്","ഗ്രിഗർ മെൻഡൽ","ജെന്നർ"], ans:1 },
+  { q:"ഫലങ്ങൾ പാകമാക്കാൻ സഹായിക്കുന്ന സസ്യഹോർമോൺ ഏത്?", opts:["ഓക്സിൻ","ജിബ്ബറലിൻ","എഥിലീൻ","സൈറ്റോകിനിൻ"], ans:2 },
+  { q:"വിത്തുകളുടെ സുപ്താവസ്ഥ നിലനിർത്തുന്ന ഹോർമോൺ ഏത്?", opts:["അബ്സിസിക് ആസിഡ്","ജിബ്ബറലിൻ","ഓക്സിൻ","എഥിലീൻ"], ans:0 },
+  { q:"തൈറോയ്ഡ് ഗ്രന്ഥി ഉൽപാദിപ്പിക്കുന്ന, മെറ്റബോളിസം നിയന്ത്രിക്കുന്ന ഹോർമോൺ ഏത്?", opts:["ഇൻസുലിൻ","തൈറോക്സിൻ","പാരാതൊർമോൺ","മെലാടോണിൻ"], ans:1 },
+  { q:"രക്തത്തിലെ കാൽസ്യം കൂട്ടുന്ന ഹോർമോൺ ഏത്?", opts:["കാൽസിടോണിൻ","ഇൻസുലിൻ","പാരാതൊർമോൺ","തൈറോക്സിൻ"], ans:2 },
+  { q:"പാൻക്രിയാസിലെ ബീറ്റാ കോശങ്ങൾ ഉൽപാദിപ്പിക്കുന്ന ഹോർമോൺ ഏത്?", opts:["ഗ്ലൂക്കഗോൺ","ഇൻസുലിൻ","ഗ്രെലിൻ","ലെപ്റ്റിൻ"], ans:1 },
+  { q:"ജലസന്തുലനം നിലനിർത്തുന്ന പിറ്റ്യൂട്ടറി ഹോർമോൺ ഏത്?", opts:["ഓക്സിടോസിൻ","പ്രോലാക്റ്റിൻ","വാസോപ്രസിൻ (ADH)","TSH"], ans:2 },
+  { q:"ഉറക്കത്തെയും ഉണരലിനെയും നിയന്ത്രിക്കുന്ന ഹോർമോൺ ഏത് ഗ്രന്ഥി ഉൽപാദിപ്പിക്കുന്നു?", opts:["തൈമസ് ഗ്രന്ഥി","പീനിയൽ ഗ്രന്ഥി","അഡ്രിനൽ ഗ്രന്ഥി","പാരാതൈറോയ്ഡ്"], ans:1 },
+  { q:"\"വിശപ്പ് ഹോർമോൺ\" എന്നറിയപ്പെടുന്നത് ഏത്?", opts:["ലെപ്റ്റിൻ","ഗ്രെലിൻ","ഇൻസുലിൻ","തൈമോസിൻ"], ans:1 },
+  { q:"T ലിംഫോസൈറ്റുകളുടെ പാകപ്പെടലിന് സഹായിക്കുന്ന ഹോർമോൺ ഏത് ഗ്രന്ഥി ഉൽപാദിപ്പിക്കുന്നു?", opts:["തൈറോയ്ഡ്","തൈമസ്","പീനിയൽ","അഡ്രിനൽ"], ans:1 }
+];
+const quizDataEN = [
+  { q:"Which scientist discovered auxin using the coleoptile tip of oat seedlings?", opts:["Charles Darwin","F.W. Went","Gregor Mendel","Edward Jenner"], ans:1 },
+  { q:"Which plant hormone helps ripen fruits?", opts:["Auxin","Gibberellin","Ethylene","Cytokinin"], ans:2 },
+  { q:"Which hormone maintains seed dormancy?", opts:["Abscisic acid","Gibberellin","Auxin","Ethylene"], ans:0 },
+  { q:"Which thyroid hormone regulates metabolism?", opts:["Insulin","Thyroxine","Parathormone","Melatonin"], ans:1 },
+  { q:"Which hormone raises blood calcium?", opts:["Calcitonin","Insulin","Parathormone","Thyroxine"], ans:2 },
+  { q:"Which hormone do the beta cells of the pancreas produce?", opts:["Glucagon","Insulin","Ghrelin","Leptin"], ans:1 },
+  { q:"Which pituitary hormone maintains water balance?", opts:["Oxytocin","Prolactin","Vasopressin (ADH)","TSH"], ans:2 },
+  { q:"Which gland produces the hormone that regulates sleep and wakefulness?", opts:["Thymus gland","Pineal gland","Adrenal gland","Parathyroid"], ans:1 },
+  { q:"Which is known as the \"hunger hormone\"?", opts:["Leptin","Ghrelin","Insulin","Thymosin"], ans:1 },
+  { q:"Which gland produces the hormone that helps mature T lymphocytes?", opts:["Thyroid","Thymus","Pineal","Adrenal"], ans:1 }
+];
+let quizData = quizDataML;
+
+let score = 0;
+let currentQ = 0;
+let userAnswers = new Array(quizDataML.length).fill(null);
+
+function renderQuestion(){
+  document.getElementById('quizContainer').style.display = 'block';
+  document.getElementById('resultContainer').style.display = 'none';
+  document.querySelector('.quiz-nav').style.display = 'flex';
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  document.getElementById('totalVal').textContent = quizData.length;
+  document.getElementById('qTotal').textContent = quizData.length;
+  document.getElementById('qPos').textContent = currentQ + 1;
+
+  const item = quizData[currentQ];
+  const qDiv = document.createElement('div');
+  qDiv.innerHTML = `<p><b>${currentQ+1}.</b> ${item.q}</p><div class="quiz-opts"></div>`;
+  const optsDiv = qDiv.querySelector('.quiz-opts');
+  const alreadyAnswered = userAnswers[currentQ] !== null;
+
+  item.opts.forEach((opt, oIdx)=>{
+    const b = document.createElement('button');
+    b.textContent = opt;
+    if(alreadyAnswered){
+      b.disabled = true;
+      if(oIdx === item.ans) b.classList.add('correct');
+      else if(oIdx === userAnswers[currentQ]) b.classList.add('wrong');
+    }
+    b.addEventListener('click', ()=>{
+      if(b.disabled) return;
+      const allBtns = optsDiv.querySelectorAll('button');
+      allBtns.forEach(x=>x.disabled=true);
+      userAnswers[currentQ] = oIdx;
+      if(oIdx === item.ans){ b.classList.add('correct'); score++; }
+      else { b.classList.add('wrong'); allBtns[item.ans].classList.add('correct'); }
+      document.getElementById('scoreVal').textContent = score;
+    });
+    optsDiv.appendChild(b);
+  });
+  container.appendChild(qDiv);
+  document.getElementById('prevBtn').disabled = (currentQ === 0);
+  document.getElementById('nextBtn').textContent = (currentQ === quizData.length - 1)
+    ? (currentLang === 'ml' ? 'ഫലം കാണുക →' : 'See Result →')
+    : (currentLang === 'ml' ? 'അടുത്തത് →' : 'Next →');
+}
+
+function showResult(){
+  document.getElementById('quizContainer').style.display = 'none';
+  document.querySelector('.quiz-nav').style.display = 'none';
+  const answeredCount = userAnswers.filter(a=>a!==null).length;
+  const box = document.getElementById('resultContainer');
+  box.style.display = 'block';
+  box.innerHTML = `<div class="result-box">
+      <div>${currentLang==='ml' ? 'നിങ്ങളുടെ സ്കോർ' : 'Your Score'}</div>
+      <div class="big">${score} / ${quizData.length}</div>
+      <div>${currentLang==='ml' ? answeredCount + ' ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകി' : answeredCount + ' questions answered'}</div>
+    </div>`;
+}
+
+function nextQuestion(){
+  if(currentQ < quizData.length - 1){ currentQ++; renderQuestion(); }
+  else { showResult(); }
+}
+function prevQuestion(){ if(currentQ > 0){ currentQ--; renderQuestion(); } }
+
+function resetQuiz(){
+  score = 0; currentQ = 0;
+  userAnswers = new Array(quizData.length).fill(null);
+  document.getElementById('scoreVal').textContent = 0;
+  renderQuestion();
+}
+
+function shareScore(){
+  const answeredCount = userAnswers.filter(a=>a!==null).length;
+  const text = currentLang === 'ml'
+    ? `ജീവികളിലെ രാസസംവേദനം — ക്വിക്ക് ക്വിസ്\nഎന്റെ സ്കോർ: ${score} / ${quizData.length} (${answeredCount} ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകി)`
+    : `Chemical Communication in Organisms — Quick Quiz\nMy score: ${score} / ${quizData.length} (${answeredCount} questions answered)`;
+  if(navigator.share){
+    navigator.share({ title: currentLang === 'ml' ? 'ക്വിക്ക് ക്വിസ്' : 'Quick Quiz', text: text }).catch(()=>{});
+  } else if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=>{
+      const toast = document.getElementById('shareToast');
+      toast.textContent = currentLang === 'ml' ? '✅ സ്കോർ കോപ്പി ചെയ്തു' : '✅ Score copied';
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'), 2500);
+    });
+  } else {
+    alert(text);
+  }
+}
+
+renderQuestion();
+</script>
+
+</body>
+</html>

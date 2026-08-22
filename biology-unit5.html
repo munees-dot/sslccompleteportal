@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<title>Unit 5 — Immunity and Health Care | Study Tool</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root{
+  --ink:#1f2937;
+  --paper:#f6f4fb;
+  --helix:#2d4f8a;
+  --helix-dark:#1a2f5c;
+  --gene:#7b3fa0;
+  --gene-light:#ede1f5;
+  --trait:#2e8b57;
+  --line:#dcd6ea;
+  --card:#ffffff;
+  --mono: 'Courier New', ui-monospace, monospace;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:'Noto Sans Malayalam','Manjari',system-ui,sans-serif;
+  line-height:1.55;
+}
+header{
+  background:linear-gradient(135deg,var(--helix-dark),var(--helix) 65%);
+  color:#fff; padding:20px 18px 60px; position:relative; overflow:hidden;
+}
+header .backbone{ position:absolute; inset:0; opacity:.15;
+  background-image: repeating-linear-gradient(115deg, transparent 0 38px, #fff 38px 40px); }
+header h1{ margin:0 0 4px; font-size:1.5rem; position:relative; z-index:1; }
+header p.sub{ margin:0 0 12px; opacity:.85; font-size:.92rem; position:relative; z-index:1; }
+.lang-toggle{ position:relative; z-index:1; display:inline-flex; gap:4px; background:rgba(255,255,255,.15); padding:4px; border-radius:20px; }
+.lang-toggle button{
+  border:none; background:transparent; color:#fff; padding:6px 16px; border-radius:16px;
+  cursor:pointer; font-family:inherit; font-size:.85rem; font-weight:600; opacity:.7;
+}
+.lang-toggle button.active{ background:#fff; color:var(--helix-dark); opacity:1; }
+.wrap{ max-width:960px; margin:-40px auto 40px; padding:0 14px; position:relative; z-index:2; }
+nav.tabs{
+  display:flex; flex-wrap:wrap; gap:8px; background:var(--card); border-radius:14px;
+  padding:10px; box-shadow:0 8px 24px rgba(26,47,92,.12); margin-bottom:18px;
+  position:sticky; top:10px; z-index:5;
+}
+nav.tabs button{
+  border:none; background:var(--paper); color:var(--helix-dark); padding:9px 14px;
+  border-radius:9px; cursor:pointer; font-size:.9rem; font-weight:600; font-family:inherit; transition:.15s;
+}
+nav.tabs button.active{ background:var(--helix); color:#fff; }
+nav.tabs button:hover{ filter:brightness(1.05); }
+.panel{ display:none; }
+.panel.active{ display:block; animation:fade .25s ease; }
+@keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+.card{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(31,41,55,.04); }
+h2.section-title{ color:var(--helix-dark); border-bottom:3px solid var(--gene); display:inline-block; padding-bottom:4px; margin-top:0; font-size:1.15rem; }
+h3.sub-title{ color:var(--gene); margin:18px 0 8px; font-size:1rem; }
+.formula-box{ background:var(--gene-light); border-left:4px solid var(--gene); padding:10px 14px; border-radius:8px; font-family:var(--mono); margin:10px 0; font-size:.95rem; overflow-x:auto; }
+table{ width:100%; border-collapse:collapse; margin:10px 0; font-size:.92rem; }
+th,td{ border:1px solid var(--line); padding:8px 10px; text-align:left; }
+th{ background:var(--helix); color:#fff; }
+tr:nth-child(even) td{ background:#f4f1fa; }
+table.compact th, table.compact td{ padding:5px 8px; font-size:.85rem; }
+ul{ padding-left:20px; } li{ margin-bottom:6px; }
+.tag{ display:inline-block; background:var(--gene); color:#fff; font-size:.72rem; padding:2px 8px; border-radius:20px; margin-left:6px; }
+.step-list li{ margin-bottom:10px; }
+.quiz-opts button{ display:block; width:100%; text-align:left; margin:6px 0; padding:10px 14px; border:1px solid var(--line); background:#fff; border-radius:9px; cursor:pointer; font-family:inherit; font-size:.92rem; }
+.quiz-opts button.correct{ background:#dff3e8; border-color:var(--trait); font-weight:600; }
+.quiz-opts button.wrong{ background:#fbe4e0; border-color:var(--gene); }
+.quiz-opts button[disabled]{ cursor:default; }
+.quiz-nav{ display:flex; justify-content:space-between; margin-top:14px; }
+.quiz-nav button:disabled{ opacity:.4; cursor:default; }
+.score-bar{ background:var(--helix-dark); color:#fff; border-radius:10px; padding:10px 16px; margin-bottom:14px; font-size:.9rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+.btn{ background:var(--gene); color:#fff; border:none; padding:9px 16px; border-radius:8px; cursor:pointer; font-family:inherit; font-weight:600; }
+.btn.secondary{ background:var(--helix); }
+.teacher-share{ margin-bottom:14px; display:flex; gap:8px; flex-wrap:wrap; }
+.teacher-share .btn{ background:var(--gene); flex:1; min-width:200px; }
+.teacher-share .btn.secondary{ background:var(--helix); }
+.share-toast{ display:none; margin-top:12px; background:var(--helix-dark); color:#fff; padding:9px 14px; border-radius:8px; font-size:.85rem; text-align:center; }
+.share-toast.show{ display:block; }
+.mqp-header{ text-align:center; margin-bottom:14px; }
+.mqp-header h2{ margin:2px 0; color:var(--helix-dark); }
+.mqp-meta{ display:flex; justify-content:space-between; font-size:.85rem; margin:6px 0 16px; }
+.mqp-section-title{ background:var(--gene); color:#fff; padding:5px 12px; border-radius:6px; display:inline-block; margin:14px 0 8px; font-size:.9rem; }
+.mqp-q{ margin-bottom:12px; } .mqp-q b{ color:var(--helix-dark); }
+.exam-tip{ background:#eef4f8; border:1px solid var(--helix); border-radius:8px; padding:10px 14px; margin-top:16px; font-size:.9rem; }
+.revision-sheet h3.sub-title{ margin-top:16px; }
+.pill-row{ display:flex; gap:10px; flex-wrap:wrap; margin:10px 0; }
+.pill{ background:var(--gene-light); color:var(--helix-dark); padding:8px 14px; border-radius:20px; font-size:.85rem; font-weight:600; }
+footer.note{ text-align:center; font-size:.78rem; color:#8a8067; margin:30px 0 10px; }
+
+.lang-en{ display:none; }
+body.show-en .lang-ml{ display:none; }
+body.show-en .lang-en{ display:block; }
+
+@media print{
+  header, nav.tabs, .no-print{ display:none !important; }
+  .panel{ display:none !important; }
+  .panel.print-target{ display:block !important; }
+  .wrap{ margin:0; }
+  .card{ box-shadow:none; border:1px solid #999; }
+  body{ background:#fff; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="backbone"></div>
+  <h1>Immunity and Health Care</h1>
+  <p class="sub">Biology · Class 10 · Unit 5 — Complete Study Tool</p>
+  <div class="lang-toggle no-print">
+    <button id="langMlBtn" class="active" onclick="setLang('ml')">മലയാളം</button>
+    <button id="langEnBtn" onclick="setLang('en')">English</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav class="tabs no-print">
+    <button data-tab="notes" class="active" data-ml="📘 സംഗ്രഹം" data-en="📘 Notes">📘 സംഗ്രഹം</button>
+    <button data-tab="revision" data-ml="⚡ ക്വിക്ക് റിവിഷൻ" data-en="⚡ Quick Revision">⚡ ക്വിക്ക് റിവിഷൻ</button>
+    <button data-tab="immunity" data-ml="🛡️ പ്രതിരോധം" data-en="🛡️ Immunity">🛡️ പ്രതിരോധം</button>
+    <button data-tab="pathogens" data-ml="🦠 രോഗാണുക്കളും രോഗങ്ങളും" data-en="🦠 Pathogens & Diseases">🦠 രോഗാണുക്കളും രോഗങ്ങളും</button>
+    <button data-tab="otherdiseases" data-ml="🧬 പകരാത്തതും പാരമ്പര്യവും" data-en="🧬 Non-communicable & Hereditary">🧬 പകരാത്തതും പാരമ്പര്യവും</button>
+    <button data-tab="treatment" data-ml="💊 ചികിത്സയും രക്തഗ്രൂപ്പും" data-en="💊 Treatment & Blood Groups">💊 ചികിത്സയും രക്തഗ്രൂപ്പും</button>
+    <button data-tab="quiz" data-ml="✅ ക്വിസ്" data-en="✅ Quiz">✅ ക്വിസ്</button>
+    <button data-tab="mqp" data-ml="📝 മാതൃകാ ചോദ്യപേപ്പർ" data-en="📝 Model Question Paper">📝 മാതൃകാ ചോദ്യപേപ്പർ</button>
+    <button id="printBtn" onclick="printCurrent()" style="margin-left:auto;background:var(--helix-dark);color:#fff;" data-ml="🖨️ പ്രിന്റ് ചെയ്യുക" data-en="🖨️ Print">🖨️ പ്രിന്റ് ചെയ്യുക</button>
+  </nav>
+
+  <!-- ================= NOTES ================= -->
+  <section class="panel active" id="notes">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">ചുരുക്ക സംഗ്രഹം</h2>
+        <ul>
+          <li><b>ആരോഗ്യം</b> എന്നാൽ ശാരീരികവും മാനസികവും സാമൂഹികവുമായ സമ്പൂർണ്ണ സുസ്ഥിതിയാണ് (WHO നിർവചനം) — രോഗമില്ലാത്ത അവസ്ഥ മാത്രമല്ല.</li>
+          <li>ശരീരത്തിലേക്ക് പ്രവേശിച്ച് രോഗമുണ്ടാക്കാൻ കഴിയുന്ന ഏതിനെയും <b>ആന്റിജനുകൾ (Antigens)</b> എന്ന് വിളിക്കാം.</li>
+          <li>രോഗപ്രതിരോധശേഷി രണ്ട് തരം: ജന്മനാ ലഭിക്കുന്ന <b>സഹജ പ്രതിരോധം (Innate immunity)</b>, ജനനശേഷം വികസിക്കുന്ന <b>ആർജിത പ്രതിരോധം (Acquired immunity)</b>.</li>
+          <li>സഹജ പ്രതിരോധത്തിൽ <b>പ്രാഥമികതല പ്രതിരോധം</b> (ത്വക്ക്, ശ്ലേഷ്മസ്തരം, ലൈസോസൈം തുടങ്ങിയ ഭൗതിക/രാസ തടസ്സങ്ങൾ), <b>ദ്വിതീയതല പ്രതിരോധം</b> (ഫാഗോസൈറ്റോസിസ്, വീങ്ങൽ പ്രതികരണം, പനി, രക്തം കട്ടപിടിക്കൽ) എന്നിവ ഉൾപ്പെടുന്നു.</li>
+          <li><b>ഫാഗോസൈറ്റോസിസ്</b> — ന്യൂട്രോഫിൽ, മോണോസൈറ്റ് പോലുള്ള വെളുത്ത രക്തകോശങ്ങൾ രോഗാണുക്കളെ വിഴുങ്ങി നശിപ്പിക്കുന്നു.</li>
+          <li><b>ആർജിത പ്രതിരോധം</b> പ്രത്യേകമായി ആന്റിജനുകളെ തിരിച്ചറിഞ്ഞ് പ്രവർത്തിക്കുന്നു — <b>T ലിംഫോസൈറ്റുകൾ</b> (തൈമസിൽ പാകപ്പെടുന്നു, രോഗബാധിത/കാൻസർ കോശങ്ങളെ നശിപ്പിക്കുന്നു), <b>B ലിംഫോസൈറ്റുകൾ</b> (അസ്ഥിമജ്ജയിൽ പാകപ്പെടുന്നു, ആന്റിബോഡികൾ ഉൽപാദിപ്പിക്കുന്നു) എന്നിവയാണ് ഇതിൽ പ്രധാനം.</li>
+          <li><b>വാക്സിനുകൾ</b> ആന്റിജനുകളോ അവയുടെ ദുർബല/നിർവീര്യ ഘടകങ്ങളോ ശരീരത്തിൽ പ്രവേശിപ്പിച്ച് ആന്റിബോഡി ഉൽപാദനത്തിന് പ്രേരിപ്പിക്കുന്നു — എഡ്വേർഡ് ജെന്നർ വാക്സിനേഷന്റെ പിതാവായി അറിയപ്പെടുന്നു.</li>
+          <li>രോഗങ്ങൾ <b>ആർജിത രോഗങ്ങൾ</b> (പകരുന്നതും പകരാത്തതും) എന്നും <b>പാരമ്പര്യരോഗങ്ങൾ</b> (ജനിതക തകരാറ് മൂലം — സിക്കിൾസെൽ അനീമിയ, ഹീമോഫീലിയ) എന്നും തരംതിരിക്കാം.</li>
+          <li>പകരുന്ന രോഗങ്ങൾക്ക് കാരണം ബാക്ടീരിയ (ക്ഷയം, എലിപ്പനി), വൈറസ് (എയ്ഡ്സ്, നിപ്പ), ഫംഗസ് (റിങ് വേം, കാൻഡിഡിയാസിസ്), പ്രോട്ടോസോവ (മലമ്പനി), വിരകൾ (മന്ത്, വിരശല്യം) എന്നിവയാകാം.</li>
+          <li><b>കാൻസർ</b> — അസാധാരണവും അനിയന്ത്രിതവുമായ കോശവിഭജനം മൂലം കോശങ്ങൾ പെരുകി മറ്റ് ശരീരഭാഗങ്ങളിലേക്ക് വ്യാപിക്കുന്ന അവസ്ഥ — പകരാത്ത രോഗമാണ്.</li>
+          <li><b>ചികിത്സാരീതികൾ</b> — ആയുർവേദം (ചരകൻ), ഹോമിയോപ്പതി (സാമുവൽ ഹനിമാൻ), ആധുനിക വൈദ്യശാസ്ത്രം (ഹിപ്പോക്രാറ്റസ്) എന്നിവ പ്രധാന ചികിത്സാ പാരമ്പര്യങ്ങൾ.</li>
+          <li><b>ആന്റിബയോട്ടിക്കുകൾ</b> ബാക്ടീരിയൽ രോഗങ്ങൾക്കെതിരെ ഫലപ്രദമാണെങ്കിലും അമിത ഉപയോഗം <b>ആന്റിബയോട്ടിക് പ്രതിരോധം</b> ഉണ്ടാക്കും — അലക്സാണ്ടർ ഫ്ലെമിങ് പെൻസിലിൻ കണ്ടെത്തി.</li>
+          <li><b>രക്തഗ്രൂപ്പുകൾ</b> (A, B, AB, O) ചുവന്ന രക്തകോശങ്ങളിലെ ആന്റിജനുകളെ അടിസ്ഥാനമാക്കിയാണ്; Rh ഘടകവും (+ve/-ve) പ്രധാനമാണ് — രക്തനിവേശനത്തിന് മുമ്പ് രക്തഗ്രൂപ്പ് പൊരുത്തം നിർബന്ധമായും പരിശോധിക്കണം.</li>
+          <li>സസ്യങ്ങൾക്കും പ്രതിരോധ സംവിധാനങ്ങളുണ്ട് — ദൃഢമായ കോശഭിത്തി, ആന്റിമൈക്രോബിയൽ പദാർത്ഥങ്ങൾ, എൻസൈമുകൾ, <b>കാലോസ്</b> എന്ന പോളിസാക്കറൈഡ് നിക്ഷേപം.</li>
+        </ul>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Chapter Summary</h2>
+        <ul>
+          <li><b>Health</b> is a state of complete physical, mental, and social well-being (WHO's definition) — not merely the absence of disease.</li>
+          <li>Anything that enters the body and can cause disease is called an <b>Antigen</b>.</li>
+          <li>Immunity is of two types: <b>Innate immunity</b>, present from birth, and <b>Acquired immunity</b>, which develops after birth.</li>
+          <li>Innate immunity includes <b>Primary level immunity</b> (physical/chemical barriers like skin, mucous membranes, lysozyme) and <b>Secondary level immunity</b> (phagocytosis, inflammatory response, fever, blood clotting).</li>
+          <li><b>Phagocytosis</b> — white blood cells like neutrophils and monocytes engulf and destroy pathogens.</li>
+          <li><b>Acquired immunity</b> specifically recognises and targets antigens — <b>T lymphocytes</b> (mature in the thymus, destroy infected/cancer cells) and <b>B lymphocytes</b> (mature in bone marrow, produce antibodies) are its key players.</li>
+          <li><b>Vaccines</b> introduce antigens or their weakened/inactivated forms into the body to trigger antibody production — Edward Jenner is known as the father of vaccination.</li>
+          <li>Diseases can be classified as <b>Acquired diseases</b> (communicable and non-communicable) or <b>Hereditary diseases</b> (caused by genetic defects — sickle cell anaemia, haemophilia).</li>
+          <li>Communicable diseases can be caused by bacteria (tuberculosis, leptospirosis), viruses (AIDS, Nipah), fungi (ringworm, candidiasis), protozoa (malaria), or worms (filariasis, worm infestations).</li>
+          <li><b>Cancer</b> — a condition where abnormal, uncontrolled cell division causes cells to multiply and spread to other body parts — is a non-communicable disease.</li>
+          <li><b>Treatment systems</b> — Ayurveda (Charaka), Homeopathy (Samuel Hahnemann), and modern medicine (Hippocrates) are the major traditions of treatment.</li>
+          <li><b>Antibiotics</b> are effective against bacterial diseases, but overuse leads to <b>antibiotic resistance</b> — Alexander Fleming discovered penicillin.</li>
+          <li><b>Blood groups</b> (A, B, AB, O) are based on antigens on red blood cells; the Rh factor (+ve/-ve) is also important — blood group compatibility must always be checked before a transfusion.</li>
+          <li>Plants also have defence mechanisms — a rigid cell wall, antimicrobial substances, enzymes, and a polysaccharide deposit called <b>callose</b>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUICK REVISION ================= -->
+  <section class="panel" id="revision">
+    <div class="card revision-sheet">
+      <div class="lang-ml">
+        <h2 class="section-title">⚡ ക്വിക്ക് റിവിഷൻ ഷീറ്റ്</h2>
+        <h3 class="sub-title">🔹 രോഗപ്രതിരോധ വർഗ്ഗീകരണം</h3>
+        <div class="formula-box">രോഗപ്രതിരോധം → സഹജ പ്രതിരോധം (പ്രാഥമികതലം + ദ്വിതീയതലം) → ആർജിത പ്രതിരോധം (T & B ലിംഫോസൈറ്റുകൾ)</div>
+        <h3 class="sub-title">🔹 പ്രാഥമികതല പ്രതിരോധ ഉദാഹരണങ്ങൾ</h3>
+        <table class="compact"><tr><th>ശരീരഭാഗം</th><th>പ്രതിരോധ സംവിധാനം</th></tr>
+          <tr><td>ഉമിനീർ, കണ്ണുനീർ</td><td>ലൈസോസൈം</td></tr>
+          <tr><td>ശ്വാസനാളം</td><td>സീലിയ</td></tr>
+          <tr><td>ത്വക്ക്</td><td>സെബം, വിയർപ്പ്</td></tr>
+          <tr><td>ആമാശയം</td><td>HCl</td></tr></table>
+        <h3 class="sub-title">🔹 ദ്വിതീയതല വെളുത്ത രക്തകോശങ്ങൾ</h3>
+        <table class="compact"><tr><th>കോശം</th><th>ധർമ്മം</th></tr>
+          <tr><td>ന്യൂട്രോഫിൽ</td><td>ബാക്ടീരിയയെ ഫാഗോസൈറ്റോസിസ് ചെയ്യുന്നു</td></tr>
+          <tr><td>ഈസിനോഫിൽ</td><td>അലർജിക്കെതിരെ, പരാദങ്ങളെ നശിപ്പിക്കുന്നു</td></tr>
+          <tr><td>മോണോസൈറ്റ്</td><td>അന്യവസ്തുക്കളെ ഫാഗോസൈറ്റോസിസ് ചെയ്യുന്നു</td></tr>
+          <tr><td>ബേസോഫിൽ</td><td>ഹെപ്പാരിൻ, ഹിസ്റ്റമിൻ ഉൽപാദനം</td></tr></table>
+        <h3 class="sub-title">🔹 T vs B ലിംഫോസൈറ്റ്</h3>
+        <table class="compact"><tr><th></th><th>T ലിംഫോസൈറ്റ്</th><th>B ലിംഫോസൈറ്റ്</th></tr>
+          <tr><td>രൂപപ്പെടൽ</td><td>അസ്ഥിമജ്ജ</td><td>അസ്ഥിമജ്ജ</td></tr>
+          <tr><td>പാകപ്പെടൽ</td><td>തൈമസ് ഗ്രന്ഥി</td><td>അസ്ഥിമജ്ജ</td></tr>
+          <tr><td>ധർമ്മം</td><td>രോഗബാധിത/കാൻസർ കോശങ്ങളെ നശിപ്പിക്കുന്നു</td><td>ആന്റിബോഡി ഉൽപാദനം</td></tr></table>
+        <h3 class="sub-title">🔹 രോഗകാരികളും ഉദാഹരണ രോഗങ്ങളും</h3>
+        <table class="compact"><tr><th>രോഗകാരി</th><th>രോഗം</th></tr>
+          <tr><td>ബാക്ടീരിയ</td><td>ക്ഷയം, എലിപ്പനി</td></tr>
+          <tr><td>വൈറസ്</td><td>എയ്ഡ്സ്, നിപ്പ, കോവിഡ്-19</td></tr>
+          <tr><td>ഫംഗസ്</td><td>റിങ് വേം, കാൻഡിഡിയാസിസ്</td></tr>
+          <tr><td>പ്രോട്ടോസോവ</td><td>മലമ്പനി, അമീബിക് മസ്തിഷ്കജ്വരം</td></tr>
+          <tr><td>വിരകൾ</td><td>മന്ത്, വിരശല്യം</td></tr></table>
+        <h3 class="sub-title">🔹 പാരമ്പര്യരോഗങ്ങൾ</h3>
+        <table class="compact"><tr><th>രോഗം</th><th>കാരണം</th></tr>
+          <tr><td>സിക്കിൾസെൽ അനീമിയ</td><td>ഹീമോഗ്ലോബിൻ ജീൻ തകരാറ്</td></tr>
+          <tr><td>ഹീമോഫീലിയ</td><td>രക്തം കട്ടപിടിക്കുന്ന പ്രോട്ടീൻ ജീൻ തകരാറ്</td></tr></table>
+        <h3 class="sub-title">🔹 രക്തഗ്രൂപ്പുകൾ</h3>
+        <table class="compact"><tr><th>ഗ്രൂപ്പ്</th><th>ആന്റിജൻ</th><th>ആന്റിബോഡി</th></tr>
+          <tr><td>A</td><td>A</td><td>b</td></tr>
+          <tr><td>B</td><td>B</td><td>a</td></tr>
+          <tr><td>AB</td><td>A, B</td><td>ഇല്ല</td></tr>
+          <tr><td>O</td><td>ഇല്ല</td><td>a, b</td></tr></table>
+        <p class="exam-tip">📌 പരീക്ഷാ ടിപ്പ്: ഫാഗോസൈറ്റോസിസിന്റെ ഘട്ടങ്ങൾ (രോഗാണു → ഫാഗോസോം → ഫാഗോലൈസോസോം → നശീകരണം) ക്രമത്തിൽ എഴുതാൻ പരിശീലിക്കുക.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">⚡ Quick Revision Sheet</h2>
+        <h3 class="sub-title">🔹 Classification of Immunity</h3>
+        <div class="formula-box">Immunity → Innate immunity (Primary level + Secondary level) → Acquired immunity (T & B lymphocytes)</div>
+        <h3 class="sub-title">🔹 Primary Level Defence Examples</h3>
+        <table class="compact"><tr><th>Body part</th><th>Defence mechanism</th></tr>
+          <tr><td>Saliva, tears</td><td>Lysozyme</td></tr>
+          <tr><td>Trachea</td><td>Cilia</td></tr>
+          <tr><td>Skin</td><td>Sebum, sweat</td></tr>
+          <tr><td>Stomach</td><td>HCl</td></tr></table>
+        <h3 class="sub-title">🔹 Secondary-Level White Blood Cells</h3>
+        <table class="compact"><tr><th>Cell</th><th>Function</th></tr>
+          <tr><td>Neutrophil</td><td>Phagocytoses bacteria</td></tr>
+          <tr><td>Eosinophil</td><td>Fights allergies, destroys parasites</td></tr>
+          <tr><td>Monocyte</td><td>Phagocytoses foreign matter</td></tr>
+          <tr><td>Basophil</td><td>Produces heparin, histamine</td></tr></table>
+        <h3 class="sub-title">🔹 T vs B Lymphocytes</h3>
+        <table class="compact"><tr><th></th><th>T lymphocyte</th><th>B lymphocyte</th></tr>
+          <tr><td>Formation</td><td>Bone marrow</td><td>Bone marrow</td></tr>
+          <tr><td>Maturation</td><td>Thymus gland</td><td>Bone marrow</td></tr>
+          <tr><td>Function</td><td>Destroys infected/cancer cells</td><td>Antibody production</td></tr></table>
+        <h3 class="sub-title">🔹 Pathogens and Example Diseases</h3>
+        <table class="compact"><tr><th>Pathogen</th><th>Disease</th></tr>
+          <tr><td>Bacteria</td><td>Tuberculosis, leptospirosis</td></tr>
+          <tr><td>Virus</td><td>AIDS, Nipah, COVID-19</td></tr>
+          <tr><td>Fungus</td><td>Ringworm, candidiasis</td></tr>
+          <tr><td>Protozoa</td><td>Malaria, amoebic meningoencephalitis</td></tr>
+          <tr><td>Worms</td><td>Filariasis, worm infestation</td></tr></table>
+        <h3 class="sub-title">🔹 Hereditary Diseases</h3>
+        <table class="compact"><tr><th>Disease</th><th>Cause</th></tr>
+          <tr><td>Sickle cell anaemia</td><td>Defect in the haemoglobin gene</td></tr>
+          <tr><td>Haemophilia</td><td>Defect in a blood-clotting protein gene</td></tr></table>
+        <h3 class="sub-title">🔹 Blood Groups</h3>
+        <table class="compact"><tr><th>Group</th><th>Antigen</th><th>Antibody</th></tr>
+          <tr><td>A</td><td>A</td><td>b</td></tr>
+          <tr><td>B</td><td>B</td><td>a</td></tr>
+          <tr><td>AB</td><td>A, B</td><td>None</td></tr>
+          <tr><td>O</td><td>None</td><td>a, b</td></tr></table>
+        <p class="exam-tip">📌 Exam Tip: Practice writing the stages of phagocytosis (pathogen → phagosome → phagolysosome → destruction) in order.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= IMMUNITY ================= -->
+  <section class="panel" id="immunity">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">രോഗപ്രതിരോധം</h2>
+        <p>ലോകാരോഗ്യ സംഘടന നിർവചിക്കുന്നത്: ശാരീരികവും മാനസികവും സാമൂഹികവുമായ സമ്പൂർണ്ണ സുസ്ഥിതിയാണ് <b>ആരോഗ്യം</b>. രോഗമില്ലാത്ത അവസ്ഥയോ വൈകല്യമില്ലാത്ത അവസ്ഥയോ എന്നത് മാത്രമല്ല അതിനർത്ഥം.</p>
+        <p>രോഗാണുപ്രവേശനം തടയുന്നതിനും പ്രവേശിച്ച രോഗാണുക്കളെ നശിപ്പിക്കുന്നതിനുമുള്ള ശരീരത്തിന്റെ കഴിവാണ് <b>രോഗപ്രതിരോധശേഷി</b>. ശരീരത്തിൽ പ്രവേശിച്ച് രോഗമുണ്ടാക്കാൻ കഴിയുന്ന ഏതിനെയും <b>ആന്റിജനുകൾ (Antigens)</b> എന്ന് വിളിക്കാം — രോഗാണുക്കൾ, പരാഗരേണുക്കൾ, പൊടി, ചില ഭക്ഷ്യവസ്തുക്കൾ, രാസവസ്തുക്കൾ എന്നിവയെല്ലാം ആന്റിജനുകൾക്ക് ഉദാഹരണങ്ങളാണ്.</p>
+        <div class="formula-box">രോഗപ്രതിരോധം → സഹജ പ്രതിരോധം (Innate immunity) → ആർജിത പ്രതിരോധം (Acquired immunity)</div>
+        <h3 class="sub-title">1. സഹജ പ്രതിരോധം (Innate Immunity)</h3>
+        <p>ജന്മനാ ശരീരത്തിൽ നിലനിൽക്കുന്ന സ്വാഭാവിക പ്രതിരോധ സംവിധാനമാണ് <b>സഹജ പ്രതിരോധം</b>. ആന്റിജനുകൾ ശരീരത്തിലേക്ക് പ്രവേശിക്കുന്നത് തടയുന്നതിനുള്ള വിവിധ മാർഗ്ഗങ്ങളാണ് <b>പ്രാഥമികതല പ്രതിരോധം (Primary level immunity)</b>.</p>
+        <table><tr><th>ശരീരഭാഗം</th><th>പ്രതിരോധസംവിധാനം</th></tr>
+          <tr><td>ഉമിനീർ, കണ്ണുനീർ</td><td>ലൈസോസൈം</td></tr>
+          <tr><td>ചെവിയിലെ മെഴുക്</td><td>ശ്ലേഷ്മം, ശ്ലേഷ്മസ്തരം</td></tr>
+          <tr><td>ശ്വാസനാളത്തിലെ സീലിയ</td><td>പൊടിയും രോഗാണുക്കളും പുറംതള്ളൽ</td></tr>
+          <tr><td>ത്വക്കിലെ സെബം, വിയർപ്പ്</td><td>അണുനാശക സ്വഭാവം</td></tr>
+          <tr><td>ആമാശയത്തിലെ HCl</td><td>രോഗാണുക്കളെ നശിപ്പിക്കുന്നു</td></tr>
+          <tr><td>ദഹനപഥത്തിലെയും മൂത്രപഥത്തിലെയും ഉപകാരി ബാക്ടീരിയകൾ</td><td>ദോഷകാരികളായ രോഗാണുക്കളെ അകറ്റുന്നു</td></tr></table>
+        <p>പ്രാഥമികതല പ്രതിരോധത്തെ ഭേദിച്ച് രോഗാണുക്കൾ ശരീരത്തിലെത്തിയാൽ അവയെ പ്രതിരോധിക്കുന്നതിനുള്ള സഹജ പ്രതിരോധ സംവിധാനമാണ് <b>ദ്വിതീയതല പ്രതിരോധം (Secondary level immunity)</b>.</p>
+        <h3 class="sub-title">2. ഫാഗോസൈറ്റോസിസ് (Phagocytosis)</h3>
+        <p>വെളുത്ത രക്തകോശങ്ങൾ രോഗാണുക്കളെ വിഴുങ്ങി നശിപ്പിക്കുന്ന പ്രക്രിയയാണ് <b>ഫാഗോസൈറ്റോസിസ്</b>. ഇതിൽ ഏർപ്പെടുന്ന കോശങ്ങളാണ് <b>ഫാഗോസൈറ്റുകൾ</b> — ന്യൂട്രോഫിൽ, മോണോസൈറ്റ് എന്നിവ ഫാഗോസൈറ്റുകളാണ്.</p>
+        <div class="formula-box">രോഗാണു → ഫാഗോസോം → ഫാഗോലൈസോസോം (ലൈസോസോമുമായി ചേരൽ) → രോഗാണു നശീകരണം → അവശിഷ്ടങ്ങൾ പുറംതള്ളൽ</div>
+        <table><tr><th>വെളുത്ത രക്തകോശം</th><th>ധർമ്മം</th></tr>
+          <tr><td>ന്യൂട്രോഫിൽ</td><td>ബാക്ടീരിയയെ വിഴുങ്ങി നശിപ്പിക്കുന്നു, രോഗാണുക്കൾക്കെതിരെ രാസവസ്തുക്കൾ ഉൽപാദിപ്പിക്കുന്നു</td></tr>
+          <tr><td>ഈസിനോഫിൽ</td><td>അലർജിയുണ്ടാകുമ്പോൾ പുറത്തുവിടുന്ന രാസവസ്തുക്കളെ നിർവീര്യമാക്കുന്നു, പരാദങ്ങളെ നശിപ്പിക്കുന്നു</td></tr>
+          <tr><td>മോണോസൈറ്റ്</td><td>അന്യവസ്തുക്കൾ, ബാക്ടീരിയകൾ, മൃതകോശങ്ങൾ എന്നിവയെ വിഴുങ്ങി നശിപ്പിക്കുന്നു, മറ്റ് പ്രതിരോധ കോശങ്ങളെ ഉത്തേജിപ്പിക്കുന്നു</td></tr>
+          <tr><td>ബേസോഫിൽ</td><td>രക്തം കട്ടപിടിക്കുന്നത് തടയുന്ന ഹെപ്പാരിനെയും വീക്കത്തിന് കാരണമാകുന്ന ഹിസ്റ്റമിനെയും ഉൽപാദിപ്പിക്കുന്നു</td></tr></table>
+        <h3 class="sub-title">3. വീക്കൽ പ്രതികരണം (Inflammatory Response)</h3>
+        <p>മുറിവോ ചതവോ ഏറ്റ ഭാഗത്തേക്ക് രക്തപ്രവാഹം വർധിപ്പിച്ച് അണുബാധയെ നേരിടാനായി വെളുത്ത രക്തകോശങ്ങളെ എത്തിക്കുന്ന മാർഗ്ഗമാണ് <b>വീക്കൽ പ്രതികരണം</b>. മുറിവേറ്റ ഭാഗത്തെ കോശങ്ങൾ ഹിസ്റ്റമിനും മറ്റ് രാസവസ്തുക്കളും പുറത്തുവിടുന്നു — ഇത് രക്തക്കുഴലുകളെ വികസിപ്പിക്കുന്നു. രക്തപ്രവാഹം വർധിച്ച് മോണോസൈറ്റുകളും ന്യൂട്രോഫില്ലുകളും ആ ഭാഗത്തേക്ക് എത്തി രോഗകാരികളെ വിഴുങ്ങിനശിപ്പിക്കുന്നു.</p>
+        <h3 class="sub-title">4. പനി (Fever)</h3>
+        <p>ശരീരത്തിന്റെ താപനില സാധാരണ പരിധിക്ക് മുകളിൽ (98.6°F അഥവാ 37°C) ഉയരുന്ന അവസ്ഥയാണ് <b>പനി</b>. അണുബാധയോ വീക്കമോ ഉണ്ടാകുമ്പോൾ, ശരീരത്തിലെ വെളുത്ത രക്തകോശങ്ങൾ <b>പൈറോജൻസ്</b> എന്ന രാസവസ്തുക്കൾ പുറത്തുവിടുന്നു — ഇവയാണ് താപനില ഉയർത്താൻ തലച്ചോറിന് നിർദേശം നൽകുന്നത്. ഉയർന്ന താപനില ഫാഗോസൈറ്റുകൾ രോഗാണുക്കളെ കൂടുതൽ വേഗത്തിൽ വിഴുങ്ങി നശിപ്പിക്കാനും രോഗാണുക്കളുടെ വളർച്ചയെ തടയാനും സഹായിക്കുന്നു.</p>
+        <h3 class="sub-title">5. രക്തം കട്ടപിടിക്കൽ (Clotting of Blood)</h3>
+        <p>ത്വക്കിൽ മുറിവുണ്ടാകുമ്പോൾ രക്തപ്രവാഹം തടയുന്നതോടൊപ്പം രോഗാണുപ്രവേശനവും തടയാനുള്ള ഒരു മാർഗ്ഗമാണ് രക്തം കട്ടപിടിക്കൽ. പ്ലേറ്റ്ലറ്റുകളും പരിക്കേറ്റ കലകളും <b>ത്രോംബോപ്ലാസ്റ്റിൻ</b> എന്ന എൻസൈമിനെ ഉൽപാദിപ്പിക്കുന്നു. ഇത് പ്ലാസ്മയിലെ <b>പ്രോത്രോംബിൻ</b> എന്ന പ്രോട്ടീനെ <b>ത്രോംബിൻ</b> ആക്കി മാറ്റുന്നു. ത്രോംബിൻ <b>ഫൈബ്രിനോജൻ</b> എന്ന നിഷ്ക്രിയ പ്രോട്ടീനെ <b>ഫൈബ്രിൻ</b> ആക്കി മാറ്റുന്നു. ഫൈബ്രിൻ നാരുകൾ ഉണ്ടാക്കുന്ന വലക്കണ്ണികളിൽ ചുവന്ന രക്താണുക്കൾ അകപ്പെടുകയും രക്തക്കട്ട രൂപപ്പെടുകയും ചെയ്യുന്നു.</p>
+        <h3 class="sub-title">6. ആർജിത പ്രതിരോധം (Acquired Immunity)</h3>
+        <p>ജനനശേഷം വികസിക്കുന്ന പ്രതിരോധമാണ് <b>ആർജിത പ്രതിരോധം</b>. ഇത് ശരീരത്തിൽ പ്രവേശിക്കുന്ന ആന്റിജനുകളെ (രോഗാണുക്കൾ പോലുള്ളവ) പ്രത്യേകം തിരിച്ചറിഞ്ഞ് പ്രതിരോധിക്കുന്നു എന്നതിനാൽ <b>പ്രത്യേക പ്രതിരോധം (Specific Immunity)</b> എന്നും അറിയപ്പെടുന്നു.</p>
+        <table><tr><th></th><th>T ലിംഫോസൈറ്റ്</th><th>B ലിംഫോസൈറ്റ്</th></tr>
+          <tr><td>രൂപപ്പെടൽ</td><td>അസ്ഥിമജ്ജയിൽ</td><td>അസ്ഥിമജ്ജയിൽ</td></tr>
+          <tr><td>പാകപ്പെടൽ</td><td>തൈമസ് ഗ്രന്ഥിയിൽ</td><td>അസ്ഥിമജ്ജയിൽ</td></tr>
+          <tr><td>ധർമ്മം</td><td>രോഗബാധിത കോശങ്ങളെയും കാൻസർ കോശങ്ങളെയും തിരിച്ചറിഞ്ഞ് നശിപ്പിക്കുന്നു</td><td>ആന്റിജനുകൾക്ക് എതിരെ പ്രവർത്തിക്കുന്ന പ്രോട്ടീനുകളായ ആന്റിബോഡികളെ ഉൽപാദിപ്പിക്കുന്നു</td></tr></table>
+        <h3 class="sub-title">7. വാക്സിനുകൾ</h3>
+        <p>18-ാം നൂറ്റാണ്ടിൽ ഇംഗ്ലീഷ് ഡോക്ടറായ <b>എഡ്വേർഡ് ജെന്നർ</b>, ഗോവസൂരി വന്നവർക്ക് വസൂരി വരില്ലെന്ന് നിരീക്ഷിച്ചു. ഒരു കുട്ടിയിൽ ഗോവസൂരി രോഗാണുക്കളടങ്ങിയ സ്രവം കുത്തിവച്ച് അദ്ദേഹം ഈ ആശയം വിജയകരമായി പരീക്ഷിച്ചു. 'പശു' എന്നർത്ഥം വരുന്ന Vacca എന്ന ലാറ്റിൻ വാക്കിൽ നിന്നാണ് <b>വാക്സിൻ</b> എന്ന പേര് വന്നത്. ജെന്നർ വാക്സിനേഷന്റെ പിതാവ് എന്നറിയപ്പെടുന്നു.</p>
+        <p><b>വാക്സിനുകൾ</b> ശരീരത്തിൽ ആന്റിജനുകളായി പ്രവർത്തിക്കുന്നു — ഇത് നമ്മുടെ പ്രതിരോധസംവിധാനത്തെ ഉത്തേജിപ്പിച്ച് രോഗകാരികൾക്കെതിരെ ആന്റിബോഡികൾ ഉൽപാദിപ്പിക്കാൻ സഹായിക്കുന്നു. ഈ ആന്റിബോഡികൾ പിന്നീട് ശരീരത്തിൽ നിലനിൽക്കുകയും രോഗങ്ങളിൽ നിന്ന് ദീർഘകാലത്തേക്ക് സംരക്ഷണം നൽകുകയും ചെയ്യുന്നു.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Immunity</h2>
+        <p>The World Health Organization defines <b>Health</b> as a state of complete physical, mental, and social well-being — not merely the absence of disease or infirmity.</p>
+        <p>The body's ability to prevent pathogens from entering and to destroy pathogens that do enter is called <b>immunity</b>. Anything that enters the body and can cause disease is called an <b>Antigen</b> — pathogens, pollen, dust, certain foods, and chemicals are all examples of antigens.</p>
+        <div class="formula-box">Immunity → Innate immunity → Acquired immunity</div>
+        <h3 class="sub-title">1. Innate Immunity</h3>
+        <p><b>Innate immunity</b> is the natural defence system present in the body from birth. The various methods of preventing antigens from entering the body are called <b>Primary level immunity</b>.</p>
+        <table><tr><th>Body part</th><th>Defence mechanism</th></tr>
+          <tr><td>Saliva, tears</td><td>Lysozyme</td></tr>
+          <tr><td>Earwax</td><td>Mucus, mucous membrane</td></tr>
+          <tr><td>Cilia in the trachea</td><td>Expel dust and pathogens</td></tr>
+          <tr><td>Sebum, sweat in skin</td><td>Antimicrobial properties</td></tr>
+          <tr><td>HCl in stomach</td><td>Destroys pathogens</td></tr>
+          <tr><td>Beneficial bacteria in digestive and urinary tracts</td><td>Keep harmful pathogens away</td></tr></table>
+        <p>If pathogens breach primary level immunity and enter the body, the innate defence system that fights them is called <b>Secondary level immunity</b>.</p>
+        <h3 class="sub-title">2. Phagocytosis</h3>
+        <p><b>Phagocytosis</b> is the process by which white blood cells engulf and destroy pathogens. The cells that carry out phagocytosis are called <b>phagocytes</b> — neutrophils and monocytes are phagocytes.</p>
+        <div class="formula-box">Pathogen → Phagosome → Phagolysosome (fusion with lysosome) → Pathogen destroyed → Waste expelled</div>
+        <table><tr><th>White blood cell</th><th>Function</th></tr>
+          <tr><td>Neutrophil</td><td>Engulfs and destroys bacteria, produces chemicals against pathogens</td></tr>
+          <tr><td>Eosinophil</td><td>Neutralises chemicals released during allergies, destroys parasites</td></tr>
+          <tr><td>Monocyte</td><td>Engulfs and destroys foreign substances, bacteria, and dead cells; stimulates other immune cells</td></tr>
+          <tr><td>Basophil</td><td>Produces heparin (which prevents clotting) and histamine (which causes inflammation)</td></tr></table>
+        <h3 class="sub-title">3. Inflammatory Response</h3>
+        <p>The <b>inflammatory response</b> is the mechanism by which blood flow to an injured or damaged area is increased to bring white blood cells to fight infection. Cells in the injured area release histamine and other chemicals — this dilates blood vessels. Increased blood flow brings monocytes and neutrophils to the area, where they engulf and destroy pathogens.</p>
+        <h3 class="sub-title">4. Fever</h3>
+        <p><b>Fever</b> is the condition where body temperature rises above the normal range (98.6°F or 37°C). When infection or inflammation occurs, white blood cells in the body release chemicals called <b>pyrogens</b> — these signal the brain to raise body temperature. The higher temperature helps phagocytes destroy pathogens more quickly and inhibits pathogen growth.</p>
+        <h3 class="sub-title">5. Clotting of Blood</h3>
+        <p>Blood clotting is a mechanism that stops blood flow when the skin is cut, while also preventing pathogen entry. Platelets and damaged tissues produce an enzyme called <b>thromboplastin</b>. This converts the plasma protein <b>prothrombin</b> into <b>thrombin</b>. Thrombin converts the inactive protein <b>fibrinogen</b> into <b>fibrin</b>. Red blood cells get trapped in the mesh formed by fibrin fibres, forming a blood clot.</p>
+        <h3 class="sub-title">6. Acquired Immunity</h3>
+        <p><b>Acquired immunity</b> develops after birth. Because it specifically recognises and defends against antigens (such as pathogens) that enter the body, it is also known as <b>Specific Immunity</b>.</p>
+        <table><tr><th></th><th>T lymphocyte</th><th>B lymphocyte</th></tr>
+          <tr><td>Formation</td><td>In bone marrow</td><td>In bone marrow</td></tr>
+          <tr><td>Maturation</td><td>In the thymus gland</td><td>In bone marrow</td></tr>
+          <tr><td>Function</td><td>Recognises and destroys infected and cancer cells</td><td>Produces antibodies — proteins that act against antigens</td></tr></table>
+        <h3 class="sub-title">7. Vaccines</h3>
+        <p>In the 18th century, English doctor <b>Edward Jenner</b> observed that people who had contracted cowpox did not get smallpox. He successfully tested this idea by inoculating a child with material containing cowpox pathogens. The word <b>vaccine</b> comes from the Latin word Vacca, meaning "cow". Jenner is known as the father of vaccination.</p>
+        <p><b>Vaccines</b> act as antigens in the body — stimulating our immune system to produce antibodies against the pathogens. These antibodies persist in the body afterward and provide long-term protection against the disease.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PATHOGENS & DISEASES ================= -->
+  <section class="panel" id="pathogens">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">രോഗാണുക്കളും ആർജിത രോഗങ്ങളും</h2>
+        <p>ഒരാളുടെ ജീവിതകാലയളവിൽ ഉണ്ടാകുന്ന രോഗങ്ങളാണ് <b>ആർജിത രോഗങ്ങൾ (Acquired Diseases)</b>. പരിസ്ഥിതി ഘടകങ്ങൾ, രോഗാണുക്കൾ, ജീവിതശൈലി തുടങ്ങിയവയെല്ലാം ഇത്തരം രോഗങ്ങൾക്ക് കാരണമാകാറുണ്ട്. പകരുന്ന മിക്ക രോഗങ്ങൾക്കും കാരണം സൂക്ഷ്മജീവികളാണ് — ഇവ <b>സാംക്രമിക രോഗങ്ങൾ (Contagious diseases)</b> എന്നറിയപ്പെടുന്നു.</p>
+        <h3 class="sub-title">1. രോഗപ്പകർച്ചാരീതികൾ</h3>
+        <ul>
+          <li>മലിനമാക്കപ്പെട്ട ആഹാരത്തിലൂടെയും ജലത്തിലൂടെയും</li>
+          <li>ചുമ, തുമ്മൽ എന്നിവയിലൂടെ വായുവിലെ കണികകളായി</li>
+          <li>നേരിട്ടുള്ള സമ്പർക്കത്തിലൂടെ</li>
+          <li>പ്രതലങ്ങളിലൂടെ (തൊടൽ)</li>
+          <li>രോഗാണുവാഹക ഘടകങ്ങൾ (കൊതുക്, എലി മുതലായവ) വഴി</li>
+        </ul>
+        <h3 class="sub-title">2. ബാക്ടീരിയ (Bacteria) മൂലമുള്ള രോഗങ്ങൾ</h3>
+        <p>ശരീരത്തിൽ പ്രവേശിച്ച് പെരുകുമ്പോൾ ബാക്ടീരിയ പുറത്ത് വിടുന്ന ടോക്സിനുകൾ (Toxins) കലകളെ നശിപ്പിക്കുകയും ശരീരപ്രവർത്തനങ്ങളെ തടസ്സപ്പെടുത്തുകയും ചെയ്യുന്നു.</p>
+        <table><tr><th></th><th>ക്ഷയം (Tuberculosis)</th><th>എലിപ്പനി (Leptospirosis)</th></tr>
+          <tr><td>രോഗകാരി</td><td>മൈക്കോബാക്ടീരിയം ട്യൂബർകുലോസിസ്</td><td>ലെപ്റ്റോസൈറ</td></tr>
+          <tr><td>പകർച്ചാരീതി</td><td>ചുമ/തുമ്മൽ/സംസാരം വഴി വായുവിലെ കണികകൾ ശ്വസിക്കുന്നതിലൂടെ</td><td>എലിമൂത്രം കലർന്ന ജലത്തിൽ നിന്ന് മുറിവുകളിലൂടെയോ കണ്ണ്, മൂക്ക് വഴിയോ</td></tr>
+          <tr><td>ബാധിക്കുന്ന ഭാഗം</td><td>പ്രധാനമായും ശ്വാസകോശങ്ങൾ; വൃക്ക, അസ്ഥികൾ, മസ്തിഷ്കം എന്നിവയെയും ബാധിക്കാം</td><td>വൃക്കകൾ, കരൾ, ശ്വാസകോശങ്ങൾ</td></tr>
+          <tr><td>ലക്ഷണം</td><td>രണ്ടാഴ്ചയിൽ കൂടുതൽ നീണ്ടുനിൽക്കുന്ന ചുമ, പനി, വിശപ്പില്ലായ്മ, ഭാരക്കുറവ്, ക്ഷീണം</td><td>പെട്ടെന്നുണ്ടാകുന്ന പനി, തലവേദന, പേശീവേദന, കണ്ണിന് ചുവപ്പ് നിറം, ഛർദി</td></tr>
+          <tr><td>പ്രതിരോധം/ചികിത്സ</td><td>BCG വാക്സിനേഷൻ; DOTS (ദീർഘകാല ആന്റിബയോട്ടിക് ചികിത്സ)</td><td>പ്രതിരോധമരുന്നുകൾ, ആന്റിബയോട്ടിക്കുകൾ</td></tr></table>
+        <h3 class="sub-title">3. വൈറസ് (Virus) മൂലമുള്ള രോഗങ്ങൾ</h3>
+        <p>വൈറസ് ശരീരത്തിൽ പ്രവേശിച്ച് ആതിഥേയ കോശങ്ങളുടെ ജനിതകസംവിധാനം ഉപയോഗിച്ച് പെരുകുന്നു — അങ്ങനെ കോശങ്ങളെ നശിപ്പിച്ച് രോഗമുണ്ടാക്കുന്നു.</p>
+        <table><tr><th></th><th>എയ്ഡ്സ് (AIDS)</th><th>നിപ്പ (Nipah)</th></tr>
+          <tr><td>രോഗകാരി</td><td>ഹ്യൂമൻ ഇമ്യൂണോഡെഫിഷ്യൻസി വൈറസ് (HIV)</td><td>നിപ്പ വൈറസ് (NiV)</td></tr>
+          <tr><td>ബാധിക്കുന്നത്</td><td>T ലിംഫോസൈറ്റുകൾ — ഇവയെ നശിപ്പിച്ച് പ്രതിരോധശേഷി കുറയ്ക്കുന്നു</td><td>കേന്ദ്ര നാഡീവ്യവസ്ഥ, ശ്വാസകോശം</td></tr>
+          <tr><td>ലക്ഷണം</td><td>പ്രാരംഭത്തിൽ മറ്റ് വൈറസ് രോഗങ്ങൾക്ക് സമാനം; ക്രമേണ ന്യൂമോണിയ, ക്ഷയം, ചിലയിനം കാൻസർ പോലുള്ള മാരകരോഗങ്ങൾ ബാധിക്കാം</td><td>പനി, തലവേദന, പേശീവേദന, ചുമ, ഛർദി; ഗുരുതരമാകുമ്പോൾ അപസ്മാരം, ബോധക്ഷയം</td></tr>
+          <tr><td>പകരുന്ന വിധം</td><td>ലൈംഗികബന്ധത്തിലൂടെ, സൂചി/സിറിഞ്ച് പങ്കുവയ്ക്കുന്നതിലൂടെ, HIV ബാധിതയായ അമ്മയിൽ നിന്ന് ഗർഭസ്ഥശിശുവിലേക്ക്</td><td>വവ്വാൽ കടിച്ച പഴങ്ങൾ വഴി പന്നികളിലേക്കും, പിന്നീട് മനുഷ്യരിലേക്കും</td></tr>
+          <tr><td>ചികിത്സ</td><td>ART (ആന്റി റിട്രോവൈറൽ തെറാപ്പി) — വൈറസിന്റെ പെരുകൽ നിയന്ത്രിക്കാം</td><td>പ്രത്യേക ആന്റിവൈറൽ മരുന്നുകളോ വാക്സിനോ ഇല്ല; സപ്പോർട്ടീവ് കെയർ മാത്രം</td></tr></table>
+        <h3 class="sub-title">4. ഫംഗസ് (Fungus) മൂലമുള്ള രോഗങ്ങൾ</h3>
+        <table><tr><th>രോഗം</th><th>ബാധിക്കുന്ന വിധം</th><th>ലക്ഷണം</th></tr>
+          <tr><td>റിങ് വേം</td><td>ബാധിച്ചവരിലൂടെയും സ്പർശനത്തിലൂടെയും മലിനമായ വസ്തുക്കളിലൂടെയും മൃഗങ്ങളിൽ നിന്നും</td><td>വൃത്താകൃതിയിലുള്ള ചുവന്ന പാടുകൾ, ചൊറിച്ചിൽ</td></tr>
+          <tr><td>കാൻഡിഡിയാസിസ്</td><td>നേരിട്ടുള്ള സമ്പർക്കം, വസ്തുക്കൾ പങ്കുവയ്ക്കൽ, ലൈംഗികബന്ധം വഴി</td><td>വായിൽ വെളുത്ത പാടുകൾ, ചൊറിച്ചിൽ, ബാധിച്ചയിടത്ത് ചുവന്ന/ചൊറിച്ചിലുണ്ടാക്കുന്ന പാടുകൾ</td></tr></table>
+        <h3 class="sub-title">5. പ്രോട്ടോസോവ (Protozoa) മൂലമുള്ള രോഗങ്ങൾ</h3>
+        <p><b>മലമ്പനി (Malaria)</b> — <b>പ്ലാസ്മോഡിയം</b> എന്ന പ്രോട്ടോസോവയാണ് രോഗകാരി. അനോഫിലിസ് പെൺകൊതുകുകളാണ് ഈ രോഗാണുവിനെ ഒരാളിൽ നിന്ന് മറ്റൊരാളിലേക്ക് എത്തിക്കുന്നത്. പ്ലാസ്മോഡിയം കരളിൽ എത്തി പെരുകുകയും ചുവന്ന രക്തകോശങ്ങളെ നശിപ്പിക്കുകയും ചെയ്യുന്നു. ഇടവിട്ടുള്ള പനി, കുളിരും വിറയലും, തലവേദന, ഛർദി, പേശീവേദന, ക്ഷീണം എന്നിവയാണ് ലക്ഷണങ്ങൾ. ആന്റിമലേറിയൽ മരുന്നുകളാണ് ചികിത്സയ്ക്ക് ഉപയോഗിക്കുന്നത്.</p>
+        <p><b>അമീബിക് മസ്തിഷ്കജ്വരം</b> — നെഗ്ലേറിയ ഫൗലേറി (Naegleria fowleri) എന്ന അമീബ കെട്ടിക്കിടക്കുന്നതും ചൂടുള്ളതുമായ ശുദ്ധജലത്തിലാണ് പ്രധാനമായും കാണപ്പെടുന്നത്. മലിനമായ വെള്ളം മൂക്കിലെത്തുമ്പോൾ രോഗാണുക്കൾ തലച്ചോറിലേക്ക് കടക്കുകയും അണുബാധയുണ്ടാക്കുകയും ചെയ്യുന്നു.</p>
+        <h3 class="sub-title">6. വിരകൾ (Worms) മൂലമുള്ള രോഗങ്ങൾ</h3>
+        <p>കുമി, ഉരുണ്ടവിര തുടങ്ങിയ പരാദവിരകൾ രോഗങ്ങൾ ഉണ്ടാക്കുന്നു — ഇവയെ പൊതുവേ <b>വിരശല്യം</b> എന്ന് പറയുന്നു. നഖം കടിക്കുകയോ കൈകഴുകാതെ ഭക്ഷണം കഴിക്കുകയോ മലിന ജലം കുടിക്കുകയോ ചെയ്യുന്നതിലൂടെ രോഗം പകരുന്നു.</p>
+        <p><b>മന്ത് (Filariasis)</b> — ഫൈലേറിയൽ വിരകൾ ലിംഫ് വാഹികളിൽ തങ്ങിനിന്ന്, ലിംഫിന്റെ സാധാരണ ഒഴുക്കിനെ തടസ്സപ്പെടുത്തുന്നതിനാലാണ് മന്ത് രോഗം ഉണ്ടാകുന്നത്. ക്യൂലക്സ് പെൺകൊതുകുകളാണ് ഈ രോഗാണുവിനെ പരത്തുന്നത്. കാലുകൾ, കൈകൾ, ജനനേന്ദ്രിയങ്ങൾ തുടങ്ങിയ ശരീരഭാഗങ്ങൾ അമിതമായി വീങ്ങി വലുതാകുന്നു.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Pathogens and Acquired Diseases</h2>
+        <p>Diseases that occur during a person's lifetime are called <b>Acquired Diseases</b>. Environmental factors, pathogens, and lifestyle are all causes of such diseases. Most communicable diseases are caused by microorganisms — these are known as <b>Contagious diseases</b>.</p>
+        <h3 class="sub-title">1. Ways Diseases Spread</h3>
+        <ul>
+          <li>Through contaminated food and water</li>
+          <li>As airborne particles through coughing and sneezing</li>
+          <li>Through direct contact</li>
+          <li>Through surfaces (touch)</li>
+          <li>Through disease vectors (mosquitoes, rats, etc.)</li>
+        </ul>
+        <h3 class="sub-title">2. Diseases Caused by Bacteria</h3>
+        <p>As bacteria enter and multiply in the body, the toxins they release destroy tissues and disrupt bodily functions.</p>
+        <table><tr><th></th><th>Tuberculosis</th><th>Leptospirosis</th></tr>
+          <tr><td>Pathogen</td><td>Mycobacterium tuberculosis</td><td>Leptospira</td></tr>
+          <tr><td>Mode of transmission</td><td>Inhaling airborne particles from coughing/sneezing/talking</td><td>Through wounds or the eyes/nose from water contaminated with rat urine</td></tr>
+          <tr><td>Body part affected</td><td>Mainly the lungs; can also affect kidneys, bones, and the brain</td><td>Kidneys, liver, lungs</td></tr>
+          <tr><td>Symptoms</td><td>Cough lasting over two weeks, fever, loss of appetite, weight loss, fatigue</td><td>Sudden fever, headache, muscle pain, red eyes, vomiting</td></tr>
+          <tr><td>Prevention/treatment</td><td>BCG vaccination; DOTS (long-term antibiotic therapy)</td><td>Preventive medicines, antibiotics</td></tr></table>
+        <h3 class="sub-title">3. Diseases Caused by Viruses</h3>
+        <p>A virus enters the body and uses the host cell's genetic machinery to multiply — thereby destroying cells and causing disease.</p>
+        <table><tr><th></th><th>AIDS</th><th>Nipah</th></tr>
+          <tr><td>Pathogen</td><td>Human Immunodeficiency Virus (HIV)</td><td>Nipah virus (NiV)</td></tr>
+          <tr><td>Affects</td><td>T lymphocytes — destroys them, reducing immunity</td><td>Central nervous system, lungs</td></tr>
+          <tr><td>Symptoms</td><td>Initially similar to other viral illnesses; can eventually lead to severe illnesses like pneumonia, tuberculosis, and certain cancers</td><td>Fever, headache, muscle pain, cough, vomiting; can progress to seizures and loss of consciousness</td></tr>
+          <tr><td>Mode of transmission</td><td>Through sexual contact, sharing needles/syringes, from an HIV-positive mother to her unborn child</td><td>Through fruit bitten by bats, to pigs, and then to humans</td></tr>
+          <tr><td>Treatment</td><td>ART (Anti-Retroviral Therapy) — can control viral replication</td><td>No specific antiviral drugs or vaccine; supportive care only</td></tr></table>
+        <h3 class="sub-title">4. Diseases Caused by Fungi</h3>
+        <table><tr><th>Disease</th><th>Mode of infection</th><th>Symptoms</th></tr>
+          <tr><td>Ringworm</td><td>Through contact with infected persons, contaminated objects, or animals</td><td>Circular red patches, itching</td></tr>
+          <tr><td>Candidiasis</td><td>Direct contact, sharing objects, sexual contact</td><td>White patches in the mouth, itching, red/itchy patches at the site of infection</td></tr></table>
+        <h3 class="sub-title">5. Diseases Caused by Protozoa</h3>
+        <p><b>Malaria</b> — caused by the protozoan <b>Plasmodium</b>. Female Anopheles mosquitoes transmit this pathogen from person to person. Plasmodium multiplies in the liver and destroys red blood cells. Symptoms include intermittent fever, chills and shivering, headache, vomiting, muscle pain, and fatigue. Anti-malarial drugs are used for treatment.</p>
+        <p><b>Amoebic meningoencephalitis</b> — the amoeba Naegleria fowleri is mainly found in stagnant, warm freshwater. When contaminated water reaches the nose, the pathogen enters the brain and causes infection.</p>
+        <h3 class="sub-title">6. Diseases Caused by Worms</h3>
+        <p>Parasitic worms such as tapeworms and roundworms cause diseases — generally referred to as <b>worm infestation</b>. The disease spreads through nail-biting, eating without washing hands, or drinking contaminated water.</p>
+        <p><b>Filariasis</b> — occurs when filarial worms lodge in the lymph vessels, obstructing the normal flow of lymph. Female Culex mosquitoes transmit this pathogen. Body parts such as the legs, arms, and genitals become excessively swollen and enlarged.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= NON-COMMUNICABLE & HEREDITARY ================= -->
+  <section class="panel" id="otherdiseases">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">കാൻസർ, പകരാത്ത രോഗങ്ങൾ, പാരമ്പര്യരോഗങ്ങൾ</h2>
+        <h3 class="sub-title">1. കാൻസർ (Cancer)</h3>
+        <p>പകരാത്ത ഒരു രോഗമാണ് <b>കാൻസർ</b>. അസാധാരണവും അനിയന്ത്രിതവുമായ കോശവിഭജനം വഴി കോശങ്ങൾ പെരുകി മറ്റ് ശരീരഭാഗങ്ങളിലേക്ക് വ്യാപിക്കുന്ന അവസ്ഥയാണിത്. കോശവിഭജനപ്രക്രിയയിലെ നിയന്ത്രണ സംവിധാനങ്ങൾ തകരാറിലാകുന്നതോടെയാണ് സാധാരണകോശങ്ങൾ കാൻസർ കോശങ്ങളായി മാറുന്നത്. കാൻസർ കോശങ്ങൾ രക്തത്തിലൂടെയും ലിംഫിലൂടെയുമാണ് മറ്റുഭാഗങ്ങളിലേക്ക് പടരുന്നത്.</p>
+        <table class="compact"><tr><th>കാൻസറിന്റെ കാരണങ്ങൾ</th><th>ചികിത്സാമാർഗ്ഗങ്ങൾ</th></tr>
+          <tr><td>ജനിതകമാറ്റങ്ങൾ, പാരിസ്ഥിതിക ഘടകങ്ങൾ, വൈറസ് ബാധ, ജീവിതശൈലി</td><td>ശസ്ത്രക്രിയ, കീമോതെറാപ്പി, വികിരണ ചികിത്സ, ഇമ്യൂണോതെറാപ്പി, ടാർഗെറ്റഡ് തെറാപ്പി, ഹോർമോൺ തെറാപ്പി</td></tr></table>
+        <h3 class="sub-title">2. പകരാത്ത രോഗങ്ങൾ (Non-communicable Diseases)</h3>
+        <table><tr><th>വിഭാഗം</th><th>രോഗം</th></tr>
+          <tr><td>ജീവിതശൈലി രോഗങ്ങൾ</td><td>പ്രമേഹം, അമിതരക്തസമ്മർദ്ദം</td></tr>
+          <tr><td>തൊഴിൽജന്യ രോഗങ്ങൾ</td><td>സിലിക്കോസിസ് (ധൂളി ശ്വസിക്കുന്നത് മൂലം)</td></tr>
+          <tr><td>സ്വയം പ്രതിരോധ വൈകല്യം</td><td>റുമാറ്റോയിഡ് ആർത്രൈറ്റിസ് (സ്വന്തം കോശങ്ങൾക്കെതിരെ പ്രതിരോധവ്യവസ്ഥ പ്രവർത്തിക്കുന്നത്)</td></tr>
+          <tr><td>പോഷണ വൈകല്യങ്ങൾ</td><td>അനീമിയ (ഇരുമ്പിന്റെ അഭാവം)</td></tr></table>
+        <h3 class="sub-title">3. പാരമ്പര്യരോഗങ്ങൾ (Hereditary Diseases)</h3>
+        <p>ജനിതക തകരാറുകൾ കൊണ്ടുണ്ടാകുന്ന രോഗങ്ങളാണ് <b>പാരമ്പര്യരോഗങ്ങൾ</b>.</p>
+        <table><tr><th></th><th>സിക്കിൾസെൽ അനീമിയ</th><th>ഹീമോഫീലിയ</th></tr>
+          <tr><td>കാരണം</td><td>ഹീമോഗ്ലോബിൻ ഉൽപാദനത്തെ നിയന്ത്രിക്കുന്ന ജീനിന്റെ തകരാറ്</td><td>രക്തം കട്ടപിടിക്കാനുള്ള പ്രോട്ടീനുകളുടെ ഉൽപാദനത്തെ നിയന്ത്രിക്കുന്ന ജീനിന്റെ തകരാറ്</td></tr>
+          <tr><td>ബാധിക്കുന്ന വിധം</td><td>ചുവന്ന രക്തകോശങ്ങൾ അരിവാൾ ആകൃതിയിലാകുന്നു; ഓക്സിജൻ വാഹകശേഷി കുറയുന്നു; രൂപമാറ്റം വന്ന കോശങ്ങൾ ലോമികകളിൽ തങ്ങിനിന്ന് രക്തപ്രവാഹം തടയും</td><td>രക്തം കട്ടപിടിക്കാൻ സഹായിക്കുന്ന പ്രോട്ടീന്റെ അഭാവം; ചെറിയ മുറിവുകളിൽ നിന്നുപോലും അമിത രക്തസ്രാവം</td></tr></table>
+        <p class="exam-tip">📌 ഓർക്കുക: രോഗങ്ങളെ പ്രധാനമായി ആർജിത രോഗങ്ങൾ (പകരുന്നത്/പകരാത്തത്) എന്നും പാരമ്പര്യരോഗങ്ങൾ എന്നും തരംതിരിക്കാം.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Cancer, Non-communicable Diseases, and Hereditary Diseases</h2>
+        <h3 class="sub-title">1. Cancer</h3>
+        <p><b>Cancer</b> is a non-communicable disease. It is a condition where abnormal, uncontrolled cell division causes cells to multiply and spread to other parts of the body. Normal cells turn into cancer cells when the control mechanisms of cell division break down. Cancer cells spread to other body parts through the blood and lymph.</p>
+        <table class="compact"><tr><th>Causes of cancer</th><th>Treatment methods</th></tr>
+          <tr><td>Genetic mutations, environmental factors, viral infection, lifestyle</td><td>Surgery, chemotherapy, radiation therapy, immunotherapy, targeted therapy, hormone therapy</td></tr></table>
+        <h3 class="sub-title">2. Non-communicable Diseases</h3>
+        <table><tr><th>Category</th><th>Disease</th></tr>
+          <tr><td>Lifestyle diseases</td><td>Diabetes, hypertension</td></tr>
+          <tr><td>Occupational diseases</td><td>Silicosis (from inhaling dust)</td></tr>
+          <tr><td>Autoimmune disorder</td><td>Rheumatoid arthritis (the immune system attacking the body's own cells)</td></tr>
+          <tr><td>Nutritional disorders</td><td>Anaemia (iron deficiency)</td></tr></table>
+        <h3 class="sub-title">3. Hereditary Diseases</h3>
+        <p><b>Hereditary diseases</b> are caused by genetic defects.</p>
+        <table><tr><th></th><th>Sickle Cell Anaemia</th><th>Haemophilia</th></tr>
+          <tr><td>Cause</td><td>Defect in the gene controlling haemoglobin production</td><td>Defect in the gene controlling production of blood-clotting proteins</td></tr>
+          <tr><td>How it affects</td><td>Red blood cells become sickle-shaped; oxygen-carrying capacity decreases; misshapen cells get stuck in capillaries, blocking blood flow</td><td>Absence of a protein that helps blood clot; excessive bleeding even from small cuts</td></tr></table>
+        <p class="exam-tip">📌 Remember: diseases can be broadly classified into acquired diseases (communicable/non-communicable) and hereditary diseases.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TREATMENT & BLOOD GROUPS ================= -->
+  <section class="panel" id="treatment">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">ചികിത്സാരീതികളും രക്തഗ്രൂപ്പുകളും</h2>
+        <h3 class="sub-title">1. പ്രധാന ചികിത്സാ പാരമ്പര്യങ്ങൾ</h3>
+        <table><tr><th>ചികിത്സാരീതി</th><th>പ്രത്യേകതകൾ</th></tr>
+          <tr><td>ആയുർവേദം</td><td>ഇന്ത്യയിൽ ഉദയംചെയ്ത ലോകപ്രസ്തമായ ചികിത്സാരീതി. ആഹാരക്രമം, ഹെർബൽ മരുന്നുകൾ, വ്യായാമരീതികൾ എന്നിവ ഉപയോഗിച്ച് ശരീരത്തിലെ വ്യവസ്ഥകളുടെ സന്തുലനം ലക്ഷ്യമാക്കുന്നു. <b>ചരകൻ</b> ആയുർവേദ ചികിത്സാരീതിയുടെ പിതാവ്</td></tr>
+          <tr><td>ഹോമിയോപ്പതി</td><td>ജർമ്മൻ ഡോക്ടറായിരുന്ന <b>സാമുവൽ ഹനിമാൻ</b> മുന്നോട്ടുവച്ച ചികിത്സാരീതി. ആരോഗ്യമുള്ള ഒരാളിൽ രോഗലക്ഷണങ്ങൾ ഉണ്ടാക്കുന്ന പ്രതിവ്യങ്ങളുടെ നേർപ്പിച്ച മാത്രകൾ ഉപയോഗിച്ച് രോഗത്തെ പ്രതിരോധിക്കുന്നു</td></tr>
+          <tr><td>ആധുനിക വൈദ്യശാസ്ത്രം</td><td>അടിത്തറ പാകിയത് ഗ്രീക്ക് വൈദ്യശാസ്ത്രജ്ഞനായ <b>ഹിപ്പോക്രാറ്റസ്</b>. രോഗകാരികൾ, രോഗനിർണ്ണയം, മരുന്നുകൾ എന്നിവയ്ക്ക് പ്രാധാന്യം നൽകുന്നു</td></tr></table>
+        <h3 class="sub-title">2. രോഗനിർണ്ണയവും ചികിത്സയും</h3>
+        <div class="formula-box">രോഗനിർണ്ണയം → രോഗലക്ഷണങ്ങളെ വിലയിരുത്തൽ → ലാബ് പരിശോധന → ശരീര പരിശോധന
+ചികിത്സ → ഔഷധം → ശസ്ത്രക്രിയ → അവയവം മാറ്റിവയ്ക്കൽ → വികിരണ ചികിത്സ</div>
+        <p>രോഗനിർണ്ണയത്തിനായി സ്റ്റെതസ്കോപ്പ്, സ്ഫിഗ്മോമാനോമീറ്റർ, ഡിജിറ്റൽ ബിപി അപ്പാരറ്റസ്, പൾസ് ഓക്സിമീറ്റർ, തെർമോമീറ്റർ, എൻഡോസ്കോപ്പ്, US/CT/MRI സ്കാനർ എന്നിവ ഉപയോഗിക്കുന്നു.</p>
+        <h3 class="sub-title">3. ആന്റിബയോട്ടിക്കുകൾ (Antibiotics)</h3>
+        <p>സൂക്ഷ്മജീവികളിൽ നിന്നുണ്ടാക്കുന്നതോ കൃത്രിമമായി ഉണ്ടാക്കുന്നതോ ആയതും ബാക്ടീരിയകൾക്കെതിരെ ഉപയോഗിക്കുന്നതുമായ ഔഷധങ്ങളാണ് <b>ആന്റിബയോട്ടിക്കുകൾ</b>. അശാസ്ത്രീയവും അമിതവുമായ ഉപയോഗം പല പാർശ്വഫലങ്ങളും ഉണ്ടാക്കും:</p>
+        <ul>
+          <li>ദഹനവ്യവസ്ഥയ്ക്കുണ്ടാകുന്ന പ്രശ്നങ്ങൾ — വയറിളക്കം, ഛർദി, വയറുവേദന</li>
+          <li>അലർജി</li>
+          <li>കരൾ, വൃക്ക തകരാറുകൾ</li>
+          <li>കുടലിലെ ഉപകാരികളായ ബാക്ടീരിയകളുടെ നാശം</li>
+          <li>ആന്റിബയോട്ടിക്കുകൾക്കെതിരായ പ്രതിരോധം (ആന്റിബയോട്ടിക് റെസിസ്റ്റൻസ്)</li>
+        </ul>
+        <p>1928-ൽ <b>അലക്സാണ്ടർ ഫ്ലെമിങ്</b> ആകസ്മികമായി <b>പെൻസിലിൻ</b> കണ്ടെത്തി — ബാക്ടീരിയകളെ കൊല്ലുന്ന ലോകത്തിലെ ആദ്യത്തെ ആന്റിബയോട്ടിക്കായിരുന്നു ഇത്. 1945-ൽ ഫ്ലെമിങ്ങിനും ഹോവാർഡ് ഫ്ലോറിക്കും എൺസ്റ്റ് ബോറിസ് ചെയ്നിനും ഇതിന് നൊബേൽ സമ്മാനം ലഭിച്ചു.</p>
+        <p>വൈറസുകൾക്കെതിരെ <b>ആന്റിവൈറൽ മരുന്നുകൾ</b>, ഫംഗസുകൾക്കെതിരെ <b>ആന്റിഫംഗൽ മരുന്നുകൾ</b>, പ്രോട്ടോസോവകൾക്കെതിരെ <b>ആന്റിപ്രോട്ടോസോവ മരുന്നുകൾ</b>, വിരകൾക്കെതിരെ <b>ആന്റിഹെൽമിന്ത് മരുന്നുകൾ</b> എന്നിവയും ഉപയോഗിക്കുന്നു. പനി കുറയ്ക്കാൻ <b>ആന്റിപൈറെറ്റിക് മരുന്നുകൾ</b> ഉപയോഗിക്കുന്നു.</p>
+        <h3 class="sub-title">4. രക്തഗ്രൂപ്പുകൾ</h3>
+        <p>ചുവന്ന രക്തകോശങ്ങളുടെ ഉപരിതലത്തിൽ കാണുന്ന A, B എന്നീ ആന്റിജനുകളാണ് രക്തഗ്രൂപ്പുകൾക്ക് അടിസ്ഥാനം.</p>
+        <table><tr><th>രക്തഗ്രൂപ്പ്</th><th>ആന്റിജൻ</th><th>ആന്റിബോഡി</th></tr>
+          <tr><td>A</td><td>A</td><td>b</td></tr>
+          <tr><td>B</td><td>B</td><td>a</td></tr>
+          <tr><td>AB</td><td>A, B</td><td>ഇല്ല</td></tr>
+          <tr><td>O</td><td>ഇല്ല</td><td>a, b</td></tr></table>
+        <p>ചില വ്യക്തികളിൽ A, B എന്നീ ആന്റിജനുകൾക്കൊപ്പം <b>D ആന്റിജനും</b> കാണപ്പെടാറുണ്ട് — D ആന്റിജൻ ഉണ്ടെങ്കിൽ +ve ഉം ഇല്ലെങ്കിൽ -ve ഉം ആണ് (<b>Rh ഘടകം</b>). സ്വീകർത്താവിന്റെ രക്തത്തിൽ സ്വാഭാവികമായി ഇല്ലാത്ത ആന്റിജൻ ദാതാവിന്റെ രക്തം വഴി എത്തിയാൽ, സ്വീകർത്താവിന്റെ പ്ലാസ്മയിലെ ആന്റിബോഡികൾ പ്രവർത്തിച്ച് രക്തം കട്ടപിടിക്കും — അതിനാൽ രക്തനിവേശനത്തിൽ രക്തഗ്രൂപ്പ് നിർബന്ധമായും പരിഗണിക്കണം.</p>
+        <p class="exam-tip">📌 <b>ബോംബെ രക്തഗ്രൂപ്പ്</b> (1952-ൽ ഡോ. ഭെൻഡേ കണ്ടെത്തി) — H ആന്റിജൻ ഇല്ലാത്തതിനാൽ O ഗ്രൂപ്പുകാരിൽ നിന്നും ഇവർക്ക് രക്തം സ്വീകരിക്കാൻ കഴിയില്ല; ബോംബെ രക്തഗ്രൂപ്പുള്ള മറ്റൊരു വ്യക്തിയിൽ നിന്നുമാത്രമേ ഇവർക്ക് രക്തം സ്വീകരിക്കാൻ കഴിയൂ.</p>
+        <h3 class="sub-title">5. സസ്യങ്ങളിലെ പ്രതിരോധം</h3>
+        <ul>
+          <li>ദൃഢമായ കോശഭിത്തി, പുറംതൊലി, ഇലകളിലും തണ്ടുകളിലുമുള്ള മെഴുക് ആവരണം എന്നിവ രോഗാണു പ്രവേശനം തടയുന്നു</li>
+          <li>ആന്റിമൈക്രോബിയൽ പദാർത്ഥങ്ങൾ രോഗാണുക്കളെ കൊല്ലുകയോ വളർച്ച തടയുകയോ ചെയ്യുന്നു</li>
+          <li>എൻസൈമുകൾ രോഗാണുക്കളുടെ കോശഭിത്തി വിഘടിപ്പിക്കുന്നു</li>
+          <li>രോഗാണുബാധയേറ്റ ഭാഗത്തെ കോശങ്ങൾ സ്വയം നശിച്ച് രോഗം പടരുന്നത് തടയുന്നു</li>
+          <li>കോശഭിത്തി മുറികടന്ന് രോഗാണുക്കൾ പ്രവേശിച്ചാൽ രോഗവ്യാപനം തടയുന്നതിന് <b>കാലോസ്</b> എന്ന പോളിസാക്കറൈഡ് നിക്ഷേപം ഉണ്ട്</li>
+        </ul>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Treatment Systems and Blood Groups</h2>
+        <h3 class="sub-title">1. Major Treatment Traditions</h3>
+        <table><tr><th>System</th><th>Key features</th></tr>
+          <tr><td>Ayurveda</td><td>A globally known system of medicine that originated in India. Uses diet, herbal medicines, and exercise regimens to target balance among the body's systems. <b>Charaka</b> is the father of Ayurveda</td></tr>
+          <tr><td>Homeopathy</td><td>A system of treatment proposed by German doctor <b>Samuel Hahnemann</b>. Fights disease using diluted doses of substances that produce disease symptoms in a healthy person</td></tr>
+          <tr><td>Modern Medicine</td><td>Its foundation was laid by Greek physician <b>Hippocrates</b>. Emphasises pathogens, diagnosis, and medicines</td></tr></table>
+        <h3 class="sub-title">2. Diagnosis and Treatment</h3>
+        <div class="formula-box">Diagnosis → Evaluating symptoms → Lab tests → Physical examination
+Treatment → Medication → Surgery → Organ transplant → Radiation therapy</div>
+        <p>Instruments used for diagnosis include the stethoscope, sphygmomanometer, digital BP apparatus, pulse oximeter, thermometer, endoscope, and US/CT/MRI scanners.</p>
+        <h3 class="sub-title">3. Antibiotics</h3>
+        <p><b>Antibiotics</b> are drugs — natural or synthetic — used against bacteria. Unscientific and excessive use causes several side effects:</p>
+        <ul>
+          <li>Digestive problems — diarrhoea, vomiting, stomach pain</li>
+          <li>Allergies</li>
+          <li>Liver and kidney damage</li>
+          <li>Destruction of beneficial gut bacteria</li>
+          <li>Antibiotic resistance</li>
+        </ul>
+        <p>In 1928, <b>Alexander Fleming</b> accidentally discovered <b>penicillin</b> — the world's first antibiotic capable of killing bacteria. In 1945, Fleming, Howard Florey, and Ernst Boris Chain shared the Nobel Prize for this discovery.</p>
+        <p><b>Antiviral drugs</b> are used against viruses, <b>antifungal drugs</b> against fungi, <b>antiprotozoal drugs</b> against protozoa, and <b>anthelmintic drugs</b> against worms. <b>Antipyretic drugs</b> are used to reduce fever.</p>
+        <h3 class="sub-title">4. Blood Groups</h3>
+        <p>Blood groups are based on the A and B antigens found on the surface of red blood cells.</p>
+        <table><tr><th>Blood group</th><th>Antigen</th><th>Antibody</th></tr>
+          <tr><td>A</td><td>A</td><td>b</td></tr>
+          <tr><td>B</td><td>B</td><td>a</td></tr>
+          <tr><td>AB</td><td>A, B</td><td>None</td></tr>
+          <tr><td>O</td><td>None</td><td>a, b</td></tr></table>
+        <p>Some individuals also carry the <b>D antigen</b> alongside A and B — the presence of D antigen makes a group +ve, its absence -ve (the <b>Rh factor</b>). If an antigen not naturally present in the recipient's blood arrives via a donor's blood, antibodies in the recipient's plasma react and clot the blood — so blood group must always be checked before a transfusion.</p>
+        <p class="exam-tip">📌 The <b>Bombay blood group</b> (discovered by Dr. Bhende in 1952) lacks the H antigen, so these individuals cannot receive blood from O-group donors; they can only receive blood from another person with the Bombay blood group.</p>
+        <h3 class="sub-title">5. Immunity in Plants</h3>
+        <ul>
+          <li>A rigid cell wall, bark, and waxy coating on leaves and stems prevent pathogen entry</li>
+          <li>Antimicrobial substances kill pathogens or inhibit their growth</li>
+          <li>Enzymes break down pathogen cell walls</li>
+          <li>Cells at the infected site self-destruct to prevent disease spread</li>
+          <li>If pathogens breach the cell wall, a polysaccharide deposit called <b>callose</b> helps prevent further spread</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="panel" id="quiz">
+    <div class="card">
+      <h2 class="section-title" data-ml="ക്വിക്ക് ക്വിസ്" data-en="Quick Quiz">ക്വിക്ക് ക്വിസ്</h2>
+      <div class="score-bar">
+        <span>
+          <span data-ml="സ്കോർ:" data-en="Score:">സ്കോർ:</span> <b id="scoreVal">0</b> / <span id="totalVal">0</span>
+          &nbsp;·&nbsp; <span data-ml="ചോദ്യം" data-en="Question">ചോദ്യം</span> <b id="qPos">1</b> / <span id="qTotal">0</span>
+        </span>
+        <span style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn" onclick="shareScore()" data-ml="🔗 സ്കോർ പങ്കിടുക" data-en="🔗 Share Score">🔗 സ്കോർ പങ്കിടുക</button>
+          <button class="btn secondary" onclick="resetQuiz()" data-ml="വീണ്ടും ചെയ്യുക" data-en="Retry">വീണ്ടും ചെയ്യുക</button>
+        </span>
+      </div>
+      <div class="teacher-share no-print">
+        <button class="btn" onclick="shareQuizLink()" data-ml="🔗 ക്വിസ് ലിങ്ക് പങ്കിടുക" data-en="🔗 Share Quiz Link">🔗 ക്വിസ് ലിങ്ക് പങ്കിടുക</button>
+        <button class="btn secondary" onclick="shareQuestions()" data-ml="📤 ചോദ്യങ്ങൾ ടെക്സ്റ്റ് ആയി അയക്കുക" data-en="📤 Send Questions as Text">📤 ചോദ്യങ്ങൾ ടെക്സ്റ്റ് ആയി അയക്കുക</button>
+      </div>
+      <div id="quizContainer"></div>
+      <div class="quiz-nav">
+        <button class="btn secondary" id="prevBtn" onclick="prevQuestion()" data-ml="← മുമ്പത്തേത്" data-en="← Previous">← മുമ്പത്തേത്</button>
+        <button class="btn" id="nextBtn" onclick="nextQuestion()" data-ml="അടുത്തത് →" data-en="Next →">അടുത്തത് →</button>
+      </div>
+      <div id="shareToast" class="share-toast"></div>
+    </div>
+  </section>
+
+  <!-- ================= MODEL QUESTION PAPER ================= -->
+  <section class="panel" id="mqp">
+    <div class="card print-target" id="mqpCard">
+      <div class="lang-ml">
+        <div class="mqp-header">
+          <h2>ജീവശാസ്ത്രം — മാതൃകാ ചോദ്യപേപ്പർ</h2>
+          <p>യൂണിറ്റ് 5: പ്രതിരോധവും ആരോഗ്യസംരക്ഷണവും</p>
+        </div>
+        <div class="mqp-meta"><span>സമയം: 45 മിനിറ്റ്</span><span>ആകെ സ്കോർ: 20</span></div>
+        <div class="mqp-section-title">Section A — 1 സ്കോർ വീതം (5 × 1 = 5)</div>
+        <div class="mqp-q">1. ശരീരത്തിൽ പ്രവേശിച്ച് രോഗമുണ്ടാക്കാൻ കഴിയുന്ന ഏതിനെയും വിളിക്കുന്ന പേരെന്ത്?</div>
+        <div class="mqp-q">2. വാക്സിനേഷന്റെ പിതാവായി അറിയപ്പെടുന്നത് ആര്?</div>
+        <div class="mqp-q">3. ക്ഷയരോഗത്തിന്റെ രോഗകാരിയായ ബാക്ടീരിയയുടെ പേരെന്ത്?</div>
+        <div class="mqp-q">4. എയ്ഡ്സ് രോഗത്തിന് കാരണമാകുന്ന വൈറസ് ഏത്?</div>
+        <div class="mqp-q">5. ആദ്യമായി പെൻസിലിൻ കണ്ടെത്തിയത് ആര്?</div>
+        <div class="mqp-section-title">Section B — 2 സ്കോർ വീതം (4 × 2 = 8)</div>
+        <div class="mqp-q">6. സഹജ പ്രതിരോധവും ആർജിത പ്രതിരോധവും തമ്മിലുള്ള വ്യത്യാസം എന്ത്?</div>
+        <div class="mqp-q">7. ഫാഗോസൈറ്റോസിസ് എന്നാൽ എന്ത്? ഒരു ഉദാഹരണം നൽകുക.</div>
+        <div class="mqp-q">8. T ലിംഫോസൈറ്റും B ലിംഫോസൈറ്റും തമ്മിലുള്ള വ്യത്യാസം എന്ത്?</div>
+        <div class="mqp-q">9. ആന്റിബയോട്ടിക് പ്രതിരോധം എന്നാൽ എന്ത്?</div>
+        <div class="mqp-section-title">Section C — 3 സ്കോർ വീതം (2 × 3 = 6)</div>
+        <div class="mqp-q">10. രക്തം കട്ടപിടിക്കുന്ന പ്രക്രിയ ഘട്ടം ഘട്ടമായി വിശദീകരിക്കുക.</div>
+        <div class="mqp-q">11. മലമ്പനി പകരുന്ന വിധവും ലക്ഷണങ്ങളും ചികിത്സയും വിശദീകരിക്കുക.</div>
+        <div class="mqp-section-title">Section D — ഉപന്യാസ തരം (1 × 1 = 1)</div>
+        <div class="mqp-q">12. സഹജ പ്രതിരോധത്തിന്റെ പ്രാഥമികതലവും ദ്വിതീയതലവും ഉദാഹരണസഹിതം വിശദമായി എഴുതുക.</div>
+      </div>
+      <div class="lang-en">
+        <div class="mqp-header">
+          <h2>Biology — Model Question Paper</h2>
+          <p>Unit 5: Immunity and Health Care</p>
+        </div>
+        <div class="mqp-meta"><span>Time: 45 minutes</span><span>Total score: 20</span></div>
+        <div class="mqp-section-title">Section A — 1 score each (5 × 1 = 5)</div>
+        <div class="mqp-q">1. What is anything that can enter the body and cause disease called?</div>
+        <div class="mqp-q">2. Who is known as the father of vaccination?</div>
+        <div class="mqp-q">3. What is the name of the bacterium that causes tuberculosis?</div>
+        <div class="mqp-q">4. Which virus causes AIDS?</div>
+        <div class="mqp-q">5. Who first discovered penicillin?</div>
+        <div class="mqp-section-title">Section B — 2 scores each (4 × 2 = 8)</div>
+        <div class="mqp-q">6. What is the difference between innate immunity and acquired immunity?</div>
+        <div class="mqp-q">7. What is phagocytosis? Give one example.</div>
+        <div class="mqp-q">8. What is the difference between T lymphocytes and B lymphocytes?</div>
+        <div class="mqp-q">9. What is antibiotic resistance?</div>
+        <div class="mqp-section-title">Section C — 3 scores each (2 × 3 = 6)</div>
+        <div class="mqp-q">10. Explain the process of blood clotting step by step.</div>
+        <div class="mqp-q">11. Explain how malaria spreads, along with its symptoms and treatment.</div>
+        <div class="mqp-section-title">Section D — Essay type (1 × 1 = 1)</div>
+        <div class="mqp-q">12. Write in detail about the primary and secondary levels of innate immunity, with examples.</div>
+      </div>
+    </div>
+    <div class="no-print" style="margin-top:10px;">
+      <button class="btn secondary" onclick="printCurrent()" data-ml="🖨️ പ്രിന്റ് ചെയ്യുക" data-en="🖨️ Print">🖨️ പ്രിന്റ് ചെയ്യുക</button>
+    </div>
+  </section>
+
+</div>
+
+<footer class="note">Abacus Academy · Class 10 Biology · Prepared for self-study</footer>
+
+<script>
+/* ===================== LANGUAGE TOGGLE ===================== */
+let currentLang = 'ml';
+function setLang(lang){
+  currentLang = lang;
+  document.body.classList.toggle('show-en', lang === 'en');
+  document.getElementById('langMlBtn').classList.toggle('active', lang === 'ml');
+  document.getElementById('langEnBtn').classList.toggle('active', lang === 'en');
+  document.querySelectorAll('[data-ml][data-en]').forEach(el=>{
+    el.textContent = (lang === 'ml') ? el.dataset.ml : el.dataset.en;
+  });
+  quizData = (lang === 'ml') ? quizDataML : quizDataEN;
+  renderQuestion();
+}
+
+/* ===================== TABS ===================== */
+const tabButtons = document.querySelectorAll('nav.tabs button[data-tab]');
+const panels = document.querySelectorAll('.panel');
+let currentTab = 'notes';
+tabButtons.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    tabButtons.forEach(b=>b.classList.remove('active'));
+    panels.forEach(p=>{p.classList.remove('active'); p.classList.remove('print-target');});
+    btn.classList.add('active');
+    currentTab = btn.dataset.tab;
+    document.getElementById(currentTab).classList.add('active');
+  });
+});
+function printCurrent(){
+  panels.forEach(p=>p.classList.remove('print-target'));
+  document.getElementById(currentTab).classList.add('print-target');
+  window.print();
+}
+
+/* ===================== QUIZ DATA (bilingual) ===================== */
+const quizDataML = [
+  { q:"ശരീരത്തിൽ പ്രവേശിച്ച് രോഗമുണ്ടാക്കാൻ കഴിയുന്ന ഏതിനെയും വിളിക്കുന്ന പേരെന്ത്?", opts:["ആന്റിബോഡി","ആന്റിജൻ","ലിംഫോസൈറ്റ്","ഫാഗോസൈറ്റ്"], ans:1 },
+  { q:"ജന്മനാ ലഭിക്കുന്ന പ്രതിരോധത്തിന്റെ പേരെന്ത്?", opts:["ആർജിത പ്രതിരോധം","സഹജ പ്രതിരോധം","പ്രത്യേക പ്രതിരോധം","കൃത്രിമ പ്രതിരോധം"], ans:1 },
+  { q:"ന്യൂട്രോഫിൽ, മോണോസൈറ്റ് എന്നിവ ഏത് പ്രക്രിയയിൽ ഏർപ്പെടുന്നു?", opts:["ഫാഗോസൈറ്റോസിസ്","ആന്റിബോഡി ഉൽപാദനം","രക്തം കട്ടപിടിക്കൽ","ഗ്ലൈക്കോളിസിസ്"], ans:0 },
+  { q:"തൈമസ് ഗ്രന്ഥിയിൽ പാകപ്പെടുന്ന ലിംഫോസൈറ്റ് ഏത്?", opts:["B ലിംഫോസൈറ്റ്","T ലിംഫോസൈറ്റ്","മോണോസൈറ്റ്","ന്യൂട്രോഫിൽ"], ans:1 },
+  { q:"വാക്സിനേഷന്റെ പിതാവായി അറിയപ്പെടുന്നത് ആര്?", opts:["അലക്സാണ്ടർ ഫ്ലെമിങ്","എഡ്വേർഡ് ജെന്നർ","ലൂയി പാസ്ചർ","ചരകൻ"], ans:1 },
+  { q:"ക്ഷയരോഗത്തിന്റെ രോഗകാരി ഏത്?", opts:["ലെപ്റ്റോസൈറ","മൈക്കോബാക്ടീരിയം ട്യൂബർകുലോസിസ്","പ്ലാസ്മോഡിയം","നിപ്പ വൈറസ്"], ans:1 },
+  { q:"എയ്ഡ്സ് രോഗത്തിന് കാരണമാകുന്ന വൈറസ് ഏത്?", opts:["HIV","HPV","NiV","H1N1"], ans:0 },
+  { q:"മലമ്പനിക്ക് കാരണമായ പ്രോട്ടോസോവ ഏത്?", opts:["പ്ലാസ്മോഡിയം","അമീബ","യൂഗ്ലീന","പാരാമീഷിയം"], ans:0 },
+  { q:"1928-ൽ പെൻസിലിൻ കണ്ടെത്തിയത് ആര്?", opts:["എഡ്വേർഡ് ജെന്നർ","അലക്സാണ്ടർ ഫ്ലെമിങ്","ഹിപ്പോക്രാറ്റസ്","സാമുവൽ ഹനിമാൻ"], ans:1 },
+  { q:"AB രക്തഗ്രൂപ്പിൽ ഏത് ആന്റിബോഡികളാണ് കാണപ്പെടുന്നത്?", opts:["a മാത്രം","b മാത്രം","a, b രണ്ടും","ഒന്നുമില്ല"], ans:3 }
+];
+const quizDataEN = [
+  { q:"What is anything that can enter the body and cause disease called?", opts:["Antibody","Antigen","Lymphocyte","Phagocyte"], ans:1 },
+  { q:"What is the immunity present from birth called?", opts:["Acquired immunity","Innate immunity","Specific immunity","Artificial immunity"], ans:1 },
+  { q:"Neutrophils and monocytes are involved in which process?", opts:["Phagocytosis","Antibody production","Blood clotting","Glycolysis"], ans:0 },
+  { q:"Which lymphocyte matures in the thymus gland?", opts:["B lymphocyte","T lymphocyte","Monocyte","Neutrophil"], ans:1 },
+  { q:"Who is known as the father of vaccination?", opts:["Alexander Fleming","Edward Jenner","Louis Pasteur","Charaka"], ans:1 },
+  { q:"What is the pathogen that causes tuberculosis?", opts:["Leptospira","Mycobacterium tuberculosis","Plasmodium","Nipah virus"], ans:1 },
+  { q:"Which virus causes AIDS?", opts:["HIV","HPV","NiV","H1N1"], ans:0 },
+  { q:"Which protozoan causes malaria?", opts:["Plasmodium","Amoeba","Euglena","Paramecium"], ans:0 },
+  { q:"Who discovered penicillin in 1928?", opts:["Edward Jenner","Alexander Fleming","Hippocrates","Samuel Hahnemann"], ans:1 },
+  { q:"Which antibodies are found in blood group AB?", opts:["a only","b only","Both a and b","None"], ans:3 }
+];
+let quizData = quizDataML;
+
+let score = 0;
+let currentQ = 0;
+let userAnswers = new Array(quizDataML.length).fill(null);
+
+function renderQuestion(){
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  document.getElementById('totalVal').textContent = quizData.length;
+  document.getElementById('qTotal').textContent = quizData.length;
+  document.getElementById('qPos').textContent = currentQ + 1;
+
+  const item = quizData[currentQ];
+  const qDiv = document.createElement('div');
+  qDiv.innerHTML = `<p><b>${currentQ+1}.</b> ${item.q}</p><div class="quiz-opts"></div>`;
+  const optsDiv = qDiv.querySelector('.quiz-opts');
+  const alreadyAnswered = userAnswers[currentQ] !== null;
+
+  item.opts.forEach((opt, oIdx)=>{
+    const b = document.createElement('button');
+    b.textContent = opt;
+    if(alreadyAnswered){
+      b.disabled = true;
+      if(oIdx === item.ans) b.classList.add('correct');
+      else if(oIdx === userAnswers[currentQ]) b.classList.add('wrong');
+    }
+    b.addEventListener('click', ()=>{
+      if(b.disabled) return;
+      const allBtns = optsDiv.querySelectorAll('button');
+      allBtns.forEach(x=>x.disabled=true);
+      userAnswers[currentQ] = oIdx;
+      if(oIdx === item.ans){ b.classList.add('correct'); score++; }
+      else { b.classList.add('wrong'); allBtns[item.ans].classList.add('correct'); }
+      document.getElementById('scoreVal').textContent = score;
+    });
+    optsDiv.appendChild(b);
+  });
+  container.appendChild(qDiv);
+  document.getElementById('prevBtn').disabled = (currentQ === 0);
+  document.getElementById('nextBtn').disabled = (currentQ === quizData.length - 1);
+}
+
+function nextQuestion(){ if(currentQ < quizData.length - 1){ currentQ++; renderQuestion(); } }
+function prevQuestion(){ if(currentQ > 0){ currentQ--; renderQuestion(); } }
+
+function resetQuiz(){
+  score = 0; currentQ = 0;
+  userAnswers = new Array(quizData.length).fill(null);
+  document.getElementById('scoreVal').textContent = 0;
+  renderQuestion();
+}
+
+/* ===================== SHARE ===================== */
+const QUIZ_SHARE_URL = "https://munees-dot.github.io/sslccompleteportal/biology-unit5quiz.html";
+
+function shareQuizLink(){
+  if(!QUIZ_SHARE_URL){
+    const toast = document.getElementById('shareToast');
+    toast.textContent = currentLang === 'ml' ? '⚠️ ക്വിസ് ലിങ്ക് ഇതുവരെ സെറ്റ് ചെയ്തിട്ടില്ല' : '⚠️ Quiz link has not been set yet';
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 3000);
+    return;
+  }
+  const text = currentLang === 'ml'
+    ? `ക്വിക്ക് ക്വിസ് — പ്രതിരോധവും ആരോഗ്യസംരക്ഷണവും\nഈ ലിങ്കിൽ ക്വിസ് ചെയ്യൂ:\n${QUIZ_SHARE_URL}`
+    : `Quick Quiz — Immunity and Health Care\nTake the quiz here:\n${QUIZ_SHARE_URL}`;
+  runShare(text, currentLang === 'ml' ? '✅ ലിങ്ക് കോപ്പി ചെയ്തു' : '✅ Link copied');
+}
+
+function shareScore(){
+  const answeredCount = userAnswers.filter(a=>a!==null).length;
+  const text = currentLang === 'ml'
+    ? `പ്രതിരോധവും ആരോഗ്യസംരക്ഷണവും — ക്വിക്ക് ക്വിസ്\nഎന്റെ സ്കോർ: ${score} / ${quizData.length} (${answeredCount} ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകി)`
+    : `Immunity and Health Care — Quick Quiz\nMy score: ${score} / ${quizData.length} (${answeredCount} questions answered)`;
+  runShare(text, currentLang === 'ml' ? '✅ സ്കോർ കോപ്പി ചെയ്തു' : '✅ Score copied');
+}
+
+function shareQuestions(){
+  const letters = ['A','B','C','D'];
+  let text = currentLang === 'ml'
+    ? 'ക്വിക്ക് ക്വിസ് — പ്രതിരോധവും ആരോഗ്യസംരക്ഷണവും\n(യൂണിറ്റ് 5, ജീവശാസ്ത്രം, സ്റ്റാൻഡേർഡ് 10)\n\n'
+    : 'Quick Quiz — Immunity and Health Care\n(Unit 5, Biology, Class 10)\n\n';
+  quizData.forEach((item, idx)=>{
+    text += `${idx+1}. ${item.q}\n`;
+    item.opts.forEach((opt, oIdx)=>{ text += `   ${letters[oIdx]}) ${opt}\n`; });
+    text += '\n';
+  });
+  runShare(text, currentLang === 'ml' ? '✅ ചോദ്യങ്ങൾ കോപ്പി ചെയ്തു' : '✅ Questions copied');
+}
+
+function runShare(text, copySuccessMsg){
+  if(navigator.share){
+    navigator.share({ title: currentLang === 'ml' ? 'ക്വിക്ക് ക്വിസ്' : 'Quick Quiz', text: text }).catch(()=>{});
+  } else if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=>{
+      const toast = document.getElementById('shareToast');
+      toast.textContent = copySuccessMsg;
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'), 2500);
+    });
+  } else {
+    alert(text);
+  }
+}
+
+renderQuestion();
+</script>
+
+</body>
+</html>

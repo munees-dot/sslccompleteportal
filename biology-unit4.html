@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<title>Unit 4 — Chemical Communication in Organisms | Study Tool</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root{
+  --ink:#1f2937;
+  --paper:#f6f4fb;
+  --helix:#2d4f8a;
+  --helix-dark:#1a2f5c;
+  --gene:#7b3fa0;
+  --gene-light:#ede1f5;
+  --trait:#2e8b57;
+  --line:#dcd6ea;
+  --card:#ffffff;
+  --mono: 'Courier New', ui-monospace, monospace;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:'Noto Sans Malayalam','Manjari',system-ui,sans-serif;
+  line-height:1.55;
+}
+header{
+  background:linear-gradient(135deg,var(--helix-dark),var(--helix) 65%);
+  color:#fff; padding:20px 18px 60px; position:relative; overflow:hidden;
+}
+header .backbone{ position:absolute; inset:0; opacity:.15;
+  background-image: repeating-linear-gradient(115deg, transparent 0 38px, #fff 38px 40px); }
+header h1{ margin:0 0 4px; font-size:1.5rem; position:relative; z-index:1; }
+header p.sub{ margin:0 0 12px; opacity:.85; font-size:.92rem; position:relative; z-index:1; }
+.lang-toggle{ position:relative; z-index:1; display:inline-flex; gap:4px; background:rgba(255,255,255,.15); padding:4px; border-radius:20px; }
+.lang-toggle button{
+  border:none; background:transparent; color:#fff; padding:6px 16px; border-radius:16px;
+  cursor:pointer; font-family:inherit; font-size:.85rem; font-weight:600; opacity:.7;
+}
+.lang-toggle button.active{ background:#fff; color:var(--helix-dark); opacity:1; }
+.wrap{ max-width:960px; margin:-40px auto 40px; padding:0 14px; position:relative; z-index:2; }
+nav.tabs{
+  display:flex; flex-wrap:wrap; gap:8px; background:var(--card); border-radius:14px;
+  padding:10px; box-shadow:0 8px 24px rgba(26,47,92,.12); margin-bottom:18px;
+  position:sticky; top:10px; z-index:5;
+}
+nav.tabs button{
+  border:none; background:var(--paper); color:var(--helix-dark); padding:9px 14px;
+  border-radius:9px; cursor:pointer; font-size:.9rem; font-weight:600; font-family:inherit; transition:.15s;
+}
+nav.tabs button.active{ background:var(--helix); color:#fff; }
+nav.tabs button:hover{ filter:brightness(1.05); }
+.panel{ display:none; }
+.panel.active{ display:block; animation:fade .25s ease; }
+@keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+.card{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin-bottom:16px; box-shadow:0 2px 10px rgba(31,41,55,.04); }
+h2.section-title{ color:var(--helix-dark); border-bottom:3px solid var(--gene); display:inline-block; padding-bottom:4px; margin-top:0; font-size:1.15rem; }
+h3.sub-title{ color:var(--gene); margin:18px 0 8px; font-size:1rem; }
+.formula-box{ background:var(--gene-light); border-left:4px solid var(--gene); padding:10px 14px; border-radius:8px; font-family:var(--mono); margin:10px 0; font-size:.95rem; overflow-x:auto; }
+table{ width:100%; border-collapse:collapse; margin:10px 0; font-size:.92rem; }
+th,td{ border:1px solid var(--line); padding:8px 10px; text-align:left; }
+th{ background:var(--helix); color:#fff; }
+tr:nth-child(even) td{ background:#f4f1fa; }
+table.compact th, table.compact td{ padding:5px 8px; font-size:.85rem; }
+ul{ padding-left:20px; } li{ margin-bottom:6px; }
+.tag{ display:inline-block; background:var(--gene); color:#fff; font-size:.72rem; padding:2px 8px; border-radius:20px; margin-left:6px; }
+.step-list li{ margin-bottom:10px; }
+.quiz-opts button{ display:block; width:100%; text-align:left; margin:6px 0; padding:10px 14px; border:1px solid var(--line); background:#fff; border-radius:9px; cursor:pointer; font-family:inherit; font-size:.92rem; }
+.quiz-opts button.correct{ background:#dff3e8; border-color:var(--trait); font-weight:600; }
+.quiz-opts button.wrong{ background:#fbe4e0; border-color:var(--gene); }
+.quiz-opts button[disabled]{ cursor:default; }
+.quiz-nav{ display:flex; justify-content:space-between; margin-top:14px; }
+.quiz-nav button:disabled{ opacity:.4; cursor:default; }
+.score-bar{ background:var(--helix-dark); color:#fff; border-radius:10px; padding:10px 16px; margin-bottom:14px; font-size:.9rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+.btn{ background:var(--gene); color:#fff; border:none; padding:9px 16px; border-radius:8px; cursor:pointer; font-family:inherit; font-weight:600; }
+.btn.secondary{ background:var(--helix); }
+.teacher-share{ margin-bottom:14px; display:flex; gap:8px; flex-wrap:wrap; }
+.teacher-share .btn{ background:var(--gene); flex:1; min-width:200px; }
+.teacher-share .btn.secondary{ background:var(--helix); }
+.share-toast{ display:none; margin-top:12px; background:var(--helix-dark); color:#fff; padding:9px 14px; border-radius:8px; font-size:.85rem; text-align:center; }
+.share-toast.show{ display:block; }
+.mqp-header{ text-align:center; margin-bottom:14px; }
+.mqp-header h2{ margin:2px 0; color:var(--helix-dark); }
+.mqp-meta{ display:flex; justify-content:space-between; font-size:.85rem; margin:6px 0 16px; }
+.mqp-section-title{ background:var(--gene); color:#fff; padding:5px 12px; border-radius:6px; display:inline-block; margin:14px 0 8px; font-size:.9rem; }
+.mqp-q{ margin-bottom:12px; } .mqp-q b{ color:var(--helix-dark); }
+.exam-tip{ background:#eef4f8; border:1px solid var(--helix); border-radius:8px; padding:10px 14px; margin-top:16px; font-size:.9rem; }
+.revision-sheet h3.sub-title{ margin-top:16px; }
+.pill-row{ display:flex; gap:10px; flex-wrap:wrap; margin:10px 0; }
+.pill{ background:var(--gene-light); color:var(--helix-dark); padding:8px 14px; border-radius:20px; font-size:.85rem; font-weight:600; }
+footer.note{ text-align:center; font-size:.78rem; color:#8a8067; margin:30px 0 10px; }
+
+.lang-en{ display:none; }
+body.show-en .lang-ml{ display:none; }
+body.show-en .lang-en{ display:block; }
+
+@media print{
+  header, nav.tabs, .no-print{ display:none !important; }
+  .panel{ display:none !important; }
+  .panel.print-target{ display:block !important; }
+  .wrap{ margin:0; }
+  .card{ box-shadow:none; border:1px solid #999; }
+  body{ background:#fff; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="backbone"></div>
+  <h1>Chemical Communication in Organisms</h1>
+  <p class="sub">Biology · Class 10 · Unit 4 — Complete Study Tool</p>
+  <div class="lang-toggle no-print">
+    <button id="langMlBtn" class="active" onclick="setLang('ml')">മലയാളം</button>
+    <button id="langEnBtn" onclick="setLang('en')">English</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav class="tabs no-print">
+    <button data-tab="notes" class="active" data-ml="📘 സംഗ്രഹം" data-en="📘 Notes">📘 സംഗ്രഹം</button>
+    <button data-tab="revision" data-ml="⚡ ക്വിക്ക് റിവിഷൻ" data-en="⚡ Quick Revision">⚡ ക്വിക്ക് റിവിഷൻ</button>
+    <button data-tab="planthormones" data-ml="🌱 സസ്യഹോർമോണുകൾ" data-en="🌱 Plant Hormones">🌱 സസ്യഹോർമോണുകൾ</button>
+    <button data-tab="thyroid" data-ml="🦋 തൈറോയ്ഡും കാൽസ്യവും" data-en="🦋 Thyroid & Calcium">🦋 തൈറോയ്ഡും കാൽസ്യവും</button>
+    <button data-tab="pancreas" data-ml="🩸 പാൻക്രിയാസും പ്രമേഹവും" data-en="🩸 Pancreas & Diabetes">🩸 പാൻക്രിയാസും പ്രമേഹവും</button>
+    <button data-tab="master" data-ml="🧠 മുഖ്യ നിയന്ത്രണ ഗ്രന്ഥികൾ" data-en="🧠 Master Glands">🧠 മുഖ്യ നിയന്ത്രണ ഗ്രന്ഥികൾ</button>
+    <button data-tab="quiz" data-ml="✅ ക്വിസ്" data-en="✅ Quiz">✅ ക്വിസ്</button>
+    <button data-tab="mqp" data-ml="📝 മാതൃകാ ചോദ്യപേപ്പർ" data-en="📝 Model Question Paper">📝 മാതൃകാ ചോദ്യപേപ്പർ</button>
+    <button id="printBtn" onclick="printCurrent()" style="margin-left:auto;background:var(--helix-dark);color:#fff;" data-ml="🖨️ പ്രിന്റ് ചെയ്യുക" data-en="🖨️ Print">🖨️ പ്രിന്റ് ചെയ്യുക</button>
+  </nav>
+
+  <!-- ================= NOTES ================= -->
+  <section class="panel active" id="notes">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">ചുരുക്ക സംഗ്രഹം</h2>
+        <ul>
+          <li>ജീവികളിലെ രാസസംവേദനത്തിന്റെ വാഹകരാണ് <b>ഹോർമോണുകൾ</b>. ഒരു ഹോർമോൺ പ്രവർത്തിക്കുന്ന കോശത്തെ <b>ലക്ഷ്യകോശം (Target cell)</b> എന്ന് പറയുന്നു — ലക്ഷ്യകോശത്തിലെ <b>റിസപ്റ്ററു</b>മായി ചേർന്ന് <b>ഹോർമോൺ-റിസപ്റ്റർ കോംപ്ലക്സ്</b> രൂപപ്പെടുത്തിയാണ് ഹോർമോൺ പ്രവർത്തിക്കുന്നത്.</li>
+          <li>പ്രധാന സസ്യഹോർമോണുകൾ: <b>ഓക്സിൻ</b> (കാണ്ഡദൈർഘ്യം, ഫോട്ടോട്രോപിസം), <b>ജിബ്ബറലിൻ</b> (സുപ്താവസ്ഥ ഇല്ലാതാക്കൽ, കാണ്ഡദീർഘീകരണം), <b>സൈറ്റോകിനിൻ</b> (കോശവിഭജനം, ഇല പച്ചപ്പ് നിലനിർത്തൽ), <b>എഥിലീൻ</b> (ഫലം പാകമാകൽ), <b>അബ്സിസിക് ആസിഡ്</b> (സുപ്താവസ്ഥ നിലനിർത്തൽ, പ്രതികൂല സാഹചര്യങ്ങളെ നേരിടൽ).</li>
+          <li>ഇവയുടെ കൃത്രിമ രൂപങ്ങൾ (<b>സിന്തറ്റിക് ഹോർമോണുകൾ</b>) കൃഷിയിൽ കളനാശിനിയായും ഫലം പാകമാക്കാനും വ്യാപകമായി ഉപയോഗിക്കുന്നു.</li>
+          <li>ജന്തുക്കളിൽ <b>അന്തഃസ്രാവീ ഗ്രന്ഥികൾ (Endocrine glands)</b> ഹോർമോണുകൾ ഉൽപാദിപ്പിച്ച് രക്തത്തിലൂടെ ലക്ഷ്യകോശങ്ങളിലെത്തിക്കുന്നു.</li>
+          <li><b>തൈറോയ്ഡ് ഗ്രന്ഥി</b> ഉൽപാദിപ്പിക്കുന്ന <b>തൈറോക്സിൻ</b> മെറ്റബോളിസത്തെയും ശരീരോഷ്മാവിനെയും നിയന്ത്രിക്കുന്നു; <b>കാൽസിടോണിൻ</b> രക്തത്തിലെ കാൽസ്യം കുറയ്ക്കുന്നു. <b>പാരാതൈറോയ്ഡ് ഗ്രന്ഥി</b>യുടെ <b>പാരാതൊർമോൺ</b> ഇതിന് വിപരീതമായി കാൽസ്യം കൂട്ടുന്നു — ഇവ ചേർന്നാണ് രക്തത്തിലെ കാൽസ്യനില ക്രമീകരിക്കുന്നത്.</li>
+          <li><b>പാൻക്രിയാസിലെ ഐലെറ്റ്സ് ഓഫ് ലാംഗർഹാൻസി</b>ലെ <b>ആൽഫ കോശങ്ങൾ ഗ്ലൂക്കഗോൺ</b>ഉം <b>ബീറ്റാ കോശങ്ങൾ ഇൻസുലിൻ</b>ഉം ഉൽപാദിപ്പിച്ച് രക്തത്തിലെ ഗ്ലൂക്കോസ് നില ക്രമീകരിക്കുന്നു. ഇത് തകരാറിലാകുന്ന അവസ്ഥയാണ് <b>പ്രമേഹം (ഡയബറ്റിസ് മെലിറ്റസ്)</b> — ടൈപ്പ്-1, ടൈപ്പ്-2 എന്നിങ്ങനെ രണ്ട് തരം.</li>
+          <li><b>അഡ്രിനൽ ഗ്രന്ഥി</b> (കോർട്ടക്സ്, മെഡുല) അടിയന്തരഘട്ടങ്ങളിൽ ശരീരത്തെ സജ്ജമാക്കുന്ന ഹോർമോണുകൾ ഉൽപാദിപ്പിക്കുന്നു.</li>
+          <li><b>ഹൈപ്പോതലാമസും പിറ്റ്യൂട്ടറി ഗ്രന്ഥിയും</b> ചേർന്നതാണ് ശരീരത്തിന്റെ <b>മുഖ്യ നിയന്ത്രണകേന്ദ്രം</b> — TSH, ACTH, GTH, വളർച്ചാ ഹോർമോൺ (GH), പ്രോലാക്റ്റിൻ എന്നിവ മുൻദളത്തിൽ നിന്നും, വാസോപ്രസിൻ (ADH), ഓക്സിടോസിൻ എന്നിവ പിൻദളത്തിൽ നിന്നും സ്രവിക്കുന്നു.</li>
+          <li>GH ഉൽപാദനത്തിലെ വ്യതിയാനം <b>വാമനത്വം, ഭീമാകാരത്വം, അക്രോമെഗലി</b> എന്നീ വൈകല്യങ്ങൾക്ക് കാരണമാകുന്നു. <b>ADH</b> ജലസന്തുലനം നിയന്ത്രിക്കുന്നു.</li>
+          <li>പ്രത്യുൽപാദന ഹോർമോണുകൾ: <b>ടെസ്റ്റോസ്റ്റിറോൺ</b> (വൃഷണം), <b>ഈസ്ട്രജൻ, പ്രൊജസ്ട്രോൺ</b> (അണ്ഡാശയം).</li>
+          <li><b>ഗ്രെലിൻ</b> "വിശപ്പ് ഹോർമോൺ" ആയും <b>ലെപ്റ്റിൻ</b> "സംതൃപ്തി ഹോർമോൺ" ആയും പ്രവർത്തിക്കുന്നു.</li>
+          <li><b>പീനിയൽ ഗ്രന്ഥി</b>യുടെ <b>മെലാടോണിൻ</b> ഉറക്കത്തെയും ഉണരലിനെയും നിയന്ത്രിക്കുന്നു — ഇതിനാൽ പീനിയൽ ഗ്രന്ഥിയെ <b>ജൈവഘടികാരം</b> എന്നും വിളിക്കുന്നു.</li>
+          <li><b>തൈമസ് ഗ്രന്ഥി</b>യുടെ <b>തൈമോസിൻ</b> T ലിംഫോസൈറ്റുകളുടെ പാകപ്പെടലിന് സഹായിക്കുന്നു.</li>
+          <li><b>ഫിറമോണുകൾ</b> ഒരേ സ്പീഷിസിലെ ജീവികൾക്കിടയിലുള്ള രാസ ആശയവിനിമയത്തിന് ഉപയോഗിക്കുന്ന ബാഷ്പീകരണസ്വഭാവമുള്ള വസ്തുക്കളാണ് — ടെറിട്ടോറിയൽ, അഗ്രിഗേഷൻ, അലാം, ട്രയൽ, ലൈംഗിക ഫിറമോൺ എന്നിങ്ങനെ പലതരം.</li>
+        </ul>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Chapter Summary</h2>
+        <ul>
+          <li><b>Hormones</b> are the carriers of chemical communication in organisms. The cell a hormone acts on is called its <b>Target cell</b> — the hormone binds to a <b>receptor</b> on the target cell to form a <b>hormone-receptor complex</b>, through which it acts.</li>
+          <li>Key plant hormones: <b>Auxins</b> (stem elongation, phototropism), <b>Gibberellins</b> (breaking seed dormancy, stem elongation), <b>Cytokinins</b> (cell division, keeping leaves green), <b>Ethylene</b> (fruit ripening), <b>Abscisic acid</b> (maintaining dormancy, coping with unfavourable conditions).</li>
+          <li>Synthetic versions of these (<b>synthetic plant hormones</b>) are widely used in agriculture — as weedkillers and to ripen fruit artificially.</li>
+          <li>In animals, <b>endocrine glands</b> produce hormones that travel through the blood to reach target cells.</li>
+          <li>The <b>thyroid gland's</b> <b>thyroxine</b> regulates metabolism and body temperature; <b>calcitonin</b> lowers blood calcium. The <b>parathyroid gland's</b> <b>parathormone</b> raises it — together they regulate blood calcium levels.</li>
+          <li>The <b>Islets of Langerhans</b> in the pancreas — <b>alpha cells</b> producing <b>glucagon</b> and <b>beta cells</b> producing <b>insulin</b> — regulate blood glucose. A disruption of this leads to <b>diabetes mellitus</b> — Type 1 and Type 2.</li>
+          <li>The <b>adrenal gland</b> (cortex and medulla) produces hormones that prepare the body for emergencies.</li>
+          <li>The <b>hypothalamus and pituitary gland</b> together form the body's <b>master control system</b> — TSH, ACTH, GTH, growth hormone (GH), and prolactin are released from the anterior lobe, while vasopressin (ADH) and oxytocin are released from the posterior lobe.</li>
+          <li>Variations in GH production cause disorders such as <b>dwarfism, gigantism, and acromegaly</b>. <b>ADH</b> regulates water balance.</li>
+          <li>Reproductive hormones: <b>Testosterone</b> (testes), <b>Estrogen and Progesterone</b> (ovaries).</li>
+          <li><b>Ghrelin</b> acts as the "hunger hormone" while <b>leptin</b> acts as the "satiety hormone".</li>
+          <li>The <b>pineal gland's</b> <b>melatonin</b> regulates sleep and wakefulness — which is why the pineal gland is called the <b>biological clock</b>.</li>
+          <li>The <b>thymus gland's</b> <b>thymosin</b> helps mature T lymphocytes.</li>
+          <li><b>Pheromones</b> are volatile chemicals used for communication between members of the same species — types include territorial, aggregation, alarm, trail, and sex pheromones.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUICK REVISION ================= -->
+  <section class="panel" id="revision">
+    <div class="card revision-sheet">
+      <div class="lang-ml">
+        <h2 class="section-title">⚡ ക്വിക്ക് റിവിഷൻ ഷീറ്റ്</h2>
+        <h3 class="sub-title">🔹 ഹോർമോൺ പ്രവർത്തന പാത</h3>
+        <div class="formula-box">ഹോർമോൺ → ലക്ഷ്യകോശത്തിലെ റിസപ്റ്റർ → ഹോർമോൺ-റിസപ്റ്റർ കോംപ്ലക്സ് → കോശപ്രവർത്തന വ്യതിയാനം</div>
+        <h3 class="sub-title">🔹 പ്രധാന സസ്യഹോർമോണുകൾ</h3>
+        <table class="compact"><tr><th>ഹോർമോൺ</th><th>പ്രധാന ധർമ്മം</th></tr>
+          <tr><td>ഓക്സിൻ</td><td>കാണ്ഡദൈർഘ്യം, ഫോട്ടോട്രോപിസം, ഏപ്പിക്കൽ ഡോമിനൻസ്</td></tr>
+          <tr><td>ജിബ്ബറലിൻ</td><td>സുപ്താവസ്ഥ ഇല്ലാതാക്കൽ, കാണ്ഡദീർഘീകരണം</td></tr>
+          <tr><td>സൈറ്റോകിനിൻ</td><td>കോശവിഭജനം, പാർശ്വമുകുള വളർച്ച, ഇല പച്ചപ്പ്</td></tr>
+          <tr><td>എഥിലീൻ</td><td>ഫലം പാകമാകൽ, ഇല/പുഷ്പം കൊഴിയൽ</td></tr>
+          <tr><td>അബ്സിസിക് ആസിഡ്</td><td>സുപ്താവസ്ഥ നിലനിർത്തൽ, സമ്മർദ്ദ പ്രതികരണം</td></tr></table>
+        <h3 class="sub-title">🔹 തൈറോയ്ഡ്-പാരാതൈറോയ്ഡ്</h3>
+        <table class="compact"><tr><th>ഗ്രന്ഥി</th><th>ഹോർമോൺ</th><th>ധർമ്മം</th></tr>
+          <tr><td>തൈറോയ്ഡ്</td><td>തൈറോക്സിൻ</td><td>മെറ്റബോളിസം നിയന്ത്രണം</td></tr>
+          <tr><td>തൈറോയ്ഡ്</td><td>കാൽസിടോണിൻ</td><td>രക്ത കാൽസ്യം കുറയ്ക്കുന്നു</td></tr>
+          <tr><td>പാരാതൈറോയ്ഡ്</td><td>പാരാതൊർമോൺ</td><td>രക്ത കാൽസ്യം കൂട്ടുന്നു</td></tr></table>
+        <h3 class="sub-title">🔹 പാൻക്രിയാസ്</h3>
+        <table class="compact"><tr><th>കോശം</th><th>ഹോർമോൺ</th><th>ഫലം</th></tr>
+          <tr><td>ആൽഫ കോശം</td><td>ഗ്ലൂക്കഗോൺ</td><td>രക്ത ഗ്ലൂക്കോസ് കൂട്ടുന്നു</td></tr>
+          <tr><td>ബീറ്റാ കോശം</td><td>ഇൻസുലിൻ</td><td>രക്ത ഗ്ലൂക്കോസ് കുറയ്ക്കുന്നു</td></tr></table>
+        <h3 class="sub-title">🔹 ഹൈപ്പോതലാമസ്-പിറ്റ്യൂട്ടറി</h3>
+        <table class="compact"><tr><th>ഭാഗം</th><th>പ്രധാന ഹോർമോണുകൾ</th></tr>
+          <tr><td>മുൻദളം</td><td>TSH, ACTH, GTH, GH, പ്രോലാക്റ്റിൻ</td></tr>
+          <tr><td>പിൻദളം</td><td>വാസോപ്രസിൻ (ADH), ഓക്സിടോസിൻ</td></tr></table>
+        <h3 class="sub-title">🔹 വളർച്ചാ ഹോർമോൺ വൈകല്യങ്ങൾ</h3>
+        <table class="compact"><tr><th>അവസ്ഥ</th><th>കാരണം</th></tr>
+          <tr><td>വാമനത്വം</td><td>വളർച്ചാ കാലഘട്ടത്തിൽ GH കുറവ്</td></tr>
+          <tr><td>ഭീമാകാരത്വം</td><td>വളർച്ചാ കാലഘട്ടത്തിൽ GH അധികം</td></tr>
+          <tr><td>അക്രോമെഗലി</td><td>വളർച്ച പൂർത്തിയായ ശേഷം GH അധികം</td></tr></table>
+        <h3 class="sub-title">🔹 മറ്റ് പ്രധാന ഗ്രന്ഥികൾ</h3>
+        <table class="compact"><tr><th>ഗ്രന്ഥി</th><th>ഹോർമോൺ</th><th>ധർമ്മം</th></tr>
+          <tr><td>പീനിയൽ</td><td>മെലാടോണിൻ</td><td>ഉറക്കം-ഉണരൽ ചക്രം</td></tr>
+          <tr><td>തൈമസ്</td><td>തൈമോസിൻ</td><td>T ലിംഫോസൈറ്റ് പാകപ്പെടൽ</td></tr>
+          <tr><td>ആമാശയഭിത്തി</td><td>ഗ്രെലിൻ</td><td>വിശപ്പ്</td></tr>
+          <tr><td>കൊഴുപ്പുകല</td><td>ലെപ്റ്റിൻ</td><td>സംതൃപ്തി</td></tr></table>
+        <p class="exam-tip">📌 പരീക്ഷാ ടിപ്പ്: ഹോർമോൺ – ഗ്രന്ഥി – ധർമ്മം എന്ന ക്രമത്തിൽ പട്ടികകൾ മനഃപാഠമാക്കുക; ഇത്തരം ചോദ്യങ്ങൾ മിക്കവാറും വരാറുണ്ട്.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">⚡ Quick Revision Sheet</h2>
+        <h3 class="sub-title">🔹 How a Hormone Acts</h3>
+        <div class="formula-box">Hormone → Receptor on target cell → Hormone-receptor complex → Change in cell activity</div>
+        <h3 class="sub-title">🔹 Key Plant Hormones</h3>
+        <table class="compact"><tr><th>Hormone</th><th>Main function</th></tr>
+          <tr><td>Auxin</td><td>Stem elongation, phototropism, apical dominance</td></tr>
+          <tr><td>Gibberellin</td><td>Breaking dormancy, stem elongation</td></tr>
+          <tr><td>Cytokinin</td><td>Cell division, lateral bud growth, keeps leaves green</td></tr>
+          <tr><td>Ethylene</td><td>Fruit ripening, leaf/flower abscission</td></tr>
+          <tr><td>Abscisic acid</td><td>Maintains dormancy, stress response</td></tr></table>
+        <h3 class="sub-title">🔹 Thyroid-Parathyroid</h3>
+        <table class="compact"><tr><th>Gland</th><th>Hormone</th><th>Function</th></tr>
+          <tr><td>Thyroid</td><td>Thyroxine</td><td>Regulates metabolism</td></tr>
+          <tr><td>Thyroid</td><td>Calcitonin</td><td>Lowers blood calcium</td></tr>
+          <tr><td>Parathyroid</td><td>Parathormone</td><td>Raises blood calcium</td></tr></table>
+        <h3 class="sub-title">🔹 Pancreas</h3>
+        <table class="compact"><tr><th>Cell</th><th>Hormone</th><th>Effect</th></tr>
+          <tr><td>Alpha cell</td><td>Glucagon</td><td>Raises blood glucose</td></tr>
+          <tr><td>Beta cell</td><td>Insulin</td><td>Lowers blood glucose</td></tr></table>
+        <h3 class="sub-title">🔹 Hypothalamus-Pituitary</h3>
+        <table class="compact"><tr><th>Part</th><th>Key hormones</th></tr>
+          <tr><td>Anterior lobe</td><td>TSH, ACTH, GTH, GH, Prolactin</td></tr>
+          <tr><td>Posterior lobe</td><td>Vasopressin (ADH), Oxytocin</td></tr></table>
+        <h3 class="sub-title">🔹 Growth Hormone Disorders</h3>
+        <table class="compact"><tr><th>Condition</th><th>Cause</th></tr>
+          <tr><td>Dwarfism</td><td>Low GH during growth period</td></tr>
+          <tr><td>Gigantism</td><td>Excess GH during growth period</td></tr>
+          <tr><td>Acromegaly</td><td>Excess GH after growth is complete</td></tr></table>
+        <h3 class="sub-title">🔹 Other Key Glands</h3>
+        <table class="compact"><tr><th>Gland</th><th>Hormone</th><th>Function</th></tr>
+          <tr><td>Pineal</td><td>Melatonin</td><td>Sleep-wake cycle</td></tr>
+          <tr><td>Thymus</td><td>Thymosin</td><td>Maturation of T lymphocytes</td></tr>
+          <tr><td>Stomach lining</td><td>Ghrelin</td><td>Hunger</td></tr>
+          <tr><td>Adipose tissue</td><td>Leptin</td><td>Satiety</td></tr></table>
+        <p class="exam-tip">📌 Exam Tip: Memorise the hormone – gland – function tables in order; these questions come up often.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PLANT HORMONES ================= -->
+  <section class="panel" id="planthormones">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">ഹോർമോണും ജീവൽ പ്രവർത്തനങ്ങളും</h2>
+        <p>ഹോളണ്ടിലെ ശാസ്ത്രജ്ഞനായ <b>F.W. വെന്റ്</b> ഓട്സ് സസ്യത്തിന്റെ ബീജശീർഷാഗ്രം (Coleoptile) മുറിച്ചെടുത്ത് അഗറിന്റെ കട്ടയിൽ വച്ചപ്പോൾ, ബീജശീർഷാഗ്രത്തിൽ നിന്നും അഗറിലേക്കെത്തിയ ഒരു രാസവസ്തുവാണ് സസ്യാഗ്രത്തിന്റെ വളർച്ചയ്ക്കിടയാക്കുന്നതെന്ന് കണ്ടെത്തി. ഇതിന് <b>ഓക്സിൻ</b> എന്ന് പേരിട്ടു. ഇത്തരം സസ്യവളർച്ചയെ സ്വാധീനിക്കുന്ന രാസവസ്തുക്കളാണ് <b>സസ്യഹോർമോണുകൾ</b>.</p>
+        <h3 class="sub-title">1. ഹോർമോൺ-ലക്ഷ്യകോശ ബന്ധം</h3>
+        <p>ഒരു ഹോർമോൺ പ്രവർത്തിക്കുന്ന കോശത്തെ അതിന്റെ <b>ലക്ഷ്യകോശം (Target cell)</b> എന്ന് പറയുന്നു. ലക്ഷ്യകോശത്തിൽ അതിന് അനുയോജ്യമായ <b>റിസപ്റ്ററുകൾ</b> ഉണ്ടായിരിക്കും. ഹോർമോണുകളും റിസപ്റ്ററുകളും ചേർന്ന് <b>ഹോർമോൺ-റിസപ്റ്റർ കോംപ്ലക്സ്</b> ഉണ്ടാകുന്നു — ഈ സംയുക്തമാണ് കോശത്തിനുള്ളിലെ പ്രവർത്തനങ്ങളെ നിയന്ത്രിക്കുന്നത്.</p>
+        <p>ജന്തുക്കളിൽ അന്തഃസ്രാവീഗ്രന്ഥികൾ (Endocrine glands) ഉൽപാദിപ്പിക്കുന്ന ഹോർമോണുകൾ രക്തത്തിലൂടെ ലക്ഷ്യകോശങ്ങളിൽ എത്തുന്നു. സസ്യഹോർമോണുകൾ വേര്, കാണ്ഡം എന്നിവയുടെ അഗ്രഭാഗങ്ങളിലോ വിത്തുകളിലോ തളിരിലകളിലോ ആണ് ഉൽപാദിപ്പിക്കപ്പെടുന്നത്; അവ കോശങ്ങളിൽ നിന്ന് കോശങ്ങളിലേക്കും സൈലത്തിലൂടെയോ ഫ്ലോയത്തിലൂടെയോ സംവഹനം ചെയ്യപ്പെട്ടും ലക്ഷ്യകോശങ്ങളിൽ എത്തുന്നു.</p>
+        <h3 class="sub-title">2. ഓക്സിന്റെ പ്രവർത്തനം (ഫോട്ടോട്രോപിസം)</h3>
+        <p>ഓക്സിനുകൾക്ക് പ്രകാശത്തിൽ നിന്നകന്ന് നിൽക്കാനുള്ള പ്രവണതയുണ്ട്. സസ്യകാണ്ഡത്തിന്റെ നേരെ മുകളിലായി സൂര്യപ്രകാശം പതിക്കുമ്പോൾ ഓക്സിൻ കാണ്ഡത്തിന്റെ എല്ലാ വശങ്ങളിലേക്കും തുല്യമായി വിതരണം ചെയ്യപ്പെടും. എന്നാൽ ഒരു ദിശയിൽ നിന്ന് മാത്രം പ്രകാശം ലഭിക്കുമ്പോൾ ഓക്സിൻ കാണ്ഡത്തിന്റെ എതിർ വശത്തേക്ക് നീങ്ങുന്നു — അവിടെയുള്ള കോശങ്ങളിലെ ഹോർമോൺ റിസപ്റ്ററുമായി ഓക്സിൻ കൂടിച്ചേർന്ന് ഹോർമോൺ റിസപ്റ്റർ കോംപ്ലക്സ് രൂപപ്പെടുകയും അതിന്റെ ഫലമായി ആ ഭാഗം കൂടുതൽ ദീർഘീകരിക്കുകയും ചെയ്യുന്നു — ഇതുവഴി കാണ്ഡം പ്രകാശ സ്രോതസ്സിന് നേരെ വളയുന്നു (<b>ഫോട്ടോട്രോപിസം</b>).</p>
+        <h3 class="sub-title">3. പ്രധാന സസ്യഹോർമോണുകളും ധർമ്മങ്ങളും</h3>
+        <table><tr><th>ഹോർമോൺ</th><th>ധർമ്മങ്ങൾ</th></tr>
+          <tr><td>ഓക്സിനുകൾ</td><td>കാണ്ഡത്തിന്റെ നീളം കൂട്ടുന്നു; പാർശ്വമുകുള വളർച്ചയെ തടയുന്നു (Apical dominance); ട്രോപ്പിക ചലനങ്ങളെ നിയന്ത്രിക്കുന്നു; പൂക്കളുടെ ഉൽപാദനത്തെയും ഫലരൂപീകരണത്തെയും സ്വാധീനിക്കുന്നു</td></tr>
+          <tr><td>ജിബ്ബറലിനുകൾ</td><td>വിത്തുകളുടെ സുപ്താവസ്ഥ ഇല്ലാതാക്കുന്നു; കാണ്ഡങ്ങളിലും വേരുകളിലും കോശവിഭജനത്തെ ഉത്തേജിപ്പിക്കുന്നു; ഫലങ്ങളുടെയും വിത്തുകളുടെയും വളർച്ചയെ ഉത്തേജിപ്പിക്കുന്നു</td></tr>
+          <tr><td>സൈറ്റോകിനിനുകൾ</td><td>മുളയ്ക്കുന്ന വിത്തുകളിൽ കോശവിഭജനത്തെയും വൈവിധ്യവൽക്കരണത്തെയും ഉത്തേജിപ്പിക്കുന്നു; പാർശ്വമുകുള വളർച്ചയെ ഉത്തേജിപ്പിക്കുന്നു; ഇലകൾ പഴുക്കുന്നത് വൈകിപ്പിച്ച് പച്ചപ്പ് നിലനിർത്തുന്നു; വളരുന്ന ഭാഗങ്ങളിലേക്കുള്ള പോഷക സംവഹനം പ്രോത്സാഹിപ്പിക്കുന്നു</td></tr>
+          <tr><td>എഥിലീൻ</td><td>ക്ലോറോഫിൽ, പ്രോട്ടീനുകൾ, ന്യൂക്ലിക് ആസിഡുകൾ എന്നിവയുടെ ശിഥിലീകരണത്തിലൂടെ ഇല/പുഷ്പം/ഫലങ്ങൾ പാകപ്പെടുന്നതിനും പഴുക്കുന്നതിനും സഹായിക്കുന്നു</td></tr>
+          <tr><td>അബ്സിസിക് ആസിഡ് (ABA)</td><td>പ്രതികൂല സാഹചര്യങ്ങളെ നേരിടാൻ സസ്യങ്ങളെ സഹായിക്കുന്നു — സസ്യഭാഗങ്ങളുടെ വളർച്ച തടസ്സപ്പെടുത്തുന്നു; വിത്തുകളുടെ സുപ്താവസ്ഥ നിലനിർത്തുന്നു; പാകമായ ഇലകളും ഫലങ്ങളും പൊഴിക്കുന്നു</td></tr></table>
+        <h3 class="sub-title">4. സിന്തറ്റിക് സസ്യഹോർമോണുകളും ഉപയോഗവും</h3>
+        <p>പ്രകൃതിദത്ത സസ്യഹോർമോണുകളുടെ രാസഘടന മനസ്സിലാക്കി കൃത്രിമമായി ഉൽപാദിപ്പിക്കുകയും കാർഷികമേഖലയിൽ വ്യാപകമായി പ്രയോജനപ്പെടുത്തുകയും ചെയ്യുന്നു.</p>
+        <table><tr><th>സിന്തറ്റിക് ഹോർമോൺ</th><th>ഉപയോഗം</th></tr>
+          <tr><td>സിന്തറ്റിക് ഓക്സിനുകൾ</td><td>തണ്ടിൽ വേര് മുളപ്പിക്കാൻ ഉപയോഗിക്കുന്നു; കളനാശിനിയായും ഉപയോഗിക്കുന്നു (2,4-D)</td></tr>
+          <tr><td>സിന്തറ്റിക് ജിബ്ബറലിനുകൾ</td><td>മുന്തിരിച്ചെടിയിൽ കായ്കളുടെ വലുപ്പം കൂട്ടാനും കരിമ്പിന്റെ കാണ്ഡദീർഘീകരണത്തിനും ഉപയോഗിക്കുന്നു</td></tr>
+          <tr><td>സിന്തറ്റിക് എഥിലീൻ</td><td>ഫലങ്ങൾ പാകപ്പെടുത്തി ഒരേസമയം വിളവെടുക്കാൻ കാർഷികമേഖലയിൽ ഉപയോഗിക്കുന്നു. വാഴപ്പഴം, തക്കാളി എന്നിവ ഒരേ സമയം പഴുപ്പിക്കാൻ എഥിലീൻ ഉപയോഗിക്കുന്നു</td></tr></table>
+        <h3 class="sub-title">5. ഫിറമോണുകൾ (Pheromones)</h3>
+        <p>ചില ജീവികൾ അതേ സ്പീഷിസിൽപ്പെട്ട ജീവികളുമായുള്ള ആശയവിനിമയത്തിനായി ചുറ്റുപാടിലേക്ക് ചില രാസവസ്തുക്കൾ സ്രവിക്കുന്നു. ഇവയാണ് <b>ഫിറമോണുകൾ</b>. ബാഷ്പീകരണ സ്വഭാവമുള്ള ഈ രാസവസ്തുക്കൾ വ്യത്യസ്ത ധർമ്മങ്ങളാണ് നിർവഹിക്കുന്നത്.</p>
+        <table><tr><th>വിവിധതരം ഫിറമോണുകൾ</th><th>ധർമ്മം</th></tr>
+          <tr><td>ടെറിട്ടോറിയൽ ഫിറമോൺ</td><td>വാസസ്ഥാനത്തിന്റെ പരിധി നിർണ്ണയിക്കാൻ</td></tr>
+          <tr><td>അഗ്രിഗേഷൻ ഫിറമോൺ</td><td>ആഹാരലഭ്യത ഉറപ്പുവരുത്താൻ</td></tr>
+          <tr><td>അലാം ഫിറമോൺ</td><td>അപായ സൂചന നൽകാൻ</td></tr>
+          <tr><td>ട്രയൽ ഫിറമോൺ</td><td>സഞ്ചാരപാത നിർണ്ണയിക്കാൻ</td></tr>
+          <tr><td>ലൈംഗിക ഫിറമോൺ</td><td>ഇണകളെ ആകർഷിക്കാൻ</td></tr></table>
+        <p>ഉറുമ്പ് ഉൽപാദിപ്പിക്കുന്ന ഫിറമോണുകൾ അപായസൂചന നൽകാനും ആഹാരലഭ്യത അറിയിക്കാനുമാണ് ഉപയോഗിക്കുന്നത്. തേനീച്ചയിലെ റാണി ഫിറമോൺ സ്രവിക്കുന്നത് പുതിയ റാണികൾ ഉണ്ടാകുന്നത് തടയുന്നതിനും ജോലിക്കാരായ തേനീച്ചകൾ റാണിയെ പരിപാലിക്കുന്നതിനുമാണ്. നായ, പൂച്ച തുടങ്ങിയ സസ്തനികൾ മൂത്രവിസർജ്ജനത്തിലൂടെ അവയുടെ ആവാസപരിധി അറിയിക്കുകയും അതിർത്തി നിർണ്ണയിക്കുകയും ചെയ്യുന്നു. കൃഷിയിടങ്ങളിൽ കീടനിയന്ത്രണത്തിനായി <b>ഫിറമോൺ കെണി</b> ഉപയോഗിക്കുന്നത് ഇതിന്റെ പ്രായോഗിക ഉദാഹരണമാണ്.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Hormones and Life Processes</h2>
+        <p>Dutch scientist <b>F.W. Went</b>, while studying growth in plants, cut the coleoptile tip of an oat seedling and placed it on a block of agar. After a short while, he removed the coleoptile tips and cut the agar into small pieces. When he placed a piece of agar off-centre on the cut surface of the coleoptile stump, the plant part bent away from the side where the agar was placed. This showed that a chemical substance travelling from the coleoptile tip into the agar was responsible for the growth of the plant part — this substance was named <b>Auxin</b>. Such chemicals that influence plant growth are called <b>plant hormones</b>.</p>
+        <h3 class="sub-title">1. Hormone-Target Cell Relationship</h3>
+        <p>The cell on which a hormone acts is called its <b>Target cell</b>. Target cells carry appropriate <b>receptors</b> for that hormone. The hormone and receptor combine to form a <b>hormone-receptor complex</b> — it is this complex that controls the activities inside the cell.</p>
+        <p>In animals, hormones produced by endocrine glands reach target cells through the blood. Plant hormones are produced in the tips of roots and stems, in seeds, or in young leaves; they move from cell to cell and are also transported through the xylem or phloem to reach target cells.</p>
+        <h3 class="sub-title">2. How Auxin Works (Phototropism)</h3>
+        <p>Auxin tends to move away from light. When sunlight falls directly on top of a plant stem, auxin is distributed equally to all sides of the stem. But when light comes from only one direction, auxin moves to the shaded side of the stem — there it combines with hormone receptors in the cells to form a hormone-receptor complex, causing that side to elongate more — this causes the stem to bend towards the light source (<b>phototropism</b>).</p>
+        <h3 class="sub-title">3. Key Plant Hormones and Their Functions</h3>
+        <table><tr><th>Hormone</th><th>Functions</th></tr>
+          <tr><td>Auxins</td><td>Increase stem length; inhibit lateral bud growth (apical dominance); regulate tropic movements; influence flower production and fruit formation</td></tr>
+          <tr><td>Gibberellins</td><td>Break seed dormancy; stimulate cell division in stems and roots; stimulate growth of fruits and seeds</td></tr>
+          <tr><td>Cytokinins</td><td>Stimulate cell division and differentiation in germinating seeds; stimulate lateral bud growth; delay leaf senescence, keeping leaves green; promote nutrient transport to growing parts</td></tr>
+          <tr><td>Ethylene</td><td>Assists the ripening of leaves, flowers, and fruits through the breakdown of chlorophyll, proteins, and nucleic acids</td></tr>
+          <tr><td>Abscisic acid (ABA)</td><td>Helps plants cope with unfavourable conditions — inhibits growth of plant parts; maintains seed dormancy; causes the shedding of mature leaves and fruits</td></tr></table>
+        <h3 class="sub-title">4. Synthetic Plant Hormones and Their Uses</h3>
+        <p>Once the chemical structure of natural plant hormones was understood, they came to be produced artificially and used extensively in agriculture.</p>
+        <table><tr><th>Synthetic hormone</th><th>Use</th></tr>
+          <tr><td>Synthetic auxins</td><td>Used to induce root growth in cuttings; also used as a weedkiller (2,4-D)</td></tr>
+          <tr><td>Synthetic gibberellins</td><td>Used to increase fruit size in grapevines and stem elongation in sugarcane</td></tr>
+          <tr><td>Synthetic ethylene</td><td>Used in agriculture to ripen fruits uniformly for harvest at the same time — used to ripen bananas and tomatoes together</td></tr></table>
+        <h3 class="sub-title">5. Pheromones</h3>
+        <p>Some organisms release certain chemicals into the environment to communicate with other members of the same species. These are called <b>Pheromones</b>. These volatile chemicals serve different functions.</p>
+        <table><tr><th>Type of pheromone</th><th>Function</th></tr>
+          <tr><td>Territorial pheromone</td><td>To mark the boundary of a habitat</td></tr>
+          <tr><td>Aggregation pheromone</td><td>To ensure access to food</td></tr>
+          <tr><td>Alarm pheromone</td><td>To signal danger</td></tr>
+          <tr><td>Trail pheromone</td><td>To mark a path of travel</td></tr>
+          <tr><td>Sex pheromone</td><td>To attract mates</td></tr></table>
+        <p>Ants use pheromones mainly to signal danger and inform others about food availability. Queen bees release a pheromone that prevents new queens from developing and prompts worker bees to care for the queen. Mammals like dogs and cats mark territory and boundaries through urination. The use of <b>pheromone traps</b> for pest control in farmland is a practical application of this.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= THYROID & CALCIUM ================= -->
+  <section class="panel" id="thyroid">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">തൈറോയ്ഡ് ഗ്രന്ഥിയും കാൽസ്യം ക്രമീകരണവും</h2>
+        <h3 class="sub-title">1. തൈറോയ്ഡ് ഗ്രന്ഥി</h3>
+        <p>ശ്വാസനാളത്തിന് (Trachea) മുന്നിലായി സ്ഥിതി ചെയ്യുന്ന ഗ്രന്ഥിയാണ് <b>തൈറോയ്ഡ്</b>. ഇതിൽ <b>ഫോളിക്കുലാർ കോശങ്ങളും പാരാഫോളിക്കുലാർ കോശങ്ങളും</b> ഉണ്ട്.</p>
+        <table><tr><th>ഹോർമോൺ</th><th>ധർമ്മങ്ങൾ</th></tr>
+          <tr><td>തൈറോക്സിൻ</td><td>മെറ്റബോളിസത്തെയും ശരീരോഷ്മാവിനെയും നിയന്ത്രിക്കുന്നു; നവജാതശിശുക്കളുടെയും കുട്ടികളുടെയും മസ്തിഷ്ക വികാസത്തിന് സഹായിക്കുന്നു; ഹൃദയം, ത്വക്ക്, പ്രത്യുൽപാദനവ്യവസ്ഥ എന്നിവയുടെ ആരോഗ്യം നിലനിർത്തുന്നു</td></tr>
+          <tr><td>കാൽസിടോണിൻ</td><td>രക്തത്തിലെ കാൽസ്യത്തിന്റെ അളവ് കുറയ്ക്കുന്നു</td></tr></table>
+        <h3 class="sub-title">2. തൈറോയ്ഡ് സംബന്ധമായ തകരാറുകൾ</h3>
+        <table><tr><th>അവസ്ഥ</th><th>കാരണം</th><th>ലക്ഷണം</th></tr>
+          <tr><td>ഹൈപ്പർതൈറോയ്ഡിസം</td><td>തൈറോക്സിന്റെ ഉൽപാദനം കൂടുന്നു</td><td>മെറ്റബോളിസത്തിന്റെ നിരക്ക് കൂടുന്നു, ഭാരക്കുറവ്, ഹൃദയമിടിപ്പ് കൂടുന്നു, അമിതമായ വിയർപ്പ്, ഉൽക്കണ്ഠ</td></tr>
+          <tr><td>ഹൈപ്പോതൈറോയ്ഡിസം</td><td>തൈറോക്സിന്റെ ഉൽപാദനം കുറയുന്നു</td><td>മെറ്റബോളിസം കുറയുന്നു, ശരീരഭാരം കൂടുന്നു, ഹൃദയമിടിപ്പ് കുറയുന്നു, ക്ഷീണം, തണുപ്പ് സഹിക്കാൻ പറ്റാത്ത അവസ്ഥ</td></tr>
+          <tr><td>ഗോയിറ്റർ</td><td>തൈറോയ്ഡ് ഗ്രന്ഥിക്കുണ്ടാകുന്ന നിരവധി തകരാറുകൾ, അയഡിന്റെ അപര്യാപ്തത</td><td>കഴുത്തിലുണ്ടാകുന്ന വീക്കം, ഭക്ഷണം വിഴുങ്ങാൻ ബുദ്ധിമുട്ട്</td></tr></table>
+        <h3 class="sub-title">3. രക്തത്തിലെ കാൽസ്യത്തിന്റെ ക്രമീകരണം</h3>
+        <p>രക്തത്തിലെ കാൽസ്യത്തിന്റെ സാധാരണ തോത് 9–11 mg/dL ആണ്. ഈ അളവ് നിയന്ത്രിക്കുന്നത് തൈറോയ്ഡ് ഗ്രന്ഥി ഉൽപാദിപ്പിക്കുന്ന <b>കാൽസിടോണിനും</b> തൈറോയ്ഡ് ഗ്രന്ഥിയുടെ പിൻഭാഗത്തായി സ്ഥിതിചെയ്യുന്ന <b>പാരാതൈറോയ്ഡ് ഗ്രന്ഥി</b> ഉൽപാദിപ്പിക്കുന്ന <b>പാരാതൊർമോണും</b> ചേർന്നാണ്.</p>
+        <table class="compact"><tr><th></th><th>രക്തത്തിൽ കാൽസ്യം കുറയുമ്പോൾ</th><th>രക്തത്തിൽ കാൽസ്യം കൂടുമ്പോൾ</th></tr>
+          <tr><td>സ്രവിക്കുന്ന ഹോർമോൺ</td><td>പാരാതൊർമോൺ (പാരാതൈറോയ്ഡ്)</td><td>കാൽസിടോണിൻ (തൈറോയ്ഡ്)</td></tr>
+          <tr><td>വൃക്ക</td><td>കാൽസ്യം, ഫോസ്ഫേറ്റ് പുനരാഗിരണം ത്വരിതപ്പെടുത്തുന്നു</td><td>പുനരാഗിരണം തടസ്സപ്പെടുത്തുന്നു</td></tr>
+          <tr><td>കുടൽ</td><td>കാൽസ്യം ആഗിരണം ത്വരിതപ്പെടുത്തുന്നു</td><td>ആഗിരണം കുറയ്ക്കുന്നു</td></tr>
+          <tr><td>അസ്ഥി</td><td>അസ്ഥിയിൽ നിന്ന് കാൽസ്യം, ഫോസ്ഫേറ്റ് രക്തത്തിലേക്ക് കലരൽ ഉത്തേജിപ്പിക്കുന്നു</td><td>അസ്ഥിയിൽ നിന്നുള്ള കലരൽ തടയുന്നു</td></tr></table>
+        <p class="exam-tip">📌 ഓർക്കുക: പാരാതൊർമോൺ, കാൽസിടോണിൻ എന്നിവ പരസ്പര വിരുദ്ധ ഫലങ്ങളാണ് ഉളവാക്കുന്നത് — ഈ സന്തുലനമാണ് രക്തത്തിലെ കാൽസ്യനില സ്ഥിരമായി നിലനിർത്തുന്നത്.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">The Thyroid Gland and Calcium Regulation</h2>
+        <h3 class="sub-title">1. The Thyroid Gland</h3>
+        <p>The <b>thyroid</b> gland is located in front of the trachea (windpipe). It contains <b>follicular cells and parafollicular cells</b>.</p>
+        <table><tr><th>Hormone</th><th>Functions</th></tr>
+          <tr><td>Thyroxine</td><td>Regulates metabolism and body temperature; supports brain development in newborns and children; maintains the health of the heart, skin, and reproductive system</td></tr>
+          <tr><td>Calcitonin</td><td>Lowers the level of calcium in the blood</td></tr></table>
+        <h3 class="sub-title">2. Thyroid-Related Disorders</h3>
+        <table><tr><th>Condition</th><th>Cause</th><th>Symptoms</th></tr>
+          <tr><td>Hyperthyroidism</td><td>Increased thyroxine production</td><td>Increased metabolic rate, weight loss, increased heart rate, excessive sweating, anxiety</td></tr>
+          <tr><td>Hypothyroidism</td><td>Decreased thyroxine production</td><td>Decreased metabolism, weight gain, decreased heart rate, fatigue, intolerance to cold</td></tr>
+          <tr><td>Goitre</td><td>Various thyroid gland disorders, iodine deficiency</td><td>Swelling in the neck, difficulty swallowing food</td></tr></table>
+        <h3 class="sub-title">3. Regulation of Blood Calcium</h3>
+        <p>The normal level of calcium in the blood is 9–11 mg/dL. This level is regulated jointly by <b>calcitonin</b> from the thyroid gland and <b>parathormone</b> produced by the <b>parathyroid glands</b> located behind the thyroid.</p>
+        <table class="compact"><tr><th></th><th>When blood calcium falls</th><th>When blood calcium rises</th></tr>
+          <tr><td>Hormone released</td><td>Parathormone (parathyroid)</td><td>Calcitonin (thyroid)</td></tr>
+          <tr><td>Kidney</td><td>Speeds up reabsorption of calcium and phosphate</td><td>Blocks reabsorption</td></tr>
+          <tr><td>Intestine</td><td>Speeds up calcium absorption</td><td>Reduces absorption</td></tr>
+          <tr><td>Bone</td><td>Stimulates release of calcium and phosphate from bone into blood</td><td>Prevents release from bone</td></tr></table>
+        <p class="exam-tip">📌 Remember: parathormone and calcitonin have opposite effects — this balance is what keeps blood calcium levels stable.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PANCREAS & DIABETES ================= -->
+  <section class="panel" id="pancreas">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">രക്തത്തിലെ ഗ്ലൂക്കോസിന്റെ ക്രമീകരണം</h2>
+        <p>ആരോഗ്യമുള്ള വ്യക്തികളിൽ ഫാസ്റ്റിങ് ബ്ലഡ് ഗ്ലൂക്കോസിന്റെ (FBS) അളവ് 70 മുതൽ 100 mg/dL ആണ്. ഭക്ഷണം കഴിച്ച് രണ്ട് മണിക്കൂർ കഴിഞ്ഞ് ഗ്ലൂക്കോസ് നില (PPBS) 140 mg/dL ൽ താഴെയായിരിക്കണം.</p>
+        <h3 class="sub-title">1. പാൻക്രിയാസും ഐലെറ്റ്സ് ഓഫ് ലാംഗർഹാൻസും</h3>
+        <p>രക്തത്തിലെ ഗ്ലൂക്കോസിന്റെ അളവ് ക്രമീകരിക്കുന്നതിൽ പ്രധാന പങ്കുവഹിക്കുന്ന ഗ്രന്ഥിയാണ് <b>പാൻക്രിയാസ്</b>. ഹോർമോൺ ഉൽപാദനവുമായി ബന്ധപ്പെട്ട് പ്രവർത്തിക്കുന്ന പാൻക്രിയാസിലെ ഒരു കൂട്ടം കോശങ്ങളാണ് <b>ഐലെറ്റ്സ് ഓഫ് ലാംഗർഹാൻസ്</b>. ഇതിൽ രണ്ടുതരം കോശങ്ങളുണ്ട്:</p>
+        <table><tr><th>കോശം</th><th>ഹോർമോൺ</th><th>ധർമ്മം</th></tr>
+          <tr><td>ആൽഫ കോശങ്ങൾ</td><td>ഗ്ലൂക്കഗോൺ</td><td>കരളിൽ സംഭരിച്ചിരിക്കുന്ന ഗ്ലൈക്കോജനെ ഗ്ലൂക്കോസ് ആക്കി മാറ്റി രക്തത്തിലേക്ക് വിടുന്നു — രക്തത്തിലെ ഗ്ലൂക്കോസ് കൂട്ടുന്നു</td></tr>
+          <tr><td>ബീറ്റാ കോശങ്ങൾ</td><td>ഇൻസുലിൻ</td><td>കലകളിലേക്കുള്ള ഗ്ലൂക്കോസ് പ്രവേശനം ത്വരിതപ്പെടുത്തുകയും കരളിൽ ഗ്ലൂക്കോസിനെ ഗ്ലൈക്കോജനായി സംഭരിക്കുകയും ചെയ്യുന്നു — രക്തത്തിലെ ഗ്ലൂക്കോസ് കുറയ്ക്കുന്നു</td></tr></table>
+        <div class="formula-box">രക്തത്തിൽ ഗ്ലൂക്കോസ് കൂടുമ്പോൾ → ബീറ്റാ കോശങ്ങൾ → ഇൻസുലിൻ → കോശങ്ങളിലേക്ക് ഗ്ലൂക്കോസ് പ്രവേശനം / ഗ്ലൈക്കോജൻ സംഭരണം → ഗ്ലൂക്കോസ് കുറയുന്നു
+രക്തത്തിൽ ഗ്ലൂക്കോസ് കുറയുമ്പോൾ → ആൽഫ കോശങ്ങൾ → ഗ്ലൂക്കഗോൺ → ഗ്ലൈക്കോജൻ വിഘടനം → ഗ്ലൂക്കോസ് കൂടുന്നു</div>
+        <h3 class="sub-title">2. പ്രമേഹം (Diabetes Mellitus)</h3>
+        <p>രക്തത്തിൽ ഗ്ലൂക്കോസിന്റെ അളവ് ശരാശരിയിൽ നിന്ന് (FBS 126 mg/dL ന് മുകളിൽ) ഉയരുന്ന രോഗാവസ്ഥയാണ് <b>പ്രമേഹം (Diabetes Mellitus)</b>. അമിത ദാഹം, വിശപ്പ്, കൂടെക്കൂടെയുള്ള മൂത്രമൊഴിക്കൽ, ശരീരഭാരം കുറയൽ, ക്ഷീണം എന്നിവയാണ് ലക്ഷണങ്ങൾ.</p>
+        <table class="compact"><tr><th>തരം</th><th>കാരണം</th></tr>
+          <tr><td>ടൈപ്പ്-1 പ്രമേഹം</td><td>ബീറ്റാകോശങ്ങൾ നശിക്കുന്നത് മൂലം ഇൻസുലിൻ ഉൽപാദനശേഷി ഇല്ലാതാകുന്ന അവസ്ഥ</td></tr>
+          <tr><td>ടൈപ്പ്-2 പ്രമേഹം</td><td>ഇൻസുലിൻ ഉൽപാദനത്തിലെ ഏറ്റക്കുറച്ചിലുകൾ, ഭക്ഷണ നിയന്ത്രണമില്ലായ്മ, ഇൻസുലിന്റെ പ്രവർത്തനക്ഷമത കുറയൽ തുടങ്ങിയ കാരണങ്ങളാൽ ഉണ്ടാകുന്ന പ്രമേഹം</td></tr></table>
+        <p>പ്രമേഹത്തെ അവഗണിച്ചാൽ ഹൃദ്രോഗം, സ്ട്രോക്ക്, വൃക്കരോഗങ്ങൾ, കാഴ്ചാപ്രശ്നങ്ങൾ തുടങ്ങിയവ ഉണ്ടാകാം. അനാരോഗ്യകരമായ ഭക്ഷണശീലം, വ്യായാമത്തിന്റെ കുറവ് എന്നിവ കുട്ടികളിൽ ടൈപ്പ്-2 പ്രമേഹം വർധിക്കുന്നതിന് കാരണമാകുന്നു. രോഗം വരാതിരിക്കാനുള്ള മുൻകരുതൽ സ്വീകരിക്കുകയും ജീവിതശൈലിയിൽ മാറ്റം വരുത്തുകയും പ്രമേഹരോഗാവസ്ഥ നേരത്തേ തിരിച്ചറിയുകയും ചെയ്യേണ്ടത് ആരോഗ്യപരിപാലനത്തിൽ നിർണ്ണായകമാണ്.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Regulation of Blood Glucose</h2>
+        <p>In healthy individuals, fasting blood glucose (FBS) ranges from 70 to 100 mg/dL. Two hours after eating, the glucose level (PPBS) should be below 140 mg/dL.</p>
+        <h3 class="sub-title">1. The Pancreas and Islets of Langerhans</h3>
+        <p>The <b>pancreas</b> plays a major role in regulating blood glucose levels. A group of hormone-producing cells in the pancreas is called the <b>Islets of Langerhans</b>. It contains two types of cells:</p>
+        <table><tr><th>Cell</th><th>Hormone</th><th>Function</th></tr>
+          <tr><td>Alpha cells</td><td>Glucagon</td><td>Converts glycogen stored in the liver back into glucose and releases it into the blood — raises blood glucose</td></tr>
+          <tr><td>Beta cells</td><td>Insulin</td><td>Speeds up glucose entry into tissues and promotes glucose storage as glycogen in the liver — lowers blood glucose</td></tr></table>
+        <div class="formula-box">Blood glucose rises → Beta cells → Insulin → Glucose enters cells / glycogen storage → Glucose falls
+Blood glucose falls → Alpha cells → Glucagon → Glycogen breakdown → Glucose rises</div>
+        <h3 class="sub-title">2. Diabetes Mellitus</h3>
+        <p><b>Diabetes Mellitus</b> is the condition where blood glucose rises above the normal range (above FBS 126 mg/dL). Excessive thirst, hunger, frequent urination, weight loss, and fatigue are its symptoms.</p>
+        <table class="compact"><tr><th>Type</th><th>Cause</th></tr>
+          <tr><td>Type-1 diabetes</td><td>Loss of insulin production due to destruction of beta cells</td></tr>
+          <tr><td>Type-2 diabetes</td><td>Diabetes caused by fluctuations in insulin production, poor dietary control, and reduced effectiveness of insulin</td></tr></table>
+        <p>Ignoring diabetes can lead to heart disease, stroke, kidney disease, and vision problems. Unhealthy eating habits and lack of exercise are contributing to a rise in Type-2 diabetes among children. Taking preventive precautions, changing lifestyle, and early detection of diabetes are all crucial to health management.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MASTER GLANDS ================= -->
+  <section class="panel" id="master">
+    <div class="card">
+      <div class="lang-ml">
+        <h2 class="section-title">മുഖ്യ നിയന്ത്രണ ഗ്രന്ഥികളും മറ്റ് ഹോർമോൺ വ്യവസ്ഥകളും</h2>
+        <h3 class="sub-title">1. അഡ്രിനൽ ഗ്രന്ഥി — അടിയന്തരഘട്ടങ്ങളെ തരണം ചെയ്യൽ</h3>
+        <p>വൃക്കയ്ക്ക് മുകളിലായി സ്ഥിതി ചെയ്യുന്ന ഗ്രന്ഥിയാണ് <b>അഡ്രിനൽ ഗ്രന്ഥി</b>. ഇതിന് പുറംഭാഗമായ <b>കോർട്ടക്സ്</b>ഉം ഉള്ളിലെ <b>മെഡുല</b>യും ഉണ്ട്. അടിയന്തരഘട്ടങ്ങളിൽ സിംപതറ്റിക് വ്യവസ്ഥയോടൊപ്പം അഡ്രിനൽ ഗ്രന്ഥി ചില ഹോർമോണുകൾ ഉൽപാദിപ്പിച്ച് ഹൃദയമിടിപ്പ് കൂട്ടുകയും ശരീരത്തെ അതിവേഗം പ്രതികരിക്കാൻ സജ്ജമാക്കുകയും ചെയ്യുന്നു.</p>
+        <h3 class="sub-title">2. ഹൈപ്പോതലാമസും പിറ്റ്യൂട്ടറിയും: മുഖ്യ നിയന്ത്രണകേന്ദ്രം</h3>
+        <p>മിക്ക അന്തഃസ്രാവീ ഗ്രന്ഥികളുടെയും പ്രവർത്തനങ്ങളെ നിയന്ത്രിക്കുന്നത് <b>ഹൈപ്പോതലാമസ്</b> ആണ്. ഹൈപ്പോതലാമസിന്റെ താഴെയായി <b>പിറ്റ്യൂട്ടറി ഗ്രന്ഥി</b> കാണപ്പെടുന്നു. പിറ്റ്യൂട്ടറി ഗ്രന്ഥിയുടെ മുൻദളം ഉൽപാദിപ്പിക്കുന്ന ഹോർമോണുകളുടെ ഉൽപാദനത്തെ നിയന്ത്രിച്ചുകൊണ്ടാണ് ഹൈപ്പോതലാമസ് മറ്റ് അന്തഃസ്രാവീ ഗ്രന്ഥികളുടെ പ്രവർത്തനത്തെ നിയന്ത്രിക്കുന്നത്.</p>
+        <table><tr><th>ഭാഗം</th><th>ഹോർമോൺ</th><th>ധർമ്മം</th></tr>
+          <tr><td>പിറ്റ്യൂട്ടറി മുൻദളം</td><td>TSH</td><td>തൈറോയ്ഡ് ഗ്രന്ഥിയെ ഉത്തേജിപ്പിക്കുന്നു</td></tr>
+          <tr><td>പിറ്റ്യൂട്ടറി മുൻദളം</td><td>ACTH</td><td>അഡ്രിനൽ കോർട്ടക്സിനെ ഉത്തേജിപ്പിക്കുന്നു</td></tr>
+          <tr><td>പിറ്റ്യൂട്ടറി മുൻദളം</td><td>GTH</td><td>അണ്ഡാശയം, വൃഷണം എന്നിവയുടെ പ്രവർത്തനത്തെ ഉത്തേജിപ്പിക്കുന്നു</td></tr>
+          <tr><td>പിറ്റ്യൂട്ടറി മുൻദളം</td><td>പ്രോലാക്റ്റിൻ</td><td>മുലപ്പാൽ ഉൽപാദിപ്പിക്കുന്നു</td></tr>
+          <tr><td>പിറ്റ്യൂട്ടറി മുൻദളം</td><td>GH (സൊമാറ്റോട്രോപിൻ)</td><td>ശരീരവളർച്ചയെ നിയന്ത്രിക്കുന്നു</td></tr>
+          <tr><td>പിറ്റ്യൂട്ടറി പിൻദളം</td><td>വാസോപ്രസിൻ (ADH)</td><td>വൃക്കയിൽ ജലത്തിന്റെ പുനരാഗിരണം</td></tr>
+          <tr><td>പിറ്റ്യൂട്ടറി പിൻദളം</td><td>ഓക്സിടോസിൻ</td><td>പാൽ ചുരത്തൽ, മിനുസപേശികളുടെ സങ്കോചം</td></tr></table>
+        <h3 class="sub-title">3. വളർച്ചയ്ക്കുപിന്നിൽ</h3>
+        <p>പിറ്റ്യൂട്ടറി ഗ്രന്ഥിയുടെ മുൻദളം ഉൽപാദിപ്പിക്കുന്ന വളർച്ചാ ഹോർമോൺ (Somatotropin, GH) ശരീരവളർച്ചയെ നിയന്ത്രിക്കുന്നു — മിക്ക ശരീരകോശങ്ങളിലും ക്രമഭംഗം ത്വരിതപ്പെടുത്തിയും കോശവലിപ്പം വർധിപ്പിച്ചും ശരീരവളർച്ചയ്ക്കിടയാക്കുന്നു. ഇതിന്റെ ഉൽപാദനത്തിലെ ഏറ്റക്കുറച്ചിലുകൾ വളർച്ചാ വൈകല്യങ്ങൾക്ക് കാരണമാകുന്നു.</p>
+        <table><tr><th>രോഗം</th><th>കാരണം</th><th>ലക്ഷണം</th></tr>
+          <tr><td>വാമനത്വം</td><td>വളർച്ചാ കാലഘട്ടത്തിൽ സൊമാറ്റോട്രോപ്പിന്റെ ഉൽപാദനം കുറയുന്നു</td><td>ശരീരവളർച്ച മുരടിക്കുന്നു</td></tr>
+          <tr><td>ഭീമാകാരത്വം</td><td>വളർച്ചാ കാലഘട്ടത്തിൽ സൊമാറ്റോട്രോപ്പിന്റെ ഉൽപാദനം കൂടുന്നു</td><td>അമിതമായ ശരീര വളർച്ച</td></tr>
+          <tr><td>അക്രോമെഗലി</td><td>വളർച്ച പൂർത്തിയായ ശേഷം സൊമാറ്റോട്രോപ്പിന്റെ ഉൽപാദനം കൂടുന്നു</td><td>കൈപ്പത്തി, കാല്പാദങ്ങൾ, താടിയെല്ല് എന്നീ ശരീരഭാഗങ്ങൾ അമിതമായി വളരുന്നു</td></tr></table>
+        <h3 class="sub-title">4. ജലസന്തുലനം (Water Balance)</h3>
+        <p>പിറ്റ്യൂട്ടറിയുടെ പിൻദളത്തിൽ സംഭരിക്കുന്ന <b>വാസോപ്രസിൻ (ADH)</b> ആണ് ജലസന്തുലനം നിലനിർത്തുന്നത്. അമിതമായ വിയർപ്പും ചൂടും നിർജലീകരണത്തിന് കാരണമാകുമ്പോൾ, ഇത് വാസോപ്രസിന്റെ ഉൽപാദനം വർധിപ്പിക്കുന്നു. വാസോപ്രസിൻ വൃക്കയിൽ നിന്നുള്ള ജലത്തിന്റെ പുനരാഗിരണം വർധിപ്പിക്കുന്നു — ഇതുവഴി മൂത്രോൽപാദനം കുറയുകയും ജലനഷ്ടം തടയുകയും ചെയ്യുന്നു. ശൈത്യകാലത്ത് ജലനഷ്ടം കുറവായതിനാൽ വാസോപ്രസിന്റെ സ്രവണം കുറയുകയും വൃക്കയിൽ നിന്നുള്ള ജലത്തിന്റെ പുനരാഗിരണം കുറയുകയും ചെയ്യുന്നു.</p>
+        <h3 class="sub-title">5. പ്രത്യുൽപാദന ഹോർമോണുകൾ</h3>
+        <table><tr><th>ഹോർമോൺ</th><th>ഗ്രന്ഥി</th><th>ധർമ്മം</th></tr>
+          <tr><td>ടെസ്റ്റോസ്റ്റിറോൺ</td><td>വൃഷണങ്ങൾ</td><td>പുരുഷലൈംഗികാവയവങ്ങളുടെ പ്രവർത്തനം, പുംബീജോൽപാദനം, ദ്വിതീയ ലൈംഗിക സവിശേഷതകളുടെ നിയന്ത്രണം</td></tr>
+          <tr><td>ഈസ്ട്രജൻ</td><td>അണ്ഡാശയം</td><td>സ്ത്രീലൈംഗികാവയവങ്ങളുടെ പ്രവർത്തനം, അണ്ഡോൽപാദനം, ആർത്തവചക്രം, ദ്വിതീയ ലൈംഗിക സവിശേഷതകളുടെ നിയന്ത്രണം</td></tr>
+          <tr><td>പ്രൊജസ്ട്രോൺ</td><td>അണ്ഡാശയം</td><td>ഭ്രൂണത്തെ ഗർഭാശയത്തിൽ നിലനിർത്തുന്നു, ആർത്തവചക്രം</td></tr></table>
+        <h3 class="sub-title">6. വിശക്കാനും വിശപ്പ് കുറയ്ക്കാനും</h3>
+        <p>ആമാശയത്തിന്റെ മുകൾഭാഗത്തുള്ള ചില കോശങ്ങൾ ഉൽപാദിപ്പിക്കുന്ന <b>ഗ്രെലിൻ</b> "വിശപ്പ് ഹോർമോൺ" എന്നറിയപ്പെടുന്നു — ഇത് ഭക്ഷണം കഴിക്കുന്നത് വർധിപ്പിക്കുകയും കൊഴുപ്പ് സംഭരണം പ്രോത്സാഹിപ്പിക്കുകയും ചെയ്യുന്നു. കൊഴുപ്പുകലകൾ ഉൽപാദിപ്പിക്കുന്ന <b>ലെപ്റ്റിൻ</b> "സംതൃപ്തി ഹോർമോൺ" എന്നറിയപ്പെടുന്നു — ശരീരത്തിൽ ആവശ്യത്തിന് ഊർജം സംഭരിച്ചിട്ടുണ്ടെന്ന് ഹൈപ്പോതലാമസിന് സൂചന നൽകി ലെപ്റ്റിൻ വിശപ്പ് കുറയ്ക്കുന്നു — ഇത് ഭക്ഷണ ഉപഭോഗം കുറയ്ക്കുകയും ഊർജ വിനിയോഗം പ്രോത്സാഹിപ്പിക്കുകയും ചെയ്യുന്നു.</p>
+        <h3 class="sub-title">7. ഉറക്കവും ഉണരലും — പീനിയൽ ഗ്രന്ഥി</h3>
+        <p>മസ്തിഷ്കത്തിൽ തലാമസിന് സമീപം സ്ഥിതി ചെയ്യുന്ന <b>പീനിയൽ ഗ്രന്ഥി</b> <b>മെലാടോണിൻ</b> എന്ന ഹോർമോൺ ഉൽപാദിപ്പിക്കുന്നു. ഈ ഹോർമോണിന്റെ ഉൽപാദനത്തിലെ ഏറ്റക്കുറച്ചിലുകൾ ദൈനംദിന ഉറക്കത്തെയും ഉണരലിനെയും സ്വാധീനിക്കുന്നു. 24 മണിക്കൂർ നീളുന്ന കൃത്യമായ ഇടവേളകളിലെ പ്രവർത്തനങ്ങൾ നിയന്ത്രിക്കുന്നതിൽ മെലാടോണിൻ മുഖ്യ പങ്ക് വഹിക്കുന്നു. അതിനാൽ പീനിയൽ ഗ്രന്ഥി <b>ജൈവഘടികാരം (Biological clock)</b> എന്നറിയപ്പെടുന്നു. രാത്രിയിൽ കൂടുതൽ സമയം സ്ക്രീൻ ഉപയോഗിക്കുന്നത് മെലാടോണിൻ ഉൽപാദനത്തെ തടസ്സപ്പെടുത്തി ഉറക്കക്കുറവിന് കാരണമാകുന്നു.</p>
+        <h3 class="sub-title">8. പ്രതിരോധത്തിനുപിന്നിൽ — തൈമസ് ഗ്രന്ഥി</h3>
+        <p>മാറെല്ലിന് പിന്നിലായി സ്ഥിതി ചെയ്യുന്ന <b>തൈമസ് ഗ്രന്ഥി</b> ശരീരത്തിലെ പ്രതിരോധസംവിധാനത്തിൽ പ്രധാന പങ്കുവഹിക്കുന്നു. ഈ ഗ്രന്ഥി ഉൽപാദിപ്പിക്കുന്ന <b>തൈമോസിൻ</b> എന്ന ഹോർമോൺ T ലിംഫോസൈറ്റുകളുടെ പാകപ്പെടലിന് സഹായിക്കുന്നു.</p>
+      </div>
+      <div class="lang-en">
+        <h2 class="section-title">Master Control Glands and Other Hormone Systems</h2>
+        <h3 class="sub-title">1. The Adrenal Gland — Handling Emergencies</h3>
+        <p>The <b>adrenal gland</b> sits atop the kidney. It has an outer <b>cortex</b> and an inner <b>medulla</b>. During emergencies, along with the sympathetic nervous system, the adrenal gland produces hormones that increase heart rate and prepare the body to respond rapidly.</p>
+        <h3 class="sub-title">2. The Hypothalamus and Pituitary: Master Control System</h3>
+        <p>The activities of most endocrine glands are controlled by the <b>hypothalamus</b>. Below the hypothalamus lies the <b>pituitary gland</b>. The hypothalamus regulates the function of other endocrine glands by controlling the production of hormones from the anterior lobe of the pituitary gland.</p>
+        <table><tr><th>Part</th><th>Hormone</th><th>Function</th></tr>
+          <tr><td>Pituitary anterior lobe</td><td>TSH</td><td>Stimulates the thyroid gland</td></tr>
+          <tr><td>Pituitary anterior lobe</td><td>ACTH</td><td>Stimulates the adrenal cortex</td></tr>
+          <tr><td>Pituitary anterior lobe</td><td>GTH</td><td>Stimulates the ovaries and testes</td></tr>
+          <tr><td>Pituitary anterior lobe</td><td>Prolactin</td><td>Produces breast milk</td></tr>
+          <tr><td>Pituitary anterior lobe</td><td>GH (Somatotropin)</td><td>Regulates body growth</td></tr>
+          <tr><td>Pituitary posterior lobe</td><td>Vasopressin (ADH)</td><td>Water reabsorption in the kidney</td></tr>
+          <tr><td>Pituitary posterior lobe</td><td>Oxytocin</td><td>Milk ejection, smooth muscle contraction</td></tr></table>
+        <h3 class="sub-title">3. Behind Growth</h3>
+        <p>Growth hormone (Somatotropin, GH), produced by the anterior lobe of the pituitary gland, regulates body growth — it speeds up metabolism and increases cell size in most body cells, causing overall growth. Variations in its production cause growth disorders.</p>
+        <table><tr><th>Disorder</th><th>Cause</th><th>Symptom</th></tr>
+          <tr><td>Dwarfism</td><td>Reduced somatotropin production during growth period</td><td>Stunted body growth</td></tr>
+          <tr><td>Gigantism</td><td>Excess somatotropin production during growth period</td><td>Excessive body growth</td></tr>
+          <tr><td>Acromegaly</td><td>Excess somatotropin production after growth is complete</td><td>Excessive growth of body parts such as hands, feet, and the jaw</td></tr></table>
+        <h3 class="sub-title">4. Water Balance</h3>
+        <p><b>Vasopressin (ADH)</b>, stored in the posterior lobe of the pituitary, maintains water balance. When excessive sweating and heat cause dehydration, this increases vasopressin production. Vasopressin increases water reabsorption from the kidney — reducing urine output and preventing water loss. In winter, since less water is lost through sweat, vasopressin secretion decreases, reducing water reabsorption from the kidney.</p>
+        <h3 class="sub-title">5. Reproductive Hormones</h3>
+        <table><tr><th>Hormone</th><th>Gland</th><th>Function</th></tr>
+          <tr><td>Testosterone</td><td>Testes</td><td>Function of male reproductive organs, sperm production, regulation of secondary sexual characteristics</td></tr>
+          <tr><td>Estrogen</td><td>Ovaries</td><td>Function of female reproductive organs, ovulation, menstrual cycle, regulation of secondary sexual characteristics</td></tr>
+          <tr><td>Progesterone</td><td>Ovaries</td><td>Maintains the embryo in the uterus, menstrual cycle</td></tr></table>
+        <h3 class="sub-title">6. Hunger and Satiety</h3>
+        <p><b>Ghrelin</b>, produced by cells in the upper stomach, is known as the "hunger hormone" — it increases food intake and promotes fat storage. <b>Leptin</b>, produced by fat tissue, is known as the "satiety hormone" — it signals the hypothalamus that the body has stored enough energy, reducing hunger, food intake, and promoting energy expenditure.</p>
+        <h3 class="sub-title">7. Sleep and Wakefulness — The Pineal Gland</h3>
+        <p>The <b>pineal gland</b>, located near the thalamus in the brain, produces the hormone <b>melatonin</b>. Fluctuations in the production of this hormone influence daily sleep and wakefulness. Melatonin plays a key role in regulating activities that follow a precise 24-hour rhythm, which is why the pineal gland is called the <b>biological clock</b>. Spending too much time on screens at night disrupts melatonin production, causing poor sleep.</p>
+        <h3 class="sub-title">8. Behind Immunity — The Thymus Gland</h3>
+        <p>The <b>thymus gland</b>, located behind the breastbone, plays a major role in the body's immune system. The hormone it produces, <b>thymosin</b>, helps in the maturation of T lymphocytes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="panel" id="quiz">
+    <div class="card">
+      <h2 class="section-title" data-ml="ക്വിക്ക് ക്വിസ്" data-en="Quick Quiz">ക്വിക്ക് ക്വിസ്</h2>
+      <div class="score-bar">
+        <span>
+          <span data-ml="സ്കോർ:" data-en="Score:">സ്കോർ:</span> <b id="scoreVal">0</b> / <span id="totalVal">0</span>
+          &nbsp;·&nbsp; <span data-ml="ചോദ്യം" data-en="Question">ചോദ്യം</span> <b id="qPos">1</b> / <span id="qTotal">0</span>
+        </span>
+        <span style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn" onclick="shareScore()" data-ml="🔗 സ്കോർ പങ്കിടുക" data-en="🔗 Share Score">🔗 സ്കോർ പങ്കിടുക</button>
+          <button class="btn secondary" onclick="resetQuiz()" data-ml="വീണ്ടും ചെയ്യുക" data-en="Retry">വീണ്ടും ചെയ്യുക</button>
+        </span>
+      </div>
+      <div class="teacher-share no-print">
+        <button class="btn" onclick="shareQuizLink()" data-ml="🔗 ക്വിസ് ലിങ്ക് പങ്കിടുക" data-en="🔗 Share Quiz Link">🔗 ക്വിസ് ലിങ്ക് പങ്കിടുക</button>
+        <button class="btn secondary" onclick="shareQuestions()" data-ml="📤 ചോദ്യങ്ങൾ ടെക്സ്റ്റ് ആയി അയക്കുക" data-en="📤 Send Questions as Text">📤 ചോദ്യങ്ങൾ ടെക്സ്റ്റ് ആയി അയക്കുക</button>
+      </div>
+      <div id="quizContainer"></div>
+      <div class="quiz-nav">
+        <button class="btn secondary" id="prevBtn" onclick="prevQuestion()" data-ml="← മുമ്പത്തേത്" data-en="← Previous">← മുമ്പത്തേത്</button>
+        <button class="btn" id="nextBtn" onclick="nextQuestion()" data-ml="അടുത്തത് →" data-en="Next →">അടുത്തത് →</button>
+      </div>
+      <div id="shareToast" class="share-toast"></div>
+    </div>
+  </section>
+
+  <!-- ================= MODEL QUESTION PAPER ================= -->
+  <section class="panel" id="mqp">
+    <div class="card print-target" id="mqpCard">
+      <div class="lang-ml">
+        <div class="mqp-header">
+          <h2>ജീവശാസ്ത്രം — മാതൃകാ ചോദ്യപേപ്പർ</h2>
+          <p>യൂണിറ്റ് 4: ജീവികളിലെ രാസസംവേദനം</p>
+        </div>
+        <div class="mqp-meta"><span>സമയം: 45 മിനിറ്റ്</span><span>ആകെ സ്കോർ: 20</span></div>
+        <div class="mqp-section-title">Section A — 1 സ്കോർ വീതം (5 × 1 = 5)</div>
+        <div class="mqp-q">1. ഓക്സിൻ ആദ്യമായി കണ്ടെത്തിയ ശാസ്ത്രജ്ഞൻ ആര്?</div>
+        <div class="mqp-q">2. ഫലം പാകമാക്കാൻ സഹായിക്കുന്ന സസ്യഹോർമോൺ ഏത്?</div>
+        <div class="mqp-q">3. തൈറോയ്ഡ് ഗ്രന്ഥി ഉൽപാദിപ്പിക്കുന്ന, മെറ്റബോളിസം നിയന്ത്രിക്കുന്ന ഹോർമോൺ ഏത്?</div>
+        <div class="mqp-q">4. പാൻക്രിയാസിലെ ബീറ്റാ കോശങ്ങൾ ഉൽപാദിപ്പിക്കുന്ന ഹോർമോൺ ഏത്?</div>
+        <div class="mqp-q">5. ജലസന്തുലനം നിലനിർത്തുന്ന പിറ്റ്യൂട്ടറി ഹോർമോൺ ഏത്?</div>
+        <div class="mqp-section-title">Section B — 2 സ്കോർ വീതം (4 × 2 = 8)</div>
+        <div class="mqp-q">6. ഹോർമോൺ-റിസപ്റ്റർ കോംപ്ലക്സ് എന്നാൽ എന്ത്?</div>
+        <div class="mqp-q">7. കാൽസിടോണിനും പാരാതൊർമോണും തമ്മിലുള്ള വ്യത്യാസം എന്ത്?</div>
+        <div class="mqp-q">8. ടൈപ്പ്-1 പ്രമേഹവും ടൈപ്പ്-2 പ്രമേഹവും തമ്മിലുള്ള വ്യത്യാസം എന്ത്?</div>
+        <div class="mqp-q">9. ഫിറമോൺ എന്നാൽ എന്ത്? ഒരു ഉദാഹരണം നൽകുക.</div>
+        <div class="mqp-section-title">Section C — 3 സ്കോർ വീതം (2 × 3 = 6)</div>
+        <div class="mqp-q">10. ഗ്ലൂക്കഗോണും ഇൻസുലിനും ചേർന്ന് രക്തത്തിലെ ഗ്ലൂക്കോസ് എങ്ങനെ ക്രമീകരിക്കുന്നു എന്ന് വിശദീകരിക്കുക.</div>
+        <div class="mqp-q">11. വാമനത്വം, ഭീമാകാരത്വം, അക്രോമെഗലി എന്നിവ തമ്മിലുള്ള വ്യത്യാസങ്ങൾ വിശദീകരിക്കുക.</div>
+        <div class="mqp-section-title">Section D — ഉപന്യാസ തരം (1 × 1 = 1)</div>
+        <div class="mqp-q">12. ഹൈപ്പോതലാമസും പിറ്റ്യൂട്ടറി ഗ്രന്ഥിയും ശരീരത്തിന്റെ മുഖ്യ നിയന്ത്രണകേന്ദ്രമായി പ്രവർത്തിക്കുന്നത് എങ്ങനെയെന്ന് വിശദമായി എഴുതുക.</div>
+      </div>
+      <div class="lang-en">
+        <div class="mqp-header">
+          <h2>Biology — Model Question Paper</h2>
+          <p>Unit 4: Chemical Communication in Organisms</p>
+        </div>
+        <div class="mqp-meta"><span>Time: 45 minutes</span><span>Total score: 20</span></div>
+        <div class="mqp-section-title">Section A — 1 score each (5 × 1 = 5)</div>
+        <div class="mqp-q">1. Who was the scientist who first discovered auxin?</div>
+        <div class="mqp-q">2. Which plant hormone helps ripen fruit?</div>
+        <div class="mqp-q">3. Which thyroid hormone regulates metabolism?</div>
+        <div class="mqp-q">4. Which hormone do the beta cells of the pancreas produce?</div>
+        <div class="mqp-q">5. Which pituitary hormone maintains water balance?</div>
+        <div class="mqp-section-title">Section B — 2 scores each (4 × 2 = 8)</div>
+        <div class="mqp-q">6. What is a hormone-receptor complex?</div>
+        <div class="mqp-q">7. What is the difference between calcitonin and parathormone?</div>
+        <div class="mqp-q">8. What is the difference between Type-1 and Type-2 diabetes?</div>
+        <div class="mqp-q">9. What is a pheromone? Give one example.</div>
+        <div class="mqp-section-title">Section C — 3 scores each (2 × 3 = 6)</div>
+        <div class="mqp-q">10. Explain how glucagon and insulin together regulate blood glucose.</div>
+        <div class="mqp-q">11. Explain the differences between dwarfism, gigantism, and acromegaly.</div>
+        <div class="mqp-section-title">Section D — Essay type (1 × 1 = 1)</div>
+        <div class="mqp-q">12. Write in detail about how the hypothalamus and pituitary gland function as the body's master control system.</div>
+      </div>
+    </div>
+    <div class="no-print" style="margin-top:10px;">
+      <button class="btn secondary" onclick="printCurrent()" data-ml="🖨️ പ്രിന്റ് ചെയ്യുക" data-en="🖨️ Print">🖨️ പ്രിന്റ് ചെയ്യുക</button>
+    </div>
+  </section>
+
+</div>
+
+<footer class="note">Abacus Academy · Class 10 Biology · Prepared for self-study</footer>
+
+<script>
+/* ===================== LANGUAGE TOGGLE ===================== */
+let currentLang = 'ml';
+function setLang(lang){
+  currentLang = lang;
+  document.body.classList.toggle('show-en', lang === 'en');
+  document.getElementById('langMlBtn').classList.toggle('active', lang === 'ml');
+  document.getElementById('langEnBtn').classList.toggle('active', lang === 'en');
+  document.querySelectorAll('[data-ml][data-en]').forEach(el=>{
+    el.textContent = (lang === 'ml') ? el.dataset.ml : el.dataset.en;
+  });
+  quizData = (lang === 'ml') ? quizDataML : quizDataEN;
+  renderQuestion();
+}
+
+/* ===================== TABS ===================== */
+const tabButtons = document.querySelectorAll('nav.tabs button[data-tab]');
+const panels = document.querySelectorAll('.panel');
+let currentTab = 'notes';
+tabButtons.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    tabButtons.forEach(b=>b.classList.remove('active'));
+    panels.forEach(p=>{p.classList.remove('active'); p.classList.remove('print-target');});
+    btn.classList.add('active');
+    currentTab = btn.dataset.tab;
+    document.getElementById(currentTab).classList.add('active');
+  });
+});
+function printCurrent(){
+  panels.forEach(p=>p.classList.remove('print-target'));
+  document.getElementById(currentTab).classList.add('print-target');
+  window.print();
+}
+
+/* ===================== QUIZ DATA (bilingual) ===================== */
+const quizDataML = [
+  { q:"ഓട്സ് സസ്യത്തിന്റെ ബീജശീർഷാഗ്രം ഉപയോഗിച്ച് ഓക്സിൻ കണ്ടെത്തിയ ശാസ്ത്രജ്ഞൻ ആര്?", opts:["ചാൾസ് ഡാർവിൻ","F.W. വെന്റ്","ഗ്രിഗർ മെൻഡൽ","ജെന്നർ"], ans:1 },
+  { q:"ഫലങ്ങൾ പാകമാക്കാൻ സഹായിക്കുന്ന സസ്യഹോർമോൺ ഏത്?", opts:["ഓക്സിൻ","ജിബ്ബറലിൻ","എഥിലീൻ","സൈറ്റോകിനിൻ"], ans:2 },
+  { q:"വിത്തുകളുടെ സുപ്താവസ്ഥ നിലനിർത്തുന്ന ഹോർമോൺ ഏത്?", opts:["അബ്സിസിക് ആസിഡ്","ജിബ്ബറലിൻ","ഓക്സിൻ","എഥിലീൻ"], ans:0 },
+  { q:"തൈറോയ്ഡ് ഗ്രന്ഥി ഉൽപാദിപ്പിക്കുന്ന, മെറ്റബോളിസം നിയന്ത്രിക്കുന്ന ഹോർമോൺ ഏത്?", opts:["ഇൻസുലിൻ","തൈറോക്സിൻ","പാരാതൊർമോൺ","മെലാടോണിൻ"], ans:1 },
+  { q:"രക്തത്തിലെ കാൽസ്യം കൂട്ടുന്ന ഹോർമോൺ ഏത്?", opts:["കാൽസിടോണിൻ","ഇൻസുലിൻ","പാരാതൊർമോൺ","തൈറോക്സിൻ"], ans:2 },
+  { q:"പാൻക്രിയാസിലെ ബീറ്റാ കോശങ്ങൾ ഉൽപാദിപ്പിക്കുന്ന ഹോർമോൺ ഏത്?", opts:["ഗ്ലൂക്കഗോൺ","ഇൻസുലിൻ","ഗ്രെലിൻ","ലെപ്റ്റിൻ"], ans:1 },
+  { q:"ജലസന്തുലനം നിലനിർത്തുന്ന പിറ്റ്യൂട്ടറി ഹോർമോൺ ഏത്?", opts:["ഓക്സിടോസിൻ","പ്രോലാക്റ്റിൻ","വാസോപ്രസിൻ (ADH)","TSH"], ans:2 },
+  { q:"ഉറക്കത്തെയും ഉണരലിനെയും നിയന്ത്രിക്കുന്ന ഹോർമോൺ ഏത് ഗ്രന്ഥി ഉൽപാദിപ്പിക്കുന്നു?", opts:["തൈമസ് ഗ്രന്ഥി","പീനിയൽ ഗ്രന്ഥി","അഡ്രിനൽ ഗ്രന്ഥി","പാരാതൈറോയ്ഡ്"], ans:1 },
+  { q:"\"വിശപ്പ് ഹോർമോൺ\" എന്നറിയപ്പെടുന്നത് ഏത്?", opts:["ലെപ്റ്റിൻ","ഗ്രെലിൻ","ഇൻസുലിൻ","തൈമോസിൻ"], ans:1 },
+  { q:"T ലിംഫോസൈറ്റുകളുടെ പാകപ്പെടലിന് സഹായിക്കുന്ന ഹോർമോൺ ഏത് ഗ്രന്ഥി ഉൽപാദിപ്പിക്കുന്നു?", opts:["തൈറോയ്ഡ്","തൈമസ്","പീനിയൽ","അഡ്രിനൽ"], ans:1 }
+];
+const quizDataEN = [
+  { q:"Which scientist discovered auxin using the coleoptile tip of oat seedlings?", opts:["Charles Darwin","F.W. Went","Gregor Mendel","Edward Jenner"], ans:1 },
+  { q:"Which plant hormone helps ripen fruits?", opts:["Auxin","Gibberellin","Ethylene","Cytokinin"], ans:2 },
+  { q:"Which hormone maintains seed dormancy?", opts:["Abscisic acid","Gibberellin","Auxin","Ethylene"], ans:0 },
+  { q:"Which thyroid hormone regulates metabolism?", opts:["Insulin","Thyroxine","Parathormone","Melatonin"], ans:1 },
+  { q:"Which hormone raises blood calcium?", opts:["Calcitonin","Insulin","Parathormone","Thyroxine"], ans:2 },
+  { q:"Which hormone do the beta cells of the pancreas produce?", opts:["Glucagon","Insulin","Ghrelin","Leptin"], ans:1 },
+  { q:"Which pituitary hormone maintains water balance?", opts:["Oxytocin","Prolactin","Vasopressin (ADH)","TSH"], ans:2 },
+  { q:"Which gland produces the hormone that regulates sleep and wakefulness?", opts:["Thymus gland","Pineal gland","Adrenal gland","Parathyroid"], ans:1 },
+  { q:"Which is known as the \"hunger hormone\"?", opts:["Leptin","Ghrelin","Insulin","Thymosin"], ans:1 },
+  { q:"Which gland produces the hormone that helps mature T lymphocytes?", opts:["Thyroid","Thymus","Pineal","Adrenal"], ans:1 }
+];
+let quizData = quizDataML;
+
+let score = 0;
+let currentQ = 0;
+let userAnswers = new Array(quizDataML.length).fill(null);
+
+function renderQuestion(){
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  document.getElementById('totalVal').textContent = quizData.length;
+  document.getElementById('qTotal').textContent = quizData.length;
+  document.getElementById('qPos').textContent = currentQ + 1;
+
+  const item = quizData[currentQ];
+  const qDiv = document.createElement('div');
+  qDiv.innerHTML = `<p><b>${currentQ+1}.</b> ${item.q}</p><div class="quiz-opts"></div>`;
+  const optsDiv = qDiv.querySelector('.quiz-opts');
+  const alreadyAnswered = userAnswers[currentQ] !== null;
+
+  item.opts.forEach((opt, oIdx)=>{
+    const b = document.createElement('button');
+    b.textContent = opt;
+    if(alreadyAnswered){
+      b.disabled = true;
+      if(oIdx === item.ans) b.classList.add('correct');
+      else if(oIdx === userAnswers[currentQ]) b.classList.add('wrong');
+    }
+    b.addEventListener('click', ()=>{
+      if(b.disabled) return;
+      const allBtns = optsDiv.querySelectorAll('button');
+      allBtns.forEach(x=>x.disabled=true);
+      userAnswers[currentQ] = oIdx;
+      if(oIdx === item.ans){ b.classList.add('correct'); score++; }
+      else { b.classList.add('wrong'); allBtns[item.ans].classList.add('correct'); }
+      document.getElementById('scoreVal').textContent = score;
+    });
+    optsDiv.appendChild(b);
+  });
+  container.appendChild(qDiv);
+  document.getElementById('prevBtn').disabled = (currentQ === 0);
+  document.getElementById('nextBtn').disabled = (currentQ === quizData.length - 1);
+}
+
+function nextQuestion(){ if(currentQ < quizData.length - 1){ currentQ++; renderQuestion(); } }
+function prevQuestion(){ if(currentQ > 0){ currentQ--; renderQuestion(); } }
+
+function resetQuiz(){
+  score = 0; currentQ = 0;
+  userAnswers = new Array(quizData.length).fill(null);
+  document.getElementById('scoreVal').textContent = 0;
+  renderQuestion();
+}
+
+/* ===================== SHARE ===================== */
+const QUIZ_SHARE_URL = "https://munees-dot.github.io/sslccompleteportal/biology-unit4quiz.html";
+
+function shareQuizLink(){
+  if(!QUIZ_SHARE_URL){
+    const toast = document.getElementById('shareToast');
+    toast.textContent = currentLang === 'ml' ? '⚠️ ക്വിസ് ലിങ്ക് ഇതുവരെ സെറ്റ് ചെയ്തിട്ടില്ല' : '⚠️ Quiz link has not been set yet';
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 3000);
+    return;
+  }
+  const text = currentLang === 'ml'
+    ? `ക്വിക്ക് ക്വിസ് — ജീവികളിലെ രാസസംവേദനം\nഈ ലിങ്കിൽ ക്വിസ് ചെയ്യൂ:\n${QUIZ_SHARE_URL}`
+    : `Quick Quiz — Chemical Communication in Organisms\nTake the quiz here:\n${QUIZ_SHARE_URL}`;
+  runShare(text, currentLang === 'ml' ? '✅ ലിങ്ക് കോപ്പി ചെയ്തു' : '✅ Link copied');
+}
+
+function shareScore(){
+  const answeredCount = userAnswers.filter(a=>a!==null).length;
+  const text = currentLang === 'ml'
+    ? `ജീവികളിലെ രാസസംവേദനം — ക്വിക്ക് ക്വിസ്\nഎന്റെ സ്കോർ: ${score} / ${quizData.length} (${answeredCount} ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകി)`
+    : `Chemical Communication in Organisms — Quick Quiz\nMy score: ${score} / ${quizData.length} (${answeredCount} questions answered)`;
+  runShare(text, currentLang === 'ml' ? '✅ സ്കോർ കോപ്പി ചെയ്തു' : '✅ Score copied');
+}
+
+function shareQuestions(){
+  const letters = ['A','B','C','D'];
+  let text = currentLang === 'ml'
+    ? 'ക്വിക്ക് ക്വിസ് — ജീവികളിലെ രാസസംവേദനം\n(യൂണിറ്റ് 4, ജീവശാസ്ത്രം, സ്റ്റാൻഡേർഡ് 10)\n\n'
+    : 'Quick Quiz — Chemical Communication in Organisms\n(Unit 4, Biology, Class 10)\n\n';
+  quizData.forEach((item, idx)=>{
+    text += `${idx+1}. ${item.q}\n`;
+    item.opts.forEach((opt, oIdx)=>{ text += `   ${letters[oIdx]}) ${opt}\n`; });
+    text += '\n';
+  });
+  runShare(text, currentLang === 'ml' ? '✅ ചോദ്യങ്ങൾ കോപ്പി ചെയ്തു' : '✅ Questions copied');
+}
+
+function runShare(text, copySuccessMsg){
+  if(navigator.share){
+    navigator.share({ title: currentLang === 'ml' ? 'ക്വിക്ക് ക്വിസ്' : 'Quick Quiz', text: text }).catch(()=>{});
+  } else if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=>{
+      const toast = document.getElementById('shareToast');
+      toast.textContent = copySuccessMsg;
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'), 2500);
+    });
+  } else {
+    alert(text);
+  }
+}
+
+renderQuestion();
+</script>
+
+</body>
+</html>
