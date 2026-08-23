@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quick Quiz — Nomenclature &amp; Isomerism | Chemistry Class 10</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1f2937; --paper:#faf6ee; --chain:#2b6e63; --chain-dark:#184d44;
+  --branch:#c1622d; --func:#7b4fa0; --line:#e1d7c3; --card:#ffffff;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.55;}
+body[data-lang="ml"]{font-family:'Noto Sans Malayalam','Segoe UI',system-ui,sans-serif;}
+header{background:linear-gradient(135deg,var(--chain-dark),var(--chain) 65%);color:#fff;padding:22px 18px;}
+header h1{margin:0 0 4px;font-size:1.3rem;}
+header p{margin:0;opacity:.85;font-size:.88rem;}
+.wrap{max-width:760px;margin:20px auto 40px;padding:0 14px;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(31,41,55,.04);}
+.toolbar{display:flex;justify-content:flex-end;margin-bottom:14px;}
+.toolbar button{border:none;background:var(--func);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.85rem;}
+.score-bar{background:var(--chain-dark);color:#fff;border-radius:10px;padding:10px 16px;margin-bottom:14px;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;}
+.btn{background:var(--branch);color:#fff;border:none;padding:9px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:600;}
+.quiz-q{margin-bottom:16px;padding-bottom:14px;border-bottom:1px dashed var(--line);}
+.quiz-q:last-child{border-bottom:none;}
+.quiz-opts button{display:block;width:100%;text-align:left;margin:5px 0;padding:8px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.9rem;}
+.quiz-opts button.correct{background:#dff3e8;border-color:var(--chain);font-weight:600;}
+.quiz-opts button.wrong{background:#fbe4e0;border-color:var(--branch);}
+.quiz-opts button[disabled]{cursor:default;}
+footer{text-align:center;font-size:.78rem;color:#8a8067;margin:20px 0 10px;}
+</style>
+</head>
+<body>
+<header>
+  <h1 id="pageTitle">Quick Quiz</h1>
+  <p id="pageSub">Chemistry · Class 10 · Nomenclature &amp; Isomerism of Organic Compounds</p>
+</header>
+<div class="wrap">
+  <div class="toolbar"><button id="langBtn" onclick="toggleLang()">🌐 മലയാളം</button></div>
+  <div class="card">
+    <div class="score-bar">
+      <span><span id="scoreLabel">Score:</span> <b id="scoreVal">0</b> / <span id="totalVal">0</span></span>
+      <button class="btn" onclick="resetQuiz()" id="retryBtn">Retry</button>
+    </div>
+    <div id="quizContainer"></div>
+  </div>
+  <footer>EduPro Study Tools · Class 10 Chemistry</footer>
+</div>
+<script>
+let currentLang = "en";
+const quizData = [{"q":"What is the IUPAC name of CH₃–CH₂–CH₂–CH₂–CH₃?","q_ml":"CH₃–CH₂–CH₂–CH₂–CH₃ യുടെ IUPAC നാമം എന്ത്?","opts":["Butane","Pentane","Hexane","Propane"],"opts_ml":["ബ്യൂട്ടെയ്ൻ","പെന്റെയ്ൻ","ഹെക്സെയ്ൻ","പ്രോപ്പെയ്ൻ"],"ans":1},{"q":"Compounds with the –OH functional group are called?","q_ml":"–OH പ്രവർത്തക ഗ്രൂപ്പുള്ള സംയുക്തങ്ങളെ എന്ത് വിളിക്കുന്നു?","opts":["Aldehyde","Ketone","Alcohol","Ether"],"opts_ml":["ആൽഡിഹൈഡ്","കീറ്റോൺ","ആൽക്കഹോൾ","ഈഥർ"],"ans":2},{"q":"What is the IUPAC name of CH₂=CH–CH₂–CH₃?","q_ml":"CH₂=CH–CH₂–CH₃ യുടെ IUPAC നാമം എന്ത്?","opts":["But-2-ene","But-1-ene","But-1-yne","Propene"],"opts_ml":["ബ്യൂട്ട്-2-ഈൻ","ബ്യൂട്ട്-1-ഈൻ","ബ്യൂട്ട്-1-യൈൻ","പ്രോപ്പീൻ"],"ans":1},{"q":"What is the suffix for hydrocarbons with a triple bond?","q_ml":"ത്രിബന്ധനമുള്ള ഹൈഡ്രോകാർബണുകൾക്കുള്ള പ്രത്യയം ഏത്?","opts":["–ol","–ene","–yne","–al"],"opts_ml":["–ol","–ene","–yne","–al"],"ans":2},{"q":"What is the common name for CH₃COOH?","q_ml":"CH₃COOH ന്റെ സാധാരണ പേര് എന്ത്?","opts":["Aldehyde","Carboxylic acid","Ketone","Ether"],"opts_ml":["ആൽഡിഹൈഡ്","കാർബോക്സിലിക് അമ്ലം","കീറ്റോൺ","ഈഥർ"],"ans":1},{"q":"What type of isomerism do CH₃CH₂OH and CH₃OCH₃ show?","q_ml":"CH₃CH₂OH ഉം CH₃OCH₃ ഉം ഏത് തരം ഐസോമെറിസമാണ് കാണിക്കുന്നത്?","opts":["Chain isomerism","Position isomerism","Functional isomerism","Metamerism"],"opts_ml":["ശൃംഖലാ ഐസോമെറിസം","സ്ഥാന ഐസോമെറിസം","പ്രവർത്തക ഗ്രൂപ്പ് ഐസോമെറിസം","മെറ്റാമെറിസം"],"ans":2},{"q":"What type of isomerism do CH₃CH₂CH₂OH and CH₃CH(OH)CH₃ show?","q_ml":"CH₃CH₂CH₂OH ഉം CH₃CH(OH)CH₃ ഉം ഏത് തരം ഐസോമെറിസമാണ് കാണിക്കുന്നത്?","opts":["Chain isomerism","Position isomerism","Functional isomerism","Metamerism"],"opts_ml":["ശൃംഖലാ ഐസോമെറിസം","സ്ഥാന ഐസോമെറിസം","പ്രവർത്തക ഗ്രൂപ്പ് ഐസോമെറിസം","മെറ്റാമെറിസം"],"ans":1},{"q":"Which compounds have the &gt;C=O functional group?","q_ml":"&gt;C=O പ്രവർത്തക ഗ്രൂപ്പുള്ള സംയുക്തങ്ങൾ ഏതെല്ലാം?","opts":["Alcohols","Ketones","Ethers","Halo compounds"],"opts_ml":["ആൽക്കഹോളുകൾ","കീറ്റോണുകൾ","ഈഥറുകൾ","ഹാലോ സംയുക്തങ്ങൾ"],"ans":1},{"q":"Which functional group family does CH₃–O–CH₂–CH₃ belong to?","q_ml":"CH₃–O–CH₂–CH₃ ഏത് പ്രവർത്തക ഗ്രൂപ്പ് കുടുംബത്തിൽ പെടുന്നു?","opts":["Aldehyde","Ketone","Ether","Carboxylic acid"],"opts_ml":["ആൽഡിഹൈഡ്","കീറ്റോൺ","ഈഥർ","കാർബോക്സിലിക് അമ്ലം"],"ans":2},{"q":"Which isomerism has the same molecular formula, the same functional group, but different alkyl groups on either side of it?","q_ml":"ഒരേ തന്മാത്രാ സൂത്രവും ഒരേ പ്രവർത്തക ഗ്രൂപ്പും എന്നാൽ അതിന്റെ ഇരുവശത്തും വ്യത്യസ്ത ആൽക്കൈൽ ഗ്രൂപ്പുകളും ഉള്ള ഐസോമെറിസം ഏത്?","opts":["Chain isomerism","Functional isomerism","Metamerism","Position isomerism"],"opts_ml":["ശൃംഖലാ ഐസോമെറിസം","പ്രവർത്തക ഗ്രൂപ്പ് ഐസോമെറിസം","മെറ്റാമെറിസം","സ്ഥാന ഐസോമെറിസം"],"ans":2}];
+let score = 0;
+
+function labels(){
+  document.getElementById('scoreLabel').textContent = currentLang === 'ml' ? 'സ്കോർ:' : 'Score:';
+  document.getElementById('retryBtn').textContent = currentLang === 'ml' ? 'വീണ്ടും ശ്രമിക്കുക' : 'Retry';
+  document.getElementById('langBtn').textContent = currentLang === 'en' ? '🌐 മലയാളം' : '🌐 English';
+  document.getElementById('pageTitle').textContent = currentLang === 'ml' ? 'പെട്ടെന്നുള്ള ക്വിസ്' : 'Quick Quiz';
+  document.getElementById('pageSub').textContent = currentLang === 'ml' ? 'രസതന്ത്രം · ക്ലാസ് 10 · ഓർഗാനിക് സംയുക്തങ്ങളുടെ നാമകരണവും ഐസോമെറിസവും' : 'Chemistry · Class 10 · Nomenclature & Isomerism of Organic Compounds';
+  document.body.setAttribute('data-lang', currentLang);
+  document.documentElement.lang = currentLang;
+}
+
+function toggleLang(){
+  currentLang = currentLang === 'en' ? 'ml' : 'en';
+  labels();
+  buildQuiz();
+}
+
+function buildQuiz(){
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  score = 0;
+  document.getElementById('scoreVal').textContent = 0;
+  document.getElementById('totalVal').textContent = quizData.length;
+  quizData.forEach((item, idx)=>{
+    const qText = currentLang === 'ml' ? item.q_ml : item.q;
+    const opts = currentLang === 'ml' ? item.opts_ml : item.opts;
+    const qDiv = document.createElement('div');
+    qDiv.className = 'quiz-q';
+    qDiv.innerHTML = '<p><b>' + (idx+1) + '.</b> ' + qText + '</p><div class="quiz-opts"></div>';
+    const optsDiv = qDiv.querySelector('.quiz-opts');
+    opts.forEach((opt, oIdx)=>{
+      const b = document.createElement('button');
+      b.textContent = opt;
+      b.addEventListener('click', ()=>{
+        if(b.disabled) return;
+        const allBtns = optsDiv.querySelectorAll('button');
+        allBtns.forEach(x=>x.disabled=true);
+        if(oIdx === item.ans){
+          b.classList.add('correct');
+          score++;
+        } else {
+          b.classList.add('wrong');
+          allBtns[item.ans].classList.add('correct');
+        }
+        document.getElementById('scoreVal').textContent = score;
+      });
+      optsDiv.appendChild(b);
+    });
+    container.appendChild(qDiv);
+  });
+}
+
+function resetQuiz(){ buildQuiz(); }
+
+labels();
+buildQuiz();
+</script>
+</body>
+</html>
