@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>കാഴ്ചയും വർണ്ണങ്ങളുടെ ലോകവും | Quiz — Abacus Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16202e; --ink-soft:#48566a; --paper:#eceee8; --card:#ffffff;
+    --wave:#4f46e5; --wave-deep:#3730a3; --amp:#ea580c;
+    --line:#d6d9d1; --good:#108a5b; --bad:#c0392b;
+    --shadow:0 1px 0 rgba(22,32,46,.04), 0 8px 24px -16px rgba(22,32,46,.35);
+    --r:14px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Noto Sans Malayalam",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;
+    min-height:100vh;display:flex;flex-direction:column;}
+  .t-en{display:none;}
+  body.lang-en .t-ml{display:none;}
+  body.lang-en .t-en{display:revert;}
+
+  header{background:var(--ink);color:#eef2f6;padding:22px 18px;position:relative;border-bottom:3px solid var(--wave);}
+  header .hwrap{max-width:680px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+  header h1{font-size:16px;margin:0;font-weight:700;line-height:1.35;}
+  header .sub{font-size:12px;color:#aebccb;margin:4px 0 0;}
+  .langbar{display:flex;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);
+    border-radius:30px;padding:3px;flex-shrink:0;}
+  .langbar button{border:none;background:none;cursor:pointer;color:#cfe0ec;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:12px;
+    padding:6px 12px;border-radius:30px;transition:.15s;}
+  .langbar button.on{background:var(--wave);color:#fff;}
+
+  main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:26px 16px 40px;}
+
+  .quiz-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+    box-shadow:var(--shadow);padding:26px;max-width:520px;width:100%;margin:0 auto;}
+
+  /* ---- gate (locked-until-9am) screen ---- */
+  .gate{text-align:center;padding:20px 6px;}
+  .gate .clock{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:44px;
+    font-weight:700;color:var(--wave-deep);margin:10px 0;}
+  .gate p{color:var(--ink-soft);font-size:14.5px;margin:6px 0;}
+
+  /* ---- registration form ---- */
+  .qflabel{font-weight:600;font-size:13.5px;color:var(--ink-soft);margin:0 0 6px;}
+  .qstart input,.qstart select{width:100%;padding:12px 14px;border:2px solid var(--line);border-radius:10px;
+    font-family:"Noto Sans Malayalam",sans-serif;font-size:15px;margin:0 0 16px;background:#f6f8f3;color:var(--ink);}
+  .qstart input:focus,.qstart select:focus{outline:none;border-color:var(--wave);background:#fff;}
+  .qerr{color:var(--bad);font-size:13px;margin:-10px 0 14px;display:none;}
+  .qerr.show{display:block;}
+
+  .qwho{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;
+    color:var(--ink-soft);background:#f1f1fb;border-radius:8px;padding:6px 12px;margin:0 0 14px;flex-wrap:wrap;gap:4px;}
+  .qwho b{color:var(--wave-deep);}
+  .qwho button{border:none;background:none;color:var(--wave-deep);font-weight:700;cursor:pointer;
+    font-family:"Noto Sans Malayalam",sans-serif;font-size:12px;text-decoration:underline;}
+
+  .qmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+  .qcount,.qscore{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:12px;letter-spacing:1px;}
+  .qcount{color:var(--ink-soft);} .qscore{color:var(--amp);font-weight:700;}
+  .qbar{height:6px;background:#e7eae3;border-radius:6px;overflow:hidden;margin-bottom:18px;}
+  .qbar i{display:block;height:100%;background:var(--wave);transition:width .3s;}
+  .qtext{font-weight:600;font-size:19px;line-height:1.4;margin:0 0 18px;}
+  .opt{display:block;width:100%;text-align:left;background:#f6f8f3;border:2px solid var(--line);
+    border-radius:11px;padding:13px 16px;margin:9px 0;cursor:pointer;
+    font-family:"Noto Sans Malayalam",sans-serif;font-size:15.5px;color:var(--ink);transition:all .15s;}
+  .opt:hover:not(:disabled){border-color:var(--wave);background:#eeeefb;}
+  .opt:disabled{cursor:default;}
+  .opt.correct{border-color:var(--good);background:#e7f6ee;color:#0a5e3d;font-weight:600;}
+  .opt.wrong{border-color:var(--bad);background:#fbecea;color:#8e2118;}
+  .qfb{margin-top:14px;padding:12px 15px;border-radius:10px;font-size:14.5px;display:none;}
+  .qfb.show{display:block;}
+  .qfb.ok{background:#e7f6ee;color:#0a5e3d;border-left:4px solid var(--good);}
+  .qfb.no{background:#fbecea;color:#8e2118;border-left:4px solid var(--bad);}
+  .qnext{margin-top:18px;width:100%;border:none;cursor:pointer;background:var(--wave);color:#fff;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:16px;padding:13px;border-radius:11px;transition:background .15s;}
+  .qnext:hover{background:var(--wave-deep);}
+  .qnext[disabled]{background:#aeb8c2;cursor:not-allowed;}
+  .result{text-align:center;padding:14px 0;}
+  .result .big{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-weight:700;font-size:54px;color:var(--wave-deep);line-height:1;}
+  .result .lbl{font-weight:600;font-size:20px;margin-top:8px;}
+  .result .msg{color:var(--ink-soft);margin-top:6px;}
+  .qsent{font-size:12.5px;text-align:center;margin-top:12px;color:var(--ink-soft);}
+  .qsent.ok{color:var(--good);}
+  .retry{margin-top:20px;background:var(--amp);color:#fff;border:none;cursor:pointer;
+    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:15px;padding:11px 26px;border-radius:10px;}
+  .newstu{margin-top:14px;border:none;background:none;color:var(--wave-deep);font-weight:700;
+    text-decoration:underline;cursor:pointer;font-family:"Noto Sans Malayalam",sans-serif;font-size:13px;display:block;margin-left:auto;margin-right:auto;}
+
+  footer{text-align:center;font-size:11.5px;color:var(--ink-soft);padding:10px 12px 22px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div>
+      <h1><span class="t-ml">കാഴ്ചയും വർണ്ണങ്ങളുടെ ലോകവും — ക്വിസ്</span><span class="t-en">Vision and the World of Colours — Quiz</span></h1>
+      <p class="sub"><span class="t-ml">Abacus Academy · Class 10 Physics</span><span class="t-en">Abacus Academy · Class 10 Physics</span></p>
+    </div>
+    <div class="langbar">
+      <button id="btnML" class="on">മല</button>
+      <button id="btnEN">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div style="max-width:520px;width:100%">
+    <div class="quiz-card" id="gateScreen" style="display:none">
+      <div class="gate">
+        <p><span class="t-ml">ക്വിസ് ഇന്ന് ആരംഭിക്കുന്നത്</span><span class="t-en">Today's quiz opens at</span></p>
+        <div class="clock">9:00 PM</div>
+        <p id="gateNow"></p>
+        <p><span class="t-ml">9 മണി കഴിഞ്ഞാൽ ഈ പേജ് ഓട്ടോമാറ്റിക്കായി തുറക്കും — റീലോഡ് ചെയ്യേണ്ടതില്ല.</span>
+           <span class="t-en">This page will unlock automatically after 9:00 PM — no need to reload.</span></p>
+      </div>
+    </div>
+    <div class="quiz-card" id="quizArea" style="display:none">
+      <div id="quizCard"></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span class="t-ml">Abacus Academy — Parambil Peedika &amp; Puthur Pallikkal</span>
+  <span class="t-en">Abacus Academy — Parambil Peedika &amp; Puthur Pallikkal</span>
+</footer>
+
+<script>
+/* ================= LANGUAGE ================= */
+let LANG='ml';
+const btnML=document.getElementById('btnML'), btnEN=document.getElementById('btnEN');
+function setLang(l){
+  LANG=l;
+  document.body.classList.toggle('lang-en', l==='en');
+  document.documentElement.lang=l;
+  btnML.classList.toggle('on', l==='ml');
+  btnEN.classList.toggle('on', l==='en');
+  updateGateText();
+  renderCurrent();
+}
+btnML.addEventListener('click',()=>setLang('ml'));
+btnEN.addEventListener('click',()=>setLang('en'));
+
+/* ================= TIME GATE — opens daily at 9:00 PM (device clock) =================
+   This is a soft client-side gate (based on the student's device clock), not a
+   server-verified lock. Good enough to stop casual early access; a student who
+   changes their phone's clock could bypass it. */
+const OPEN_HOUR = 21;
+function isOpenNow(){ return new Date().getHours() >= OPEN_HOUR; }
+function updateGateText(){
+  const el=document.getElementById('gateNow');
+  if(!el) return;
+  const now=new Date();
+  const label = LANG==='ml' ? 'ഇപ്പോൾ സമയം: ' : 'Current time: ';
+  el.textContent = label + now.toLocaleTimeString('en-GB');
+}
+function checkGate(){
+  const gate=document.getElementById('gateScreen'), area=document.getElementById('quizArea');
+  if(isOpenNow()){
+    gate.style.display='none'; area.style.display='block';
+    if(!quizStarted){ quizStarted=true; quizState='start'; renderCurrent(); }
+  } else {
+    gate.style.display='block'; area.style.display='none';
+    updateGateText();
+  }
+}
+let quizStarted=false;
+setInterval(checkGate, 15000);
+
+/* ================= DAILY-EXAM RESULT COLLECTION — via Google Form =================
+   HOW THIS WORKS:
+   Google Forms accept submissions from plain JS (no login needed) at their
+   "formResponse" URL, using each question's entry.XXXXXXX ID as the field name.
+   Fill these five constants in after creating your Form (see the setup steps
+   you were given), then every quiz submission auto-appears in the Form's
+   linked Google Sheet — no Apps Script deployment needed.
+================================================================= */
+const FORM_ACTION_URL = "PASTE_YOUR_GOOGLE_FORM_FORMRESPONSE_URL_HERE";
+const ENTRY_NAME     = "PASTE_ENTRY_ID_FOR_NAME";
+const ENTRY_BRANCH   = "PASTE_ENTRY_ID_FOR_BRANCH";
+const ENTRY_REGISTER = "PASTE_ENTRY_ID_FOR_REGISTER_NUMBER";
+const ENTRY_SCORE    = "PASTE_ENTRY_ID_FOR_SCORE";
+// optional — leave blank ("") if you didn't add these questions to the Form
+const ENTRY_CHAPTER  = "";
+const ENTRY_DATE     = "";
+
+const CHAPTER_TITLE = "കാഴ്ചയും വർണ്ണങ്ങളുടെ ലോകവും | Vision and the World of Colours";
+
+const PENDING_KEY='formPendingResults_v1';
+function getPending(){ try{ return JSON.parse(localStorage.getItem(PENDING_KEY)||'[]'); }catch(e){ return []; } }
+function setPending(arr){ try{ localStorage.setItem(PENDING_KEY, JSON.stringify(arr)); }catch(e){} }
+function queuePending(fd){ const arr=getPending(); arr.push(fd); setPending(arr); }
+function removePending(fd){ setPending(getPending().filter(p=>p._id!==fd._id)); }
+
+function buildFormBody(fd){
+  const params=new URLSearchParams();
+  params.append(ENTRY_NAME, fd.name);
+  params.append(ENTRY_BRANCH, fd.branch);
+  params.append(ENTRY_REGISTER, fd.register);
+  params.append(ENTRY_SCORE, fd.scoreText);
+  if(ENTRY_CHAPTER) params.append(ENTRY_CHAPTER, fd.chapter);
+  if(ENTRY_DATE) params.append(ENTRY_DATE, fd.date);
+  return params;
+}
+function sendToForm(fd){
+  return fetch(FORM_ACTION_URL, { method:'POST', mode:'no-cors', body: buildFormBody(fd) });
+}
+let currentSubmitId=null;
+function trySend(fd, attempt){
+  attempt = attempt||0;
+  sendToForm(fd).then(()=>{
+    removePending(fd);
+    if(fd._id===currentSubmitId){ const el=document.getElementById('qsent'); if(el){ el.textContent='✓ '+T[LANG].sentOk; el.classList.add('ok'); } }
+  }).catch(()=>{
+    if(attempt<3){ setTimeout(()=>trySend(fd, attempt+1), 2500*(attempt+1)); }
+    else if(fd._id===currentSubmitId){ const el=document.getElementById('qsent'); if(el){ el.textContent='⚠ '+T[LANG].sentFail; } }
+  });
+}
+function flushPending(){
+  if(!FORM_ACTION_URL || FORM_ACTION_URL.indexOf('PASTE_YOUR')===0) return;
+  getPending().forEach(p=>trySend(p));
+}
+function submitResult(pct){
+  const s=()=>document.getElementById('qsent');
+  if(!FORM_ACTION_URL || FORM_ACTION_URL.indexOf('PASTE_YOUR')===0){ if(s()) s().textContent=''; return; }
+  const now=new Date();
+  const fd={
+    _id: Date.now()+'-'+Math.random().toString(36).slice(2),
+    name: studentName, branch: studentBranch, register: studentRegister,
+    scoreText: score+' / '+quiz.length+' ('+pct+'%)',
+    chapter: CHAPTER_TITLE, date: now.toLocaleDateString('en-GB')
+  };
+  currentSubmitId = fd._id;
+  queuePending(fd);
+  trySend(fd);
+}
+flushPending();
+
+/* ================= QUIZ ================= */
+const quiz=[
+  {qml:"ദൃശ്യപ്രകാശത്തിന്റെ ഏകദേശ തരംഗദൈർഘ്യപരിധി എത്ര?", qen:"What is the approximate wavelength range of visible light?",
+   oml:["380–750 nm","100–380 nm","750–1000 nm","10–100 nm"], oen:["380–750 nm","100–380 nm","750–1000 nm","10–100 nm"], a:0,
+   fml:"ദൃശ്യപ്രകാശത്തിന്റെ തരംഗദൈർഘ്യപരിധി 380 nm (വയലറ്റ്) മുതൽ 750 nm (ചുവപ്പ്) വരെയാണ്.",
+   fen:"Visible light ranges from about 380 nm (violet) to 750 nm (red)."},
+  {qml:"പ്രിസത്തിലൂടെ ധവളപ്രകാശം കടക്കുമ്പോൾ പ്രകീർണ്ണനം സംഭവിക്കാനുള്ള കാരണം?", qen:"What causes white light to disperse into colours when passing through a prism?",
+   oml:["ഓരോ വർണ്ണത്തിനും വ്യത്യസ്ത അപവർത്തനവ്യതിയാനം","എല്ലാ വർണ്ണങ്ങൾക്കും ഒരേ വേഗത","പ്രതിഫലനം","വിസരണം മാത്രം"],
+   oen:["Each colour deviates by a different amount on refraction","All colours travel at the same speed","Reflection","Scattering alone"], a:0,
+   fml:"ഓരോ വർണ്ണത്തിന്റെയും തരംഗദൈർഘ്യം വ്യത്യസ്തമായതിനാൽ അപവർത്തനവ്യതിയാനവും വ്യത്യസ്തമാകുന്നു — ഇതാണ് പ്രകീർണ്ണനത്തിന് കാരണം.",
+   fen:"Since each colour has a different wavelength, each deviates by a different amount on refraction — this causes dispersion."},
+  {qml:"മഴവില്ല് രൂപപ്പെടുമ്പോൾ ജലകണികയിൽ എത്ര അപവർത്തനങ്ങൾ സംഭവിക്കുന്നു?", qen:"How many refractions occur inside a water droplet during rainbow formation?",
+   oml:["ഒന്ന്","രണ്ട്","മൂന്ന്","നാല്"], oen:["One","Two","Three","Four"], a:1,
+   fml:"പ്രകാശം കണികയിലേക്ക് കടക്കുമ്പോൾ ഒരു അപവർത്തനവും, പുറത്തേക്ക് വരുമ്പോൾ മറ്റൊരു അപവർത്തനവും — ഇവയ്ക്കിടയിൽ ഒരു ആന്തരപ്രതിപതനവും സംഭവിക്കുന്നു.",
+   fen:"One refraction as light enters the droplet and another as it exits, with one total internal reflection in between."},
+  {qml:"കൃത്രിമമായി മഴവില്ല് ഉണ്ടാക്കാൻ കഴിയുന്ന വഴി ഏത്?", qen:"How can a rainbow be created artificially?",
+   oml:["മുറിയിൽ ടോർച്ച് അടിച്ച്","നല്ല സൂര്യപ്രകാശമുള്ളപ്പോൾ വെള്ളം സ്പ്രേ ചെയ്ത്","കണ്ണാടി ഉപയോഗിച്ച്","ഇരുട്ടിൽ മെഴുകുതിരി കത്തിച്ച്"],
+   oen:["By shining a torch indoors","By spraying water into the air in bright sunshine","Using a mirror","Lighting a candle in the dark"], a:1,
+   fml:"നല്ല സൂര്യപ്രകാശമുള്ളപ്പോൾ അന്തരീക്ഷത്തിലേക്ക് വെള്ളം സ്പ്രേ ചെയ്താൽ ജലകണികകൾ പ്രിസങ്ങളായി പ്രവർത്തിച്ച് മഴവില്ല് ഉണ്ടാക്കും.",
+   fen:"Spraying water into the air when the Sun shines brightly makes the droplets act as prisms, creating a rainbow."},
+  {qml:"ഒരു പ്രിസത്തിലൂടെ വേർപിരിഞ്ഞ ഘടകവർണ്ണങ്ങളെ വീണ്ടും ധവളപ്രകാശമാക്കാൻ എന്ത് ചെയ്യണം?", qen:"How can the colours split by a prism be recombined into white light?",
+   oml:["അവയെ ആഗിരണം ചെയ്യിക്കണം","അതേ പാതയിൽ മറ്റൊരു സമാന പ്രിസത്തിലൂടെ കടത്തിവിടണം","കണ്ണാടിയിൽ പ്രതിഫലിപ്പിക്കണം","ഫിൽട്ടർ ഉപയോഗിക്കണം"],
+   oen:["Absorb them","Pass them through a second identical prism placed in their path","Reflect them off a mirror","Use a filter"], a:1,
+   fml:"വേർപിരിഞ്ഞ വർണ്ണങ്ങളെ അതേ പാതയിലുള്ള മറ്റൊരു സമാന പ്രിസത്തിലൂടെ കടത്തിവിട്ടാൽ അവ വീണ്ടും ചേർന്ന് ധവളപ്രകാശം ലഭിക്കും.",
+   fen:"Passing the separated colours through a second, identical prism placed in their path recombines them into white light."},
+  {qml:"പ്രിന്റിങിൽ ഉപയോഗിക്കുന്ന പ്രാഥമിക ചായങ്ങൾ (dyes/pigments) ഏവ?", qen:"What are the primary dyes/pigments used in printing?",
+   oml:["ചുവപ്പ്, പച്ച, നീല","സയൻ, മജന്ത, മഞ്ഞ","കറുപ്പ്, വെളുപ്പ്, ചാരം","വയലറ്റ്, ഓറഞ്ച്, പച്ച"],
+   oen:["Red, Green, Blue","Cyan, Magenta, Yellow","Black, White, Grey","Violet, Orange, Green"], a:1,
+   fml:"പ്രകാശത്തിന്റെ പ്രാഥമികവർണ്ണങ്ങൾ RGB ആണെങ്കിലും, ചായങ്ങളുടെ പ്രാഥമികവർണ്ണങ്ങൾ സയൻ, മജന്ത, മഞ്ഞ (CMY) ആണ്.",
+   fen:"While the primary colours of light are RGB, the primary dyes/pigments are Cyan, Magenta and Yellow (CMY)."},
+  {qml:"പച്ചയും നീലയും ചേരുമ്പോൾ ലഭിക്കുന്ന വർണ്ണം ഏത്?", qen:"What colour results from combining green and blue light?",
+   oml:["മഞ്ഞ","സയൻ","മജന്ത","ധവളം"], oen:["Yellow","Cyan","Magenta","White"], a:1,
+   fml:"പച്ച + നീല = സയൻ.", fen:"Green + Blue = Cyan."},
+  {qml:"ചുവപ്പും നീലയും ചേരുമ്പോൾ ലഭിക്കുന്ന വർണ്ണം ഏത്?", qen:"What colour results from combining red and blue light?",
+   oml:["മജന്ത","സയൻ","മഞ്ഞ","കറുപ്പ്"], oen:["Magenta","Cyan","Yellow","Black"], a:0,
+   fml:"ചുവപ്പ് + നീല = മജന്ത.", fen:"Red + Blue = Magenta."},
+  {qml:"ഒരു ഫിൽട്ടർ ഏതൊക്കെ വർണ്ണങ്ങളെയാണ് കടത്തിവിടുന്നത്?", qen:"Which colours does a filter transmit?",
+   oml:["എല്ലാ വർണ്ണങ്ങളെയും","അതിന്റെ സ്വന്തം നിറവും ഘടകവർണ്ണങ്ങളും മാത്രം","കറുപ്പ് മാത്രം","പൂരകവർണ്ണം മാത്രം"],
+   oen:["All colours","Only its own colour and its component colours","Only black","Only its complementary colour"], a:1,
+   fml:"ഒരു ഫിൽട്ടർ അതിന്റെ സ്വന്തം നിറത്തെയും ഘടകവർണ്ണങ്ങളെയും മാത്രം കടത്തിവിടുകയും മറ്റുള്ളവയെ ആഗിരണം ചെയ്യുകയും ചെയ്യുന്നു.",
+   fen:"A filter transmits only its own colour and its component colours, absorbing the rest."},
+  {qml:"വെളുത്ത പ്രകാശത്തിൽ പച്ചയായി കാണപ്പെടുന്ന ഒരു ഇല, ശുദ്ധമായ ചുവന്ന വെളിച്ചത്തിൽ വച്ചാൽ എങ്ങനെ കാണപ്പെടും?", qen:"A leaf that looks green in white light will appear how under pure red light?",
+   oml:["പച്ചയായി തന്നെ","ഇരുണ്ടതായി (കറുപ്പ്)","ചുവപ്പായി","മഞ്ഞയായി"], oen:["Still green","Dark (black)","Red","Yellow"], a:1,
+   fml:"ഇലയ്ക്ക് പ്രതിപതിപ്പിക്കാൻ പച്ചവർണ്ണം ലഭ്യമല്ലാത്തതിനാൽ അത് ഇരുണ്ടതായി കാണപ്പെടും.",
+   fen:"Since no green light is available for the leaf to reflect, it appears dark."},
+  {qml:"അന്തരീക്ഷത്തിൽ ഏറ്റവും കുറവ് വിസരണം ചെയ്യപ്പെടുന്ന വർണ്ണം ഏത്?", qen:"Which colour is scattered the least by the atmosphere?",
+   oml:["വയലറ്റ്","നീല","ചുവപ്പ്","ഇൻഡിഗോ"], oen:["Violet","Blue","Red","Indigo"], a:2,
+   fml:"തരംഗദൈർഘ്യം കൂടിയ ചുവപ്പിന് വിസരണം ഏറ്റവും കുറവാണ്.", fen:"Red, having the longest wavelength, is scattered the least."},
+  {qml:"ഉദയാസ്തമയ സമയങ്ങളിൽ സൂര്യൻ ചുവപ്പായി കാണപ്പെടാനുള്ള കാരണം?", qen:"Why does the Sun appear red at sunrise/sunset?",
+   oml:["സൂര്യൻ യഥാർത്ഥത്തിൽ ചുവപ്പാണ്","നീല വർണ്ണം ദീർഘമായ പാതയിൽ വിസരണം ചെയ്ത് നഷ്ടപ്പെടുന്നു","അന്തരീക്ഷത്തിൽ ചുവപ്പ് വാതകം ഉള്ളതിനാൽ","കണ്ണിന്റെ ക്ഷീണം കൊണ്ട്"],
+   oen:["The Sun is actually red","Blue light is scattered away over the long atmospheric path","The atmosphere contains red gas","Due to eye fatigue"], a:1,
+   fml:"ദീർഘമായ പാതയിൽ നീല വർണ്ണം മിക്കവാറും പൂർണ്ണമായി വിസരണം ചെയ്യപ്പെടുന്നു; ചുവപ്പ്, ഓറഞ്ച്, മഞ്ഞ വർണ്ണങ്ങൾ മാത്രം അവശേഷിച്ച് കണ്ണിലെത്തുന്നു.",
+   fen:"Over the long path, blue light is almost completely scattered away; only red, orange and yellow remain to reach the eye."},
+  {qml:"വൈദ്യുതകാന്തികസ്പെക്ട്രത്തിൽ ഏറ്റവും കുറഞ്ഞ തരംഗദൈർഘ്യമുള്ളത് ഏത്?", qen:"Which has the shortest wavelength in the electromagnetic spectrum?",
+   oml:["റേഡിയോതരംഗങ്ങൾ","ഇൻഫ്രാറെഡ്","ദൃശ്യപ്രകാശം","ഗാമ വികിരണം"], oen:["Radio waves","Infrared","Visible light","Gamma rays"], a:3,
+   fml:"ഗാമ വികിരണത്തിനാണ് വൈദ്യുതകാന്തികസ്പെക്ട്രത്തിൽ ഏറ്റവും കുറഞ്ഞ തരംഗദൈർഘ്യം.",
+   fen:"Gamma rays have the shortest wavelength in the electromagnetic spectrum."},
+  {qml:"ശൂന്യതയിൽ വൈദ്യുതകാന്തിക വികിരണങ്ങളുടെ വേഗം എത്ര?", qen:"What is the speed of electromagnetic radiation in vacuum?",
+   oml:["3 × 10⁵ m/s","3 × 10⁶ m/s","3 × 10⁸ m/s","3 × 10¹⁰ m/s"], oen:["3 × 10⁵ m/s","3 × 10⁶ m/s","3 × 10⁸ m/s","3 × 10¹⁰ m/s"], a:2,
+   fml:"എല്ലാ വൈദ്യുതകാന്തിക വികിരണങ്ങളും ശൂന്യതയിലൂടെ 3 × 10⁸ m/s വേഗത്തിൽ സഞ്ചരിക്കുന്നു.",
+   fen:"All electromagnetic radiations travel through vacuum at 3 × 10⁸ m/s."},
+  {qml:"സൗരവികിരണങ്ങൾ ഭൂമിയിൽ എത്താൻ ഏകദേശം എത്ര ദൂരം സഞ്ചരിക്കുന്നു?", qen:"About how far does solar radiation travel to reach Earth?",
+   oml:["15 ലക്ഷം കി.മീ","1.5 കോടി കി.മീ","15 കോടി കി.മീ","150 കോടി കി.മീ"], oen:["1.5 million km","15 million km","150 million km","1.5 billion km"], a:2,
+   fml:"സൗരവികിരണങ്ങൾ ശരാശരി 15 കോടി കിലോമീറ്റർ (150 million km) സഞ്ചരിച്ചാണ് ഭൂമിയിൽ എത്തുന്നത്.",
+   fen:"Solar radiation travels an average of about 150 million km before reaching Earth."},
+  {qml:"ലെൻസ് ഉപയോഗിച്ച് കേന്ദ്രീകരിച്ചാൽ വസ്തുക്കൾ കത്തിക്കാൻ കഴിയുന്ന വികിരണം ഏത്?", qen:"Which radiation, when focused with a lens, can burn objects?",
+   oml:["അൾട്രാവയലറ്റ്","ഇൻഫ്രാറെഡ്","ദൃശ്യപ്രകാശം","റേഡിയോതരംഗം"], oen:["Ultraviolet","Infrared","Visible light","Radio waves"], a:1,
+   fml:"ഇൻഫ്രാറെഡ് വികിരണം ലെൻസ് ഉപയോഗിച്ച് കേന്ദ്രീകരിച്ചാൽ വസ്തുക്കൾ കത്തിക്കാൻ കഴിയും.",
+   fen:"Infrared radiation, when focused with a lens, can burn objects."},
+  {qml:"സീലിയറി പേശികൾ സങ്കോചിക്കുമ്പോൾ കണ്ണിന്റെ ലെൻസിന് എന്ത് സംഭവിക്കുന്നു?", qen:"What happens to the eye lens when the ciliary muscles contract?",
+   oml:["വക്രത കൂടുകയും ഫോക്കസ്ദൂരം കുറയുകയും ചെയ്യുന്നു","വക്രത കുറയുകയും ഫോക്കസ്ദൂരം കൂടുകയും ചെയ്യുന്നു","ലെൻസ് പരന്നതാവുന്നു","ഒരു മാറ്റവും സംഭവിക്കില്ല"],
+   oen:["Curvature increases and focal length decreases","Curvature decreases and focal length increases","The lens flattens","No change occurs"], a:0,
+   fml:"സീലിയറി പേശികൾ സങ്കോചിക്കുമ്പോൾ ലെൻസിന്റെ വക്രത കൂടുകയും ഫോക്കസ്ദൂരം കുറയുകയും ചെയ്യുന്നു — ഇത് അടുത്ത വസ്തുക്കൾ കാണാൻ സഹായിക്കുന്നു.",
+   fen:"When the ciliary muscles contract, the lens curvature increases and the focal length decreases — helping to view nearby objects."},
+  {qml:"വ്യക്തമായ കാഴ്ചയ്ക്കുള്ള കുറഞ്ഞ ദൂരം (Least distance of distinct vision) എത്രയാണ്?", qen:"What is the least distance of distinct vision?",
+   oml:["10 cm","25 cm","50 cm","100 cm"], oen:["10 cm","25 cm","50 cm","100 cm"], a:1,
+   fml:"ആരോഗ്യമുള്ള കണ്ണിന്റെ നിയർ പോയിന്റ്/വ്യക്തമായ കാഴ്ചയ്ക്കുള്ള കുറഞ്ഞ ദൂരം 25 cm ആയി കണക്കാക്കുന്നു.",
+   fen:"For a healthy eye, the near point / least distance of distinct vision is taken as 25 cm."},
+  {qml:"ഹ്രസ്വദൃഷ്ടിക്ക് (myopia) ഒരു കാരണം ഏത്?", qen:"What is one cause of myopia?",
+   oml:["നേത്രഗോളം ചെറുതാവുക","നേത്രഗോളം കൂടുതൽ നീണ്ടതാവുകയോ ലെൻസ് പവർ കൂടുതലാവുകയോ ചെയ്യുക","സീലിയറി പേശികളുടെ ക്ഷമത കൂടുക","കോർണിയ കട്ടിയാവുക"],
+   oen:["A smaller eyeball","An elongated eyeball or excessive lens power","Increased ciliary muscle strength","A thicker cornea"], a:1,
+   fml:"നേത്രഗോളത്തിന്റെ വലുപ്പം കൂടുതലാവുകയോ ലെൻസിന്റെ പവർ കൂടുതലാവുകയോ ചെയ്യുന്നതാണ് ഹ്രസ്വദൃഷ്ടിക്ക് കാരണം.",
+   fen:"Myopia is caused by an elongated eyeball or excessive power of the eye lens."},
+  {qml:"ഫോട്ടോപീരിയോഡിസം (Photoperiodism) എന്നാൽ എന്ത്?", qen:"What is photoperiodism?",
+   oml:["രാത്രി കാഴ്ച നഷ്ടപ്പെടുന്ന അവസ്ഥ","പകലിന്റെ ദൈർഘ്യത്തിലെ മാറ്റത്തിനനുസരിച്ച് ജീവികൾ പ്രവർത്തനങ്ങൾ ക്രമീകരിക്കുന്ന പ്രതിഭാസം","പ്രകാശം കൊണ്ട് ഫോട്ടോ എടുക്കൽ","കണ്ണിന്റെ ഒരു ന്യൂനത"],
+   oen:["Loss of night vision","The phenomenon where organisms adjust activities according to changes in day length","Taking photographs using light","A defect of the eye"], a:1,
+   fml:"പകലിന്റെ ദൈർഘ്യത്തിലെ മാറ്റത്തിനനുസരിച്ച് സസ്യങ്ങളും ജീവികളും അവയുടെ പ്രവർത്തനങ്ങൾ (പൂക്കൽ, ഇലപൊഴിക്കൽ) ക്രമീകരിക്കുന്ന പ്രതിഭാസമാണ് ഫോട്ടോപീരിയോഡിസം.",
+   fen:"Photoperiodism is the phenomenon by which plants and animals adjust their activities (flowering, leaf shedding) according to changes in day length."}
+];
+
+let qi=0,score=0,answered=false;
+let quizState='start';
+let studentName='', studentBranch='', studentRegister='';
+let resultSubmitted=false;
+const qc=document.getElementById('quizCard');
+
+function renderCurrent(){
+  if(quizState==='start') renderStart();
+  else if(quizState==='quiz') renderQ();
+  else renderResult();
+}
+
+function renderStart(){
+  const t=T[LANG];
+  qc.innerHTML=`
+    <div class="qstart">
+      <p class="qflabel">${t.nameLabel}</p>
+      <input type="text" id="stName" placeholder="${t.namePh}" value="${studentName.replace(/"/g,'&quot;')}">
+      <p class="qflabel">${t.branchLabel}</p>
+      <select id="stBranch">
+        <option value="">${t.branchPh}</option>
+        <option value="Abacus Academy, Puthur Pallikkal" ${studentBranch==='Abacus Academy, Puthur Pallikkal'?'selected':''}>${t.branch1}</option>
+        <option value="Abacus Academy, Parambil Peedika" ${studentBranch==='Abacus Academy, Parambil Peedika'?'selected':''}>${t.branch2}</option>
+      </select>
+      <p class="qflabel">${t.registerLabel}</p>
+      <input type="text" id="stRegister" inputmode="numeric" placeholder="${t.registerPh}" value="${studentRegister.replace(/"/g,'&quot;')}">
+      <p class="qerr" id="qerr">${t.errFields}</p>
+      <button class="qnext" id="qstartBtn">${t.startBtn}</button>
+    </div>`;
+  document.getElementById('qstartBtn').addEventListener('click', beginQuiz);
+}
+
+function beginQuiz(){
+  const nameVal=document.getElementById('stName').value.trim();
+  const branchVal=document.getElementById('stBranch').value;
+  const regVal=document.getElementById('stRegister').value.trim();
+  if(!nameVal || !branchVal || !regVal){ document.getElementById('qerr').classList.add('show'); return; }
+  studentName=nameVal; studentBranch=branchVal; studentRegister=regVal;
+  qi=0; score=0; resultSubmitted=false; quizState='quiz';
+  renderQ();
+}
+
+function renderQ(){
+  answered=false; qi=Math.min(qi,quiz.length-1);
+  const t=T[LANG], item=quiz[qi];
+  const qtext = LANG==='ml'?item.qml:item.qen;
+  const opts  = LANG==='ml'?item.oml:item.oen;
+  qc.innerHTML=`
+    <div class="qwho">
+      <span>${t.attemptedAs} <b>${studentName}</b> · ${studentRegister}</span>
+      <button id="qswitch">${t.notYou}</button>
+    </div>
+    <div class="qmeta">
+      <span class="qcount">${t.q} ${qi+1} / ${quiz.length}</span>
+      <span class="qscore">${t.score}: ${score}</span>
+    </div>
+    <div class="qbar"><i style="width:${qi/quiz.length*100}%"></i></div>
+    <p class="qtext">${qtext}</p>
+    <div id="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div>
+    <div class="qfb" id="qfb"></div>
+    <button class="qnext" id="qnext" disabled>${qi===quiz.length-1?t.result:t.next}</button>`;
+  qc.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',pick));
+  document.getElementById('qnext').addEventListener('click',()=>{
+    if(qi<quiz.length-1){ qi++; renderQ(); }
+    else { quizState='result'; renderResult(); }
+  });
+  document.getElementById('qswitch').addEventListener('click',()=>{
+    quizState='start'; studentName=''; studentBranch=''; studentRegister=''; qi=0; score=0; renderStart();
+  });
+}
+function pick(e){
+  if(answered)return; answered=true;
+  const t=T[LANG], chosen=+e.currentTarget.dataset.i, correct=quiz[qi].a;
+  qc.querySelectorAll('.opt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===correct)b.classList.add('correct');
+    if(i===chosen&&chosen!==correct)b.classList.add('wrong');
+  });
+  const fb=document.getElementById('qfb');
+  const expl = LANG==='ml'?quiz[qi].fml:quiz[qi].fen;
+  if(chosen===correct){score++;fb.className='qfb show ok';fb.innerHTML='✓ '+expl;}
+  else{fb.className='qfb show no';fb.innerHTML='✗ '+expl;}
+  document.querySelector('.qscore').textContent=t.score+': '+score;
+  document.getElementById('qnext').disabled=false;
+}
+function renderResult(){
+  const t=T[LANG], pct=Math.round(score/quiz.length*100);
+  const msg = pct>=80?t.good : pct>=50?t.mid : t.low;
+  qc.innerHTML=`<div class="result">
+    <div class="qwho" style="justify-content:center">
+      <span><b>${studentName}</b> · ${studentRegister} · ${studentBranch}</span>
+    </div>
+    <div class="big">${score}<span style="font-size:24px;color:var(--ink-soft)">/${quiz.length}</span></div>
+    <div class="lbl">${pct}% ${t.correct}</div>
+    <div class="msg">${msg}</div>
+    <div class="qsent" id="qsent">${t.sending}</div>
+    <button class="retry" id="retry">${t.retry}</button>
+    <button class="newstu" id="newStudent">${t.newStudent}</button>
+  </div>`;
+  document.getElementById('retry').addEventListener('click',()=>{
+    qi=0; score=0; resultSubmitted=false; quizState='quiz'; renderQ();
+  });
+  document.getElementById('newStudent').addEventListener('click',()=>{
+    quizState='start'; studentName=''; studentBranch=''; studentRegister=''; qi=0; score=0; renderStart();
+  });
+  if(!resultSubmitted){ resultSubmitted=true; submitResult(pct); }
+  else { const s=document.getElementById('qsent'); if(s){ s.textContent=T[LANG].sentAlready; s.classList.add('ok'); } }
+}
+
+const T={
+  ml:{q:"ചോദ്യം",score:"സ്കോർ",next:"അടുത്ത ചോദ്യം ▸",result:"ഫലം കാണാം ▸",correct:"ശരി",retry:"വീണ്ടും ശ്രമിക്കാം ↻",
+      good:"മികച്ചത്! നന്നായി പഠിച്ചു 🌟",mid:"നന്നായി വരുന്നു — ഒന്നു കൂടി റിവിഷൻ ചെയ്യാം 👍",low:"കുറിപ്പുകൾ ഒന്നുകൂടി വായിച്ച് വീണ്ടും ശ്രമിക്കാം 📘",
+      nameLabel:"പേര്",namePh:"ഉദാ: അമൽ കൃഷ്ണ",
+      branchLabel:"ബ്രാഞ്ച്",branchPh:"തിരഞ്ഞെടുക്കുക",branch1:"Abacus Academy, Puthur Pallikkal",branch2:"Abacus Academy, Parambil Peedika",
+      registerLabel:"രജിസ്റ്റർ നമ്പർ",registerPh:"ഉദാ: 24",
+      errFields:"എല്ലാ വിവരങ്ങളും പൂരിപ്പിക്കുക",startBtn:"ക്വിസ് തുടങ്ങൂ ▸",attemptedAs:"എഴുതുന്നത്:",notYou:"ഞാനല്ല ↻",
+      sending:"ഫലം രേഖപ്പെടുത്തുന്നു...",sentOk:"ഫലം രേഖപ്പെടുത്തി",sentFail:"നെറ്റ്‌വർക്ക് തിരക്ക് — വീണ്ടും ശ്രമിക്കുന്നു, പേജ് അടയ്ക്കരുത്",
+      sentAlready:"ഫലം നേരത്തെ രേഖപ്പെടുത്തിയിരുന്നു",newStudent:"അടുത്ത കുട്ടി / പുതിയ ശ്രമം ▸"},
+  en:{q:"Question",score:"Score",next:"Next question ▸",result:"See result ▸",correct:"correct",retry:"Try again ↻",
+      good:"Excellent! Well studied 🌟",mid:"Coming along nicely — one more revision 👍",low:"Read the notes once more and try again 📘",
+      nameLabel:"Name",namePh:"e.g. Amal Krishna",
+      branchLabel:"Branch",branchPh:"Select",branch1:"Abacus Academy, Puthur Pallikkal",branch2:"Abacus Academy, Parambil Peedika",
+      registerLabel:"Register number",registerPh:"e.g. 24",
+      errFields:"Please fill in all fields",startBtn:"Start quiz ▸",attemptedAs:"Attempting as:",notYou:"Not you ↻",
+      sending:"Recording result...",sentOk:"Result recorded",sentFail:"Network busy — retrying, don't close the page",
+      sentAlready:"Result was already recorded",newStudent:"Next student / New attempt ▸"}
+};
+
+checkGate();
+updateGateText();
+</script>
+</body>
+</html>
