@@ -173,48 +173,32 @@ function checkGate(){
 let quizStarted=false;
 setInterval(checkGate, 15000);
 
-/* ================= DAILY-EXAM RESULT COLLECTION — via Google Form =================
-   HOW THIS WORKS:
-   Google Forms accept submissions from plain JS (no login needed) at their
-   "formResponse" URL, using each question's entry.XXXXXXX ID as the field name.
-   Fill these five constants in after creating your Form (see the setup steps
-   you were given), then every quiz submission auto-appears in the Form's
-   linked Google Sheet — no Apps Script deployment needed.
+/* ================= DAILY-EXAM RESULT COLLECTION — via Apps Script + Google Sheet =================
+   Deploy the Code.gs given to you as a Web App (Extensions ▸ Apps Script ▸
+   Deploy ▸ New deployment ▸ Web app ▸ Execute as: Me ▸ Access: Anyone),
+   then paste the /exec URL below. No entry IDs, no Google Form needed —
+   every submission appends a row straight into your Sheet.
 ================================================================= */
-const FORM_ACTION_URL = "PASTE_YOUR_GOOGLE_FORM_FORMRESPONSE_URL_HERE";
-const ENTRY_NAME     = "PASTE_ENTRY_ID_FOR_NAME";
-const ENTRY_BRANCH   = "PASTE_ENTRY_ID_FOR_BRANCH";
-const ENTRY_REGISTER = "PASTE_ENTRY_ID_FOR_REGISTER_NUMBER";
-const ENTRY_SCORE    = "PASTE_ENTRY_ID_FOR_SCORE";
-// optional — leave blank ("") if you didn't add these questions to the Form
-const ENTRY_CHAPTER  = "";
-const ENTRY_DATE     = "";
-
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzYhqLr50qx87GuA5JSIat1f32YAraAsOeYhWZYWEISnnjAjePrk1hAeY498ZmOCR3LuQ/exec";
 const CHAPTER_TITLE = "കാഴ്ചയും വർണ്ണങ്ങളുടെ ലോകവും | Vision and the World of Colours";
 
-const PENDING_KEY='formPendingResults_v1';
+const PENDING_KEY='sheetPendingResults_v1';
 function getPending(){ try{ return JSON.parse(localStorage.getItem(PENDING_KEY)||'[]'); }catch(e){ return []; } }
 function setPending(arr){ try{ localStorage.setItem(PENDING_KEY, JSON.stringify(arr)); }catch(e){} }
 function queuePending(fd){ const arr=getPending(); arr.push(fd); setPending(arr); }
 function removePending(fd){ setPending(getPending().filter(p=>p._id!==fd._id)); }
 
-function buildFormBody(fd){
-  const params=new URLSearchParams();
-  params.append(ENTRY_NAME, fd.name);
-  params.append(ENTRY_BRANCH, fd.branch);
-  params.append(ENTRY_REGISTER, fd.register);
-  params.append(ENTRY_SCORE, fd.scoreText);
-  if(ENTRY_CHAPTER) params.append(ENTRY_CHAPTER, fd.chapter);
-  if(ENTRY_DATE) params.append(ENTRY_DATE, fd.date);
-  return params;
-}
-function sendToForm(fd){
-  return fetch(FORM_ACTION_URL, { method:'POST', mode:'no-cors', body: buildFormBody(fd) });
+function sendToSheet(fd){
+  return fetch(SCRIPT_URL, {
+    method:'POST', mode:'no-cors',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify(fd)
+  });
 }
 let currentSubmitId=null;
 function trySend(fd, attempt){
   attempt = attempt||0;
-  sendToForm(fd).then(()=>{
+  sendToSheet(fd).then(()=>{
     removePending(fd);
     if(fd._id===currentSubmitId){ const el=document.getElementById('qsent'); if(el){ el.textContent='✓ '+T[LANG].sentOk; el.classList.add('ok'); } }
   }).catch(()=>{
@@ -223,18 +207,18 @@ function trySend(fd, attempt){
   });
 }
 function flushPending(){
-  if(!FORM_ACTION_URL || FORM_ACTION_URL.indexOf('PASTE_YOUR')===0) return;
+  if(!SCRIPT_URL || SCRIPT_URL.indexOf('PASTE_YOUR')===0) return;
   getPending().forEach(p=>trySend(p));
 }
 function submitResult(pct){
   const s=()=>document.getElementById('qsent');
-  if(!FORM_ACTION_URL || FORM_ACTION_URL.indexOf('PASTE_YOUR')===0){ if(s()) s().textContent=''; return; }
+  if(!SCRIPT_URL || SCRIPT_URL.indexOf('PASTE_YOUR')===0){ if(s()) s().textContent=''; return; }
   const now=new Date();
   const fd={
     _id: Date.now()+'-'+Math.random().toString(36).slice(2),
-    name: studentName, branch: studentBranch, register: studentRegister,
-    scoreText: score+' / '+quiz.length+' ('+pct+'%)',
-    chapter: CHAPTER_TITLE, date: now.toLocaleDateString('en-GB')
+    name: studentName, centre: studentBranch, admissionNumber: studentRegister,
+    chapter: CHAPTER_TITLE, score: score, total: quiz.length, percent: pct,
+    date: now.toLocaleDateString('en-GB'), time: now.toLocaleTimeString('en-GB')
   };
   currentSubmitId = fd._id;
   queuePending(fd);
@@ -445,16 +429,16 @@ const T={
   ml:{q:"ചോദ്യം",score:"സ്കോർ",next:"അടുത്ത ചോദ്യം ▸",result:"ഫലം കാണാം ▸",correct:"ശരി",retry:"വീണ്ടും ശ്രമിക്കാം ↻",
       good:"മികച്ചത്! നന്നായി പഠിച്ചു 🌟",mid:"നന്നായി വരുന്നു — ഒന്നു കൂടി റിവിഷൻ ചെയ്യാം 👍",low:"കുറിപ്പുകൾ ഒന്നുകൂടി വായിച്ച് വീണ്ടും ശ്രമിക്കാം 📘",
       nameLabel:"പേര്",namePh:"ഉദാ: അമൽ കൃഷ്ണ",
-      branchLabel:"ബ്രാഞ്ച്",branchPh:"തിരഞ്ഞെടുക്കുക",branch1:"Abacus Academy, Puthur Pallikkal",branch2:"Abacus Academy, Parambil Peedika",
-      registerLabel:"രജിസ്റ്റർ നമ്പർ",registerPh:"ഉദാ: 24",
+      branchLabel:"സെന്റർ",branchPh:"തിരഞ്ഞെടുക്കുക",branch1:"Abacus Academy, Puthur Pallikkal",branch2:"Abacus Academy, Parambil Peedika",
+      registerLabel:"അഡ്മിഷൻ നമ്പർ",registerPh:"ഉദാ: 24",
       errFields:"എല്ലാ വിവരങ്ങളും പൂരിപ്പിക്കുക",startBtn:"ക്വിസ് തുടങ്ങൂ ▸",attemptedAs:"എഴുതുന്നത്:",notYou:"ഞാനല്ല ↻",
       sending:"ഫലം രേഖപ്പെടുത്തുന്നു...",sentOk:"ഫലം രേഖപ്പെടുത്തി",sentFail:"നെറ്റ്‌വർക്ക് തിരക്ക് — വീണ്ടും ശ്രമിക്കുന്നു, പേജ് അടയ്ക്കരുത്",
       sentAlready:"ഫലം നേരത്തെ രേഖപ്പെടുത്തിയിരുന്നു",newStudent:"അടുത്ത കുട്ടി / പുതിയ ശ്രമം ▸"},
   en:{q:"Question",score:"Score",next:"Next question ▸",result:"See result ▸",correct:"correct",retry:"Try again ↻",
       good:"Excellent! Well studied 🌟",mid:"Coming along nicely — one more revision 👍",low:"Read the notes once more and try again 📘",
       nameLabel:"Name",namePh:"e.g. Amal Krishna",
-      branchLabel:"Branch",branchPh:"Select",branch1:"Abacus Academy, Puthur Pallikkal",branch2:"Abacus Academy, Parambil Peedika",
-      registerLabel:"Register number",registerPh:"e.g. 24",
+      branchLabel:"Centre",branchPh:"Select",branch1:"Abacus Academy, Puthur Pallikkal",branch2:"Abacus Academy, Parambil Peedika",
+      registerLabel:"Admission number",registerPh:"e.g. 24",
       errFields:"Please fill in all fields",startBtn:"Start quiz ▸",attemptedAs:"Attempting as:",notYou:"Not you ↻",
       sending:"Recording result...",sentOk:"Result recorded",sentFail:"Network busy — retrying, don't close the page",
       sentAlready:"Result was already recorded",newStudent:"Next student / New attempt ▸"}
