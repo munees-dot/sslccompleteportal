@@ -1039,9 +1039,16 @@ render();
 
 function shareQuiz(){
   const html = buildStandaloneQuizHTML();
-  const blob = new Blob([html], {type:'text/html'});
-  const url = URL.createObjectURL(blob);
-  window.open(url, '_blank');
+  const win = window.open('', '_blank');
+  if(win){
+    win.document.open();
+    win.document.write(html);
+    win.document.close();
+  } else {
+    alert(currentLang === 'ml'
+      ? 'പോപ്പപ്പ് ബ്ലോക്ക് ചെയ്തിരിക്കുന്നു — ബ്രൗസർ സെറ്റിംഗ്സിൽ ഈ സൈറ്റിന് പോപ്പപ്പ് അനുവദിക്കൂ.'
+      : 'Popup blocked — please allow popups for this site in your browser settings.');
+  }
 }
 </script>
 
