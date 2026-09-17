@@ -1,261 +1,343 @@
 <!DOCTYPE html>
-<html lang="ml">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Daily Exam — Nomenclature &amp; Isomerism | Chemistry Class 10</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ക്വിസ് — യൂണിറ്റ് 3 | Abacus Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy-950:#080c17; --navy-900:#0d1428; --navy-800:#131c38; --navy-700:#1c2a4f;
-  --shell-cyan:#4fd8c9; --shell-cyan-dim:#2a5f5a; --orbit-amber:#f2b64d; --nucleus-rose:#ef6f6f;
-  --ok:#4fd88a; --bad:#ef6f6f;
-  --ink-0:#f4f7fb; --ink-1:#c3ccdc; --ink-2:#8894ac; --line:#233256; --radius:14px;
+  --ink:#1f2937; --paper:#faf6ee; --chain:#2b6e63; --chain-dark:#184d44;
+  --branch:#c1622d; --func:#7b4fa0; --line:#e1d7c3; --card:#ffffff;
 }
 *{box-sizing:border-box;}
-body{margin:0;background:radial-gradient(1100px 600px at 85% -10%, rgba(79,216,201,.10), transparent 60%),radial-gradient(900px 500px at -10% 20%, rgba(242,182,77,.08), transparent 55%),var(--navy-950);color:var(--ink-0);font-family:'Inter',sans-serif;min-height:100vh;}
-body.lang-ml .en{display:none;} body.lang-en .ml{display:none;}
-.ml{font-family:'Noto Sans Malayalam','Inter',sans-serif;}
-h1,h2,h3{font-family:'Sora','Noto Sans Malayalam',sans-serif;}
-body.lang-ml h1,body.lang-ml h2,body.lang-ml h3{font-family:'Noto Sans Malayalam',sans-serif;}
-
-.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;padding:12px 22px;background:rgba(8,12,23,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
-.brand{display:flex;align-items:center;gap:10px;flex:1;min-width:0;}
-.brand-mark{width:36px;height:36px;border-radius:10px;flex:none;background:conic-gradient(from 210deg, var(--shell-cyan), var(--orbit-amber), var(--nucleus-rose), var(--shell-cyan));display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:800;font-size:15px;color:var(--navy-950);}
-.brand-text b{display:block;font-family:'Sora',sans-serif;font-size:14.5px;}
-.brand-text span{display:block;font-size:11px;color:var(--ink-2);}
-.lang-toggle{display:flex;background:var(--navy-800);border:1px solid var(--line);border-radius:999px;padding:3px;}
-.lang-toggle button{border:none;background:transparent;color:var(--ink-2);font-weight:600;font-size:12.5px;padding:6px 13px;border-radius:999px;cursor:pointer;}
-.lang-toggle button.active{background:var(--shell-cyan);color:var(--navy-950);}
-.back-link{flex:none;color:var(--ink-1);text-decoration:none;font-size:13px;border:1px solid var(--line);padding:8px 14px;border-radius:999px;background:var(--navy-800);}
-
-.wrap{max-width:760px;margin:0 auto;padding:34px 20px 80px;}
-.hero{text-align:center;margin-bottom:26px;}
-.hero h1{font-size:clamp(22px,4vw,32px);margin:8px 0 8px;background:linear-gradient(90deg,var(--ink-0),var(--shell-cyan) 60%,var(--orbit-amber));-webkit-background-clip:text;background-clip:text;color:transparent;}
-.hero p{color:var(--ink-1);font-size:14.5px;}
-
-.part-tabs{display:flex;gap:10px;justify-content:center;margin:18px 0 26px;}
-.part-tabs button{padding:10px 20px;border-radius:999px;border:1px solid var(--line);background:var(--navy-800);color:var(--ink-1);font-weight:600;font-size:13.5px;cursor:pointer;font-family:inherit;}
-.part-tabs button.active{background:var(--shell-cyan);color:var(--navy-950);border-color:var(--shell-cyan);}
-.part-tabs button .badge{display:inline-block;margin-left:6px;font-size:11px;opacity:.85;}
-
-.part{display:none;} .part.active{display:block;}
-
-.q-card{background:linear-gradient(180deg,var(--navy-800),var(--navy-900));border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-bottom:14px;}
-.q-card .qnum{font-family:'Sora',sans-serif;font-size:11px;color:var(--shell-cyan);border:1px solid var(--shell-cyan-dim);background:rgba(79,216,201,.08);padding:3px 9px;border-radius:999px;display:inline-block;margin-bottom:10px;}
-.q-card p.qtext{font-size:15px;color:var(--ink-0);margin:0 0 14px;line-height:1.6;}
-.opts{display:flex;flex-direction:column;gap:8px;}
-.opt{display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:10px;border:1px solid var(--line);background:var(--navy-950);cursor:pointer;font-size:14px;color:var(--ink-1);transition:.15s;}
-.opt:hover{border-color:var(--shell-cyan-dim);}
-.opt.selected{border-color:var(--shell-cyan);background:rgba(79,216,201,.08);color:var(--ink-0);}
-.opt.correct{border-color:var(--ok);background:rgba(79,216,138,.12);color:var(--ink-0);}
-.opt.incorrect{border-color:var(--bad);background:rgba(239,111,111,.12);color:var(--ink-0);}
-.opt .letter{flex:none;width:22px;height:22px;border-radius:6px;background:var(--navy-800);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--ink-2);}
-.explain{display:none;margin-top:12px;padding:10px 12px;border-left:3px solid var(--orbit-amber);background:rgba(242,182,77,.07);border-radius:0 8px 8px 0;font-size:13px;color:var(--ink-1);}
-.explain.show{display:block;}
-
-.submit-bar{position:sticky;bottom:16px;display:flex;justify-content:center;margin-top:20px;}
-.submit-btn{background:var(--shell-cyan);color:var(--navy-950);font-weight:700;font-size:14.5px;padding:13px 32px;border-radius:999px;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(79,216,201,.25);}
-.submit-btn:disabled{opacity:.5;cursor:not-allowed;}
-
-.result-card{text-align:center;background:linear-gradient(120deg,rgba(79,216,201,.12),rgba(242,182,77,.10));border:1px solid var(--shell-cyan-dim);border-radius:var(--radius);padding:28px;margin-top:10px;}
-.result-card .score{font-family:'Sora',sans-serif;font-size:42px;font-weight:800;color:var(--shell-cyan);margin:6px 0;}
-.result-card p{color:var(--ink-1);font-size:14px;}
-.retry-btn{margin-top:14px;background:var(--navy-800);border:1px solid var(--line);color:var(--ink-0);padding:10px 20px;border-radius:999px;cursor:pointer;font-weight:600;font-size:13.5px;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.55;}
+body[data-lang="ml"]{font-family:'Noto Sans Malayalam','Segoe UI',system-ui,sans-serif;}
+header{background:linear-gradient(135deg,var(--chain-dark),var(--chain) 65%);color:#fff;padding:22px 18px;}
+header h1{margin:0 0 4px;font-size:1.3rem;}
+header p{margin:0;opacity:.85;font-size:.88rem;}
+.wrap{max-width:600px;margin:20px auto 40px;padding:0 14px;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(31,41,55,.04);}
+.toolbar{display:flex;justify-content:flex-end;margin-bottom:14px;}
+.toolbar button{border:none;background:var(--func);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.85rem;}
+.score-bar{background:var(--chain-dark);color:#fff;border-radius:10px;padding:10px 16px;margin-bottom:14px;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;}
+.btn{background:var(--branch);color:#fff;border:none;padding:9px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:600;}
+.quiz-q{margin-bottom:16px;padding-bottom:14px;border-bottom:1px dashed var(--line);}
+.quiz-q:last-child{border-bottom:none;}
+.quiz-opts button{display:block;width:100%;text-align:left;margin:5px 0;padding:8px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.9rem;}
+.quiz-opts button.correct{background:#dff3e8;border-color:var(--chain);font-weight:600;}
+.quiz-opts button.wrong{background:#fbe4e0;border-color:var(--branch);}
+.quiz-opts button[disabled]{cursor:default;}
+.qflabel{font-weight:600;font-size:.85rem;color:var(--ink);margin:0 0 6px;}
+.qstart input,.qstart select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:.92rem;margin:0 0 12px;background:#fff;color:var(--ink);}
+.qstart input:focus,.qstart select:focus{outline:none;border-color:var(--chain);}
+.qerr{color:#a33;font-size:.82rem;margin:-6px 0 12px;display:none;}
+.qerr.show{display:block;}
+.qwho{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--ink);background:#f2f7f5;border-radius:8px;padding:6px 12px;margin:0 0 12px;flex-wrap:wrap;gap:4px;}
+.qwho b{color:var(--chain-dark);}
+.qwho button{border:none;background:none;color:var(--chain-dark);font-weight:700;cursor:pointer;font-family:inherit;font-size:.78rem;text-decoration:underline;}
+.result-big{font-size:2.6rem;font-weight:700;color:var(--chain-dark);text-align:center;}
+.result-lbl{text-align:center;font-weight:600;font-size:1.1rem;margin-top:4px;}
+.result-msg{text-align:center;color:#555;margin-top:4px;}
+.qsent{font-size:.8rem;text-align:center;margin-top:10px;color:#555;}
+.qsent.ok{color:var(--chain-dark);}
+.gatebox{text-align:center;padding:10px 4px;}
+.gatebox b{color:var(--chain-dark);}
+footer{text-align:center;font-size:.78rem;color:#8a8067;margin:20px 0 10px;}
 </style>
 </head>
-<body class="lang-ml">
-
-<div class="topbar">
-  <div class="brand">
-    <div class="brand-mark">Aa</div>
-    <div class="brand-text">
-      <b>Abacus Academy</b>
-      <span class="ml">യൂണിറ്റ് 3 ക്വിസ്</span><span class="en">Unit 3 Quiz</span>
-    </div>
-  </div>
-  <div class="lang-toggle">
-    <button id="btn-ml" class="active" onclick="setLang('ml')">മലയാളം</button>
-    <button id="btn-en" onclick="setLang('en')">English</button>
-  </div>
-  <a class="back-link" href="chemistry-unit3.html"><span class="ml">← പഠനത്തിലേക്ക്</span><span class="en">← Back to study</span></a>
-</div>
-
+<body>
+<header>
+  <h1 id="pageTitle">Daily Exam</h1>
+  <p id="pageSub">Chemistry · Class 10 · Nomenclature &amp; Isomerism of Organic Compounds</p>
+</header>
 <div class="wrap">
-  <div class="hero">
-    <h1><span class="ml">പീരിയോഡിക് ടേബിളും ഇലക്ട്രോൺ വിന്യാസവും</span><span class="en">Periodic Table & Electron Configuration</span></h1>
-    <p class="ml">രണ്ട് ഭാഗങ്ങൾ — ഭാഗം 1 അടിസ്ഥാനം, ഭാഗം 2 പ്രയോഗതലം. ഓരോ ഭാഗവും വെവ്വേറെ സ്കോർ ചെയ്യാം.</p>
-    <p class="en">Two parts — Part 1 is basics, Part 2 is application-level. Each part is scored separately.</p>
+  <div class="toolbar"><button id="langBtn" onclick="toggleLang()">🌐 മലയാളം</button></div>
+  <div class="card">
+    <div id="gateBox" style="display:none"></div>
+    <div id="startBox" style="display:none"></div>
+    <div id="quizBox" style="display:none">
+      <div class="score-bar">
+        <span><span id="scoreLabel">Score:</span> <b id="scoreVal">0</b> / <span id="totalVal">0</span></span>
+      </div>
+      <div id="quizContainer"></div>
+    </div>
+    <div id="resultBox" style="display:none"></div>
   </div>
-
-  <div class="part-tabs">
-    <button id="tab1" class="active" onclick="showPart(1)"><span class="ml">ഭാഗം 1</span><span class="en">Part 1</span><span class="badge ml">· അടിസ്ഥാനം</span><span class="badge en">· Basics</span></button>
-    <button id="tab2" onclick="showPart(2)"><span class="ml">ഭാഗം 2</span><span class="en">Part 2</span><span class="badge ml">· പ്രയോഗം</span><span class="badge en">· Application</span></button>
-  </div>
-
-  <div id="part1" class="part active"></div>
-  <div id="part2" class="part"></div>
+  <footer>Abacus Academy · EduPro Study Tools · Class 10 Chemistry</footer>
 </div>
-
 <script>
-const QUIZ = {
-  1: [
-    {q:{ml:"അസിമുഥൽ ക്വാണ്ടം നമ്പർ (l) എന്താണ് സൂചിപ്പിക്കുന്നത്?", en:"What does the Azimuthal quantum number (l) represent?"},
-     opts:[{ml:"ഷെല്ലിന്റെ ഊർജനില", en:"The energy level of the shell"},{ml:"ഓർബിറ്റലിന്റെ ത്രിമാന ആകൃതി (സബ്‌ഷെൽ)", en:"The 3-D shape of the orbital (sub-shell)"},{ml:"ഓർബിറ്റലിന്റെ ഓറിയന്റേഷൻ", en:"The orientation of the orbital"},{ml:"ഇലക്ട്രോണിന്റെ സ്പിൻ", en:"The spin of the electron"}],
-     correct:1, exp:{ml:"l ഓർബിറ്റലിന്റെ ത്രിമാന ആകൃതി സൂചിപ്പിക്കുന്നു — s, p, d, f സബ്‌ഷെല്ലുകളെ നിർണ്ണയിക്കുന്നു.", en:"l defines the 3-D shape of the orbital — it determines the s, p, d, f sub-shells."}},
-    {q:{ml:"l = 2 ആണെങ്കിൽ, മാഗ്നറ്റിക് ക്വാണ്ടം നമ്പർ m ന് എത്ര വിലകൾ ഉണ്ടായിരിക്കും?", en:"If l = 2, how many values can the magnetic quantum number m take?"},
-     opts:[{ml:"3",en:"3"},{ml:"5",en:"5"},{ml:"7",en:"7"},{ml:"1",en:"1"}],
-     correct:1, exp:{ml:"m = (2l+1) = (2×2+1) = 5. ഇത് d സബ്‌ഷെല്ലിലെ 5 ഓർബിറ്റലുകളാണ്.", en:"m = (2l+1) = (2×2+1) = 5 — these are the 5 orbitals of the d sub-shell."}},
-    {q:{ml:"M ഷെല്ലിൽ (n=3) ഉൾക്കൊള്ളാവുന്ന പരമാവധി ഇലക്ട്രോണുകളുടെ എണ്ണം എത്ര?", en:"What is the maximum number of electrons the M shell (n=3) can hold?"},
-     opts:[{ml:"8",en:"8"},{ml:"9",en:"9"},{ml:"18",en:"18"},{ml:"32",en:"32"}],
-     correct:2, exp:{ml:"2n² = 2×3² = 18.", en:"2n² = 2×3² = 18."}},
-    {q:{ml:"ഒരു ഓർബിറ്റലിൽ പരമാവധി എത്ര ഇലക്ട്രോണുകൾ ഉൾക്കൊള്ളാം?", en:"What is the maximum number of electrons a single orbital can hold?"},
-     opts:[{ml:"1",en:"1"},{ml:"2",en:"2"},{ml:"6",en:"6"},{ml:"10",en:"10"}],
-     correct:1, exp:{ml:"ഓരോ ഓർബിറ്റലിലും പരമാവധി 2 ഇലക്ട്രോണുകൾ മാത്രം.", en:"Every orbital can hold a maximum of 2 electrons."}},
-    {q:{ml:"സബ്‌ഷെല്ലുകളുടെ ഊർജക്രമം നിർണ്ണയിക്കാൻ ഉപയോഗിക്കുന്ന നിയമം ഏത്?", en:"Which rule is used to determine the energy order of sub-shells?"},
-     opts:[{ml:"പോളി തത്വം", en:"Pauli's principle"},{ml:"(n+l) നിയമം", en:"The (n+l) rule"},{ml:"ഹുണ്ട് നിയമം", en:"Hund's rule"},{ml:"ഹൈസൻബർഗ് തത്വം", en:"Heisenberg's principle"}],
-     correct:1, exp:{ml:"(n+l) വില കൂടി വരുന്ന ക്രമത്തിലാണ് സബ്‌ഷെല്ലുകൾ ഊർജം കൂടി വരുന്നത്.", en:"Sub-shells are arranged in order of increasing (n+l) value."}},
-    {q:{ml:"4s ഉം 3d ഉം താരതമ്യം ചെയ്യുമ്പോൾ ഏതിനാണ് ഊർജം കുറവ്?", en:"Comparing 4s and 3d, which has lower energy?"},
-     opts:[{ml:"3d",en:"3d"},{ml:"4s",en:"4s"},{ml:"രണ്ടും തുല്യം", en:"Both equal"},{ml:"നിർണ്ണയിക്കാൻ കഴിയില്ല", en:"Cannot be determined"}],
-     correct:1, exp:{ml:"4s: n+l=4, 3d: n+l=5 → 4s ന് ഊർജം കുറവ്, അതിനാൽ ആദ്യം നിറയുന്നു.", en:"4s: n+l=4, 3d: n+l=5 → 4s has lower energy and fills first."}},
-    {q:{ml:"സോഡിയത്തിന്റെ (Na, Z=11) നോബിൾ ഗ്യാസ് കോർ നൊട്ടേഷൻ ഏത്?", en:"What is the noble-gas-core notation for sodium (Na, Z=11)?"},
-     opts:[{ml:"[He] 2s¹",en:"[He] 2s¹"},{ml:"[Ne] 3s¹",en:"[Ne] 3s¹"},{ml:"[Ar] 3s¹",en:"[Ar] 3s¹"},{ml:"[Ne] 3p¹",en:"[Ne] 3p¹"}],
-     correct:1, exp:{ml:"Na: 1s² 2s² 2p⁶ 3s¹ — തൊട്ടുമുൻപുള്ള ഉൽക്കൃഷ്ട വാതകം Ne ആണ് → [Ne] 3s¹.", en:"Na: 1s² 2s² 2p⁶ 3s¹ — the nearest preceding noble gas is Ne → [Ne] 3s¹."}},
-    {q:{ml:"താഴെ പറയുന്നവയിൽ സാധ്യതയില്ലാത്ത സബ്‌ഷെൽ ഏത്?", en:"Which of the following sub-shells is NOT possible?"},
-     opts:[{ml:"3p",en:"3p"},{ml:"2d",en:"2d"},{ml:"3d",en:"3d"},{ml:"4f",en:"4f"}],
-     correct:1, exp:{ml:"n=2 ആയാൽ l ന് 0,1 മാത്രമേ സാധ്യമാകൂ (s,p). l=2 (d) സാധ്യമല്ല. അതിനാൽ 2d നിലവിലില്ല.", en:"For n=2, l can only be 0 or 1 (s, p). l=2 (d) is not possible for n=2, so 2d does not exist."}},
-    {q:{ml:"s ബ്ലോക്ക് മൂലകങ്ങളുടെ ബാഹ്യതമ ഇലക്ട്രോൺ വിന്യാസം ഏത് രൂപത്തിലാണ്?", en:"What is the general outer electron configuration of s-block elements?"},
-     opts:[{ml:"ns¹⁻²",en:"ns¹⁻²"},{ml:"ns² np¹⁻⁶",en:"ns² np¹⁻⁶"},{ml:"(n−1)d¹⁻¹⁰ ns¹⁻²",en:"(n−1)d¹⁻¹⁰ ns¹⁻²"},{ml:"(n−2)f¹⁻¹⁴",en:"(n−2)f¹⁻¹⁴"}],
-     correct:0, exp:{ml:"s ബ്ലോക്ക് മൂലകങ്ങളുടെ ബാഹ്യതമ വിന്യാസം ns¹ (ഗ്രൂപ്പ് 1) അല്ലെങ്കിൽ ns² (ഗ്രൂപ്പ് 2) ആണ്.", en:"s-block elements have outer configuration ns¹ (group 1) or ns² (group 2)."}},
-    {q:{ml:"ഒരു ഗ്രൂപ്പിൽ മുകളിൽ നിന്ന് താഴേക്ക് പോകുമ്പോൾ അയോണീകരണ എൻഥാൽപിക്ക് എന്ത് സംഭവിക്കുന്നു?", en:"What happens to ionisation enthalpy when moving down a group?"},
-     opts:[{ml:"കൂടുന്നു",en:"Increases"},{ml:"കുറയുന്നു",en:"Decreases"},{ml:"മാറ്റമില്ല",en:"No change"},{ml:"ആദ്യം കൂടും പിന്നെ കുറയും",en:"First increases then decreases"}],
-     correct:1, exp:{ml:"ഷെല്ലുകൾ കൂടുന്നതിനാൽ ന്യൂക്ലിയസിന്റെ ആകർഷണം കുറയുന്നു → അയോണീകരണ എൻഥാൽപി കുറയുന്നു.", en:"As shells increase, nuclear attraction on the outer electron weakens → ionisation enthalpy decreases."}}
-  ],
-  2: [
-    {q:{ml:"ഗ്രൂപ്പ് 17, 3 ഷെല്ലുകളുള്ള X എന്ന മൂലകത്തിന്റെ സബ്‌ഷെൽ ഇലക്ട്രോൺ വിന്യാസം ഏത്?", en:"Element X is in group 17 with 3 shells. What is its sub-shell electron configuration?"},
-     opts:[{ml:"1s² 2s² 2p⁶ 3s² 3p⁵",en:"1s² 2s² 2p⁶ 3s² 3p⁵"},{ml:"1s² 2s² 2p⁵",en:"1s² 2s² 2p⁵"},{ml:"1s² 2s² 2p⁶ 3s² 3p⁶",en:"1s² 2s² 2p⁶ 3s² 3p⁶"},{ml:"1s² 2s² 2p⁶ 3s¹",en:"1s² 2s² 2p⁶ 3s¹"}],
-     correct:0, exp:{ml:"3 ഷെല്ലുകൾ → n=3 വരെ. ഗ്രൂപ്പ് 17 → s+p ബാഹ്യതമ ഇലക്ട്രോണുകൾ 7 (2+5) → ഇത് ക്ലോറിൻ (Cl) ആണ്: 1s² 2s² 2p⁶ 3s² 3p⁵.", en:"3 shells → up to n=3. Group 17 → outer s+p electrons = 7 (2+5) → this is chlorine (Cl): 1s² 2s² 2p⁶ 3s² 3p⁵."}},
-    {q:{ml:"3p, 4d, 3f, 2d എന്നിവയിൽ സാധ്യതയില്ലാത്ത സബ്‌ഷെല്ലുകൾ ഏവ?", en:"Among 3p, 4d, 3f, 2d — which sub-shells are NOT possible?"},
-     opts:[{ml:"3p, 4d",en:"3p, 4d"},{ml:"3f, 2d",en:"3f, 2d"},{ml:"3p മാത്രം",en:"3p only"},{ml:"നാലും സാധ്യമല്ല",en:"All four impossible"}],
-     correct:1, exp:{ml:"n=3 ന് l പരമാവധി 2 (s,p,d) — f (l=3) സാധ്യമല്ല → 3f തെറ്റ്. n=2 ന് l പരമാവധി 1 (s,p) — d (l=2) സാധ്യമല്ല → 2d തെറ്റ്.", en:"For n=3, max l=2 (s,p,d) — f (l=3) not possible → 3f invalid. For n=2, max l=1 (s,p) — d (l=2) not possible → 2d invalid."}},
-    {q:{ml:"ഒരാറ്റത്തിൽ അവസാന ഇലക്ട്രോൺ നിറയുന്നത് 3d സബ്‌ഷെല്ലിലാണ്, ആ സബ്‌ഷെല്ലിൽ 7 ഇലക്ട്രോണുകൾ ഉണ്ട്. ഈ മൂലകത്തിന്റെ പീരിയഡ് നമ്പർ എത്ര?", en:"An atom's last electron fills the 3d sub-shell, which has 7 electrons. What is this element's period number?"},
-     opts:[{ml:"3",en:"3"},{ml:"4",en:"4"},{ml:"7",en:"7"},{ml:"2",en:"2"}],
-     correct:1, exp:{ml:"സബ്‌ഷെൽ വിന്യാസത്തിലെ ഏറ്റവും ഉയർന്ന n = 4 (4s ഉള്ളതിനാൽ, d-ബ്ലോക്കിൽ 4s എപ്പോഴും ഉണ്ടാകും) → പീരിയഡ് 4. (ഇത് കോബാൾട്ട്, Z=27 ആണ്: [Ar] 3d⁷ 4s²)", en:"The highest n in the configuration is 4 (since 4s is always present alongside 3d in d-block elements) → Period 4. (This is cobalt, Z=27: [Ar] 3d⁷ 4s².)"}},
-    {q:{ml:"Fe (Z=26) രാസപ്രവർത്തനത്തിൽ Fe³⁺ ആയി മാറുമ്പോൾ, ഏത് സബ്‌ഷെല്ലുകളിൽ നിന്നാണ് ആകെ 3 ഇലക്ട്രോണുകൾ നഷ്ടപ്പെടുന്നത്?", en:"When Fe (Z=26) forms Fe³⁺, from which sub-shells are the 3 electrons lost?"},
-     opts:[{ml:"3d ൽ നിന്ന് മാത്രം 3 ഇലക്ട്രോൺ", en:"All 3 from 3d only"},{ml:"4s ൽ നിന്ന് 2, 3d ൽ നിന്ന് 1", en:"2 from 4s, 1 from 3d"},{ml:"3p ൽ നിന്ന് 3", en:"3 from 3p"},{ml:"4s ൽ നിന്ന് 3", en:"3 from 4s"}],
-     correct:1, exp:{ml:"Fe: [Ar] 3d⁶ 4s². ബാഹ്യതമ 4s ലെ 2 ഇലക്ട്രോണുകൾ ആദ്യം നഷ്ടപ്പെടും, തുടർന്ന് 3d ൽ നിന്ന് ഒന്ന് കൂടി നഷ്ടപ്പെടും → Fe³⁺ = [Ar] 3d⁵.", en:"Fe: [Ar] 3d⁶ 4s². The 2 outer 4s electrons are lost first, then one more from 3d → Fe³⁺ = [Ar] 3d⁵."}},
-    {q:{ml:"Cr (Z=24) ന്റെ സ്ഥിരതയുള്ള സബ്‌ഷെൽ ഇലക്ട്രോൺ വിന്യാസം ഏത്?", en:"What is the stable sub-shell electron configuration of Cr (Z=24)?"},
-     opts:[{ml:"[Ar] 3d⁴ 4s²",en:"[Ar] 3d⁴ 4s²"},{ml:"[Ar] 3d⁵ 4s¹",en:"[Ar] 3d⁵ 4s¹"},{ml:"[Ar] 3d⁶",en:"[Ar] 3d⁶"},{ml:"[Ar] 3d³ 4s²",en:"[Ar] 3d³ 4s²"}],
-     correct:1, exp:{ml:"പകുതി നിറഞ്ഞ d⁵ ക്രമീകരണത്തിന്റെ അധിക സ്ഥിരത നേടാൻ 4s ൽ നിന്ന് 3d ലേക്ക് ഒരു ഇലക്ട്രോൺ നീങ്ങുന്നു → [Ar] 3d⁵ 4s¹.", en:"To gain the extra stability of a half-filled d⁵ configuration, one electron shifts from 4s to 3d → [Ar] 3d⁵ 4s¹."}},
-    {q:{ml:"[Ar] 3d² 4s² എന്ന വിന്യാസമുള്ള മൂലകം ഏത് ഗ്രൂപ്പിലാണ്?", en:"An element with configuration [Ar] 3d² 4s² belongs to which group?"},
-     opts:[{ml:"ഗ്രൂപ്പ് 2",en:"Group 2"},{ml:"ഗ്രൂപ്പ് 4",en:"Group 4"},{ml:"ഗ്രൂപ്പ് 12",en:"Group 12"},{ml:"ഗ്രൂപ്പ് 14",en:"Group 14"}],
-     correct:1, exp:{ml:"d ബ്ലോക്ക് ഗ്രൂപ്പ് നമ്പർ = 4s(2) + 3d(2) = 4 → ഗ്രൂപ്പ് 4 (ഇത് ടൈറ്റാനിയം, Ti ആണ്).", en:"d-block group number = 4s(2) + 3d(2) = 4 → Group 4 (this is titanium, Ti)."}},
-    {q:{ml:"[Ne] 3s² 3p⁶ എന്ന വിന്യാസമുള്ള മൂലകം ഏത് ബ്ലോക്കിലും ഏത് ഗ്രൂപ്പിലുമാണ്?", en:"An element with configuration [Ne] 3s² 3p⁶ is in which block and group?"},
-     opts:[{ml:"s ബ്ലോക്ക്, ഗ്രൂപ്പ് 2",en:"s-block, Group 2"},{ml:"p ബ്ലോക്ക്, ഗ്രൂപ്പ് 18",en:"p-block, Group 18"},{ml:"d ബ്ലോക്ക്, ഗ്രൂപ്പ് 8",en:"d-block, Group 8"},{ml:"p ബ്ലോക്ക്, ഗ്രൂപ്പ് 16",en:"p-block, Group 16"}],
-     correct:1, exp:{ml:"അവസാന ഇലക്ട്രോൺ 3p ൽ → p ബ്ലോക്ക്. s+p = 2+6 = 8 → 8+10 = ഗ്രൂപ്പ് 18 (ഇത് ആർഗൺ, Ar ആണ്).", en:"Last electron in 3p → p-block. s+p = 2+6 = 8 → 8+10 = Group 18 (this is argon, Ar)."}},
-    {q:{ml:"d ബ്ലോക്ക് മൂലകങ്ങളുടെ സംയുക്തങ്ങൾ പൊതുവേ നിറമുള്ളവയായിരിക്കാൻ കാരണം?", en:"Why are compounds of d-block elements generally coloured?"},
-     opts:[{ml:"അവ റേഡിയോ ആക്റ്റീവ് ആയതിനാൽ",en:"Because they are radioactive"},{ml:"ബാഹ്യതമ s ഉം തൊട്ടുള്ളിലെ d ഉം തമ്മിലുള്ള ഊർജവ്യത്യാസം കുറവായതിനാൽ d ഇലക്ട്രോണുകളും ബന്ധനത്തിൽ പങ്കെടുക്കുന്നു",en:"Because the small energy gap between outer s and inner d lets d-electrons also take part in bonding"},{ml:"അവയ്ക്ക് ns¹ വിന്യാസമുള്ളതിനാൽ",en:"Because they have ns¹ configuration"},{ml:"അവ ഖരാവസ്ഥയിൽ മാത്രം കാണപ്പെടുന്നതിനാൽ",en:"Because they exist only as solids"}],
-     correct:1, exp:{ml:"ഈ ഊർജസാമീപ്യമാണ് d ബ്ലോക്ക് മൂലകങ്ങളുടെ വ്യത്യസ്ത ഓക്സീകരണാവസ്ഥകൾക്കും നിറമുള്ള സംയുക്തങ്ങൾക്കും കാരണം.", en:"This closeness in energy is why d-block elements show variable oxidation states and form coloured compounds."}},
-    {q:{ml:"6-ാം പീരിയഡിലെ f ബ്ലോക്ക് മൂലകങ്ങൾ ഏത് പേരിൽ അറിയപ്പെടുന്നു?", en:"What are the f-block elements of period 6 called?"},
-     opts:[{ml:"ആക്റ്റിനോയ്ഡുകൾ",en:"Actinoids"},{ml:"ലാന്ഥനോയ്ഡുകൾ",en:"Lanthanoids"},{ml:"സംക്രമണ മൂലകങ്ങൾ",en:"Transition elements"},{ml:"ഉൽക്കൃഷ്ട വാതകങ്ങൾ",en:"Noble gases"}],
-     correct:1, exp:{ml:"6-ാം പീരിയഡിലെ f ബ്ലോക്ക് മൂലകങ്ങൾ ലാന്ഥനോയ്ഡുകൾ എന്നും, 7-ാം പീരിയഡിലേത് ആക്റ്റിനോയ്ഡുകൾ എന്നും അറിയപ്പെടുന്നു.", en:"Period 6 f-block elements are lanthanoids; period 7 f-block elements are actinoids."}},
-    {q:{ml:"s ബ്ലോക്കിനെയും p ബ്ലോക്കിനെയും താരതമ്യം ചെയ്യുമ്പോൾ, ഏതിനാണ് പൊതുവേ അയോണീകരണ എൻഥാൽപി കുറവ്?", en:"Comparing s-block and p-block, which generally has lower ionisation enthalpy?"},
-     opts:[{ml:"s ബ്ലോക്ക്",en:"s-block"},{ml:"p ബ്ലോക്ക്",en:"p-block"},{ml:"ഇരുവർക്കും തുല്യം",en:"Both equal"},{ml:"താരതമ്യം സാധ്യമല്ല",en:"Cannot be compared"}],
-     correct:0, exp:{ml:"s ബ്ലോക്ക് മൂലകങ്ങൾ (പ്രത്യേകിച്ച് ആൽക്കലി ലോഹങ്ങൾ) പൊതുവേ p ബ്ലോക്ക് മൂലകങ്ങളേക്കാൾ കുറഞ്ഞ അയോണീകരണ എൻഥാൽപി പ്രകടിപ്പിക്കുന്നു.", en:"s-block elements (especially alkali metals) generally have lower ionisation enthalpy than p-block elements."}}
-  ]
+let currentLang = "en";
+const quizData = [{"q":"What is the IUPAC name of CH₃–CH₂–CH₂–CH₂–CH₃?","q_ml":"CH₃–CH₂–CH₂–CH₂–CH₃ യുടെ IUPAC നാമം എന്ത്?","opts":["Butane","Pentane","Hexane","Propane"],"opts_ml":["ബ്യൂട്ടെയ്ൻ","പെന്റെയ്ൻ","ഹെക്സെയ്ൻ","പ്രോപ്പെയ്ൻ"],"ans":1},{"q":"Compounds with the –OH functional group are called?","q_ml":"–OH പ്രവർത്തക ഗ്രൂപ്പുള്ള സംയുക്തങ്ങളെ എന്ത് വിളിക്കുന്നു?","opts":["Aldehyde","Ketone","Alcohol","Ether"],"opts_ml":["ആൽഡിഹൈഡ്","കീറ്റോൺ","ആൽക്കഹോൾ","ഈഥർ"],"ans":2},{"q":"What is the IUPAC name of CH₂=CH–CH₂–CH₃?","q_ml":"CH₂=CH–CH₂–CH₃ യുടെ IUPAC നാമം എന്ത്?","opts":["But-2-ene","But-1-ene","But-1-yne","Propene"],"opts_ml":["ബ്യൂട്ട്-2-ഈൻ","ബ്യൂട്ട്-1-ഈൻ","ബ്യൂട്ട്-1-യൈൻ","പ്രോപ്പീൻ"],"ans":1},{"q":"What is the suffix for hydrocarbons with a triple bond?","q_ml":"ത്രിബന്ധനമുള്ള ഹൈഡ്രോകാർബണുകൾക്കുള്ള പ്രത്യയം ഏത്?","opts":["–ol","–ene","–yne","–al"],"opts_ml":["–ol","–ene","–yne","–al"],"ans":2},{"q":"What is the common name for CH₃COOH?","q_ml":"CH₃COOH ന്റെ സാധാരണ പേര് എന്ത്?","opts":["Aldehyde","Carboxylic acid","Ketone","Ether"],"opts_ml":["ആൽഡിഹൈഡ്","കാർബോക്സിലിക് അമ്ലം","കീറ്റോൺ","ഈഥർ"],"ans":1},{"q":"What type of isomerism do CH₃CH₂OH and CH₃OCH₃ show?","q_ml":"CH₃CH₂OH ഉം CH₃OCH₃ ഉം ഏത് തരം ഐസോമെറിസമാണ് കാണിക്കുന്നത്?","opts":["Chain isomerism","Position isomerism","Functional isomerism","Metamerism"],"opts_ml":["ശൃംഖലാ ഐസോമെറിസം","സ്ഥാന ഐസോമെറിസം","പ്രവർത്തക ഗ്രൂപ്പ് ഐസോമെറിസം","മെറ്റാമെറിസം"],"ans":2},{"q":"What type of isomerism do CH₃CH₂CH₂OH and CH₃CH(OH)CH₃ show?","q_ml":"CH₃CH₂CH₂OH ഉം CH₃CH(OH)CH₃ ഉം ഏത് തരം ഐസോമെറിസമാണ് കാണിക്കുന്നത്?","opts":["Chain isomerism","Position isomerism","Functional isomerism","Metamerism"],"opts_ml":["ശൃംഖലാ ഐസോമെറിസം","സ്ഥാന ഐസോമെറിസം","പ്രവർത്തക ഗ്രൂപ്പ് ഐസോമെറിസം","മെറ്റാമെറിസം"],"ans":1},{"q":"Which compounds have the &gt;C=O functional group?","q_ml":"&gt;C=O പ്രവർത്തക ഗ്രൂപ്പുള്ള സംയുക്തങ്ങൾ ഏതെല്ലാം?","opts":["Alcohols","Ketones","Ethers","Halo compounds"],"opts_ml":["ആൽക്കഹോളുകൾ","കീറ്റോണുകൾ","ഈഥറുകൾ","ഹാലോ സംയുക്തങ്ങൾ"],"ans":1},{"q":"Which functional group family does CH₃–O–CH₂–CH₃ belong to?","q_ml":"CH₃–O–CH₂–CH₃ ഏത് പ്രവർത്തക ഗ്രൂപ്പ് കുടുംബത്തിൽ പെടുന്നു?","opts":["Aldehyde","Ketone","Ether","Carboxylic acid"],"opts_ml":["ആൽഡിഹൈഡ്","കീറ്റോൺ","ഈഥർ","കാർബോക്സിലിക് അമ്ലം"],"ans":2},{"q":"Which isomerism has the same molecular formula, the same functional group, but different alkyl groups on either side of it?","q_ml":"ഒരേ തന്മാത്രാ സൂത്രവും ഒരേ പ്രവർത്തക ഗ്രൂപ്പും എന്നാൽ അതിന്റെ ഇരുവശത്തും വ്യത്യസ്ത ആൽക്കൈൽ ഗ്രൂപ്പുകളും ഉള്ള ഐസോമെറിസം ഏത്?","opts":["Chain isomerism","Functional isomerism","Metamerism","Position isomerism"],"opts_ml":["ശൃംഖലാ ഐസോമെറിസം","പ്രവർത്തക ഗ്രൂപ്പ് ഐസോമെറിസം","മെറ്റാമെറിസം","സ്ഥാന ഐസോമെറിസം"],"ans":2},{"q":"What is the alkyl group name for the branch –CH₂–CH₃ (2 carbon atoms)?","q_ml":"–CH₂–CH₃ (2 കാർബൺ ആറ്റങ്ങൾ) എന്ന ശാഖയുടെ ആൽക്കൈൽ ഗ്രൂപ്പ് പേര് എന്ത്?","opts":["Methyl","Ethyl","Propyl","Butyl"],"opts_ml":["മീഥൈൽ","എഥൈൽ","പ്രോപ്പൈൽ","ബ്യൂട്ടൈൽ"],"ans":1},{"q":"While numbering the parent chain in IUPAC nomenclature, the chain is numbered so that:","q_ml":"IUPAC നാമകരണത്തിൽ മാതൃ ശൃംഖലയ്ക്ക് നമ്പർ നൽകുമ്പോൾ, ഏത് രീതിയിലാണ് നമ്പർ നൽകുന്നത്?","opts":["The branch/functional group gets the lowest locant","Numbering always starts from the left","The longest branch is numbered first","Carbon atoms are counted from the middle"],"opts_ml":["ശാഖ/പ്രവർത്തക ഗ്രൂപ്പിന് ഏറ്റവും കുറഞ്ഞ സ്ഥാനസൂചിക ലഭിക്കുന്ന വിധം","എപ്പോഴും ഇടത്തുനിന്ന് നമ്പറിംഗ് തുടങ്ങുന്നു","ഏറ്റവും നീളമുള്ള ശാഖയ്ക്ക് ആദ്യം നമ്പർ നൽകുന്നു","മധ്യത്തിൽ നിന്ന് കാർബൺ ആറ്റങ്ങൾ എണ്ണുന്നു"],"ans":0},{"q":"Which prefix is used in IUPAC naming when the same branch appears twice in a compound?","q_ml":"ഒരു സംയുക്തത്തിൽ ഒരേ ശാഖ രണ്ട് തവണ ഉണ്ടെങ്കിൽ IUPAC നാമകരണത്തിൽ ഉപയോഗിക്കുന്ന ഉപസർഗ്ഗം ഏത്?","opts":["mono","di","tri","tetra"],"opts_ml":["മോണോ","ഡൈ","ട്രൈ","ടെട്ര"],"ans":1},{"q":"What is the IUPAC name of CH₃–CH₂–CH₂–Cl?","q_ml":"CH₃–CH₂–CH₂–Cl ന്റെ IUPAC നാമം എന്ത്?","opts":["1-Chloropropane","2-Chloropropane","Chloroethane","1-Chlorobutane"],"opts_ml":["1-ക്ലോറോപ്രോപ്പെയ്ൻ","2-ക്ലോറോപ്രോപ്പെയ്ൻ","ക്ലോറോഈഥേൻ","1-ക്ലോറോബ്യൂട്ടെയ്ൻ"],"ans":0},{"q":"The suffix '–oic acid' in IUPAC nomenclature indicates the presence of which functional group?","q_ml":"IUPAC നാമകരണത്തിലെ '–oic acid' എന്ന പ്രത്യയം ഏത് പ്രവർത്തക ഗ്രൂപ്പിനെ സൂചിപ്പിക്കുന്നു?","opts":["Alcohol","Aldehyde","Ketone","Carboxylic acid"],"opts_ml":["ആൽക്കഹോൾ","ആൽഡിഹൈഡ്","കീറ്റോൺ","കാർബോക്സിലിക് അമ്ലം"],"ans":3},{"q":"What is the molecular formula of benzene?","q_ml":"ബെൻസീനിന്റെ തന്മാത്രാ സൂത്രം എന്ത്?","opts":["C₆H₆","C₆H₁₂","C₆H₅OH","C₆H₁₄"],"opts_ml":["C₆H₆","C₆H₁₂","C₆H₅OH","C₆H₁₄"],"ans":0},{"q":"Which of the following is an example of a ketone?","q_ml":"താഴെപ്പറയുന്നവയിൽ ഏതാണ് കീറ്റോണിന്റെ ഉദാഹരണം?","opts":["CH₃CH₂OH","CH₃COCH₃","CH₃CHO","CH₃COOH"],"opts_ml":["CH₃CH₂OH","CH₃COCH₃","CH₃CHO","CH₃COOH"],"ans":1},{"q":"Which property of carbon is mainly responsible for the huge number of organic compounds?","q_ml":"ഓർഗാനിക് സംയുക്തങ്ങളുടെ വൻ എണ്ണത്തിന് പ്രധാന കാരണമായ കാർബണിന്റെ ഗുണം ഏത്?","opts":["Catenation","Ionization","Valency of 2","Radioactivity"],"opts_ml":["കാറ്റനേഷൻ","അയോണീകരണം","വേലൻസി 2","റേഡിയോആക്ടിവിറ്റി"],"ans":0},{"q":"n-Butane and Isobutane are examples of which type of isomerism?","q_ml":"n-ബ്യൂട്ടെയ്നും ഐസോബ്യൂട്ടെയ്നും ഏത് തരം ഐസോമെറിസത്തിന്റെ ഉദാഹരണങ്ങളാണ്?","opts":["Position isomerism","Functional isomerism","Chain isomerism","Metamerism"],"opts_ml":["സ്ഥാന ഐസോമെറിസം","പ്രവർത്തക ഗ്രൂപ്പ് ഐസോമെറിസം","ശൃംഖലാ ഐസോമെറിസം","മെറ്റാമെറിസം"],"ans":2},{"q":"What is the IUPAC name of CH₃–O–CH₂–CH₃?","q_ml":"CH₃–O–CH₂–CH₃ ന്റെ IUPAC നാമം എന്ത്?","opts":["Methoxyethane","Ethoxymethane","Methoxypropane","Ethoxyethane"],"opts_ml":["മെതോക്സിഈഥേൻ","എതോക്സിമീഥേൻ","മെതോക്സിപ്രോപ്പെയ്ൻ","എതോക്സിഈഥേൻ"],"ans":0}];
+
+/* ---- daily-exam config ---- */
+const QUIZ_OPEN_HOUR = 21;
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw_zU9ysc2jyNMUHDLcxnpiQPbqJJGM2-Ri6U599LkeSv8pS6r42CyeH9kBBVcFYAtrGA/exec";
+const CHAPTER_TITLE = "Nomenclature & Isomerism of Organic Compounds | Chemistry Unit 1";
+
+const STR = {
+  en:{ gateTitle:"Today's exam opens at 9:00 PM.", nowLabel:"Current time: ",
+       nameLabel:"Name", namePh:"e.g. Amal Krishna",
+       centreLabel:"Centre", centrePh:"Select", centre1:"Abacus Academy, Puthur Pallikkal", centre2:"Abacus Academy, Parambil Peedika",
+       admLabel:"Admission number", admPh:"e.g. 24",
+       errFields:"Please fill in all fields", startBtn:"Start exam", attemptedAs:"Attempting as:", notYou:"Not you",
+       checking:"Checking...", alreadyAttempted:"This admission number has already attempted today's exam — one attempt per student.",
+       score:"Score:", correct:"correct",
+       good:"Excellent! Well studied.", mid:"Coming along nicely.", low:"Read the notes once more and try again.",
+       sending:"Recording result...", sentOk:"Result recorded", sentFail:"Network busy — retrying, don't close the page",
+       sentAlready:"Result was already recorded", newStudent:"Next student / New attempt" },
+  ml:{ gateTitle:"ക്വിസ് ഇന്ന് രാത്രി 9 മണിക്ക് ആരംഭിക്കും.", nowLabel:"ഇപ്പോൾ സമയം: ",
+       nameLabel:"പേര്", namePh:"ഉദാ: അമൽ കൃഷ്ണ",
+       centreLabel:"സെന്റർ", centrePh:"തിരഞ്ഞെടുക്കുക", centre1:"Abacus Academy, Puthur Pallikkal", centre2:"Abacus Academy, Parambil Peedika",
+       admLabel:"അഡ്മിഷൻ നമ്പർ", admPh:"ഉദാ: 24",
+       errFields:"എല്ലാ വിവരങ്ങളും പൂരിപ്പിക്കുക", startBtn:"പരീക്ഷ തുടങ്ങൂ", attemptedAs:"എഴുതുന്നത്:", notYou:"ഞാനല്ല",
+       checking:"പരിശോധിക്കുന്നു...", alreadyAttempted:"ഈ അഡ്മിഷൻ നമ്പർ ഉപയോഗിച്ച് ഇന്ന് നേരത്തെ എഴുതിയിട്ടുണ്ട് — ഒരു കുട്ടിക്ക് ഒരു അവസരം മാത്രം.",
+       score:"സ്കോർ:", correct:"ശരി",
+       good:"മികച്ചത്! നന്നായി പഠിച്ചു.", mid:"നന്നായി വരുന്നു — ഒന്നു കൂടി റിവിഷൻ ചെയ്യാം.", low:"കുറിപ്പുകൾ ഒന്നുകൂടി വായിച്ച് വീണ്ടും ശ്രമിക്കാം.",
+       sending:"ഫലം രേഖപ്പെടുത്തുന്നു...", sentOk:"ഫലം രേഖപ്പെടുത്തി", sentFail:"നെറ്റ്‌വർക്ക് തിരക്ക് — വീണ്ടും ശ്രമിക്കുന്നു, പേജ് അടയ്ക്കരുത്",
+       sentAlready:"ഫലം നേരത്തെ രേഖപ്പെടുത്തിയിരുന്നു", newStudent:"അടുത്ത കുട്ടി / പുതിയ ശ്രമം" }
 };
 
-let state = {1:{}, 2:{}, submitted:{1:false,2:false}};
+let score = 0;
+let quizState = 'gate';
+let studentName = '', studentCentre = '', studentAdmission = '';
+let resultSubmitted = false;
+let _gateOpenSeen = null;
 
-function renderPart(n){
-  const el = document.getElementById('part'+n);
-  el.innerHTML = '';
-  QUIZ[n].forEach((item, idx)=>{
-    const card = document.createElement('div');
-    card.className = 'q-card';
-    const letters = ['A','B','C','D'];
-    card.innerHTML = `
-      <span class="qnum">${idx+1} / ${QUIZ[n].length}</span>
-      <p class="qtext"><span class="ml">${item.q.ml}</span><span class="en">${item.q.en}</span></p>
-      <div class="opts" data-part="${n}" data-idx="${idx}">
-        ${item.opts.map((o,oi)=>`
-          <div class="opt" data-oi="${oi}" onclick="selectOpt(${n},${idx},${oi})">
-            <span class="letter">${letters[oi]}</span>
-            <span><span class="ml">${o.ml}</span><span class="en">${o.en}</span></span>
-          </div>`).join('')}
-      </div>
-      <div class="explain" id="exp-${n}-${idx}"><span class="ml">${item.exp.ml}</span><span class="en">${item.exp.en}</span></div>
-    `;
-    el.appendChild(card);
+function isQuizOpen(){ return new Date().getHours() >= QUIZ_OPEN_HOUR; }
+
+function toggleLang(){
+  currentLang = currentLang === 'en' ? 'ml' : 'en';
+  document.getElementById('langBtn').textContent = currentLang === 'en' ? '🌐 മലയാളം' : '🌐 English';
+  document.getElementById('pageTitle').textContent = currentLang === 'ml' ? 'ദിവസേനയുള്ള പരീക്ഷ' : 'Daily Exam';
+  document.getElementById('pageSub').textContent = currentLang === 'ml' ? 'രസതന്ത്രം · ക്ലാസ് 10 · ഓർഗാനിക് സംയുക്തങ്ങളുടെ നാമകരണവും ഐസോമെറിസവും' : 'Chemistry · Class 10 · Nomenclature & Isomerism of Organic Compounds';
+  document.body.setAttribute('data-lang', currentLang);
+  document.documentElement.lang = currentLang;
+  render();
+}
+
+function render(){
+  document.getElementById('gateBox').style.display = 'none';
+  document.getElementById('startBox').style.display = 'none';
+  document.getElementById('quizBox').style.display = 'none';
+  document.getElementById('resultBox').style.display = 'none';
+  if(quizState === 'gate') renderGate();
+  else if(quizState === 'start') renderStart();
+  else if(quizState === 'quiz') renderQuiz();
+  else renderResult();
+}
+
+function renderGate(){
+  const t = STR[currentLang];
+  const box = document.getElementById('gateBox');
+  box.style.display = 'block';
+  box.innerHTML = '<div class="gatebox"><b>📌 ' + t.gateTitle + '</b><br>' + t.nowLabel + new Date().toLocaleTimeString('en-GB') + '</div>';
+}
+
+function renderStart(){
+  const t = STR[currentLang];
+  const box = document.getElementById('startBox');
+  box.style.display = 'block';
+  box.innerHTML =
+    '<div class="qstart">' +
+    '<p class="qflabel">' + t.nameLabel + '</p>' +
+    '<input type="text" id="stName" placeholder="' + t.namePh + '" value="' + studentName.replace(/"/g,'&quot;') + '">' +
+    '<p class="qflabel">' + t.centreLabel + '</p>' +
+    '<select id="stCentre">' +
+      '<option value="">' + t.centrePh + '</option>' +
+      '<option value="Abacus Academy, Puthur Pallikkal"' + (studentCentre==='Abacus Academy, Puthur Pallikkal'?' selected':'') + '>' + t.centre1 + '</option>' +
+      '<option value="Abacus Academy, Parambil Peedika"' + (studentCentre==='Abacus Academy, Parambil Peedika'?' selected':'') + '>' + t.centre2 + '</option>' +
+    '</select>' +
+    '<p class="qflabel">' + t.admLabel + '</p>' +
+    '<input type="text" id="stAdm" inputmode="numeric" placeholder="' + t.admPh + '" value="' + studentAdmission.replace(/"/g,'&quot;') + '">' +
+    '<p class="qerr" id="qerr"></p>' +
+    '<button class="btn" id="startBtn" style="width:100%">' + t.startBtn + '</button>' +
+    '</div>';
+  document.getElementById('startBtn').addEventListener('click', beginExam);
+}
+
+const ATTEMPT_KEY = 'chemExamAttempts_v1';
+function todayStr(){ return new Date().toLocaleDateString('en-GB'); }
+function getAttempts(){ try{ return JSON.parse(localStorage.getItem(ATTEMPT_KEY) || '{}'); }catch(e){ return {}; } }
+function markAttempted(adm){
+  const map = getAttempts(); const d = todayStr();
+  if(!map[d]) map[d] = [];
+  if(map[d].indexOf(adm) === -1) map[d].push(adm);
+  try{ localStorage.setItem(ATTEMPT_KEY, JSON.stringify(map)); }catch(e){}
+}
+function isAttemptedOnThisDevice(adm){
+  const map = getAttempts(); const d = todayStr();
+  return !!(map[d] && map[d].indexOf(adm) !== -1);
+}
+function checkAlreadyAttemptedOnServer(adm){
+  if(!SCRIPT_URL) return Promise.resolve(false);
+  const url = SCRIPT_URL + (SCRIPT_URL.indexOf('?') === -1 ? '?' : '&') +
+    'admissionNumber=' + encodeURIComponent(adm) + '&date=' + encodeURIComponent(todayStr());
+  const ctrl = ('AbortController' in window) ? new AbortController() : null;
+  const opts = ctrl ? {signal: ctrl.signal} : {};
+  const timeout = new Promise(res => setTimeout(function(){ if(ctrl) ctrl.abort(); res(null); }, 4000));
+  const req = fetch(url, opts).then(function(r){ return r.json(); }).then(function(d){ return !!d.taken; }).catch(function(){ return null; });
+  return Promise.race([req, timeout]).then(function(r){ return r === true; });
+}
+
+function beginExam(){
+  const t = STR[currentLang];
+  const nameVal = document.getElementById('stName').value.trim();
+  const centreVal = document.getElementById('stCentre').value;
+  const admVal = document.getElementById('stAdm').value.trim();
+  const errEl = document.getElementById('qerr');
+  if(!nameVal || !centreVal || !admVal){ errEl.textContent = t.errFields; errEl.classList.add('show'); return; }
+
+  if(isAttemptedOnThisDevice(admVal)){
+    errEl.textContent = t.alreadyAttempted; errEl.classList.add('show'); return;
+  }
+
+  const btn = document.getElementById('startBtn');
+  btn.disabled = true; btn.textContent = t.checking;
+  errEl.classList.remove('show');
+
+  checkAlreadyAttemptedOnServer(admVal).then(function(taken){
+    if(taken){
+      btn.disabled = false; btn.textContent = t.startBtn;
+      errEl.textContent = t.alreadyAttempted; errEl.classList.add('show');
+      return;
+    }
+    studentName = nameVal; studentCentre = centreVal; studentAdmission = admVal;
+    score = 0; resultSubmitted = false;
+    quizState = 'quiz';
+    render();
   });
-  const bar = document.createElement('div');
-  bar.className = 'submit-bar';
-  bar.innerHTML = `<button class="submit-btn" id="submit-${n}" onclick="submitPart(${n})" disabled>
-    <span class="ml">സമർപ്പിക്കൂ</span><span class="en">Submit</span>
-  </button>`;
-  el.appendChild(bar);
-  const result = document.createElement('div');
-  result.id = 'result-'+n;
-  el.appendChild(result);
 }
 
-function selectOpt(n, idx, oi){
-  if(state.submitted[n]) return;
-  state[n][idx] = oi;
-  const group = document.querySelector(`.opts[data-part="${n}"][data-idx="${idx}"]`);
-  group.querySelectorAll('.opt').forEach(o=> o.classList.toggle('selected', +o.dataset.oi===oi));
-  const answered = Object.keys(state[n]).length;
-  document.getElementById('submit-'+n).disabled = answered < QUIZ[n].length;
-}
-
-function submitPart(n){
-  let score = 0;
-  QUIZ[n].forEach((item, idx)=>{
-    const group = document.querySelector(`.opts[data-part="${n}"][data-idx="${idx}"]`);
-    const chosen = state[n][idx];
-    group.querySelectorAll('.opt').forEach(o=>{
-      const oi = +o.dataset.oi;
-      if(oi===item.correct) o.classList.add('correct');
-      else if(oi===chosen) o.classList.add('incorrect');
-      o.style.pointerEvents='none';
+function renderQuiz(){
+  const t = STR[currentLang];
+  const box = document.getElementById('quizBox');
+  box.style.display = 'block';
+  document.getElementById('scoreLabel').textContent = t.score;
+  document.getElementById('scoreVal').textContent = 0;
+  document.getElementById('totalVal').textContent = quizData.length;
+  score = 0;
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  const who = document.createElement('div');
+  who.className = 'qwho';
+  who.innerHTML = '<span>' + t.attemptedAs + ' <b>' + studentName + '</b> · ' + studentAdmission + '</span>';
+  container.appendChild(who);
+  quizData.forEach(function(item, idx){
+    const qText = currentLang === 'ml' ? item.q_ml : item.q;
+    const opts = currentLang === 'ml' ? item.opts_ml : item.opts;
+    const qDiv = document.createElement('div');
+    qDiv.className = 'quiz-q';
+    qDiv.innerHTML = '<p><b>' + (idx+1) + '.</b> ' + qText + '</p><div class="quiz-opts"></div>';
+    const optsDiv = qDiv.querySelector('.quiz-opts');
+    opts.forEach(function(opt, oIdx){
+      const b = document.createElement('button');
+      b.textContent = opt;
+      b.addEventListener('click', function(){
+        if(b.disabled) return;
+        const allBtns = optsDiv.querySelectorAll('button');
+        allBtns.forEach(function(x){ x.disabled = true; });
+        if(oIdx === item.ans){
+          b.classList.add('correct');
+          score++;
+        } else {
+          b.classList.add('wrong');
+          allBtns[item.ans].classList.add('correct');
+        }
+        document.getElementById('scoreVal').textContent = score;
+        if(idx === quizData.length - 1){
+          setTimeout(function(){ quizState = 'result'; render(); }, 600);
+        }
+      });
+      optsDiv.appendChild(b);
     });
-    document.getElementById(`exp-${n}-${idx}`).classList.add('show');
-    if(chosen===item.correct) score++;
+    container.appendChild(qDiv);
   });
-  state.submitted[n] = true;
-  document.getElementById('submit-'+n).style.display='none';
-  const pct = Math.round((score/QUIZ[n].length)*100);
-  document.getElementById('result-'+n).innerHTML = `
-    <div class="result-card">
-      <p class="ml">നിങ്ങളുടെ സ്കോർ</p><p class="en">Your score</p>
-      <div class="score">${score} / ${QUIZ[n].length}</div>
-      <p>${pct}% ${pct>=70?'🎉':pct>=40?'👍':'💪'}</p>
-      <button class="retry-btn" onclick="retryPart(${n})"><span class="ml">വീണ്ടും ശ്രമിക്കൂ</span><span class="en">Try again</span></button>
-    </div>`;
-  window.scrollTo({top: document.getElementById('result-'+n).offsetTop-20, behavior:'smooth'});
 }
 
-function retryPart(n){
-  state[n] = {}; state.submitted[n]=false;
-  renderPart(n);
+const PENDING_KEY = 'chemExamPending_v1';
+function getPending(){ try{ return JSON.parse(localStorage.getItem(PENDING_KEY) || '[]'); }catch(e){ return []; } }
+function setPending(arr){ try{ localStorage.setItem(PENDING_KEY, JSON.stringify(arr)); }catch(e){} }
+function queuePending(fd){ const arr = getPending(); arr.push(fd); setPending(arr); }
+function removePending(fd){ setPending(getPending().filter(function(p){ return p._id !== fd._id; })); }
+function sendToSheet(fd){
+  return fetch(SCRIPT_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: {'Content-Type': 'text/plain;charset=utf-8'},
+    body: JSON.stringify(fd)
+  });
+}
+let currentSubmitId = null;
+function trySend(fd, attempt){
+  attempt = attempt || 0;
+  sendToSheet(fd).then(function(){
+    removePending(fd);
+    if(fd._id === currentSubmitId){ const el = document.getElementById('qsent'); if(el){ el.textContent = '✓ ' + STR[currentLang].sentOk; el.classList.add('ok'); } }
+  }).catch(function(){
+    if(attempt < 3){ setTimeout(function(){ trySend(fd, attempt + 1); }, 2500 * (attempt + 1)); }
+    else if(fd._id === currentSubmitId){ const el = document.getElementById('qsent'); if(el){ el.textContent = '⚠ ' + STR[currentLang].sentFail; } }
+  });
+}
+function flushPending(){
+  if(!SCRIPT_URL) return;
+  getPending().forEach(function(p){ trySend(p); });
+}
+function submitResult(pct){
+  if(!SCRIPT_URL) return;
+  const now = new Date();
+  const fd = {
+    _id: Date.now() + '-' + Math.random().toString(36).slice(2),
+    name: studentName, centre: studentCentre, admissionNumber: studentAdmission,
+    chapter: CHAPTER_TITLE, score: score, total: quizData.length, percent: pct,
+    date: now.toLocaleDateString('en-GB'), time: now.toLocaleTimeString('en-GB')
+  };
+  currentSubmitId = fd._id;
+  queuePending(fd);
+  trySend(fd);
 }
 
-function showPart(n){
-  document.getElementById('part1').classList.toggle('active', n===1);
-  document.getElementById('part2').classList.toggle('active', n===2);
-  document.getElementById('tab1').classList.toggle('active', n===1);
-  document.getElementById('tab2').classList.toggle('active', n===2);
-  window.scrollTo({top:0, behavior:'smooth'});
+function renderResult(){
+  const t = STR[currentLang];
+  const pct = Math.round(score / quizData.length * 100);
+  const msg = pct >= 80 ? t.good : pct >= 50 ? t.mid : t.low;
+  const box = document.getElementById('resultBox');
+  box.style.display = 'block';
+  box.innerHTML =
+    '<div class="qwho" style="justify-content:center"><span><b>' + studentName + '</b> · ' + studentAdmission + ' · ' + studentCentre + '</span></div>' +
+    '<div class="result-big">' + score + '<span style="font-size:1.3rem;color:#777">/' + quizData.length + '</span></div>' +
+    '<div class="result-lbl">' + pct + '% ' + t.correct + '</div>' +
+    '<div class="result-msg">' + msg + '</div>' +
+    '<div class="qsent" id="qsent">' + t.sending + '</div>' +
+    '<button class="btn" id="newStuBtn" style="width:100%;margin-top:14px">' + t.newStudent + '</button>';
+  document.getElementById('newStuBtn').addEventListener('click', function(){
+    quizState = 'start'; studentName = ''; studentCentre = ''; studentAdmission = ''; score = 0;
+    render();
+  });
+  if(!resultSubmitted){
+    resultSubmitted = true;
+    markAttempted(studentAdmission);
+    submitResult(pct);
+  } else {
+    const el = document.getElementById('qsent');
+    if(el){ el.textContent = t.sentAlready; el.classList.add('ok'); }
+  }
 }
 
-function setLang(l){
-  document.body.className = 'lang-'+l;
-  document.getElementById('btn-ml').classList.toggle('active', l==='ml');
-  document.getElementById('btn-en').classList.toggle('active', l==='en');
+function watchGate(){
+  const open = isQuizOpen();
+  if(_gateOpenSeen === null){ _gateOpenSeen = open; return; }
+  if(open !== _gateOpenSeen){
+    _gateOpenSeen = open;
+    if(open && quizState === 'gate'){ quizState = 'start'; render(); }
+    else if(!open){ quizState = 'gate'; render(); }
+  }
 }
+setInterval(watchGate, 15000);
 
-renderPart(1); renderPart(2);
+flushPending();
+quizState = isQuizOpen() ? 'start' : 'gate';
+render();
 </script>
 </body>
 </html>
