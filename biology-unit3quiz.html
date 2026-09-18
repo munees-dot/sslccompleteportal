@@ -1,228 +1,343 @@
 <!DOCTYPE html>
-<html lang="ml">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Quick Quiz — Behind the Senses | Unit 3</title>
+<title>Daily Exam — Behind the Senses | Biology Class 10</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#1f2937;
-  --paper:#f6f4fb;
-  --helix:#2d4f8a;
-  --helix-dark:#1a2f5c;
-  --gene:#7b3fa0;
-  --gene-light:#ede1f5;
-  --trait:#2e8b57;
-  --line:#dcd6ea;
-  --card:#ffffff;
+  --ink:#1f2937; --paper:#faf6ee; --chain:#2b6e63; --chain-dark:#184d44;
+  --branch:#c1622d; --func:#7b4fa0; --line:#e1d7c3; --card:#ffffff;
 }
 *{box-sizing:border-box;}
-body{
-  margin:0; background:var(--paper); color:var(--ink);
-  font-family:'Noto Sans Malayalam','Manjari',system-ui,sans-serif;
-  line-height:1.55;
-}
-header{
-  background:linear-gradient(135deg,var(--helix-dark),var(--helix) 65%);
-  color:#fff; padding:20px 18px 50px; position:relative; overflow:hidden; text-align:center;
-}
-header .backbone{ position:absolute; inset:0; opacity:.15;
-  background-image: repeating-linear-gradient(115deg, transparent 0 38px, #fff 38px 40px); }
-header h1{ margin:0 0 4px; font-size:1.3rem; position:relative; z-index:1; }
-header p.sub{ margin:0 0 12px; opacity:.85; font-size:.88rem; position:relative; z-index:1; }
-.lang-toggle{ position:relative; z-index:1; display:inline-flex; gap:4px; background:rgba(255,255,255,.15); padding:4px; border-radius:20px; }
-.lang-toggle button{
-  border:none; background:transparent; color:#fff; padding:6px 16px; border-radius:16px;
-  cursor:pointer; font-family:inherit; font-size:.85rem; font-weight:600; opacity:.7;
-}
-.lang-toggle button.active{ background:#fff; color:var(--helix-dark); opacity:1; }
-.wrap{ max-width:560px; margin:-32px auto 40px; padding:0 14px; position:relative; z-index:2; }
-.card{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px; margin-bottom:16px; box-shadow:0 8px 24px rgba(26,47,92,.1); }
-h2.section-title{ color:var(--helix-dark); border-bottom:3px solid var(--gene); display:inline-block; padding-bottom:4px; margin-top:0; font-size:1.1rem; }
-.quiz-opts button{ display:block; width:100%; text-align:left; margin:6px 0; padding:12px 14px; border:1px solid var(--line); background:#fff; border-radius:9px; cursor:pointer; font-family:inherit; font-size:.95rem; }
-.quiz-opts button.correct{ background:#dff3e8; border-color:var(--trait); font-weight:600; }
-.quiz-opts button.wrong{ background:#fbe4e0; border-color:var(--gene); }
-.quiz-opts button[disabled]{ cursor:default; }
-.quiz-nav{ display:flex; justify-content:space-between; margin-top:14px; }
-.quiz-nav button:disabled{ opacity:.4; cursor:default; }
-.score-bar{ background:var(--helix-dark); color:#fff; border-radius:10px; padding:10px 16px; margin-bottom:14px; font-size:.9rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
-.btn{ background:var(--gene); color:#fff; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; font-family:inherit; font-weight:600; }
-.btn.secondary{ background:var(--helix); }
-.btn.block{ width:100%; margin-top:8px; }
-.share-toast{ display:none; margin-top:12px; background:var(--helix-dark); color:#fff; padding:9px 14px; border-radius:8px; font-size:.85rem; text-align:center; }
-.share-toast.show{ display:block; }
-.result-box{ text-align:center; padding:20px 10px; }
-.result-box .big{ font-size:2.4rem; font-weight:700; color:var(--helix-dark); margin:6px 0; }
-footer.note{ text-align:center; font-size:.78rem; color:#8a8067; margin:30px 0 10px; }
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.55;}
+body[data-lang="ml"]{font-family:'Noto Sans Malayalam','Segoe UI',system-ui,sans-serif;}
+header{background:linear-gradient(135deg,var(--chain-dark),var(--chain) 65%);color:#fff;padding:22px 18px;}
+header h1{margin:0 0 4px;font-size:1.3rem;}
+header p{margin:0;opacity:.85;font-size:.88rem;}
+.wrap{max-width:600px;margin:20px auto 40px;padding:0 14px;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(31,41,55,.04);}
+.toolbar{display:flex;justify-content:flex-end;margin-bottom:14px;}
+.toolbar button{border:none;background:var(--func);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.85rem;}
+.score-bar{background:var(--chain-dark);color:#fff;border-radius:10px;padding:10px 16px;margin-bottom:14px;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;}
+.btn{background:var(--branch);color:#fff;border:none;padding:9px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:600;}
+.quiz-q{margin-bottom:16px;padding-bottom:14px;border-bottom:1px dashed var(--line);}
+.quiz-q:last-child{border-bottom:none;}
+.quiz-opts button{display:block;width:100%;text-align:left;margin:5px 0;padding:8px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.9rem;}
+.quiz-opts button.correct{background:#dff3e8;border-color:var(--chain);font-weight:600;}
+.quiz-opts button.wrong{background:#fbe4e0;border-color:var(--branch);}
+.quiz-opts button[disabled]{cursor:default;}
+.qflabel{font-weight:600;font-size:.85rem;color:var(--ink);margin:0 0 6px;}
+.qstart input,.qstart select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:.92rem;margin:0 0 12px;background:#fff;color:var(--ink);}
+.qstart input:focus,.qstart select:focus{outline:none;border-color:var(--chain);}
+.qerr{color:#a33;font-size:.82rem;margin:-6px 0 12px;display:none;}
+.qerr.show{display:block;}
+.qwho{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--ink);background:#f2f7f5;border-radius:8px;padding:6px 12px;margin:0 0 12px;flex-wrap:wrap;gap:4px;}
+.qwho b{color:var(--chain-dark);}
+.qwho button{border:none;background:none;color:var(--chain-dark);font-weight:700;cursor:pointer;font-family:inherit;font-size:.78rem;text-decoration:underline;}
+.result-big{font-size:2.6rem;font-weight:700;color:var(--chain-dark);text-align:center;}
+.result-lbl{text-align:center;font-weight:600;font-size:1.1rem;margin-top:4px;}
+.result-msg{text-align:center;color:#555;margin-top:4px;}
+.qsent{font-size:.8rem;text-align:center;margin-top:10px;color:#555;}
+.qsent.ok{color:var(--chain-dark);}
+.gatebox{text-align:center;padding:10px 4px;}
+.gatebox b{color:var(--chain-dark);}
+footer{text-align:center;font-size:.78rem;color:#8a8067;margin:20px 0 10px;}
 </style>
 </head>
 <body>
-
 <header>
-  <div class="backbone"></div>
-  <h1>Quick Quiz — Behind the Senses</h1>
-  <p class="sub">Biology · Class 10 · Unit 3</p>
-  <div class="lang-toggle">
-    <button id="langMlBtn" class="active" onclick="setLang('ml')">മലയാളം</button>
-    <button id="langEnBtn" onclick="setLang('en')">English</button>
-  </div>
+  <h1 id="pageTitle">Daily Exam</h1>
+  <p id="pageSub">Biology · Class 10 · Behind the Senses</p>
 </header>
-
 <div class="wrap">
+  <div class="toolbar"><button id="langBtn" onclick="toggleLang()">🌐 മലയാളം</button></div>
   <div class="card">
-    <h2 class="section-title" data-ml="ക്വിക്ക് ക്വിസ്" data-en="Quick Quiz">ക്വിക്ക് ക്വിസ്</h2>
-    <div class="score-bar">
-      <span>
-        <span data-ml="സ്കോർ:" data-en="Score:">സ്കോർ:</span> <b id="scoreVal">0</b> / <span id="totalVal">0</span>
-        &nbsp;·&nbsp; <span data-ml="ചോദ്യം" data-en="Question">ചോദ്യം</span> <b id="qPos">1</b> / <span id="qTotal">0</span>
-      </span>
+    <div id="gateBox" style="display:none"></div>
+    <div id="startBox" style="display:none"></div>
+    <div id="quizBox" style="display:none">
+      <div class="score-bar">
+        <span><span id="scoreLabel">Score:</span> <b id="scoreVal">0</b> / <span id="totalVal">0</span></span>
+      </div>
+      <div id="quizContainer"></div>
     </div>
-    <div id="quizContainer"></div>
-    <div id="resultContainer" style="display:none;"></div>
-    <div class="quiz-nav">
-      <button class="btn secondary" id="prevBtn" onclick="prevQuestion()" data-ml="← മുമ്പത്തേത്" data-en="← Previous">← മുമ്പത്തേത്</button>
-      <button class="btn" id="nextBtn" onclick="nextQuestion()" data-ml="അടുത്തത് →" data-en="Next →">അടുത്തത് →</button>
-    </div>
-    <button class="btn secondary block" onclick="shareScore()" data-ml="🔗 സ്കോർ പങ്കിടുക" data-en="🔗 Share Score">🔗 സ്കോർ പങ്കിടുക</button>
-    <button class="btn block" style="background:var(--helix-dark);" onclick="resetQuiz()" data-ml="വീണ്ടും ചെയ്യുക" data-en="Retry">വീണ്ടും ചെയ്യുക</button>
-    <div id="shareToast" class="share-toast"></div>
+    <div id="resultBox" style="display:none"></div>
   </div>
+  <footer>Abacus Academy · EduPro Study Tools · Class 10 Chemistry</footer>
 </div>
-
-<footer class="note">Abacus Academy · Class 10 Biology · Unit 3 Quiz</footer>
-
 <script>
-let currentLang = 'ml';
-function setLang(lang){
-  currentLang = lang;
-  document.getElementById('langMlBtn').classList.toggle('active', lang === 'ml');
-  document.getElementById('langEnBtn').classList.toggle('active', lang === 'en');
-  document.querySelectorAll('[data-ml][data-en]').forEach(el=>{
-    el.textContent = (lang === 'ml') ? el.dataset.ml : el.dataset.en;
-  });
-  quizData = (lang === 'ml') ? quizDataML : quizDataEN;
-  renderQuestion();
-}
+let currentLang = "en";
+const quizData = [{"q":"What are the conditions that trigger responses in organisms called?","q_ml":"ജീവികളിൽ പ്രതികരണത്തിന് കാരണമാകുന്ന സാഹചര്യങ്ങളെ എന്ത് വിളിക്കുന്നു?","opts":["Receptors","Stimuli","Neurons","Hormones"],"opts_ml":["ഗ്രാഹികൾ","ഉദ്ദീപനങ്ങൾ","ന്യൂറോണുകൾ","ഹോർമോണുകൾ"],"ans":1},{"q":"What is the electrical signal generated in a receptor called?","q_ml":"ഗ്രാഹികളിൽ ഉണ്ടാകുന്ന വൈദ്യുത സന്ദേശത്തിന്റെ പേരെന്ത്?","opts":["Action potential","Resting potential","Receptor potential","Synaptic potential"],"opts_ml":["ആക്ഷൻ പൊട്ടൻഷ്യൽ","റെസ്റ്റിംഗ് പൊട്ടൻഷ്യൽ","റിസപ്റ്റർ പൊട്ടൻഷ്യൽ","സിനാപ്റ്റിക് പൊട്ടൻഷ്യൽ"],"ans":2},{"q":"What is the middle layer of the eye called?","q_ml":"കണ്ണിന്റെ മധ്യപാളി (Choroid) യുടെ മലയാളം പേരെന്ത്?","opts":["Sclera","Choroid","Retina","Conjunctiva"],"opts_ml":["ദൃഢപടലം","രക്തപടലം","ദൃഷ്ടിപടലം","നേത്രാവരണം"],"ans":1},{"q":"Which photoreceptor cells enable vision in dim light?","q_ml":"മങ്ങിയ വെളിച്ചത്തിൽ കാഴ്ച സാധ്യമാക്കുന്ന പ്രകാശഗ്രാഹീ കോശങ്ങൾ ഏത്?","opts":["Cone cells","Rod cells","Bipolar cells","Ganglion cells"],"opts_ml":["കോൺ കോശങ്ങൾ","റോഡ് കോശങ്ങൾ","ബൈപോളാർ കോശങ്ങൾ","ഗാംഗ്ലിയോൺ കോശങ്ങൾ"],"ans":1},{"q":"What is the pigment found in rod cells called?","q_ml":"റോഡ് കോശങ്ങളിലെ വർണ്ണകത്തിന്റെ പേരെന്ത്?","opts":["Photopsin","Crystallin","Rhodopsin","Melanin"],"opts_ml":["ഫോട്ടോപ്സിൻ","ക്രിസ്റ്റലിൻ","റോഡോപ്സിൻ","മെലാനിൻ"],"ans":2},{"q":"Which is the first of the three middle-ear ossicles?","q_ml":"മധ്യകർണ്ണത്തിലെ മൂന്ന് അസ്ഥികളിൽ ആദ്യത്തേത് ഏത്?","opts":["Incus","Stapes","Malleus","Cochlea"],"opts_ml":["ഇൻകസ്","സ്റ്റേപിസ്","മാലിയസ്","കോക്ലിയ"],"ans":2},{"q":"Which tube connects the middle ear to the throat?","q_ml":"മധ്യകർണ്ണത്തെ ഗ്രസനിയുമായി ബന്ധിപ്പിക്കുന്ന കുഴൽ ഏത്?","opts":["Cochlea","Eustachian canal","Semicircular canal","Ear canal"],"opts_ml":["കോക്ലിയ","യൂസ്റ്റേഷ്യൻ കനാൽ","സെമിസർക്കുലാർ കനാൽ","കർണ്ണനാളം"],"ans":1},{"q":"Which part of the cochlea houses the sound receptors?","q_ml":"ശബ്ദഗ്രാഹികൾ സ്ഥിതി ചെയ്യുന്ന കോക്ലിയയിലെ ഭാഗം ഏത്?","opts":["Oval window","Organ of Corti","Round window","Vestibule"],"opts_ml":["ഓവൽ വിൻഡോ","ഓർഗൻ ഓഫ് കോർട്ടി","റൗണ്ട് വിൻഡോ","വെസ്റ്റിബ്യുൾ"],"ans":1},{"q":"What is the sensation of pain that warns of danger called?","q_ml":"അപകട സൂചന നൽകുന്ന വേദനാ സംവേദനത്തെ എന്ത് വിളിക്കുന്നു?","opts":["Nociception","Accommodation","Binocular fusion","Olfaction"],"opts_ml":["നോസിസെപ്ഷൻ","അക്കോമൊഡേഷൻ","ബൈനോക്കുലർ ഫ്യൂഷൻ","ഓൾഫാക്ഷൻ"],"ans":0},{"q":"Which of these is NOT one of the basic tastes we perceive?","q_ml":"താഴെപ്പറയുന്നവയിൽ നാം തിരിച്ചറിയുന്ന അടിസ്ഥാന രുചിയല്ലാത്തത് ഏത്?","opts":["Sweet","Salty","Cold","Umami"],"opts_ml":["മധുരം","ഉപ്പ്","തണുപ്പ്","ഉമാമി"],"ans":2},{"q":"What is the region where the optic nerve begins — which has no photoreceptor cells — called?","q_ml":"നേത്രനാഡി ആരംഭിക്കുന്ന, പ്രകാശഗ്രാഹീ കോശങ്ങൾ ഇല്ലാത്ത ഭാഗത്തിന്റെ പേരെന്ത്?","opts":["Macula","Blind Spot","Iris","Cornea"],"opts_ml":["മാക്കുല","അന്ധബിന്ദു (Blind Spot)","ഐറിസ്","കോർണിയ"],"ans":1},{"q":"Which part of the retina has the highest concentration of cone cells?","q_ml":"കോൺ കോശങ്ങൾ ഏറ്റവും കൂടുതൽ കേന്ദ്രീകരിച്ചിരിക്കുന്ന റെറ്റിനയിലെ ഭാഗം ഏത്?","opts":["Blind Spot","Macula","Sclera","Choroid"],"opts_ml":["അന്ധബിന്ദു","മാക്കുല","സ്ക്ലീറ","കോറോയിഡ്"],"ans":1},{"q":"Which fluid, between the lens and retina, maintains the eyeball's shape?","q_ml":"ലെൻസിനും റെറ്റിനയ്ക്കും ഇടയിൽ കണ്ണിന്റെ ആകൃതി നിലനിർത്തുന്ന ദ്രവം ഏത്?","opts":["Aqueous humor","Vitreous humor","Endolymph","Perilymph"],"opts_ml":["അക്വസ് ദ്രവം","വിട്രിയസ് ദ്രവം","എൻഡോലിംഫ്","പെരിലിംഫ്"],"ans":1},{"q":"What happens to the ciliary muscles when focusing on a near object (accommodation)?","q_ml":"അടുത്തുള്ള വസ്തുക്കളിൽ ഫോക്കസ് ചെയ്യുമ്പോൾ (accommodation) സീലിയറി പേശികൾക്ക് എന്ത് സംഭവിക്കുന്നു?","opts":["They relax","They contract","No change","They degenerate"],"opts_ml":["അയയുന്നു","സങ്കോചിക്കുന്നു","മാറ്റമില്ല","നശിക്കുന്നു"],"ans":1},{"q":"On which chromosome are the genes for the red- and green-sensitive cone pigments found?","q_ml":"പച്ച, ചുവപ്പ് കോൺ കോശങ്ങളിലെ വർണ്ണകത്തിനുള്ള ജീൻ ഏത് ക്രോമസോമിലാണ്?","opts":["X chromosome","Y chromosome","Chromosome 7","Chromosome 12"],"opts_ml":["X ക്രോമസോം","Y ക്രോമസോം","ക്രോമസോം 7","ക്രോമസോം 12"],"ans":0},{"q":"Which condition is caused by clouding of the eye lens?","q_ml":"നേത്ര ലെൻസ് അതാര്യമാകുന്ന അവസ്ഥ ഏതാണ്?","opts":["Glaucoma","Cataract","Astigmatism","Xerophthalmia"],"opts_ml":["ഗ്ലോക്കോമ","തിമിരം (Cataract)","അസ്റ്റിഗ്മാറ്റിസം","സീറോഫ്താൽമിയ"],"ans":1},{"q":"Which fluid fills the middle chamber of the cochlea?","q_ml":"കോക്ലിയയുടെ മധ്യഅറയിൽ നിറഞ്ഞിരിക്കുന്ന ദ്രവം ഏത്?","opts":["Perilymph","Endolymph","Aqueous humor","Vitreous humor"],"opts_ml":["പെരിലിംഫ്","എൻഡോലിംഫ്","അക്വസ് ദ്രവം","വിട്രിയസ് ദ്രവം"],"ans":1},{"q":"What is the main function of the Eustachian canal?","q_ml":"യൂസ്റ്റേഷ്യൻ കനാലിന്റെ പ്രധാന ധർമ്മം എന്ത്?","opts":["Generate sound impulses","Equalize air pressure on both sides of the eardrum","Maintain body balance","Detect smell"],"opts_ml":["ശബ്ദ ആവേഗങ്ങൾ ഉണ്ടാക്കുക","കർണ്ണപടത്തിന്റെ ഇരുവശത്തുമുള്ള മർദ്ദം തുല്യമാക്കുക","ശരീരതുലനനില പാലിക്കുക","ഗന്ധം തിരിച്ചറിയുക"],"ans":1},{"q":"In what unit is sound intensity measured?","q_ml":"ശബ്ദതീവ്രത അളക്കുന്ന യൂണിറ്റ് ഏത്?","opts":["Hertz","Decibel (dB)","Pascal","Joule"],"opts_ml":["ഹെർട്സ്","ഡെസിബെൽ (dB)","പാസ്കൽ","ജൂൾ"],"ans":1},{"q":"Which structure in the inner ear helps maintain body balance?","q_ml":"ആന്തരകർണ്ണത്തിൽ ശരീരതുലനനില പാലിക്കാൻ സഹായിക്കുന്ന ഭാഗം ഏത്?","opts":["Organ of Corti","Vestibular system (semicircular canals)","Eardrum","Eustachian canal"],"opts_ml":["ഓർഗൻ ഓഫ് കോർട്ടി","വെസ്റ്റിബ്യുലാർ സിസ്റ്റം (സെമിസർക്കുലാർ കനാലുകൾ)","കർണ്ണപടം","യൂസ്റ്റേഷ്യൻ കനാൽ"],"ans":1}];
 
-const quizDataML = [
-  { q:"ജീവികളിൽ പ്രതികരണത്തിന് കാരണമാകുന്ന സാഹചര്യങ്ങളെ എന്ത് വിളിക്കുന്നു?", opts:["ഗ്രാഹികൾ","ഉദ്ദീപനങ്ങൾ","ന്യൂറോണുകൾ","ഹോർമോണുകൾ"], ans:1 },
-  { q:"ഗ്രാഹികളിൽ ഉണ്ടാകുന്ന വൈദ്യുത സന്ദേശത്തിന്റെ പേരെന്ത്?", opts:["ആക്ഷൻ പൊട്ടൻഷ്യൽ","റെസ്റ്റിംഗ് പൊട്ടൻഷ്യൽ","റിസപ്റ്റർ പൊട്ടൻഷ്യൽ","സിനാപ്റ്റിക് പൊട്ടൻഷ്യൽ"], ans:2 },
-  { q:"കണ്ണിന്റെ മധ്യപാളി (Choroid) യുടെ മലയാളം പേരെന്ത്?", opts:["ദൃഢപടലം","രക്തപടലം","ദൃഷ്ടിപടലം","നേത്രാവരണം"], ans:1 },
-  { q:"മങ്ങിയ വെളിച്ചത്തിൽ കാഴ്ച സാധ്യമാക്കുന്ന പ്രകാശഗ്രാഹീ കോശങ്ങൾ ഏത്?", opts:["കോൺ കോശങ്ങൾ","റോഡ് കോശങ്ങൾ","ബൈപോളാർ കോശങ്ങൾ","ഗാംഗ്ലിയോൺ കോശങ്ങൾ"], ans:1 },
-  { q:"റോഡ് കോശങ്ങളിലെ വർണ്ണകത്തിന്റെ പേരെന്ത്?", opts:["ഫോട്ടോപ്സിൻ","ക്രിസ്റ്റലിൻ","റോഡോപ്സിൻ","മെലാനിൻ"], ans:2 },
-  { q:"മധ്യകർണ്ണത്തിലെ മൂന്ന് അസ്ഥികളിൽ ആദ്യത്തേത് ഏത്?", opts:["ഇൻകസ്","സ്റ്റേപിസ്","മാലിയസ്","കോക്ലിയ"], ans:2 },
-  { q:"മധ്യകർണ്ണത്തെ ഗ്രസനിയുമായി ബന്ധിപ്പിക്കുന്ന കുഴൽ ഏത്?", opts:["കോക്ലിയ","യൂസ്റ്റേഷ്യൻ കനാൽ","സെമിസർക്കുലാർ കനാൽ","കർണ്ണനാളം"], ans:1 },
-  { q:"ശബ്ദഗ്രാഹികൾ സ്ഥിതി ചെയ്യുന്ന കോക്ലിയയിലെ ഭാഗം ഏത്?", opts:["ഓവൽ വിൻഡോ","ഓർഗൻ ഓഫ് കോർട്ടി","റൗണ്ട് വിൻഡോ","വെസ്റ്റിബ്യുൾ"], ans:1 },
-  { q:"അപകട സൂചന നൽകുന്ന വേദനാ സംവേദനത്തെ എന്ത് വിളിക്കുന്നു?", opts:["നോസിസെപ്ഷൻ","അക്കോമൊഡേഷൻ","ബൈനോക്കുലർ ഫ്യൂഷൻ","ഓൾഫാക്ഷൻ"], ans:0 },
-  { q:"താഴെപ്പറയുന്നവയിൽ നാം തിരിച്ചറിയുന്ന അടിസ്ഥാന രുചിയല്ലാത്തത് ഏത്?", opts:["മധുരം","ഉപ്പ്", "തണുപ്പ്", "ഉമാമി"], ans:2 }
-];
-const quizDataEN = [
-  { q:"What are the conditions that trigger responses in organisms called?", opts:["Receptors","Stimuli","Neurons","Hormones"], ans:1 },
-  { q:"What is the electrical signal generated in a receptor called?", opts:["Action potential","Resting potential","Receptor potential","Synaptic potential"], ans:2 },
-  { q:"What is the middle layer of the eye called?", opts:["Sclera","Choroid","Retina","Conjunctiva"], ans:1 },
-  { q:"Which photoreceptor cells enable vision in dim light?", opts:["Cone cells","Rod cells","Bipolar cells","Ganglion cells"], ans:1 },
-  { q:"What is the pigment found in rod cells called?", opts:["Photopsin","Crystallin","Rhodopsin","Melanin"], ans:2 },
-  { q:"Which is the first of the three middle-ear ossicles?", opts:["Incus","Stapes","Malleus","Cochlea"], ans:2 },
-  { q:"Which tube connects the middle ear to the throat?", opts:["Cochlea","Eustachian canal","Semicircular canal","Ear canal"], ans:1 },
-  { q:"Which part of the cochlea houses the sound receptors?", opts:["Oval window","Organ of Corti","Round window","Vestibule"], ans:1 },
-  { q:"What is the sensation of pain that warns of danger called?", opts:["Nociception","Accommodation","Binocular fusion","Olfaction"], ans:0 },
-  { q:"Which of these is NOT one of the basic tastes we perceive?", opts:["Sweet","Salty","Cold","Umami"], ans:2 }
-];
-let quizData = quizDataML;
+/* ---- daily-exam config ---- */
+const QUIZ_OPEN_HOUR = 21;
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw_zU9ysc2jyNMUHDLcxnpiQPbqJJGM2-Ri6U599LkeSv8pS6r42CyeH9kBBVcFYAtrGA/exec";
+const CHAPTER_TITLE = "Behind the Senses | Biology Unit 3";
+
+const STR = {
+  en:{ gateTitle:"Today's exam opens at 9:00 PM.", nowLabel:"Current time: ",
+       nameLabel:"Name", namePh:"e.g. Amal Krishna",
+       centreLabel:"Centre", centrePh:"Select", centre1:"Abacus Academy, Puthur Pallikkal", centre2:"Abacus Academy, Parambil Peedika",
+       admLabel:"Admission number", admPh:"e.g. 24",
+       errFields:"Please fill in all fields", startBtn:"Start exam", attemptedAs:"Attempting as:", notYou:"Not you",
+       checking:"Checking...", alreadyAttempted:"This admission number has already attempted today's exam — one attempt per student.",
+       score:"Score:", correct:"correct",
+       good:"Excellent! Well studied.", mid:"Coming along nicely.", low:"Read the notes once more and try again.",
+       sending:"Recording result...", sentOk:"Result recorded", sentFail:"Network busy — retrying, don't close the page",
+       sentAlready:"Result was already recorded", newStudent:"Next student / New attempt" },
+  ml:{ gateTitle:"ക്വിസ് ഇന്ന് രാത്രി 9 മണിക്ക് ആരംഭിക്കും.", nowLabel:"ഇപ്പോൾ സമയം: ",
+       nameLabel:"പേര്", namePh:"ഉദാ: അമൽ കൃഷ്ണ",
+       centreLabel:"സെന്റർ", centrePh:"തിരഞ്ഞെടുക്കുക", centre1:"Abacus Academy, Puthur Pallikkal", centre2:"Abacus Academy, Parambil Peedika",
+       admLabel:"അഡ്മിഷൻ നമ്പർ", admPh:"ഉദാ: 24",
+       errFields:"എല്ലാ വിവരങ്ങളും പൂരിപ്പിക്കുക", startBtn:"പരീക്ഷ തുടങ്ങൂ", attemptedAs:"എഴുതുന്നത്:", notYou:"ഞാനല്ല",
+       checking:"പരിശോധിക്കുന്നു...", alreadyAttempted:"ഈ അഡ്മിഷൻ നമ്പർ ഉപയോഗിച്ച് ഇന്ന് നേരത്തെ എഴുതിയിട്ടുണ്ട് — ഒരു കുട്ടിക്ക് ഒരു അവസരം മാത്രം.",
+       score:"സ്കോർ:", correct:"ശരി",
+       good:"മികച്ചത്! നന്നായി പഠിച്ചു.", mid:"നന്നായി വരുന്നു — ഒന്നു കൂടി റിവിഷൻ ചെയ്യാം.", low:"കുറിപ്പുകൾ ഒന്നുകൂടി വായിച്ച് വീണ്ടും ശ്രമിക്കാം.",
+       sending:"ഫലം രേഖപ്പെടുത്തുന്നു...", sentOk:"ഫലം രേഖപ്പെടുത്തി", sentFail:"നെറ്റ്‌വർക്ക് തിരക്ക് — വീണ്ടും ശ്രമിക്കുന്നു, പേജ് അടയ്ക്കരുത്",
+       sentAlready:"ഫലം നേരത്തെ രേഖപ്പെടുത്തിയിരുന്നു", newStudent:"അടുത്ത കുട്ടി / പുതിയ ശ്രമം" }
+};
 
 let score = 0;
-let currentQ = 0;
-let userAnswers = new Array(quizDataML.length).fill(null);
+let quizState = 'gate';
+let studentName = '', studentCentre = '', studentAdmission = '';
+let resultSubmitted = false;
+let _gateOpenSeen = null;
 
-function renderQuestion(){
-  document.getElementById('quizContainer').style.display = 'block';
-  document.getElementById('resultContainer').style.display = 'none';
-  document.querySelector('.quiz-nav').style.display = 'flex';
+function isQuizOpen(){ return new Date().getHours() >= QUIZ_OPEN_HOUR; }
+
+function toggleLang(){
+  currentLang = currentLang === 'en' ? 'ml' : 'en';
+  document.getElementById('langBtn').textContent = currentLang === 'en' ? '🌐 മലയാളം' : '🌐 English';
+  document.getElementById('pageTitle').textContent = currentLang === 'ml' ? 'ദിവസേനയുള്ള പരീക്ഷ' : 'Daily Exam';
+  document.getElementById('pageSub').textContent = currentLang === 'ml' ? 'ജീവശാസ്ത്രം · ക്ലാസ് 10 · സംവേദനങ്ങൾക്കുപിന്നിൽ' : 'Biology · Class 10 · Behind the Senses';
+  document.body.setAttribute('data-lang', currentLang);
+  document.documentElement.lang = currentLang;
+  render();
+}
+
+function render(){
+  document.getElementById('gateBox').style.display = 'none';
+  document.getElementById('startBox').style.display = 'none';
+  document.getElementById('quizBox').style.display = 'none';
+  document.getElementById('resultBox').style.display = 'none';
+  if(quizState === 'gate') renderGate();
+  else if(quizState === 'start') renderStart();
+  else if(quizState === 'quiz') renderQuiz();
+  else renderResult();
+}
+
+function renderGate(){
+  const t = STR[currentLang];
+  const box = document.getElementById('gateBox');
+  box.style.display = 'block';
+  box.innerHTML = '<div class="gatebox"><b>📌 ' + t.gateTitle + '</b><br>' + t.nowLabel + new Date().toLocaleTimeString('en-GB') + '</div>';
+}
+
+function renderStart(){
+  const t = STR[currentLang];
+  const box = document.getElementById('startBox');
+  box.style.display = 'block';
+  box.innerHTML =
+    '<div class="qstart">' +
+    '<p class="qflabel">' + t.nameLabel + '</p>' +
+    '<input type="text" id="stName" placeholder="' + t.namePh + '" value="' + studentName.replace(/"/g,'&quot;') + '">' +
+    '<p class="qflabel">' + t.centreLabel + '</p>' +
+    '<select id="stCentre">' +
+      '<option value="">' + t.centrePh + '</option>' +
+      '<option value="Abacus Academy, Puthur Pallikkal"' + (studentCentre==='Abacus Academy, Puthur Pallikkal'?' selected':'') + '>' + t.centre1 + '</option>' +
+      '<option value="Abacus Academy, Parambil Peedika"' + (studentCentre==='Abacus Academy, Parambil Peedika'?' selected':'') + '>' + t.centre2 + '</option>' +
+    '</select>' +
+    '<p class="qflabel">' + t.admLabel + '</p>' +
+    '<input type="text" id="stAdm" inputmode="numeric" placeholder="' + t.admPh + '" value="' + studentAdmission.replace(/"/g,'&quot;') + '">' +
+    '<p class="qerr" id="qerr"></p>' +
+    '<button class="btn" id="startBtn" style="width:100%">' + t.startBtn + '</button>' +
+    '</div>';
+  document.getElementById('startBtn').addEventListener('click', beginExam);
+}
+
+const ATTEMPT_KEY = 'chemExamAttempts_v1';
+function todayStr(){ return new Date().toLocaleDateString('en-GB'); }
+function getAttempts(){ try{ return JSON.parse(localStorage.getItem(ATTEMPT_KEY) || '{}'); }catch(e){ return {}; } }
+function markAttempted(adm){
+  const map = getAttempts(); const d = todayStr();
+  if(!map[d]) map[d] = [];
+  if(map[d].indexOf(adm) === -1) map[d].push(adm);
+  try{ localStorage.setItem(ATTEMPT_KEY, JSON.stringify(map)); }catch(e){}
+}
+function isAttemptedOnThisDevice(adm){
+  const map = getAttempts(); const d = todayStr();
+  return !!(map[d] && map[d].indexOf(adm) !== -1);
+}
+function checkAlreadyAttemptedOnServer(adm){
+  if(!SCRIPT_URL) return Promise.resolve(false);
+  const url = SCRIPT_URL + (SCRIPT_URL.indexOf('?') === -1 ? '?' : '&') +
+    'admissionNumber=' + encodeURIComponent(adm) + '&date=' + encodeURIComponent(todayStr());
+  const ctrl = ('AbortController' in window) ? new AbortController() : null;
+  const opts = ctrl ? {signal: ctrl.signal} : {};
+  const timeout = new Promise(res => setTimeout(function(){ if(ctrl) ctrl.abort(); res(null); }, 4000));
+  const req = fetch(url, opts).then(function(r){ return r.json(); }).then(function(d){ return !!d.taken; }).catch(function(){ return null; });
+  return Promise.race([req, timeout]).then(function(r){ return r === true; });
+}
+
+function beginExam(){
+  const t = STR[currentLang];
+  const nameVal = document.getElementById('stName').value.trim();
+  const centreVal = document.getElementById('stCentre').value;
+  const admVal = document.getElementById('stAdm').value.trim();
+  const errEl = document.getElementById('qerr');
+  if(!nameVal || !centreVal || !admVal){ errEl.textContent = t.errFields; errEl.classList.add('show'); return; }
+
+  if(isAttemptedOnThisDevice(admVal)){
+    errEl.textContent = t.alreadyAttempted; errEl.classList.add('show'); return;
+  }
+
+  const btn = document.getElementById('startBtn');
+  btn.disabled = true; btn.textContent = t.checking;
+  errEl.classList.remove('show');
+
+  checkAlreadyAttemptedOnServer(admVal).then(function(taken){
+    if(taken){
+      btn.disabled = false; btn.textContent = t.startBtn;
+      errEl.textContent = t.alreadyAttempted; errEl.classList.add('show');
+      return;
+    }
+    studentName = nameVal; studentCentre = centreVal; studentAdmission = admVal;
+    score = 0; resultSubmitted = false;
+    quizState = 'quiz';
+    render();
+  });
+}
+
+function renderQuiz(){
+  const t = STR[currentLang];
+  const box = document.getElementById('quizBox');
+  box.style.display = 'block';
+  document.getElementById('scoreLabel').textContent = t.score;
+  document.getElementById('scoreVal').textContent = 0;
+  document.getElementById('totalVal').textContent = quizData.length;
+  score = 0;
   const container = document.getElementById('quizContainer');
   container.innerHTML = '';
-  document.getElementById('totalVal').textContent = quizData.length;
-  document.getElementById('qTotal').textContent = quizData.length;
-  document.getElementById('qPos').textContent = currentQ + 1;
-
-  const item = quizData[currentQ];
-  const qDiv = document.createElement('div');
-  qDiv.innerHTML = `<p><b>${currentQ+1}.</b> ${item.q}</p><div class="quiz-opts"></div>`;
-  const optsDiv = qDiv.querySelector('.quiz-opts');
-  const alreadyAnswered = userAnswers[currentQ] !== null;
-
-  item.opts.forEach((opt, oIdx)=>{
-    const b = document.createElement('button');
-    b.textContent = opt;
-    if(alreadyAnswered){
-      b.disabled = true;
-      if(oIdx === item.ans) b.classList.add('correct');
-      else if(oIdx === userAnswers[currentQ]) b.classList.add('wrong');
-    }
-    b.addEventListener('click', ()=>{
-      if(b.disabled) return;
-      const allBtns = optsDiv.querySelectorAll('button');
-      allBtns.forEach(x=>x.disabled=true);
-      userAnswers[currentQ] = oIdx;
-      if(oIdx === item.ans){ b.classList.add('correct'); score++; }
-      else { b.classList.add('wrong'); allBtns[item.ans].classList.add('correct'); }
-      document.getElementById('scoreVal').textContent = score;
+  const who = document.createElement('div');
+  who.className = 'qwho';
+  who.innerHTML = '<span>' + t.attemptedAs + ' <b>' + studentName + '</b> · ' + studentAdmission + '</span>';
+  container.appendChild(who);
+  quizData.forEach(function(item, idx){
+    const qText = currentLang === 'ml' ? item.q_ml : item.q;
+    const opts = currentLang === 'ml' ? item.opts_ml : item.opts;
+    const qDiv = document.createElement('div');
+    qDiv.className = 'quiz-q';
+    qDiv.innerHTML = '<p><b>' + (idx+1) + '.</b> ' + qText + '</p><div class="quiz-opts"></div>';
+    const optsDiv = qDiv.querySelector('.quiz-opts');
+    opts.forEach(function(opt, oIdx){
+      const b = document.createElement('button');
+      b.textContent = opt;
+      b.addEventListener('click', function(){
+        if(b.disabled) return;
+        const allBtns = optsDiv.querySelectorAll('button');
+        allBtns.forEach(function(x){ x.disabled = true; });
+        if(oIdx === item.ans){
+          b.classList.add('correct');
+          score++;
+        } else {
+          b.classList.add('wrong');
+          allBtns[item.ans].classList.add('correct');
+        }
+        document.getElementById('scoreVal').textContent = score;
+        if(idx === quizData.length - 1){
+          setTimeout(function(){ quizState = 'result'; render(); }, 600);
+        }
+      });
+      optsDiv.appendChild(b);
     });
-    optsDiv.appendChild(b);
+    container.appendChild(qDiv);
   });
-  container.appendChild(qDiv);
-  document.getElementById('prevBtn').disabled = (currentQ === 0);
-  document.getElementById('nextBtn').textContent = (currentQ === quizData.length - 1)
-    ? (currentLang === 'ml' ? 'ഫലം കാണുക →' : 'See Result →')
-    : (currentLang === 'ml' ? 'അടുത്തത് →' : 'Next →');
 }
 
-function showResult(){
-  document.getElementById('quizContainer').style.display = 'none';
-  document.querySelector('.quiz-nav').style.display = 'none';
-  const answeredCount = userAnswers.filter(a=>a!==null).length;
-  const box = document.getElementById('resultContainer');
+const PENDING_KEY = 'chemExamPending_v1';
+function getPending(){ try{ return JSON.parse(localStorage.getItem(PENDING_KEY) || '[]'); }catch(e){ return []; } }
+function setPending(arr){ try{ localStorage.setItem(PENDING_KEY, JSON.stringify(arr)); }catch(e){} }
+function queuePending(fd){ const arr = getPending(); arr.push(fd); setPending(arr); }
+function removePending(fd){ setPending(getPending().filter(function(p){ return p._id !== fd._id; })); }
+function sendToSheet(fd){
+  return fetch(SCRIPT_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: {'Content-Type': 'text/plain;charset=utf-8'},
+    body: JSON.stringify(fd)
+  });
+}
+let currentSubmitId = null;
+function trySend(fd, attempt){
+  attempt = attempt || 0;
+  sendToSheet(fd).then(function(){
+    removePending(fd);
+    if(fd._id === currentSubmitId){ const el = document.getElementById('qsent'); if(el){ el.textContent = '✓ ' + STR[currentLang].sentOk; el.classList.add('ok'); } }
+  }).catch(function(){
+    if(attempt < 3){ setTimeout(function(){ trySend(fd, attempt + 1); }, 2500 * (attempt + 1)); }
+    else if(fd._id === currentSubmitId){ const el = document.getElementById('qsent'); if(el){ el.textContent = '⚠ ' + STR[currentLang].sentFail; } }
+  });
+}
+function flushPending(){
+  if(!SCRIPT_URL) return;
+  getPending().forEach(function(p){ trySend(p); });
+}
+function submitResult(pct){
+  if(!SCRIPT_URL) return;
+  const now = new Date();
+  const fd = {
+    _id: Date.now() + '-' + Math.random().toString(36).slice(2),
+    name: studentName, centre: studentCentre, admissionNumber: studentAdmission,
+    chapter: CHAPTER_TITLE, score: score, total: quizData.length, percent: pct,
+    date: now.toLocaleDateString('en-GB'), time: now.toLocaleTimeString('en-GB')
+  };
+  currentSubmitId = fd._id;
+  queuePending(fd);
+  trySend(fd);
+}
+
+function renderResult(){
+  const t = STR[currentLang];
+  const pct = Math.round(score / quizData.length * 100);
+  const msg = pct >= 80 ? t.good : pct >= 50 ? t.mid : t.low;
+  const box = document.getElementById('resultBox');
   box.style.display = 'block';
-  box.innerHTML = `<div class="result-box">
-      <div>${currentLang==='ml' ? 'നിങ്ങളുടെ സ്കോർ' : 'Your Score'}</div>
-      <div class="big">${score} / ${quizData.length}</div>
-      <div>${currentLang==='ml' ? answeredCount + ' ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകി' : answeredCount + ' questions answered'}</div>
-    </div>`;
-}
-
-function nextQuestion(){
-  if(currentQ < quizData.length - 1){ currentQ++; renderQuestion(); }
-  else { showResult(); }
-}
-function prevQuestion(){ if(currentQ > 0){ currentQ--; renderQuestion(); } }
-
-function resetQuiz(){
-  score = 0; currentQ = 0;
-  userAnswers = new Array(quizData.length).fill(null);
-  document.getElementById('scoreVal').textContent = 0;
-  renderQuestion();
-}
-
-function shareScore(){
-  const answeredCount = userAnswers.filter(a=>a!==null).length;
-  const text = currentLang === 'ml'
-    ? `സംവേദനങ്ങൾക്കുപിന്നിൽ — ക്വിക്ക് ക്വിസ്\nഎന്റെ സ്കോർ: ${score} / ${quizData.length} (${answeredCount} ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകി)`
-    : `Behind the Senses — Quick Quiz\nMy score: ${score} / ${quizData.length} (${answeredCount} questions answered)`;
-  if(navigator.share){
-    navigator.share({ title: currentLang === 'ml' ? 'ക്വിക്ക് ക്വിസ്' : 'Quick Quiz', text: text }).catch(()=>{});
-  } else if(navigator.clipboard){
-    navigator.clipboard.writeText(text).then(()=>{
-      const toast = document.getElementById('shareToast');
-      toast.textContent = currentLang === 'ml' ? '✅ സ്കോർ കോപ്പി ചെയ്തു' : '✅ Score copied';
-      toast.classList.add('show');
-      setTimeout(()=>toast.classList.remove('show'), 2500);
-    });
+  box.innerHTML =
+    '<div class="qwho" style="justify-content:center"><span><b>' + studentName + '</b> · ' + studentAdmission + ' · ' + studentCentre + '</span></div>' +
+    '<div class="result-big">' + score + '<span style="font-size:1.3rem;color:#777">/' + quizData.length + '</span></div>' +
+    '<div class="result-lbl">' + pct + '% ' + t.correct + '</div>' +
+    '<div class="result-msg">' + msg + '</div>' +
+    '<div class="qsent" id="qsent">' + t.sending + '</div>' +
+    '<button class="btn" id="newStuBtn" style="width:100%;margin-top:14px">' + t.newStudent + '</button>';
+  document.getElementById('newStuBtn').addEventListener('click', function(){
+    quizState = 'start'; studentName = ''; studentCentre = ''; studentAdmission = ''; score = 0;
+    render();
+  });
+  if(!resultSubmitted){
+    resultSubmitted = true;
+    markAttempted(studentAdmission);
+    submitResult(pct);
   } else {
-    alert(text);
+    const el = document.getElementById('qsent');
+    if(el){ el.textContent = t.sentAlready; el.classList.add('ok'); }
   }
 }
 
-renderQuestion();
-</script>
+function watchGate(){
+  const open = isQuizOpen();
+  if(_gateOpenSeen === null){ _gateOpenSeen = open; return; }
+  if(open !== _gateOpenSeen){
+    _gateOpenSeen = open;
+    if(open && quizState === 'gate'){ quizState = 'start'; render(); }
+    else if(!open){ quizState = 'gate'; render(); }
+  }
+}
+setInterval(watchGate, 15000);
 
+flushPending();
+quizState = isQuizOpen() ? 'start' : 'gate';
+render();
+</script>
 </body>
 </html>
