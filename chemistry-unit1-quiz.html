@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Daily Exam — Periodic Table &amp; Electron Configuration | Chemistry Class 10</title>
+<title>Daily Exam — Nomenclature &amp; Isomerism | Chemistry Class 10</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
@@ -50,7 +50,7 @@ footer{text-align:center;font-size:.78rem;color:#8a8067;margin:20px 0 10px;}
 <body>
 <header>
   <h1 id="pageTitle">Daily Exam</h1>
-  <p id="pageSub">Chemistry · Class 10 · Periodic Table &amp; Electron Configuration</p>
+  <p id="pageSub">Chemistry · Class 10 · Nomenclature &amp; Isomerism of Organic Compounds</p>
 </header>
 <div class="wrap">
   <div class="toolbar"><button id="langBtn" onclick="toggleLang()">🌐 മലയാളം</button></div>
@@ -69,126 +69,12 @@ footer{text-align:center;font-size:.78rem;color:#8a8067;margin:20px 0 10px;}
 </div>
 <script>
 let currentLang = "en";
-const quizData = [
-  {
-    q: "What is the shell notation for the principal quantum number n = 3?",
-    q_ml: "പ്രിൻസിപ്പൽ ക്വാണ്ടം നമ്പർ n = 3 എന്നതിന്റെ ഷെൽ നൊട്ടേഷൻ എന്ത്?",
-    opts: ["K", "L", "M", "N"], opts_ml: ["K", "L", "M", "N"], ans: 2
-  },
-  {
-    q: "What is the maximum number of electrons a shell with n = 3 can hold?",
-    q_ml: "n = 3 ആയ ഒരു ഷെല്ലിന് ഉൾക്കൊള്ളാവുന്ന പരമാവധി ഇലക്ട്രോണുകൾ എത്ര?",
-    opts: ["9", "8", "18", "32"], opts_ml: ["9", "8", "18", "32"], ans: 2
-  },
-  {
-    q: "If the azimuthal quantum number l = 2, what is the sub-shell called?",
-    q_ml: "അസിമുഥൽ ക്വാണ്ടം നമ്പർ l = 2 ആണെങ്കിൽ ആ സബ്ഷെല്ലിനെ എന്ത് വിളിക്കുന്നു?",
-    opts: ["s", "p", "d", "f"], opts_ml: ["s", "p", "d", "f"], ans: 2
-  },
-  {
-    q: "How many orbitals are there in a p sub-shell?",
-    q_ml: "ഒരു p സബ്ഷെല്ലിൽ എത്ര ഓർബിറ്റലുകൾ ഉണ്ട്?",
-    opts: ["1", "3", "5", "7"], opts_ml: ["1", "3", "5", "7"], ans: 1
-  },
-  {
-    q: "What is the maximum number of electrons a p sub-shell can hold?",
-    q_ml: "ഒരു p സബ്ഷെല്ലിന് ഉൾക്കൊള്ളാവുന്ന പരമാവധി ഇലക്ട്രോണുകൾ എത്ര?",
-    opts: ["2", "6", "10", "14"], opts_ml: ["2", "6", "10", "14"], ans: 1
-  },
-  {
-    q: "If l = 1, how many values can the magnetic quantum number m have?",
-    q_ml: "l = 1 ആണെങ്കിൽ മാഗ്നറ്റിക് ക്വാണ്ടം നമ്പർ m ന് എത്ര മൂല്യങ്ങൾ ഉണ്ടായിരിക്കും?",
-    opts: ["1", "2", "3", "5"], opts_ml: ["1", "2", "3", "5"], ans: 2
-  },
-  {
-    q: "Which quantum number determines the three-dimensional shape of an orbital?",
-    q_ml: "ഓർബിറ്റലിന്റെ ത്രിമാന ആകൃതി നിർണ്ണയിക്കുന്ന ക്വാണ്ടം നമ്പർ ഏത്?",
-    opts: ["Principal quantum number (n)", "Azimuthal quantum number (l)", "Magnetic quantum number (m)", "None of these"],
-    opts_ml: ["പ്രിൻസിപ്പൽ ക്വാണ്ടം നമ്പർ (n)", "അസിമുഥൽ ക്വാണ്ടം നമ്പർ (l)", "മാഗ്നറ്റിക് ക്വാണ്ടം നമ്പർ (m)", "ഇവയൊന്നുമല്ല"], ans: 1
-  },
-  {
-    q: "What is the electron configuration of Neon (Z = 10)?",
-    q_ml: "നിയോണിന്റെ (Z = 10) ഇലക്ട്രോൺ വിന്യാസം എന്ത്?",
-    opts: ["1s² 2s² 2p⁴", "1s² 2s² 2p⁶", "1s² 2s² 2p⁶ 3s²", "1s² 2s² 2p⁵"],
-    opts_ml: ["1s² 2s² 2p⁴", "1s² 2s² 2p⁶", "1s² 2s² 2p⁶ 3s²", "1s² 2s² 2p⁵"], ans: 1
-  },
-  {
-    q: "According to the (n+l) rule, which sub-shell is filled first — 3d or 4s?",
-    q_ml: "(n+l) നിയമമനുസരിച്ച്, 3d-യും 4s-ഉം തമ്മിൽ ആദ്യം നിറയുന്നത് ഏത് സബ്ഷെല്ലാണ്?",
-    opts: ["3d", "4s", "Both fill together", "Neither"],
-    opts_ml: ["3d", "4s", "രണ്ടും ഒരുമിച്ച്", "രണ്ടുമല്ല"], ans: 1
-  },
-  {
-    q: "What is the actual (anomalous) electron configuration of Chromium (Cr, Z = 24)?",
-    q_ml: "ക്രോമിയത്തിന്റെ (Cr, Z = 24) യഥാർത്ഥ (അസാധാരണ) ഇലക്ട്രോൺ വിന്യാസം എന്ത്?",
-    opts: ["[Ar] 3d⁴ 4s²", "[Ar] 3d⁵ 4s¹", "[Ar] 3d⁶", "[Ar] 3d³ 4s²"],
-    opts_ml: ["[Ar] 3d⁴ 4s²", "[Ar] 3d⁵ 4s¹", "[Ar] 3d⁶", "[Ar] 3d³ 4s²"], ans: 1
-  },
-  {
-    q: "Why does Chromium show this anomalous electron configuration?",
-    q_ml: "ക്രോമിയം ഈ അസാധാരണ ഇലക്ട്രോൺ വിന്യാസം കാണിക്കാനുള്ള കാരണം എന്ത്?",
-    opts: ["Half-filled d-sub-shells (d⁵) are more stable", "d-orbitals cannot hold more than 4 electrons", "It has an extra proton", "The 4s sub-shell is always empty"],
-    opts_ml: ["പകുതി നിറഞ്ഞ d-സബ്ഷെല്ലുകൾ (d⁵) കൂടുതൽ സ്ഥിരതയുള്ളവയാണ്", "d-ഓർബിറ്റലുകൾക്ക് 4 ഇലക്ട്രോണിൽ കൂടുതൽ ഉൾക്കൊള്ളാൻ കഴിയില്ല", "ഇതിന് ഒരു അധിക പ്രോട്ടോൺ ഉണ്ട്", "4s സബ്ഷെൽ എപ്പോഴും ശൂന്യമാണ്"], ans: 0
-  },
-  {
-    q: "What is the group number of an element with configuration ending in ns² np⁴?",
-    q_ml: "ns² np⁴ എന്നതിൽ അവസാനിക്കുന്ന വിന്യാസമുള്ള ഒരു മൂലകത്തിന്റെ ഗ്രൂപ്പ് നമ്പർ എത്ര?",
-    opts: ["14", "15", "16", "17"], opts_ml: ["14", "15", "16", "17"], ans: 2
-  },
-  {
-    q: "What determines the period number of an element?",
-    q_ml: "ഒരു മൂലകത്തിന്റെ പീരിയഡ് നമ്പർ എന്താണ് നിർണ്ണയിക്കുന്നത്?",
-    opts: ["The total number of electrons", "The highest principal quantum number (n) in its configuration", "The number of protons", "The atomic mass"],
-    opts_ml: ["ആകെ ഇലക്ട്രോണുകളുടെ എണ്ണം", "വിന്യാസത്തിലെ ഏറ്റവും ഉയർന്ന പ്രിൻസിപ്പൽ ക്വാണ്ടം നമ്പർ (n)", "പ്രോട്ടോണുകളുടെ എണ്ണം", "അറ്റോമിക മാസ്"], ans: 1
-  },
-  {
-    q: "Elements in which the last electron enters a d sub-shell belong to which block?",
-    q_ml: "അവസാന ഇലക്ട്രോൺ d സബ്ഷെല്ലിൽ പ്രവേശിക്കുന്ന മൂലകങ്ങൾ ഏത് ബ്ലോക്കിൽ ഉൾപ്പെടുന്നു?",
-    opts: ["s-block", "p-block", "d-block", "f-block"],
-    opts_ml: ["s-ബ്ലോക്ക്", "p-ബ്ലോക്ക്", "d-ബ്ലോക്ക്", "f-ബ്ലോക്ക്"], ans: 2
-  },
-  {
-    q: "In which groups are s-block elements found?",
-    q_ml: "s-ബ്ലോക്ക് മൂലകങ്ങൾ ഏതെല്ലാം ഗ്രൂപ്പുകളിലാണ് കാണപ്പെടുന്നത്?",
-    opts: ["Groups 1 and 2", "Groups 13 to 18", "Groups 3 to 12", "Group 18 only"],
-    opts_ml: ["ഗ്രൂപ്പ് 1, 2", "ഗ്രൂപ്പ് 13 മുതൽ 18 വരെ", "ഗ്രൂപ്പ് 3 മുതൽ 12 വരെ", "ഗ്രൂപ്പ് 18 മാത്രം"], ans: 0
-  },
-  {
-    q: "What is the general trend of ionisation enthalpy across a period (left to right)?",
-    q_ml: "ഒരു പീരിയഡിൽ ഇടത്തുനിന്ന് വലത്തോട്ട് പോകുമ്പോൾ അയോണീകരണ എൻഥാൽപിയുടെ പൊതു പ്രവണത എന്ത്?",
-    opts: ["Increases", "Decreases", "Stays the same", "First increases then decreases"],
-    opts_ml: ["കൂടുന്നു", "കുറയുന്നു", "മാറ്റമില്ല", "ആദ്യം കൂടി പിന്നെ കുറയുന്നു"], ans: 0
-  },
-  {
-    q: "What is the general trend of ionisation enthalpy down a group?",
-    q_ml: "ഒരു ഗ്രൂപ്പിൽ മുകളിൽ നിന്ന് താഴേക്ക് പോകുമ്പോൾ അയോണീകരണ എൻഥാൽപിയുടെ പൊതു പ്രവണത എന്ത്?",
-    opts: ["Increases", "Decreases", "Stays the same", "Cannot be determined"],
-    opts_ml: ["കൂടുന്നു", "കുറയുന്നു", "മാറ്റമില്ല", "നിർണ്ണയിക്കാൻ കഴിയില്ല"], ans: 1
-  },
-  {
-    q: "Which of these elements has one of the lowest ionisation enthalpies?",
-    q_ml: "താഴെപ്പറയുന്നവയിൽ ഏറ്റവും കുറഞ്ഞ അയോണീകരണ എൻഥാൽപിയുള്ള മൂലകം ഏത്?",
-    opts: ["Fluorine", "Helium", "Caesium", "Neon"],
-    opts_ml: ["ഫ്ലൂറിൻ", "ഹീലിയം", "സീസിയം", "നിയോൺ"], ans: 2
-  },
-  {
-    q: "Which of the following is a common feature of d-block elements?",
-    q_ml: "d-ബ്ലോക്ക് മൂലകങ്ങളുടെ പൊതുവായ ഒരു സവിശേഷത ഏത്?",
-    opts: ["They are all non-metals", "They are all metals", "They cannot form compounds", "They are all radioactive"],
-    opts_ml: ["ഇവയെല്ലാം അലോഹങ്ങളാണ്", "ഇവയെല്ലാം ലോഹങ്ങളാണ്", "ഇവയ്ക്ക് സംയുക്തങ്ങൾ ഉണ്ടാക്കാൻ കഴിയില്ല", "ഇവയെല്ലാം റേഡിയോ ആക്റ്റീവ് ആണ്"], ans: 1
-  },
-  {
-    q: "Lanthanides and actinides together belong to which block?",
-    q_ml: "ലാന്തനോയ്ഡുകളും ആക്റ്റിനോയ്ഡുകളും ഒരുമിച്ച് ഏത് ബ്ലോക്കിൽ ഉൾപ്പെടുന്നു?",
-    opts: ["s-block", "p-block", "d-block", "f-block"],
-    opts_ml: ["s-ബ്ലോക്ക്", "p-ബ്ലോക്ക്", "d-ബ്ലോക്ക്", "f-ബ്ലോക്ക്"], ans: 3
-  }
-];
+const quizData = [{"q":"What is the IUPAC name of CH₃–CH₂–CH₂–CH₂–CH₃?","q_ml":"CH₃–CH₂–CH₂–CH₂–CH₃ യുടെ IUPAC നാമം എന്ത്?","opts":["Butane","Pentane","Hexane","Propane"],"opts_ml":["ബ്യൂട്ടെയ്ൻ","പെന്റെയ്ൻ","ഹെക്സെയ്ൻ","പ്രോപ്പെയ്ൻ"],"ans":1},{"q":"Compounds with the –OH functional group are called?","q_ml":"–OH പ്രവർത്തക ഗ്രൂപ്പുള്ള സംയുക്തങ്ങളെ എന്ത് വിളിക്കുന്നു?","opts":["Aldehyde","Ketone","Alcohol","Ether"],"opts_ml":["ആൽഡിഹൈഡ്","കീറ്റോൺ","ആൽക്കഹോൾ","ഈഥർ"],"ans":2},{"q":"What is the IUPAC name of CH₂=CH–CH₂–CH₃?","q_ml":"CH₂=CH–CH₂–CH₃ യുടെ IUPAC നാമം എന്ത്?","opts":["But-2-ene","But-1-ene","But-1-yne","Propene"],"opts_ml":["ബ്യൂട്ട്-2-ഈൻ","ബ്യൂട്ട്-1-ഈൻ","ബ്യൂട്ട്-1-യൈൻ","പ്രോപ്പീൻ"],"ans":1},{"q":"What is the suffix for hydrocarbons with a triple bond?","q_ml":"ത്രിബന്ധനമുള്ള ഹൈഡ്രോകാർബണുകൾക്കുള്ള പ്രത്യയം ഏത്?","opts":["–ol","–ene","–yne","–al"],"opts_ml":["–ol","–ene","–yne","–al"],"ans":2},{"q":"What is the common name for CH₃COOH?","q_ml":"CH₃COOH ന്റെ സാധാരണ പേര് എന്ത്?","opts":["Aldehyde","Carboxylic acid","Ketone","Ether"],"opts_ml":["ആൽഡിഹൈഡ്","കാർബോക്സിലിക് അമ്ലം","കീറ്റോൺ","ഈഥർ"],"ans":1},{"q":"What type of isomerism do CH₃CH₂OH and CH₃OCH₃ show?","q_ml":"CH₃CH₂OH ഉം CH₃OCH₃ ഉം ഏത് തരം ഐസോമെറിസമാണ് കാണിക്കുന്നത്?","opts":["Chain isomerism","Position isomerism","Functional isomerism","Metamerism"],"opts_ml":["ശൃംഖലാ ഐസോമെറിസം","സ്ഥാന ഐസോമെറിസം","പ്രവർത്തക ഗ്രൂപ്പ് ഐസോമെറിസം","മെറ്റാമെറിസം"],"ans":2},{"q":"What type of isomerism do CH₃CH₂CH₂OH and CH₃CH(OH)CH₃ show?","q_ml":"CH₃CH₂CH₂OH ഉം CH₃CH(OH)CH₃ ഉം ഏത് തരം ഐസോമെറിസമാണ് കാണിക്കുന്നത്?","opts":["Chain isomerism","Position isomerism","Functional isomerism","Metamerism"],"opts_ml":["ശൃംഖലാ ഐസോമെറിസം","സ്ഥാന ഐസോമെറിസം","പ്രവർത്തക ഗ്രൂപ്പ് ഐസോമെറിസം","മെറ്റാമെറിസം"],"ans":1},{"q":"Which compounds have the &gt;C=O functional group?","q_ml":"&gt;C=O പ്രവർത്തക ഗ്രൂപ്പുള്ള സംയുക്തങ്ങൾ ഏതെല്ലാം?","opts":["Alcohols","Ketones","Ethers","Halo compounds"],"opts_ml":["ആൽക്കഹോളുകൾ","കീറ്റോണുകൾ","ഈഥറുകൾ","ഹാലോ സംയുക്തങ്ങൾ"],"ans":1},{"q":"Which functional group family does CH₃–O–CH₂–CH₃ belong to?","q_ml":"CH₃–O–CH₂–CH₃ ഏത് പ്രവർത്തക ഗ്രൂപ്പ് കുടുംബത്തിൽ പെടുന്നു?","opts":["Aldehyde","Ketone","Ether","Carboxylic acid"],"opts_ml":["ആൽഡിഹൈഡ്","കീറ്റോൺ","ഈഥർ","കാർബോക്സിലിക് അമ്ലം"],"ans":2},{"q":"Which isomerism has the same molecular formula, the same functional group, but different alkyl groups on either side of it?","q_ml":"ഒരേ തന്മാത്രാ സൂത്രവും ഒരേ പ്രവർത്തക ഗ്രൂപ്പും എന്നാൽ അതിന്റെ ഇരുവശത്തും വ്യത്യസ്ത ആൽക്കൈൽ ഗ്രൂപ്പുകളും ഉള്ള ഐസോമെറിസം ഏത്?","opts":["Chain isomerism","Functional isomerism","Metamerism","Position isomerism"],"opts_ml":["ശൃംഖലാ ഐസോമെറിസം","പ്രവർത്തക ഗ്രൂപ്പ് ഐസോമെറിസം","മെറ്റാമെറിസം","സ്ഥാന ഐസോമെറിസം"],"ans":2},{"q":"What is the alkyl group name for the branch –CH₂–CH₃ (2 carbon atoms)?","q_ml":"–CH₂–CH₃ (2 കാർബൺ ആറ്റങ്ങൾ) എന്ന ശാഖയുടെ ആൽക്കൈൽ ഗ്രൂപ്പ് പേര് എന്ത്?","opts":["Methyl","Ethyl","Propyl","Butyl"],"opts_ml":["മീഥൈൽ","എഥൈൽ","പ്രോപ്പൈൽ","ബ്യൂട്ടൈൽ"],"ans":1},{"q":"While numbering the parent chain in IUPAC nomenclature, the chain is numbered so that:","q_ml":"IUPAC നാമകരണത്തിൽ മാതൃ ശൃംഖലയ്ക്ക് നമ്പർ നൽകുമ്പോൾ, ഏത് രീതിയിലാണ് നമ്പർ നൽകുന്നത്?","opts":["The branch/functional group gets the lowest locant","Numbering always starts from the left","The longest branch is numbered first","Carbon atoms are counted from the middle"],"opts_ml":["ശാഖ/പ്രവർത്തക ഗ്രൂപ്പിന് ഏറ്റവും കുറഞ്ഞ സ്ഥാനസൂചിക ലഭിക്കുന്ന വിധം","എപ്പോഴും ഇടത്തുനിന്ന് നമ്പറിംഗ് തുടങ്ങുന്നു","ഏറ്റവും നീളമുള്ള ശാഖയ്ക്ക് ആദ്യം നമ്പർ നൽകുന്നു","മധ്യത്തിൽ നിന്ന് കാർബൺ ആറ്റങ്ങൾ എണ്ണുന്നു"],"ans":0},{"q":"Which prefix is used in IUPAC naming when the same branch appears twice in a compound?","q_ml":"ഒരു സംയുക്തത്തിൽ ഒരേ ശാഖ രണ്ട് തവണ ഉണ്ടെങ്കിൽ IUPAC നാമകരണത്തിൽ ഉപയോഗിക്കുന്ന ഉപസർഗ്ഗം ഏത്?","opts":["mono","di","tri","tetra"],"opts_ml":["മോണോ","ഡൈ","ട്രൈ","ടെട്ര"],"ans":1},{"q":"What is the IUPAC name of CH₃–CH₂–CH₂–Cl?","q_ml":"CH₃–CH₂–CH₂–Cl ന്റെ IUPAC നാമം എന്ത്?","opts":["1-Chloropropane","2-Chloropropane","Chloroethane","1-Chlorobutane"],"opts_ml":["1-ക്ലോറോപ്രോപ്പെയ്ൻ","2-ക്ലോറോപ്രോപ്പെയ്ൻ","ക്ലോറോഈഥേൻ","1-ക്ലോറോബ്യൂട്ടെയ്ൻ"],"ans":0},{"q":"The suffix '–oic acid' in IUPAC nomenclature indicates the presence of which functional group?","q_ml":"IUPAC നാമകരണത്തിലെ '–oic acid' എന്ന പ്രത്യയം ഏത് പ്രവർത്തക ഗ്രൂപ്പിനെ സൂചിപ്പിക്കുന്നു?","opts":["Alcohol","Aldehyde","Ketone","Carboxylic acid"],"opts_ml":["ആൽക്കഹോൾ","ആൽഡിഹൈഡ്","കീറ്റോൺ","കാർബോക്സിലിക് അമ്ലം"],"ans":3},{"q":"What is the molecular formula of benzene?","q_ml":"ബെൻസീനിന്റെ തന്മാത്രാ സൂത്രം എന്ത്?","opts":["C₆H₆","C₆H₁₂","C₆H₅OH","C₆H₁₄"],"opts_ml":["C₆H₆","C₆H₁₂","C₆H₅OH","C₆H₁₄"],"ans":0},{"q":"Which of the following is an example of a ketone?","q_ml":"താഴെപ്പറയുന്നവയിൽ ഏതാണ് കീറ്റോണിന്റെ ഉദാഹരണം?","opts":["CH₃CH₂OH","CH₃COCH₃","CH₃CHO","CH₃COOH"],"opts_ml":["CH₃CH₂OH","CH₃COCH₃","CH₃CHO","CH₃COOH"],"ans":1},{"q":"Which property of carbon is mainly responsible for the huge number of organic compounds?","q_ml":"ഓർഗാനിക് സംയുക്തങ്ങളുടെ വൻ എണ്ണത്തിന് പ്രധാന കാരണമായ കാർബണിന്റെ ഗുണം ഏത്?","opts":["Catenation","Ionization","Valency of 2","Radioactivity"],"opts_ml":["കാറ്റനേഷൻ","അയോണീകരണം","വേലൻസി 2","റേഡിയോആക്ടിവിറ്റി"],"ans":0},{"q":"n-Butane and Isobutane are examples of which type of isomerism?","q_ml":"n-ബ്യൂട്ടെയ്നും ഐസോബ്യൂട്ടെയ്നും ഏത് തരം ഐസോമെറിസത്തിന്റെ ഉദാഹരണങ്ങളാണ്?","opts":["Position isomerism","Functional isomerism","Chain isomerism","Metamerism"],"opts_ml":["സ്ഥാന ഐസോമെറിസം","പ്രവർത്തക ഗ്രൂപ്പ് ഐസോമെറിസം","ശൃംഖലാ ഐസോമെറിസം","മെറ്റാമെറിസം"],"ans":2},{"q":"What is the IUPAC name of CH₃–O–CH₂–CH₃?","q_ml":"CH₃–O–CH₂–CH₃ ന്റെ IUPAC നാമം എന്ത്?","opts":["Methoxyethane","Ethoxymethane","Methoxypropane","Ethoxyethane"],"opts_ml":["മെതോക്സിഈഥേൻ","എതോക്സിമീഥേൻ","മെതോക്സിപ്രോപ്പെയ്ൻ","എതോക്സിഈഥേൻ"],"ans":0}];
 
 /* ---- daily-exam config ---- */
 const QUIZ_OPEN_HOUR = 21;
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw_zU9ysc2jyNMUHDLcxnpiQPbqJJGM2-Ri6U599LkeSv8pS6r42CyeH9kBBVcFYAtrGA/exec";
-const CHAPTER_TITLE = "Periodic Table & Electron Configuration | Chemistry Unit 3";
+const CHAPTER_TITLE = "Nomenclature & Isomerism of Organic Compounds | Chemistry Unit 1";
 
 const STR = {
   en:{ gateTitle:"Today's exam opens at 9:00 PM.", nowLabel:"Current time: ",
@@ -225,7 +111,7 @@ function toggleLang(){
   currentLang = currentLang === 'en' ? 'ml' : 'en';
   document.getElementById('langBtn').textContent = currentLang === 'en' ? '🌐 മലയാളം' : '🌐 English';
   document.getElementById('pageTitle').textContent = currentLang === 'ml' ? 'ദിവസേനയുള്ള പരീക്ഷ' : 'Daily Exam';
-  document.getElementById('pageSub').textContent = currentLang === 'ml' ? 'രസതന്ത്രം · ക്ലാസ് 10 · പീരിയോഡിക് ടേബിളും ഇലക്ട്രോൺ വിന്യാസവും' : 'Chemistry · Class 10 · Periodic Table & Electron Configuration';
+  document.getElementById('pageSub').textContent = currentLang === 'ml' ? 'രസതന്ത്രം · ക്ലാസ് 10 · ഓർഗാനിക് സംയുക്തങ്ങളുടെ നാമകരണവും ഐസോമെറിസവും' : 'Chemistry · Class 10 · Nomenclature & Isomerism of Organic Compounds';
   document.body.setAttribute('data-lang', currentLang);
   document.documentElement.lang = currentLang;
   render();

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Unit 1 — Nomenclature &amp; Isomerism of Organic Compounds | Study Tool</title>
+<title>Unit 3 — Periodic Table &amp; Electron Configuration | Study Tool</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
@@ -10,96 +10,37 @@
 :root{
   --ink:#1f2937;
   --paper:#faf6ee;
-  --chain:#2b6e63;      /* carbon backbone green-teal */
+  --chain:#2b6e63;
   --chain-dark:#184d44;
-  --branch:#c1622d;     /* substituent / branch amber-rust */
+  --branch:#c1622d;
   --branch-light:#f2e1d2;
-  --func:#7b4fa0;       /* functional group violet */
+  --func:#7b4fa0;
   --line:#e1d7c3;
   --card:#ffffff;
   --mono: 'Courier New', ui-monospace, monospace;
 }
 *{box-sizing:border-box;}
-body{
-  margin:0;
-  background:var(--paper);
-  color:var(--ink);
-  font-family:'Segoe UI',system-ui,sans-serif;
-  line-height:1.55;
-}
-body[data-lang="ml"]{
-  font-family:'Noto Sans Malayalam','Segoe UI',system-ui,sans-serif;
-}
-header{
-  background:linear-gradient(135deg,var(--chain-dark),var(--chain) 65%);
-  color:#fff;
-  padding:26px 18px 60px;
-  position:relative;
-  overflow:hidden;
-}
-header .backbone{
-  position:absolute; inset:0; opacity:.15;
-  background-image:
-    repeating-linear-gradient(115deg, transparent 0 38px, #fff 38px 40px);
-}
-header h1{
-  margin:0 0 4px; font-size:1.5rem; position:relative; z-index:1;
-}
-header p.sub{
-  margin:0; opacity:.85; font-size:.92rem; position:relative; z-index:1;
-}
-.wrap{
-  max-width:960px; margin:-40px auto 40px; padding:0 14px;
-  position:relative; z-index:2;
-}
-nav.tabs{
-  display:flex; flex-wrap:wrap; gap:8px;
-  background:var(--card); border-radius:14px;
-  padding:10px; box-shadow:0 8px 24px rgba(24,77,68,.12);
-  margin-bottom:18px; position:sticky; top:10px; z-index:5;
-}
-nav.tabs button{
-  border:none; background:var(--paper); color:var(--chain-dark);
-  padding:9px 14px; border-radius:9px; cursor:pointer;
-  font-size:.9rem; font-weight:600; font-family:inherit;
-  transition:.15s;
-}
-nav.tabs button.active{
-  background:var(--chain); color:#fff;
-}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.55;}
+body[data-lang="ml"]{font-family:'Noto Sans Malayalam','Segoe UI',system-ui,sans-serif;}
+header{background:linear-gradient(135deg,var(--chain-dark),var(--chain) 65%);color:#fff;padding:26px 18px 60px;position:relative;overflow:hidden;}
+header .backbone{position:absolute; inset:0; opacity:.15;background-image:repeating-linear-gradient(115deg, transparent 0 38px, #fff 38px 40px);}
+header h1{margin:0 0 4px; font-size:1.5rem; position:relative; z-index:1;}
+header p.sub{margin:0; opacity:.85; font-size:.92rem; position:relative; z-index:1;}
+.wrap{max-width:960px; margin:-40px auto 40px; padding:0 14px;position:relative; z-index:2;}
+nav.tabs{display:flex; flex-wrap:wrap; gap:8px;background:var(--card); border-radius:14px;padding:10px; box-shadow:0 8px 24px rgba(24,77,68,.12);margin-bottom:18px; position:sticky; top:10px; z-index:5;}
+nav.tabs button{border:none; background:var(--paper); color:var(--chain-dark);padding:9px 14px; border-radius:9px; cursor:pointer;font-size:.9rem; font-weight:600; font-family:inherit;transition:.15s;}
+nav.tabs button.active{background:var(--chain); color:#fff;}
 nav.tabs button:hover{ filter:brightness(1.05); }
-
-#langToggle{
-  margin-left:auto; background:var(--func) !important; color:#fff !important;
-}
-
+#langToggle{margin-left:auto; background:var(--func) !important; color:#fff !important;}
 .panel{ display:none; }
 .panel.active{ display:block; animation:fade .25s ease; }
 @keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
-
-.card{
-  background:var(--card); border:1px solid var(--line);
-  border-radius:14px; padding:18px 20px; margin-bottom:16px;
-  box-shadow:0 2px 10px rgba(31,41,55,.04);
-}
-h2.section-title{
-  color:var(--chain-dark); border-bottom:3px solid var(--branch);
-  display:inline-block; padding-bottom:4px; margin-top:0;
-  font-size:1.15rem;
-}
-h3.sub-title{
-  color:var(--func); margin:18px 0 8px; font-size:1rem;
-}
-.formula-box{
-  background:var(--branch-light); border-left:4px solid var(--branch);
-  padding:10px 14px; border-radius:8px; font-family:var(--mono);
-  margin:10px 0; font-size:.95rem; overflow-x:auto;
-}
+.card{background:var(--card); border:1px solid var(--line);border-radius:14px; padding:18px 20px; margin-bottom:16px;box-shadow:0 2px 10px rgba(31,41,55,.04);}
+h2.section-title{color:var(--chain-dark); border-bottom:3px solid var(--branch);display:inline-block; padding-bottom:4px; margin-top:0;font-size:1.15rem;}
+h3.sub-title{color:var(--func); margin:18px 0 8px; font-size:1rem;}
+.formula-box{background:var(--branch-light); border-left:4px solid var(--branch);padding:10px 14px; border-radius:8px; font-family:var(--mono);margin:10px 0; font-size:.95rem; overflow-x:auto;}
 body[data-lang="ml"] .formula-box{ font-family:'Noto Sans Malayalam',var(--mono); }
-.chain{
-  font-family:var(--mono); background:#f2f7f5; border:1px dashed var(--chain);
-  padding:8px 12px; border-radius:8px; display:inline-block; margin:6px 6px 6px 0;
-}
+.chain{font-family:var(--mono); background:#f2f7f5; border:1px dashed var(--chain);padding:8px 12px; border-radius:8px; display:inline-block; margin:6px 6px 6px 0;}
 body[data-lang="ml"] .chain{ font-family:'Noto Sans Malayalam',var(--mono); }
 table{ width:100%; border-collapse:collapse; margin:10px 0; font-size:.92rem; }
 th,td{ border:1px solid var(--line); padding:8px 10px; text-align:left; }
@@ -108,45 +49,18 @@ tr:nth-child(even) td{ background:#f7f4ec; }
 table.compact th, table.compact td{ padding:5px 8px; font-size:.85rem; }
 ul{ padding-left:20px; }
 li{ margin-bottom:6px; }
-.tag{
-  display:inline-block; background:var(--func); color:#fff;
-  font-size:.72rem; padding:2px 8px; border-radius:20px; margin-left:6px;
-}
+.tag{display:inline-block; background:var(--func); color:#fff;font-size:.72rem; padding:2px 8px; border-radius:20px; margin-left:6px;}
 .step-list li{ margin-bottom:10px; }
 .quiz-q{ margin-bottom:16px; padding-bottom:14px; border-bottom:1px dashed var(--line); }
 .quiz-q:last-child{ border-bottom:none; }
-.quiz-opts button{
-  display:block; width:100%; text-align:left; margin:5px 0; padding:8px 12px;
-  border:1px solid var(--line); background:#fff; border-radius:8px; cursor:pointer;
-  font-family:inherit; font-size:.9rem;
-}
+.quiz-opts button{display:block; width:100%; text-align:left; margin:5px 0; padding:8px 12px;border:1px solid var(--line); background:#fff; border-radius:8px; cursor:pointer;font-family:inherit; font-size:.9rem;}
 .quiz-opts button.correct{ background:#dff3e8; border-color:var(--chain); font-weight:600; }
 .quiz-opts button.wrong{ background:#fbe4e0; border-color:var(--branch); }
 .quiz-opts button[disabled]{ cursor:default; }
-.score-bar{
-  background:var(--chain-dark); color:#fff; border-radius:10px;
-  padding:10px 16px; margin-bottom:14px; font-size:.9rem; display:flex;
-  justify-content:space-between; align-items:center;
-}
-.btn{
-  background:var(--branch); color:#fff; border:none; padding:9px 16px;
-  border-radius:8px; cursor:pointer; font-family:inherit; font-weight:600;
-}
+.score-bar{background:var(--chain-dark); color:#fff; border-radius:10px;padding:10px 16px; margin-bottom:14px; font-size:.9rem; display:flex;justify-content:space-between; align-items:center;}
+.btn{background:var(--branch); color:#fff; border:none; padding:9px 16px;border-radius:8px; cursor:pointer; font-family:inherit; font-weight:600;}
 .btn.secondary{ background:var(--chain); }
-.mqp-header{ text-align:center; margin-bottom:14px; }
-.mqp-header h2{ margin:2px 0; color:var(--chain-dark); }
-.mqp-meta{ display:flex; justify-content:space-between; font-size:.85rem; margin:6px 0 16px; }
-.mqp-section-title{
-  background:var(--branch); color:#fff; padding:5px 12px; border-radius:6px;
-  display:inline-block; margin:14px 0 8px; font-size:.9rem;
-}
-.mqp-q{ margin-bottom:12px; }
-.mqp-q b{ color:var(--chain-dark); }
-.exam-tip{
-  background:#eef7f2; border:1px solid var(--chain); border-radius:8px;
-  padding:10px 14px; margin-top:16px; font-size:.9rem;
-}
-.revision-sheet h3.sub-title{ margin-top:16px; }
+.exam-tip{background:#eef7f2; border:1px solid var(--chain); border-radius:8px;padding:10px 14px; margin-top:16px; font-size:.9rem;}
 @media print{
   header, nav.tabs, .no-print{ display:none !important; }
   .panel{ display:none !important; }
@@ -155,292 +69,196 @@ li{ margin-bottom:6px; }
   .card{ box-shadow:none; border:1px solid #999; }
   body{ background:#fff; }
 }
-footer.note{
-  text-align:center; font-size:.78rem; color:#8a8067; margin:30px 0 10px;
-}
+footer.note{text-align:center; font-size:.78rem; color:#8a8067; margin:30px 0 10px;}
 </style>
 </head>
 <body>
 
 <header>
   <div class="backbone"></div>
-  <h1 data-ml="ഓർഗാനിക് സംയുക്തങ്ങളുടെ നാമകരണവും ഐസോമെറിസവും">Nomenclature &amp; Isomerism of Organic Compounds</h1>
-  <p class="sub" data-ml="രസതന്ത്രം · ക്ലാസ് 10 · യൂണിറ്റ് 1 — സമ്പൂർണ്ണ പഠന സഹായി">Chemistry · Class 10 · Unit 1 — Complete Study Tool</p>
+  <h1 data-ml="പീരിയോഡിക് ടേബിളും ഇലക്ട്രോൺ വിന്യാസവും">Periodic Table &amp; Electron Configuration</h1>
+  <p class="sub" data-ml="രസതന്ത്രം · ക്ലാസ് 10 · യൂണിറ്റ് 3 — സമ്പൂർണ്ണ പഠന സഹായി">Chemistry · Class 10 · Unit 3 — Complete Study Tool</p>
 </header>
 
 <div class="wrap">
 
   <nav class="tabs no-print">
     <button data-tab="notes" class="active" data-ml="📘 നോട്ടുകൾ">📘 Notes</button>
-    <button data-tab="revision" data-ml="⚡ പെട്ടെന്നുള്ള അവലോകനം">⚡ Quick Revision</button>
-    <button data-tab="rules" data-ml="🧪 IUPAC നിയമങ്ങൾ">🧪 IUPAC Rules</button>
-    <button data-tab="fgroups" data-ml="⚗️ പ്രവർത്തക ഗ്രൂപ്പുകൾ">⚗️ Functional Groups</button>
-    <button data-tab="isomer" data-ml="🔀 ഐസോമെറിസം">🔀 Isomerism</button>
+    <button data-tab="qnum" data-ml="🔢 ക്വാണ്ടം നമ്പറുകൾ">🔢 Quantum Numbers</button>
+    <button data-tab="econfig" data-ml="⚛️ ഇലക്ട്രോൺ വിന്യാസം">⚛️ Electron Configuration</button>
+    <button data-tab="blocks" data-ml="🧱 ബ്ലോക്ക് വർഗ്ഗീകരണം">🧱 Block Classification</button>
+    <button data-tab="trends" data-ml="📈 ആവർത്തന പ്രവണതകൾ">📈 Periodic Trends</button>
     <button data-tab="quiz" data-ml="✅ ക്വിസ്">✅ Quiz</button>
-    <button data-tab="mqp" data-ml="📝 മാതൃകാ ചോദ്യപേപ്പർ">📝 Model Question Paper</button>
     <button id="langToggle" onclick="toggleLang()">🌐 മലയാളം</button>
     <button id="printBtn" onclick="printCurrent()" style="background:var(--chain-dark);color:#fff;" data-ml="🖨️ പ്രിന്റ്">🖨️ Print</button>
   </nav>
 
-  <!-- ================= NOTES ================= -->
   <section class="panel active" id="notes">
     <div class="card">
       <h2 class="section-title" data-ml="അധ്യായ സംഗ്രഹം">Chapter Summary</h2>
       <ul>
-        <li data-ml="കാർബണിന് സ്വയം ബന്ധിക്കാനുള്ള (കാറ്റനേഷൻ) ശേഷിയും ഹൈഡ്രജൻ, ഓക്സിജൻ, നൈട്രജൻ തുടങ്ങിയ മൂലകങ്ങളുമായി ബന്ധിക്കാനുള്ള കഴിവുമാണ് ഓർഗാനിക് സംയുക്തങ്ങളുടെ വൈവിധ്യത്തിന് കാരണം.">The huge variety of organic compounds arises from carbon's ability to bond with itself (catenation) and with elements such as hydrogen, oxygen and nitrogen.</li>
-        <li data-ml="ഒരേ തന്മാത്രാ സൂത്രമുള്ള സംയുക്തങ്ങൾക്ക് വ്യത്യസ്ത ഘടനാ സൂത്രങ്ങൾ (ശാഖകളുടെ വ്യത്യസ്ത ക്രമീകരണം) ഉണ്ടാകാം.">Compounds with the same molecular formula can have different structural formulas (different arrangement of branches).</li>
-        <li data-ml="IUPAC നാമകരണത്തിൽ, ഏറ്റവും നീളമുള്ള കാർബൺ ശൃംഖലയെ മാതൃ ശൃംഖലയായി കണക്കാക്കുന്നു; ബാക്കിയുള്ളവയെ ശാഖകളായി (ആൽക്കൈൽ ഗ്രൂപ്പുകൾ) കണക്കാക്കുന്നു.">In IUPAC nomenclature, the longest carbon chain is treated as the parent chain; the rest are treated as branches (alkyl groups).</li>
-        <li data-ml="ശാഖകൾക്ക് ഏറ്റവും കുറഞ്ഞ സ്ഥാനസൂചിക ലഭിക്കുന്ന വിധത്തിൽ കാർബൺ ആറ്റങ്ങൾക്ക് നമ്പർ നൽകണം.">Carbon atoms must be numbered so that the branches get the lowest possible locants.</li>
-        <li data-ml="ഒരേ ശാഖ ഒന്നിലധികം തവണ ഉണ്ടെങ്കിൽ, di, tri, tetra എന്നീ ഉപസർഗ്ഗങ്ങൾ ഉപയോഗിക്കുകയും സ്ഥാനസൂചികകൾ കോമയിട്ട് വേർതിരിക്കുകയും വേണം.">If the same branch occurs more than once, use the prefixes di, tri, tetra, and separate the locants with commas.</li>
-        <li data-ml="IUPAC നാമത്തിൽ അക്കങ്ങളും അക്ഷരങ്ങളും ഒരു ഹൈഫൻ (–) ഉപയോഗിച്ച് വേർതിരിക്കണം.">A hyphen (–) must separate numbers from letters in an IUPAC name.</li>
-        <li data-ml="ദ്വിബന്ധനം (C=C) ഉള്ള ശൃംഖലകളെ ആൽക്കീൻ (–ene പ്രത്യയം) എന്നും ത്രിബന്ധനം (C≡C) ഉള്ളവയെ ആൽക്കൈൻ (–yne പ്രത്യയം) എന്നും വിളിക്കുന്നു. ബന്ധനത്തിന് ഏറ്റവും കുറഞ്ഞ സ്ഥാനസൂചിക ലഭിക്കണം.">Chains with a double bond (C=C) are called alkenes (suffix –ene); chains with a triple bond (C≡C) are called alkynes (suffix –yne). The bond must get the lowest possible locant.</li>
-        <li data-ml="ഒരു സംയുക്തത്തിന്റെ സവിശേഷ രാസ, ഭൗതിക ഗുണങ്ങൾ നിർണ്ണയിക്കുന്ന, കാർബണിനോട് ബന്ധിപ്പിച്ചിരിക്കുന്ന ആറ്റമോ ആറ്റങ്ങളുടെ കൂട്ടമോ ആണ് പ്രവർത്തക ഗ്രൂപ്പ് (functional group).">A functional group is the atom or group of atoms attached to carbon that determines a compound's characteristic chemical and physical properties.</li>
-        <li data-ml="പ്രവർത്തക ഗ്രൂപ്പ് ഉൾക്കൊള്ളുന്ന ശൃംഖലയെ മാതൃ ശൃംഖലയായി കണക്കാക്കുന്നു, കൂടാതെ പ്രവർത്തക ഗ്രൂപ്പിന് ഏറ്റവും കുറഞ്ഞ സ്ഥാനസൂചിക ലഭിക്കണം.">The chain containing the functional group is treated as the parent chain, and the functional group must get the lowest possible locant.</li>
-        <li data-ml="ഒരേ തന്മാത്രാ സൂത്രമുള്ളതും എന്നാൽ വ്യത്യസ്ത ഗുണങ്ങളുള്ളതുമായ സംയുക്തങ്ങളെ ഐസോമറുകൾ എന്നും ഈ പ്രതിഭാസത്തെ ഐസോമെറിസം എന്നും വിളിക്കുന്നു.">Compounds with the same molecular formula but different properties are called isomers; this phenomenon is called isomerism.</li>
+        <li data-ml="ബോർ മാതൃകയ്ക്ക് പരിമിതികൾ ഉണ്ടെന്ന് ലൂയി ദ് ബ്രോയ്‌ലിയുടെ (തരംഗ സ്വഭാവം) ദ്വൈത സ്വഭാവ സിദ്ധാന്തവും ഹൈസൻബർഗിന്റെ അനിശ്ചിതത്വ സിദ്ധാന്തവും തെളിയിച്ചു — ഇത് ക്വാണ്ടം മെക്കാനിക്കൽ ആറ്റം മാതൃകയിലേക്ക് നയിച്ചു.">The Bohr model has limitations, shown by de Broglie's dual (wave-particle) nature of matter and Heisenberg's uncertainty principle — leading to the quantum mechanical model of the atom.</li>
+        <li data-ml="ന്യൂക്ലിയസിനു ചുറ്റും ഇലക്ട്രോണുകളെ കണ്ടെത്താൻ പരമാവധി സാധ്യതയുള്ള മേഖലകളാണ് ഓർബിറ്റലുകൾ.">Orbitals are regions around the nucleus where the probability of finding an electron is maximum.</li>
+        <li data-ml="ഓർബിറ്റലുകളെയും ഇലക്ട്രോണുകളെയും വിശദീകരിക്കാൻ 3 ക്വാണ്ടം നമ്പറുകൾ ഉപയോഗിക്കുന്നു: പ്രിൻസിപ്പൽ (n), അസിമുഥൽ (l), മാഗ്നറ്റിക് (m).">Three quantum numbers describe orbitals and electrons: Principal (n), Azimuthal (l), and Magnetic (m).</li>
+        <li data-ml="ഒരു ഷെല്ലിൽ ഉൾക്കൊള്ളാവുന്ന പരമാവധി ഇലക്ട്രോണുകളുടെ എണ്ണം 2n² ആണ്; ഒരു ഓർബിറ്റലിൽ പരമാവധി 2 ഇലക്ട്രോണുകൾ മാത്രം.">The maximum number of electrons a shell can hold is 2n²; each orbital can hold a maximum of 2 electrons.</li>
+        <li data-ml="ഊർജ്ജം കുറഞ്ഞ സബ്ഷെല്ലിൽ നിന്ന് ഊർജ്ജം കൂടിയ സബ്ഷെല്ലിലേക്ക് ക്രമമായി ഇലക്ട്രോണുകൾ നിറയുന്നതാണ് ആഫ്ബൗ തത്വം; ക്രമം (n+l) മൂല്യം ഉപയോഗിച്ച് കണ്ടെത്താം.">The Aufbau principle states that electrons fill sub-shells in order of increasing energy; the filling order can be found using the (n+l) value.</li>
+        <li data-ml="ക്രോമിയത്തിന്റെയും കോപ്പറിന്റെയും ഇലക്ട്രോൺ വിന്യാസത്തിൽ അപവാദം കാണുന്നത്, പകുതി നിറഞ്ഞ (d⁵) അല്ലെങ്കിൽ പൂർണ്ണമായി നിറഞ്ഞ (d¹⁰) d സബ്ഷെല്ലുകൾക്ക് കൂടുതൽ സ്ഥിരതയുള്ളതിനാലാണ്.">Chromium and copper show exceptions in electron configuration because half-filled (d⁵) or fully-filled (d¹⁰) d sub-shells are more stable.</li>
+        <li data-ml="ഒരു മൂലകത്തിന്റെ സബ്ഷെൽ ഇലക്ട്രോൺ വിന്യാസത്തിൽ നിന്ന് അതിന്റെ ബ്ലോക്ക് (s,p,d,f), ഗ്രൂപ്പ് നമ്പർ, പീരിയഡ് നമ്പർ എന്നിവ കണ്ടെത്താം.">An element's block (s, p, d, f), group number and period number can all be determined from its sub-shell electron configuration.</li>
+        <li data-ml="ഒരു പീരിയഡിൽ ഇടത്തുനിന്ന് വലത്തോട്ട് പോകുന്തോറും അയോണീകരണ എൻഥാൽപി കൂടുന്നു; ഒരു ഗ്രൂപ്പിൽ മുകളിൽ നിന്ന് താഴേക്ക് പോകുന്തോറും കുറയുന്നു.">Ionisation enthalpy increases across a period (left to right) and decreases down a group.</li>
       </ul>
-
-      <h3 class="sub-title" data-ml="രണ്ട് ഉദാഹരണ ഹൈഡ്രോകാർബണുകൾ">Two Example Hydrocarbons</h3>
-      <div class="chain" data-ml="CH₃–CH₂–CH₂–CH₂–CH₃ &nbsp;(ഹൈഡ്രോകാർബൺ I — നേർരേഖാ ശൃംഖല)">CH₃–CH₂–CH₂–CH₂–CH₃ &nbsp;(Hydrocarbon I — straight chain)</div><br>
-      <div class="chain" data-ml="CH₃–CH(CH₃)–CH₂–CH₃ &nbsp;(ഹൈഡ്രോകാർബൺ II — ശാഖിതം)">CH₃–CH(CH₃)–CH₂–CH₃ &nbsp;(Hydrocarbon II — branched)</div>
-      <p data-ml="രണ്ടിനും ഒരേ തന്മാത്രാ സൂത്രം C₅H₁₂ ആണ്, എന്നാൽ ഘടനാ സൂത്രങ്ങൾ വ്യത്യസ്തമാണ് — ഇതാണ് ശൃംഖലാ ഐസോമെറിസത്തിന്റെ അടിസ്ഥാനം.">Both have the same molecular formula C₅H₁₂, but different structural formulas — this is the basis of chain isomerism.</p>
+      <h3 class="sub-title" data-ml="ഉദാഹരണം: മഗ്നീഷ്യത്തിന്റെ ഇലക്ട്രോൺ വിന്യാസം">Example: Electron Configuration of Magnesium</h3>
+      <div class="chain" data-ml="₁₂Mg → 1s² 2s² 2p⁶ 3s²">₁₂Mg → 1s² 2s² 2p⁶ 3s²</div>
+      <p data-ml="3 ഷെല്ലുകളിലായി (K, L, M) 12 ഇലക്ട്രോണുകൾ വിന്യസിച്ചിരിക്കുന്നു — ഏറ്റവും ഉയർന്ന ഷെൽ നമ്പർ 3 ആയതിനാൽ ഇത് പീരിയഡ് 3-ലും, ബാഹ്യതമ s സബ്ഷെല്ലിൽ 2 ഇലക്ട്രോൺ ഉള്ളതിനാൽ ഗ്രൂപ്പ് 2-ലും ഉൾപ്പെടുന്നു.">The 12 electrons are spread across 3 shells (K, L, M) — since the highest shell number is 3 it belongs to Period 3, and since its outermost s sub-shell has 2 electrons it belongs to Group 2.</p>
     </div>
   </section>
 
-  <!-- ================= QUICK REVISION (dense, print-ready) ================= -->
-  <section class="panel" id="revision">
-    <div class="card revision-sheet">
-      <h2 class="section-title" data-ml="⚡ പെട്ടെന്നുള്ള അവലോകന ഷീറ്റ് — യൂണിറ്റ് മുഴുവൻ ഒറ്റനോട്ടത്തിൽ">⚡ Quick Revision Sheet — The Whole Unit at a Glance</h2>
-
-      <h3 class="sub-title" data-ml="🔹 ശാഖിതമായ ആൽക്കെയ്നിന് പേരിടൽ — 4 ഘട്ടങ്ങൾ">🔹 Naming a Branched Alkane — 4 Steps</h3>
-      <div class="formula-box" data-ml="1) ഏറ്റവും നീളമുള്ള ശൃംഖല കണ്ടെത്തുക → 2) ശാഖകൾക്ക് ഏറ്റവും കുറഞ്ഞ സ്ഥാനസൂചിക ലഭിക്കുന്ന വിധം നമ്പർ നൽകുക → 3) di/tri/tetra + കോമ ഉപയോഗിക്കുക → 4) അക്കങ്ങൾക്കും അക്ഷരങ്ങൾക്കും ഇടയിൽ ഹൈഫൻ">1) Find the longest chain → 2) Number it so branches get the lowest locants → 3) Use di/tri/tetra + commas → 4) Hyphen between numbers and letters</div>
-      <table class="compact">
-        <tr><th data-ml="ശാഖ">Branch</th><th data-ml="ഘടന">Structure</th></tr>
-        <tr><td data-ml="മീഥൈൽ">Methyl</td><td>–CH₃</td></tr>
-        <tr><td data-ml="എഥൈൽ">Ethyl</td><td>–CH₂CH₃</td></tr>
-        <tr><td data-ml="പ്രോപ്പൈൽ">Propyl</td><td>–CH₂CH₂CH₃</td></tr>
-      </table>
-
-      <h3 class="sub-title" data-ml="🔹 ബന്ധന പ്രത്യയങ്ങൾ">🔹 Bond Suffixes</h3>
-      <table class="compact">
-        <tr><th data-ml="ബന്ധനം">Bond</th><th data-ml="പ്രത്യയം">Suffix</th><th data-ml="ഉദാഹരണം">Example</th></tr>
-        <tr><td data-ml="ഏകബന്ധനം C–C">Single bond C–C</td><td>–ane</td><td data-ml="ബ്യൂട്ടെയ്ൻ">Butane</td></tr>
-        <tr><td data-ml="ദ്വിബന്ധനം C=C">Double bond C=C</td><td>–ene</td><td data-ml="ബ്യൂട്ട്-1-ഈൻ">But-1-ene</td></tr>
-        <tr><td data-ml="ത്രിബന്ധനം C≡C">Triple bond C≡C</td><td>–yne</td><td data-ml="ബ്യൂട്ട്-1-യൈൻ">But-1-yne</td></tr>
-      </table>
-
-      <h3 class="sub-title" data-ml="🔹 പ്രവർത്തക ഗ്രൂപ്പ് ചീറ്റ്-ഷീറ്റ്">🔹 Functional Group Cheat-Sheet</h3>
-      <table class="compact">
-        <tr><th data-ml="ഗ്രൂപ്പ്">Group</th><th data-ml="കുടുംബം">Family</th><th data-ml="പ്രത്യയം">Suffix</th></tr>
-        <tr><td>–OH</td><td data-ml="ആൽക്കഹോൾ">Alcohol</td><td>e→ol</td></tr>
-        <tr><td>–CHO</td><td data-ml="ആൽഡിഹൈഡ്">Aldehyde</td><td>e→al</td></tr>
-        <tr><td>&gt;C=O</td><td data-ml="കീറ്റോൺ">Ketone</td><td>e→one</td></tr>
-        <tr><td>–COOH</td><td data-ml="കാർബോക്സിലിക് അമ്ലം">Carboxylic acid</td><td>e→oic acid</td></tr>
-        <tr><td>–O–R</td><td data-ml="ഈഥർ">Ether</td><td>alkoxy + ane</td></tr>
-        <tr><td>–F/Cl/Br/I</td><td data-ml="ഹാലോ സംയുക്തം">Halo compound</td><td>halo + ane</td></tr>
-      </table>
-
-      <h3 class="sub-title" data-ml="🔹 ഐസോമെറിസം — 4 തരങ്ങൾ ഓരോന്നും ഒറ്റ വരിയിൽ">🔹 Isomerism — 4 Types in One Line Each</h3>
-      <table class="compact">
-        <tr><th data-ml="തരം">Type</th><th data-ml="എന്താണ് വ്യത്യാസപ്പെടുന്നത്">What differs</th><th data-ml="ഉദാഹരണം">Example</th></tr>
-        <tr><td data-ml="ശൃംഖല">Chain</td><td data-ml="കാർബൺ ശൃംഖലയുടെ ശാഖാ ക്രമം">Branching pattern of the carbon chain</td><td data-ml="n-ബ്യൂട്ടെയ്ൻ / ഐസോബ്യൂട്ടെയ്ൻ">n-Butane / Isobutane</td></tr>
-        <tr><td data-ml="സ്ഥാനം">Position</td><td data-ml="പ്രവർത്തക ഗ്രൂപ്പിന്റെ/ബന്ധനത്തിന്റെ സ്ഥാനസൂചിക">Locant of the functional group/bond</td><td data-ml="പ്രോപ്പാൻ-1-ഓൾ / പ്രോപ്പാൻ-2-ഓൾ">Propan-1-ol / Propan-2-ol</td></tr>
-        <tr><td data-ml="പ്രവർത്തക ഗ്രൂപ്പ്">Functional</td><td data-ml="പ്രവർത്തക ഗ്രൂപ്പ് തന്നെ വ്യത്യാസപ്പെടുന്നു">The functional group itself differs</td><td data-ml="എഥനോൾ / മെതോക്സിമീഥേൻ">Ethanol / Methoxymethane</td></tr>
-        <tr><td data-ml="മെറ്റാമെറിസം">Metamerism</td><td data-ml="–O–/&gt;C=O യുടെ ഇരുവശത്തുമുള്ള ആൽക്കൈൽ ഗ്രൂപ്പുകൾ">Alkyl groups on either side of –O–/&gt;C=O</td><td data-ml="എതോക്സിഈഥേൻ / മെതോക്സിപ്രോപ്പെയ്ൻ">Ethoxyethane / Methoxypropane</td></tr>
-      </table>
-
-      <h3 class="sub-title" data-ml="🔹 ഓർത്തിരിക്കേണ്ട സൂത്രങ്ങൾ">🔹 Formulas to Remember</h3>
-      <div class="formula-box" data-ml="ആൽക്കെയ്ൻ – e + ol → ആൽക്കനോൾ &nbsp;|&nbsp; ആൽക്കെയ്ൻ – e + al → ആൽക്കനാൽ">Alkane – e + ol → Alkanol &nbsp;|&nbsp; Alkane – e + al → Alkanal</div>
-      <div class="formula-box" data-ml="ആൽക്കെയ്ൻ – e + one → ആൽക്കനോൺ &nbsp;|&nbsp; ആൽക്കെയ്ൻ – e + oic acid → ആൽക്കനോയിക് അമ്ലം">Alkane – e + one → Alkanone &nbsp;|&nbsp; Alkane – e + oic acid → Alkanoic acid</div>
-      <div class="formula-box" data-ml="ശാഖാ സ്ഥാനസൂചിക–ശാഖയുടെ പേര്+മൂലപദം–FG സ്ഥാനസൂചിക–പ്രത്യയം">Branch locant–branch name+root–FG locant–suffix</div>
-
-      <h3 class="sub-title" data-ml="🔹 ആരോമാറ്റിക് അടിസ്ഥാനങ്ങൾ">🔹 Aromatic Basics</h3>
-      <p data-ml="ബെൻസീൻ C₆H₆ &nbsp;·&nbsp; ഫിനോൾ C₆H₅OH &nbsp;·&nbsp; ബെൻസോയിക് അമ്ലം C₆H₅COOH">Benzene C₆H₆ &nbsp;·&nbsp; Phenol C₆H₅OH &nbsp;·&nbsp; Benzoic acid C₆H₅COOH</p>
-
-      <p class="exam-tip" data-ml="📌 പരീക്ഷാ ടിപ്പ്: ഏതൊരു സംയുക്തത്തിനും ആദ്യം പ്രവർത്തക ഗ്രൂപ്പ് കണ്ടെത്തുക → FG ഉൾപ്പെടെയുള്ള ഏറ്റവും നീളമുള്ള ശൃംഖല കണ്ടെത്തുക → FG/ബന്ധനത്തിന് ഏറ്റവും കുറഞ്ഞ സ്ഥാനസൂചിക ലഭിക്കുന്ന വിധം നമ്പർ നൽകുക → ശാഖകളുടെ പേരുകൾ ചേർത്ത് പേര് പൂർത്തിയാക്കുക.">📌 Exam tip: For any compound, first spot the functional group → find the longest chain (including the FG) → number it so the FG/bond gets the lowest locant → add the branch names to complete the name.</p>
-    </div>
-  </section>
-
-  <!-- ================= RULES / EQUATIONS ================= -->
-  <section class="panel" id="rules">
+  <section class="panel" id="qnum">
     <div class="card">
-      <h2 class="section-title" data-ml="നാമകരണ നിയമങ്ങളും സൂത്രങ്ങളും">Naming Rules &amp; Formulas</h2>
-
-      <h3 class="sub-title" data-ml="1. ശാഖിത ആൽക്കെയ്നുകൾ">1. Branched Alkanes</h3>
-      <div class="formula-box" data-ml="ശാഖയുടെ സ്ഥാനസൂചിക + ഹൈഫൻ + ആൽക്കൈൽ ഗ്രൂപ്പിന്റെ പേര് + മൂലപദം + പ്രത്യയം (ane)">Locant of branch + hyphen + name of alkyl group + root word + suffix (ane)</div>
-      <ul class="step-list">
-        <li data-ml="<b>ഘട്ടം 1:</b> ഏറ്റവും കൂടുതൽ കാർബൺ ആറ്റങ്ങളുള്ള ഏറ്റവും നീളമുള്ള ശൃംഖല മാതൃ ശൃംഖലയായി തിരഞ്ഞെടുക്കുക."><b>Step 1:</b> Choose the longest chain containing the most carbon atoms as the parent chain.</li>
-        <li data-ml="<b>ഘട്ടം 2:</b> ശാഖയുള്ള കാർബണിന് ഏറ്റവും കുറഞ്ഞ സ്ഥാനസൂചിക ലഭിക്കുന്ന വിധം ശൃംഖലയ്ക്ക് (ഇടത്തുനിന്നോ വലത്തുനിന്നോ) നമ്പർ നൽകുക."><b>Step 2:</b> Number the chain (from left or right) so the branched carbon gets the lowest possible locant.</li>
-        <li data-ml="<b>ഘട്ടം 3:</b> ഒരേ ശാഖ ഒന്നിലധികം തവണ ഉണ്ടെങ്കിൽ di (2), tri (3), tetra (4) ഉപയോഗിക്കുകയും സ്ഥാനസൂചികകൾ കോമയിട്ട് വേർതിരിക്കുകയും ചെയ്യുക."><b>Step 3:</b> If the same branch appears more than once, use di (2), tri (3), tetra (4) and separate locants with commas.</li>
-        <li data-ml="<b>ഘട്ടം 4:</b> അക്കത്തിനും അക്ഷരത്തിനും ഇടയിൽ ഹൈഫൻ ഉപയോഗിക്കുക."><b>Step 4:</b> Use a hyphen between a number and a letter.</li>
-      </ul>
-
-      <h3 class="sub-title" data-ml="ആൽക്കൈൽ ഗ്രൂപ്പുകൾ (ടേബിൾ 1.1)">Alkyl Groups (Table 1.1)</h3>
-      <table>
-        <tr><th data-ml="ആൽക്കൈൽ ഗ്രൂപ്പ്">Alkyl Group</th><th data-ml="ഘടന">Structure</th></tr>
-        <tr><td data-ml="മീഥൈൽ">Methyl</td><td>–CH₃</td></tr>
-        <tr><td data-ml="എഥൈൽ">Ethyl</td><td>–CH₂–CH₃</td></tr>
-        <tr><td data-ml="പ്രോപ്പൈൽ">Propyl</td><td>–CH₂–CH₂–CH₃</td></tr>
+      <h2 class="section-title" data-ml="ക്വാണ്ടം നമ്പറുകൾ">Quantum Numbers</h2>
+      <h3 class="sub-title" data-ml="1. പ്രിൻസിപ്പൽ ക്വാണ്ടം നമ്പർ (n)">1. Principal Quantum Number (n)</h3>
+      <p data-ml="ഷെല്ലിനെ അഥവാ മുഖ്യ ഊർജനിലയെ പ്രതിനിധീകരിക്കുന്നു. n = 1, 2, 3, 4... n=1 എന്നത് K ഷെല്ലിനെയും n=2 എന്നത് L ഷെല്ലിനെയും സൂചിപ്പിക്കുന്നു.">Represents the shell or main energy level. n = 1, 2, 3, 4 ... n=1 denotes the K shell, n=2 the L shell.</p>
+      <table class="compact">
+        <tr><th data-ml="n">n</th><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+        <tr><th data-ml="ഷെൽ">Shell</th><td>K</td><td>L</td><td>M</td><td>N</td></tr>
       </table>
-      <div class="formula-box" data-ml="ആൽക്കൈൽ ഗ്രൂപ്പിന്റെ പേര് = ശാഖയിലെ കാർബൺ ആറ്റങ്ങളുടെ എണ്ണത്തിനുള്ള മൂലപദം + yl">Name of alkyl group = root word for the number of carbon atoms in the branch + yl</div>
+      <h3 class="sub-title" data-ml="2. അസിമുഥൽ ക്വാണ്ടം നമ്പർ (l)">2. Azimuthal Quantum Number (l)</h3>
+      <p data-ml="ഓർബിറ്റലിന്റെ ത്രിമാന ആകൃതി സൂചിപ്പിക്കുന്നു. ഒരു ഷെല്ലിലെ സബ്ഷെല്ലുകളുടെ എണ്ണം n ന്റെ മൂല്യത്തിന് തുല്യമാണ്. l ന്റെ വില 0 മുതൽ (n−1) വരെയാകാം. l = 0 → s, l = 1 → p, l = 2 → d, l = 3 → f.">Denotes the three-dimensional shape of the orbital. The number of sub-shells in a shell equals the value of n. l ranges from 0 to (n−1). l = 0 → s, l = 1 → p, l = 2 → d, l = 3 → f.</p>
+      <table class="compact">
+        <tr><th data-ml="n">n</th><td>1</td><td>2</td><td colspan="2">3</td><td colspan="3">4</td></tr>
+        <tr><th data-ml="ഷെൽ">Shell</th><td>K</td><td>L</td><td colspan="2">M</td><td colspan="3">N</td></tr>
+        <tr><th>l</th><td>0</td><td>0,1</td><td>0</td><td>1,2</td><td>0</td><td>1,2</td><td>3</td></tr>
+        <tr><th data-ml="സബ്ഷെൽ">Sub-shell</th><td>s</td><td>s,p</td><td>s</td><td>p,d</td><td>s</td><td>p,d</td><td>f</td></tr>
+      </table>
+      <h3 class="sub-title" data-ml="3. മാഗ്നറ്റിക് ക്വാണ്ടം നമ്പർ (m)">3. Magnetic Quantum Number (m)</h3>
+      <p data-ml="ഓർബിറ്റലിന്റെ ഓറിയന്റേഷനിലെ വ്യത്യാസത്തെ പ്രതിനിധീകരിക്കുന്നു. ഒരു നിശ്ചിത l വിലയ്ക്ക് (2l+1) മൂല്യങ്ങൾ m നു ഉണ്ടായിരിക്കും. ഉദാ: l=0 (s) → 1 ഓറിയന്റേഷൻ; l=1 (p) → 3 ഓറിയന്റേഷനുകൾ (3 p ഓർബിറ്റലുകൾ); l=2 (d) → 5 ഓറിയന്റേഷനുകൾ (5 d ഓർബിറ്റലുകൾ).">Represents the orientation of the orbital in space. For a given l value, m can take (2l+1) values. E.g. l=0 (s) → 1 orientation; l=1 (p) → 3 orientations (3 p orbitals); l=2 (d) → 5 orientations (5 d orbitals).</p>
+      <h3 class="sub-title" data-ml="ഓരോ ഷെല്ലിലെയും ഓർബിറ്റലുകളുടെ എണ്ണം">Number of Orbitals per Shell</h3>
+      <table>
+        <tr><th data-ml="ഷെൽ">Shell</th><th>K</th><th>L</th><th>M</th><th>N</th></tr>
+        <tr><td data-ml="സബ്ഷെൽ">Sub-shell</td><td>s</td><td>s,p</td><td>s,p,d</td><td>s,p,d,f</td></tr>
+        <tr><td data-ml="ഓർബിറ്റലുകളുടെ എണ്ണം">No. of orbitals</td><td>1</td><td>4</td><td>9</td><td>16 (n²)</td></tr>
+        <tr><td data-ml="പരമാവധി ഇലക്ട്രോണുകൾ (2n²)">Max. electrons (2n²)</td><td>2</td><td>8</td><td>18</td><td>32</td></tr>
+      </table>
+      <div class="formula-box" data-ml="ഓരോ ഷെല്ലിലെയും ആകെ ഓർബിറ്റലുകൾ = n² &nbsp;|&nbsp; ഓരോ ഷെല്ലിലും പരമാവധി ഇലക്ട്രോണുകൾ = 2n² &nbsp;|&nbsp; ഓരോ സബ്ഷെല്ലിലും പരമാവധി ഇലക്ട്രോണുകൾ = 2(2l+1) &nbsp;|&nbsp; ഓരോ ഓർബിറ്റലിലും പരമാവധി ഇലക്ട്രോണുകൾ = 2">Total orbitals per shell = n² &nbsp;|&nbsp; Max. electrons per shell = 2n² &nbsp;|&nbsp; Max. electrons per sub-shell = 2(2l+1) &nbsp;|&nbsp; Max. electrons per orbital = 2</div>
+      <table class="compact">
+        <tr><th data-ml="സബ്ഷെൽ">Sub-shell</th><td>s</td><td>p</td><td>d</td><td>f</td></tr>
+        <tr><th data-ml="പരമാവധി ഇലക്ട്രോണുകൾ">Max. electrons</th><td>2</td><td>6</td><td>10</td><td>14</td></tr>
+      </table>
+    </div>
+  </section>
 
-      <h3 class="sub-title" data-ml="2. അപൂരിത ഹൈഡ്രോകാർബണുകൾ">2. Unsaturated Hydrocarbons</h3>
-      <div class="formula-box" data-ml="ആൽക്കീൻ = മൂലപദം + ഹൈഫൻ + ദ്വിബന്ധനത്തിന്റെ സ്ഥാനസൂചിക + ഹൈഫൻ + ene">Alkene = root word + hyphen + locant of double bond + hyphen + ene</div>
-      <div class="formula-box" data-ml="ആൽക്കൈൻ = മൂലപദം + ഹൈഫൻ + ത്രിബന്ധനത്തിന്റെ സ്ഥാനസൂചിക + ഹൈഫൻ + yne">Alkyne = root word + hyphen + locant of triple bond + hyphen + yne</div>
-      <p data-ml="ബന്ധനത്തിന് ഏറ്റവും കുറഞ്ഞ സ്ഥാനസൂചിക ലഭിക്കുന്ന വിധം നമ്പറിംഗ് നടത്തണം.">Numbering should be done so the bond gets the lowest possible locant.</p>
+  <section class="panel" id="econfig">
+    <div class="card">
+      <h2 class="section-title" data-ml="ഇലക്ട്രോൺ വിന്യാസം">Electron Configuration</h2>
+      <h3 class="sub-title" data-ml="ആഫ്ബൗ തത്വവും (n+l) നിയമവും">The Aufbau Principle and the (n+l) Rule</h3>
+      <p data-ml="ഊർജ്ജം കുറഞ്ഞ സബ്ഷെല്ലിൽ നിന്ന് ഊർജ്ജം കൂടിയ സബ്ഷെല്ലിലേക്ക് ക്രമമായി ഇലക്ട്രോണുകൾ നിറയുന്നു. (n+l) വില കൂടുതലുള്ള സബ്ഷെല്ലിന് ഊർജ്ജം കൂടുതലാണ്. (n+l) വില തുല്യമെങ്കിൽ, n കുറഞ്ഞ സബ്ഷെല്ലിന് ഊർജ്ജം കുറവായിരിക്കും.">Electrons fill sub-shells in order of increasing energy. A sub-shell with a higher (n+l) value has higher energy. If two sub-shells have the same (n+l) value, the one with the lower n has lower energy.</p>
+      <div class="formula-box" data-ml="ഉദാഹരണം: 3d (n=3,l=2 → n+l=5) vs 4s (n=4,l=0 → n+l=4)&#10;4s ന് (n+l) കുറവായതിനാൽ 3d നേക്കാൾ ഊർജ്ജം കുറവാണ് — അതിനാൽ 3d ന് മുൻപ് 4s നിറയുന്നു.">Example: 3d (n=3,l=2 → n+l=5) vs 4s (n=4,l=0 → n+l=4)&#10;4s has the lower (n+l), so it has lower energy than 3d — hence 4s fills before 3d.</div>
+      <p data-ml="ഈ ക്രമത്തിൽ സബ്ഷെല്ലുകളുടെ ഊർജ്ജം കൂടിവരുന്നു:">The energy of sub-shells increases in this order:</p>
+      <div class="chain">1s &lt; 2s &lt; 2p &lt; 3s &lt; 3p &lt; 4s &lt; 3d &lt; 4p &lt; 5s &lt; 4d &lt; 5p &lt; 6s &lt; 4f &lt; 5d ...</div>
+      <h3 class="sub-title" data-ml="വിന്യാസം എഴുതുന്ന ചുരുക്ക രീതി (Noble Gas Core)">Shorthand Notation (Noble Gas Core)</h3>
+      <p data-ml="തൊട്ടുമുൻപുള്ള ഉൽക്കൃഷ്ട വാതകത്തിന്റെ പ്രതീകം ചതുരവലയത്തിൽ എഴുതി, തുടർന്നുള്ള സബ്ഷെൽ ഇലക്ട്രോൺ വിന്യാസം മാത്രം എഴുതിയാൽ മതി. ഉദാ: സോഡിയത്തിന്റെ (1s² 2s² 2p⁶ 3s¹) വിന്യാസം [Ne] 3s¹ എന്നെഴുതാം.">Write the symbol of the nearest preceding noble gas in square brackets, followed by only the remaining sub-shell configuration. E.g. sodium's configuration (1s² 2s² 2p⁶ 3s¹) can be written as [Ne] 3s¹.</p>
+      <h3 class="sub-title" data-ml="ചില മൂലകങ്ങളുടെ ഇലക്ട്രോൺ വിന്യാസം">Electron Configuration of Some Elements</h3>
+      <table>
+        <tr><th data-ml="മൂലകം">Element</th><th data-ml="ഇലക്ട്രോണുകൾ">Electrons</th><th data-ml="സബ്ഷെൽ ഇലക്ട്രോൺ വിന്യാസം">Sub-shell Configuration</th></tr>
+        <tr><td>Be</td><td>4</td><td>1s² 2s²</td></tr>
+        <tr><td>C</td><td>6</td><td>1s² 2s² 2p²</td></tr>
+        <tr><td>O</td><td>8</td><td>1s² 2s² 2p⁴</td></tr>
+        <tr><td>Ne</td><td>10</td><td>1s² 2s² 2p⁶</td></tr>
+        <tr><td>Na</td><td>11</td><td>[Ne] 3s¹</td></tr>
+        <tr><td>K</td><td>19</td><td>[Ar] 4s¹</td></tr>
+        <tr><td>Ca</td><td>20</td><td>[Ar] 4s²</td></tr>
+        <tr><td>Sc</td><td>21</td><td>[Ar] 3d¹ 4s²</td></tr>
+        <tr><td>Fe</td><td>26</td><td>[Ar] 3d⁶ 4s²</td></tr>
+        <tr><td>Zn</td><td>30</td><td>[Ar] 3d¹⁰ 4s²</td></tr>
+      </table>
+      <h3 class="sub-title" data-ml="Cr, Cu എന്നിവയിലെ പ്രത്യേകത">The Special Cases of Cr and Cu</h3>
+      <p data-ml="പ്രതീക്ഷിക്കുന്ന ക്രമമനുസരിച്ച് Cr (Z=24) ന്റെ വിന്യാസം [Ar] 3d⁴ 4s² ആണ്; എന്നാൽ യഥാർത്ഥ സ്ഥിരതയുള്ള വിന്യാസം [Ar] 3d⁵ 4s¹ ആണ്. അതുപോലെ Cu (Z=29) ന്റെ പ്രതീക്ഷിക്ക വിന്യാസം [Ar] 3d⁹ 4s² ആണെങ്കിലും യഥാർത്ഥ വിന്യാസം [Ar] 3d¹⁰ 4s¹ ആണ്.">Based on the expected order, Cr (Z=24) should be [Ar] 3d⁴ 4s²; but its actual, stable configuration is [Ar] 3d⁵ 4s¹. Similarly Cu (Z=29) is expected to be [Ar] 3d⁹ 4s², but its actual configuration is [Ar] 3d¹⁰ 4s¹.</p>
+      <div class="exam-tip" data-ml="കാരണം: d¹, d⁵, d¹⁰ എന്നീ ഇലക്ട്രോൺ ക്രമീകരണങ്ങൾ മറ്റുള്ളവയേക്കാൾ സ്ഥിരത കൂടിയവയാണ്. അതിനാൽ 4s ൽ നിന്ന് ഒരു ഇലക്ട്രോൺ 3d ലേക്ക് നീങ്ങി പകുതി നിറഞ്ഞ (d⁵) അല്ലെങ്കിൽ പൂർണ്ണമായി നിറഞ്ഞ (d¹⁰) കൂടുതൽ സ്ഥിരതയുള്ള അവസ്ഥ കൈവരിക്കുന്നു.">Reason: electron arrangements d¹, d⁵ and d¹⁰ are more stable than others. So one electron shifts from 4s to 3d to achieve the more stable half-filled (d⁵) or fully-filled (d¹⁰) state.</div>
+    </div>
+  </section>
+
+  <section class="panel" id="blocks">
+    <div class="card">
+      <h2 class="section-title" data-ml="ബ്ലോക്ക് വർഗ്ഗീകരണം">Block Classification</h2>
+      <p data-ml="ഒരു മൂലകത്തിന്റെ അവസാനം ഇലക്ട്രോൺ ചേർക്കപ്പെടുന്ന സബ്ഷെല്ല് ഏതാണോ, ആ മൂലകം ആ ബ്ലോക്കിൽ ഉൾപ്പെടുന്നു.">The block an element belongs to is decided by which sub-shell its last electron is added to.</p>
+      <table>
+        <tr><th data-ml="ബ്ലോക്ക്">Block</th><th data-ml="ഗ്രൂപ്പുകൾ">Groups</th><th data-ml="ബാഹ്യതമ വിന്യാസം">Outer Configuration</th><th data-ml="കുറിപ്പ്">Note</th></tr>
+        <tr><td>s</td><td>1, 2</td><td>ns¹⁻²</td><td data-ml="ആൽക്കലി, ആൽക്കലൈൻ എർത്ത് ലോഹങ്ങൾ">Alkali &amp; alkaline earth metals</td></tr>
+        <tr><td>p</td><td>13–18</td><td>ns² np¹⁻⁶</td><td data-ml="ലോഹങ്ങൾ, അലോഹങ്ങൾ, ഉപലോഹങ്ങൾ, ഉൽക്കൃഷ്ട വാതകങ്ങൾ">Metals, non-metals, metalloids, noble gases</td></tr>
+        <tr><td>d</td><td>3–12</td><td>(n−1)d¹⁻¹⁰ ns¹⁻²</td><td data-ml="സംക്രമണ മൂലകങ്ങൾ — എല്ലാം ലോഹങ്ങൾ">Transition elements — all metals</td></tr>
+        <tr><td>f</td><td data-ml="(ഗ്രൂപ്പ് 3-നൊപ്പം പ്രത്യേക നിരകളിൽ)">(separate rows, with group 3)</td><td>(n−2)f¹⁻¹⁴</td><td data-ml="ലാന്തനോയ്ഡുകൾ, ആക്റ്റിനോയ്ഡുകൾ">Lanthanides, actinides</td></tr>
+      </table>
+      <h3 class="sub-title" data-ml="ഗ്രൂപ്പ് നമ്പർ കണ്ടെത്തുന്ന വിധം">Finding the Group Number</h3>
       <ul>
-        <li data-ml="ഉദാ: CH₂=CH–CH₂–CH₃ → <b>ബ്യൂട്ട്-1-ഈൻ</b>">e.g. CH₂=CH–CH₂–CH₃ → <b>But-1-ene</b></li>
-        <li data-ml="ഉദാ: CH₃–CH=CH–CH₃ → <b>ബ്യൂട്ട്-2-ഈൻ</b>">e.g. CH₃–CH=CH–CH₃ → <b>But-2-ene</b></li>
-        <li data-ml="ഉദാ: CH≡C–CH₂–CH₃ → <b>ബ്യൂട്ട്-1-യൈൻ</b>">e.g. CH≡C–CH₂–CH₃ → <b>But-1-yne</b></li>
+        <li data-ml="s ബ്ലോക്ക്: ഗ്രൂപ്പ് നമ്പർ = ബാഹ്യതമ s സബ്ഷെല്ലിലെ ഇലക്ട്രോണുകളുടെ എണ്ണം (1 അല്ലെങ്കിൽ 2).">s-block: Group number = number of electrons in outermost s sub-shell (1 or 2).</li>
+        <li data-ml="p ബ്ലോക്ക്: ഗ്രൂപ്പ് നമ്പർ = ബാഹ്യതമ s, p സബ്ഷെല്ലുകളിലെ ആകെ ഇലക്ട്രോണുകൾ + 10.">p-block: Group number = total electrons in outermost s and p sub-shells + 10.</li>
+        <li data-ml="d ബ്ലോക്ക്: ഗ്രൂപ്പ് നമ്പർ = ബാഹ്യതമ s സബ്ഷെല്ലിലെയും തൊട്ടുള്ളിലെ d സബ്ഷെല്ലിലെയും ആകെ ഇലക്ട്രോണുകൾ.">d-block: Group number = total electrons in the outermost s sub-shell and the inner d sub-shell.</li>
       </ul>
-
-      <h3 class="sub-title" data-ml="3. പ്രവർത്തക ഗ്രൂപ്പ് പ്രത്യയങ്ങൾ (മൂലപദത്തിലെ 'e' മാറ്റിസ്ഥാപിക്കൽ)">3. Functional Group Suffixes (replacing the 'e' in the root word)</h3>
-      <table>
-        <tr><th data-ml="പ്രവർത്തക ഗ്രൂപ്പ്">Functional Group</th><th data-ml="സാധാരണ പേര്">Common Name</th><th data-ml="രൂപീകരണ നിയമം">Formation Rule</th></tr>
-        <tr><td>–OH</td><td data-ml="ആൽക്കഹോൾ">Alcohol</td><td data-ml="ആൽക്കെയ്ൻ – e + ol → ആൽക്കനോൾ">Alkane – e + ol → Alkanol</td></tr>
-        <tr><td>–COOH</td><td data-ml="കാർബോക്സിലിക് അമ്ലം">Carboxylic acid</td><td data-ml="ആൽക്കെയ്ൻ – e + oic acid → ആൽക്കനോയിക് അമ്ലം">Alkane – e + oic acid → Alkanoic acid</td></tr>
-        <tr><td>–CHO</td><td data-ml="ആൽഡിഹൈഡ്">Aldehyde</td><td data-ml="ആൽക്കെയ്ൻ – e + al → ആൽക്കനാൽ">Alkane – e + al → Alkanal</td></tr>
-        <tr><td>&gt;C=O</td><td data-ml="കീറ്റോൺ">Ketone</td><td data-ml="ആൽക്കെയ്ൻ – e + one → ആൽക്കനോൺ">Alkane – e + one → Alkanone</td></tr>
+      <table class="compact">
+        <tr><th data-ml="മൂലകം">Element</th><th data-ml="വിന്യാസം">Configuration</th><th data-ml="കണക്കുകൂട്ടൽ">Calculation</th><th data-ml="ഗ്രൂപ്പ്">Group</th></tr>
+        <tr><td>O</td><td>1s² 2s² 2p⁴</td><td>2+4+10</td><td>16</td></tr>
+        <tr><td>Cl</td><td>[Ne] 3s² 3p⁵</td><td>2+5+10</td><td>17</td></tr>
+        <tr><td>Fe</td><td>[Ar] 3d⁶ 4s²</td><td>6+2</td><td>8</td></tr>
       </table>
-
-      <h3 class="sub-title" data-ml="4. ഹാലോ സംയുക്തങ്ങളും ഈഥറുകളും">4. Halo Compounds &amp; Ethers</h3>
-      <div class="formula-box" data-ml="ഹാലോ ഗ്രൂപ്പിന്റെ സ്ഥാനസൂചിക + ഹൈഫൻ + ഹാലോ ഗ്രൂപ്പിന്റെ പേര് + ആൽക്കെയ്നിന്റെ പേര്">Locant of halo group + hyphen + name of halo group + name of alkane</div>
-      <p data-ml="ഉദാ: CH₃–CH₂–CH₂–Cl → <b>1-ക്ലോറോപ്രോപ്പെയ്ൻ</b>">e.g. CH₃–CH₂–CH₂–Cl → <b>1-Chloropropane</b></p>
-      <div class="formula-box" data-ml="ആൽകോക്സി ഗ്രൂപ്പ് (–O–R) + ആൽക്കെയ്നിന്റെ പേര് → ഈഥറിന്റെ പേര്">Alkoxy group (–O–R) + name of alkane → ether name</div>
-      <p data-ml="ഉദാ: CH₃–O–CH₂–CH₃ → <b>മെതോക്സിഈഥേൻ</b>">e.g. CH₃–O–CH₂–CH₃ → <b>Methoxyethane</b></p>
-
-      <h3 class="sub-title" data-ml="പൊതു സൂത്രം (എല്ലാ ഭാഗങ്ങളും ചേർത്ത്)">General Formula (all parts combined)</h3>
-      <div class="formula-box" data-ml="ശാഖയുടെ സ്ഥാനസൂചിക + ഹൈഫൻ + ആൽക്കൈൽ ഗ്രൂപ്പിന്റെ പേര് + മൂലപദം + ഹൈഫൻ + പ്രവർത്തക ഗ്രൂപ്പിന്റെ സ്ഥാനസൂചിക + ഹൈഫൻ + പ്രത്യയം">Locant of branch + hyphen + alkyl group name + root word + hyphen + locant of functional group + hyphen + suffix</div>
+      <h3 class="sub-title" data-ml="പീരിയഡ് നമ്പർ കണ്ടെത്തുന്ന വിധം">Finding the Period Number</h3>
+      <p data-ml="ഒരു മൂലകത്തിന്റെ സബ്ഷെൽ ഇലക്ട്രോൺ വിന്യാസത്തിലെ ഏറ്റവും ഉയർന്ന ഷെൽ നമ്പർ (n) തന്നെയാണ് ആ മൂലകത്തിന്റെ പീരിയഡ് നമ്പർ.">The highest principal quantum number (n) in an element's electron configuration is its period number.</p>
     </div>
   </section>
 
-  <!-- ================= FUNCTIONAL GROUPS ================= -->
-  <section class="panel" id="fgroups">
+  <section class="panel" id="trends">
     <div class="card">
-      <h2 class="section-title" data-ml="പ്രവർത്തക ഗ്രൂപ്പുകൾ — സമ്പൂർണ്ണ പട്ടിക">Functional Groups — Complete Table</h2>
-      <table>
-        <tr><th data-ml="പ്രവർത്തക ഗ്രൂപ്പ്">Functional Group</th><th data-ml="ഗ്രൂപ്പിന്റെ പേര്">Group Name</th><th data-ml="സാധാരണ പേര്">Common Name</th><th data-ml="പ്രത്യയം/ഉപസർഗ്ഗം">Suffix/Prefix</th><th data-ml="ഉദാഹരണം">Example</th></tr>
-        <tr><td>–OH</td><td data-ml="ഹൈഡ്രോക്സിൽ">Hydroxyl</td><td data-ml="ആൽക്കഹോൾ">Alcohol</td><td>–ol</td><td data-ml="CH₃OH മെഥനോൾ">CH₃OH Methanol</td></tr>
-        <tr><td>–COOH</td><td data-ml="കാർബോക്സിൽ">Carboxyl</td><td data-ml="കാർബോക്സിലിക് അമ്ലം">Carboxylic acid</td><td>–oic acid</td><td data-ml="CH₃COOH എഥനോയിക് അമ്ലം">CH₃COOH Ethanoic acid</td></tr>
-        <tr><td>–CHO</td><td data-ml="ആൽഡിഹൈഡ്">Aldehyde</td><td data-ml="ആൽഡിഹൈഡ്">Aldehyde</td><td>–al</td><td data-ml="CH₃CHO എഥനാൽ">CH₃CHO Ethanal</td></tr>
-        <tr><td>&gt;C=O</td><td data-ml="കീറ്റോ">Keto</td><td data-ml="കീറ്റോൺ">Ketone</td><td>–one</td><td data-ml="CH₃COCH₃ പ്രോപ്പനോൺ">CH₃COCH₃ Propanone</td></tr>
-        <tr><td>–O–R</td><td data-ml="ആൽകോക്സി">Alkoxy</td><td data-ml="ഈഥർ">Ether</td><td>alkoxy–</td><td data-ml="CH₃OCH₃ മെതോക്സിമീഥേൻ">CH₃OCH₃ Methoxymethane</td></tr>
-        <tr><td>–F, –Cl, –Br, –I</td><td data-ml="ഹാലോ">Halo</td><td data-ml="ഹാലോ സംയുക്തങ്ങൾ">Halo compounds</td><td>halo–</td><td data-ml="CH₃CH₂Cl ക്ലോറോഈഥേൻ">CH₃CH₂Cl Chloroethane</td></tr>
-      </table>
-
-      <h3 class="sub-title" data-ml="ആരോമാറ്റിക് സംയുക്തങ്ങൾ">Aromatic Compounds</h3>
-      <table>
-        <tr><th data-ml="സംയുക്തം">Compound</th><th data-ml="ഘടന">Structure</th><th data-ml="സൂത്രം">Formula</th></tr>
-        <tr><td data-ml="ബെൻസീൻ">Benzene</td><td data-ml="ആറ് അംഗ വളയം, മാറി മാറി വരുന്ന ദ്വിബന്ധനങ്ങൾ">Six-membered ring, alternating double bonds</td><td>C₆H₆</td></tr>
-        <tr><td data-ml="ഫിനോൾ">Phenol</td><td data-ml="–OH ഗ്രൂപ്പുള്ള ബെൻസീൻ വളയം">Benzene ring with an –OH group</td><td>C₆H₅–OH</td></tr>
-        <tr><td data-ml="ബെൻസോയിക് അമ്ലം">Benzoic acid</td><td data-ml="–COOH ഗ്രൂപ്പുള്ള ബെൻസീൻ വളയം">Benzene ring with a –COOH group</td><td>C₆H₅–COOH</td></tr>
-      </table>
-      <p><span class="tag" data-ml="ഓർക്കുക">Remember</span> <span data-ml="പ്രവർത്തക ഗ്രൂപ്പ് വഹിക്കുന്ന കാർബണിന് ഏറ്റവും കുറഞ്ഞ സ്ഥാനസൂചിക ലഭിക്കുന്ന വിധം ശൃംഖലയ്ക്ക് നമ്പർ നൽകണം.">The chain must be numbered so the carbon bearing the functional group gets the lowest possible locant.</span></p>
-    </div>
-  </section>
-
-  <!-- ================= ISOMERISM ================= -->
-  <section class="panel" id="isomer">
-    <div class="card">
-      <h2 class="section-title" data-ml="ഐസോമെറിസം — തരങ്ങൾ">Isomerism — Types</h2>
-      <p data-ml="<b>നിർവചനം:</b> ഒരേ തന്മാത്രാ സൂത്രമുള്ളതും എന്നാൽ വ്യത്യസ്ത രാസ-ഭൗതിക ഗുണങ്ങളുള്ളതുമായ സംയുക്തങ്ങളെ ഐസോമറുകൾ എന്നും ഈ പ്രതിഭാസത്തെ ഐസോമെറിസം എന്നും വിളിക്കുന്നു. അവയുടെ ഘടനാ സൂത്രങ്ങൾ വ്യത്യസ്തമായിരിക്കും."><b>Definition:</b> Compounds with the same molecular formula but different chemical and physical properties are called isomers, and the phenomenon is called isomerism. Their structural formulas are different.</p>
-
-      <h3 class="sub-title" data-ml="1. ശൃംഖലാ ഐസോമെറിസം">1. Chain Isomerism</h3>
-      <p data-ml="ഒരേ തന്മാത്രാ സൂത്രമുള്ളതും എന്നാൽ കാർബൺ ശൃംഖലയുടെ ക്രമീകരണത്തിൽ (ശാഖയിൽ) വ്യത്യാസമുള്ളതുമായ സംയുക്തങ്ങൾ.">Compounds with the same molecular formula but a different arrangement (branching) of the carbon chain.</p>
-      <div class="chain" data-ml="CH₃CH₂CH₂CH₃ (n-ബ്യൂട്ടെയ്ൻ)">CH₃CH₂CH₂CH₃ (n-butane)</div>
-      <div class="chain" data-ml="CH₃CH(CH₃)CH₃ (2-മെഥൈൽപ്രോപ്പെയ്ൻ)">CH₃CH(CH₃)CH₃ (2-methylpropane)</div>
-
-      <h3 class="sub-title" data-ml="2. സ്ഥാന ഐസോമെറിസം">2. Position Isomerism</h3>
-      <p data-ml="ഒരേ തന്മാത്രാ സൂത്രവും ഒരേ പ്രവർത്തക ഗ്രൂപ്പും ഉള്ളതും എന്നാൽ പ്രവർത്തക ഗ്രൂപ്പിന്റെ/ബന്ധനത്തിന്റെ സ്ഥാനം വ്യത്യാസപ്പെട്ടതുമായ സംയുക്തങ്ങൾ.">Compounds with the same molecular formula and the same functional group, but the position of the functional group/bond differs.</p>
-      <div class="chain" data-ml="CH₃CH₂CH₂OH (പ്രോപ്പാൻ-1-ഓൾ)">CH₃CH₂CH₂OH (propan-1-ol)</div>
-      <div class="chain" data-ml="CH₃CH(OH)CH₃ (പ്രോപ്പാൻ-2-ഓൾ)">CH₃CH(OH)CH₃ (propan-2-ol)</div>
-
-      <h3 class="sub-title" data-ml="3. പ്രവർത്തക ഗ്രൂപ്പ് ഐസോമെറിസം">3. Functional Isomerism</h3>
-      <p data-ml="ഒരേ തന്മാത്രാ സൂത്രമുള്ളതും എന്നാൽ വ്യത്യസ്ത പ്രവർത്തക ഗ്രൂപ്പുകളുള്ളതുമായ സംയുക്തങ്ങൾ.">Compounds with the same molecular formula but different functional groups.</p>
-      <div class="chain" data-ml="CH₃CH₂OH (എഥനോൾ — ആൽക്കഹോൾ)">CH₃CH₂OH (ethanol — alcohol)</div>
-      <div class="chain" data-ml="CH₃–O–CH₃ (മെതോക്സിമീഥേൻ — ഈഥർ)">CH₃–O–CH₃ (methoxymethane — ether)</div>
-
-      <h3 class="sub-title" data-ml="4. മെറ്റാമെറിസം">4. Metamerism</h3>
-      <p data-ml="ഒരേ തന്മാത്രാ സൂത്രവും ഒരേ പ്രവർത്തക ഗ്രൂപ്പും (–O– അല്ലെങ്കിൽ &gt;C=O) ഉള്ളതും എന്നാൽ ആ ഗ്രൂപ്പിന്റെ ഇരുവശത്തും വ്യത്യസ്ത ആൽക്കൈൽ ഗ്രൂപ്പുകളുള്ളതുമായ സംയുക്തങ്ങൾ തമ്മിലുള്ള ഐസോമെറിസം.">Isomerism between compounds with the same molecular formula and the same functional group (–O– or &gt;C=O), but with different alkyl groups on either side of that group.</p>
-      <div class="chain" data-ml="CH₃CH₂–O–CH₂CH₃ (എതോക്സിഈഥേൻ)">CH₃CH₂–O–CH₂CH₃ (ethoxyethane)</div>
-      <div class="chain" data-ml="CH₃–O–CH₂CH₂CH₃ (മെതോക്സിപ്രോപ്പെയ്ൻ)">CH₃–O–CH₂CH₂CH₃ (methoxypropane)</div>
-
-      <h3 class="sub-title" data-ml="പെട്ടെന്നുള്ള റഫറൻസ്">Quick Reference</h3>
-      <table>
-        <tr><th data-ml="തരം">Type</th><th data-ml="എന്താണ് വ്യത്യാസപ്പെടുന്നത്">What varies</th></tr>
-        <tr><td data-ml="ശൃംഖല">Chain</td><td data-ml="കാർബൺ ശൃംഖലയുടെ ഘടന (ശാഖ)">Structure (branching) of the carbon chain</td></tr>
-        <tr><td data-ml="സ്ഥാനം">Position</td><td data-ml="പ്രവർത്തക ഗ്രൂപ്പിന്റെ/ബന്ധനത്തിന്റെ സ്ഥാനസൂചിക">Locant of the functional group/bond</td></tr>
-        <tr><td data-ml="പ്രവർത്തക ഗ്രൂപ്പ്">Functional</td><td data-ml="പ്രവർത്തക ഗ്രൂപ്പ് തന്നെ">The functional group itself</td></tr>
-        <tr><td data-ml="മെറ്റാമെറിസം">Metamerism</td><td data-ml="–O–/&gt;C=O യുടെ ഇരുവശത്തുമുള്ള ആൽക്കൈൽ ഗ്രൂപ്പുകൾ">Alkyl groups on either side of –O–/&gt;C=O</td></tr>
+      <h2 class="section-title" data-ml="ആവർത്തന പ്രവണതകൾ — അയോണീകരണ എൻഥാൽപി">Periodic Trends — Ionisation Enthalpy</h2>
+      <p data-ml="വാതകാവസ്ഥയിലുള്ള ഒറ്റപ്പെട്ട ഒരു ആറ്റത്തിന്റെ ബാഹ്യതമ ഷെല്ലിൽ ഏറ്റവും ദുർബലമായി ബന്ധിച്ചിരിക്കുന്ന ഇലക്ട്രോണിനെ നീക്കം ചെയ്യാൻ ആവശ്യമായ ഏറ്റവും കുറഞ്ഞ ഊർജ്ജമാണ് അയോണീകരണ എൻഥാൽപി.">Ionisation enthalpy is the minimum energy required to remove the most loosely bound electron from the outermost shell of an isolated gaseous atom.</p>
+      <h3 class="sub-title" data-ml="ഒരു ഗ്രൂപ്പിൽ മുകളിൽ നിന്ന് താഴേക്ക്">Down a Group</h3>
+      <ul>
+        <li data-ml="ഷെല്ലുകളുടെ എണ്ണം കൂടുന്നു → ബാഹ്യതമ ഇലക്ട്രോൺ ന്യൂക്ലിയസിൽ നിന്ന് അകലുന്നു.">Number of shells increases → outermost electron moves farther from the nucleus.</li>
+        <li data-ml="ന്യൂക്ലിയസിന്റെ ആകർഷണബലം കുറയുന്നു → അയോണീകരണ എൻഥാൽപി കുറയുന്നു.">Nuclear attraction on the outer electron weakens → ionisation enthalpy decreases.</li>
+      </ul>
+      <div class="exam-tip" data-ml="ഏറ്റവും കുറഞ്ഞ അയോണീകരണ എൻഥാൽപിയുള്ള മൂലകങ്ങൾ: സീസിയം, ഫ്രാൻസിയം (ആൽക്കലി ലോഹങ്ങളുടെ ഗ്രൂപ്പിന്റെ അടിഭാഗം).">Elements with the lowest ionisation enthalpy: Caesium and Francium (bottom of the alkali metal group).</div>
+      <h3 class="sub-title" data-ml="ഒരു പീരിയഡിൽ ഇടത്തുനിന്ന് വലത്തോട്ട്">Across a Period (Left to Right)</h3>
+      <ul>
+        <li data-ml="ഷെല്ലുകളുടെ എണ്ണത്തിൽ മാറ്റമില്ല, എന്നാൽ ന്യൂക്ലിയർ ചാർജ് ക്രമമായി കൂടുന്നു.">Number of shells stays the same, but nuclear charge increases steadily.</li>
+        <li data-ml="ബാഹ്യതമ ഇലക്ട്രോണുകൾക്ക് മേലുള്ള ന്യൂക്ലിയസിന്റെ ആകർഷണബലം കൂടുന്നു → അയോണീകരണ എൻഥാൽപി കൂടുന്നു.">Nuclear attraction on the outer electrons increases → ionisation enthalpy increases.</li>
+      </ul>
+      <h3 class="sub-title" data-ml="s, p, d, f ബ്ലോക്ക് മൂലകങ്ങളുടെ പ്രത്യേകതകൾ">Features of s, p, d, f Block Elements</h3>
+      <table class="compact">
+        <tr><th data-ml="ബ്ലോക്ക്">Block</th><th data-ml="പ്രത്യേകതകൾ">Key Features</th></tr>
+        <tr><td>s</td><td data-ml="+1, +2 ഓക്സീകരണാവസ്ഥകൾ കാണിക്കുന്നു; പൊതുവേ ഖരാവസ്ഥ; ഏറ്റവും കുറഞ്ഞ അയോണീകരണ എൻഥാൽപി.">Show +1, +2 oxidation states; generally soft solids; lowest ionisation enthalpies.</td></tr>
+        <tr><td>p</td><td data-ml="ലോഹങ്ങൾ, അലോഹങ്ങൾ, ഉപലോഹങ്ങൾ ഉൾപ്പെടുന്നു; പോസിറ്റീവ്, നെഗറ്റീവ് ഓക്സീകരണാവസ്ഥകൾ കാണിക്കുന്നു.">Includes metals, non-metals, metalloids; show both positive and negative oxidation states.</td></tr>
+        <tr><td>d</td><td data-ml="എല്ലാം ലോഹങ്ങൾ; വ്യത്യസ്ത ഓക്സീകരണാവസ്ഥകൾ; നിറമുള്ള സംയുക്തങ്ങൾ ഉണ്ടാക്കുന്നു (Zn, Cd, Hg ഒഴികെ).">All metals; variable oxidation states; form coloured compounds (except Zn, Cd, Hg).</td></tr>
+        <tr><td>f</td><td data-ml="ലാന്തനോയ്ഡുകൾ, ആക്റ്റിനോയ്ഡുകൾ; റേഡിയോ ആക്റ്റീവ് മൂലകങ്ങൾ ഉൾപ്പെടുന്നു; വ്യത്യസ്ത ഓക്സീകരണാവസ്ഥകൾ.">Lanthanides and actinides; include radioactive elements; variable oxidation states.</td></tr>
       </table>
     </div>
   </section>
 
-  <!-- ================= QUIZ ================= -->
   <section class="panel" id="quiz">
-    <div class="card no-print">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-        <h2 class="section-title" data-ml="പെട്ടെന്നുള്ള ക്വിസ്" style="margin:0;">Quick Quiz</h2>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+        <h2 class="section-title" data-ml="ക്വിക്ക് ക്വിസ്">Quick Quiz</h2>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
           <a class="btn secondary" href="chemistry-unit3-quiz.html" target="_blank" rel="noopener" data-ml="🔗 എക്സാം പേജ് തുറക്കുക" style="text-decoration:none;display:inline-block;">🔗 Open Exam Page</a>
           <a class="btn" id="waShareBtn" href="#" target="_blank" rel="noopener" data-ml="📲 WhatsApp വഴി ഷെയർ ചെയ്യുക" style="text-decoration:none;display:inline-block;">📲 Share on WhatsApp</a>
         </div>
       </div>
       <div class="score-bar" style="margin-top:14px;">
-        <span><span data-ml="സ്കോർ:">Score:</span> <b id="scoreVal">0</b> / <span id="totalVal">0</span></span>
-        <button class="btn" onclick="resetQuiz()" data-ml="വീണ്ടും ശ്രമിക്കുക">Retry</button>
+        <span><span data-ml="സ്കോർ">Score</span>: <b id="scoreVal">0</b> / <span id="totalVal">0</span></span>
       </div>
       <div id="quizContainer"></div>
     </div>
   </section>
 
-  <!-- ================= MODEL QUESTION PAPER ================= -->
-  <section class="panel" id="mqp">
-    <div class="card print-target" id="mqpCard">
-      <div class="mqp-header">
-        <h2 data-ml="രസതന്ത്രം — മാതൃകാ ചോദ്യപേപ്പർ">Chemistry — Model Question Paper</h2>
-        <p data-ml="യൂണിറ്റ് 1: ഓർഗാനിക് സംയുക്തങ്ങളുടെ നാമകരണവും ഐസോമെറിസവും">Unit 1: Nomenclature &amp; Isomerism of Organic Compounds</p>
-      </div>
-      <div class="mqp-meta">
-        <span data-ml="സമയം: 45 മിനിറ്റ്">Time: 45 minutes</span>
-        <span data-ml="ആകെ സ്കോർ: 20">Total score: 20</span>
-      </div>
-
-      <div class="mqp-section-title" data-ml="വിഭാഗം A — ഓരോന്നിനും 1 സ്കോർ (5 × 1 = 5)">Section A — 1 score each (5 × 1 = 5)</div>
-      <div class="mqp-q" data-ml="1. –COOH പ്രവർത്തക ഗ്രൂപ്പുള്ള സംയുക്തങ്ങളെ എന്ത് വിളിക്കുന്നു?">1. What are compounds having the –COOH functional group called?</div>
-      <div class="mqp-q" data-ml="2. CH₃–CH₂–CH₂–CH₃ ന്റെ IUPAC നാമം എഴുതുക.">2. Write the IUPAC name of CH₃–CH₂–CH₂–CH₃.</div>
-      <div class="mqp-q" data-ml="3. ഈഥറുകളിൽ ഏത് പ്രവർത്തക ഗ്രൂപ്പ് ഉണ്ട്?">3. Which functional group is present in ethers?</div>
-      <div class="mqp-q" data-ml="4. ദ്വിബന്ധനമുള്ള ഹൈഡ്രോകാർബണുകൾക്ക് ഉപയോഗിക്കുന്ന പ്രത്യയം ഏത്?">4. What is the suffix used for hydrocarbons with a double bond?</div>
-      <div class="mqp-q" data-ml="5. എന്താണ് ഐസോമെറിസം?">5. What is isomerism?</div>
-
-      <div class="mqp-section-title" data-ml="വിഭാഗം B — ഓരോന്നിനും 2 സ്കോർ (4 × 2 = 8)">Section B — 2 scores each (4 × 2 = 8)</div>
-      <div class="mqp-q" data-ml="6. CH₃–CH(CH₃)–CH₂–CH₃ ന്റെ IUPAC നാമം കണ്ടെത്തുക.">6. Find the IUPAC name of CH₃–CH(CH₃)–CH₂–CH₃.</div>
-      <div class="mqp-q" data-ml="7. 2,3-ഡൈമെഥൈൽപെന്റെയ്നിന്റെ ഘടനാ സൂത്രം എഴുതുക.">7. Write the structural formula of 2,3-dimethylpentane.</div>
-      <div class="mqp-q" data-ml="8. ശൃംഖലാ ഐസോമെറിസവും സ്ഥാന ഐസോമെറിസവും തമ്മിലുള്ള വ്യത്യാസം എന്ത്?">8. What is the difference between chain isomerism and position isomerism?</div>
-      <div class="mqp-q" data-ml="9. CH₃CH₂OH ഉം CH₃OCH₃ ഉം ഏത് തരം ഐസോമെറിസമാണ് കാണിക്കുന്നത്? കാരണം എഴുതുക.">9. What type of isomerism do CH₃CH₂OH and CH₃OCH₃ show? Give a reason.</div>
-
-      <div class="mqp-section-title" data-ml="വിഭാഗം C — ഓരോന്നിനും 3 സ്കോർ (2 × 3 = 6)">Section C — 3 scores each (2 × 3 = 6)</div>
-      <div class="mqp-q" data-ml="10. ചുവടെയുള്ള ഹൈഡ്രോകാർബണിന്റെ IUPAC നാമം ഘട്ടം ഘട്ടമായി കണ്ടെത്തുക:<br><span class=&quot;chain&quot;>CH₃–CH₂–CH(CH₃)–CH₂–CH₃</span>">10. Find the IUPAC name of the following hydrocarbon step by step:<br>
-        <span class="chain">CH₃–CH₂–CH(CH₃)–CH₂–CH₃</span></div>
-      <div class="mqp-q" data-ml="11. എന്താണ് പ്രവർത്തക ഗ്രൂപ്പ്? ഏതെങ്കിലും മൂന്ന് പ്രവർത്തക ഗ്രൂപ്പുകളും അവയുടെ സാധാരണ പേരുകളും എഴുതുക.">11. What is a functional group? Write any three functional groups and their common names.</div>
-
-      <div class="mqp-section-title" data-ml="വിഭാഗം D — ഉപന്യാസ തരം (1 × 1 = 1)">Section D — Essay type (1 × 1 = 1)</div>
-      <div class="mqp-q" data-ml="12. പെന്റെയ്നിന്റെ (C₅H₁₂) മൂന്ന് ശൃംഖലാ ഐസോമറുകളുടെയും ഘടനാ സൂത്രങ്ങളും IUPAC നാമങ്ങളും എഴുതുക.">12. Write the structural formulas and IUPAC names of all three chain isomers of pentane (C₅H₁₂).</div>
-
-      <p style="margin-top:24px; font-size:.8rem; color:#8a8067;" data-ml="* ഘടനാ ചിത്രങ്ങൾ ആവശ്യമായ ചോദ്യങ്ങൾക്ക് പ്രത്യേക ഷീറ്റ് ഉപയോഗിക്കുക.">* For questions requiring structural drawings, use a separate sheet of paper.</p>
-    </div>
-    <div class="no-print" style="margin-top:10px;">
-      <button class="btn secondary" onclick="printCurrent()" data-ml="🖨️ പ്രിന്റ്">🖨️ Print</button>
-    </div>
-  </section>
-
 </div>
 
-<footer class="note" data-ml="EduPro പഠന ഉപകരണങ്ങൾ · ക്ലാസ് 10 രസതന്ത്രം · സ്വയം പഠനത്തിനായി തയ്യാറാക്കിയത്">EduPro Study Tools · Class 10 Chemistry · Prepared for self-study</footer>
+<footer class="note no-print">
+  <span data-ml="Abacus Academy · EduPro Study Tools · ക്ലാസ് 10 രസതന്ത്രം">Abacus Academy · EduPro Study Tools · Class 10 Chemistry</span>
+</footer>
 
 <script>
-// ===== Language toggle =====
 let currentLang = 'en';
 
+function toggleLang(){
+  currentLang = currentLang === 'en' ? 'ml' : 'en';
+  applyLanguage();
+}
 function applyLanguage(){
   document.querySelectorAll('[data-ml]').forEach(el=>{
     if(el.dataset.en === undefined){ el.dataset.en = el.innerHTML; }
@@ -454,186 +272,145 @@ function applyLanguage(){
   setupShareLinks();
 }
 
-function toggleLang(){
-  currentLang = currentLang === 'en' ? 'ml' : 'en';
-  applyLanguage();
-}
-
-// Tabs
-const tabButtons = document.querySelectorAll('nav.tabs button[data-tab]');
-const panels = document.querySelectorAll('.panel');
-let currentTab = 'notes';
-tabButtons.forEach(btn=>{
+document.querySelectorAll('nav.tabs button[data-tab]').forEach(btn=>{
   btn.addEventListener('click', ()=>{
-    tabButtons.forEach(b=>b.classList.remove('active'));
-    panels.forEach(p=>{p.classList.remove('active'); p.classList.remove('print-target');});
+    document.querySelectorAll('nav.tabs button[data-tab]').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
     btn.classList.add('active');
-    currentTab = btn.dataset.tab;
-    const target = document.getElementById(currentTab);
-    target.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
   });
 });
 
 function printCurrent(){
-  panels.forEach(p=>p.classList.remove('print-target'));
-  document.getElementById(currentTab).classList.add('print-target');
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('print-target'));
+  document.querySelector('.panel.active').classList.add('print-target');
   window.print();
 }
 
-// Quiz data (English + Malayalam)
 const quizData = [
   {
-    q: "What is the IUPAC name of CH₃–CH₂–CH₂–CH₂–CH₃?",
-    q_ml: "CH₃–CH₂–CH₂–CH₂–CH₃ യുടെ IUPAC നാമം എന്ത്?",
-    opts: ["Butane", "Pentane", "Hexane", "Propane"],
-    opts_ml: ["ബ്യൂട്ടെയ്ൻ", "പെന്റെയ്ൻ", "ഹെക്സെയ്ൻ", "പ്രോപ്പെയ്ൻ"],
-    ans: 1
+    q: "What is the shell notation for the principal quantum number n = 3?",
+    q_ml: "പ്രിൻസിപ്പൽ ക്വാണ്ടം നമ്പർ n = 3 എന്നതിന്റെ ഷെൽ നൊട്ടേഷൻ എന്ത്?",
+    opts: ["K", "L", "M", "N"], opts_ml: ["K", "L", "M", "N"], ans: 2
   },
   {
-    q: "Compounds with the –OH functional group are called?",
-    q_ml: "–OH പ്രവർത്തക ഗ്രൂപ്പുള്ള സംയുക്തങ്ങളെ എന്ത് വിളിക്കുന്നു?",
-    opts: ["Aldehyde", "Ketone", "Alcohol", "Ether"],
-    opts_ml: ["ആൽഡിഹൈഡ്", "കീറ്റോൺ", "ആൽക്കഹോൾ", "ഈഥർ"],
-    ans: 2
+    q: "What is the maximum number of electrons a shell with n = 3 can hold?",
+    q_ml: "n = 3 ആയ ഒരു ഷെല്ലിന് ഉൾക്കൊള്ളാവുന്ന പരമാവധി ഇലക്ട്രോണുകൾ എത്ര?",
+    opts: ["9", "8", "18", "32"], opts_ml: ["9", "8", "18", "32"], ans: 2
   },
   {
-    q: "What is the IUPAC name of CH₂=CH–CH₂–CH₃?",
-    q_ml: "CH₂=CH–CH₂–CH₃ യുടെ IUPAC നാമം എന്ത്?",
-    opts: ["But-2-ene", "But-1-ene", "But-1-yne", "Propene"],
-    opts_ml: ["ബ്യൂട്ട്-2-ഈൻ", "ബ്യൂട്ട്-1-ഈൻ", "ബ്യൂട്ട്-1-യൈൻ", "പ്രോപ്പീൻ"],
-    ans: 1
+    q: "If the azimuthal quantum number l = 2, what is the sub-shell called?",
+    q_ml: "അസിമുഥൽ ക്വാണ്ടം നമ്പർ l = 2 ആണെങ്കിൽ ആ സബ്ഷെല്ലിനെ എന്ത് വിളിക്കുന്നു?",
+    opts: ["s", "p", "d", "f"], opts_ml: ["s", "p", "d", "f"], ans: 2
   },
   {
-    q: "What is the suffix for hydrocarbons with a triple bond?",
-    q_ml: "ത്രിബന്ധനമുള്ള ഹൈഡ്രോകാർബണുകൾക്കുള്ള പ്രത്യയം ഏത്?",
-    opts: ["–ol", "–ene", "–yne", "–al"],
-    opts_ml: ["–ol", "–ene", "–yne", "–al"],
-    ans: 2
+    q: "How many orbitals are there in a p sub-shell?",
+    q_ml: "ഒരു p സബ്ഷെല്ലിൽ എത്ര ഓർബിറ്റലുകൾ ഉണ്ട്?",
+    opts: ["1", "3", "5", "7"], opts_ml: ["1", "3", "5", "7"], ans: 1
   },
   {
-    q: "What is the common name for CH₃COOH?",
-    q_ml: "CH₃COOH ന്റെ സാധാരണ പേര് എന്ത്?",
-    opts: ["Aldehyde", "Carboxylic acid", "Ketone", "Ether"],
-    opts_ml: ["ആൽഡിഹൈഡ്", "കാർബോക്സിലിക് അമ്ലം", "കീറ്റോൺ", "ഈഥർ"],
-    ans: 1
+    q: "What is the maximum number of electrons a p sub-shell can hold?",
+    q_ml: "ഒരു p സബ്ഷെല്ലിന് ഉൾക്കൊള്ളാവുന്ന പരമാവധി ഇലക്ട്രോണുകൾ എത്ര?",
+    opts: ["2", "6", "10", "14"], opts_ml: ["2", "6", "10", "14"], ans: 1
   },
   {
-    q: "What type of isomerism do CH₃CH₂OH and CH₃OCH₃ show?",
-    q_ml: "CH₃CH₂OH ഉം CH₃OCH₃ ഉം ഏത് തരം ഐസോമെറിസമാണ് കാണിക്കുന്നത്?",
-    opts: ["Chain isomerism", "Position isomerism", "Functional isomerism", "Metamerism"],
-    opts_ml: ["ശൃംഖലാ ഐസോമെറിസം", "സ്ഥാന ഐസോമെറിസം", "പ്രവർത്തക ഗ്രൂപ്പ് ഐസോമെറിസം", "മെറ്റാമെറിസം"],
-    ans: 2
+    q: "If l = 1, how many values can the magnetic quantum number m have?",
+    q_ml: "l = 1 ആണെങ്കിൽ മാഗ്നറ്റിക് ക്വാണ്ടം നമ്പർ m ന് എത്ര മൂല്യങ്ങൾ ഉണ്ടായിരിക്കും?",
+    opts: ["1", "2", "3", "5"], opts_ml: ["1", "2", "3", "5"], ans: 2
   },
   {
-    q: "What type of isomerism do CH₃CH₂CH₂OH and CH₃CH(OH)CH₃ show?",
-    q_ml: "CH₃CH₂CH₂OH ഉം CH₃CH(OH)CH₃ ഉം ഏത് തരം ഐസോമെറിസമാണ് കാണിക്കുന്നത്?",
-    opts: ["Chain isomerism", "Position isomerism", "Functional isomerism", "Metamerism"],
-    opts_ml: ["ശൃംഖലാ ഐസോമെറിസം", "സ്ഥാന ഐസോമെറിസം", "പ്രവർത്തക ഗ്രൂപ്പ് ഐസോമെറിസം", "മെറ്റാമെറിസം"],
-    ans: 1
+    q: "Which quantum number determines the three-dimensional shape of an orbital?",
+    q_ml: "ഓർബിറ്റലിന്റെ ത്രിമാന ആകൃതി നിർണ്ണയിക്കുന്ന ക്വാണ്ടം നമ്പർ ഏത്?",
+    opts: ["Principal quantum number (n)", "Azimuthal quantum number (l)", "Magnetic quantum number (m)", "None of these"],
+    opts_ml: ["പ്രിൻസിപ്പൽ ക്വാണ്ടം നമ്പർ (n)", "അസിമുഥൽ ക്വാണ്ടം നമ്പർ (l)", "മാഗ്നറ്റിക് ക്വാണ്ടം നമ്പർ (m)", "ഇവയൊന്നുമല്ല"], ans: 1
   },
   {
-    q: "Which compounds have the &gt;C=O functional group?",
-    q_ml: "&gt;C=O പ്രവർത്തക ഗ്രൂപ്പുള്ള സംയുക്തങ്ങൾ ഏതെല്ലാം?",
-    opts: ["Alcohols", "Ketones", "Ethers", "Halo compounds"],
-    opts_ml: ["ആൽക്കഹോളുകൾ", "കീറ്റോണുകൾ", "ഈഥറുകൾ", "ഹാലോ സംയുക്തങ്ങൾ"],
-    ans: 1
+    q: "What is the electron configuration of Neon (Z = 10)?",
+    q_ml: "നിയോണിന്റെ (Z = 10) ഇലക്ട്രോൺ വിന്യാസം എന്ത്?",
+    opts: ["1s² 2s² 2p⁴", "1s² 2s² 2p⁶", "1s² 2s² 2p⁶ 3s²", "1s² 2s² 2p⁵"],
+    opts_ml: ["1s² 2s² 2p⁴", "1s² 2s² 2p⁶", "1s² 2s² 2p⁶ 3s²", "1s² 2s² 2p⁵"], ans: 1
   },
   {
-    q: "Which functional group family does CH₃–O–CH₂–CH₃ belong to?",
-    q_ml: "CH₃–O–CH₂–CH₃ ഏത് പ്രവർത്തക ഗ്രൂപ്പ് കുടുംബത്തിൽ പെടുന്നു?",
-    opts: ["Aldehyde", "Ketone", "Ether", "Carboxylic acid"],
-    opts_ml: ["ആൽഡിഹൈഡ്", "കീറ്റോൺ", "ഈഥർ", "കാർബോക്സിലിക് അമ്ലം"],
-    ans: 2
+    q: "According to the (n+l) rule, which sub-shell is filled first — 3d or 4s?",
+    q_ml: "(n+l) നിയമമനുസരിച്ച്, 3d-യും 4s-ഉം തമ്മിൽ ആദ്യം നിറയുന്നത് ഏത് സബ്ഷെല്ലാണ്?",
+    opts: ["3d", "4s", "Both fill together", "Neither"],
+    opts_ml: ["3d", "4s", "രണ്ടും ഒരുമിച്ച്", "രണ്ടുമല്ല"], ans: 1
   },
   {
-    q: "Which isomerism has the same molecular formula, the same functional group, but different alkyl groups on either side of it?",
-    q_ml: "ഒരേ തന്മാത്രാ സൂത്രവും ഒരേ പ്രവർത്തക ഗ്രൂപ്പും എന്നാൽ അതിന്റെ ഇരുവശത്തും വ്യത്യസ്ത ആൽക്കൈൽ ഗ്രൂപ്പുകളും ഉള്ള ഐസോമെറിസം ഏത്?",
-    opts: ["Chain isomerism", "Functional isomerism", "Metamerism", "Position isomerism"],
-    opts_ml: ["ശൃംഖലാ ഐസോമെറിസം", "പ്രവർത്തക ഗ്രൂപ്പ് ഐസോമെറിസം", "മെറ്റാമെറിസം", "സ്ഥാന ഐസോമെറിസം"],
-    ans: 2
+    q: "What is the actual (anomalous) electron configuration of Chromium (Cr, Z = 24)?",
+    q_ml: "ക്രോമിയത്തിന്റെ (Cr, Z = 24) യഥാർത്ഥ (അസാധാരണ) ഇലക്ട്രോൺ വിന്യാസം എന്ത്?",
+    opts: ["[Ar] 3d⁴ 4s²", "[Ar] 3d⁵ 4s¹", "[Ar] 3d⁶", "[Ar] 3d³ 4s²"],
+    opts_ml: ["[Ar] 3d⁴ 4s²", "[Ar] 3d⁵ 4s¹", "[Ar] 3d⁶", "[Ar] 3d³ 4s²"], ans: 1
   },
   {
-    q: "What is the alkyl group name for the branch –CH₂–CH₃ (2 carbon atoms)?",
-    q_ml: "–CH₂–CH₃ (2 കാർബൺ ആറ്റങ്ങൾ) എന്ന ശാഖയുടെ ആൽക്കൈൽ ഗ്രൂപ്പ് പേര് എന്ത്?",
-    opts: ["Methyl", "Ethyl", "Propyl", "Butyl"],
-    opts_ml: ["മീഥൈൽ", "എഥൈൽ", "പ്രോപ്പൈൽ", "ബ്യൂട്ടൈൽ"],
-    ans: 1
+    q: "Why does Chromium show this anomalous electron configuration?",
+    q_ml: "ക്രോമിയം ഈ അസാധാരണ ഇലക്ട്രോൺ വിന്യാസം കാണിക്കാനുള്ള കാരണം എന്ത്?",
+    opts: ["Half-filled d-sub-shells (d⁵) are more stable", "d-orbitals cannot hold more than 4 electrons", "It has an extra proton", "The 4s sub-shell is always empty"],
+    opts_ml: ["പകുതി നിറഞ്ഞ d-സബ്ഷെല്ലുകൾ (d⁵) കൂടുതൽ സ്ഥിരതയുള്ളവയാണ്", "d-ഓർബിറ്റലുകൾക്ക് 4 ഇലക്ട്രോണിൽ കൂടുതൽ ഉൾക്കൊള്ളാൻ കഴിയില്ല", "ഇതിന് ഒരു അധിക പ്രോട്ടോൺ ഉണ്ട്", "4s സബ്ഷെൽ എപ്പോഴും ശൂന്യമാണ്"], ans: 0
   },
   {
-    q: "While numbering the parent chain in IUPAC nomenclature, the chain is numbered so that:",
-    q_ml: "IUPAC നാമകരണത്തിൽ മാതൃ ശൃംഖലയ്ക്ക് നമ്പർ നൽകുമ്പോൾ, ഏത് രീതിയിലാണ് നമ്പർ നൽകുന്നത്?",
-    opts: ["The branch/functional group gets the lowest locant", "Numbering always starts from the left", "The longest branch is numbered first", "Carbon atoms are counted from the middle"],
-    opts_ml: ["ശാഖ/പ്രവർത്തക ഗ്രൂപ്പിന് ഏറ്റവും കുറഞ്ഞ സ്ഥാനസൂചിക ലഭിക്കുന്ന വിധം", "എപ്പോഴും ഇടത്തുനിന്ന് നമ്പറിംഗ് തുടങ്ങുന്നു", "ഏറ്റവും നീളമുള്ള ശാഖയ്ക്ക് ആദ്യം നമ്പർ നൽകുന്നു", "മധ്യത്തിൽ നിന്ന് കാർബൺ ആറ്റങ്ങൾ എണ്ണുന്നു"],
-    ans: 0
+    q: "What is the group number of an element with configuration ending in ns² np⁴?",
+    q_ml: "ns² np⁴ എന്നതിൽ അവസാനിക്കുന്ന വിന്യാസമുള്ള ഒരു മൂലകത്തിന്റെ ഗ്രൂപ്പ് നമ്പർ എത്ര?",
+    opts: ["14", "15", "16", "17"], opts_ml: ["14", "15", "16", "17"], ans: 2
   },
   {
-    q: "Which prefix is used in IUPAC naming when the same branch appears twice in a compound?",
-    q_ml: "ഒരു സംയുക്തത്തിൽ ഒരേ ശാഖ രണ്ട് തവണ ഉണ്ടെങ്കിൽ IUPAC നാമകരണത്തിൽ ഉപയോഗിക്കുന്ന ഉപസർഗ്ഗം ഏത്?",
-    opts: ["mono", "di", "tri", "tetra"],
-    opts_ml: ["മോണോ", "ഡൈ", "ട്രൈ", "ടെട്ര"],
-    ans: 1
+    q: "What determines the period number of an element?",
+    q_ml: "ഒരു മൂലകത്തിന്റെ പീരിയഡ് നമ്പർ എന്താണ് നിർണ്ണയിക്കുന്നത്?",
+    opts: ["The total number of electrons", "The highest principal quantum number (n) in its configuration", "The number of protons", "The atomic mass"],
+    opts_ml: ["ആകെ ഇലക്ട്രോണുകളുടെ എണ്ണം", "വിന്യാസത്തിലെ ഏറ്റവും ഉയർന്ന പ്രിൻസിപ്പൽ ക്വാണ്ടം നമ്പർ (n)", "പ്രോട്ടോണുകളുടെ എണ്ണം", "അറ്റോമിക മാസ്"], ans: 1
   },
   {
-    q: "What is the IUPAC name of CH₃–CH₂–CH₂–Cl?",
-    q_ml: "CH₃–CH₂–CH₂–Cl ന്റെ IUPAC നാമം എന്ത്?",
-    opts: ["1-Chloropropane", "2-Chloropropane", "Chloroethane", "1-Chlorobutane"],
-    opts_ml: ["1-ക്ലോറോപ്രോപ്പെയ്ൻ", "2-ക്ലോറോപ്രോപ്പെയ്ൻ", "ക്ലോറോഈഥേൻ", "1-ക്ലോറോബ്യൂട്ടെയ്ൻ"],
-    ans: 0
+    q: "Elements in which the last electron enters a d sub-shell belong to which block?",
+    q_ml: "അവസാന ഇലക്ട്രോൺ d സബ്ഷെല്ലിൽ പ്രവേശിക്കുന്ന മൂലകങ്ങൾ ഏത് ബ്ലോക്കിൽ ഉൾപ്പെടുന്നു?",
+    opts: ["s-block", "p-block", "d-block", "f-block"],
+    opts_ml: ["s-ബ്ലോക്ക്", "p-ബ്ലോക്ക്", "d-ബ്ലോക്ക്", "f-ബ്ലോക്ക്"], ans: 2
   },
   {
-    q: "The suffix '–oic acid' in IUPAC nomenclature indicates the presence of which functional group?",
-    q_ml: "IUPAC നാമകരണത്തിലെ '–oic acid' എന്ന പ്രത്യയം ഏത് പ്രവർത്തക ഗ്രൂപ്പിനെ സൂചിപ്പിക്കുന്നു?",
-    opts: ["Alcohol", "Aldehyde", "Ketone", "Carboxylic acid"],
-    opts_ml: ["ആൽക്കഹോൾ", "ആൽഡിഹൈഡ്", "കീറ്റോൺ", "കാർബോക്സിലിക് അമ്ലം"],
-    ans: 3
+    q: "In which groups are s-block elements found?",
+    q_ml: "s-ബ്ലോക്ക് മൂലകങ്ങൾ ഏതെല്ലാം ഗ്രൂപ്പുകളിലാണ് കാണപ്പെടുന്നത്?",
+    opts: ["Groups 1 and 2", "Groups 13 to 18", "Groups 3 to 12", "Group 18 only"],
+    opts_ml: ["ഗ്രൂപ്പ് 1, 2", "ഗ്രൂപ്പ് 13 മുതൽ 18 വരെ", "ഗ്രൂപ്പ് 3 മുതൽ 12 വരെ", "ഗ്രൂപ്പ് 18 മാത്രം"], ans: 0
   },
   {
-    q: "What is the molecular formula of benzene?",
-    q_ml: "ബെൻസീനിന്റെ തന്മാത്രാ സൂത്രം എന്ത്?",
-    opts: ["C₆H₆", "C₆H₁₂", "C₆H₅OH", "C₆H₁₄"],
-    opts_ml: ["C₆H₆", "C₆H₁₂", "C₆H₅OH", "C₆H₁₄"],
-    ans: 0
+    q: "What is the general trend of ionisation enthalpy across a period (left to right)?",
+    q_ml: "ഒരു പീരിയഡിൽ ഇടത്തുനിന്ന് വലത്തോട്ട് പോകുമ്പോൾ അയോണീകരണ എൻഥാൽപിയുടെ പൊതു പ്രവണത എന്ത്?",
+    opts: ["Increases", "Decreases", "Stays the same", "First increases then decreases"],
+    opts_ml: ["കൂടുന്നു", "കുറയുന്നു", "മാറ്റമില്ല", "ആദ്യം കൂടി പിന്നെ കുറയുന്നു"], ans: 0
   },
   {
-    q: "Which of the following is an example of a ketone?",
-    q_ml: "താഴെപ്പറയുന്നവയിൽ ഏതാണ് കീറ്റോണിന്റെ ഉദാഹരണം?",
-    opts: ["CH₃CH₂OH", "CH₃COCH₃", "CH₃CHO", "CH₃COOH"],
-    opts_ml: ["CH₃CH₂OH", "CH₃COCH₃", "CH₃CHO", "CH₃COOH"],
-    ans: 1
+    q: "What is the general trend of ionisation enthalpy down a group?",
+    q_ml: "ഒരു ഗ്രൂപ്പിൽ മുകളിൽ നിന്ന് താഴേക്ക് പോകുമ്പോൾ അയോണീകരണ എൻഥാൽപിയുടെ പൊതു പ്രവണത എന്ത്?",
+    opts: ["Increases", "Decreases", "Stays the same", "Cannot be determined"],
+    opts_ml: ["കൂടുന്നു", "കുറയുന്നു", "മാറ്റമില്ല", "നിർണ്ണയിക്കാൻ കഴിയില്ല"], ans: 1
   },
   {
-    q: "Which property of carbon is mainly responsible for the huge number of organic compounds?",
-    q_ml: "ഓർഗാനിക് സംയുക്തങ്ങളുടെ വൻ എണ്ണത്തിന് പ്രധാന കാരണമായ കാർബണിന്റെ ഗുണം ഏത്?",
-    opts: ["Catenation", "Ionization", "Valency of 2", "Radioactivity"],
-    opts_ml: ["കാറ്റനേഷൻ", "അയോണീകരണം", "വേലൻസി 2", "റേഡിയോആക്ടിവിറ്റി"],
-    ans: 0
+    q: "Which of these elements has one of the lowest ionisation enthalpies?",
+    q_ml: "താഴെപ്പറയുന്നവയിൽ ഏറ്റവും കുറഞ്ഞ അയോണീകരണ എൻഥാൽപിയുള്ള മൂലകം ഏത്?",
+    opts: ["Fluorine", "Helium", "Caesium", "Neon"],
+    opts_ml: ["ഫ്ലൂറിൻ", "ഹീലിയം", "സീസിയം", "നിയോൺ"], ans: 2
   },
   {
-    q: "n-Butane and Isobutane are examples of which type of isomerism?",
-    q_ml: "n-ബ്യൂട്ടെയ്നും ഐസോബ്യൂട്ടെയ്നും ഏത് തരം ഐസോമെറിസത്തിന്റെ ഉദാഹരണങ്ങളാണ്?",
-    opts: ["Position isomerism", "Functional isomerism", "Chain isomerism", "Metamerism"],
-    opts_ml: ["സ്ഥാന ഐസോമെറിസം", "പ്രവർത്തക ഗ്രൂപ്പ് ഐസോമെറിസം", "ശൃംഖലാ ഐസോമെറിസം", "മെറ്റാമെറിസം"],
-    ans: 2
+    q: "Which of the following is a common feature of d-block elements?",
+    q_ml: "d-ബ്ലോക്ക് മൂലകങ്ങളുടെ പൊതുവായ ഒരു സവിശേഷത ഏത്?",
+    opts: ["They are all non-metals", "They are all metals", "They cannot form compounds", "They are all radioactive"],
+    opts_ml: ["ഇവയെല്ലാം അലോഹങ്ങളാണ്", "ഇവയെല്ലാം ലോഹങ്ങളാണ്", "ഇവയ്ക്ക് സംയുക്തങ്ങൾ ഉണ്ടാക്കാൻ കഴിയില്ല", "ഇവയെല്ലാം റേഡിയോ ആക്റ്റീവ് ആണ്"], ans: 1
   },
   {
-    q: "What is the IUPAC name of CH₃–O–CH₂–CH₃?",
-    q_ml: "CH₃–O–CH₂–CH₃ ന്റെ IUPAC നാമം എന്ത്?",
-    opts: ["Methoxyethane", "Ethoxymethane", "Methoxypropane", "Ethoxyethane"],
-    opts_ml: ["മെതോക്സിഈഥേൻ", "എതോക്സിമീഥേൻ", "മെതോക്സിപ്രോപ്പെയ്ൻ", "എതോക്സിഈഥേൻ"],
-    ans: 0
+    q: "Lanthanides and actinides together belong to which block?",
+    q_ml: "ലാന്തനോയ്ഡുകളും ആക്റ്റിനോയ്ഡുകളും ഒരുമിച്ച് ഏത് ബ്ലോക്കിൽ ഉൾപ്പെടുന്നു?",
+    opts: ["s-block", "p-block", "d-block", "f-block"],
+    opts_ml: ["s-ബ്ലോക്ക്", "p-ബ്ലോക്ക്", "d-ബ്ലോക്ക്", "f-ബ്ലോക്ക്"], ans: 3
   }
 ];
 
 let score = 0;
-let answered = 0;
 
-/* ---- quiz opens daily at 9:00 PM (device clock) ---- */
 const QUIZ_OPEN_HOUR = 21;
 function isQuizOpen(){ return new Date().getHours() >= QUIZ_OPEN_HOUR; }
 function quizLockedHTML(){
   return currentLang === 'ml'
-    ? `<div class="exam-tip"><b>📌 ക്വിസ് ഇന്ന് രാത്രി 9 മണിക്ക് ആരംഭിക്കും.</b><br>ഇപ്പോൾ സമയം: ${new Date().toLocaleTimeString('en-GB')}</div>`
-    : `<div class="exam-tip"><b>📌 Today's quiz opens at 9:00 PM.</b><br>Current time: ${new Date().toLocaleTimeString('en-GB')}</div>`;
+    ? '<div class="exam-tip"><b>📌 ക്വിസ് ഇന്ന് രാത്രി 9 മണിക്ക് ആരംഭിക്കും.</b><br>ഇപ്പോൾ സമയം: ' + new Date().toLocaleTimeString('en-GB') + '</div>'
+    : '<div class="exam-tip"><b>📌 Today\'s quiz opens at 9:00 PM.</b><br>Current time: ' + new Date().toLocaleTimeString('en-GB') + '</div>';
 }
 let _quizGateOpen = null;
 function watchQuizGate(){
@@ -653,7 +430,7 @@ function buildQuiz(){
   }
   scoreBar.style.display = 'flex';
   container.innerHTML = '';
-  score = 0; answered = 0;
+  score = 0;
   document.getElementById('scoreVal').textContent = 0;
   document.getElementById('totalVal').textContent = quizData.length;
   quizData.forEach((item, idx)=>{
@@ -661,7 +438,7 @@ function buildQuiz(){
     const opts = currentLang === 'ml' ? item.opts_ml : item.opts;
     const qDiv = document.createElement('div');
     qDiv.className = 'quiz-q';
-    qDiv.innerHTML = `<p><b>${idx+1}.</b> ${qText}</p><div class="quiz-opts"></div>`;
+    qDiv.innerHTML = '<p><b>' + (idx+1) + '.</b> ' + qText + '</p><div class="quiz-opts"></div>';
     const optsDiv = qDiv.querySelector('.quiz-opts');
     opts.forEach((opt, oIdx)=>{
       const b = document.createElement('button');
@@ -677,7 +454,6 @@ function buildQuiz(){
           b.classList.add('wrong');
           allBtns[item.ans].classList.add('correct');
         }
-        answered++;
         document.getElementById('scoreVal').textContent = score;
       });
       optsDiv.appendChild(b);
@@ -686,26 +462,17 @@ function buildQuiz(){
   });
 }
 
-function resetQuiz(){
-  score = 0; answered = 0;
-  document.getElementById('scoreVal').textContent = 0;
-  buildQuiz();
-}
-
 buildQuiz();
 
-// ===== WhatsApp share link for the standalone exam page =====
 function setupShareLinks(){
   const examUrl = new URL('chemistry-unit3-quiz.html', window.location.href).href;
   const msg = currentLang === 'ml'
-    ? 'രസതന്ത്രം - Nomenclature & Isomerism ദിവസേനയുള്ള പരീക്ഷ എഴുതൂ: ' + examUrl
-    : "Chemistry - Nomenclature & Isomerism daily exam, attempt here: " + examUrl;
+    ? 'രസതന്ത്രം - പീരിയോഡിക് ടേബിളും ഇലക്ട്രോൺ വിന്യാസവും - ദിവസേനയുള്ള പരീക്ഷ എഴുതൂ: ' + examUrl
+    : "Chemistry - Periodic Table & Electron Configuration daily exam, attempt here: " + examUrl;
   const waBtn = document.getElementById('waShareBtn');
   if(waBtn) waBtn.href = 'https://wa.me/?text=' + encodeURIComponent(msg);
 }
 setupShareLinks();
-
 </script>
-
 </body>
 </html>
