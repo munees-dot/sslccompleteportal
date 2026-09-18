@@ -1,563 +1,476 @@
 <!DOCTYPE html>
-<html lang="ml">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Unit 4 — Gas Laws &amp; Mole Concept | Study Tool</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>യൂണിറ്റ് 4: വാതകനിയമങ്ങളും മോൾ സങ്കല്പനവും | Abacus Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy-950:#080c17;
-  --navy-900:#0d1428;
-  --navy-800:#131c38;
-  --navy-700:#1c2a4f;
-  --shell-cyan:#4fd8c9;
-  --shell-cyan-dim:#2a5f5a;
-  --orbit-amber:#f2b64d;
-  --nucleus-rose:#ef6f6f;
-  --ink-0:#f4f7fb;
-  --ink-1:#c3ccdc;
-  --ink-2:#8894ac;
-  --line:#233256;
-  --radius:14px;
+  --ink:#1f2937;
+  --paper:#faf6ee;
+  --chain:#2b6e63;
+  --chain-dark:#184d44;
+  --branch:#c1622d;
+  --branch-light:#f2e1d2;
+  --func:#7b4fa0;
+  --line:#e1d7c3;
+  --card:#ffffff;
+  --mono: 'Courier New', ui-monospace, monospace;
 }
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  margin:0;
-  background:
-    radial-gradient(1100px 600px at 85% -10%, rgba(79,216,201,.10), transparent 60%),
-    radial-gradient(900px 500px at -10% 20%, rgba(242,182,77,.08), transparent 55%),
-    var(--navy-950);
-  color:var(--ink-0);
-  font-family:'Inter',sans-serif;
-  min-height:100vh;
-}
-body.lang-ml .en{display:none;}
-body.lang-en .ml{display:none;}
-.ml{font-family:'Noto Sans Malayalam','Inter',sans-serif;}
-h1,h2,h3,.disp{font-family:'Sora','Noto Sans Malayalam',sans-serif;}
-body.lang-ml h1, body.lang-ml h2, body.lang-ml h3, body.lang-ml .disp{font-family:'Noto Sans Malayalam',sans-serif;}
-
-/* ===== Top bar ===== */
-.topbar{
-  position:sticky;top:0;z-index:50;
-  display:flex;align-items:center;gap:14px;
-  padding:12px 22px;
-  background:rgba(8,12,23,.86);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line);
-}
-.brand{display:flex;align-items:center;gap:10px;flex:1;min-width:0;}
-.brand-mark{
-  width:36px;height:36px;border-radius:10px;flex:none;
-  background:conic-gradient(from 210deg, var(--shell-cyan), var(--orbit-amber), var(--nucleus-rose), var(--shell-cyan));
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Sora',sans-serif;font-weight:800;font-size:15px;color:var(--navy-950);
-}
-.brand-text{line-height:1.15;min-width:0;}
-.brand-text b{display:block;font-family:'Sora',sans-serif;font-size:14.5px;letter-spacing:.02em;}
-.brand-text span{display:block;font-size:11px;color:var(--ink-2);}
-.lang-toggle{
-  display:flex;background:var(--navy-800);border:1px solid var(--line);border-radius:999px;padding:3px;flex:none;
-}
-.lang-toggle button{
-  border:none;background:transparent;color:var(--ink-2);font-weight:600;font-size:12.5px;
-  padding:6px 13px;border-radius:999px;cursor:pointer;transition:.2s;
-}
-.lang-toggle button.active{background:var(--shell-cyan);color:var(--navy-950);}
-.print-btn{
-  flex:none;border:1px solid var(--line);background:var(--navy-800);color:var(--ink-1);
-  padding:8px 14px;border-radius:999px;font-size:12.5px;font-weight:600;cursor:pointer;
-}
-
-/* ===== Hero ===== */
-.hero{
-  padding:52px 22px 34px;max-width:980px;margin:0 auto;text-align:center;position:relative;
-}
-.hero .unit-chip{
-  display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;
-  background:var(--navy-800);border:1px solid var(--line);color:var(--shell-cyan);
-  font-size:12.5px;font-weight:600;letter-spacing:.04em;margin-bottom:18px;
-}
-.hero h1{font-size:clamp(26px,4.4vw,42px);line-height:1.2;margin:0 0 14px;
-  background:linear-gradient(90deg,var(--ink-0),var(--shell-cyan) 60%,var(--orbit-amber));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.hero p.sub{color:var(--ink-1);font-size:15.5px;max-width:640px;margin:0 auto 26px;line-height:1.7;}
-
-/* orbit diagram */
-.orbit-wrap{width:180px;height:180px;margin:0 auto 8px;position:relative;}
-.orbit-wrap svg{width:100%;height:100%;}
-.orbit-ring{fill:none;stroke:var(--line);stroke-width:1;}
-.orbit-e{fill:var(--shell-cyan);filter:drop-shadow(0 0 6px rgba(79,216,201,.8));}
-@keyframes spin{to{transform:rotate(360deg);}}
-.spin-slow{transform-origin:90px 90px;animation:spin 9s linear infinite;}
-.spin-mid{transform-origin:90px 90px;animation:spin 6s linear infinite reverse;}
-.spin-fast{transform-origin:90px 90px;animation:spin 3.6s linear infinite;}
-@media (prefers-reduced-motion:reduce){.spin-slow,.spin-mid,.spin-fast{animation:none;}}
-
-/* progress */
-.progress-shell{max-width:760px;margin:0 auto 6px;padding:0 22px;}
-.progress-track{height:6px;border-radius:999px;background:var(--navy-800);border:1px solid var(--line);overflow:hidden;}
-.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--shell-cyan),var(--orbit-amber));transition:width .4s;}
-.progress-label{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink-2);margin-top:6px;}
-
-/* ===== Layout ===== */
-.layout{max-width:1180px;margin:20px auto 80px;padding:0 22px;display:grid;grid-template-columns:260px 1fr;gap:24px;}
-@media (max-width:900px){.layout{grid-template-columns:1fr;}}
-
-.steps-nav{position:sticky;top:78px;align-self:start;display:flex;flex-direction:column;gap:6px;max-height:calc(100vh - 100px);overflow:auto;padding-right:4px;}
-@media (max-width:900px){.steps-nav{position:static;flex-direction:row;flex-wrap:wrap;max-height:none;}}
-.step-btn{
-  display:flex;align-items:center;gap:10px;text-align:left;
-  padding:10px 12px;border-radius:10px;border:1px solid transparent;background:transparent;
-  color:var(--ink-1);cursor:pointer;font-size:13.5px;font-weight:500;line-height:1.35;
-}
-.step-btn .num{
-  flex:none;width:24px;height:24px;border-radius:7px;background:var(--navy-800);border:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--ink-2);
-}
-.step-btn.done .num{background:var(--shell-cyan-dim);border-color:var(--shell-cyan);color:var(--shell-cyan);}
-.step-btn.active{background:var(--navy-800);border-color:var(--line);color:var(--ink-0);}
-.step-btn.active .num{background:var(--shell-cyan);color:var(--navy-950);border-color:var(--shell-cyan);}
-.step-btn:hover{color:var(--ink-0);}
-
-.panel{display:none;}
-.panel.active{display:block;animation:fadein .35s ease;}
-@keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-
-.card{
-  background:linear-gradient(180deg,var(--navy-800),var(--navy-900));
-  border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin-bottom:16px;
-}
-.card h2{font-size:19px;margin:0 0 4px;display:flex;align-items:center;gap:10px;}
-.card h2 .tag{font-family:'Sora',sans-serif;font-size:11px;color:var(--shell-cyan);border:1px solid var(--shell-cyan-dim);background:rgba(79,216,201,.08);padding:3px 9px;border-radius:999px;}
-.card h3{font-size:14.5px;color:var(--shell-cyan);margin:18px 0 8px;}
-.card p{color:var(--ink-1);line-height:1.8;font-size:14.5px;margin:8px 0;}
-.card ul,.card ol{color:var(--ink-1);line-height:1.85;font-size:14.5px;padding-left:20px;}
-.card li{margin-bottom:4px;}
-.formula{
-  display:inline-block;background:var(--navy-950);border:1px solid var(--shell-cyan-dim);color:var(--shell-cyan);
-  font-family:'Sora',sans-serif;font-weight:600;padding:6px 12px;border-radius:8px;margin:4px 6px 4px 0;font-size:14px;
-}
-.callout{
-  border-left:3px solid var(--orbit-amber);background:rgba(242,182,77,.07);
-  padding:12px 14px;border-radius:0 10px 10px 0;font-size:14px;color:var(--ink-1);margin:14px 0;
-}
-.callout b{color:var(--orbit-amber);}
-.example{
-  border:1px dashed var(--line);border-radius:10px;padding:12px 14px;margin:12px 0;background:rgba(255,255,255,.02);
-}
-.example b{color:var(--ink-0);}
-
-table{width:100%;border-collapse:collapse;margin:12px 0 18px;font-size:13.5px;}
-th,td{border:1px solid var(--line);padding:8px 10px;text-align:center;color:var(--ink-1);}
-th{background:var(--navy-950);color:var(--shell-cyan);font-family:'Sora',sans-serif;font-weight:600;font-size:12.5px;}
-tr:hover td{background:rgba(79,216,201,.04);}
-
-.mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0;}
-.mini-cell{background:var(--navy-950);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center;}
-.mini-cell .k{font-family:'Sora',sans-serif;font-size:20px;color:var(--shell-cyan);font-weight:700;}
-.mini-cell .l{font-size:11.5px;color:var(--ink-2);margin-top:4px;}
-
-/* mini periodic block map */
-.block-map{display:grid;grid-template-columns:repeat(18,1fr);grid-auto-rows:26px;gap:3px;margin:16px 0;}
-.block-map .cell{border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--navy-950);min-width:0;}
-.block-map .empty{background:transparent;}
-.b-s{background:var(--shell-cyan);}
-.b-p{background:var(--orbit-amber);}
-.b-d{background:var(--nucleus-rose);}
-.b-f{background:#8f7cf0;}
-.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px;font-size:12px;color:var(--ink-2);}
-.legend span{display:inline-flex;align-items:center;gap:6px;}
-.legend i{width:12px;height:12px;border-radius:3px;display:inline-block;}
-
-.step-nav-btns{display:flex;justify-content:space-between;gap:12px;margin-top:22px;}
-.step-nav-btns button{
-  flex:1;padding:12px 16px;border-radius:10px;border:1px solid var(--line);background:var(--navy-800);
-  color:var(--ink-0);font-weight:600;font-size:13.5px;cursor:pointer;font-family:inherit;
-}
-.step-nav-btns button.primary{background:var(--shell-cyan);color:var(--navy-950);border-color:var(--shell-cyan);}
-.step-nav-btns button:disabled{opacity:.4;cursor:not-allowed;}
-
-.quiz-cta{
-  margin-top:30px;padding:24px;border-radius:var(--radius);
-  background:linear-gradient(120deg,rgba(79,216,201,.12),rgba(242,182,77,.10));
-  border:1px solid var(--shell-cyan-dim);text-align:center;
-}
-.quiz-cta h3{color:var(--ink-0);font-size:17px;margin:0 0 6px;}
-.quiz-cta p{color:var(--ink-1);font-size:13.5px;margin:0 0 14px;}
-.quiz-cta a{
-  display:inline-flex;align-items:center;gap:8px;background:var(--shell-cyan);color:var(--navy-950);
-  font-weight:700;font-size:14px;padding:11px 22px;border-radius:999px;text-decoration:none;
-}
-
-.footer-note{text-align:center;color:var(--ink-2);font-size:12px;padding:20px;}
-
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.55;}
+body[data-lang="ml"]{font-family:'Noto Sans Malayalam','Segoe UI',system-ui,sans-serif;}
+header{background:linear-gradient(135deg,var(--chain-dark),var(--chain) 65%);color:#fff;padding:26px 18px 60px;position:relative;overflow:hidden;}
+header .backbone{position:absolute; inset:0; opacity:.15;background-image:repeating-linear-gradient(115deg, transparent 0 38px, #fff 38px 40px);}
+header h1{margin:0 0 4px; font-size:1.5rem; position:relative; z-index:1;}
+header p.sub{margin:0; opacity:.85; font-size:.92rem; position:relative; z-index:1;}
+.wrap{max-width:960px; margin:-40px auto 40px; padding:0 14px;position:relative; z-index:2;}
+nav.tabs{display:flex; flex-wrap:wrap; gap:8px;background:var(--card); border-radius:14px;padding:10px; box-shadow:0 8px 24px rgba(24,77,68,.12);margin-bottom:18px; position:sticky; top:10px; z-index:5;}
+nav.tabs button{border:none; background:var(--paper); color:var(--chain-dark);padding:9px 14px; border-radius:9px; cursor:pointer;font-size:.9rem; font-weight:600; font-family:inherit;transition:.15s;}
+nav.tabs button.active{background:var(--chain); color:#fff;}
+nav.tabs button:hover{ filter:brightness(1.05); }
+#langToggle{margin-left:auto; background:var(--func) !important; color:#fff !important;}
+.panel{ display:none; }
+.panel.active{ display:block; animation:fade .25s ease; }
+@keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+.card{background:var(--card); border:1px solid var(--line);border-radius:14px; padding:18px 20px; margin-bottom:16px;box-shadow:0 2px 10px rgba(31,41,55,.04);}
+h2.section-title{color:var(--chain-dark); border-bottom:3px solid var(--branch);display:inline-block; padding-bottom:4px; margin-top:0;font-size:1.15rem;}
+h3.sub-title{color:var(--func); margin:18px 0 8px; font-size:1rem;}
+.formula-box{background:var(--branch-light); border-left:4px solid var(--branch);padding:10px 14px; border-radius:8px; font-family:var(--mono);margin:10px 0; font-size:.95rem; overflow-x:auto;}
+body[data-lang="ml"] .formula-box{ font-family:'Noto Sans Malayalam',var(--mono); }
+.chain{font-family:var(--mono); background:#f2f7f5; border:1px dashed var(--chain);padding:8px 12px; border-radius:8px; display:inline-block; margin:6px 6px 6px 0;}
+body[data-lang="ml"] .chain{ font-family:'Noto Sans Malayalam',var(--mono); }
+table{ width:100%; border-collapse:collapse; margin:10px 0; font-size:.92rem; }
+th,td{ border:1px solid var(--line); padding:8px 10px; text-align:left; }
+th{ background:var(--chain); color:#fff; }
+tr:nth-child(even) td{ background:#f7f4ec; }
+table.compact th, table.compact td{ padding:5px 8px; font-size:.85rem; }
+ul{ padding-left:20px; }
+li{ margin-bottom:6px; }
+.tag{display:inline-block; background:var(--func); color:#fff;font-size:.72rem; padding:2px 8px; border-radius:20px; margin-left:6px;}
+.step-list li{ margin-bottom:10px; }
+.quiz-q{ margin-bottom:16px; padding-bottom:14px; border-bottom:1px dashed var(--line); }
+.quiz-q:last-child{ border-bottom:none; }
+.quiz-opts button{display:block; width:100%; text-align:left; margin:5px 0; padding:8px 12px;border:1px solid var(--line); background:#fff; border-radius:8px; cursor:pointer;font-family:inherit; font-size:.9rem;}
+.quiz-opts button.correct{ background:#dff3e8; border-color:var(--chain); font-weight:600; }
+.quiz-opts button.wrong{ background:#fbe4e0; border-color:var(--branch); }
+.quiz-opts button[disabled]{ cursor:default; }
+.score-bar{background:var(--chain-dark); color:#fff; border-radius:10px;padding:10px 16px; margin-bottom:14px; font-size:.9rem; display:flex;justify-content:space-between; align-items:center;}
+.btn{background:var(--branch); color:#fff; border:none; padding:9px 16px;border-radius:8px; cursor:pointer; font-family:inherit; font-weight:600;}
+.btn.secondary{ background:var(--chain); }
+.exam-tip{background:#eef7f2; border:1px solid var(--chain); border-radius:8px;padding:10px 14px; margin-top:16px; font-size:.9rem;}
 @media print{
-  .topbar,.steps-nav,.step-nav-btns,.quiz-cta,.hero .orbit-wrap{display:none!important;}
-  body{background:#fff;color:#000;}
-  .panel{display:block!important;}
-  .card{border:1px solid #ccc;background:#fff;break-inside:avoid;}
+  header, nav.tabs, .no-print{ display:none !important; }
+  .panel{ display:none !important; }
+  .panel.print-target{ display:block !important; }
+  .wrap{ margin:0; }
+  .card{ box-shadow:none; border:1px solid #999; }
+  body{ background:#fff; }
 }
+footer.note{text-align:center; font-size:.78rem; color:#8a8067; margin:30px 0 10px;}
 </style>
 </head>
-<body class="lang-ml">
+<body>
 
-<div class="topbar">
-  <div class="brand">
-    <div class="brand-mark">Aa</div>
-    <div class="brand-text">
-      <b>Abacus Academy</b>
-      <span class="ml">SSLC രസതന്ത്രം · സ്റ്റഡി പോർട്ടൽ</span>
-      <span class="en">SSLC Chemistry · Study Portal</span>
-    </div>
-  </div>
-  <div class="lang-toggle">
-    <button id="btn-ml" class="active" onclick="setLang('ml')">മലയാളം</button>
-    <button id="btn-en" onclick="setLang('en')">English</button>
-  </div>
-  <a class="print-btn" id="printLink" href="chemistry-unit4-print-mm.html" style="text-decoration:none;display:inline-block;">
-    <span class="ml">പ്രിന്റ്</span><span class="en">Print</span>
-  </a>
-</div>
+<header>
+  <div class="backbone"></div>
+  <h1 data-ml="വാതകനിയമങ്ങളും മോൾ സങ്കല്പനവും">Gas Laws &amp; Mole Concept</h1>
+  <p class="sub" data-ml="രസതന്ത്രം · ക്ലാസ് 10 · യൂണിറ്റ് 4 — സമ്പൂർണ്ണ പഠന സഹായി">Chemistry · Class 10 · Unit 4 — Complete Study Tool</p>
+</header>
 
-<div class="hero">
-  <div class="orbit-wrap">
-    <svg viewBox="0 0 180 180">
-      <rect x="18" y="18" width="144" height="144" rx="10" class="orbit-ring" fill="none"/>
-      <circle class="orbit-e" cx="55" cy="50" r="5"><animate attributeName="cx" values="55;140;30;95;55" dur="4.2s" repeatCount="indefinite"/><animate attributeName="cy" values="50;120;140;35;50" dur="4.2s" repeatCount="indefinite"/></circle>
-      <circle class="orbit-e" cx="120" cy="70" r="4.5" fill="#f2b64d"><animate attributeName="cx" values="120;35;150;70;120" dur="3.6s" repeatCount="indefinite"/><animate attributeName="cy" values="70;140;40;110;70" dur="3.6s" repeatCount="indefinite"/></circle>
-      <circle class="orbit-e" cx="90" cy="130" r="5"><animate attributeName="cx" values="90;30;150;60;90" dur="5s" repeatCount="indefinite"/><animate attributeName="cy" values="130;40;90;145;130" dur="5s" repeatCount="indefinite"/></circle>
-      <circle class="orbit-e" cx="40" cy="100" r="4" fill="#ef6f6f"><animate attributeName="cx" values="40;130;70;145;40" dur="4.8s" repeatCount="indefinite"/><animate attributeName="cy" values="100;35;150;80;100" dur="4.8s" repeatCount="indefinite"/></circle>
-    </svg>
-  </div>
-  <div class="unit-chip">
-    <span class="ml">യൂണിറ്റ് 4 · രസതന്ത്രം സ്റ്റാൻഡേർഡ് 10</span>
-    <span class="en">Unit 4 · Chemistry Standard 10</span>
-  </div>
-  <h1>
-    <span class="ml">വാതകനിയമങ്ങളും മോൾ സങ്കല്പനവും</span>
-    <span class="en">Gas Laws & the Mole Concept</span>
-  </h1>
-  <p class="sub ml">ഗതികതന്മാത്രാ സിദ്ധാന്തം മുതൽ ബോയിൽ, ചാൾസ്, അവൊഗാഡ്രോ നിയമങ്ങൾ, മോൾ സങ്കൽപനം, ആദർശ വാതക സമവാക്യം വരെ — 9 പടികളിലായി ക്രമമായി പഠിക്കാം. ഓരോ പടിയും പൂർത്തിയാക്കുമ്പോൾ ടിക് ചെയ്യൂ.</p>
-  <p class="sub en">From the kinetic theory of gases to Boyle's, Charles's and Avogadro's laws, the mole concept and the ideal gas equation — learn in 9 structured steps. Mark each step done as you finish it.</p>
+<div class="wrap">
 
-  <div class="progress-shell">
-    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="progress-label">
-      <span class="ml">പുരോഗതി</span><span class="en">Progress</span>
-      <span id="progressText">0 / 9</span>
-    </div>
-  </div>
-</div>
+  <nav class="tabs no-print">
+    <button data-tab="notes" class="active" data-ml="📘 നോട്ടുകൾ">📘 Notes</button>
+    <button data-tab="properties" data-ml="💨 വാതക ഗുണങ്ങൾ">💨 Gas Properties</button>
+    <button data-tab="laws" data-ml="⚖️ വാതകനിയമങ്ങൾ">⚖️ Gas Laws</button>
+    <button data-tab="mole" data-ml="🔢 മോൾ സങ്കല്പനം">🔢 Mole Concept</button>
+    <button data-tab="stoich" data-ml="🧮 സ്റ്റോയ്ക്കിയോമെട്രി">🧮 Stoichiometry</button>
+    <button data-tab="quiz" data-ml="✅ ക്വിസ്">✅ Quiz</button>
+    <button id="langToggle" onclick="toggleLang()">🌐 മലയാളം</button>
+    <button id="printBtn" onclick="printCurrent()" style="background:var(--chain-dark);color:#fff;" data-ml="🖨️ പ്രിന്റ്">🖨️ Print</button>
+  </nav>
 
-<div class="layout">
-  <nav class="steps-nav" id="stepsNav"></nav>
-
-  <div id="panels">
-
-  <!-- STEP 1 -->
-  <section class="panel" data-step="1">
+  <section class="panel active" id="notes">
     <div class="card">
-      <h2><span class="tag">01</span><span class="ml">ഗതികതന്മാത്രാ സിദ്ധാന്തം</span><span class="en">Kinetic Theory of Gases</span></h2>
-      <p class="ml">വാതകങ്ങളുടെ പൊതുസ്വഭാവങ്ങളെ വിശദീകരിക്കാൻ ജെയിംസ് ക്ലർക്ക് മാക്സ്‌വെൽ, ലുഡ്‌വിഗ് ബോൾട്സ്മാൻ എന്നീ ശാസ്ത്രജ്ഞർ മുന്നോട്ടുവച്ച സിദ്ധാന്തമാണ് ഗതികതന്മാത്രാ സിദ്ധാന്തം.</p>
-      <p class="en">The kinetic molecular theory, proposed by James Clerk Maxwell and Ludwig Boltzmann, explains the general behaviour of gases.</p>
-
-      <h3><span class="ml">അടിസ്ഥാനതത്വങ്ങൾ</span><span class="en">Basic Postulates</span></h3>
+      <h2 class="section-title" data-ml="അധ്യായ സംഗ്രഹം">Chapter Summary</h2>
       <ul>
-        <li class="ml">വാതകങ്ങൾ സൂക്ഷ്മകണികകളാൽ (ആറ്റങ്ങൾ/തന്മാത്രകൾ) നിർമ്മിതമാണ്.</li>
-        <li class="ml">വാതക തന്മാത്രകൾ തമ്മിൽ ആകർഷണബലം വളരെ കുറവാണ്.</li>
-        <li class="ml">തന്മാത്രകൾ തമ്മിലുള്ള അകലം വളരെ കൂടുതലായതിനാൽ, തന്മാത്രകൾ ഉൾക്കൊള്ളുന്ന ആകെ വ്യാപ്പം വളരെ നിസാരമാണ്.</li>
-        <li class="ml">വാതക തന്മാത്രകൾ എല്ലാ ദിശകളിലേക്കും നിരന്തരം ചലിച്ചുകൊണ്ടിരിക്കുന്നു; പാത്രഭിത്തിയിൽ ഇടിച്ചുണ്ടാവുന്ന ബലമാണ് വാതകമർദത്തിന് കാരണം.</li>
-        <li class="ml">തന്മാത്രകളുടെ കൂട്ടിമുട്ടലുകൾ ഇലാസ്റ്റികമാണ് — കൂട്ടിമുട്ടലിന് മുമ്പും ശേഷവും ആകെ ഗതികോർജം തുല്യമായിരിക്കും.</li>
-        <li class="ml">ഒരു വാതകത്തിലെ തന്മാത്രകളുടെ ശരാശരി ഗതികോർജം അതിന്റെ താപനിലയ്ക്ക് നേർഅനുപാതത്തിലാണ്.</li>
+        <li data-ml="വാതക തന്മാത്രകൾ തമ്മിലുള്ള ആകർഷണബലം വളരെ കുറവാണ്; അവ എല്ലാ ദിശകളിലേക്കും നിരന്തരം ചലിച്ചുകൊണ്ടിരിക്കുന്നു (ഗതിക തന്മാത്രാ സിദ്ധാന്തം).">Gas molecules have very weak intermolecular attraction and are in constant, random motion in all directions (kinetic molecular theory).</li>
+        <li data-ml="ബോയിൽ നിയമം: സ്ഥിര താപനിലയിൽ ഒരു നിശ്ചിത മാസ് വാതകത്തിന്റെ വ്യാപ്പം മർദ്ദത്തിന് വിപരീതാനുപാതത്തിലാണ് (V ∝ 1/P).">Boyle's Law: at constant temperature, the volume of a fixed mass of gas is inversely proportional to pressure (V ∝ 1/P).</li>
+        <li data-ml="ചാൾസ് നിയമം: സ്ഥിര മർദ്ദത്തിൽ ഒരു നിശ്ചിത മാസ് വാതകത്തിന്റെ വ്യാപ്പം കെൽവിൻ താപനിലയ്ക്ക് നേർഅനുപാതത്തിലാണ് (V ∝ T).">Charles's Law: at constant pressure, the volume of a fixed mass of gas is directly proportional to its Kelvin temperature (V ∝ T).</li>
+        <li data-ml="കേവല പൂജ്യം (0 K) = −273.15°C ആണ് — ഇവിടെ വാതകത്തിന്റെ വ്യാപ്പം സൈദ്ധാന്തികമായി പൂജ്യമാകും.">Absolute zero (0 K) = −273.15°C — the temperature at which a gas's volume would theoretically become zero.</li>
+        <li data-ml="അവെഗാഡ്രോ നിയമം: സ്ഥിര താപനിലയിലും മർദ്ദത്തിലും വാതകത്തിന്റെ വ്യാപ്പം അതിലെ തന്മാത്രകളുടെ എണ്ണത്തിന് നേർഅനുപാതത്തിലാണ്.">Avogadro's Law: at constant temperature and pressure, the volume of a gas is directly proportional to the number of molecules it contains.</li>
+        <li data-ml="ആദർശ വാതക സമവാക്യം: PV = nRT (R = വാതക സ്ഥിരാങ്കം).">Ideal gas equation: PV = nRT (R = universal gas constant).</li>
+        <li data-ml="ഒരു മോൾ എന്നാൽ 6.022 × 10²³ കണികകൾ (അവെഗാഡ്രോ സംഖ്യ) അടങ്ങിയ പദാർത്ഥത്തിന്റെ അളവാണ്.">A mole is the amount of substance containing 6.022 × 10²³ particles (Avogadro's number).</li>
+        <li data-ml="STP-യിൽ (273 K, 1 atm) ഏതൊരു വാതകത്തിന്റെയും 1 മോളിന് 22.4 L വ്യാപ്പം ഉണ്ടായിരിക്കും.">At STP (273 K, 1 atm), 1 mole of any gas occupies 22.4 L — the molar volume.</li>
+        <li data-ml="രാസസമവാക്യങ്ങളിലെ മോൾ അനുപാതം ഉപയോഗിച്ച് പ്രവർത്തകങ്ങളുടെയും ഉൽപന്നങ്ങളുടെയും അളവ് കണക്കാക്കാം (സ്റ്റോയ്ക്കിയോമെട്രി).">The mole ratios in a balanced chemical equation let us calculate the amounts of reactants and products (stoichiometry).</li>
       </ul>
-      <p class="en" style="font-size:13px;color:var(--ink-2)">Summary: gas particles are far apart with negligible attraction and volume, move constantly in all directions causing pressure through elastic collisions, and average kinetic energy is directly proportional to temperature.</p>
-
-      <h3><span class="ml">ഖരം, ദ്രാവകം, വാതകം — താരതമ്യം</span><span class="en">Solid vs Liquid vs Gas</span></h3>
-      <table>
-        <tr><th class="ml">സവിശേഷത</th><th class="ml">ഖരം</th><th class="ml">ദ്രാവകം</th><th class="ml">വാതകം</th></tr>
-        <tr><td class="ml">തന്മാത്രകൾ തമ്മിലുള്ള അകലം</td><td class="ml">വളരെ കുറവ്</td><td class="ml">കുറവ്</td><td class="ml">വളരെ കൂടുതൽ</td></tr>
-        <tr><td class="ml">ആകർഷണബലം</td><td class="ml">വളരെ കൂടുതൽ</td><td class="ml">മിതമായ</td><td class="ml">വളരെ കുറവ്</td></tr>
-        <tr><td class="ml">ചലനസ്വാതന്ത്ര്യം</td><td class="ml">ഇല്ല</td><td class="ml">പരിമിതം</td><td class="ml">പൂർണ്ണം</td></tr>
-      </table>
+      <h3 class="sub-title" data-ml="ഉദാഹരണം: 27°C-ൽ 150 L വ്യാപ്പമുള്ള വാതകം 0°C-ൽ എത്ര?">Example: A gas occupies 150 L at 27°C — what is its volume at 0°C?</h3>
+      <div class="chain">V₁/T₁ = V₂/T₂ → 150/300 = V₂/273 → V₂ = 136.5 L</div>
     </div>
   </section>
 
-  <!-- STEP 2 -->
-  <section class="panel" data-step="2">
+  <section class="panel" id="properties">
     <div class="card">
-      <h2><span class="tag">02</span><span class="ml">വ്യാപ്പം, മർദം, താപനില</span><span class="en">Volume, Pressure & Temperature</span></h2>
-      <p class="ml">വാതകങ്ങളുടെ അളന്നുതിട്ടപ്പെടുത്താൻ കഴിയുന്ന മൂന്ന് പ്രധാന സ്വഭാവഗുണങ്ങളാണ് വ്യാപ്പം, മർദം, താപനില.</p>
+      <h2 class="section-title" data-ml="വാതകങ്ങളുടെ പൊതുസ്വഭാവങ്ങൾ">General Properties of Gases</h2>
 
-      <h3><span class="ml">വ്യാപ്പം (Volume)</span></h3>
-      <p class="ml">ഒരു പദാർത്ഥത്തിന് സ്ഥിതി ചെയ്യാൻ ആവശ്യമായ സ്ഥലമാണ് അതിന്റെ വ്യാപ്പം. വാതകത്തിന്റെ വ്യാപ്പം എന്നത് അത് സ്ഥിതിചെയ്യുന്ന പാത്രത്തിന്റെ വ്യാപ്പമാണ്.</p>
-      <p><span class="formula">1000 cm³ = 1000 mL = 1 L</span><span class="formula">1 m³ = 1000 L</span></p>
-      <p class="en" style="font-size:12.5px;color:var(--ink-2)">Common unit: litre (L); SI unit: m³.</p>
+      <h3 class="sub-title" data-ml="വ്യാപ്പം (Volume)">Volume</h3>
+      <p data-ml="ഒരു പദാർത്ഥത്തിന് സ്ഥിതി ചെയ്യാനാവശ്യമായ സ്ഥലമാണ് അതിന്റെ വ്യാപ്പം. വാതകത്തിന്റെ വ്യാപ്പം എന്നത് അത് സ്ഥിതിചെയ്യുന്ന പാത്രത്തിന്റെ വ്യാപ്പമാണ്.">Volume is the space occupied by a substance. A gas's volume is simply the volume of the container it occupies.</p>
+      <div class="formula-box" data-ml="1000 cm³ = 1000 mL = 1 L &nbsp;|&nbsp; 1 m³ = 1000 L &nbsp;|&nbsp; വ്യാപ്പത്തിന്റെ SI യൂണിറ്റ് m³ ആണ്.">1000 cm³ = 1000 mL = 1 L &nbsp;|&nbsp; 1 m³ = 1000 L &nbsp;|&nbsp; The SI unit of volume is m³.</div>
 
-      <h3><span class="ml">മർദം (Pressure)</span></h3>
-      <p class="ml">വാതക തന്മാത്രകൾ പാത്രഭിത്തിയിൽ കൂട്ടിയിടിക്കുന്നതിന്റെ ഫലമായി പ്രതലത്തിൽ അനുഭവപ്പെടുന്ന ബലമാണ് വാതകമർദം.</p>
-      <p><span class="formula">P = F / A</span></p>
-      <div class="callout ml"><b>SI യൂണിറ്റ്:</b> പാസ്കൽ (Pa = N/m²). സാധാരണ ഉപയോഗിക്കുന്ന യൂണിറ്റ്: അന്തരീക്ഷ മർദം (atm). <span class="formula">1 atm = 1.01325 × 10⁵ Pa</span> — മാനോമീറ്റർ ഉപയോഗിച്ചാണ് വാതകമർദം അളക്കുന്നത്.</div>
+      <h3 class="sub-title" data-ml="മർദ്ദം (Pressure)">Pressure</h3>
+      <p data-ml="വാതക തന്മാത്രകൾ പാത്രത്തിന്റെ ഭിത്തിയിൽ ഇടിച്ചുണ്ടാക്കുന്ന ബലമാണ് വാതകമർദ്ദത്തിന് കാരണം. യൂണിറ്റ് പരപ്പളവിൽ അനുഭവപ്പെടുന്ന ബലമാണ് മർദ്ദം.">Gas pressure results from gas molecules colliding with the walls of their container. Pressure is the force experienced per unit area.</p>
+      <div class="formula-box" data-ml="മർദ്ദം (P) = ബലം (F) / പരപ്പളവ് (A) &nbsp;|&nbsp; SI യൂണിറ്റ്: പാസ്കൽ (Pa) &nbsp;|&nbsp; 1 atm = 1.01325 × 10⁵ Pa">Pressure (P) = Force (F) / Area (A) &nbsp;|&nbsp; SI unit: Pascal (Pa) &nbsp;|&nbsp; 1 atm = 1.01325 × 10⁵ Pa</div>
 
-      <h3><span class="ml">താപനില (Temperature)</span></h3>
-      <p class="ml">വാതകത്തെ അളന്നുതിട്ടപ്പെടുത്താൻ കഴിയുന്ന മറ്റൊരു സ്വഭാവമാണ് താപനില. വാതകങ്ങൾ ചൂടാക്കുമ്പോൾ തന്മാത്രകളുടെ ഗതികോർജം കൂടുന്നതിനാൽ താപനിലയും വർധിക്കുന്നു.</p>
-      <div class="callout"><b class="ml">SI യൂണിറ്റ്:</b><b class="en">SI unit:</b> <span class="ml">കെൽവിൻ (K)</span><span class="en">Kelvin (K)</span></div>
-      <p><span class="formula">K = °C + 273</span></p>
-    </div>
-  </section>
+      <h3 class="sub-title" data-ml="താപനില (Temperature)">Temperature</h3>
+      <p data-ml="ഒരു വാതകത്തെ ചൂടാക്കുമ്പോൾ അതിലെ തന്മാത്രകളുടെ ഗതികോർജ്ജം കൂടുന്നു, അതിനാൽ താപനിലയും വർധിക്കുന്നു. താപനിലയുടെ SI യൂണിറ്റ് കെൽവിൻ (K) ആണ്.">Heating a gas increases the kinetic energy of its molecules, and hence its temperature. The SI unit of temperature is Kelvin (K).</p>
+      <div class="formula-box" data-ml="t°C = (t + 273) K">t°C = (t + 273) K</div>
 
-  <!-- STEP 3 -->
-  <section class="panel" data-step="3">
-    <div class="card">
-      <h2><span class="tag">03</span><span class="ml">ബോയിൽ നിയമം</span><span class="en">Boyle's Law</span></h2>
-      <p class="ml">1662-ൽ റോബർട്ട് ബോയിൽ (Robert Boyle) എന്ന ശാസ്ത്രജ്ഞൻ മുന്നോട്ടുവച്ച, മർദവും വ്യാപ്പവും തമ്മിലുള്ള ബന്ധം വിശദീകരിക്കുന്ന നിയമമാണിത്.</p>
-      <div class="callout"><span class="ml">താപനില സ്ഥിരമായിരിക്കുമ്പോൾ, ഒരു നിശ്ചിത മാസ് വാതകത്തിന്റെ വ്യാപ്പം മർദത്തിന് വിപരീതാനുപാതത്തിലായിരിക്കും.</span><span class="en">At constant temperature, the volume of a fixed mass of gas is inversely proportional to its pressure.</span></div>
-      <p><span class="formula">V ∝ 1/P</span><span class="formula">PV = k</span><span class="formula">P₁V₁ = P₂V₂</span></p>
-      <p class="ml" style="font-size:12.5px;color:var(--ink-2)">മർദം-വ്യാപ്പം (P–V) ഗ്രാഫ് ഒരു ഹൈപ്പർബോള രൂപത്തിലാണ് — എല്ലാ ബിന്ദുക്കളിലും PV ഒരു സ്ഥിരസംഖ്യയാണ്.</p>
-
-      <div class="example">
-        <b class="ml">ഉദാഹരണം —</b>
-        <p class="ml">ഒരു നിശ്ചിത മാസ് വാതകത്തിന്റെ വ്യാപ്പം 1 atm മർദത്തിൽ 44 L ആണ്. മർദം 4 atm ആയാൽ വ്യാപ്പം എത്ര?</p>
-        <p style="font-family:'Sora',sans-serif;font-size:13px;">P₁V₁ = P₂V₂ → 1×44 = 4×V₂ → V₂ = 44/4 = <b>11 L</b></p>
-      </div>
-
-      <h3><span class="ml">നിത്യജീവിതത്തിൽ</span><span class="en">Everyday examples</span></h3>
+      <h3 class="sub-title" data-ml="ഗതിക തന്മാത്രാ സിദ്ധാന്തത്തിന്റെ അടിസ്ഥാനതത്വങ്ങൾ">Postulates of the Kinetic Molecular Theory</h3>
       <ul>
-        <li class="ml">കാലാവസ്ഥാ ബലൂണുകൾ സമുദ്രനിരപ്പിൽ നിന്ന് ഉയരുന്തോറും (മർദം കുറയുന്നതിനാൽ) വലിപ്പം കൂടുന്നു.</li>
-        <li class="ml">സമുദ്രത്തിന്റെ അടിത്തട്ടിൽ നിന്നുയരുന്ന കുമിളകൾ ജലോപരിതലത്തിലെത്തുമ്പോൾ വലിപ്പം കൂടുന്നു.</li>
+        <li data-ml="വാതകങ്ങൾ സൂക്ഷ്മകണികകളാൽ (ആറ്റങ്ങൾ/തന്മാത്രകൾ) നിർമ്മിതമാണ്.">Gases are made up of tiny particles (atoms/molecules).</li>
+        <li data-ml="വാതക തന്മാത്രകൾ തമ്മിൽ ആകർഷണബലം വളരെ കുറവാണ്.">The force of attraction between gas molecules is very weak.</li>
+        <li data-ml="തന്മാത്രകൾ തമ്മിലുള്ള അകലം വളരെ കൂടുതലായതിനാൽ വാതകത്തിന്റെ ആകെ വ്യാപ്പം താരതമ്യേന നിസ്സാരമായിരിക്കും.">Since the distance between molecules is very large, the actual volume of the molecules themselves is negligible compared to the total volume.</li>
+        <li data-ml="വാതക തന്മാത്രകൾ എല്ലാ ദിശകളിലേക്കും നിരന്തരം ചലിച്ചുകൊണ്ടിരിക്കുന്നു; ഈ ചലനത്തിന്റെ ഫലമായി തന്മാത്രകൾ തമ്മിലും പാത്രത്തിന്റെ ഭിത്തിയുമായും കൂട്ടിമുട്ടലുകൾ സംഭവിക്കുന്നു.">Gas molecules move constantly in all directions; this motion causes collisions between molecules and with the container walls.</li>
+        <li data-ml="വാതക തന്മാത്രകളുടെ കൂട്ടിമുട്ടൽ ഇലാസ്റ്റികമാണ് — കൂട്ടിമുട്ടലിന് മുമ്പും ശേഷവും തന്മാത്രകളുടെ ആകെ ഗതികോർജ്ജം തുല്യമായിരിക്കും.">Collisions between gas molecules are perfectly elastic — total kinetic energy before and after collision remains the same.</li>
+        <li data-ml="ഒരു വാതകത്തിലെ തന്മാത്രകളുടെ ശരാശരി ഗതികോർജ്ജം അതിന്റെ താപനിലയ്ക്ക് നേർഅനുപാതത്തിലാണ്.">The average kinetic energy of gas molecules is directly proportional to its temperature.</li>
       </ul>
     </div>
   </section>
 
-  <!-- STEP 4 -->
-  <section class="panel" data-step="4">
+  <section class="panel" id="laws">
     <div class="card">
-      <h2><span class="tag">04</span><span class="ml">ചാൾസ് നിയമം</span><span class="en">Charles's Law</span></h2>
-      <p class="ml">ജാക്വസ് അലക്സാണ്ട്രെ സീസർ ചാൾസ് (Jacques Charles) ആണ് താപനിലയ്ക്കനുസരിച്ച് വാതകത്തിന്റെ വ്യാപ്പത്തിലുണ്ടാകുന്ന മാറ്റങ്ങളെക്കുറിച്ച് പഠനം നടത്തിയത്.</p>
-      <div class="callout"><span class="ml">മർദം സ്ഥിരം ആയിരിക്കുമ്പോൾ, ഒരു നിശ്ചിത മാസ് വാതകത്തിന്റെ വ്യാപ്പം കെൽവിൻ സ്കെയിലിലെ താപനിലയ്ക്ക് നേർഅനുപാതത്തിലായിരിക്കും.</span><span class="en">At constant pressure, the volume of a fixed mass of gas is directly proportional to its temperature in Kelvin.</span></div>
-      <p><span class="formula">V ∝ T</span><span class="formula">V/T = k</span><span class="formula">V₁/T₁ = V₂/T₂</span></p>
+      <h2 class="section-title" data-ml="വാതകനിയമങ്ങൾ">The Gas Laws</h2>
 
-      <h3><span class="ml">കേവല പൂജ്യവും കെൽവിൻ സ്കെയിലും</span><span class="en">Absolute Zero & the Kelvin Scale</span></h3>
-      <p class="ml">വ്യാപ്പം–താപനില ഗ്രാഫ് പിന്നിലേക്ക് നീട്ടിയാൽ എല്ലാ നേർരേഖകളും −273.15°C ൽ സന്ധിക്കുന്നു — ഈ താപനിലയിൽ വാതകത്തിന്റെ വ്യാപ്പം സൈദ്ധാന്തികമായി പൂജ്യമാകും. ലോർഡ് കെൽവിൻ ഇതിനെ <b>കേവല പൂജ്യം (Absolute Zero)</b> എന്ന് വിളിച്ചു, ഇതിനെ അടിസ്ഥാനമാക്കി കെൽവിൻ സ്കെയിൽ ആവിഷ്കരിച്ചു.</p>
-      <table>
-        <tr><th class="ml">സെൽഷ്യസ്</th><th class="ml">കെൽവിൻ</th></tr>
-        <tr><td>−273°C</td><td>0 K <span class="ml">(കേവല പൂജ്യം)</span></td></tr>
-        <tr><td>0°C</td><td>273 K</td></tr>
-        <tr><td>100°C</td><td>373 K</td></tr>
+      <h3 class="sub-title" data-ml="a) ബോയിൽ നിയമം (Boyle's Law)">a) Boyle's Law</h3>
+      <p data-ml="1662-ൽ റോബർട്ട് ബോയിൽ മുന്നോട്ടുവച്ച ഈ നിയമം പറയുന്നത്: താപനില സ്ഥിരമായിരിക്കുമ്പോൾ ഒരു നിശ്ചിത മാസ് വാതകത്തിന്റെ വ്യാപ്പം മർദ്ദത്തിന് വിപരീതാനുപാതത്തിലായിരിക്കും.">Proposed by Robert Boyle in 1662, this law states: at constant temperature, the volume of a fixed mass of gas is inversely proportional to its pressure.</p>
+      <div class="formula-box" data-ml="V ∝ 1/P (താപനില, മാസ് സ്ഥിരം) &nbsp;→&nbsp; PV = k &nbsp;→&nbsp; P₁V₁ = P₂V₂">V ∝ 1/P (temperature, mass constant) &nbsp;→&nbsp; PV = k &nbsp;→&nbsp; P₁V₁ = P₂V₂</div>
+      <p data-ml="ഉദാഹരണം: ഒരു നിശ്ചിത മാസ് വാതകത്തിന്റെ വ്യാപ്പം 1 atm മർദ്ദത്തിൽ 44 L ആണ്. മർദ്ദം 4 atm ആയാൽ വ്യാപ്പം എത്ര?">Example: A fixed mass of gas has a volume of 44 L at 1 atm. What is its volume at 4 atm?</p>
+      <div class="chain">1 × 44 = 4 × V₂ → V₂ = 11 L</div>
+
+      <h3 class="sub-title" data-ml="b) ചാൾസ് നിയമം (Charles's Law)">b) Charles's Law</h3>
+      <p data-ml="ജാക്വസ് ചാൾസ് നടത്തിയ പഠനങ്ങളുടെ അടിസ്ഥാനത്തിൽ: മർദ്ദം സ്ഥിരമായിരിക്കുമ്പോൾ ഒരു നിശ്ചിത മാസ് വാതകത്തിന്റെ വ്യാപ്പം കെൽവിൻ സ്കെയിലിലെ താപനിലയ്ക്ക് നേർഅനുപാതത്തിലായിരിക്കും.">Based on studies by Jacques Charles: at constant pressure, the volume of a fixed mass of gas is directly proportional to its temperature on the Kelvin scale.</p>
+      <div class="formula-box" data-ml="V ∝ T (മർദ്ദം, മാസ് സ്ഥിരം) &nbsp;→&nbsp; V/T = k &nbsp;→&nbsp; V₁/T₁ = V₂/T₂">V ∝ T (pressure, mass constant) &nbsp;→&nbsp; V/T = k &nbsp;→&nbsp; V₁/T₁ = V₂/T₂</div>
+      <div class="exam-tip" data-ml="എല്ലാ V-T ഗ്രാഫുകളും (മർദ്ദം എന്തായാലും) −273.15°C ൽ സന്ധിക്കുന്നു — ഇതാണ് കേവല പൂജ്യം (0 K), ലോർഡ് കെൽവിൻ നിർവചിച്ചത്.">All V–T graphs (whatever the pressure) meet at −273.15°C — this is absolute zero (0 K), defined by Lord Kelvin.</div>
+
+      <h3 class="sub-title" data-ml="സംയോജിത വാതക സമവാക്യം (Combined Gas Equation)">Combined Gas Equation</h3>
+      <p data-ml="ബോയിൽ നിയമവും ചാൾസ് നിയമവും ഒരുമിച്ച് പരിഗണിക്കുമ്പോൾ:">Combining Boyle's Law and Charles's Law:</p>
+      <div class="formula-box">P₁V₁ / T₁ = P₂V₂ / T₂</div>
+
+      <h3 class="sub-title" data-ml="അവെഗാഡ്രോ നിയമം (Avogadro's Law)">Avogadro's Law</h3>
+      <p data-ml="സ്ഥിര താപനിലയിലും മർദ്ദത്തിലും തുല്യ വ്യാപ്പത്തിൽ എടുത്തിരിക്കുന്ന ഏതൊരു വാതകത്തിലെയും തന്മാത്രകളുടെ എണ്ണം തുല്യമായിരിക്കും.">Equal volumes of any gas, at the same temperature and pressure, contain equal numbers of molecules.</p>
+      <div class="formula-box">V ∝ N (താപനില, മർദ്ദം സ്ഥിരം) / V ∝ N (temperature, pressure constant)</div>
+
+      <h3 class="sub-title" data-ml="ആദർശ വാതക സമവാക്യം (Ideal Gas Equation)">Ideal Gas Equation</h3>
+      <p data-ml="ബോയിൽ നിയമം, ചാൾസ് നിയമം, അവെഗാഡ്രോ നിയമം എന്നിവ സംയോജിപ്പിച്ചാൽ:">Combining Boyle's Law, Charles's Law and Avogadro's Law:</p>
+      <div class="formula-box">PV = nRT &nbsp;(R = <span data-ml="വാതക സ്ഥിരാങ്കം (Universal gas constant)">Universal gas constant</span>)</div>
+      <p data-ml="എല്ലാ താപനിലയിലും മർദ്ദത്തിലും ഈ സമവാക്യം അനുസരിക്കുന്ന വാതകങ്ങളെ ആദർശ വാതകങ്ങൾ എന്ന് വിളിക്കുന്നു.">Gases that obey this equation at all temperatures and pressures are called ideal gases.</p>
+    </div>
+  </section>
+
+  <section class="panel" id="mole">
+    <div class="card">
+      <h2 class="section-title" data-ml="മോൾ സങ്കല്പനം">The Mole Concept</h2>
+      <p data-ml="അതിസൂക്ഷ്മ കണങ്ങളായ ആറ്റങ്ങൾ, തന്മാത്രകൾ, അയോണുകൾ എന്നിവയെ എണ്ണിത്തിട്ടപ്പെടുത്താൻ ഉപയോഗിക്കുന്ന യൂണിറ്റാണ് മോൾ.">The mole is the unit used to count extremely tiny particles such as atoms, molecules and ions.</p>
+      <div class="formula-box" data-ml="1 മോൾ = 6.022 × 10²³ കണികകൾ (അവെഗാഡ്രോ സംഖ്യ, Nₐ)">1 mole = 6.022 × 10²³ particles (Avogadro's number, Nₐ)</div>
+      <p data-ml="ഇറ്റാലിയൻ ശാസ്ത്രജ്ഞനായ അമിഡിയോ അവെഗാഡ്രോയുടെ ബഹുമാനാർത്ഥമാണ് ഈ സംഖ്യയെ അവെഗാഡ്രോ സംഖ്യ എന്ന് വിളിക്കുന്നത്.">This number is named the Avogadro number in honour of the Italian scientist Amedeo Avogadro.</p>
+
+      <h3 class="sub-title" data-ml="ആപേക്ഷിക അറ്റോമിക മാസ്">Relative Atomic Mass</h3>
+      <p data-ml="ഒരു കാർബൺ-12 ആറ്റത്തിന്റെ മാസിന്റെ 1/12 ഭാഗത്തെ ഒരു യൂണിറ്റായി പരിഗണിച്ച്, അതിന്റെ എത്ര മടങ്ങാണ് ഒരു മൂലക ആറ്റത്തിന്റെ മാസ് എന്ന് പ്രസ്താവിക്കുന്നതാണ് അതിന്റെ അറ്റോമിക മാസ്.">Relative atomic mass states how many times heavier an atom is than 1/12th the mass of a carbon-12 atom.</p>
+      <table class="compact">
+        <tr><th data-ml="മൂലകം">Element</th><td data-ml="ഹൈഡ്രജൻ">Hydrogen</td><td data-ml="ഓക്സിജൻ">Oxygen</td><td data-ml="കാർബൺ">Carbon</td><td data-ml="നൈട്രജൻ">Nitrogen</td></tr>
+        <tr><th data-ml="ആപേക്ഷിക അറ്റോമിക മാസ്">Relative Atomic Mass</th><td>1</td><td>16</td><td>12</td><td>14</td></tr>
       </table>
 
-      <div class="example">
-        <b class="ml">ഉദാഹരണം —</b>
-        <p class="ml">27°C ൽ ഒരു വാതകത്തിന്റെ വ്യാപ്പം 150 L ആണെങ്കിൽ, 0°C ൽ അതിന്റെ വ്യാപ്പം എത്ര?</p>
-        <p style="font-family:'Sora',sans-serif;font-size:13px;">27°C = 300 K, 0°C = 273 K<br>V₁/T₁ = V₂/T₂ → 150/300 = V₂/273 → V₂ = <b>136.5 L</b></p>
-      </div>
-      <p class="ml" style="font-size:12.5px;color:var(--ink-2)">നിത്യജീവിതം: വേനൽക്കാലത്ത് വാഹനങ്ങളുടെ ടയറിൽ കുറഞ്ഞ മർദത്തിൽ വായു നിറയ്ക്കുന്നു — ചൂടിൽ വ്യാപ്പം കൂടും എന്നതിനാൽ.</p>
-    </div>
-  </section>
-
-  <!-- STEP 5 -->
-  <section class="panel" data-step="5">
-    <div class="card">
-      <h2><span class="tag">05</span><span class="ml">അവൊഗാഡ്രോ നിയമം & സംയോജിത വാതക സമവാക്യം</span><span class="en">Avogadro's Law & Combined Gas Equation</span></h2>
-
-      <h3>Avogadro's Law</h3>
-      <div class="callout"><span class="ml">സ്ഥിര താപനിലയിലും മർദത്തിലും, വാതകങ്ങളുടെ വ്യാപ്പം അതിലെ തന്മാത്രകളുടെ എണ്ണത്തിന് നേർഅനുപാതത്തിലായിരിക്കും.</span><span class="en">At constant temperature and pressure, the volume of a gas is directly proportional to the number of its molecules.</span></div>
-      <p><span class="formula">V ∝ N</span></p>
-      <p class="ml" style="font-size:12.5px;color:var(--ink-2)">ഉദാഹരണം: ബലൂൺ ഊതി വീർപ്പിക്കുന്നത്, ഫുട്ബോളിൽ വായു നിറയ്ക്കുന്നത്.</p>
-
-      <h3><span class="ml">സംയോജിത വാതക സമവാക്യം</span><span class="en">Combined Gas Equation</span></h3>
-      <p class="ml">ബോയിൽ നിയമവും (V ∝ 1/P) ചാൾസ് നിയമവും (V ∝ T) ഒരുമിച്ച് പരിഗണിച്ചാൽ:</p>
-      <p><span class="formula">V ∝ T/P</span><span class="formula">PV/T = k</span></p>
-      <div class="callout"><span class="formula" style="font-size:14px;">P₁V₁/T₁ = P₂V₂/T₂</span></div>
-
-      <div class="example">
-        <b class="ml">ഉദാഹരണം —</b>
-        <p class="ml">ഒരു നിശ്ചിതമാസ് വാതകത്തിന്റെ വ്യാപ്പം 1 atm ലും 300 K ലും 30 L ആണ്. 273 K ലും 0.5 atm ലും വ്യാപ്പം എത്ര?</p>
-        <p style="font-family:'Sora',sans-serif;font-size:13px;">1×30/300 = 0.5×V₂/273 → V₂ = (30×273)/(300×0.5) = <b>54.6 L</b></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- STEP 6 -->
-  <section class="panel" data-step="6">
-    <div class="card">
-      <h2><span class="tag">06</span><span class="ml">മോൾ സങ്കൽപനവും അവൊഗാഡ്രോ സംഖ്യയും</span><span class="en">The Mole Concept & Avogadro Number</span></h2>
-      <p class="ml">ആറ്റങ്ങൾ, തന്മാത്രകൾ പോലുള്ള അതിസൂക്ഷ്മ കണികകളെ എണ്ണിത്തിട്ടപ്പെടുത്താൻ സാധാരണ യൂണിറ്റുകൾ (ഡസൻ, സ്കോർ, ഗ്രോസ്) പര്യാപ്തമല്ല. ഇതിനായി രസതന്ത്രത്തിൽ ഉപയോഗിക്കുന്ന യൂണിറ്റാണ് <b>മോൾ</b>.</p>
-      <div class="mini-grid">
-        <div class="mini-cell"><div class="k">12</div><div class="l ml">1 ഡസൻ</div></div>
-        <div class="mini-cell"><div class="k">20</div><div class="l ml">1 സ്കോർ</div></div>
-        <div class="mini-cell"><div class="k">144</div><div class="l ml">1 ഗ്രോസ്</div></div>
-        <div class="mini-cell"><div class="k">6.022×10²³</div><div class="l ml">1 മോൾ</div></div>
-      </div>
-      <div class="callout"><span class="ml">6.022 × 10²³ കണികകൾ (ആറ്റങ്ങൾ/തന്മാത്രകൾ/അയോണുകൾ) അടങ്ങിയ പദാർത്ഥത്തിന്റെ അളവിനെയാണ് <b>മോൾ</b> എന്ന് പറയുന്നത്.</span><span class="en">A <b>mole</b> is the amount of substance that contains 6.022 × 10²³ particles (atoms/molecules/ions).</span></div>
-      <p><span class="formula">Nₐ = 6.022 × 10²³ mol⁻¹</span></p>
-      <p class="ml" style="font-size:12.5px;color:var(--ink-2)">ഇറ്റാലിയൻ ശാസ്ത്രജ്ഞൻ അമിഡിയോ അവൊഗാഡ്രോയുടെ ബഹുമാനാർത്ഥമാണ് ഈ സംഖ്യയെ അവൊഗാഡ്രോ സംഖ്യ (Nₐ) എന്ന് വിളിക്കുന്നത്. 1908-ൽ ജീൻ പെറിൻ ഇത് കണ്ടെത്തി; 2001-ൽ ദ് ബ്യേവ്ര് കൂടുതൽ കൃത്യതയോടെ 6.022×10²³ എന്ന വില സ്ഥിരീകരിച്ചു.</p>
-      <p class="ml" style="font-size:12.5px;color:var(--ink-2)">പദാർത്ഥത്തിന്റെ അളവിന്റെ SI യൂണിറ്റാണ് മോൾ. ഒരു മോൾ ജലത്തിൽ 6.022×10²³ ജലതന്മാത്രകൾ ഉണ്ടായിരിക്കും.</p>
-    </div>
-  </section>
-
-  <!-- STEP 7 -->
-  <section class="panel" data-step="7">
-    <div class="card">
-      <h2><span class="tag">07</span><span class="ml">ആപേക്ഷിക അറ്റോമിക മാസും മോളാർ മാസും</span><span class="en">Relative Atomic Mass & Molar Mass</span></h2>
-      <p class="ml">ഒരു കാർബൺ-12 ആറ്റത്തിന്റെ മാസിന്റെ 12-ൽ ഒരു ഭാഗത്തെ യൂണിറ്റായി പരിഗണിച്ച്, ഒരു മൂലക ആറ്റത്തിന്റെ മാസ് അതിന്റെ എത്ര മടങ്ങാണെന്ന് പ്രസ്താവിക്കുന്നതാണ് <b>ആപേക്ഷിക അറ്റോമിക മാസ്</b>.</p>
+      <h3 class="sub-title" data-ml="മോളാർ മാസ്">Molar Mass</h3>
+      <p data-ml="ഒരു തന്മാത്രയിലെ ആറ്റങ്ങളുടെ ആകെ മാസ് ആണ് മോളിക്യുലാർ മാസ്. ഇത് ഗ്രാമിൽ പ്രസ്താവിക്കുമ്പോൾ അതിനെ മോളാർ മാസ് എന്ന് വിളിക്കുന്നു — ഒരു മോളാർ മാസ് അളവിൽ ഒരു സംയുക്തം എടുത്താൽ അതിൽ ഒരു മോൾ തന്മാത്രകൾ ഉണ്ടായിരിക്കും.">The sum of the masses of atoms in a molecule is its molecular mass. Expressed in grams, it becomes the molar mass — taking a compound in that amount always gives one mole of its molecules.</p>
       <table>
-        <tr><th class="ml">മൂലകം</th><th class="ml">ആപേക്ഷിക അറ്റോമിക മാസ്</th><th class="ml">ഗ്രാം അറ്റോമിക മാസ്</th></tr>
-        <tr><td>H</td><td>1</td><td>1 g</td></tr>
-        <tr><td>O</td><td>16</td><td>16 g</td></tr>
-        <tr><td>Na</td><td>23</td><td>23 g</td></tr>
-        <tr><td>C</td><td>12</td><td>12 g</td></tr>
+        <tr><th data-ml="സംയുക്തം">Compound</th><th data-ml="രാസസൂത്രം">Formula</th><th data-ml="മോളിക്യുലാർ മാസ്">Molecular Mass</th></tr>
+        <tr><td data-ml="ജലം">Water</td><td>H₂O</td><td>18</td></tr>
+        <tr><td data-ml="കാർബൺ ഡൈഓക്സൈഡ്">Carbon dioxide</td><td>CO₂</td><td>44</td></tr>
+        <tr><td data-ml="അമോണിയ">Ammonia</td><td>NH₃</td><td>17</td></tr>
+        <tr><td data-ml="ഗ്ലൂക്കോസ്">Glucose</td><td>C₆H₁₂O₆</td><td>180</td></tr>
       </table>
-      <div class="callout ml">ഒരു മൂലകത്തിന്റെ ഗ്രാം അറ്റോമിക മാസ് അളവിൽ ആ മൂലകം എടുത്താൽ അതിൽ 6.022×10²³ ആറ്റങ്ങൾ (1 മോൾ) ഉണ്ടായിരിക്കും.</div>
 
-      <h3><span class="ml">മോളിക്യുലാർ മാസും മോളാർ മാസും</span><span class="en">Molecular Mass & Molar Mass</span></h3>
-      <p class="ml">ഒരു തന്മാത്രയിൽ അടങ്ങിയിരിക്കുന്ന ആറ്റങ്ങളുടെ ആകെ മാസ് ആണ് മോളിക്യുലാർ മാസ്. ഇത് ഗ്രാമിൽ പ്രസ്താവിക്കുന്നതിനെ <b>മോളാർ മാസ്</b> എന്ന് പറയുന്നു — ഈ അളവിൽ 1 മോൾ തന്മാത്രകൾ ഉണ്ടായിരിക്കും.</p>
-      <div class="example">
-        <b class="ml">ഉദാഹരണം — CO₂ യുടെ മോളിക്യുലാർ മാസ് (C=12, O=16)</b>
-        <p style="font-family:'Sora',sans-serif;font-size:13px;">1×C + 2×O = 12 + 2×16 = 12 + 32 = <b>44</b> → മോളാർ മാസ് = 44 g</p>
-      </div>
-      <table>
-        <tr><th class="ml">സംയുക്തം</th><th class="ml">രാസസൂത്രം</th><th class="ml">മോളിക്യുലാർ മാസ്</th></tr>
-        <tr><td class="ml">അമോണിയ</td><td>NH₃</td><td>14 + 3×1 = 17</td></tr>
-        <tr><td class="ml">ജലം</td><td>H₂O</td><td>2×1 + 16 = 18</td></tr>
-        <tr><td class="ml">ഗ്ലൂക്കോസ്</td><td>C₆H₁₂O₆</td><td>180</td></tr>
-      </table>
+      <h3 class="sub-title" data-ml="STP-ൽ വാതകങ്ങളുടെ മോളാർ വ്യാപ്പം">Molar Volume of Gases at STP</h3>
+      <div class="formula-box" data-ml="STP (273 K, 1 atm) യിൽ ഏതൊരു വാതകത്തിന്റെയും 1 മോളിന് 22.4 L വ്യാപ്പം">At STP (273 K, 1 atm), 1 mole of any gas occupies 22.4 L</div>
+      <div class="formula-box" data-ml="മോളുകളുടെ എണ്ണം (n) = തന്നിരിക്കുന്ന മാസ് / മോളാർ മാസ് &nbsp;|&nbsp; തന്മാത്രകളുടെ എണ്ണം = n × 6.022 × 10²³ &nbsp;|&nbsp; STP-യിലെ വ്യാപ്പം = n × 22.4 L">Number of moles (n) = given mass / molar mass &nbsp;|&nbsp; Number of molecules = n × 6.022 × 10²³ &nbsp;|&nbsp; Volume at STP = n × 22.4 L</div>
+      <p data-ml="ഉദാഹരണം: 44 g CO₂ (മോളാർ മാസ് 44) എത്ര മോൾ? = 44/44 = 1 മോൾ. ഈ 1 മോളിൽ 6.022 × 10²³ തന്മാത്രകൾ ഉണ്ടായിരിക്കും, STP-ൽ അതിന്റെ വ്യാപ്പം 22.4 L ആയിരിക്കും.">Example: How many moles in 44 g of CO₂ (molar mass 44)? = 44/44 = 1 mole. This 1 mole contains 6.022 × 10²³ molecules, and occupies 22.4 L at STP.</p>
     </div>
   </section>
 
-  <!-- STEP 8 -->
-  <section class="panel" data-step="8">
+  <section class="panel" id="stoich">
     <div class="card">
-      <h2><span class="tag">08</span><span class="ml">STP-യിലെ മോളാർ വ്യാപ്പവും ആദർശ വാതക സമവാക്യവും</span><span class="en">Molar Volume at STP & Ideal Gas Equation</span></h2>
+      <h2 class="section-title" data-ml="മോൾ സങ്കല്പനവും സമവാക്യങ്ങളും (സ്റ്റോയ്ക്കിയോമെട്രി)">Mole Concept and Equations (Stoichiometry)</h2>
+      <p data-ml="ഒരു ബാലൻസ്ഡ് സമവാക്യത്തിലെ ഗുണോത്തരങ്ങൾ (coefficients) പ്രവർത്തകങ്ങളുടെയും ഉൽപന്നങ്ങളുടെയും മോൾ അനുപാതം കാണിക്കുന്നു.">The coefficients in a balanced equation show the mole ratio between reactants and products.</p>
+      <div class="chain">N₂ + 3H₂ → 2NH₃</div>
+      <p data-ml="ഇവിടെ 1 മോൾ നൈട്രജൻ 3 മോൾ ഹൈഡ്രജനുമായി പ്രവർത്തിച്ച് 2 മോൾ അമോണിയ ഉണ്ടാക്കുന്നു.">Here, 1 mole of nitrogen reacts with 3 moles of hydrogen to form 2 moles of ammonia.</p>
 
-      <h3>STP <span class="ml">(Standard Temperature and Pressure)</span></h3>
-      <p><span class="formula">273 K, 1 atm</span></p>
-      <div class="callout"><span class="ml">STP യിൽ ഏതൊരു വാതകത്തിന്റെയും 1 മോളിന് <b>22.4 L</b> വ്യാപ്പം ഉണ്ടായിരിക്കും — ഇതിനെ STP യിലെ മോളാർ വ്യാപ്പം എന്ന് പറയുന്നു.</span><span class="en">At STP, 1 mole of any gas occupies <b>22.4 L</b> — this is the molar volume at STP.</span></div>
-      <p><span class="formula">moles = given volume (L) / 22.4</span></p>
+      <h3 class="sub-title" data-ml="മാസിന്റെ അടിസ്ഥാനത്തിൽ">On a Mass Basis</h3>
+      <div class="formula-box">28 g N₂ + 6 g H₂ → 34 g NH₃</div>
+      <p data-ml="ഈ അനുപാതം ഉപയോഗിച്ച് ഏത് അളവിലും ഉള്ള പ്രവർത്തകങ്ങൾക്കോ ഉൽപന്നങ്ങൾക്കോ ആനുപാതികമായ അളവുകൾ കണ്ടെത്താം.">This ratio lets us find proportional amounts for reactants or products of any quantity.</p>
 
-      <h3><span class="ml">ആദർശ വാതക സമവാക്യം</span><span class="en">Ideal Gas Equation</span></h3>
-      <p class="ml">ബോയിൽ നിയമം (V ∝ 1/P), ചാൾസ് നിയമം (V ∝ T), അവൊഗാഡ്രോ നിയമം (V ∝ n) എന്നിവ ഒരുമിച്ച് പരിഗണിച്ചാൽ:</p>
-      <p><span class="formula">V ∝ nT/P</span></p>
-      <div class="callout" style="text-align:center;"><span class="formula" style="font-size:16px;">PV = nRT</span></div>
-      <p class="ml">ഇവിടെ R — <b>വാതക സ്ഥിരാങ്കം (Universal Gas Constant)</b>. എല്ലാ താപനിലയിലും മർദത്തിലും ഈ സമവാക്യം അനുസരിക്കുന്ന വാതകങ്ങളെ <b>ആദർശ വാതകങ്ങൾ</b> എന്ന് വിളിക്കുന്നു.</p>
+      <h3 class="sub-title" data-ml="പരിമിതപ്പെടുത്തുന്ന അഭികാരകം (Limiting Reagent)">Limiting Reagent</h3>
+      <p data-ml="ഒരു പ്രവർത്തനത്തിന് ആവശ്യമായ കൃത്യമായ മോൾ അനുപാതത്തിൽ അഭികാരകങ്ങൾ ഇല്ലെങ്കിൽ, കുറവുള്ള അഭികാരകത്തിന് ആനുപാതികമായി മാത്രമേ ഉൽപന്നം ഉണ്ടാവുകയുള്ളൂ.">If the reactants aren't present in the exact mole ratio a reaction needs, the product formed is limited by whichever reactant runs out first.</p>
+      <p data-ml="ഉദാഹരണം: 6 മോൾ നൈട്രജൻ 6 മോൾ ഹൈഡ്രജനുമായി പ്രവർത്തിച്ചാൽ (അനുപാതം N:H = 1:3 വേണം), ഹൈഡ്രജൻ മാത്രമേ പൂർണ്ണമായി ഉപയോഗിക്കപ്പെടൂ — 6 മോൾ ഹൈഡ്രജനുമായി 2 മോൾ നൈട്രജൻ മാത്രമേ പ്രവർത്തിക്കൂ, 4 മോൾ അമോണിയ ലഭിക്കും, 4 മോൾ നൈട്രജൻ ബാക്കിയാവും.">Example: If 6 moles of nitrogen react with 6 moles of hydrogen (the required ratio is N:H = 1:3), only the hydrogen gets fully used — it reacts with just 2 moles of nitrogen, giving 4 moles of ammonia, leaving 4 moles of nitrogen unreacted.</p>
 
-      <div class="example">
-        <b class="ml">ഉദാഹരണം —</b>
-        <p class="ml">STP യിൽ 224 L ഓക്സിജൻ വാതകം എടുത്തിരിക്കുന്നു. എത്ര മോൾ ഉണ്ട്?</p>
-        <p style="font-family:'Sora',sans-serif;font-size:13px;">moles = 224 / 22.4 = <b>10 mol</b> → തന്മാത്രകൾ = 10 × 6.022×10²³</p>
-      </div>
+      <h3 class="sub-title" data-ml="ഒരു ജ്വലന പ്രവർത്തന ഉദാഹരണം">A Combustion Example</h3>
+      <div class="chain">CH₄ + 2O₂ → CO₂ + 2H₂O</div>
+      <p data-ml="16 g മീഥെയ്ൻ (1 മോൾ) പൂർണ്ണമായും ജ്വലിക്കാൻ 2 മോൾ (64 g) ഓക്സിജൻ ആവശ്യമാണ്, 44 g CO₂ ഉം 36 g ജലവും ഉണ്ടാകുന്നു.">Fully burning 16 g of methane (1 mole) requires 2 moles (64 g) of oxygen, producing 44 g of CO₂ and 36 g of water.</p>
     </div>
   </section>
 
-  <!-- STEP 9 -->
-  <section class="panel" data-step="9">
+  <section class="panel" id="quiz">
     <div class="card">
-      <h2><span class="tag">09</span><span class="ml">മോൾ സങ്കൽപനവും രാസസമവാക്യങ്ങളും</span><span class="en">Mole Concept in Chemical Equations</span></h2>
-      <p class="ml">ബാലൻസ് ചെയ്ത ഒരു രാസസമവാക്യത്തിലെ ഗുണകങ്ങൾ (coefficients) പ്രവർത്തകങ്ങളുടെയും ഉൽപന്നങ്ങളുടെയും മോൾ അനുപാതം കൂടിയാണ് സൂചിപ്പിക്കുന്നത്.</p>
-      <div class="example">
-        <p style="font-family:'Sora',sans-serif;font-size:13px;text-align:center;">2H₂ + O₂ → 2H₂O</p>
-        <p class="ml">2 മോൾ ഹൈഡ്രജൻ, 1 മോൾ ഓക്സിജനുമായി പ്രവർത്തിച്ച് 2 മോൾ ജലം ഉണ്ടാക്കുന്നു.</p>
-        <p class="ml">മാസിന്റെ അടിസ്ഥാനത്തിൽ: 4 g H₂ + 32 g O₂ → <b>36 g H₂O</b></p>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+        <h2 class="section-title" data-ml="ക്വിക്ക് ക്വിസ്">Quick Quiz</h2>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a class="btn secondary" href="chemistry-unit4-quiz.html" target="_blank" rel="noopener" data-ml="🔗 എക്സാം പേജ് തുറക്കുക" style="text-decoration:none;display:inline-block;">🔗 Open Exam Page</a>
+          <a class="btn" id="waShareBtn" href="#" target="_blank" rel="noopener" data-ml="📲 WhatsApp വഴി ഷെയർ ചെയ്യുക" style="text-decoration:none;display:inline-block;">📲 Share on WhatsApp</a>
+        </div>
       </div>
-
-      <div class="example">
-        <b class="ml">കണക്കുകൂട്ടൽ ഉദാഹരണം —</b>
-        <p class="ml">40 g ഹൈഡ്രജൻ പൂർണ്ണമായും ഓക്സിജനുമായി പ്രവർത്തിച്ചാൽ എത്ര ഗ്രാം ജലം ലഭിക്കും?</p>
-        <p style="font-family:'Sora',sans-serif;font-size:13px;">4 g H₂ → 36 g H₂O ആണെങ്കിൽ, 1 g H₂ → 9 g H₂O<br>40 g H₂ → 9×40 = <b>360 g H₂O</b></p>
+      <div class="score-bar" style="margin-top:14px;">
+        <span><span data-ml="സ്കോർ">Score</span>: <b id="scoreVal">0</b> / <span id="totalVal">0</span></span>
       </div>
-
-      <h3><span class="ml">NH₃ ഉൽപാദനം — അമോണിയ സംശ്ലേഷണം</span><span class="en">Ammonia Synthesis</span></h3>
-      <p style="font-family:'Sora',sans-serif;font-size:13px;text-align:center;">N₂ + 3H₂ → 2NH₃</p>
-      <p class="ml">1 മോൾ N₂, 3 മോൾ H₂ ആയി പ്രവർത്തിച്ച് 2 മോൾ NH₃ ഉണ്ടാക്കുന്നു. അതായത് N : H : NH₃ = 1 : 3 : 2 എന്ന മോൾ അനുപാതം എപ്പോഴും നിലനിൽക്കും — ഏതെങ്കിലും അഭികാരകം കുറവാണെങ്കിൽ അതിന് ആനുപാതികമായി മാത്രമേ ഉൽപന്നം ലഭിക്കൂ.</p>
-
-      <div class="callout ml">വ്യവസായശാലകളിൽ നിന്ന് പുറന്തള്ളുന്ന ആസിഡ് മാലിന്യങ്ങൾ നിർവീര്യമാക്കാൻ ചുണ്ണാമ്പ്, ബേക്കിങ് സോഡ തുടങ്ങിയ സംയുക്തങ്ങൾ ഉപയോഗിക്കുന്നു — ഇതും മോൾ സങ്കൽപനത്തിന്റെ പ്രായോഗിക ഉപയോഗമാണ്.<br>H₂SO₄ + Ca(OH)₂ → CaSO₄ + 2H₂O</div>
-    </div>
-
-    <div class="quiz-cta">
-      <h3 class="ml">🎉 എല്ലാ പടികളും പൂർത്തിയായി!</h3>
-      <h3 class="en">🎉 All steps complete!</h3>
-      <p class="ml">ഇനി രണ്ട് ഭാഗങ്ങളുള്ള ക്വിസ് പരീക്ഷിക്കൂ — ആദ്യം അടിസ്ഥാന ആശയങ്ങൾ, പിന്നെ പ്രയോഗപരമായ ചോദ്യങ്ങൾ.</p>
-      <p class="en">Now try the two-part quiz — Part 1 covers the basics, Part 2 is application-level.</p>
-      <a href="chemistry-unit4-quiz.html">
-        <span class="ml">ക്വിസ് ആരംഭിക്കൂ →</span><span class="en">Start the Quiz →</span>
-      </a>
+      <div id="quizContainer"></div>
     </div>
   </section>
 
-  <div class="step-nav-btns">
-    <button id="prevBtn" onclick="go(-1)">‹ <span class="ml">മുൻപത്തേത്</span><span class="en">Previous</span></button>
-    <button id="nextBtn" class="primary" onclick="go(1)"><span class="ml">അടുത്തത്</span><span class="en">Next</span> ›</button>
-  </div>
-  </div>
 </div>
 
-<p class="footer-note">Abacus Academy · SSLC Chemistry Unit 4 &nbsp;|&nbsp; <span class="ml">പഠനം തുടരൂ 🧪</span><span class="en">Keep learning 🧪</span></p>
+<footer class="note no-print">
+  <span data-ml="Abacus Academy · EduPro Study Tools · ക്ലാസ് 10 രസതന്ത്രം">Abacus Academy · EduPro Study Tools · Class 10 Chemistry</span>
+</footer>
 
 <script>
-const STEPS = [
-  {ml:"ഗതികതന്മാത്രാ സിദ്ധാന്തം", en:"Kinetic Theory"},
-  {ml:"വ്യാപ്പം, മർദം, താപനില", en:"Volume, Pressure, Temp"},
-  {ml:"ബോയിൽ നിയമം", en:"Boyle's Law"},
-  {ml:"ചാൾസ് നിയമം", en:"Charles's Law"},
-  {ml:"അവൊഗാഡ്രോ & സംയോജിത സമവാക്യം", en:"Avogadro & Combined Eq."},
-  {ml:"മോൾ സങ്കൽപനം", en:"Mole Concept"},
-  {ml:"അറ്റോമിക & മോളാർ മാസ്", en:"Atomic & Molar Mass"},
-  {ml:"STP & ആദർശ വാതക സമവാക്യം", en:"STP & Ideal Gas Eq."},
-  {ml:"മോളും രാസസമവാക്യങ്ങളും", en:"Mole in Equations"}
-];
-let current = 1;
-let done = [];
+let currentLang = 'en';
 
-function buildNav(){
-  const nav = document.getElementById('stepsNav');
-  nav.innerHTML = '';
-  STEPS.forEach((s,i)=>{
-    const n = i+1;
-    const btn = document.createElement('button');
-    btn.className = 'step-btn' + (done.includes(n)?' done':'') + (n===current?' active':'');
-    btn.onclick = ()=>showStep(n);
-    btn.innerHTML = `<span class="num">${done.includes(n)?'✓':n}</span><span><span class="ml">${s.ml}</span><span class="en">${s.en}</span></span>`;
-    nav.appendChild(btn);
+function toggleLang(){
+  currentLang = currentLang === 'en' ? 'ml' : 'en';
+  applyLanguage();
+}
+function applyLanguage(){
+  document.querySelectorAll('[data-ml]').forEach(el=>{
+    if(el.dataset.en === undefined){ el.dataset.en = el.innerHTML; }
+    el.innerHTML = currentLang === 'ml' ? el.dataset.ml : el.dataset.en;
+  });
+  document.body.setAttribute('data-lang', currentLang);
+  document.documentElement.lang = currentLang;
+  const toggleBtn = document.getElementById('langToggle');
+  toggleBtn.textContent = currentLang === 'en' ? '🌐 മലയാളം' : '🌐 English';
+  buildQuiz();
+  setupShareLinks();
+}
+
+document.querySelectorAll('nav.tabs button[data-tab]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('nav.tabs button[data-tab]').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+function printCurrent(){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('print-target'));
+  document.querySelector('.panel.active').classList.add('print-target');
+  window.print();
+}
+
+const quizData = [
+  {
+    q: "What is the SI unit of volume?",
+    q_ml: "വ്യാപ്പത്തിന്റെ SI യൂണിറ്റ് ഏത്?",
+    opts: ["Litre", "m³", "cm³", "mL"], opts_ml: ["ലിറ്റർ", "m³", "cm³", "mL"], ans: 1
+  },
+  {
+    q: "How many millilitres are there in 1 litre?",
+    q_ml: "1 ലിറ്ററിൽ എത്ര മില്ലിലിറ്റർ ഉണ്ട്?",
+    opts: ["10", "100", "1000", "10000"], opts_ml: ["10", "100", "1000", "10000"], ans: 2
+  },
+  {
+    q: "What is the formula for pressure?",
+    q_ml: "മർദ്ദത്തിന്റെ സൂത്രം ഏത്?",
+    opts: ["Force × Area", "Force / Area", "Area / Force", "Mass / Volume"],
+    opts_ml: ["ബലം × പരപ്പളവ്", "ബലം / പരപ്പളവ്", "പരപ്പളവ് / ബലം", "മാസ് / വ്യാപ്പം"], ans: 1
+  },
+  {
+    q: "What is the SI unit of pressure?",
+    q_ml: "മർദ്ദത്തിന്റെ SI യൂണിറ്റ് ഏത്?",
+    opts: ["Atmosphere", "Pascal", "Newton", "Bar"], opts_ml: ["അന്തരീക്ഷമർദ്ദം (atm)", "പാസ്കൽ", "ന്യൂട്ടൺ", "ബാർ"], ans: 1
+  },
+  {
+    q: "1 atm is equal to how many Pascals?",
+    q_ml: "1 atm എത്ര പാസ്കലിന് തുല്യമാണ്?",
+    opts: ["1.01325 × 10³ Pa", "1.01325 × 10⁵ Pa", "1.01325 × 10⁷ Pa", "1.01325 × 10¹ Pa"],
+    opts_ml: ["1.01325 × 10³ Pa", "1.01325 × 10⁵ Pa", "1.01325 × 10⁷ Pa", "1.01325 × 10¹ Pa"], ans: 1
+  },
+  {
+    q: "What is the SI unit of temperature?",
+    q_ml: "താപനിലയുടെ SI യൂണിറ്റ് ഏത്?",
+    opts: ["Celsius", "Fahrenheit", "Kelvin", "Joule"], opts_ml: ["സെൽഷ്യസ്", "ഫാരൻഹീറ്റ്", "കെൽവിൻ", "ജൂൾ"], ans: 2
+  },
+  {
+    q: "Convert 27°C to Kelvin.",
+    q_ml: "27°C-നെ കെൽവിനിലേക്ക് മാറ്റുക.",
+    opts: ["27 K", "273 K", "300 K", "246 K"], opts_ml: ["27 K", "273 K", "300 K", "246 K"], ans: 2
+  },
+  {
+    q: "What is absolute zero, expressed in Celsius?",
+    q_ml: "കേവല പൂജ്യം സെൽഷ്യസിൽ എത്രയാണ്?",
+    opts: ["0°C", "100°C", "−273.15°C", "−100°C"], opts_ml: ["0°C", "100°C", "−273.15°C", "−100°C"], ans: 2
+  },
+  {
+    q: "Boyle's Law relates which two quantities at constant temperature?",
+    q_ml: "സ്ഥിര താപനിലയിൽ ബോയിൽ നിയമം ഏത് രണ്ട് അളവുകൾ തമ്മിലുള്ള ബന്ധമാണ് കാണിക്കുന്നത്?",
+    opts: ["Volume and Temperature", "Pressure and Temperature", "Pressure and Volume", "Mass and Volume"],
+    opts_ml: ["വ്യാപ്പവും താപനിലയും", "മർദ്ദവും താപനിലയും", "മർദ്ദവും വ്യാപ്പവും", "മാസും വ്യാപ്പവും"], ans: 2
+  },
+  {
+    q: "According to Boyle's Law, if pressure on a fixed mass of gas increases (at constant temperature), the volume:",
+    q_ml: "ബോയിൽ നിയമമനുസരിച്ച്, ഒരു നിശ്ചിത മാസ് വാതകത്തിന്റെ മേലുള്ള മർദ്ദം കൂടിയാൽ (സ്ഥിര താപനിലയിൽ), വ്യാപ്പത്തിന് എന്ത് സംഭവിക്കും?",
+    opts: ["Increases", "Decreases", "Stays the same", "Becomes zero"],
+    opts_ml: ["കൂടുന്നു", "കുറയുന്നു", "മാറ്റമില്ല", "പൂജ്യമാകുന്നു"], ans: 1
+  },
+  {
+    q: "What is the relationship in Charles's Law?",
+    q_ml: "ചാൾസ് നിയമത്തിലെ ബന്ധം എന്താണ്?",
+    opts: ["V ∝ P", "V ∝ 1/T", "V ∝ T", "P ∝ T"], opts_ml: ["V ∝ P", "V ∝ 1/T", "V ∝ T", "P ∝ T"], ans: 2
+  },
+  {
+    q: "What is the combined gas equation?",
+    q_ml: "സംയോജിത വാതക സമവാക്യം ഏത്?",
+    opts: ["PV = nRT", "P₁V₁/T₁ = P₂V₂/T₂", "V₁/V₂ = P₁/P₂", "PT = kV"],
+    opts_ml: ["PV = nRT", "P₁V₁/T₁ = P₂V₂/T₂", "V₁/V₂ = P₁/P₂", "PT = kV"], ans: 1
+  },
+  {
+    q: "What does Avogadro's Law state?",
+    q_ml: "അവെഗാഡ്രോ നിയമം എന്താണ് പ്രസ്താവിക്കുന്നത്?",
+    opts: [
+      "Equal volumes of gases at the same T and P contain equal numbers of molecules",
+      "Volume is inversely proportional to pressure",
+      "Volume is directly proportional to temperature",
+      "Pressure is directly proportional to temperature"
+    ],
+    opts_ml: [
+      "ഒരേ താപനിലയിലും മർദ്ദത്തിലും തുല്യ വ്യാപ്പമുള്ള വാതകങ്ങളിൽ തുല്യ എണ്ണം തന്മാത്രകൾ ഉണ്ടായിരിക്കും",
+      "വ്യാപ്പം മർദ്ദത്തിന് വിപരീതാനുപാതത്തിലാണ്",
+      "വ്യാപ്പം താപനിലയ്ക്ക് നേർഅനുപാതത്തിലാണ്",
+      "മർദ്ദം താപനിലയ്ക്ക് നേർഅനുപാതത്തിലാണ്"
+    ], ans: 0
+  },
+  {
+    q: "What is the ideal gas equation?",
+    q_ml: "ആദർശ വാതക സമവാക്യം ഏത്?",
+    opts: ["PV = nRT", "PT = nRV", "PVT = nR", "P = nRT/V²"],
+    opts_ml: ["PV = nRT", "PT = nRV", "PVT = nR", "P = nRT/V²"], ans: 0
+  },
+  {
+    q: "What is Avogadro's number?",
+    q_ml: "അവെഗാഡ്രോ സംഖ്യ എത്രയാണ്?",
+    opts: ["3.14 × 10²³", "6.022 × 10²³", "9.8 × 10²³", "1.6 × 10²³"],
+    opts_ml: ["3.14 × 10²³", "6.022 × 10²³", "9.8 × 10²³", "1.6 × 10²³"], ans: 1
+  },
+  {
+    q: "What is the molar volume of any gas at STP?",
+    q_ml: "STP-യിൽ ഏതൊരു വാതകത്തിന്റെയും മോളാർ വ്യാപ്പം എത്ര?",
+    opts: ["11.2 L", "22.4 L", "44.8 L", "6.022 L"], opts_ml: ["11.2 L", "22.4 L", "44.8 L", "6.022 L"], ans: 1
+  },
+  {
+    q: "What are the standard conditions (STP)?",
+    q_ml: "STP-യുടെ (Standard Temperature and Pressure) മാനദണ്ഡങ്ങൾ ഏവ?",
+    opts: ["298 K and 2 atm", "273 K and 1 atm", "0 K and 1 atm", "373 K and 1 atm"],
+    opts_ml: ["298 K, 2 atm", "273 K, 1 atm", "0 K, 1 atm", "373 K, 1 atm"], ans: 1
+  },
+  {
+    q: "How many moles are there in 44 g of CO₂? (molar mass of CO₂ = 44)",
+    q_ml: "44 g CO₂-ൽ എത്ര മോൾ ഉണ്ട്? (CO₂ യുടെ മോളാർ മാസ് = 44)",
+    opts: ["0.5 mole", "1 mole", "2 moles", "4 moles"], opts_ml: ["0.5 മോൾ", "1 മോൾ", "2 മോൾ", "4 മോൾ"], ans: 1
+  },
+  {
+    q: "What is the molecular mass of NH₃? (N = 14, H = 1)",
+    q_ml: "NH₃ യുടെ മോളിക്യുലാർ മാസ് എത്ര? (N = 14, H = 1)",
+    opts: ["15", "16", "17", "18"], opts_ml: ["15", "16", "17", "18"], ans: 2
+  },
+  {
+    q: "In the reaction N₂ + 3H₂ → 2NH₃, how many moles of H₂ are needed to produce 2 moles of NH₃?",
+    q_ml: "N₂ + 3H₂ → 2NH₃ എന്ന പ്രവർത്തനത്തിൽ, 2 മോൾ NH₃ ഉണ്ടാവാൻ എത്ര മോൾ H₂ വേണം?",
+    opts: ["1 mole", "2 moles", "3 moles", "6 moles"], opts_ml: ["1 മോൾ", "2 മോൾ", "3 മോൾ", "6 മോൾ"], ans: 2
+  }
+];
+
+let score = 0;
+
+const QUIZ_OPEN_HOUR = 21;
+function isQuizOpen(){ return new Date().getHours() >= QUIZ_OPEN_HOUR; }
+function quizLockedHTML(){
+  return currentLang === 'ml'
+    ? '<div class="exam-tip"><b>📌 ക്വിസ് ഇന്ന് രാത്രി 9 മണിക്ക് ആരംഭിക്കും.</b><br>ഇപ്പോൾ സമയം: ' + new Date().toLocaleTimeString('en-GB') + '</div>'
+    : '<div class="exam-tip"><b>📌 Today\'s quiz opens at 9:00 PM.</b><br>Current time: ' + new Date().toLocaleTimeString('en-GB') + '</div>';
+}
+let _quizGateOpen = null;
+function watchQuizGate(){
+  const open = isQuizOpen();
+  if(_quizGateOpen === null){ _quizGateOpen = open; return; }
+  if(open !== _quizGateOpen){ _quizGateOpen = open; buildQuiz(); }
+}
+setInterval(watchQuizGate, 15000);
+
+function buildQuiz(){
+  const container = document.getElementById('quizContainer');
+  const scoreBar = document.querySelector('#quiz .score-bar');
+  if(!isQuizOpen()){
+    scoreBar.style.display = 'none';
+    container.innerHTML = quizLockedHTML();
+    return;
+  }
+  scoreBar.style.display = 'flex';
+  container.innerHTML = '';
+  score = 0;
+  document.getElementById('scoreVal').textContent = 0;
+  document.getElementById('totalVal').textContent = quizData.length;
+  quizData.forEach((item, idx)=>{
+    const qText = currentLang === 'ml' ? item.q_ml : item.q;
+    const opts = currentLang === 'ml' ? item.opts_ml : item.opts;
+    const qDiv = document.createElement('div');
+    qDiv.className = 'quiz-q';
+    qDiv.innerHTML = '<p><b>' + (idx+1) + '.</b> ' + qText + '</p><div class="quiz-opts"></div>';
+    const optsDiv = qDiv.querySelector('.quiz-opts');
+    opts.forEach((opt, oIdx)=>{
+      const b = document.createElement('button');
+      b.textContent = opt;
+      b.addEventListener('click', ()=>{
+        if(b.disabled) return;
+        const allBtns = optsDiv.querySelectorAll('button');
+        allBtns.forEach(x=>x.disabled=true);
+        if(oIdx === item.ans){
+          b.classList.add('correct');
+          score++;
+        } else {
+          b.classList.add('wrong');
+          allBtns[item.ans].classList.add('correct');
+        }
+        document.getElementById('scoreVal').textContent = score;
+      });
+      optsDiv.appendChild(b);
+    });
+    container.appendChild(qDiv);
   });
 }
 
-function showStep(n){
-  current = n;
-  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active', +p.dataset.step===n));
-  if(!done.includes(n)){ done.push(n); }
-  buildNav();
-  updateProgress();
-  document.getElementById('prevBtn').disabled = n===1;
-  document.getElementById('nextBtn').textContent='';
-  const nb = document.getElementById('nextBtn');
-  nb.innerHTML = n===STEPS.length ? '<span class="ml">പൂർത്തിയായി ✓</span><span class="en">Done ✓</span>' : '<span class="ml">അടുത്തത്</span><span class="en">Next</span> ›';
-  window.scrollTo({top:0, behavior:'smooth'});
-}
+buildQuiz();
 
-function go(delta){
-  const n = current+delta;
-  if(n>=1 && n<=STEPS.length) showStep(n);
+function setupShareLinks(){
+  const examUrl = new URL('chemistry-unit4-quiz.html', window.location.href).href;
+  const msg = currentLang === 'ml'
+    ? 'രസതന്ത്രം - വാതകനിയമങ്ങളും മോൾ സങ്കല്പനവും - ദിവസേനയുള്ള പരീക്ഷ എഴുതൂ: ' + examUrl
+    : "Chemistry - Gas Laws & Mole Concept daily exam, attempt here: " + examUrl;
+  const waBtn = document.getElementById('waShareBtn');
+  if(waBtn) waBtn.href = 'https://wa.me/?text=' + encodeURIComponent(msg);
 }
-
-function updateProgress(){
-  const pct = Math.round((done.length/STEPS.length)*100);
-  document.getElementById('progressFill').style.width = pct+'%';
-  document.getElementById('progressText').textContent = done.length+' / '+STEPS.length;
-}
-
-function setLang(l){
-  document.body.className = 'lang-'+l;
-  document.getElementById('btn-ml').classList.toggle('active', l==='ml');
-  document.getElementById('btn-en').classList.toggle('active', l==='en');
-  document.getElementById('printLink').href = (l==='ml') ? 'chemistry-unit4-print-mm.html' : 'chemistry-unit4-print-em.html';
-}
-
-buildNav();
-showStep(1);
+setupShareLinks();
 </script>
 </body>
 </html>
