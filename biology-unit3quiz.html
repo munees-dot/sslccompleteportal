@@ -46,7 +46,8 @@ header p{margin:0;opacity:.85;font-size:.88rem;}
 .gatebox b{color:var(--chain-dark);}
 footer{text-align:center;font-size:.78rem;color:#8a8067;margin:20px 0 10px;}
 </style>
-</head>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <body>
 <header>
   <h1 id="pageTitle">Daily Exam</h1>
@@ -65,43 +66,62 @@ footer{text-align:center;font-size:.78rem;color:#8a8067;margin:20px 0 10px;}
     </div>
     <div id="resultBox" style="display:none"></div>
   </div>
-  <footer>Abacus Academy · EduPro Study Tools · Class 10 Chemistry</footer>
+  <footer>Abacus Academy · EduPro Study Tools · Class 10 Biology</footer>
 </div>
+
 <script>
+/*
+  ABACUS ACADEMY — Supabase-connected Biology Unit 3 Quiz
+
+  Before publishing:
+  1) Keep SUPABASE_URL as shown below.
+  2) Replace SUPABASE_ANON_KEY with your project's public anon key.
+  3) Run abacus_biology_quiz_supabase_setup.sql once in Supabase SQL Editor.
+*/
+
+const SUPABASE_URL = "https://wrzssivgxituefcwobbr.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_3mi5iJCxekZfiyXojUFtQg_gDASyEWm";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 let currentLang = "en";
 const quizData = [{"q":"What are the conditions that trigger responses in organisms called?","q_ml":"ജീവികളിൽ പ്രതികരണത്തിന് കാരണമാകുന്ന സാഹചര്യങ്ങളെ എന്ത് വിളിക്കുന്നു?","opts":["Receptors","Stimuli","Neurons","Hormones"],"opts_ml":["ഗ്രാഹികൾ","ഉദ്ദീപനങ്ങൾ","ന്യൂറോണുകൾ","ഹോർമോണുകൾ"],"ans":1},{"q":"What is the electrical signal generated in a receptor called?","q_ml":"ഗ്രാഹികളിൽ ഉണ്ടാകുന്ന വൈദ്യുത സന്ദേശത്തിന്റെ പേരെന്ത്?","opts":["Action potential","Resting potential","Receptor potential","Synaptic potential"],"opts_ml":["ആക്ഷൻ പൊട്ടൻഷ്യൽ","റെസ്റ്റിംഗ് പൊട്ടൻഷ്യൽ","റിസപ്റ്റർ പൊട്ടൻഷ്യൽ","സിനാപ്റ്റിക് പൊട്ടൻഷ്യൽ"],"ans":2},{"q":"What is the middle layer of the eye called?","q_ml":"കണ്ണിന്റെ മധ്യപാളി (Choroid) യുടെ മലയാളം പേരെന്ത്?","opts":["Sclera","Choroid","Retina","Conjunctiva"],"opts_ml":["ദൃഢപടലം","രക്തപടലം","ദൃഷ്ടിപടലം","നേത്രാവരണം"],"ans":1},{"q":"Which photoreceptor cells enable vision in dim light?","q_ml":"മങ്ങിയ വെളിച്ചത്തിൽ കാഴ്ച സാധ്യമാക്കുന്ന പ്രകാശഗ്രാഹീ കോശങ്ങൾ ഏത്?","opts":["Cone cells","Rod cells","Bipolar cells","Ganglion cells"],"opts_ml":["കോൺ കോശങ്ങൾ","റോഡ് കോശങ്ങൾ","ബൈപോളാർ കോശങ്ങൾ","ഗാംഗ്ലിയോൺ കോശങ്ങൾ"],"ans":1},{"q":"What is the pigment found in rod cells called?","q_ml":"റോഡ് കോശങ്ങളിലെ വർണ്ണകത്തിന്റെ പേരെന്ത്?","opts":["Photopsin","Crystallin","Rhodopsin","Melanin"],"opts_ml":["ഫോട്ടോപ്സിൻ","ക്രിസ്റ്റലിൻ","റോഡോപ്സിൻ","മെലാനിൻ"],"ans":2},{"q":"Which is the first of the three middle-ear ossicles?","q_ml":"മധ്യകർണ്ണത്തിലെ മൂന്ന് അസ്ഥികളിൽ ആദ്യത്തേത് ഏത്?","opts":["Incus","Stapes","Malleus","Cochlea"],"opts_ml":["ഇൻകസ്","സ്റ്റേപിസ്","മാലിയസ്","കോക്ലിയ"],"ans":2},{"q":"Which tube connects the middle ear to the throat?","q_ml":"മധ്യകർണ്ണത്തെ ഗ്രസനിയുമായി ബന്ധിപ്പിക്കുന്ന കുഴൽ ഏത്?","opts":["Cochlea","Eustachian canal","Semicircular canal","Ear canal"],"opts_ml":["കോക്ലിയ","യൂസ്റ്റേഷ്യൻ കനാൽ","സെമിസർക്കുലാർ കനാൽ","കർണ്ണനാളം"],"ans":1},{"q":"Which part of the cochlea houses the sound receptors?","q_ml":"ശബ്ദഗ്രാഹികൾ സ്ഥിതി ചെയ്യുന്ന കോക്ലിയയിലെ ഭാഗം ഏത്?","opts":["Oval window","Organ of Corti","Round window","Vestibule"],"opts_ml":["ഓവൽ വിൻഡോ","ഓർഗൻ ഓഫ് കോർട്ടി","റൗണ്ട് വിൻഡോ","വെസ്റ്റിബ്യുൾ"],"ans":1},{"q":"What is the sensation of pain that warns of danger called?","q_ml":"അപകട സൂചന നൽകുന്ന വേദനാ സംവേദനത്തെ എന്ത് വിളിക്കുന്നു?","opts":["Nociception","Accommodation","Binocular fusion","Olfaction"],"opts_ml":["നോസിസെപ്ഷൻ","അക്കോമൊഡേഷൻ","ബൈനോക്കുലർ ഫ്യൂഷൻ","ഓൾഫാക്ഷൻ"],"ans":0},{"q":"Which of these is NOT one of the basic tastes we perceive?","q_ml":"താഴെപ്പറയുന്നവയിൽ നാം തിരിച്ചറിയുന്ന അടിസ്ഥാന രുചിയല്ലാത്തത് ഏത്?","opts":["Sweet","Salty","Cold","Umami"],"opts_ml":["മധുരം","ഉപ്പ്","തണുപ്പ്","ഉമാമി"],"ans":2},{"q":"What is the region where the optic nerve begins — which has no photoreceptor cells — called?","q_ml":"നേത്രനാഡി ആരംഭിക്കുന്ന, പ്രകാശഗ്രാഹീ കോശങ്ങൾ ഇല്ലാത്ത ഭാഗത്തിന്റെ പേരെന്ത്?","opts":["Macula","Blind Spot","Iris","Cornea"],"opts_ml":["മാക്കുല","അന്ധബിന്ദു (Blind Spot)","ഐറിസ്","കോർണിയ"],"ans":1},{"q":"Which part of the retina has the highest concentration of cone cells?","q_ml":"കോൺ കോശങ്ങൾ ഏറ്റവും കൂടുതൽ കേന്ദ്രീകരിച്ചിരിക്കുന്ന റെറ്റിനയിലെ ഭാഗം ഏത്?","opts":["Blind Spot","Macula","Sclera","Choroid"],"opts_ml":["അന്ധബിന്ദു","മാക്കുല","സ്ക്ലീറ","കോറോയിഡ്"],"ans":1},{"q":"Which fluid, between the lens and retina, maintains the eyeball's shape?","q_ml":"ലെൻസിനും റെറ്റിനയ്ക്കും ഇടയിൽ കണ്ണിന്റെ ആകൃതി നിലനിർത്തുന്ന ദ്രവം ഏത്?","opts":["Aqueous humor","Vitreous humor","Endolymph","Perilymph"],"opts_ml":["അക്വസ് ദ്രവം","വിട്രിയസ് ദ്രവം","എൻഡോലിംഫ്","പെരിലിംഫ്"],"ans":1},{"q":"What happens to the ciliary muscles when focusing on a near object (accommodation)?","q_ml":"അടുത്തുള്ള വസ്തുക്കളിൽ ഫോക്കസ് ചെയ്യുമ്പോൾ (accommodation) സീലിയറി പേശികൾക്ക് എന്ത് സംഭവിക്കുന്നു?","opts":["They relax","They contract","No change","They degenerate"],"opts_ml":["അയയുന്നു","സങ്കോചിക്കുന്നു","മാറ്റമില്ല","നശിക്കുന്നു"],"ans":1},{"q":"On which chromosome are the genes for the red- and green-sensitive cone pigments found?","q_ml":"പച്ച, ചുവപ്പ് കോൺ കോശങ്ങളിലെ വർണ്ണകത്തിനുള്ള ജീൻ ഏത് ക്രോമസോമിലാണ്?","opts":["X chromosome","Y chromosome","Chromosome 7","Chromosome 12"],"opts_ml":["X ക്രോമസോം","Y ക്രോമസോം","ക്രോമസോം 7","ക്രോമസോം 12"],"ans":0},{"q":"Which condition is caused by clouding of the eye lens?","q_ml":"നേത്ര ലെൻസ് അതാര്യമാകുന്ന അവസ്ഥ ഏതാണ്?","opts":["Glaucoma","Cataract","Astigmatism","Xerophthalmia"],"opts_ml":["ഗ്ലോക്കോമ","തിമിരം (Cataract)","അസ്റ്റിഗ്മാറ്റിസം","സീറോഫ്താൽമിയ"],"ans":1},{"q":"Which fluid fills the middle chamber of the cochlea?","q_ml":"കോക്ലിയയുടെ മധ്യഅറയിൽ നിറഞ്ഞിരിക്കുന്ന ദ്രവം ഏത്?","opts":["Perilymph","Endolymph","Aqueous humor","Vitreous humor"],"opts_ml":["പെരിലിംഫ്","എൻഡോലിംഫ്","അക്വസ് ദ്രവം","വിട്രിയസ് ദ്രവം"],"ans":1},{"q":"What is the main function of the Eustachian canal?","q_ml":"യൂസ്റ്റേഷ്യൻ കനാലിന്റെ പ്രധാന ധർമ്മം എന്ത്?","opts":["Generate sound impulses","Equalize air pressure on both sides of the eardrum","Maintain body balance","Detect smell"],"opts_ml":["ശബ്ദ ആവേഗങ്ങൾ ഉണ്ടാക്കുക","കർണ്ണപടത്തിന്റെ ഇരുവശത്തുമുള്ള മർദ്ദം തുല്യമാക്കുക","ശരീരതുലനനില പാലിക്കുക","ഗന്ധം തിരിച്ചറിയുക"],"ans":1},{"q":"In what unit is sound intensity measured?","q_ml":"ശബ്ദതീവ്രത അളക്കുന്ന യൂണിറ്റ് ഏത്?","opts":["Hertz","Decibel (dB)","Pascal","Joule"],"opts_ml":["ഹെർട്സ്","ഡെസിബെൽ (dB)","പാസ്കൽ","ജൂൾ"],"ans":1},{"q":"Which structure in the inner ear helps maintain body balance?","q_ml":"ആന്തരകർണ്ണത്തിൽ ശരീരതുലനനില പാലിക്കാൻ സഹായിക്കുന്ന ഭാഗം ഏത്?","opts":["Organ of Corti","Vestibular system (semicircular canals)","Eardrum","Eustachian canal"],"opts_ml":["ഓർഗൻ ഓഫ് കോർട്ടി","വെസ്റ്റിബ്യുലാർ സിസ്റ്റം (സെമിസർക്കുലാർ കനാലുകൾ)","കർണ്ണപടം","യൂസ്റ്റേഷ്യൻ കനാൽ"],"ans":1}];
 
-/* ---- daily-exam config ---- */
+/* ---- quiz config ---- */
 const QUIZ_OPEN_HOUR = 21;
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw_zU9ysc2jyNMUHDLcxnpiQPbqJJGM2-Ri6U599LkeSv8pS6r42CyeH9kBBVcFYAtrGA/exec";
-const CHAPTER_TITLE = "Behind the Senses | Biology Unit 3";
+const SUBJECT = "Biology";
+const CHAPTER = "Behind the Senses";
+const QUIZ_NAME = "Behind the Senses | Biology Unit 3";
 
 const STR = {
   en:{ gateTitle:"Today's exam opens at 9:00 PM.", nowLabel:"Current time: ",
-       nameLabel:"Name", namePh:"e.g. Amal Krishna",
-       centreLabel:"Centre", centrePh:"Select", centre1:"Abacus Academy, Puthur Pallikkal", centre2:"Abacus Academy, Parambil Peedika",
-       admLabel:"Admission number", admPh:"e.g. 24",
-       errFields:"Please fill in all fields", startBtn:"Start exam", attemptedAs:"Attempting as:", notYou:"Not you",
-       checking:"Checking...", alreadyAttempted:"This admission number has already attempted today's exam — one attempt per student.",
-       score:"Score:", correct:"correct",
+       admLabel:"Admission number", admPh:"Enter your admission number",
+       errAdm:"Please enter your admission number",
+       invalidAdm:"Admission number not found. Please check the number.",
+       checking:"Checking...", startBtn:"Start exam",
+       attemptingAs:"Attempting as:", correct:"correct",
        good:"Excellent! Well studied.", mid:"Coming along nicely.", low:"Read the notes once more and try again.",
-       sending:"Recording result...", sentOk:"Result recorded", sentFail:"Network busy — retrying, don't close the page",
-       sentAlready:"Result was already recorded", newStudent:"Next student / New attempt" },
+       saving:"Saving result...", saved:"Result saved successfully", saveFail:"Could not save the result. Please try again.",
+       alreadyAttempted:"This admission number has already attempted this quiz today — one attempt per student.",
+       newStudent:"Next student / New attempt" },
   ml:{ gateTitle:"ക്വിസ് ഇന്ന് രാത്രി 9 മണിക്ക് ആരംഭിക്കും.", nowLabel:"ഇപ്പോൾ സമയം: ",
-       nameLabel:"പേര്", namePh:"ഉദാ: അമൽ കൃഷ്ണ",
-       centreLabel:"സെന്റർ", centrePh:"തിരഞ്ഞെടുക്കുക", centre1:"Abacus Academy, Puthur Pallikkal", centre2:"Abacus Academy, Parambil Peedika",
-       admLabel:"അഡ്മിഷൻ നമ്പർ", admPh:"ഉദാ: 24",
-       errFields:"എല്ലാ വിവരങ്ങളും പൂരിപ്പിക്കുക", startBtn:"പരീക്ഷ തുടങ്ങൂ", attemptedAs:"എഴുതുന്നത്:", notYou:"ഞാനല്ല",
-       checking:"പരിശോധിക്കുന്നു...", alreadyAttempted:"ഈ അഡ്മിഷൻ നമ്പർ ഉപയോഗിച്ച് ഇന്ന് നേരത്തെ എഴുതിയിട്ടുണ്ട് — ഒരു കുട്ടിക്ക് ഒരു അവസരം മാത്രം.",
-       score:"സ്കോർ:", correct:"ശരി",
+       admLabel:"അഡ്മിഷൻ നമ്പർ", admPh:"അഡ്മിഷൻ നമ്പർ നൽകുക",
+       errAdm:"അഡ്മിഷൻ നമ്പർ നൽകുക",
+       invalidAdm:"ഈ അഡ്മിഷൻ നമ്പർ കണ്ടെത്താനായില്ല. നമ്പർ പരിശോധിക്കുക.",
+       checking:"പരിശോധിക്കുന്നു...", startBtn:"പരീക്ഷ തുടങ്ങൂ",
+       attemptingAs:"എഴുതുന്നത്:", correct:"ശരി",
        good:"മികച്ചത്! നന്നായി പഠിച്ചു.", mid:"നന്നായി വരുന്നു — ഒന്നു കൂടി റിവിഷൻ ചെയ്യാം.", low:"കുറിപ്പുകൾ ഒന്നുകൂടി വായിച്ച് വീണ്ടും ശ്രമിക്കാം.",
-       sending:"ഫലം രേഖപ്പെടുത്തുന്നു...", sentOk:"ഫലം രേഖപ്പെടുത്തി", sentFail:"നെറ്റ്‌വർക്ക് തിരക്ക് — വീണ്ടും ശ്രമിക്കുന്നു, പേജ് അടയ്ക്കരുത്",
-       sentAlready:"ഫലം നേരത്തെ രേഖപ്പെടുത്തിയിരുന്നു", newStudent:"അടുത്ത കുട്ടി / പുതിയ ശ്രമം" }
+       saving:"ഫലം രേഖപ്പെടുത്തുന്നു...", saved:"ഫലം വിജയകരമായി രേഖപ്പെടുത്തി", saveFail:"ഫലം save ചെയ്യാൻ കഴിഞ്ഞില്ല. വീണ്ടും ശ്രമിക്കുക.",
+       alreadyAttempted:"ഈ അഡ്മിഷൻ നമ്പർ ഉപയോഗിച്ച് ഇന്ന് ഈ ക്വിസ് നേരത്തെ എഴുതിയിട്ടുണ്ട് — ഒരു കുട്ടിക്ക് ഒരു അവസരം മാത്രം.",
+       newStudent:"അടുത്ത കുട്ടി / പുതിയ ശ്രമം" }
 };
 
 let score = 0;
 let quizState = 'gate';
-let studentName = '', studentCentre = '', studentAdmission = '';
+let studentName = '';
+let studentCentre = '';
+let studentAdmission = '';
+let studentClass = '';
+let selectedAnswers = [];
 let resultSubmitted = false;
 let _gateOpenSeen = null;
 
@@ -141,103 +161,111 @@ function renderStart(){
   box.style.display = 'block';
   box.innerHTML =
     '<div class="qstart">' +
-    '<p class="qflabel">' + t.nameLabel + '</p>' +
-    '<input type="text" id="stName" placeholder="' + t.namePh + '" value="' + studentName.replace(/"/g,'&quot;') + '">' +
-    '<p class="qflabel">' + t.centreLabel + '</p>' +
-    '<select id="stCentre">' +
-      '<option value="">' + t.centrePh + '</option>' +
-      '<option value="Abacus Academy, Puthur Pallikkal"' + (studentCentre==='Abacus Academy, Puthur Pallikkal'?' selected':'') + '>' + t.centre1 + '</option>' +
-      '<option value="Abacus Academy, Parambil Peedika"' + (studentCentre==='Abacus Academy, Parambil Peedika'?' selected':'') + '>' + t.centre2 + '</option>' +
-    '</select>' +
     '<p class="qflabel">' + t.admLabel + '</p>' +
-    '<input type="text" id="stAdm" inputmode="numeric" placeholder="' + t.admPh + '" value="' + studentAdmission.replace(/"/g,'&quot;') + '">' +
+    '<input type="text" id="stAdm" inputmode="numeric" autocomplete="off" placeholder="' + t.admPh + '">' +
     '<p class="qerr" id="qerr"></p>' +
     '<button class="btn" id="startBtn" style="width:100%">' + t.startBtn + '</button>' +
     '</div>';
   document.getElementById('startBtn').addEventListener('click', beginExam);
+  document.getElementById('stAdm').addEventListener('keydown', function(e){
+    if(e.key === 'Enter') beginExam();
+  });
 }
 
-const ATTEMPT_KEY = 'chemExamAttempts_v1';
-function todayStr(){ return new Date().toLocaleDateString('en-GB'); }
-function getAttempts(){ try{ return JSON.parse(localStorage.getItem(ATTEMPT_KEY) || '{}'); }catch(e){ return {}; } }
-function markAttempted(adm){
-  const map = getAttempts(); const d = todayStr();
-  if(!map[d]) map[d] = [];
-  if(map[d].indexOf(adm) === -1) map[d].push(adm);
-  try{ localStorage.setItem(ATTEMPT_KEY, JSON.stringify(map)); }catch(e){}
-}
-function isAttemptedOnThisDevice(adm){
-  const map = getAttempts(); const d = todayStr();
-  return !!(map[d] && map[d].indexOf(adm) !== -1);
-}
-function checkAlreadyAttemptedOnServer(adm){
-  if(!SCRIPT_URL) return Promise.resolve(false);
-  const url = SCRIPT_URL + (SCRIPT_URL.indexOf('?') === -1 ? '?' : '&') +
-    'admissionNumber=' + encodeURIComponent(adm) + '&date=' + encodeURIComponent(todayStr());
-  const ctrl = ('AbortController' in window) ? new AbortController() : null;
-  const opts = ctrl ? {signal: ctrl.signal} : {};
-  const timeout = new Promise(res => setTimeout(function(){ if(ctrl) ctrl.abort(); res(null); }, 4000));
-  const req = fetch(url, opts).then(function(r){ return r.json(); }).then(function(d){ return !!d.taken; }).catch(function(){ return null; });
-  return Promise.race([req, timeout]).then(function(r){ return r === true; });
-}
-
-function beginExam(){
+async function beginExam(){
   const t = STR[currentLang];
-  const nameVal = document.getElementById('stName').value.trim();
-  const centreVal = document.getElementById('stCentre').value;
   const admVal = document.getElementById('stAdm').value.trim();
   const errEl = document.getElementById('qerr');
-  if(!nameVal || !centreVal || !admVal){ errEl.textContent = t.errFields; errEl.classList.add('show'); return; }
 
-  if(isAttemptedOnThisDevice(admVal)){
-    errEl.textContent = t.alreadyAttempted; errEl.classList.add('show'); return;
+  errEl.classList.remove('show');
+  if(!admVal){
+    errEl.textContent = t.errAdm;
+    errEl.classList.add('show');
+    return;
+  }
+  if(!/^\d+$/.test(admVal)){
+    errEl.textContent = t.errAdm;
+    errEl.classList.add('show');
+    return;
   }
 
   const btn = document.getElementById('startBtn');
-  btn.disabled = true; btn.textContent = t.checking;
-  errEl.classList.remove('show');
+  btn.disabled = true;
+  btn.textContent = t.checking;
 
-  checkAlreadyAttemptedOnServer(admVal).then(function(taken){
-    if(taken){
-      btn.disabled = false; btn.textContent = t.startBtn;
-      errEl.textContent = t.alreadyAttempted; errEl.classList.add('show');
+  try {
+    const { data, error } = await supabaseClient.rpc('verify_student', {
+      p_admission_no: Number(admVal)
+    });
+
+    if(error) throw error;
+
+    const student = Array.isArray(data) ? data[0] : data;
+    if(!student){
+      btn.disabled = false;
+      btn.textContent = t.startBtn;
+      errEl.textContent = t.invalidAdm;
+      errEl.classList.add('show');
       return;
     }
-    studentName = nameVal; studentCentre = centreVal; studentAdmission = admVal;
-    score = 0; resultSubmitted = false;
+
+    studentAdmission = String(student.admission_no);
+    studentName = student.student_name;
+    studentCentre = student.centre || '';
+    studentClass = student.class || '';
+
+    score = 0;
+    selectedAnswers = new Array(quizData.length).fill(null);
+    resultSubmitted = false;
     quizState = 'quiz';
     render();
-  });
+
+  } catch (err) {
+    console.error(err);
+    btn.disabled = false;
+    btn.textContent = t.startBtn;
+    errEl.textContent = "Database connection error. Please try again.";
+    errEl.classList.add('show');
+  }
 }
 
 function renderQuiz(){
   const t = STR[currentLang];
   const box = document.getElementById('quizBox');
   box.style.display = 'block';
-  document.getElementById('scoreLabel').textContent = t.score;
+  document.getElementById('scoreLabel').textContent = t.correct + ':';
   document.getElementById('scoreVal').textContent = 0;
   document.getElementById('totalVal').textContent = quizData.length;
   score = 0;
+
   const container = document.getElementById('quizContainer');
   container.innerHTML = '';
+
   const who = document.createElement('div');
   who.className = 'qwho';
-  who.innerHTML = '<span>' + t.attemptedAs + ' <b>' + studentName + '</b> · ' + studentAdmission + '</span>';
+  who.innerHTML = '<span>' + t.attemptingAs + ' <b>' + escapeHtml(studentName) + '</b> · ' + escapeHtml(studentAdmission) + '</span>';
   container.appendChild(who);
+
   quizData.forEach(function(item, idx){
     const qText = currentLang === 'ml' ? item.q_ml : item.q;
     const opts = currentLang === 'ml' ? item.opts_ml : item.opts;
+
     const qDiv = document.createElement('div');
     qDiv.className = 'quiz-q';
-    qDiv.innerHTML = '<p><b>' + (idx+1) + '.</b> ' + qText + '</p><div class="quiz-opts"></div>';
+    qDiv.innerHTML = '<p><b>' + (idx+1) + '.</b> ' + escapeHtml(qText) + '</p><div class="quiz-opts"></div>';
+
     const optsDiv = qDiv.querySelector('.quiz-opts');
     opts.forEach(function(opt, oIdx){
       const b = document.createElement('button');
       b.textContent = opt;
       b.addEventListener('click', function(){
         if(b.disabled) return;
+
         const allBtns = optsDiv.querySelectorAll('button');
         allBtns.forEach(function(x){ x.disabled = true; });
+
+        selectedAnswers[idx] = oIdx;
+
         if(oIdx === item.ans){
           b.classList.add('correct');
           score++;
@@ -245,9 +273,14 @@ function renderQuiz(){
           b.classList.add('wrong');
           allBtns[item.ans].classList.add('correct');
         }
+
         document.getElementById('scoreVal').textContent = score;
+
         if(idx === quizData.length - 1){
-          setTimeout(function(){ quizState = 'result'; render(); }, 600);
+          setTimeout(function(){
+            quizState = 'result';
+            render();
+          }, 600);
         }
       });
       optsDiv.appendChild(b);
@@ -256,45 +289,43 @@ function renderQuiz(){
   });
 }
 
-const PENDING_KEY = 'chemExamPending_v1';
-function getPending(){ try{ return JSON.parse(localStorage.getItem(PENDING_KEY) || '[]'); }catch(e){ return []; } }
-function setPending(arr){ try{ localStorage.setItem(PENDING_KEY, JSON.stringify(arr)); }catch(e){} }
-function queuePending(fd){ const arr = getPending(); arr.push(fd); setPending(arr); }
-function removePending(fd){ setPending(getPending().filter(function(p){ return p._id !== fd._id; })); }
-function sendToSheet(fd){
-  return fetch(SCRIPT_URL, {
-    method: 'POST', mode: 'no-cors',
-    headers: {'Content-Type': 'text/plain;charset=utf-8'},
-    body: JSON.stringify(fd)
+async function submitResult(pct){
+  const t = STR[currentLang];
+
+  const answers = quizData.map(function(item, idx){
+    const selected = selectedAnswers[idx];
+    return {
+      question_no: idx + 1,
+      selected_answer: selected,
+      correct_answer: item.ans,
+      is_correct: selected === item.ans
+    };
   });
-}
-let currentSubmitId = null;
-function trySend(fd, attempt){
-  attempt = attempt || 0;
-  sendToSheet(fd).then(function(){
-    removePending(fd);
-    if(fd._id === currentSubmitId){ const el = document.getElementById('qsent'); if(el){ el.textContent = '✓ ' + STR[currentLang].sentOk; el.classList.add('ok'); } }
-  }).catch(function(){
-    if(attempt < 3){ setTimeout(function(){ trySend(fd, attempt + 1); }, 2500 * (attempt + 1)); }
-    else if(fd._id === currentSubmitId){ const el = document.getElementById('qsent'); if(el){ el.textContent = '⚠ ' + STR[currentLang].sentFail; } }
-  });
-}
-function flushPending(){
-  if(!SCRIPT_URL) return;
-  getPending().forEach(function(p){ trySend(p); });
-}
-function submitResult(pct){
-  if(!SCRIPT_URL) return;
-  const now = new Date();
-  const fd = {
-    _id: Date.now() + '-' + Math.random().toString(36).slice(2),
-    name: studentName, centre: studentCentre, admissionNumber: studentAdmission,
-    chapter: CHAPTER_TITLE, score: score, total: quizData.length, percent: pct,
-    date: now.toLocaleDateString('en-GB'), time: now.toLocaleTimeString('en-GB')
-  };
-  currentSubmitId = fd._id;
-  queuePending(fd);
-  trySend(fd);
+
+  try {
+    const { data, error } = await supabaseClient.rpc('submit_quiz', {
+      p_admission_no: Number(studentAdmission),
+      p_subject: SUBJECT,
+      p_chapter: CHAPTER,
+      p_quiz_name: QUIZ_NAME,
+      p_score: score,
+      p_total: quizData.length,
+      p_percentage: pct,
+      p_answers: answers
+    });
+
+    if(error) throw error;
+
+    const result = Array.isArray(data) ? data[0] : data;
+
+    if(result && result.already_submitted){
+      return { ok:false, already:true };
+    }
+    return { ok:true };
+  } catch(err) {
+    console.error(err);
+    return { ok:false, already:false, error:true };
+  }
 }
 
 function renderResult(){
@@ -303,25 +334,49 @@ function renderResult(){
   const msg = pct >= 80 ? t.good : pct >= 50 ? t.mid : t.low;
   const box = document.getElementById('resultBox');
   box.style.display = 'block';
+
   box.innerHTML =
-    '<div class="qwho" style="justify-content:center"><span><b>' + studentName + '</b> · ' + studentAdmission + ' · ' + studentCentre + '</span></div>' +
+    '<div class="qwho" style="justify-content:center"><span><b>' + escapeHtml(studentName) + '</b> · ' + escapeHtml(studentAdmission) + ' · ' + escapeHtml(studentCentre) + '</span></div>' +
     '<div class="result-big">' + score + '<span style="font-size:1.3rem;color:#777">/' + quizData.length + '</span></div>' +
     '<div class="result-lbl">' + pct + '% ' + t.correct + '</div>' +
     '<div class="result-msg">' + msg + '</div>' +
-    '<div class="qsent" id="qsent">' + t.sending + '</div>' +
+    '<div class="qsent" id="qsent">' + t.saving + '</div>' +
     '<button class="btn" id="newStuBtn" style="width:100%;margin-top:14px">' + t.newStudent + '</button>';
+
   document.getElementById('newStuBtn').addEventListener('click', function(){
-    quizState = 'start'; studentName = ''; studentCentre = ''; studentAdmission = ''; score = 0;
+    quizState = 'start';
+    studentName = '';
+    studentCentre = '';
+    studentAdmission = '';
+    studentClass = '';
+    selectedAnswers = [];
+    score = 0;
+    resultSubmitted = false;
     render();
   });
+
   if(!resultSubmitted){
     resultSubmitted = true;
-    markAttempted(studentAdmission);
-    submitResult(pct);
-  } else {
-    const el = document.getElementById('qsent');
-    if(el){ el.textContent = t.sentAlready; el.classList.add('ok'); }
+    submitResult(pct).then(function(result){
+      const el = document.getElementById('qsent');
+      if(!el) return;
+
+      if(result.ok){
+        el.textContent = '✓ ' + t.saved;
+        el.classList.add('ok');
+      } else if(result.already){
+        el.textContent = '⚠ ' + t.alreadyAttempted;
+      } else {
+        el.textContent = '⚠ ' + t.saveFail;
+      }
+    });
   }
+}
+
+function escapeHtml(value){
+  return String(value ?? '').replace(/[&<>"']/g, function(ch){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];
+  });
 }
 
 function watchGate(){
@@ -333,11 +388,11 @@ function watchGate(){
     else if(!open){ quizState = 'gate'; render(); }
   }
 }
-setInterval(watchGate, 15000);
 
-flushPending();
+setInterval(watchGate, 15000);
 quizState = isQuizOpen() ? 'start' : 'gate';
 render();
 </script>
+
 </body>
 </html>
