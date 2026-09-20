@@ -1,94 +1,13 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ABACUS ACADEMY Admin Dashboard</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style>
-body{font-family:Arial;margin:0;background:#f4f6fa;color:#172033}header{background:#111827;color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center}main{max-width:1200px;margin:20px auto;padding:0 15px}.card{background:white;border-radius:12px;padding:18px;margin-bottom:18px;box-shadow:0 2px 10px #0001}.login{max-width:400px;margin:70px auto}input,select{width:100%;box-sizing:border-box;padding:10px;margin:5px 0 12px;border:1px solid #ccd2dc;border-radius:7px}button{padding:10px 14px;border:0;border-radius:7px;cursor:pointer}.blue{background:#2563eb;color:white}.red{background:#dc2626;color:white}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.metric{font-size:28px;font-weight:bold}.filters{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}table{width:100%;border-collapse:collapse}th,td{padding:9px;border-bottom:1px solid #e5e7eb;text-align:left;font-size:13px}th{background:#f8fafc}.scroll{overflow:auto}@media(max-width:800px){.grid,.filters{grid-template-columns:1fr 1fr}}@media(max-width:500px){.grid,.filters{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
-<div id="login" class="card login">
-<h2>ABACUS ACADEMY</h2><h3>Admin Login</h3>
-<p>Use the admin email/password created in Supabase Authentication.</p>
-<input id="email" type="email" placeholder="Admin email">
-<input id="password" type="password" placeholder="Password">
-<button class="blue" onclick="login()">Login</button>
-<p id="msg"></p>
-</div>
-
-<div id="app" style="display:none">
-<header><b>ABACUS ACADEMY — ADMIN DASHBOARD</b><button class="red" onclick="logout()">Logout</button></header>
-<main>
-<div class="grid">
-<div class="card">Total Students<div id="students" class="metric">0</div></div>
-<div class="card">Attempted<div id="attempted" class="metric">0</div></div>
-<div class="card">Not Attempted<div id="notattempted" class="metric">0</div></div>
-<div class="card">Average %<div id="average" class="metric">0%</div></div>
-</div>
-
-<div class="card">
-<h3>Filters</h3>
-<div class="filters">
-<div><label>Class</label><select id="fc" onchange="render()"><option value="">All</option></select></div>
-<div><label>Batch</label><select id="fb" onchange="render()"><option value="">All</option></select></div>
-<div><label>Subject</label><select id="fs" onchange="render()"><option value="">All</option></select></div>
-<div><label>Quiz / Chapter</label><select id="fq" onchange="render()"><option value="">All</option></select></div>
-<div><label>Date</label><input id="fd" type="date" onchange="render()"></div>
-</div>
-<button class="blue" onclick="csv()">Download CSV</button>
-</div>
-
-<div class="card"><h3>Student-wise Report</h3><div class="scroll">
-<table><thead><tr><th>Admission</th><th>Student</th><th>Class</th><th>Batch</th><th>Centre</th><th>Subject</th><th>Quiz</th><th>Date</th><th>Mark</th><th>%</th></tr></thead>
-<tbody id="body"></tbody></table></div></div>
-
-<div class="card"><h3>Class / Batch Summary</h3><div class="scroll">
-<table><thead><tr><th>Class</th><th>Batch</th><th>Students</th><th>Attempts</th><th>Average %</th></tr></thead>
-<tbody id="summary"></tbody></table></div></div>
-</main></div>
-
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABACUS ACADEMY Admin</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>body{font-family:Arial;margin:0;background:#f4f6fa;color:#172033}header{background:#111827;color:#fff;padding:18px 24px;display:flex;justify-content:space-between}.card{background:#fff;border-radius:12px;padding:18px;margin:18px auto;max-width:1200px;box-shadow:0 2px 10px #0001}.login{max-width:400px;margin-top:70px}input,select{width:100%;box-sizing:border-box;padding:10px;margin:6px 0 12px;border:1px solid #ccd2dc;border-radius:7px}button{padding:10px 14px;border:0;border-radius:7px;cursor:pointer}.blue{background:#2563eb;color:#fff}.red{background:#dc2626;color:#fff}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:1200px;margin:18px auto}.metric{font-size:28px;font-weight:bold}.filters{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}table{width:100%;border-collapse:collapse}th,td{padding:9px;border-bottom:1px solid #e5e7eb;text-align:left;font-size:13px}th{background:#f8fafc}.scroll{overflow:auto}.status{white-space:pre-wrap;color:#b42318}@media(max-width:800px){.grid,.filters{grid-template-columns:1fr 1fr}}@media(max-width:500px){.grid,.filters{grid-template-columns:1fr}}</style></head><body>
+<div id="login" class="card login"><h2>ABACUS ACADEMY</h2><h3>Admin Login</h3><p>Use the admin email/password created in Supabase.</p><input id="email" type="email" placeholder="Admin email"><input id="password" type="password" placeholder="Password"><button id="loginBtn" class="blue" onclick="login()">Login</button><div id="msg" class="status"></div></div>
+<div id="app" style="display:none"><header><b>ABACUS ACADEMY — ADMIN DASHBOARD</b><button class="red" onclick="logout()">Logout</button></header><div id="loadStatus" class="card"></div><div class="grid"><div class="card">Total Students<div id="students" class="metric">0</div></div><div class="card">Attempted<div id="attempted" class="metric">0</div></div><div class="card">Not Attempted<div id="notattempted" class="metric">0</div></div><div class="card">Average %<div id="average" class="metric">0%</div></div></div><div class="card"><h3>Filters</h3><div class="filters"><div>Class<select id="fc" onchange="render()"><option value="">All</option></select></div><div>Batch<select id="fb" onchange="render()"><option value="">All</option></select></div><div>Subject<select id="fs" onchange="render()"><option value="">All</option></select></div><div>Quiz / Chapter<select id="fq" onchange="render()"><option value="">All</option></select></div><div>Date<input id="fd" type="date" onchange="render()"></div></div></div><div class="card"><h3>Student-wise Report</h3><div class="scroll"><table><thead><tr><th>Admission</th><th>Student</th><th>Class</th><th>Batch</th><th>Centre</th><th>Subject</th><th>Quiz</th><th>Date</th><th>Mark</th><th>%</th></tr></thead><tbody id="body"></tbody></table></div></div><div class="card"><h3>Class / Batch Summary</h3><div class="scroll"><table><thead><tr><th>Class</th><th>Batch</th><th>Students</th><th>Attempts</th><th>Average %</th></tr></thead><tbody id="summary"></tbody></table></div></div></div>
 <script>
-const URL="https://wrzssivgxituefcwobbr.supabase.co";
-const KEY="sb_publishable_3mi5iJCxekZfiyXojUFtQg_gDASyEWm";
-const db=supabase.createClient(URL,KEY);
-let students=[],results=[],rows=[];
-
-async function login(){
- let email=document.getElementById("email").value.trim(),password=document.getElementById("password").value;
- document.getElementById("msg").textContent="Logging in...";
- let {error}=await db.auth.signInWithPassword({email,password});
- if(error){document.getElementById("msg").textContent=error.message;return}
- show();
-}
-async function logout(){await db.auth.signOut();location.reload()}
-async function show(){
- document.getElementById("login").style.display="none";document.getElementById("app").style.display="block";
- let s=await db.from("students").select("admission_no,student_name,class,centre,batch").order("admission_no");
- let r=await db.from("quiz_results").select("id,admission_no,subject,chapter,quiz_name,quiz_date,score,total,percentage,submitted_at").order("quiz_date",{ascending:false});
- if(s.error){alert(s.error.message);return} if(r.error){alert(r.error.message);return}
- students=s.data||[];results=r.data||[];
- rows=results.map(x=>{let st=students.find(y=>Number(y.admission_no)===Number(x.admission_no))||{};return {...x,student_name:st.student_name||"",class:st.class||"",centre:st.centre||"",batch:st.batch||""}});
- opts("fc",students.map(x=>x.class));opts("fb",students.map(x=>x.batch));opts("fs",results.map(x=>x.subject));opts("fq",results.map(x=>x.quiz_name));render();
-}
-function opts(id,a){let e=document.getElementById(id),v=e.value,u=[...new Set(a.filter(Boolean).map(String))].sort();e.innerHTML='<option value="">All</option>'+u.map(x=>"<option>"+esc(x)+"</option>").join("");if(u.includes(v))e.value=v}
-function filtered(){let c=fc.value,b=fb.value,s=fs.value,q=fq.value,d=fd.value;return rows.filter(x=>(!c||String(x.class)==c)&&(!b||String(x.batch)==b)&&(!s||x.subject==s)&&(!q||x.quiz_name==q)&&(!d||x.quiz_date==d))}
-function render(){
- let d=filtered(),c=fc.value,b=fb.value,pool=students.filter(x=>(!c||String(x.class)==c)&&(!b||String(x.batch)==b));
- studentsEl= document.getElementById("students");studentsEl.textContent=pool.length;
- let set=new Set(d.map(x=>Number(x.admission_no)));document.getElementById("attempted").textContent=set.size;document.getElementById("notattempted").textContent=Math.max(0,pool.length-set.size);
- let av=d.length?d.reduce((a,x)=>a+Number(x.percentage||0),0)/d.length:0;document.getElementById("average").textContent=av.toFixed(1)+"%";
- document.getElementById("body").innerHTML=d.map(x=>"<tr><td>"+esc(x.admission_no)+"</td><td>"+esc(x.student_name)+"</td><td>"+esc(x.class)+"</td><td>"+esc(x.batch)+"</td><td>"+esc(x.centre)+"</td><td>"+esc(x.subject)+"</td><td>"+esc(x.quiz_name)+"</td><td>"+esc(x.quiz_date)+"</td><td>"+esc(x.score)+"/"+esc(x.total)+"</td><td>"+Number(x.percentage||0).toFixed(1)+"%</td></tr>").join("")||'<tr><td colspan="10">No records found.</td></tr>';
- let g={};d.forEach(x=>{let k=(x.class||"")+"|"+(x.batch||"");if(!g[k])g[k]={class:x.class,batch:x.batch,n:0,sum:0};g[k].n++;g[k].sum+=Number(x.percentage||0)});
- document.getElementById("summary").innerHTML=Object.values(g).map(x=>"<tr><td>"+esc(x.class)+"</td><td>"+esc(x.batch)+"</td><td>"+students.filter(s=>String(s.class)==String(x.class)&&String(s.batch)==String(x.batch)).length+"</td><td>"+x.n+"</td><td>"+(x.sum/x.n).toFixed(1)+"%</td></tr>").join("")||'<tr><td colspan="5">No records found.</td></tr>';
-}
-function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
-function csv(){
- let d=filtered(),a=[["Admission","Student","Class","Batch","Centre","Subject","Quiz","Date","Score","Total","Percentage"],...d.map(x=>[x.admission_no,x.student_name,x.class,x.batch,x.centre,x.subject,x.quiz_name,x.quiz_date,x.score,x.total,x.percentage])];
- let text=a.map(r=>r.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\n"),blob=new Blob([text],{type:"text/csv"}),a1=document.createElement("a");a1.href=URL.createObjectURL(blob);a1.download="abacus_quiz_report.csv";a1.click();
-}
-db.auth.getSession().then(x=>{if(x.data.session)show()});
-</script>
-</body></html>
+const SUPABASE_URL='https://wrzssivgxituefcwobbr.supabase.co',SUPABASE_KEY='sb_publishable_3mi5iJCxekZfiyXojUFtQg_gDASyEWm';const client=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);let students=[],results=[],rows=[];
+async function login(){document.getElementById('loginBtn').disabled=true;document.getElementById('msg').textContent='Logging in...';try{const {data,error}=await client.auth.signInWithPassword({email:document.getElementById('email').value.trim(),password:document.getElementById('password').value});if(error)throw error;if(!data.session)throw new Error('No login session returned');await show()}catch(e){document.getElementById('msg').textContent='LOGIN ERROR: '+(e.message||e);document.getElementById('loginBtn').disabled=false}}
+async function logout(){await client.auth.signOut();location.reload()}
+async function show(){document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';document.getElementById('loadStatus').textContent='Loading database...';try{const s=await client.from('students').select('admission_no,student_name,class,centre,batch').order('admission_no');if(s.error)throw new Error('students: '+s.error.message);const r=await client.from('quiz_results').select('id,admission_no,subject,chapter,quiz_name,quiz_date,score,total,percentage,submitted_at').order('quiz_date',{ascending:false});if(r.error)throw new Error('quiz_results: '+r.error.message);students=s.data||[];results=r.data||[];rows=results.map(x=>{const st=students.find(y=>Number(y.admission_no)===Number(x.admission_no))||{};return {...x,student_name:st.student_name||'',class:st.class||'',centre:st.centre||'',batch:st.batch||''}});options('fc',students.map(x=>x.class));options('fb',students.map(x=>x.batch));options('fs',results.map(x=>x.subject));options('fq',results.map(x=>x.quiz_name));document.getElementById('loadStatus').textContent='Database connected successfully.';render()}catch(e){document.getElementById('loadStatus').textContent='DATABASE ERROR: '+(e.message||e)}}
+function options(id,a){const e=document.getElementById(id),u=[...new Set(a.filter(Boolean).map(String))].sort();e.innerHTML='<option value="">All</option>'+u.map(x=>'<option>'+esc(x)+'</option>').join('')}
+function filtered(){const c=fc.value,b=fb.value,s=fs.value,q=fq.value,d=fd.value;return rows.filter(x=>(!c||String(x.class)==c)&&(!b||String(x.batch)==b)&&(!s||x.subject==s)&&(!q||x.quiz_name==q)&&(!d||x.quiz_date==d))}
+function render(){const d=filtered(),c=fc.value,b=fb.value,p=students.filter(x=>(!c||String(x.class)==c)&&(!b||String(x.batch)==b));document.getElementById('students').textContent=p.length;const a=new Set(d.map(x=>Number(x.admission_no)));document.getElementById('attempted').textContent=a.size;document.getElementById('notattempted').textContent=Math.max(0,p.length-a.size);document.getElementById('average').textContent=(d.length?d.reduce((z,x)=>z+Number(x.percentage||0),0)/d.length:0).toFixed(1)+'%';document.getElementById('body').innerHTML=d.map(x=>'<tr><td>'+esc(x.admission_no)+'</td><td>'+esc(x.student_name)+'</td><td>'+esc(x.class)+'</td><td>'+esc(x.batch)+'</td><td>'+esc(x.centre)+'</td><td>'+esc(x.subject)+'</td><td>'+esc(x.quiz_name)+'</td><td>'+esc(x.quiz_date)+'</td><td>'+esc(x.score)+'/'+esc(x.total)+'</td><td>'+Number(x.percentage||0).toFixed(1)+'%</td></tr>').join('')||'<tr><td colspan="10">No records found.</td></tr>';let g={};d.forEach(x=>{let k=(x.class||'')+'|'+(x.batch||'');if(!g[k])g[k]={class:x.class,batch:x.batch,n:0,sum:0};g[k].n++;g[k].sum+=Number(x.percentage||0)});document.getElementById('summary').innerHTML=Object.values(g).map(x=>'<tr><td>'+esc(x.class)+'</td><td>'+esc(x.batch)+'</td><td>'+students.filter(s=>String(s.class)==String(x.class)&&String(s.batch)==String(x.batch)).length+'</td><td>'+x.n+'</td><td>'+(x.sum/x.n).toFixed(1)+'%</td></tr>').join('')||'<tr><td colspan="5">No records found.</td></tr>'}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}client.auth.getSession().then(({data})=>{if(data.session)show()});
+</script></body></html>
