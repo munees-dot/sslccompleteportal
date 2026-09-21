@@ -1,228 +1,349 @@
 <!DOCTYPE html>
-<html lang="ml">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Quick Quiz — Chemical Communication in Organisms | Unit 4</title>
+<title>Daily Exam — Chemical Communication in Organisms | Biology Class 10</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#1f2937;
-  --paper:#f6f4fb;
-  --helix:#2d4f8a;
-  --helix-dark:#1a2f5c;
-  --gene:#7b3fa0;
-  --gene-light:#ede1f5;
-  --trait:#2e8b57;
-  --line:#dcd6ea;
-  --card:#ffffff;
+  --ink:#1f2937; --paper:#faf6ee; --chain:#2b6e63; --chain-dark:#184d44;
+  --branch:#c1622d; --func:#7b4fa0; --line:#e1d7c3; --card:#ffffff;
 }
 *{box-sizing:border-box;}
-body{
-  margin:0; background:var(--paper); color:var(--ink);
-  font-family:'Noto Sans Malayalam','Manjari',system-ui,sans-serif;
-  line-height:1.55;
-}
-header{
-  background:linear-gradient(135deg,var(--helix-dark),var(--helix) 65%);
-  color:#fff; padding:20px 18px 50px; position:relative; overflow:hidden; text-align:center;
-}
-header .backbone{ position:absolute; inset:0; opacity:.15;
-  background-image: repeating-linear-gradient(115deg, transparent 0 38px, #fff 38px 40px); }
-header h1{ margin:0 0 4px; font-size:1.3rem; position:relative; z-index:1; }
-header p.sub{ margin:0 0 12px; opacity:.85; font-size:.88rem; position:relative; z-index:1; }
-.lang-toggle{ position:relative; z-index:1; display:inline-flex; gap:4px; background:rgba(255,255,255,.15); padding:4px; border-radius:20px; }
-.lang-toggle button{
-  border:none; background:transparent; color:#fff; padding:6px 16px; border-radius:16px;
-  cursor:pointer; font-family:inherit; font-size:.85rem; font-weight:600; opacity:.7;
-}
-.lang-toggle button.active{ background:#fff; color:var(--helix-dark); opacity:1; }
-.wrap{ max-width:560px; margin:-32px auto 40px; padding:0 14px; position:relative; z-index:2; }
-.card{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px; margin-bottom:16px; box-shadow:0 8px 24px rgba(26,47,92,.1); }
-h2.section-title{ color:var(--helix-dark); border-bottom:3px solid var(--gene); display:inline-block; padding-bottom:4px; margin-top:0; font-size:1.1rem; }
-.quiz-opts button{ display:block; width:100%; text-align:left; margin:6px 0; padding:12px 14px; border:1px solid var(--line); background:#fff; border-radius:9px; cursor:pointer; font-family:inherit; font-size:.95rem; }
-.quiz-opts button.correct{ background:#dff3e8; border-color:var(--trait); font-weight:600; }
-.quiz-opts button.wrong{ background:#fbe4e0; border-color:var(--gene); }
-.quiz-opts button[disabled]{ cursor:default; }
-.quiz-nav{ display:flex; justify-content:space-between; margin-top:14px; }
-.quiz-nav button:disabled{ opacity:.4; cursor:default; }
-.score-bar{ background:var(--helix-dark); color:#fff; border-radius:10px; padding:10px 16px; margin-bottom:14px; font-size:.9rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
-.btn{ background:var(--gene); color:#fff; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; font-family:inherit; font-weight:600; }
-.btn.secondary{ background:var(--helix); }
-.btn.block{ width:100%; margin-top:8px; }
-.share-toast{ display:none; margin-top:12px; background:var(--helix-dark); color:#fff; padding:9px 14px; border-radius:8px; font-size:.85rem; text-align:center; }
-.share-toast.show{ display:block; }
-.result-box{ text-align:center; padding:20px 10px; }
-.result-box .big{ font-size:2.4rem; font-weight:700; color:var(--helix-dark); margin:6px 0; }
-footer.note{ text-align:center; font-size:.78rem; color:#8a8067; margin:30px 0 10px; }
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.55;}
+body[data-lang="ml"]{font-family:'Noto Sans Malayalam','Segoe UI',system-ui,sans-serif;}
+header{background:linear-gradient(135deg,var(--chain-dark),var(--chain) 65%);color:#fff;padding:22px 18px;}
+header h1{margin:0 0 4px;font-size:1.3rem;}
+header p{margin:0;opacity:.85;font-size:.88rem;}
+.wrap{max-width:600px;margin:20px auto 40px;padding:0 14px;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(31,41,55,.04);}
+.toolbar{display:flex;justify-content:flex-end;margin-bottom:14px;}
+.toolbar button{border:none;background:var(--func);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;font-size:.85rem;}
+.score-bar{background:var(--chain-dark);color:#fff;border-radius:10px;padding:10px 16px;margin-bottom:14px;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;}
+.btn{background:var(--branch);color:#fff;border:none;padding:9px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:600;}
+.quiz-q{margin-bottom:16px;padding-bottom:14px;border-bottom:1px dashed var(--line);}
+.quiz-q:last-child{border-bottom:none;}
+.quiz-opts button{display:block;width:100%;text-align:left;margin:5px 0;padding:8px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.9rem;}
+.quiz-opts button.correct{background:#dff3e8;border-color:var(--chain);font-weight:600;}
+.quiz-opts button.wrong{background:#fbe4e0;border-color:var(--branch);}
+.quiz-opts button[disabled]{cursor:default;}
+.qflabel{font-weight:600;font-size:.85rem;color:var(--ink);margin:0 0 6px;}
+.qstart input,.qstart select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:.92rem;margin:0 0 12px;background:#fff;color:var(--ink);}
+.qstart input:focus,.qstart select:focus{outline:none;border-color:var(--chain);}
+.qerr{color:#a33;font-size:.82rem;margin:-6px 0 12px;display:none;}
+.qerr.show{display:block;}
+.qwho{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--ink);background:#f2f7f5;border-radius:8px;padding:6px 12px;margin:0 0 12px;flex-wrap:wrap;gap:4px;}
+.qwho b{color:var(--chain-dark);}
+.qwho button{border:none;background:none;color:var(--chain-dark);font-weight:700;cursor:pointer;font-family:inherit;font-size:.78rem;text-decoration:underline;}
+.result-big{font-size:2.6rem;font-weight:700;color:var(--chain-dark);text-align:center;}
+.result-lbl{text-align:center;font-weight:600;font-size:1.1rem;margin-top:4px;}
+.result-msg{text-align:center;color:#555;margin-top:4px;}
+.qsent{font-size:.8rem;text-align:center;margin-top:10px;color:#555;}
+.qsent.ok{color:var(--chain-dark);}
+.gatebox{text-align:center;padding:10px 4px;}
+.gatebox b{color:var(--chain-dark);}
+footer{text-align:center;font-size:.78rem;color:#8a8067;margin:20px 0 10px;}
 </style>
 </head>
 <body>
-
 <header>
-  <div class="backbone"></div>
-  <h1>Quick Quiz — Chemical Communication</h1>
-  <p class="sub">Biology · Class 10 · Unit 4</p>
-  <div class="lang-toggle">
-    <button id="langMlBtn" class="active" onclick="setLang('ml')">മലയാളം</button>
-    <button id="langEnBtn" onclick="setLang('en')">English</button>
-  </div>
+  <h1 id="pageTitle">Daily Exam</h1>
+  <p id="pageSub">Biology · Class 10 · Chemical Communication in Organisms</p>
 </header>
-
 <div class="wrap">
+  <div class="toolbar"><button id="langBtn" onclick="toggleLang()">🌐 മലയാളം</button></div>
   <div class="card">
-    <h2 class="section-title" data-ml="ക്വിക്ക് ക്വിസ്" data-en="Quick Quiz">ക്വിക്ക് ക്വിസ്</h2>
-    <div class="score-bar">
-      <span>
-        <span data-ml="സ്കോർ:" data-en="Score:">സ്കോർ:</span> <b id="scoreVal">0</b> / <span id="totalVal">0</span>
-        &nbsp;·&nbsp; <span data-ml="ചോദ്യം" data-en="Question">ചോദ്യം</span> <b id="qPos">1</b> / <span id="qTotal">0</span>
-      </span>
+    <div id="gateBox" style="display:none"></div>
+    <div id="startBox" style="display:none"></div>
+    <div id="quizBox" style="display:none">
+      <div class="score-bar">
+        <span><span id="scoreLabel">Score:</span> <b id="scoreVal">0</b> / <span id="totalVal">0</span></span>
+      </div>
+      <div id="quizContainer"></div>
     </div>
-    <div id="quizContainer"></div>
-    <div id="resultContainer" style="display:none;"></div>
-    <div class="quiz-nav">
-      <button class="btn secondary" id="prevBtn" onclick="prevQuestion()" data-ml="← മുമ്പത്തേത്" data-en="← Previous">← മുമ്പത്തേത്</button>
-      <button class="btn" id="nextBtn" onclick="nextQuestion()" data-ml="അടുത്തത് →" data-en="Next →">അടുത്തത് →</button>
-    </div>
-    <button class="btn secondary block" onclick="shareScore()" data-ml="🔗 സ്കോർ പങ്കിടുക" data-en="🔗 Share Score">🔗 സ്കോർ പങ്കിടുക</button>
-    <button class="btn block" style="background:var(--helix-dark);" onclick="resetQuiz()" data-ml="വീണ്ടും ചെയ്യുക" data-en="Retry">വീണ്ടും ചെയ്യുക</button>
-    <div id="shareToast" class="share-toast"></div>
+    <div id="resultBox" style="display:none"></div>
   </div>
+  <footer>Abacus Academy · EduPro Study Tools · Class 10 Biology</footer>
 </div>
-
-<footer class="note">Abacus Academy · Class 10 Biology · Unit 3 Quiz</footer>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-let currentLang = 'ml';
-function setLang(lang){
-  currentLang = lang;
-  document.getElementById('langMlBtn').classList.toggle('active', lang === 'ml');
-  document.getElementById('langEnBtn').classList.toggle('active', lang === 'en');
-  document.querySelectorAll('[data-ml][data-en]').forEach(el=>{
-    el.textContent = (lang === 'ml') ? el.dataset.ml : el.dataset.en;
-  });
-  quizData = (lang === 'ml') ? quizDataML : quizDataEN;
-  renderQuestion();
-}
+let currentLang = "en";
+const quizData = [{"q":"Which scientist discovered auxin using the coleoptile tip of oat seedlings?","q_ml":"ഓട്സ് സസ്യത്തിന്റെ ബീജശീർഷാഗ്രം ഉപയോഗിച്ച് ഓക്സിൻ കണ്ടെത്തിയ ശാസ്ത്രജ്ഞൻ ആര്?","opts":["Charles Darwin","F.W. Went","Gregor Mendel","Edward Jenner"],"opts_ml":["ചാൾസ് ഡാർവിൻ","F.W. വെന്റ്","ഗ്രിഗർ മെൻഡൽ","ജെന്നർ"],"ans":1},{"q":"Which plant hormone helps ripen fruits?","q_ml":"ഫലങ്ങൾ പാകമാക്കാൻ സഹായിക്കുന്ന സസ്യഹോർമോൺ ഏത്?","opts":["Auxin","Gibberellin","Ethylene","Cytokinin"],"opts_ml":["ഓക്സിൻ","ജിബ്ബറലിൻ","എഥിലീൻ","സൈറ്റോകിനിൻ"],"ans":2},{"q":"Which hormone maintains seed dormancy?","q_ml":"വിത്തുകളുടെ സുപ്താവസ്ഥ നിലനിർത്തുന്ന ഹോർമോൺ ഏത്?","opts":["Abscisic acid","Gibberellin","Auxin","Ethylene"],"opts_ml":["അബ്സിസിക് ആസിഡ്","ജിബ്ബറലിൻ","ഓക്സിൻ","എഥിലീൻ"],"ans":0},{"q":"Which thyroid hormone regulates metabolism?","q_ml":"തൈറോയ്ഡ് ഗ്രന്ഥി ഉൽപാദിപ്പിക്കുന്ന, മെറ്റബോളിസം നിയന്ത്രിക്കുന്ന ഹോർമോൺ ഏത്?","opts":["Insulin","Thyroxine","Parathormone","Melatonin"],"opts_ml":["ഇൻസുലിൻ","തൈറോക്സിൻ","പാരാതൊർമോൺ","മെലാടോണിൻ"],"ans":1},{"q":"Which hormone raises blood calcium?","q_ml":"രക്തത്തിലെ കാൽസ്യം കൂട്ടുന്ന ഹോർമോൺ ഏത്?","opts":["Calcitonin","Insulin","Parathormone","Thyroxine"],"opts_ml":["കാൽസിടോണിൻ","ഇൻസുലിൻ","പാരാതൊർമോൺ","തൈറോക്സിൻ"],"ans":2},{"q":"Which hormone do the beta cells of the pancreas produce?","q_ml":"പാൻക്രിയാസിലെ ബീറ്റാ കോശങ്ങൾ ഉൽപാദിപ്പിക്കുന്ന ഹോർമോൺ ഏത്?","opts":["Glucagon","Insulin","Ghrelin","Leptin"],"opts_ml":["ഗ്ലൂക്കഗോൺ","ഇൻസുലിൻ","ഗ്രെലിൻ","ലെപ്റ്റിൻ"],"ans":1},{"q":"Which pituitary hormone maintains water balance?","q_ml":"ജലസന്തുലനം നിലനിർത്തുന്ന പിറ്റ്യൂട്ടറി ഹോർമോൺ ഏത്?","opts":["Oxytocin","Prolactin","Vasopressin (ADH)","TSH"],"opts_ml":["ഓക്സിടോസിൻ","പ്രോലാക്റ്റിൻ","വാസോപ്രസിൻ (ADH)","TSH"],"ans":2},{"q":"Which gland produces the hormone that regulates sleep and wakefulness?","q_ml":"ഉറക്കത്തെയും ഉണരലിനെയും നിയന്ത്രിക്കുന്ന ഹോർമോൺ ഏത് ഗ്രന്ഥി ഉൽപാദിപ്പിക്കുന്നു?","opts":["Thymus gland","Pineal gland","Adrenal gland","Parathyroid"],"opts_ml":["തൈമസ് ഗ്രന്ഥി","പീനിയൽ ഗ്രന്ഥി","അഡ്രിനൽ ഗ്രന്ഥി","പാരാതൈറോയ്ഡ്"],"ans":1},{"q":"Which is known as the \"hunger hormone\"?","q_ml":"\"വിശപ്പ് ഹോർമോൺ\" എന്നറിയപ്പെടുന്നത് ഏത്?","opts":["Leptin","Ghrelin","Insulin","Thymosin"],"opts_ml":["ലെപ്റ്റിൻ","ഗ്രെലിൻ","ഇൻസുലിൻ","തൈമോസിൻ"],"ans":1},{"q":"Which gland produces the hormone that helps mature T lymphocytes?","q_ml":"T ലിംഫോസൈറ്റുകളുടെ പാകപ്പെടലിന് സഹായിക്കുന്ന ഹോർമോൺ ഏത് ഗ്രന്ഥി ഉൽപാദിപ്പിക്കുന്നു?","opts":["Thyroid","Thymus","Pineal","Adrenal"],"opts_ml":["തൈറോയ്ഡ്","തൈമസ്","പീനിയൽ","അഡ്രിനൽ"],"ans":1},{"q":"What is the cell that a hormone acts upon called?","q_ml":"ഒരു ഹോർമോൺ പ്രവർത്തിക്കുന്ന കോശത്തെ എന്ത് വിളിക്കുന്നു?","opts":["Target cell","Neuron","Gland cell","Receptor cell"],"opts_ml":["ലക്ഷ്യകോശം (Target cell)","ന്യൂറോൺ","ഗ്രന്ഥികോശം","റിസപ്റ്റർ കോശം"],"ans":0},{"q":"What is the phenomenon called where auxin suppresses the growth of lateral buds?","q_ml":"ഓക്സിൻ പാർശ്വമുകുളങ്ങളുടെ വളർച്ച തടയുന്ന പ്രതിഭാസത്തിന്റെ പേരെന്ത്?","opts":["Phototropism","Apical dominance","Geotropism","Thigmotropism"],"opts_ml":["ഫോട്ടോട്രോപിസം","ഏപ്പിക്കൽ ഡോമിനൻസ്","ജിയോട്രോപിസം","തിഗ്മോട്രോപിസം"],"ans":1},{"q":"In agriculture, synthetic plant hormones are mainly used for?","q_ml":"കൃഷിയിൽ കൃത്രിമ സസ്യഹോർമോണുകൾ പ്രധാനമായും ഏതിനായി ഉപയോഗിക്കുന്നു?","opts":["Soil testing","As weedkillers and to ripen fruit artificially","Irrigation","Seed storage"],"opts_ml":["മണ്ണ് പരിശോധനയ്ക്ക്","കള നശിപ്പിക്കാനും ഫലം കൃത്രിമമായി പാകമാക്കാനും","ജലസേചനത്തിന്","വിത്ത് സൂക്ഷിക്കാൻ"],"ans":1},{"q":"Which gland produces hormones that prepare the body for emergencies?","q_ml":"അടിയന്തരഘട്ടങ്ങളിൽ ശരീരത്തെ സജ്ജമാക്കുന്ന ഹോർമോണുകൾ ഏത് ഗ്രന്ഥി ഉൽപാദിപ്പിക്കുന്നു?","opts":["Thymus gland","Adrenal gland","Pineal gland","Parathyroid gland"],"opts_ml":["തൈമസ് ഗ്രന്ഥി","അഡ്രിനൽ ഗ്രന്ഥി","പീനിയൽ ഗ്രന്ഥി","പാരാതൈറോയ്ഡ്"],"ans":1},{"q":"Which condition results from excess growth hormone during the growth period?","q_ml":"വളർച്ചാ കാലഘട്ടത്തിൽ GH അധികമായാൽ ഉണ്ടാകുന്ന അവസ്ഥ ഏത്?","opts":["Dwarfism","Gigantism","Acromegaly","Goitre"],"opts_ml":["വാമനത്വം","ഭീമാകാരത്വം (Gigantism)","അക്രോമെഗലി","ഗോയിറ്റർ"],"ans":1},{"q":"Which condition results from excess growth hormone after growth is complete?","q_ml":"വളർച്ച പൂർത്തിയായ ശേഷം GH അധികമായാൽ ഉണ്ടാകുന്ന അവസ്ഥ ഏത്?","opts":["Gigantism","Dwarfism","Acromegaly","Goitre"],"opts_ml":["ഭീമാകാരത്വം","വാമനത്വം","അക്രോമെഗലി","ഗോയിറ്റർ"],"ans":2},{"q":"Which hormone is produced by the testes?","q_ml":"വൃഷണം ഉൽപാദിപ്പിക്കുന്ന ഹോർമോൺ ഏത്?","opts":["Estrogen","Testosterone","Progesterone","Oxytocin"],"opts_ml":["ഈസ്ട്രജൻ","ടെസ്റ്റോസ്റ്റിറോൺ","പ്രൊജസ്ട്രോൺ","ഓക്സിടോസിൻ"],"ans":1},{"q":"Increased production of thyroxine causes which condition?","q_ml":"തൈറോക്സിന്റെ ഉൽപാദനം കൂടുന്നത് ഏത് അവസ്ഥയ്ക്ക് കാരണമാകുന്നു?","opts":["Hypothyroidism","Hyperthyroidism","Diabetes","Dwarfism"],"opts_ml":["ഹൈപ്പോതൈറോയ്ഡിസം","ഹൈപ്പർതൈറോയ്ഡിസം","പ്രമേഹം","വാമനത്വം"],"ans":1},{"q":"What is a major cause of goitre?","q_ml":"ഗോയിറ്ററിന് ഒരു പ്രധാന കാരണം ഏത്?","opts":["Iodine deficiency","Excess calcium","Vitamin D deficiency","Iron deficiency"],"opts_ml":["അയഡിന്റെ അപര്യാപ്തത","കാൽസ്യത്തിന്റെ അധികം","വിറ്റാമിൻ D കുറവ്","ഇരുമ്പിന്റെ അപര്യാപ്തത"],"ans":0},{"q":"Which hormone does the parathyroid gland secrete to raise blood calcium?","q_ml":"രക്തത്തിലെ കാൽസ്യം കൂട്ടാൻ പാരാതൈറോയ്ഡ് ഗ്രന്ഥി സ്രവിക്കുന്ന ഹോർമോൺ ഏത്?","opts":["Calcitonin","Parathormone","Insulin","Glucagon"],"opts_ml":["കാൽസിടോണിൻ","പാരാതൊർമോൺ","ഇൻസുലിൻ","ഗ്ലൂക്കഗോൺ"],"ans":1}];
 
-const quizDataML = [
-  { q:"ഓട്സ് സസ്യത്തിന്റെ ബീജശീർഷാഗ്രം ഉപയോഗിച്ച് ഓക്സിൻ കണ്ടെത്തിയ ശാസ്ത്രജ്ഞൻ ആര്?", opts:["ചാൾസ് ഡാർവിൻ","F.W. വെന്റ്","ഗ്രിഗർ മെൻഡൽ","ജെന്നർ"], ans:1 },
-  { q:"ഫലങ്ങൾ പാകമാക്കാൻ സഹായിക്കുന്ന സസ്യഹോർമോൺ ഏത്?", opts:["ഓക്സിൻ","ജിബ്ബറലിൻ","എഥിലീൻ","സൈറ്റോകിനിൻ"], ans:2 },
-  { q:"വിത്തുകളുടെ സുപ്താവസ്ഥ നിലനിർത്തുന്ന ഹോർമോൺ ഏത്?", opts:["അബ്സിസിക് ആസിഡ്","ജിബ്ബറലിൻ","ഓക്സിൻ","എഥിലീൻ"], ans:0 },
-  { q:"തൈറോയ്ഡ് ഗ്രന്ഥി ഉൽപാദിപ്പിക്കുന്ന, മെറ്റബോളിസം നിയന്ത്രിക്കുന്ന ഹോർമോൺ ഏത്?", opts:["ഇൻസുലിൻ","തൈറോക്സിൻ","പാരാതൊർമോൺ","മെലാടോണിൻ"], ans:1 },
-  { q:"രക്തത്തിലെ കാൽസ്യം കൂട്ടുന്ന ഹോർമോൺ ഏത്?", opts:["കാൽസിടോണിൻ","ഇൻസുലിൻ","പാരാതൊർമോൺ","തൈറോക്സിൻ"], ans:2 },
-  { q:"പാൻക്രിയാസിലെ ബീറ്റാ കോശങ്ങൾ ഉൽപാദിപ്പിക്കുന്ന ഹോർമോൺ ഏത്?", opts:["ഗ്ലൂക്കഗോൺ","ഇൻസുലിൻ","ഗ്രെലിൻ","ലെപ്റ്റിൻ"], ans:1 },
-  { q:"ജലസന്തുലനം നിലനിർത്തുന്ന പിറ്റ്യൂട്ടറി ഹോർമോൺ ഏത്?", opts:["ഓക്സിടോസിൻ","പ്രോലാക്റ്റിൻ","വാസോപ്രസിൻ (ADH)","TSH"], ans:2 },
-  { q:"ഉറക്കത്തെയും ഉണരലിനെയും നിയന്ത്രിക്കുന്ന ഹോർമോൺ ഏത് ഗ്രന്ഥി ഉൽപാദിപ്പിക്കുന്നു?", opts:["തൈമസ് ഗ്രന്ഥി","പീനിയൽ ഗ്രന്ഥി","അഡ്രിനൽ ഗ്രന്ഥി","പാരാതൈറോയ്ഡ്"], ans:1 },
-  { q:"\"വിശപ്പ് ഹോർമോൺ\" എന്നറിയപ്പെടുന്നത് ഏത്?", opts:["ലെപ്റ്റിൻ","ഗ്രെലിൻ","ഇൻസുലിൻ","തൈമോസിൻ"], ans:1 },
-  { q:"T ലിംഫോസൈറ്റുകളുടെ പാകപ്പെടലിന് സഹായിക്കുന്ന ഹോർമോൺ ഏത് ഗ്രന്ഥി ഉൽപാദിപ്പിക്കുന്നു?", opts:["തൈറോയ്ഡ്","തൈമസ്","പീനിയൽ","അഡ്രിനൽ"], ans:1 }
-];
-const quizDataEN = [
-  { q:"Which scientist discovered auxin using the coleoptile tip of oat seedlings?", opts:["Charles Darwin","F.W. Went","Gregor Mendel","Edward Jenner"], ans:1 },
-  { q:"Which plant hormone helps ripen fruits?", opts:["Auxin","Gibberellin","Ethylene","Cytokinin"], ans:2 },
-  { q:"Which hormone maintains seed dormancy?", opts:["Abscisic acid","Gibberellin","Auxin","Ethylene"], ans:0 },
-  { q:"Which thyroid hormone regulates metabolism?", opts:["Insulin","Thyroxine","Parathormone","Melatonin"], ans:1 },
-  { q:"Which hormone raises blood calcium?", opts:["Calcitonin","Insulin","Parathormone","Thyroxine"], ans:2 },
-  { q:"Which hormone do the beta cells of the pancreas produce?", opts:["Glucagon","Insulin","Ghrelin","Leptin"], ans:1 },
-  { q:"Which pituitary hormone maintains water balance?", opts:["Oxytocin","Prolactin","Vasopressin (ADH)","TSH"], ans:2 },
-  { q:"Which gland produces the hormone that regulates sleep and wakefulness?", opts:["Thymus gland","Pineal gland","Adrenal gland","Parathyroid"], ans:1 },
-  { q:"Which is known as the \"hunger hormone\"?", opts:["Leptin","Ghrelin","Insulin","Thymosin"], ans:1 },
-  { q:"Which gland produces the hormone that helps mature T lymphocytes?", opts:["Thyroid","Thymus","Pineal","Adrenal"], ans:1 }
-];
-let quizData = quizDataML;
+/* ---- daily-exam config ---- */
+const QUIZ_OPEN_HOUR = 21;
+const SUPABASE_URL = "https://wrzssivgxituefcwobbr.supabase.co";
+const SUPABASE_KEY = "sb_publishable_3mi5iJCxekZfiyXojUFtQg_gDASyEWm";
+const SUBJECT_NAME = "Biology";
+function getSB(){ if(!window._sbClient){ window._sbClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } return window._sbClient; }
+const CHAPTER_TITLE = "Chemical Communication in Organisms | Biology Unit 4";
+
+const STR = {
+  en:{ gateTitle:"Today's exam opens at 9:00 PM.", nowLabel:"Current time: ",
+       nameLabel:"Name", namePh:"e.g. Amal Krishna",
+       centreLabel:"Centre", centrePh:"Select", centre1:"Abacus Academy, Puthur Pallikkal", centre2:"Abacus Academy, Parambil Peedika",
+       admLabel:"Admission number", admPh:"e.g. 24",
+       errFields:"Please fill in all fields", startBtn:"Start exam", attemptedAs:"Attempting as:", notYou:"Not you",
+       checking:"Checking...", alreadyAttempted:"This admission number has already attempted today's exam — one attempt per student.",
+       score:"Score:", correct:"correct",
+       good:"Excellent! Well studied.", mid:"Coming along nicely.", low:"Read the notes once more and try again.",
+       sending:"Recording result...", sentOk:"Result recorded", sentFail:"Network busy — retrying, don't close the page",
+       sentAlready:"Result was already recorded", newStudent:"Next student / New attempt" },
+  ml:{ gateTitle:"ക്വിസ് ഇന്ന് രാത്രി 9 മണിക്ക് ആരംഭിക്കും.", nowLabel:"ഇപ്പോൾ സമയം: ",
+       nameLabel:"പേര്", namePh:"ഉദാ: അമൽ കൃഷ്ണ",
+       centreLabel:"സെന്റർ", centrePh:"തിരഞ്ഞെടുക്കുക", centre1:"Abacus Academy, Puthur Pallikkal", centre2:"Abacus Academy, Parambil Peedika",
+       admLabel:"അഡ്മിഷൻ നമ്പർ", admPh:"ഉദാ: 24",
+       errFields:"എല്ലാ വിവരങ്ങളും പൂരിപ്പിക്കുക", startBtn:"പരീക്ഷ തുടങ്ങൂ", attemptedAs:"എഴുതുന്നത്:", notYou:"ഞാനല്ല",
+       checking:"പരിശോധിക്കുന്നു...", alreadyAttempted:"ഈ അഡ്മിഷൻ നമ്പർ ഉപയോഗിച്ച് ഇന്ന് നേരത്തെ എഴുതിയിട്ടുണ്ട് — ഒരു കുട്ടിക്ക് ഒരു അവസരം മാത്രം.",
+       score:"സ്കോർ:", correct:"ശരി",
+       good:"മികച്ചത്! നന്നായി പഠിച്ചു.", mid:"നന്നായി വരുന്നു — ഒന്നു കൂടി റിവിഷൻ ചെയ്യാം.", low:"കുറിപ്പുകൾ ഒന്നുകൂടി വായിച്ച് വീണ്ടും ശ്രമിക്കാം.",
+       sending:"ഫലം രേഖപ്പെടുത്തുന്നു...", sentOk:"ഫലം രേഖപ്പെടുത്തി", sentFail:"നെറ്റ്‌വർക്ക് തിരക്ക് — വീണ്ടും ശ്രമിക്കുന്നു, പേജ് അടയ്ക്കരുത്",
+       sentAlready:"ഫലം നേരത്തെ രേഖപ്പെടുത്തിയിരുന്നു", newStudent:"അടുത്ത കുട്ടി / പുതിയ ശ്രമം" }
+};
 
 let score = 0;
-let currentQ = 0;
-let userAnswers = new Array(quizDataML.length).fill(null);
+let quizState = 'gate';
+let studentName = '', studentCentre = '', studentAdmission = '';
+let resultSubmitted = false;
+let _gateOpenSeen = null;
 
-function renderQuestion(){
-  document.getElementById('quizContainer').style.display = 'block';
-  document.getElementById('resultContainer').style.display = 'none';
-  document.querySelector('.quiz-nav').style.display = 'flex';
+function isQuizOpen(){ return new Date().getHours() >= QUIZ_OPEN_HOUR; }
+
+function toggleLang(){
+  currentLang = currentLang === 'en' ? 'ml' : 'en';
+  document.getElementById('langBtn').textContent = currentLang === 'en' ? '🌐 മലയാളം' : '🌐 English';
+  document.getElementById('pageTitle').textContent = currentLang === 'ml' ? 'ദിവസേനയുള്ള പരീക്ഷ' : 'Daily Exam';
+  document.getElementById('pageSub').textContent = currentLang === 'ml' ? 'ജീവശാസ്ത്രം · ക്ലാസ് 10 · ജീവികളിലെ രാസസംവേദനം' : 'Biology · Class 10 · Chemical Communication in Organisms';
+  document.body.setAttribute('data-lang', currentLang);
+  document.documentElement.lang = currentLang;
+  render();
+}
+
+function render(){
+  document.getElementById('gateBox').style.display = 'none';
+  document.getElementById('startBox').style.display = 'none';
+  document.getElementById('quizBox').style.display = 'none';
+  document.getElementById('resultBox').style.display = 'none';
+  if(quizState === 'gate') renderGate();
+  else if(quizState === 'start') renderStart();
+  else if(quizState === 'quiz') renderQuiz();
+  else renderResult();
+}
+
+function renderGate(){
+  const t = STR[currentLang];
+  const box = document.getElementById('gateBox');
+  box.style.display = 'block';
+  box.innerHTML = '<div class="gatebox"><b>📌 ' + t.gateTitle + '</b><br>' + t.nowLabel + new Date().toLocaleTimeString('en-GB') + '</div>';
+}
+
+function renderStart(){
+  const t = STR[currentLang];
+  const box = document.getElementById('startBox');
+  box.style.display = 'block';
+  box.innerHTML =
+    '<div class="qstart">' +
+    '<p class="qflabel">' + t.nameLabel + '</p>' +
+    '<input type="text" id="stName" placeholder="' + t.namePh + '" value="' + studentName.replace(/"/g,'&quot;') + '">' +
+    '<p class="qflabel">' + t.centreLabel + '</p>' +
+    '<select id="stCentre">' +
+      '<option value="">' + t.centrePh + '</option>' +
+      '<option value="Abacus Academy, Puthur Pallikkal"' + (studentCentre==='Abacus Academy, Puthur Pallikkal'?' selected':'') + '>' + t.centre1 + '</option>' +
+      '<option value="Abacus Academy, Parambil Peedika"' + (studentCentre==='Abacus Academy, Parambil Peedika'?' selected':'') + '>' + t.centre2 + '</option>' +
+    '</select>' +
+    '<p class="qflabel">' + t.admLabel + '</p>' +
+    '<input type="text" id="stAdm" inputmode="numeric" placeholder="' + t.admPh + '" value="' + studentAdmission.replace(/"/g,'&quot;') + '">' +
+    '<p class="qerr" id="qerr"></p>' +
+    '<button class="btn" id="startBtn" style="width:100%">' + t.startBtn + '</button>' +
+    '</div>';
+  document.getElementById('startBtn').addEventListener('click', beginExam);
+}
+
+const ATTEMPT_KEY = 'chemExamAttempts_v1';
+function todayISO(){ const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+function todayStr(){ return todayISO(); }
+function getAttempts(){ try{ return JSON.parse(localStorage.getItem(ATTEMPT_KEY) || '{}'); }catch(e){ return {}; } }
+function markAttempted(adm){
+  const map = getAttempts(); const d = todayISO();
+  if(!map[d]) map[d] = [];
+  if(map[d].indexOf(adm) === -1) map[d].push(adm);
+  try{ localStorage.setItem(ATTEMPT_KEY, JSON.stringify(map)); }catch(e){}
+}
+function isAttemptedOnThisDevice(adm){
+  const map = getAttempts(); const d = todayISO();
+  return !!(map[d] && map[d].indexOf(adm) !== -1);
+}
+function checkAlreadyAttemptedOnServer(adm){
+  const admVal = isNaN(Number(adm)) ? adm : Number(adm);
+  const timeout = new Promise(function(res){ setTimeout(function(){ res(null); }, 5000); });
+  const query = getSB().from('quiz_results').select('id').eq('admission_no', admVal).eq('quiz_name', CHAPTER_TITLE).eq('quiz_date', todayISO())
+    .then(function(res){ return (res.data && res.data.length > 0); }).catch(function(){ return null; });
+  return Promise.race([query, timeout]).then(function(r){ return r === true; });
+}
+
+function beginExam(){
+  const t = STR[currentLang];
+  const nameVal = document.getElementById('stName').value.trim();
+  const centreVal = document.getElementById('stCentre').value;
+  const admVal = document.getElementById('stAdm').value.trim();
+  const errEl = document.getElementById('qerr');
+  if(!nameVal || !centreVal || !admVal){ errEl.textContent = t.errFields; errEl.classList.add('show'); return; }
+
+  if(isAttemptedOnThisDevice(admVal)){
+    errEl.textContent = t.alreadyAttempted; errEl.classList.add('show'); return;
+  }
+
+  const btn = document.getElementById('startBtn');
+  btn.disabled = true; btn.textContent = t.checking;
+  errEl.classList.remove('show');
+
+  checkAlreadyAttemptedOnServer(admVal).then(function(taken){
+    if(taken){
+      btn.disabled = false; btn.textContent = t.startBtn;
+      errEl.textContent = t.alreadyAttempted; errEl.classList.add('show');
+      return;
+    }
+    studentName = nameVal; studentCentre = centreVal; studentAdmission = admVal;
+    score = 0; resultSubmitted = false;
+    quizState = 'quiz';
+    render();
+  });
+}
+
+function renderQuiz(){
+  const t = STR[currentLang];
+  const box = document.getElementById('quizBox');
+  box.style.display = 'block';
+  document.getElementById('scoreLabel').textContent = t.score;
+  document.getElementById('scoreVal').textContent = 0;
+  document.getElementById('totalVal').textContent = quizData.length;
+  score = 0;
   const container = document.getElementById('quizContainer');
   container.innerHTML = '';
-  document.getElementById('totalVal').textContent = quizData.length;
-  document.getElementById('qTotal').textContent = quizData.length;
-  document.getElementById('qPos').textContent = currentQ + 1;
-
-  const item = quizData[currentQ];
-  const qDiv = document.createElement('div');
-  qDiv.innerHTML = `<p><b>${currentQ+1}.</b> ${item.q}</p><div class="quiz-opts"></div>`;
-  const optsDiv = qDiv.querySelector('.quiz-opts');
-  const alreadyAnswered = userAnswers[currentQ] !== null;
-
-  item.opts.forEach((opt, oIdx)=>{
-    const b = document.createElement('button');
-    b.textContent = opt;
-    if(alreadyAnswered){
-      b.disabled = true;
-      if(oIdx === item.ans) b.classList.add('correct');
-      else if(oIdx === userAnswers[currentQ]) b.classList.add('wrong');
-    }
-    b.addEventListener('click', ()=>{
-      if(b.disabled) return;
-      const allBtns = optsDiv.querySelectorAll('button');
-      allBtns.forEach(x=>x.disabled=true);
-      userAnswers[currentQ] = oIdx;
-      if(oIdx === item.ans){ b.classList.add('correct'); score++; }
-      else { b.classList.add('wrong'); allBtns[item.ans].classList.add('correct'); }
-      document.getElementById('scoreVal').textContent = score;
+  const who = document.createElement('div');
+  who.className = 'qwho';
+  who.innerHTML = '<span>' + t.attemptedAs + ' <b>' + studentName + '</b> · ' + studentAdmission + '</span>';
+  container.appendChild(who);
+  quizData.forEach(function(item, idx){
+    const qText = currentLang === 'ml' ? item.q_ml : item.q;
+    const opts = currentLang === 'ml' ? item.opts_ml : item.opts;
+    const qDiv = document.createElement('div');
+    qDiv.className = 'quiz-q';
+    qDiv.innerHTML = '<p><b>' + (idx+1) + '.</b> ' + qText + '</p><div class="quiz-opts"></div>';
+    const optsDiv = qDiv.querySelector('.quiz-opts');
+    opts.forEach(function(opt, oIdx){
+      const b = document.createElement('button');
+      b.textContent = opt;
+      b.addEventListener('click', function(){
+        if(b.disabled) return;
+        const allBtns = optsDiv.querySelectorAll('button');
+        allBtns.forEach(function(x){ x.disabled = true; });
+        if(oIdx === item.ans){
+          b.classList.add('correct');
+          score++;
+        } else {
+          b.classList.add('wrong');
+          allBtns[item.ans].classList.add('correct');
+        }
+        document.getElementById('scoreVal').textContent = score;
+        if(idx === quizData.length - 1){
+          setTimeout(function(){ quizState = 'result'; render(); }, 600);
+        }
+      });
+      optsDiv.appendChild(b);
     });
-    optsDiv.appendChild(b);
+    container.appendChild(qDiv);
   });
-  container.appendChild(qDiv);
-  document.getElementById('prevBtn').disabled = (currentQ === 0);
-  document.getElementById('nextBtn').textContent = (currentQ === quizData.length - 1)
-    ? (currentLang === 'ml' ? 'ഫലം കാണുക →' : 'See Result →')
-    : (currentLang === 'ml' ? 'അടുത്തത് →' : 'Next →');
 }
 
-function showResult(){
-  document.getElementById('quizContainer').style.display = 'none';
-  document.querySelector('.quiz-nav').style.display = 'none';
-  const answeredCount = userAnswers.filter(a=>a!==null).length;
-  const box = document.getElementById('resultContainer');
+function sendToSupabase(fd){
+  return getSB().from('quiz_results').insert([{
+    admission_no: fd.admissionNumber,
+    subject: SUBJECT_NAME,
+    chapter: CHAPTER_TITLE,
+    quiz_name: CHAPTER_TITLE,
+    quiz_date: fd.date,
+    score: fd.score,
+    total: fd.total,
+    percentage: fd.percent,
+    submitted_at: new Date().toISOString()
+  }]);
+}
+const PENDING_KEY = 'chemExamPending_v1';
+function getPending(){ try{ return JSON.parse(localStorage.getItem(PENDING_KEY) || '[]'); }catch(e){ return []; } }
+function setPending(arr){ try{ localStorage.setItem(PENDING_KEY, JSON.stringify(arr)); }catch(e){} }
+function queuePending(fd){ const arr = getPending(); arr.push(fd); setPending(arr); }
+function removePending(fd){ setPending(getPending().filter(function(p){ return p._id !== fd._id; })); }
+let currentSubmitId = null;
+function trySend(fd, attempt){
+  attempt = attempt || 0;
+  sendToSupabase(fd).then(function(res){
+    if(res.error) throw res.error;
+    removePending(fd);
+    if(fd._id === currentSubmitId){ const el = document.getElementById('qsent'); if(el){ el.textContent = '✓ ' + STR[currentLang].sentOk; el.classList.add('ok'); } }
+  }).catch(function(){
+    if(attempt < 3){ setTimeout(function(){ trySend(fd, attempt + 1); }, 2500 * (attempt + 1)); }
+    else if(fd._id === currentSubmitId){ const el = document.getElementById('qsent'); if(el){ el.textContent = '⚠ ' + STR[currentLang].sentFail; } }
+  });
+}
+function flushPending(){
+  getPending().forEach(function(p){ trySend(p); });
+}
+function submitResult(pct){
+  const fd = {
+    _id: Date.now() + '-' + Math.random().toString(36).slice(2),
+    admissionNumber: studentAdmission,
+    score: score, total: quizData.length, percent: pct,
+    date: todayISO()
+  };
+  currentSubmitId = fd._id;
+  queuePending(fd);
+  trySend(fd);
+}
+
+function renderResult(){
+  const t = STR[currentLang];
+  const pct = Math.round(score / quizData.length * 100);
+  const msg = pct >= 80 ? t.good : pct >= 50 ? t.mid : t.low;
+  const box = document.getElementById('resultBox');
   box.style.display = 'block';
-  box.innerHTML = `<div class="result-box">
-      <div>${currentLang==='ml' ? 'നിങ്ങളുടെ സ്കോർ' : 'Your Score'}</div>
-      <div class="big">${score} / ${quizData.length}</div>
-      <div>${currentLang==='ml' ? answeredCount + ' ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകി' : answeredCount + ' questions answered'}</div>
-    </div>`;
-}
-
-function nextQuestion(){
-  if(currentQ < quizData.length - 1){ currentQ++; renderQuestion(); }
-  else { showResult(); }
-}
-function prevQuestion(){ if(currentQ > 0){ currentQ--; renderQuestion(); } }
-
-function resetQuiz(){
-  score = 0; currentQ = 0;
-  userAnswers = new Array(quizData.length).fill(null);
-  document.getElementById('scoreVal').textContent = 0;
-  renderQuestion();
-}
-
-function shareScore(){
-  const answeredCount = userAnswers.filter(a=>a!==null).length;
-  const text = currentLang === 'ml'
-    ? `ജീവികളിലെ രാസസംവേദനം — ക്വിക്ക് ക്വിസ്\nഎന്റെ സ്കോർ: ${score} / ${quizData.length} (${answeredCount} ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകി)`
-    : `Chemical Communication in Organisms — Quick Quiz\nMy score: ${score} / ${quizData.length} (${answeredCount} questions answered)`;
-  if(navigator.share){
-    navigator.share({ title: currentLang === 'ml' ? 'ക്വിക്ക് ക്വിസ്' : 'Quick Quiz', text: text }).catch(()=>{});
-  } else if(navigator.clipboard){
-    navigator.clipboard.writeText(text).then(()=>{
-      const toast = document.getElementById('shareToast');
-      toast.textContent = currentLang === 'ml' ? '✅ സ്കോർ കോപ്പി ചെയ്തു' : '✅ Score copied';
-      toast.classList.add('show');
-      setTimeout(()=>toast.classList.remove('show'), 2500);
-    });
+  box.innerHTML =
+    '<div class="qwho" style="justify-content:center"><span><b>' + studentName + '</b> · ' + studentAdmission + ' · ' + studentCentre + '</span></div>' +
+    '<div class="result-big">' + score + '<span style="font-size:1.3rem;color:#777">/' + quizData.length + '</span></div>' +
+    '<div class="result-lbl">' + pct + '% ' + t.correct + '</div>' +
+    '<div class="result-msg">' + msg + '</div>' +
+    '<div class="qsent" id="qsent">' + t.sending + '</div>' +
+    '<button class="btn" id="newStuBtn" style="width:100%;margin-top:14px">' + t.newStudent + '</button>';
+  document.getElementById('newStuBtn').addEventListener('click', function(){
+    quizState = 'start'; studentName = ''; studentCentre = ''; studentAdmission = ''; score = 0;
+    render();
+  });
+  if(!resultSubmitted){
+    resultSubmitted = true;
+    markAttempted(studentAdmission);
+    submitResult(pct);
   } else {
-    alert(text);
+    const el = document.getElementById('qsent');
+    if(el){ el.textContent = t.sentAlready; el.classList.add('ok'); }
   }
 }
 
-renderQuestion();
-</script>
+function watchGate(){
+  const open = isQuizOpen();
+  if(_gateOpenSeen === null){ _gateOpenSeen = open; return; }
+  if(open !== _gateOpenSeen){
+    _gateOpenSeen = open;
+    if(open && quizState === 'gate'){ quizState = 'start'; render(); }
+    else if(!open){ quizState = 'gate'; render(); }
+  }
+}
+setInterval(watchGate, 15000);
 
+flushPending();
+quizState = isQuizOpen() ? 'start' : 'gate';
+render();
+</script>
 </body>
 </html>
