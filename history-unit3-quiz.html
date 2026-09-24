@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Unit 3 Quiz · Social Analysis | Abacus Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0b2f4a;--navy-dark:#071f31;--gold:#c8963e;--gold-light:#f0d9a8;--cream:#fbf6ec;--paper:#fffdf8;--ink:#26221a;--accent:#8c1f28;--accent-light:#f6e3e0;--line:#e2d5b8;--ok:#1f6e46;--ok-bg:#e3f2e8;--radius:14px;}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Noto Sans Malayalam','Noto Sans',system-ui,sans-serif;background:linear-gradient(180deg,#f4ecd8 0%,#fbf6ec 300px,#fbf6ec 100%);color:var(--ink);line-height:1.7;min-height:100vh;padding-bottom:env(safe-area-inset-bottom,0px)}
+.topbar{position:sticky;top:0;z-index:10;background:linear-gradient(120deg,var(--navy),var(--navy-dark));color:#fff;display:flex;align-items:center;gap:12px;padding:10px 16px;padding-top:calc(10px + env(safe-area-inset-top,0px));box-shadow:0 3px 10px rgba(0,0,0,.25);flex-wrap:wrap}
+.logo-badge{width:42px;height:42px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--gold-light),var(--gold) 70%);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--navy-dark);font-size:15px;flex-shrink:0}
+.brand{display:flex;flex-direction:column;line-height:1.2}.brand b{font-size:15px}.brand span{font-size:11px;color:var(--gold-light)}
+.medium-toggle{margin-left:auto;display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.08);border-radius:22px;padding:3px 4px 3px 10px}
+.medium-label{font-size:11.5px;color:var(--gold-light)}
+.pill-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);color:#fff;padding:6px 12px;border-radius:20px;font-size:12.5px;cursor:pointer;font-family:inherit}
+.pill-btn.active{background:var(--gold);border-color:var(--gold);color:var(--navy-dark);font-weight:700}
+.wrap{max-width:720px;margin:0 auto;padding:22px 16px 50px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px 20px;box-shadow:0 2px 8px rgba(60,40,10,.05)}
+.hidden{display:none!important}
+.unit-tag{display:inline-block;background:var(--accent);color:#fff;padding:4px 14px;border-radius:20px;font-size:12px;letter-spacing:1px;margin-bottom:8px}
+h1{font-size:clamp(20px,4vw,26px);margin:4px 0;color:var(--navy-dark)}
+h2{font-size:20px;margin:0 0 6px;color:var(--navy-dark)}
+.sub{color:#6b5f45;font-size:14px;margin:0 0 14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}.chips span{background:var(--gold-light);padding:4px 12px;border-radius:8px;font-size:13px}
+label{display:block;font-weight:700;margin-bottom:6px;font-size:14px}
+input{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+.btn{display:inline-block;border:0;border-radius:22px;padding:11px 22px;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;background:var(--navy);color:#fff;text-decoration:none}
+.btn.gold{background:var(--gold);color:var(--navy-dark)}
+.btn.wa{background:#1fa855}
+.btn.ghost{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.gate{text-align:center}
+.clock{font-size:clamp(34px,9vw,52px);font-weight:800;color:var(--navy);letter-spacing:1px;margin:10px 0;font-variant-numeric:tabular-nums}
+.notice{background:var(--accent-light);border-left:4px solid var(--accent);padding:12px 16px;border-radius:8px;margin:14px 0;font-size:14px;text-align:left}
+.progress{display:flex;justify-content:space-between;font-size:13px;color:#6b5f45;margin-bottom:6px}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin-bottom:16px}.bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}
+.timer{font-weight:700;color:var(--accent)}
+.q{font-size:17px;font-weight:700;margin:0 0 14px}
+.opts{display:grid;gap:10px}
+.opt{text-align:left;width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;font:inherit;font-size:15px;cursor:pointer;display:flex;gap:10px;align-items:flex-start;color:var(--ink)}
+.opt b{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line);font-size:12px}
+.opt:hover:not(:disabled){border-color:var(--gold)}
+.opt.correct{border-color:var(--ok);background:var(--ok-bg)}.opt.correct b{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opt.wrong{border-color:var(--accent);background:var(--accent-light)}.opt.wrong b{background:var(--accent);color:#fff;border-color:var(--accent)}
+.opt:disabled{cursor:default}
+.explain{margin-top:12px;padding:12px 14px;background:#eef4fa;border:1px solid #c8dced;border-radius:10px;font-size:14px}
+.score{text-align:center}.big{font-size:60px;font-weight:800;color:var(--navy);line-height:1}.big small{font-size:24px;color:#6b5f45}
+.ri{border-top:1px solid var(--line);padding:10px 0;font-size:14px}.ri .ok{color:var(--ok)}.ri .no{color:var(--accent)}
+footer{text-align:center;padding:18px;font-size:12px;color:#8a7e63}
+.en{display:none}body.show-en .ml{display:none}body.show-en .en{display:inline}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo-badge">AA</div>
+  <div class="brand"><b>Abacus Academy</b><span>Social Science I · Unit 3 Quiz</span></div>
+  <div class="medium-toggle" role="group" aria-label="Medium">
+    <span class="medium-label">Medium</span>
+    <button class="pill-btn active" id="btn-ml" onclick="setLang('ml')">Malayalam</button>
+    <button class="pill-btn" id="btn-en" onclick="setLang('en')">English</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <!-- GATE: before / after the time window, or already attempted -->
+  <section id="gate" class="card gate hidden">
+    <span class="unit-tag">UNIT 3 QUIZ</span>
+    <h1><span class="ml">സാമൂഹികവിശകലനം: സമൂഹശാസ്ത്രസങ്കല്പത്തിലൂടെ</span><span class="en">Social Analysis: Through the Sociological Imagination</span></h1>
+    <p class="sub" id="gateTitle"></p>
+    <div class="clock" id="gateClock"></div>
+    <p class="sub" id="gateMsg"></p>
+    <div class="notice" id="gateNote"></div>
+    <div class="row" style="justify-content:center"><a class="btn ghost" id="portalLink" href="history-unit3.html">Back to Study Portal</a></div>
+  </section>
+
+  <!-- START -->
+  <section id="start" class="card hidden">
+    <span class="unit-tag">UNIT 3 QUIZ</span>
+    <h1><span class="ml">സാമൂഹികവിശകലനം: സമൂഹശാസ്ത്രസങ്കല്പത്തിലൂടെ</span><span class="en">Social Analysis: Through the Sociological Imagination</span></h1>
+    <div class="chips"><span>20 Questions</span><span>Instant answer check</span><span>One attempt per day</span><span id="closesChip"></span></div>
+    <label for="nm">Admission Number</label>
+    <input id="nm" type="text" inputmode="numeric" maxlength="12" placeholder="Enter Admission Number" autocomplete="off">
+    <p id="studentInfo" class="sub" style="margin-top:8px"></p>
+    <div class="row"><button class="btn gold" id="startBtn" disabled>Start Quiz</button></div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="card hidden" aria-live="polite">
+    <div class="progress"><span id="qnum"></span><span>Score: <b id="qscore">0</b> · <span class="timer" id="qtimer"></span></span></div>
+    <div class="bar"><i id="barFill"></i></div>
+    <p class="q" id="qtext"></p>
+    <div class="opts" id="opts"></div>
+    <div class="explain hidden" id="explain"></div>
+    <div class="row"><button class="btn hidden" id="nextBtn">Next Question</button></div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="card hidden">
+    <div class="score"><div class="big" id="finalScore"></div><h2 id="resTitle"></h2><p class="sub" id="resMsg"></p></div>
+    <div class="row" style="justify-content:center">
+      <button class="btn wa" id="waBtn">Share Score on WhatsApp</button>
+      <button class="btn ghost" id="copyBtn">Copy Quiz Link</button>
+    </div>
+    <h2 style="margin-top:22px;font-size:17px">Answer Review</h2>
+    <div id="review"></div>
+  </section>
+</div>
+<footer>© Abacus Academy · Parambil Peedika &amp; Puthur Pallikkal · SSLC / Class 10 Social Science</footer>
+
+<script>
+/* ===== SETTINGS (edit here) ===== */
+const OPEN_HOUR = 21, OPEN_MIN = 0;    // quiz opens 9:00 PM (India time)
+const CLOSE_HOUR = 22, CLOSE_MIN = 0;  // quiz closes 10:00 PM
+const QUIZ_ID = "history-unit3";
+/* Teacher preview: add ?preview=1 to the link to open anytime (no attempt lock) */
+
+const QS = [
+ {ml:{q:"വ്യക്തിപരമായ അനുഭവങ്ങൾ, സാമൂഹികഇടപെടലുകൾ, സാംസ്കാരിക അറിവുകൾ എന്നിവയിലൂടെ വ്യക്തികൾ ലോകത്തെക്കുറിച്ച് നേടുന്ന അടിസ്ഥാന, ദൈനംദിന ധാരണ ഏത്?",o:["സാമാന്യബോധജ്ഞാനം","സമൂഹശാസ്ത്രസങ്കല്പം","സ്വയംപ്രതിഫലനം","സാമൂഹികവിശകലനം"],e:"ഇത് ഔപചാരിക അറിവല്ല; അനുമാനങ്ങളോ ദൈനംദിന പ്രായോഗിക അറിവുകളോ ആണ്."},
+  en:{q:"What is the basic, everyday understanding of the world gained through personal experiences, social interactions and cultural knowledge?",o:["Commonsense knowledge","Sociological imagination","Self-reflexivity","Social analysis"],e:"It is not formal knowledge; it consists of assumptions or everyday practical knowledge."},a:0},
+ {ml:{q:"'ദി സോഷ്യോളജിക്കൽ ഇമാജിനേഷൻ' (1959) എന്ന പുസ്തകം രചിച്ചതാര്?",o:["എമിൽ ദുർഖീം","ചാൾസ് റൈറ്റ് മിൽസ്","മാക്സ് വെബർ","കാൾ മാർക്സ്"],e:"അമേരിക്കൻ സമൂഹശാസ്ത്രജ്ഞനായ ചാൾസ് റൈറ്റ് മിൽസ് ആണ് സമൂഹശാസ്ത്രസങ്കല്പം അവതരിപ്പിച്ചത്."},
+  en:{q:"Who wrote the book 'The Sociological Imagination' (1959)?",o:["Emile Durkheim","C. Wright Mills","Max Weber","Karl Marx"],e:"American sociologist C. Wright Mills introduced the sociological imagination."},a:1},
+ {ml:{q:"'കൗമാരക്കാർ എപ്പോഴും വിമതരും നിരുത്തരവാദ സ്വഭാവമുള്ളവരുമാണ്' — ഇത് സാമാന്യബോധജ്ഞാനത്തിന്റെ ഏത് പരിമിതി കാണിക്കുന്നു?",o:["ഭാഗികമായ അറിവുകൾ മാത്രം നൽകുന്നു","ശാസ്ത്രീയ പഠനങ്ങളുടെ അടിസ്ഥാനമില്ല","വാർപ്പുമാതൃകകളെ അടിസ്ഥാനമാക്കുന്നു","ഊഹാപോഹങ്ങളെ ആശ്രയിക്കുന്നു"],e:"സാമാന്യവൽക്കരിച്ച വിശ്വാസങ്ങളോ ആശയങ്ങളോ ആണ് വാർപ്പുമാതൃക (Stereotype)."},
+  en:{q:"'Adolescents are always rebellious and irresponsible' — which limitation of commonsense does this show?",o:["Gives only partial knowledge","Has no scientific basis","Is based on stereotypes","Relies on assumptions"],e:"Generalised beliefs or ideas are called stereotypes."},a:2},
+ {ml:{q:"'അധികസമയം പഠിച്ചാൽ മാത്രമേ ഉയർന്ന സ്കോർ നേടാൻ കഴിയൂ' — ഈ പ്രസ്താവനയുടെ പരിമിതി?",o:["ഊഹാപോഹങ്ങളെയും ശീലങ്ങളെയും ആശ്രയിക്കുന്നു","വാർപ്പുമാതൃകകളെ അടിസ്ഥാനമാക്കുന്നു","സങ്കീർണ്ണ സാമൂഹികപ്രശ്നങ്ങൾ മനസ്സിലാക്കാനാവില്ല","ഭാഗികമായ അറിവ് മാത്രം നൽകുന്നു"],e:"വ്യക്തിഗത പഠനരീതികളും പഠനശൈലികളും പഠനത്തെ സ്വാധീനിക്കുന്നു."},
+  en:{q:"'Only studying for long hours gets high scores' — what is the limitation of this statement?",o:["Relies on assumptions and habits","Is based on stereotypes","Cannot understand complex social problems","Gives only partial knowledge"],e:"Individual study methods and learning styles also shape learning."},a:0},
+ {ml:{q:"വ്യക്തികൾക്ക് സമൂഹത്തിലുള്ള സ്ഥാനം (Status), പങ്ക് (Role), ഉത്തരവാദിത്വം എന്നിവ വിശദീകരിക്കുകയും പ്രാവർത്തികമാക്കുകയും ചെയ്യുന്നത്?",o:["സാമൂഹികബന്ധങ്ങൾ","സാമൂഹികസ്ഥാപനങ്ങൾ","സാമൂഹികഘടന","സാമൂഹികപ്രശ്നം"],e:"വഴക്കങ്ങൾ (Norms), ചട്ടങ്ങൾ എന്നിവ സാമൂഹികഘടനയുടെ ഉദാഹരണങ്ങളാണ്."},
+  en:{q:"What defines and puts into practice people's status, role and responsibility in society?",o:["Social relationships","Social institutions","Social structure","Social problem"],e:"Norms and rules are examples of social structure."},a:2},
+ {ml:{q:"കുടുംബം, വിവാഹം, മതം, വിദ്യാഭ്യാസസ്ഥാപനങ്ങൾ — ഇവ ഏതിന്റെ ഉദാഹരണങ്ങളാണ്?",o:["സാമൂഹികഘടന","സാമൂഹികസ്ഥാപനങ്ങൾ","സമപ്രായസംഘങ്ങൾ","സാമൂഹികപ്രശ്നങ്ങൾ"],e:"സാമൂഹികബന്ധങ്ങളെ സുസ്ഥിരമാക്കാനും നിയന്ത്രിക്കാനും സമൂഹം സ്ഥാപിക്കുന്ന ക്രമങ്ങളുടെ ചട്ടക്കൂടാണ് സാമൂഹികസ്ഥാപനങ്ങൾ."},
+  en:{q:"Family, marriage, religion and educational institutions are examples of:",o:["Social structure","Social institutions","Peer groups","Social problems"],e:"Social institutions are frameworks society sets up to stabilise and regulate relationships."},a:1},
+ {ml:{q:"എഞ്ചിനീയർ ജോലി തിരഞ്ഞെടുത്തത് തന്റെ മാത്രം തീരുമാനമല്ലെന്ന് ഇഷാൻ തിരിച്ചറിഞ്ഞത് ഏതിലൂടെ?",o:["അനുതാപം","വിമർശനാത്മക ചിന്ത","സ്വയംപ്രതിഫലനം","സാമാന്യബോധജ്ഞാനം"],e:"സ്വന്തം ചിന്തകളെയും പ്രവൃത്തികളെയും വിമർശനാത്മകമായി വിലയിരുത്താനുള്ള നൈപുണിയാണ് സ്വയംപ്രതിഫലനം."},
+  en:{q:"How did Ishan realise that becoming an engineer was not his decision alone?",o:["Empathy","Critical thinking","Self-reflexivity","Commonsense knowledge"],e:"Self-reflexivity is the skill of critically evaluating one's own thoughts and actions."},a:2},
+ {ml:{q:"2022–2023-ൽ ഇന്ത്യയിലെ സ്ത്രീകളുടെ തൊഴിൽ പങ്കാളിത്തനിരക്ക്?",o:["21.1","27.5","31.6","77.4"],e:"2022–23-ൽ പുരുഷന്മാർ 77.4, സ്ത്രീകൾ 31.6."},
+  en:{q:"What was the female labour force participation rate in India in 2022–2023?",o:["21.1","27.5","31.6","77.4"],e:"In 2022–23: men 77.4, women 31.6."},a:2},
+ {ml:{q:"'മഴക്കാലത്തെ തൊഴിലില്ലായ്മയ്ക്ക് ബദൽ സംവിധാനമൊരുക്കുന്നതിൽ ഭരണകൂടത്തിന്റെ പരിമിതി' — അനുവിന്റെ പ്രശ്നത്തിലെ ഏത് ഘടകം?",o:["സാമ്പത്തികം","പാരിസ്ഥിതികം","ഭരണപരം","ഭൂമിശാസ്ത്രപരമായ അസമാനതകൾ"],e:"അനുവിന്റെ പ്രശ്നത്തിന് സാമ്പത്തികം, പാരിസ്ഥിതികം, ഭരണപരം, ഭൂമിശാസ്ത്രപരമായ അസമാനതകൾ എന്നീ ഘടകങ്ങളുണ്ട്."},
+  en:{q:"'The government's limitation in providing alternatives for monsoon unemployment' — which factor of Anu's problem is this?",o:["Economic","Environmental","Administrative","Geographical inequalities"],e:"Anu's problem has economic, environmental, administrative and geographical factors."},a:2},
+ {ml:{q:"മാനസികാരോഗ്യത്തെക്കുറിച്ചുള്ള മുൻധാരണകൾ റിനു ചോദ്യം ചെയ്തത് സമൂഹശാസ്ത്രസങ്കല്പത്തിന്റെ ഏത് സവിശേഷത?",o:["ഗുണാത്മകമല്ലാത്ത വഴക്കങ്ങളെ ചോദ്യം ചെയ്യൽ","വ്യക്തിഗതവീക്ഷണത്തെ വിശാലമാക്കൽ","സ്വയംപ്രതിഫലനം","അനുതാപവും സഹിഷ്ണുതയും"],e:"ശാരീരികാരോഗ്യം പോലെ മാനസികാരോഗ്യവും പ്രധാനമെന്ന് റിനു തിരിച്ചറിഞ്ഞു."},
+  en:{q:"Rinu questioned prejudices about mental health. Which feature of the sociological imagination is this?",o:["Questioning negative norms","Broadening personal perspective","Self-reflexivity","Empathy and tolerance"],e:"Rinu realised mental health is as important as physical health."},a:0},
+ {ml:{q:"അനുവും കുടുംബവും നേരിടുന്ന സാമൂഹികപ്രശ്നം ഏത്?",o:["കടബാധ്യത","നിരക്ഷരത","ലിംഗവിവേചനം","പാർപ്പിടമില്ലായ്മ"],e:"കടബാധ്യത (Indebtedness) എന്ന സാമൂഹികപ്രശ്നമാണ് അനുവും കുടുംബവും നേരിടുന്നത്."},
+  en:{q:"Which social problem do Anu and her family face?",o:["Indebtedness","Illiteracy","Gender discrimination","Homelessness"],e:"Anu and her family face the social problem of indebtedness."},a:0},
+ {ml:{q:"'വാർപ്പുമാതൃക' (Stereotype) എന്നാൽ?",o:["ശാസ്ത്രീയമായി തെളിയിച്ച അറിവ്","സാമാന്യവൽക്കരിച്ച വിശ്വാസങ്ങളോ ആശയങ്ങളോ","സമൂഹം അംഗീകരിച്ച നിയമങ്ങൾ","സ്വന്തം ചിന്തകളുടെ വിലയിരുത്തൽ"],e:"വാർപ്പുമാതൃകകൾ തെറ്റായ അനുമാനങ്ങളിലേക്കും വിശ്വാസക്കുറവിലേക്കും നയിക്കുന്നു."},
+  en:{q:"What is a 'stereotype'?",o:["Scientifically proven knowledge","Generalised beliefs or ideas","Rules accepted by society","Evaluation of one's own thoughts"],e:"Stereotypes lead to wrong assumptions and distrust."},a:1},
+ {ml:{q:"ഒരു പ്രശ്നം സാമൂഹികപ്രശ്നമായി കണക്കാക്കപ്പെടുന്നത് എപ്പോൾ?",o:["ഒരു വ്യക്തിയെ മാത്രം ബാധിക്കുമ്പോൾ","ഒരു കുടുംബത്തെ മാത്രം ബാധിക്കുമ്പോൾ","സമൂഹത്തിലെ വലിയൊരു വിഭാഗം ജനങ്ങളെ ബാധിക്കുമ്പോൾ","സർക്കാർ പ്രഖ്യാപിക്കുമ്പോൾ"],e:"ഒരാളെയോ ഏതാനും പേരെയോ മാത്രം ബാധിക്കുന്നത് സാമൂഹികപ്രശ്നമല്ല."},
+  en:{q:"When is a problem considered a social problem?",o:["When it affects one person","When it affects one family","When it affects a large section of society","When the government declares it"],e:"Problems affecting only one or a few people are not social problems."},a:2},
+ {ml:{q:"സാമൂഹികഘടകങ്ങളെ വിശകലനം ചെയ്യുന്നതിലൂടെ തിരിച്ചറിയാൻ കഴിയുന്നത്?",o:["കാര്യ-കാരണ ബന്ധങ്ങളും പ്രത്യാഘാതങ്ങളും","വ്യക്തിയുടെ സ്വഭാവം മാത്രം","സാമാന്യബോധജ്ഞാനം","വാർപ്പുമാതൃകകൾ"],e:"ഇതിലൂടെ വ്യക്തിഗതപ്രശ്നങ്ങൾ വിശാലമായ സാമൂഹികഘടനകളുമായി ബന്ധപ്പെട്ടിരിക്കുന്നുവെന്ന് കാണാം."},
+  en:{q:"What can we identify by analysing social factors?",o:["Cause-effect relationships and consequences","Only a person's character","Commonsense knowledge","Stereotypes"],e:"It shows how personal problems are linked to wider social structures."},a:0},
+ {ml:{q:"തന്റെ തൊഴിൽനഷ്ടം മറ്റ് കുടിയേറ്റക്കാരുടെയും പൊതുപ്രശ്നമാണെന്ന് പ്രിയ തിരിച്ചറിഞ്ഞു. ഏത് സവിശേഷത?",o:["സ്വയംപ്രതിഫലനം","വിമർശനാത്മക ചിന്ത","അനുതാപം","വ്യക്തിഗതവീക്ഷണം"],e:"വിമർശനാത്മക ചിന്തയിലൂടെ പ്രിയ തന്റെയും മറ്റുള്ളവരുടെയും സാഹചര്യങ്ങൾ മെച്ചപ്പെടുത്തി."},
+  en:{q:"Priya realised her job loss was a common problem of migrants. Which feature is this?",o:["Self-reflexivity","Critical thinking","Empathy","Personal perspective"],e:"Through critical thinking Priya improved her own and others' situations."},a:1},
+ {ml:{q:"കുറഞ്ഞ സ്കോർ നേടുന്ന കുട്ടിയുടെ കുടുംബപശ്ചാത്തലവും വിഭവങ്ങളുടെ കുറവും മനസ്സിലാക്കുമ്പോൾ വളരുന്നത്?",o:["അനുതാപവും സഹിഷ്ണുതയും","വാർപ്പുമാതൃക","മത്സരബുദ്ധി","സാമാന്യബോധജ്ഞാനം"],e:"സാമൂഹികസാഹചര്യം മനസ്സിലാക്കുമ്പോൾ ആ കുട്ടിക്ക് പിന്തുണയും പ്രചോദനവും നൽകാൻ കഴിയും."},
+  en:{q:"Understanding a low-scoring student's family background and lack of resources develops:",o:["Empathy and tolerance","Stereotypes","Competitiveness","Commonsense knowledge"],e:"Understanding social circumstances helps us support and motivate the student."},a:0},
+ {ml:{q:"'വയറുനിറച്ച് ആഹാരം കഴിക്കുന്നത് ആരോഗ്യത്തിന് നല്ലതാണ്' — ഈ പ്രസ്താവനയുടെ പരിമിതി?",o:["വാർപ്പുമാതൃകയെ അടിസ്ഥാനമാക്കുന്നു","ശാസ്ത്രീയ നിരീക്ഷണങ്ങളുടെയോ പഠനങ്ങളുടെയോ അടിസ്ഥാനമില്ല","ഊഹാപോഹങ്ങളെ ആശ്രയിക്കുന്നു","സങ്കീർണ്ണപ്രശ്നം മനസ്സിലാക്കാനാവില്ല"],e:"പോഷകാഹാരത്തെക്കുറിച്ച് വിശദമായി മനസ്സിലാക്കാതെ ദൈനംദിന നിരീക്ഷണം മാത്രം."},
+  en:{q:"'Eating till full is good for health' — what is the limitation?",o:["Based on stereotypes","No basis in scientific observation or study","Relies on assumptions","Cannot understand complex problems"],e:"It is based only on daily observation, not on knowledge of nutrition."},a:1},
+ {ml:{q:"സമൂഹശാസ്ത്രത്തിന്റെ ആദ്യകാല ചിന്തകരിൽ ഉൾപ്പെടാത്തത്?",o:["കാൾ മാർക്സ്","എമിൽ ദുർഖീം","മാക്സ് വെബർ","ചാൾസ് ഡാർവിൻ"],e:"കാൾ മാർക്സ്, എമിൽ ദുർഖീം, മാക്സ് വെബർ എന്നിവരാണ് ആദ്യകാല ചിന്തകരിൽ പ്രമുഖർ."},
+  en:{q:"Who is NOT among the early thinkers of sociology?",o:["Karl Marx","Emile Durkheim","Max Weber","Charles Darwin"],e:"Karl Marx, Emile Durkheim and Max Weber were prominent early thinkers."},a:3},
+ {ml:{q:"എമിൽ ദുർഖീമിന്റെ 'സൂയിസൈഡ്' എന്ന പുസ്തകം പ്രസിദ്ധീകരിച്ച വർഷം?",o:["1858","1897","1917","1959"],e:"1897-ൽ. വ്യക്തിപരമായ കാരണങ്ങളേക്കാൾ സാമൂഹികകാരണങ്ങളുണ്ടെന്ന് അദ്ദേഹം കണ്ടെത്തി."},
+  en:{q:"In which year was Emile Durkheim's book 'Suicide' published?",o:["1858","1897","1917","1959"],e:"1897. He found that social causes outweighed personal ones."},a:1},
+ {ml:{q:"സൂക്ഷ്മ-സ്ഥൂല ബന്ധങ്ങൾ (Micro-Macro Relationships) ഏതു തമ്മിലുള്ള ബന്ധമാണ്?",o:["വ്യക്തിയും സമൂഹവും","രണ്ട് രാജ്യങ്ങൾ","അധ്യാപകനും വിദ്യാർഥിയും","ഗ്രാമവും നഗരവും"],e:"വ്യക്തിയും സമൂഹവും തമ്മിലുള്ള ബന്ധങ്ങൾ കണ്ടെത്താൻ സമൂഹശാസ്ത്രസങ്കല്പം സഹായിക്കുന്നു."},
+  en:{q:"Micro-macro relationships are relationships between:",o:["The individual and society","Two countries","Teacher and student","Village and city"],e:"The sociological imagination helps find links between the individual and society."},a:0}
+];
+
+const $=id=>document.getElementById(id);
+const L=["A","B","C","D"];
+let lang='ml', order=[], idx=0, score=0, answers=[], player="", answered=false;
+const params=new URLSearchParams(location.search);
+const PREVIEW=params.get('preview')==='1';
+
+/* India time helpers */
+function istNow(){ const p=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(new Date()); const g=t=>+p.find(x=>x.type===t).value; return {y:g('year'),mo:g('month'),d:g('day'),h:g('hour')%24,mi:g('minute'),s:g('second')}; }
+function secOfDay(t){return t.h*3600+t.mi*60+t.s;}
+const OPEN_S=OPEN_HOUR*3600+OPEN_MIN*60, CLOSE_S=CLOSE_HOUR*3600+CLOSE_MIN*60;
+function dayKey(){const t=istNow();return `${QUIZ_ID}-${t.y}-${t.mo}-${t.d}`;}
+function fmt12(h,m){const ap=h>=12?"PM":"AM";const hh=((h+11)%12)+1;return `${hh}:${String(m).padStart(2,'0')} ${ap}`;}
+function hms(s){const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return [h,m,x].map(v=>String(v).padStart(2,'0')).join(':');}
+function store(k,v){try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v);}catch(e){return null;}}
+
+function show(id){["gate","start","quiz","result"].forEach(s=>$(s).classList.toggle("hidden",s!==id));}
+let gateTimer=null;
+function checkGate(){
+  if(PREVIEW){ show("start"); $("closesChip").textContent="Teacher preview"; return; }
+  const done=store(dayKey());
+  const now=secOfDay(istNow());
+  const windowTxt=`${fmt12(OPEN_HOUR,OPEN_MIN)} – ${fmt12(CLOSE_HOUR,CLOSE_MIN)}`;
+  if(done){
+    const r=JSON.parse(done);
+    show("gate"); $("gateTitle").textContent="You have already taken today's quiz";
+    $("gateClock").textContent=`${r.score}/${r.total}`;
+    $("gateMsg").textContent=`Well done, ${r.name}. Come back tomorrow at ${fmt12(OPEN_HOUR,OPEN_MIN)}.`;
+    $("gateNote").textContent=`Quiz time: every day ${windowTxt}. One attempt per day.`;
+    return;
+  }
+  if(now>=OPEN_S && now<CLOSE_S){
+    if(!$("start").classList.contains("hidden")||!$("quiz").classList.contains("hidden")||!$("result").classList.contains("hidden")) return;
+    show("start"); $("closesChip").textContent=`Closes at ${fmt12(CLOSE_HOUR,CLOSE_MIN)}`; return;
+  }
+  show("gate");
+  const wait = now<OPEN_S ? OPEN_S-now : 86400-now+OPEN_S;
+  $("gateTitle").textContent = now<OPEN_S ? `The quiz opens today at ${fmt12(OPEN_HOUR,OPEN_MIN)}` : `Today's quiz is closed. It opens again tomorrow at ${fmt12(OPEN_HOUR,OPEN_MIN)}`;
+  $("gateClock").textContent=hms(wait);
+  $("gateMsg").textContent="Time left until the quiz opens";
+  $("gateNote").textContent=`Quiz time: every day ${windowTxt} (India time). Revise the study portal until then.`;
+}
+
+let student=null, verifying=false;
+$("nm").addEventListener("input", async e=>{
+  const v=e.target.value.trim().replace(/\D/g,""); e.target.value=v;
+  $("startBtn").disabled=true; $("studentInfo").textContent="";
+  if(v.length<1) return;
+  verifying=true; $("studentInfo").textContent="Checking admission number...";
+  try{
+    const {data,error}=await supabaseClient.rpc("verify_student",{p_admission_no:Number(v)});
+    if(error) throw error;
+    if(!data || !data.length){ student=null; $("studentInfo").textContent="Admission number not found."; return; }
+    student=data[0];
+    $("studentInfo").textContent=`${student.student_name} · Class ${student.class} · ${student.centre}`;
+    $("startBtn").disabled=false;
+  }catch(err){ student=null; $("studentInfo").textContent="Unable to verify student. Please try again."; console.error(err); }
+  finally{verifying=false;}
+});
+$("nm").addEventListener("keydown",e=>{if(e.key==="Enter"&&!$("startBtn").disabled&&!verifying)start();});
+$("startBtn").onclick=start;
+$("nextBtn").onclick=()=>{idx++; idx<order.length?render():finish();};
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function start(){
+  if(!student) return;
+  player=student.student_name; idx=0; score=0; answers=[];
+  order=QS.map(q=>({q,perm:shuffle([0,1,2,3])}));
+  show("quiz"); render();
+}
+function cur(){const {q,perm}=order[idx];const t=q[lang];return {text:t.q,opts:perm.map(k=>t.o[k]),ans:perm.indexOf(q.a),exp:t.e};}
+function render(){
+  answered=false;
+  const c=cur();
+  $("qnum").textContent=`Question ${idx+1} of ${order.length}`;
+  $("qscore").textContent=score;
+  $("barFill").style.width=(idx/order.length*100)+"%";
+  $("qtext").textContent=c.text;
+  $("explain").classList.add("hidden"); $("nextBtn").classList.add("hidden");
+  const box=$("opts"); box.innerHTML="";
+  c.opts.forEach((t,i)=>{const b=document.createElement("button");b.className="opt";b.innerHTML=`<b>${L[i]}</b><span></span>`;b.querySelector("span").textContent=t;b.onclick=()=>pick(i);box.appendChild(b);});
+}
+function pick(i){
+  if(answered) return; answered=true;
+  const c=cur(), btns=[...$("opts").children];
+  btns.forEach(b=>b.disabled=true); btns[c.ans].classList.add("correct");
+  const ok=i===c.ans; if(ok)score++; else btns[i].classList.add("wrong");
+  answers.push({n:idx,pick:order[idx].perm[i],ok});
+  $("qscore").textContent=score;
+  $("explain").innerHTML=`<b>${ok?"Correct!":"Correct answer: "+esc(c.opts[c.ans])}</b><br>${esc(c.exp)}`;
+  $("explain").classList.remove("hidden");
+  $("nextBtn").textContent= idx===order.length-1?"See Result":"Next Question";
+  $("nextBtn").classList.remove("hidden");
+}
+function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+async function finish(){
+  show("result"); renderResult(); window.scrollTo(0,0);
+  if(PREVIEW || !student) return;
+  const payload=answers.map((a,i)=>{
+    const q=order[a.n].q;
+    return {
+      question_no:i+1,
+      selected_answer:a.pick,
+      correct_answer:q.a,
+      is_correct:a.ok
+    };
+  });
+  const percentage=(score/order.length)*100;
+  const {error}=await supabaseClient.rpc("submit_quiz",{
+    p_admission_no:Number(student.admission_no),
+    p_subject:"History",
+    p_chapter:"Social Analysis",
+    p_quiz_name:"History Unit 3 Quiz",
+    p_score:score,
+    p_total:order.length,
+    p_percentage:percentage,
+    p_answers:payload
+  });
+  if(error){
+    $("resMsg").textContent="Result display complete, but mark could not be saved. Please contact the teacher.";
+    console.error(error);
+    return;
+  }
+  store(dayKey(),JSON.stringify({name:player,score,total:order.length}));
+  $("resMsg").textContent="Your score has been saved successfully.";
+}
+function renderResult(){
+  const pct=score/order.length;
+  $("finalScore").innerHTML=`${score}<small> / ${order.length}</small>`;
+  $("resTitle").textContent= pct>=0.9?`Excellent, ${player}!`:pct>=0.7?`Well done, ${player}!`:pct>=0.5?`Good effort, ${player}`:`Keep practising, ${player}`;
+  $("resMsg").textContent= pct>=0.7?"You have understood the chapter well.":"Revise the sections of the questions you missed in the study portal.";
+  $("review").innerHTML=answers.map((a,i)=>{const q=order[a.n].q,t=q[lang];return `<div class="ri"><b>${i+1}. ${esc(t.q)}</b><br>${a.ok?`<span class="ok">✔ ${esc(t.o[q.a])}</span>`:`<span class="no">✘ Your answer: ${esc(t.o[a.pick])}</span><br><span class="ok">✔ Correct answer: ${esc(t.o[q.a])}</span>`}</div>`;}).join("");
+}
+function setLang(l){
+  lang=l;
+  document.body.classList.toggle('show-en',l==='en');
+  $("btn-ml").classList.toggle('active',l==='ml'); $("btn-en").classList.toggle('active',l==='en');
+  store('aa-medium',l);
+  if(!$("quiz").classList.contains("hidden")){
+    const keepAnswered=answered; render();
+    if(keepAnswered){const a=answers[answers.length-1]; answered=false; answers.pop(); if(a.ok)score--; pick(order[idx].perm.indexOf(a.pick));}
+  }
+  if(!$("result").classList.contains("hidden")) renderResult();
+}
+
+const shareUrl=location.href.split("#")[0].replace(/[?&]preview=1/,"");
+$("waBtn").onclick=()=>{const msg=`📘 SSLC Social Science I — Unit 3 Quiz\n${player} scored ${score}/${order.length}\nTry it (opens daily ${fmt12(OPEN_HOUR,OPEN_MIN)}) 👇\n${shareUrl}`;window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank","noopener");};
+$("copyBtn").onclick=async()=>{try{await navigator.clipboard.writeText(shareUrl);$("copyBtn").textContent="Link Copied";}catch(e){prompt("Copy this link:",shareUrl);}};
+
+/* portal link only on GitHub / local */
+if(!(/github\.io$/.test(location.hostname)||location.protocol==="file:")) $("portalLink").classList.add("hidden");
+
+const m=params.get('medium')||store('aa-medium'); if(m==='en') setLang('en');
+checkGate();
+setInterval(()=>{ if(!$("gate").classList.contains("hidden")||!$("start").classList.contains("hidden")) checkGate(); },1000);
+</script>
+</body>
+</html>

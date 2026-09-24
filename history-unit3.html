@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>സാമൂഹികവിശകലനം: സമൂഹശാസ്ത്രസങ്കല്പത്തിലൂടെ | Social Analysis — Unit 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0b2f4a;
+  --navy-dark:#071f31;
+  --gold:#c8963e;
+  --gold-light:#f0d9a8;
+  --cream:#fbf6ec;
+  --paper:#fffdf8;
+  --ink:#26221a;
+  --accent:#8c1f28;
+  --accent-light:#f6e3e0;
+  --line:#e2d5b8;
+  --radius:14px;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:'Noto Sans Malayalam','Noto Sans',system-ui,-apple-system,sans-serif;
+  background:linear-gradient(180deg,#f4ecd8 0%,#fbf6ec 300px,#fbf6ec 100%);
+  color:var(--ink);
+  line-height:1.65;
+}
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:linear-gradient(120deg,var(--navy) 0%,var(--navy-dark) 100%);
+  color:#fff;
+  display:flex;align-items:center;gap:14px;
+  padding:10px 18px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.25);
+}
+.logo-badge{
+  width:44px;height:44px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, var(--gold-light), var(--gold) 70%);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;color:var(--navy-dark);font-size:15px;
+  flex-shrink:0;
+  box-shadow:0 0 0 3px rgba(255,255,255,0.15);
+}
+.brand{display:flex;flex-direction:column;line-height:1.2;}
+.brand b{font-size:15px;letter-spacing:.3px;}
+.brand span{font-size:11px;color:var(--gold-light);}
+.top-actions{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.pill-btn{
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.35);
+  color:#fff;padding:7px 13px;border-radius:20px;
+  font-size:12.5px;cursor:pointer;font-family:inherit;
+  transition:.15s;white-space:nowrap;
+}
+.pill-btn:hover{background:rgba(255,255,255,0.25);}
+.pill-btn.active{background:var(--gold);border-color:var(--gold);color:var(--navy-dark);font-weight:700;}
+
+.hero{
+  max-width:980px;margin:0 auto;padding:26px 18px 10px;text-align:center;
+}
+.hero .unit-tag{
+  display:inline-block;background:var(--accent);color:#fff;
+  padding:4px 14px;border-radius:20px;font-size:12px;letter-spacing:1px;margin-bottom:10px;
+}
+.hero h1{
+  font-size:clamp(22px,4vw,32px);margin:6px 0 4px;color:var(--navy-dark);
+}
+.hero h2{
+  font-size:clamp(15px,2.6vw,19px);margin:0 0 10px;color:var(--accent);font-weight:600;
+}
+.hero p.meta{font-size:13px;color:#6b5f45;}
+
+.container{max-width:980px;margin:0 auto;padding:0 18px 60px;}
+
+.tabs{
+  display:flex;flex-wrap:wrap;gap:7px;justify-content:center;
+  margin:18px 0 22px;padding:12px;
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+}
+.tab-btn{
+  border:1px solid var(--line);background:#fff;color:var(--navy-dark);
+  padding:8px 14px;border-radius:10px;font-size:13px;cursor:pointer;
+  font-family:inherit;font-weight:600;transition:.15s;
+}
+.tab-btn:hover{border-color:var(--gold);}
+.tab-btn.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+.panel{display:none;animation:fade .25s ease;}
+.panel.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+.card{
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 24px;margin-bottom:18px;box-shadow:0 2px 8px rgba(60,40,10,0.05);
+}
+.card h3{
+  margin-top:0;color:var(--navy-dark);font-size:19px;
+  border-bottom:2px solid var(--gold-light);padding-bottom:8px;
+}
+.card h4{color:var(--accent);font-size:15.5px;margin-bottom:6px;}
+.card p{margin:8px 0;}
+.card ul{margin:8px 0;padding-left:22px;}
+.card li{margin-bottom:6px;}
+
+.quote{
+  background:var(--accent-light);border-left:4px solid var(--accent);
+  padding:14px 18px;border-radius:8px;font-style:italic;margin:14px 0;
+  font-size:14.5px;color:#4a2018;
+}
+.info-box{
+  background:#eef4fa;border:1px solid #c8dced;border-radius:10px;
+  padding:14px 18px;margin:14px 0;
+}
+.info-box h5{margin:0 0 6px;color:var(--navy);font-size:14px;}
+.figure-row{display:flex;gap:14px;flex-wrap:wrap;margin:14px 0;}
+.figure-chip{
+  flex:1 1 200px;background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:12px 14px;
+}
+.figure-chip b{display:block;color:var(--accent);margin-bottom:4px;font-size:14px;}
+.figure-chip span{font-size:13px;color:#4a4536;}
+
+.estate-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:14px 0;}
+.estate-card{border-radius:10px;padding:16px;color:#fff;}
+.estate-1{background:linear-gradient(135deg,#7a4b1f,#a56b2f);}
+.estate-2{background:linear-gradient(135deg,#4a2028,#6e2c36);}
+.estate-3{background:linear-gradient(135deg,#1f4a3a,#2f6e56);}
+.estate-card b{font-size:15px;display:block;margin-bottom:6px;}
+.estate-card ul{margin:6px 0 0;padding-left:18px;font-size:13.5px;}
+
+.timeline{border-left:3px solid var(--gold);margin:16px 0 16px 8px;padding-left:20px;}
+.tl-item{margin-bottom:16px;position:relative;}
+.tl-item::before{
+  content:'';position:absolute;left:-26px;top:4px;width:11px;height:11px;
+  border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 2px var(--accent);
+}
+.tl-date{font-weight:700;color:var(--accent);font-size:13.5px;}
+
+.reform-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;}
+.reform-table th{background:var(--navy);color:#fff;padding:10px;text-align:left;}
+.reform-table td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;}
+.reform-table tr:nth-child(even){background:#f7f1e2;}
+
+.thinker-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;}
+.thinker-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;}
+.thinker-card b{color:var(--navy-dark);font-size:14.5px;display:block;margin-bottom:4px;}
+
+.nav-btns{display:flex;justify-content:space-between;margin-top:18px;gap:10px;flex-wrap:wrap;}
+.nav-btns button{
+  flex:1;min-width:140px;padding:10px;border-radius:10px;border:none;
+  background:var(--navy);color:#fff;font-family:inherit;cursor:pointer;font-size:13.5px;font-weight:600;
+}
+.nav-btns button:hover{background:var(--navy-dark);}
+
+.quiz-cta{
+  text-align:center;background:linear-gradient(120deg,var(--navy),var(--navy-dark));
+  color:#fff;border-radius:var(--radius);padding:24px;margin-top:24px;
+}
+.quiz-cta h3{margin-top:0;color:var(--gold-light);border:none;}
+.quiz-cta a{
+  display:inline-block;margin-top:8px;background:var(--gold);color:var(--navy-dark);
+  padding:10px 22px;border-radius:22px;text-decoration:none;font-weight:700;font-size:14px;
+}
+
+footer{text-align:center;padding:22px;font-size:12px;color:#8a7e63;}
+
+/* Language toggle */
+.en{display:none;}
+body.show-en .ml{display:none;}
+body.show-en .en{display:block;}
+body.show-en .en.inline{display:inline;}
+.ml.inline, .en.inline{display:inline;}
+body.show-en .ml.inline{display:none;}
+
+@media print{
+  .topbar,.tabs,.top-actions,.quiz-cta,.nav-btns{display:none !important;}
+  .panel{display:block !important;}
+  body{background:#fff;}
+  .card{break-inside:avoid;border:1px solid #ccc;box-shadow:none;}
+  body::after{
+    content:'Abacus Academy';position:fixed;top:45%;left:20%;
+    font-size:60px;color:rgba(0,0,0,0.06);transform:rotate(-30deg);z-index:-1;
+  }
+}
+@media (max-width:600px){
+  .card{padding:16px;}
+  .brand span{display:none;}
+}
+
+/* table cells in language toggle */
+body.show-en th.en, body.show-en td.en{display:table-cell;}
+.table-wrap{overflow-x:auto;}
+.panel .reform-table{min-width:0;}
+@media (max-width:600px){ .reform-table{font-size:12.5px;} .reform-table th,.reform-table td{padding:7px;} }
+.medium-toggle{display:flex;align-items:center;gap:4px;background:rgba(255,255,255,0.08);border-radius:22px;padding:3px 4px 3px 10px;}
+.medium-label{font-size:11.5px;color:var(--gold-light);margin-right:2px;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo-badge">AA</div>
+  <div class="brand">
+    <b>Abacus Academy</b>
+    <span>SSLC Study Portal · Social Science I</span>
+  </div>
+  <div class="top-actions">
+    <div class="medium-toggle" role="group" aria-label="Medium">
+      <span class="medium-label">Medium</span>
+      <button class="pill-btn active" id="btn-ml" onclick="setLang('ml')">Malayalam</button>
+      <button class="pill-btn" id="btn-en" onclick="setLang('en')">English</button>
+    </div>
+    <a class="pill-btn js-quiz" href="history-unit3-quiz.html" target="_blank" style="text-decoration:none;">🏆 Quiz</a>
+    <button class="pill-btn" onclick="window.print()">🖨️ Print</button>
+  </div>
+</div>
+
+<div class="hero">
+  <span class="unit-tag">UNIT 3 · Social Science I · Class 10</span>
+  <h1 class="ml">സാമൂഹികവിശകലനം: സമൂഹശാസ്ത്രസങ്കല്പത്തിലൂടെ</h1>
+  <h1 class="en">Social Analysis: Through the Sociological Imagination</h1>
+  <h2 class="ml">സാമാന്യബോധജ്ഞാനവും സമൂഹശാസ്ത്രസങ്കല്പവും</h2>
+  <h2 class="en">Commonsense Knowledge and the Sociological Imagination</h2>
+  <p class="meta ml">അനുവിന്റെ അനുഭവക്കുറിപ്പ് മുതൽ ചാൾസ് റൈറ്റ് മിൽസിന്റെ സമൂഹശാസ്ത്രസങ്കല്പം വരെ</p>
+  <p class="meta en">From Anu's diary to C. Wright Mills' Sociological Imagination</p>
+</div>
+
+<div class="container">
+
+  <div class="tabs" id="tabs"></div>
+
+  <!-- PANEL 1: OVERVIEW -->
+  <div class="panel" data-panel="0">
+    <div class="card">
+      <h3><span class="ml">ആമുഖം: അനുവിന്റെ അനുഭവക്കുറിപ്പ്</span><span class="en">Introduction: Anu's Diary</span></h3>
+      <p class="ml">മഴക്കാലത്തെക്കുറിച്ചുള്ള അനുഭവം പങ്കുവയ്ക്കാൻ ടീച്ചർ നിർദേശിച്ചതനുസരിച്ച് ഒൻപതാം ക്ലാസുകാരിയായ അനു ഒരു കുറിപ്പ് തയ്യാറാക്കി. മഴക്കാലത്ത് നാട്ടിലാർക്കും പണിയില്ല. വീട്ടാവശ്യങ്ങൾക്കുള്ള സാധനങ്ങൾ വാങ്ങാൻ അനു അച്ഛനോടൊപ്പം കടയിൽ പോയി. മുമ്പ് കടം വാങ്ങിയ വകയിൽ കുറേയേറെ പണം തരാനുണ്ടെന്ന് കടക്കാരൻ ഓർമ്മിപ്പിച്ചു. കൈയിൽ കരുതിയ പണം അച്ഛൻ അദ്ദേഹത്തിന് നൽകി. അച്ഛൻ അന്ന് ഏറെ വിഷമിച്ചു.</p>
+      <p class="en">On her teacher's instruction to share a monsoon experience, Anu, a Class 9 student, wrote a diary note. During the rainy season nobody in her village has work. Anu went with her father to buy household items. The shopkeeper reminded them that a large amount was still due from earlier credit purchases. Her father handed over the money he had brought. He was deeply upset that day.</p>
+      <div class="quote ml">"ഒരു രൂപയ്ക്ക് പോലും എന്തു വിലയാണ്! പണമില്ലാത്തതാണ് ഞങ്ങളുടെ പ്രശ്നങ്ങൾക്ക് കാരണം. എല്ലാം നേരെയാകുമെന്നുള്ള വിശ്വാസം എനിക്കുണ്ട്." — അനു</div>
+      <div class="quote en">"Even a single rupee is so precious! Lack of money is the cause of all our problems. I believe everything will be fine." — Anu</div>
+      <div class="info-box">
+        <h5 class="ml">അനുവും കുടുംബവും നേരിടുന്ന പ്രശ്നങ്ങൾ</h5>
+        <h5 class="en">Problems faced by Anu and her family</h5>
+        <ul class="ml"><li>മഴക്കാലത്തുണ്ടാകുന്ന തൊഴിൽദൗർലഭ്യം</li><li>കടബാധ്യത (Indebtedness)</li><li>സ്ഥിരവരുമാനമില്ലായ്മ, സാമ്പത്തിക ബുദ്ധിമുട്ട്</li><li>വീട്ടാവശ്യങ്ങൾ നിറവേറ്റാൻ കഴിയാത്ത അവസ്ഥ</li></ul>
+        <ul class="en"><li>Lack of work during the monsoon</li><li>Indebtedness</li><li>No stable income; financial difficulty</li><li>Inability to meet household needs</li></ul>
+      </div>
+      <p class="ml">പണത്തിന്റെ ലഭ്യതക്കുറവ് മാത്രമാണ് തന്റെയും കുടുംബത്തിന്റെയും പ്രശ്നങ്ങൾക്ക് കാരണമെന്ന് അനു കരുതുന്നു. അതായത്, <b>വ്യക്തിപരമായ കാരണങ്ങളാണ്</b> പ്രശ്നങ്ങൾക്കു പിന്നിലെന്നാണ് അനുവിന്റെ ധാരണ. എന്തുകൊണ്ടാണ് അനു ഇങ്ങനെ ചിന്തിക്കുന്നത്? ഈ അധ്യായം അതിനുള്ള ഉത്തരം തേടുന്നു.</p>
+      <p class="en">Anu believes that shortage of money alone is the cause of her family's problems — in other words, that the causes are <b>purely personal</b>. Why does Anu think this way? This chapter looks for the answer.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ml">ഈ അധ്യായത്തിൽ പഠിക്കുന്നത്</span><span class="en">What You Will Learn</span></h3>
+      <ul class="ml">
+        <li>സാമാന്യബോധജ്ഞാനം — അർഥവും രൂപപ്പെടുന്ന വഴികളും</li>
+        <li>സാമാന്യബോധജ്ഞാനവും സാമൂഹികവിശകലനവും; സാമൂഹികപ്രശ്നം</li>
+        <li>അഞ്ച് പ്രസ്താവനകളിലൂടെ സാമാന്യബോധജ്ഞാനത്തിന്റെ പരിമിതികൾ</li>
+        <li>വ്യക്തിഗതപ്രശ്നങ്ങൾക്കു പിന്നിലെ സാമൂഹികഘടകങ്ങൾ</li>
+        <li>സമൂഹശാസ്ത്രം: സാമൂഹികബന്ധങ്ങൾ, സാമൂഹികസ്ഥാപനങ്ങൾ, സാമൂഹികഘടന</li>
+        <li>ചാൾസ് റൈറ്റ് മിൽസും സമൂഹശാസ്ത്രസങ്കല്പവും</li>
+        <li>സമൂഹശാസ്ത്രസങ്കല്പത്തിന്റെ ആറ് സവിശേഷതകൾ</li>
+        <li>സാമാന്യബോധജ്ഞാന സമീപനവും സമൂഹശാസ്ത്രസങ്കല്പ സമീപനവും — താരതമ്യം</li>
+      </ul>
+      <ul class="en">
+        <li>Commonsense knowledge — meaning and how it is formed</li>
+        <li>Commonsense knowledge and social analysis; what a social problem is</li>
+        <li>Limitations of commonsense knowledge through five statements</li>
+        <li>Social factors behind personal problems</li>
+        <li>Sociology: social relationships, social institutions, social structure</li>
+        <li>C. Wright Mills and the Sociological Imagination</li>
+        <li>Six features of the Sociological Imagination</li>
+        <li>Commonsense approach vs Sociological Imagination approach</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PANEL 2: COMMONSENSE KNOWLEDGE -->
+  <div class="panel" data-panel="1">
+    <div class="card">
+      <h3><span class="ml">സാമാന്യബോധജ്ഞാനം</span><span class="en">Commonsense Knowledge</span></h3>
+      <p class="ml">വ്യക്തിപരമായ പ്രശ്നത്തിനു പിന്നിലെ കാരണങ്ങൾ കണ്ടെത്താൻ പലരും ആശ്രയിക്കുന്നത് സാധാരണയായി കാണുന്ന കാര്യങ്ങളെയാണ്. മുൻകാല അനുഭവങ്ങളുടെ പശ്ചാത്തലത്തിലും, മറ്റുള്ളവരുമായുള്ള ഇടപെടലുകളിലൂടെ ലഭിക്കുന്ന വിവരങ്ങളിലൂടെയും, സാമൂഹീകരണ (Socialisation) പ്രക്രിയയിലൂടെ ലഭിച്ച അറിവുകളും ശീലങ്ങളും ഉപയോഗിച്ചുമാണ് വ്യക്തികൾ പലപ്പോഴും തങ്ങളുടെ പ്രശ്നങ്ങളുടെ കാരണം കണ്ടെത്തുന്നത്. ഇത്തരം അറിവിനെയാണ് സാമാന്യബോധജ്ഞാനം (Commonsense Knowledge) എന്ന് പറയുന്നത്.</p>
+      <p class="en">To find the causes of personal problems, most people rely on what they commonly observe. People usually explain their problems using past experiences, information gained through interaction with others, and the knowledge and habits acquired through the process of socialisation. Such knowledge is called Commonsense Knowledge.</p>
+      <div class="info-box">
+        <h5 class="ml">നിർവചനം</h5>
+        <h5 class="en">Definition</h5>
+        <p class="ml">വ്യക്തിപരമായ അനുഭവങ്ങൾ, സാമൂഹികഇടപെടലുകൾ, സാംസ്കാരിക അറിവുകൾ എന്നിവയിലൂടെ വ്യക്തികൾ ലോകത്തെക്കുറിച്ച് നേടുന്ന അടിസ്ഥാന, ദൈനംദിന ധാരണയാണ് <b>സാമാന്യബോധജ്ഞാനം</b>.</p>
+        <p class="en"><b>Commonsense knowledge</b> is the basic, everyday understanding of the world that individuals gain through personal experiences, social interactions and cultural knowledge.</p>
+      </div>
+      <h4 class="ml">സവിശേഷതകൾ</h4><h4 class="en">Characteristics</h4>
+      <ul class="ml">
+        <li>ഇവ ഔപചാരിക അറിവുകളല്ല; അനുമാനങ്ങളോ ദൈനംദിന പ്രായോഗിക അറിവുകളോ ആണ്.</li>
+        <li>നിരീക്ഷണം, അനുഭവം, സാമൂഹീകരണം എന്നിവയിലൂടെ പഠിച്ചെടുക്കുന്നു.</li>
+        <li>വഴക്കങ്ങൾ (Norms), ശീലങ്ങൾ, വിശ്വാസങ്ങൾ, വ്യക്തിപരമായ അനുഭവങ്ങൾ എന്നിവയെ അടിസ്ഥാനമാക്കി രൂപംകൊള്ളുന്നു.</li>
+        <li>ഇതിനു പിന്നിലെ വസ്തുതകൾ പലപ്പോഴും പരിശോധിക്കപ്പെടാറില്ല.</li>
+      </ul>
+      <ul class="en">
+        <li>It is not formal knowledge; it consists of assumptions or everyday practical knowledge.</li>
+        <li>It is learned through observation, experience and socialisation.</li>
+        <li>It is shaped by norms, habits, beliefs and personal experiences.</li>
+        <li>The facts behind it are often never verified.</li>
+      </ul>
+      <div class="figure-row">
+        <div class="figure-chip"><b class="ml">ഉദാഹരണം 1</b><b class="en">Example 1</b><span class="ml">'സൂര്യൻ കിഴക്ക് ഉദിച്ച് പടിഞ്ഞാറ് അസ്തമിക്കുന്നു' — ദൈനംദിന പ്രകൃതിപ്രതിഭാസത്തെക്കുറിച്ചുള്ള അറിവ്.</span><span class="en">'The sun rises in the east and sets in the west' — knowledge about a daily natural phenomenon.</span></div>
+        <div class="figure-chip"><b class="ml">ഉദാഹരണം 2</b><b class="en">Example 2</b><span class="ml">'തീയിൽ തൊട്ടാൽ പൊള്ളും' — തീയുടെ അപകടസാധ്യതയെക്കുറിച്ചുള്ള അടിസ്ഥാന ധാരണ.</span><span class="en">'Touching fire burns you' — a basic understanding of the danger of fire.</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ml">സാമാന്യബോധജ്ഞാനവും സാമൂഹികവിശകലനവും</span><span class="en">Commonsense Knowledge and Social Analysis</span></h3>
+      <p class="ml">അനുവും കുടുംബവും നേരിടുന്നത് <b>കടബാധ്യത (Indebtedness)</b> എന്ന സാമൂഹികപ്രശ്നമാണ്. ഈ പ്രശ്നത്തെ സാമാന്യബോധജ്ഞാനത്തിലൂടെ മാത്രം വിശകലനം ചെയ്താൽ അതിനു പിന്നിലെ യഥാർഥ കാരണങ്ങൾ പൂർണ്ണമായി കണ്ടെത്താൻ സാധിക്കില്ല.</p>
+      <p class="en">Anu and her family face a social problem called <b>indebtedness</b>. If we analyse it only through commonsense knowledge, we cannot fully find its real causes.</p>
+      <p class="ml">ഒരു വ്യക്തി ദാരിദ്ര്യം അനുഭവിക്കുന്നതിന് കാരണം അയാളുടെ അലസതയും തൊഴിൽ ചെയ്യാനുള്ള ആഗ്രഹമില്ലായ്മയുമാണെന്ന് മറ്റുള്ളവർ ചിന്തിച്ചേക്കാം. വ്യക്തിപരമായ പരാജയം മാത്രമാണ് ദാരിദ്ര്യത്തിന് കാരണമെന്ന് പലരും കരുതുന്നു. ഇത്തരം ധാരണകൾ രൂപപ്പെടുന്നത് സാമാന്യബോധജ്ഞാനത്തിലൂടെയാണ്.</p>
+      <p class="en">Others may think a person is poor because of laziness and unwillingness to work. Many believe that personal failure alone causes poverty. Such beliefs are formed through commonsense knowledge.</p>
+      <div class="info-box">
+        <h5 class="ml">സാമൂഹികപ്രശ്നം (Social Problem)</h5>
+        <h5 class="en">Social Problem</h5>
+        <p class="ml">സമൂഹത്തിലെ വലിയൊരു വിഭാഗം ജനങ്ങളെ ബാധിക്കുന്ന ഒരു പ്രശ്നം അല്ലെങ്കിൽ അവസ്ഥയാണ് സാമൂഹികപ്രശ്നം. ഒരു വ്യക്തിയെയോ ഏതാനും വ്യക്തികളെയോ മാത്രം ബാധിക്കുന്ന പ്രശ്നങ്ങൾ സാമൂഹികപ്രശ്നങ്ങളായി കണക്കാക്കാറില്ല. സമൂഹത്തിന് അഭികാമ്യമല്ലാത്തതോ ഹാനികരമോ ആയ അവസ്ഥയാണിത്. ഉദാ: ദാരിദ്ര്യം, അസമത്വം, വിവേചനം, പരിസരമലിനീകരണം.</p>
+        <p class="en">A social problem is a problem or condition that affects a large section of people in society. Problems affecting only one or a few individuals are not considered social problems. It is a condition undesirable or harmful to society. E.g. poverty, inequality, discrimination, environmental pollution.</p>
+      </div>
+      <h4 class="ml">സാമാന്യബോധജ്ഞാനം ഉണ്ടാകുന്ന വഴികൾ</h4><h4 class="en">Sources of commonsense knowledge</h4>
+      <ul class="ml"><li>വ്യക്തിഗത അനുഭവങ്ങളിലൂടെ</li><li>പൊതുനിരീക്ഷണങ്ങളിലൂടെ</li><li>കുടുംബം, സുഹൃത്തുക്കൾ എന്നിവരുമായുള്ള ഇടപെടലുകളിലൂടെ</li><li>സാംസ്കാരിക വിശ്വാസങ്ങളിലൂടെയും മാധ്യമങ്ങളിലൂടെയും</li></ul>
+      <ul class="en"><li>Personal experiences</li><li>General observations</li><li>Interaction with family and friends</li><li>Cultural beliefs and the media</li></ul>
+      <p class="ml"><b>ചിന്തിക്കാം:</b> സാമാന്യബോധജ്ഞാനത്തിലൂടെ ലഭിക്കുന്ന അറിവുകളെ പ്രശ്നപരിഹാരത്തിന് എപ്പോഴും ആശ്രയിക്കാൻ കഴിയില്ല — കാരണം അവ പലപ്പോഴും പരിശോധിക്കപ്പെടാത്തതും അപൂർണ്ണവുമാണ്.</p>
+      <p class="en"><b>Think:</b> We cannot always rely on commonsense knowledge to solve problems, because it is often unverified and incomplete.</p>
+    </div>
+  </div>
+
+  <!-- PANEL 3: FIVE STATEMENTS -->
+  <div class="panel" data-panel="2">
+    <div class="card">
+      <h3><span class="ml">സാമാന്യബോധജ്ഞാനത്തിലൂന്നിയ അഞ്ച് പ്രസ്താവനകൾ</span><span class="en">Five Statements Based on Commonsense</span></h3>
+      <p class="ml">സമൂഹത്തിൽ ചിലയിടങ്ങളിലെങ്കിലും നിലനിൽക്കുന്ന അഞ്ച് പ്രസ്താവനകൾ പൂർണ്ണമായും ശരിയാണോ എന്ന് വിശകലനം ചെയ്യാം.</p>
+      <p class="en">Let us analyse whether five statements that exist in parts of society are completely true.</p>
+
+      <h4 class="ml">1. "കാലാവസ്ഥാവ്യതിയാനം സ്വാഭാവികമായി സംഭവിക്കുന്നു. മനുഷ്യരുടെ പ്രവൃത്തികൾക്ക് ഇതിൽ പങ്കില്ല."</h4>
+      <h4 class="en">1. "Climate change happens naturally. Human actions have no role in it."</h4>
+      <p class="ml">കാലാവസ്ഥാവ്യതിയാനം മൂലം ആഗോളതാപനം, പ്രളയം, വരൾച്ച, സമുദ്രനിരപ്പ് ഉയരൽ തുടങ്ങിയ പ്രശ്നങ്ങളുണ്ടാകുന്നു. പ്ലാസ്റ്റിക് കത്തിക്കൽ, വനനശീകരണം, ഫോസിൽ ഇന്ധനങ്ങളുടെ അമിത ഉപയോഗം, വ്യവസായശാലകളിലെ പുക തുടങ്ങിയ മനുഷ്യപ്രവൃത്തികൾ ആഗോളതാപനത്തിന് കാരണമാകുന്നു. അതിനാൽ ഈ പ്രസ്താവന സാമാന്യബോധജ്ഞാനം മാത്രമാണ്.</p>
+      <p class="en">Climate change causes global warming, floods, droughts and rising sea levels. Human activities such as burning plastic, deforestation, excessive use of fossil fuels and factory emissions contribute to global warming. So this statement is only commonsense.</p>
+      <div class="quote ml">സാമാന്യബോധജ്ഞാനത്തിലൂടെ ലഭിക്കുന്ന അറിവുകൾ പലപ്പോഴും ഭാഗികമാണ്.</div>
+      <div class="quote en">Knowledge gained through commonsense is often partial.</div>
+
+      <h4 class="ml">2. "അധികസമയം പഠനത്തിലേർപ്പെട്ടാൽ മാത്രമേ ഉയർന്ന സ്കോർ നേടാൻ സാധിക്കുകയുള്ളൂ."</h4>
+      <h4 class="en">2. "Only by studying for long hours can one score high marks."</h4>
+      <p class="ml">ഇത് എല്ലാവർക്കും ഒരുപോലെയല്ല. വ്യക്തിഗതപഠനരീതികളും പഠനശൈലികളും പഠനത്തെ സ്വാധീനിക്കുന്നു. പഠനമികവിന് സംഘം ചേർന്ന് പഠിക്കാം, കൃത്യമായ ഇടവേളകളും വിശ്രമവും എടുക്കാം, ആസൂത്രണത്തോടെ പഠിക്കാം.</p>
+      <p class="en">This is not the same for everyone. Individual study methods and learning styles influence learning. For better results one can study in groups, take proper breaks and rest, and study with planning.</p>
+      <div class="quote ml">സാമാന്യബോധജ്ഞാനം ഊഹാപോഹങ്ങളെയും ശീലങ്ങളെയും ആശ്രയിക്കുന്നു.</div>
+      <div class="quote en">Commonsense knowledge relies on assumptions and habits.</div>
+
+      <h4 class="ml">3. "കൗമാരക്കാർ എപ്പോഴും വിമതരും നിരുത്തരവാദ സ്വഭാവമുള്ളവരുമാണ്."</h4>
+      <h4 class="en">3. "Adolescents are always rebellious and irresponsible."</h4>
+      <p class="ml">ഇതൊരു സാമാന്യവൽക്കരിച്ച വിശ്വാസമാണ്. ഇത്തരം സാമാന്യവൽക്കരിച്ച വിശ്വാസങ്ങളെയോ ആശയങ്ങളെയോ ആണ് <b>വാർപ്പുമാതൃക (Stereotype)</b> എന്ന് പറയുന്നത്. യഥാർഥത്തിൽ കൗമാരക്കാർ വൈവിധ്യമാർന്ന ഒരു കൂട്ടമാണ്; പലരും ഉത്തരവാദിത്വബോധവും പരസ്പരബഹുമാനവും പുലർത്തുന്നവരാണ്. ഇത്തരം പ്രസ്താവനകൾ കൗമാരക്കാരോടുള്ള വിശ്വാസക്കുറവിലേക്കും അവരുടെ പെരുമാറ്റത്തെക്കുറിച്ചുള്ള തെറ്റായ അനുമാനങ്ങളിലേക്കും നയിക്കുന്നു.</p>
+      <p class="en">This is a generalised belief. Such generalised beliefs or ideas are called <b>stereotypes</b>. In reality, adolescents are a diverse group; many show responsibility and mutual respect. Such statements lead to distrust of adolescents and wrong assumptions about their behaviour.</p>
+      <div class="quote ml">സാമാന്യബോധജ്ഞാനം പലപ്പോഴും വാർപ്പുമാതൃകകളെ അടിസ്ഥാനമാക്കുന്നു.</div>
+      <div class="quote en">Commonsense knowledge is often based on stereotypes.</div>
+
+      <h4 class="ml">4. "വയറുനിറച്ച് ആഹാരം കഴിക്കുന്നത് ആരോഗ്യത്തിന് നല്ലതാണ്."</h4>
+      <h4 class="en">4. "Eating till you are full is good for health."</h4>
+      <p class="ml">പോഷകാഹാരങ്ങളെക്കുറിച്ചും ആരോഗ്യത്തെക്കുറിച്ചും വിശദമായി മനസ്സിലാക്കാതെ ദൈനംദിന നിരീക്ഷണങ്ങളെ മാത്രം അടിസ്ഥാനമാക്കിയാണ് ഇത്തരം പ്രസ്താവനകളുണ്ടാകുന്നത്. ഒരു ആശയത്തെക്കുറിച്ചുള്ള ഭാഗികധാരണകൾ മാത്രമേ ഇവ നൽകുന്നുള്ളൂ.</p>
+      <p class="en">Such statements arise from everyday observations alone, without a detailed understanding of nutrition and health. They give only a partial understanding of an idea.</p>
+      <div class="quote ml">സാമാന്യബോധജ്ഞാനം പലപ്പോഴും ശാസ്ത്രീയമായ നിരീക്ഷണങ്ങളുടെയോ പഠനങ്ങളുടെയോ അടിസ്ഥാനത്തിലല്ല രൂപീകൃതമാകുന്നത്.</div>
+      <div class="quote en">Commonsense knowledge is often not formed on the basis of scientific observation or study.</div>
+
+      <h4 class="ml">5. "താൽക്കാലിക വീടുകൾ നൽകിയാൽ പാർപ്പിടമില്ലായ്മ പരിഹരിക്കാം."</h4>
+      <h4 class="en">5. "Homelessness can be solved by providing temporary houses."</h4>
+      <p class="ml">പാർപ്പിടമില്ലായ്മയെ ഒരു വ്യക്തിഗതതിരഞ്ഞെടുപ്പായോ (Personal Choice) സ്ഥിരമായ പാർപ്പിടം ഉറപ്പാക്കാൻ ശ്രമിക്കാത്തതു മൂലമുള്ള പ്രശ്നമായോ ചിലർ കാണുന്നു. എന്നാൽ ഇതിനു പിന്നിൽ സാമ്പത്തിക അസ്ഥിരത, തൊഴിലില്ലായ്മ, ഭൂമിയുടെ ലഭ്യതക്കുറവ്, ഉയർന്ന നിർമ്മാണച്ചെലവ്, പ്രകൃതിദുരന്തങ്ങൾ തുടങ്ങിയ കാരണങ്ങളുണ്ട്.</p>
+      <p class="en">Some see homelessness as a personal choice or as the result of not trying to secure permanent housing. But behind it lie economic instability, unemployment, lack of land, high construction cost and natural disasters.</p>
+      <div class="quote ml">സാമാന്യബോധജ്ഞാനം ഉപയോഗിച്ച് വ്യക്തിഗതപ്രശ്നങ്ങളെയോ സങ്കീർണ്ണമായ സാമൂഹികപ്രശ്നങ്ങളെയോ പൂർണ്ണമായി മനസ്സിലാക്കാൻ കഴിയില്ല.</div>
+      <div class="quote en">Personal problems or complex social problems cannot be fully understood using commonsense knowledge.</div>
+    </div>
+  </div>
+
+  <!-- PANEL 4: LIMITATIONS -->
+  <div class="panel" data-panel="3">
+    <div class="card">
+      <h3><span class="ml">സാമാന്യബോധജ്ഞാനത്തിന്റെ പരിമിതികൾ</span><span class="en">Limitations of Commonsense Knowledge</span></h3>
+      <p class="ml">സാമാന്യബോധജ്ഞാനം പ്രശ്നങ്ങളുടെ യഥാർഥ കാരണങ്ങളെ പൂർണ്ണമായി കണ്ടെത്തുന്നതിൽ പലപ്പോഴും പരാജയപ്പെടുന്നു. അഞ്ച് പ്രസ്താവനകളിലെ വിഷയങ്ങളെല്ലാം സങ്കീർണ്ണമായ സാമൂഹികപ്രശ്നങ്ങളുമായി ബന്ധപ്പെട്ടവയാണ്.</p>
+      <p class="en">Commonsense knowledge often fails to fully identify the real causes of problems. All the issues in the five statements are linked to complex social problems.</p>
+      <div class="estate-grid">
+        <div class="estate-card estate-1"><b class="ml">1. ഭാഗികമായ അറിവുകൾ മാത്രം നൽകുന്നു</b><b class="en">1. Gives only partial knowledge</b><ul class="ml"><li>ഉദാ: കാലാവസ്ഥാവ്യതിയാനം</li></ul><ul class="en"><li>E.g. climate change</li></ul></div>
+        <div class="estate-card estate-2"><b class="ml">2. ശീലങ്ങളെയോ ഊഹാപോഹങ്ങളെയോ ആശ്രയിക്കുന്നു</b><b class="en">2. Relies on habits or assumptions</b><ul class="ml"><li>ഉദാ: അധികസമയ പഠനം</li></ul><ul class="en"><li>E.g. long study hours</li></ul></div>
+        <div class="estate-card estate-3"><b class="ml">3. വാർപ്പുമാതൃകകളെ അടിസ്ഥാനമാക്കുന്നു</b><b class="en">3. Based on stereotypes</b><ul class="ml"><li>ഉദാ: കൗമാരക്കാർ</li></ul><ul class="en"><li>E.g. adolescents</li></ul></div>
+        <div class="estate-card estate-1"><b class="ml">4. ശാസ്ത്രീയ നിരീക്ഷണങ്ങളുടെയോ പഠനങ്ങളുടെയോ അടിസ്ഥാനമില്ല</b><b class="en">4. No basis in scientific observation or study</b><ul class="ml"><li>ഉദാ: വയറുനിറച്ചുള്ള ഭക്ഷണം</li></ul><ul class="en"><li>E.g. eating till full</li></ul></div>
+        <div class="estate-card estate-2"><b class="ml">5. സങ്കീർണ്ണമായ സാമൂഹികപ്രശ്നങ്ങളെ മനസ്സിലാക്കാൻ കഴിയില്ല</b><b class="en">5. Cannot understand complex social problems</b><ul class="ml"><li>ഉദാ: പാർപ്പിടമില്ലായ്മ</li></ul><ul class="en"><li>E.g. homelessness</li></ul></div>
+      </div>
+      <div class="info-box">
+        <h5 class="ml">ഓർമ്മിക്കാൻ</h5><h5 class="en">Remember</h5>
+        <p class="ml">വ്യക്തിപരമായ പ്രശ്നങ്ങളെയും സാമൂഹികപ്രശ്നങ്ങളെയും സാമാന്യബോധജ്ഞാനത്തിലൂടെ മാത്രം സമീപിച്ചാൽ അവയുടെ ശരിയായ പരിഹാരങ്ങളെക്കുറിച്ചുള്ള പൂർണ്ണമായ അറിവ് ലഭിക്കില്ല. അനു തന്റെ പ്രശ്നങ്ങളുടെ കാരണത്തെക്കുറിച്ച് ചിന്തിച്ചത് സാമാന്യബോധജ്ഞാനത്തെ മാത്രം അടിസ്ഥാനമാക്കിയാണ്.</p>
+        <p class="en">If we approach personal and social problems only through commonsense, we cannot get complete knowledge of their proper solutions. Anu thought about the cause of her problems based only on commonsense knowledge.</p>
+      </div>
+      <p class="ml"><b>പ്രവർത്തനം:</b> സാമാന്യബോധജ്ഞാനത്തിന് കൂടുതൽ ഉദാഹരണങ്ങൾ കണ്ടെത്തി അവയുടെ പരിമിതികൾ ചർച്ച ചെയ്യുക. ഉദാ: 'ഗണിതം ആൺകുട്ടികൾക്കാണ് എളുപ്പം' (വാർപ്പുമാതൃക), 'മഴ നനഞ്ഞാൽ പനി വരും' (ഭാഗിക അറിവ്), 'പണക്കാർക്ക് പ്രശ്നങ്ങളില്ല' (സങ്കീർണ്ണത കാണുന്നില്ല).</p>
+      <p class="en"><b>Activity:</b> Find more examples of commonsense and discuss their limits. E.g. 'Maths is easier for boys' (stereotype), 'Getting wet in rain causes fever' (partial knowledge), 'Rich people have no problems' (ignores complexity).</p>
+    </div>
+  </div>
+
+  <!-- PANEL 5: SOCIAL FACTORS -->
+  <div class="panel" data-panel="4">
+    <div class="card">
+      <h3><span class="ml">അനുവിന്റെ പ്രശ്നത്തിനു പിന്നിലെ ഘടകങ്ങൾ</span><span class="en">Factors Behind Anu's Problem</span></h3>
+      <p class="ml">പണത്തിന്റെ കുറവ് മാത്രമാണ് പ്രശ്നങ്ങളുടെ കാരണമെന്ന് അനു കരുതി. എന്നാൽ അനുവിന്റെ പ്രശ്നങ്ങൾക്ക് കാരണമാകുന്ന മറ്റ് ധാരാളം ഘടകങ്ങളുണ്ട്.</p>
+      <p class="en">Anu thought lack of money was the only cause. But many other factors lie behind her problems.</p>
+      <table class="reform-table">
+        <tr><th class="ml">പ്രശ്നങ്ങൾ</th><th class="en">Problems</th><th class="ml">ഘടകങ്ങൾ</th><th class="en">Factors</th></tr>
+        <tr><td class="ml">അനുവിന്റെ കുടുംബത്തിന് സ്ഥിരമായ വരുമാനസ്രോതസ്സുകളില്ല</td><td class="en">The family has no stable source of income</td><td class="ml"><b>സാമ്പത്തികം</b></td><td class="en"><b>Economic</b></td></tr>
+        <tr><td class="ml">കാലാവസ്ഥ മാറുന്നതനുസരിച്ച് വരുമാനം വ്യത്യാസപ്പെടുന്നു</td><td class="en">Income varies with the season</td><td class="ml"><b>പാരിസ്ഥിതികം</b></td><td class="en"><b>Environmental</b></td></tr>
+        <tr><td class="ml">മഴക്കാലത്തെ തൊഴിലില്ലായ്മ (ബദൽ സംവിധാനമൊരുക്കി സാമ്പത്തികപ്രശ്നം പരിഹരിക്കാൻ ഇടപെടുന്നതിൽ ഭരണകൂടത്തിന്റെ പരിമിതി)</td><td class="en">Monsoon unemployment (the government's limitation in providing an alternative system)</td><td class="ml"><b>ഭരണപരം</b></td><td class="en"><b>Administrative</b></td></tr>
+        <tr><td class="ml">വിഭിന്ന ഭൂമിശാസ്ത്രമേഖലകളിൽ ജീവിക്കുന്നവർ അനുഭവിക്കുന്ന പ്രശ്നങ്ങൾ</td><td class="en">Problems faced by people living in different geographical regions</td><td class="ml"><b>ഭൂമിശാസ്ത്രപരമായ അസമാനതകൾ</b></td><td class="en"><b>Geographical inequalities</b></td></tr>
+      </table>
+      <p class="ml">പണത്തിന്റെ ദൗർലഭ്യം മാത്രമല്ല; നിരവധി സാമൂഹികഘടകങ്ങൾ കൂടി അനുവിന്റെ പ്രശ്നത്തിന് പിന്നിലുണ്ട്. അനുവിന്റെ വ്യക്തിപരമായ പ്രശ്നം ഒരു <b>സാമൂഹികപ്രശ്നം</b> കൂടിയാണ്.</p>
+      <p class="en">Not just lack of money — many social factors lie behind Anu's problem. Anu's personal problem is also a <b>social problem</b>.</p>
+      <div class="info-box">
+        <h5 class="ml">സാമൂഹികഘടകങ്ങൾ (Social Factors)</h5>
+        <h5 class="en">Social Factors</h5>
+        <p class="ml">വ്യക്തികളുടെ പെരുമാറ്റം, മനോഭാവം, അവസരങ്ങൾ, തിരഞ്ഞെടുപ്പ് തുടങ്ങിയവയെ സ്വാധീനിക്കുന്ന സമൂഹത്തിന്റെ വിവിധ ഘടകങ്ങൾ ഉൾക്കൊള്ളുന്നതാണ് സാമൂഹികഘടകങ്ങൾ. കുടുംബം, വിദ്യാഭ്യാസം, സമപ്രായസംഘങ്ങൾ, മതം, ജാതിവ്യവസ്ഥ, സാമ്പത്തികനില, പരിസ്ഥിതി, സാംസ്കാരികവഴക്കങ്ങൾ, മൂല്യങ്ങൾ, ഭരണസംവിധാനങ്ങൾ, രാഷ്ട്രീയം, സാങ്കേതികവിദ്യ, മാധ്യമങ്ങൾ തുടങ്ങിയവയെല്ലാം ഇതിൽ ഉൾപ്പെടുന്നു.</p>
+        <p class="en">Social factors are the various elements of society that influence people's behaviour, attitudes, opportunities and choices. They include family, education, peer groups, religion, the caste system, economic status, environment, cultural practices, values, governance systems, politics, technology and media.</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ml">വ്യക്തിഗതപ്രശ്നങ്ങളും സാമൂഹികഘടകങ്ങളും</span><span class="en">Personal Problems and Social Factors</span></h3>
+      <p class="ml">ഏതൊരു വ്യക്തിപരമായ പ്രശ്നത്തിനു പിന്നിലും സാമൂഹികമായ ഘടകങ്ങളുടെ സ്വാധീനമുണ്ടായിരിക്കും. അവയെ തിരിച്ചറിഞ്ഞ് കാരണങ്ങൾ കണ്ടെത്തിയാൽ മാത്രമേ വ്യക്തിഗതപ്രശ്നങ്ങളെ കൂടുതൽ ആഴത്തിലും വ്യാപ്തിയിലും മനസ്സിലാക്കാൻ കഴിയൂ.</p>
+      <p class="en">Social factors influence every personal problem. Only by identifying them can we understand personal problems in greater depth and breadth.</p>
+      <table class="reform-table">
+        <tr><th>#</th><th class="ml">ചിത്രം</th><th class="en">Picture</th><th class="ml">വ്യക്തിഗതപ്രശ്നം</th><th class="en">Personal problem</th><th class="ml">സാമൂഹികഘടകങ്ങൾ</th><th class="en">Social factors</th></tr>
+        <tr><td>1</td><td class="ml">പുസ്തകങ്ങൾക്കിടയിൽ തലയ്ക്ക് കൈകൊടുത്തിരിക്കുന്ന വിദ്യാർഥിനി</td><td class="en">A student holding her head among books</td><td class="ml">പഠനസമ്മർദം</td><td class="en">Academic pressure</td><td class="ml">മത്സരാധിഷ്ഠിത വിദ്യാഭ്യാസം, രക്ഷിതാക്കളുടെ പ്രതീക്ഷ, സമപ്രായക്കാരുമായുള്ള താരതമ്യം</td><td class="en">Competitive education, parents' expectations, peer comparison</td></tr>
+        <tr><td>2</td><td class="ml">3 ജോലി ഒഴിവിന് നീണ്ട വരി</td><td class="en">A long queue for 3 job vacancies</td><td class="ml">തൊഴിലില്ലായ്മ</td><td class="en">Unemployment</td><td class="ml">ജനസംഖ്യാവർധനവ്, തൊഴിലവസരങ്ങളുടെ കുറവ്, സാമ്പത്തികനയങ്ങൾ</td><td class="en">Population growth, few jobs, economic policies</td></tr>
+        <tr><td>3</td><td class="ml">ആശുപത്രിക്കിടക്കയിലെ രോഗി</td><td class="en">A patient in a hospital bed</td><td class="ml">അനാരോഗ്യം, ചികിത്സാച്ചെലവ്</td><td class="en">Ill health, medical costs</td><td class="ml">ആരോഗ്യസൗകര്യങ്ങളുടെ ലഭ്യത, സാമ്പത്തികനില, പരിസ്ഥിതി, ജീവിതശൈലി</td><td class="en">Access to healthcare, economic status, environment, lifestyle</td></tr>
+      </table>
+      <p class="ml">ഈ ഘടകങ്ങളെ വിശകലനം ചെയ്യുന്നതിലൂടെ സാമൂഹികപ്രശ്നങ്ങളുടെ <b>കാര്യ-കാരണ ബന്ധങ്ങളും (Cause-effect relationships)</b> <b>പ്രത്യാഘാതങ്ങളും (Consequences)</b> തിരിച്ചറിയാം. വ്യക്തിഗതപ്രശ്നങ്ങൾ വിശാലമായ <b>സാമൂഹികഘടനകളുമായി (Social Structure)</b> ബന്ധപ്പെട്ടിരിക്കുന്നു.</p>
+      <p class="en">By analysing these factors we can identify the <b>cause-effect relationships</b> and <b>consequences</b> of social problems. Personal problems are connected to the wider <b>social structure</b>.</p>
+      <div class="info-box">
+        <h5 class="ml">സാമൂഹികവിശകലനം (Social Analysis)</h5>
+        <h5 class="en">Social Analysis</h5>
+        <p class="ml">സാമൂഹികബന്ധങ്ങൾ, സാമൂഹികസ്ഥാപനങ്ങൾ, സാമൂഹികഘടനകൾ, സാമൂഹികപ്രശ്നങ്ങൾ എന്നിവ വ്യക്തികളെയും സമൂഹത്തെയും എങ്ങനെയെല്ലാം ബാധിക്കുന്നുവെന്ന് പരിശോധിക്കുന്ന പ്രക്രിയയാണ് സാമൂഹികവിശകലനം. ഇതിലൂടെ വിവിധ സാമൂഹിക സാഹചര്യങ്ങളെ സ്വാധീനിക്കുന്ന ഘടകങ്ങളെക്കുറിച്ച് ആഴത്തിലുള്ള അവബോധം വളർത്താനും അവ മെച്ചപ്പെടുത്താനുള്ള നിർദേശങ്ങൾ നൽകാനും സാധിക്കുന്നു.</p>
+        <p class="en">Social analysis is the process of examining how social relationships, social institutions, social structures and social problems affect individuals and society. It builds a deep understanding of the factors shaping social situations and helps suggest ways to improve them.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 6: SOCIOLOGY -->
+  <div class="panel" data-panel="5">
+    <div class="card">
+      <h3><span class="ml">സമൂഹശാസ്ത്രം (Sociology)</span><span class="en">Sociology</span></h3>
+      <p class="ml">സമൂഹത്തെക്കുറിച്ചുള്ള ശാസ്ത്രീയപഠനമാണ് സമൂഹശാസ്ത്രം. സമൂഹത്തിലെ ബന്ധങ്ങളെയും സാമൂഹികസ്ഥാപനങ്ങളെയും ഘടനകളെയും നിരീക്ഷിക്കാനും വിശകലനം ചെയ്യാനും വ്യാഖ്യാനിക്കാനും സമൂഹശാസ്ത്രത്തിന് സാധിക്കുന്നു.</p>
+      <p class="en">Sociology is the scientific study of society. It observes, analyses and interprets relationships, social institutions and structures in society.</p>
+      <div class="thinker-grid">
+        <div class="thinker-card"><b>കാൾ മാർക്സ് (Karl Marx)</b><p class="ml">സമൂഹശാസ്ത്രത്തിന്റെ ആദ്യകാല ചിന്തകരിൽ പ്രമുഖൻ.</p><p class="en">A leading early thinker of sociology.</p></div>
+        <div class="thinker-card"><b>എമിൽ ദുർഖീം (Emile Durkheim)</b><p class="ml">സമൂഹശാസ്ത്രത്തിന് അടിത്തറയിട്ടവരിൽ പ്രധാനി (1858–1917).</p><p class="en">One of the founders of sociology (1858–1917).</p></div>
+        <div class="thinker-card"><b>മാക്സ് വെബർ (Max Weber)</b><p class="ml">സമൂഹശാസ്ത്രത്തിന്റെ ആദ്യകാല ചിന്തകരിൽ പ്രമുഖൻ.</p><p class="en">A leading early thinker of sociology.</p></div>
+      </div>
+      <p class="ml" style="margin-top:14px">സാമൂഹികവിശകലനത്തിനായി സമൂഹശാസ്ത്രം ഉപയോഗിക്കുന്ന പ്രധാന സങ്കല്പങ്ങൾ:</p>
+      <p class="en" style="margin-top:14px">Key concepts sociology uses for social analysis:</p>
+      <div class="estate-grid">
+        <div class="estate-card estate-1">
+          <b class="ml">സാമൂഹികബന്ധങ്ങൾ (Social Relationships)</b><b class="en">Social Relationships</b>
+          <ul class="ml"><li>സമൂഹത്തിൽ വ്യക്തികൾ പരസ്പരം രൂപപ്പെടുത്തുന്ന ബന്ധങ്ങളും ഇടപെടലുകളും</li><li>അടിസ്ഥാനം: സാമൂഹികഘടനയും സാമൂഹികസ്ഥാപനങ്ങളും</li><li>ഉദാ: കുടുംബാംഗങ്ങളുടെ സഹകരണം, കരുതൽ, വാത്സല്യം; കൂട്ടുകാരുമായുള്ള സൗഹൃദം</li></ul>
+          <ul class="en"><li>Bonds and interactions people form with each other in society</li><li>Based on social structure and social institutions</li><li>E.g. cooperation, care and affection in a family; friendship</li></ul>
+        </div>
+        <div class="estate-card estate-2">
+          <b class="ml">സാമൂഹികസ്ഥാപനങ്ങൾ (Social Institutions)</b><b class="en">Social Institutions</b>
+          <ul class="ml"><li>സാമൂഹികബന്ധങ്ങളെ സുസ്ഥിരമാക്കാനും നിയന്ത്രിക്കാനും സമൂഹം സ്ഥാപിക്കുന്ന ക്രമങ്ങളുടെ ചട്ടക്കൂട്</li><li>നമ്മുടെ പ്രവൃത്തികളെ ക്രമപ്പെടുത്തുന്നു; മൂല്യങ്ങൾ പകർന്ന് സമൂഹത്തെ പുരോഗതിയിലേക്ക് നയിക്കുന്നു</li><li>ഉദാ: കുടുംബം, വിവാഹം, മതം, രാഷ്ട്രീയ-സാമ്പത്തിക-വിദ്യാഭ്യാസ-നീതിന്യായ സ്ഥാപനങ്ങൾ</li></ul>
+          <ul class="en"><li>A framework of arrangements society sets up to stabilise and regulate social relationships</li><li>Orders our actions; passes on values and leads society forward</li><li>E.g. family, marriage, religion, political, economic, educational and legal institutions</li></ul>
+        </div>
+        <div class="estate-card estate-3">
+          <b class="ml">സാമൂഹികഘടന (Social Structure)</b><b class="en">Social Structure</b>
+          <ul class="ml"><li>വ്യക്തികൾക്ക് സമൂഹത്തിലുള്ള സ്ഥാനം (Status), പങ്ക് (Role), നിലനില്പ്, ഉത്തരവാദിത്വം എന്നിവ വിശദീകരിക്കുന്നു</li><li>ഉദാ: വഴക്കങ്ങൾ (Norms), ചട്ടങ്ങൾ</li><li>സമൂഹത്തിന് ക്രമവും സ്ഥിരതയും നൽകുന്നു</li></ul>
+          <ul class="en"><li>Defines people's status, role, position and responsibility in society</li><li>E.g. norms and rules</li><li>Gives society order and stability</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 7: SOCIOLOGICAL IMAGINATION -->
+  <div class="panel" data-panel="6">
+    <div class="card">
+      <h3><span class="ml">സമൂഹശാസ്ത്രസങ്കല്പം (Sociological Imagination)</span><span class="en">The Sociological Imagination</span></h3>
+      <p class="ml">അനു അനുഭവിക്കുന്ന പ്രശ്നത്തിന്റെ വിവിധ ഘടകങ്ങൾ വിശാലമായ സാമൂഹികഘടനകളുമായി ബന്ധപ്പെട്ടിരിക്കുന്നു. ഇങ്ങനെ വ്യക്തിഗതപ്രശ്നങ്ങൾ വിശാലമായ സാമൂഹികഘടനകളുമായി ബന്ധപ്പെട്ടിരിക്കുന്നുവെന്ന് കണ്ടെത്തി വിശകലനം ചെയ്യാനുള്ള നൈപുണിയാണ് <b>സമൂഹശാസ്ത്രസങ്കല്പം</b>.</p>
+      <p class="en">The various elements of Anu's problem are linked to broader social structures. The skill of recognising and analysing how personal problems are connected to broader social structures is called the <b>Sociological Imagination</b>.</p>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-date">1959</div><p class="ml">അമേരിക്കൻ സമൂഹശാസ്ത്രജ്ഞനായ <b>ചാൾസ് റൈറ്റ് മിൽസ്</b> 'ദി സോഷ്യോളജിക്കൽ ഇമാജിനേഷൻ' (The Sociological Imagination) എന്ന പുസ്തകത്തിൽ ഈ സങ്കല്പം ആദ്യമായി അവതരിപ്പിച്ചു.</p><p class="en">American sociologist <b>C. Wright Mills</b> first introduced the concept in his book 'The Sociological Imagination'.</p></div>
+      </div>
+      <p class="ml">വ്യക്തിഗതപ്രശ്നങ്ങളെ വിശാലമായ സാമൂഹികഘടനയുടെ ഭാഗമായി കാണാൻ സഹായിക്കുന്ന ഒരു നൈപുണിയായിട്ടാണ് മിൽസ് ഈ സങ്കല്പം മുന്നോട്ടുവച്ചത്. വ്യക്തിഗതപ്രശ്നങ്ങളും അവയുടെ കാരണങ്ങളും അടയാളപ്പെടുത്തുകയും അവയെ വിശാലമായ നിരീക്ഷണത്തിനും വിശകലനത്തിനും വിധേയമാക്കി വിശദീകരിക്കുകയും ചെയ്യുന്ന രീതിയാണ് സമൂഹശാസ്ത്രസങ്കല്പം.</p>
+      <p class="en">Mills put this forward as a skill that helps us see personal problems as part of the wider social structure. It identifies personal problems and their causes and explains them through broad observation and analysis.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ml">സമൂഹശാസ്ത്രസങ്കല്പവും സാമൂഹികവിശകലനവും</span><span class="en">Sociological Imagination and Social Analysis</span></h3>
+      <p class="ml">എല്ലാ വ്യക്തിഗതപ്രശ്നങ്ങൾക്കും പിന്നിലുള്ള സാമൂഹിക കാരണങ്ങളെയും സമൂഹശാസ്ത്രസങ്കല്പത്തിലൂടെ കണ്ടെത്താൻ കഴിയും. സാമൂഹികഘടനകൾ എങ്ങനെയാണ് നമ്മുടെയും മറ്റുള്ളവരുടെയും ജീവിതത്തെ സ്വാധീനിക്കുന്നത് എന്ന് മനസ്സിലാക്കാൻ ഇത് സഹായിക്കുന്നു.</p>
+      <p class="en">The Sociological Imagination helps uncover the social causes behind every personal problem. It helps us understand how social structures influence our lives and the lives of others.</p>
+      <ul class="ml"><li>വ്യക്തികളെ അവരുടെ വ്യക്തിപരമായ സാഹചര്യങ്ങളിൽ നിന്ന് പുറത്ത് കടക്കാൻ സഹായിക്കുന്നു.</li><li>വിശാലമായ സാമൂഹികഘടനകളുടെ പശ്ചാത്തലത്തിൽ സ്വന്തം അനുഭവങ്ങളെയും ജീവിതാവസ്ഥയെയും നോക്കിക്കാണാൻ പ്രാപ്തരാക്കുന്നു.</li></ul>
+      <ul class="en"><li>Helps people step outside their personal circumstances.</li><li>Enables them to view their own experiences and life situation against the backdrop of wider social structures.</li></ul>
+      <div class="info-box">
+        <h5 class="ml">ആത്മഹത്യാനിരക്കും സമൂഹവും — എമിൽ ദുർഖീം</h5>
+        <h5 class="en">Suicide Rate and Society — Emile Durkheim</h5>
+        <p class="ml">ആത്മഹത്യയെ വ്യക്തിപരമായ കാര്യം മാത്രമായി കണ്ടിരുന്ന കാലത്ത്, എമിൽ ദുർഖീം അതിനു പിന്നിലെ സാമൂഹികകാരണങ്ങൾ പഠിക്കാൻ തീരുമാനിച്ചു. വ്യക്തിപരമായ കാരണങ്ങളേക്കാൾ ഉപരി സാമൂഹികകാരണങ്ങൾ ഉണ്ടെന്ന് അദ്ദേഹം കണ്ടെത്തി. 1897-ൽ പ്രസിദ്ധീകരിച്ച <b>'സൂയിസൈഡ്' (Suicide)</b> എന്ന പുസ്തകത്തിലാണ് ഈ കണ്ടെത്തലുകൾ അവതരിപ്പിച്ചത്.</p>
+        <p class="en">When suicide was seen as a purely personal matter, Emile Durkheim chose to study its social causes. He found that social causes outweighed personal ones. He presented his findings in the book <b>'Suicide'</b>, published in 1897.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 8: FEATURES 1–3 -->
+  <div class="panel" data-panel="7">
+    <div class="card">
+      <h3><span class="ml">സവിശേഷത 1: വ്യക്തിഗതവീക്ഷണത്തെ വിശാലമാക്കുന്നു</span><span class="en">Feature 1: Broadens Personal Perspective</span></h3>
+      <p class="ml">ഒരാൾ വാഹനാപകടത്തിൽപ്പെടുന്നത് അയാളുടെ ശ്രദ്ധയില്ലായ്മ കൊണ്ട് മാത്രമാണോ? അല്ല. സമൂഹശാസ്ത്രസങ്കല്പത്തിലൂടെ മറ്റ് കാരണങ്ങൾ കണ്ടെത്താം:</p>
+      <p class="en">Is a road accident caused only by a person's carelessness? No. Through the sociological imagination we find other causes:</p>
+      <ul class="ml"><li>ട്രാഫിക് നിയമലംഘനം</li><li>വാഹനപ്പെരുപ്പം</li><li>ജനസംഖ്യയ്ക്കനുസൃതമായ സഞ്ചാരസൗകര്യമില്ലായ്മ</li><li>ട്രാഫിക്നിയമങ്ങളുമായി ബന്ധപ്പെട്ട നിയമസംവിധാനത്തിന്റെ വീഴ്ച</li><li>റോഡുകളുടെ അശാസ്ത്രീയ നിർമ്മാണരീതി</li></ul>
+      <ul class="en"><li>Violation of traffic rules</li><li>Rising number of vehicles</li><li>Lack of transport facilities matching the population</li><li>Failure of the legal system related to traffic laws</li><li>Unscientific road construction</li></ul>
+      <p class="ml">വ്യക്തിഗതപ്രശ്നങ്ങളെ മറ്റ് സാമൂഹികഘടകങ്ങൾ എങ്ങനെ സ്വാധീനിക്കുമെന്ന് തിരിച്ചറിയാനും വ്യക്തിഗതവീക്ഷണത്തെ വിശാലമാക്കാനും സമൂഹശാസ്ത്രസങ്കല്പത്തിലൂടെ സാധിക്കുന്നു.</p>
+      <p class="en">The sociological imagination helps us see how social factors shape personal problems and so widens our personal outlook.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ml">സവിശേഷത 2: സാമൂഹികപ്രശ്നങ്ങളെ ആഴത്തിൽ മനസ്സിലാക്കുന്നു</span><span class="en">Feature 2: Deeper Understanding of Social Problems</span></h3>
+      <h4 class="ml">ലിംഗപദവി അനുസരിച്ചുള്ള ഇന്ത്യയിലെ തൊഴിൽ പങ്കാളിത്തനിരക്ക് 2017–2023</h4>
+      <h4 class="en">Labour Force Participation Rate in India by Gender, 2017–2023</h4>
+      <table class="reform-table">
+        <tr><th class="ml">വർഷം</th><th class="en">Year</th><th class="ml">പുരുഷൻ</th><th class="en">Male</th><th class="ml">സ്ത്രീ</th><th class="en">Female</th></tr>
+        <tr><td>2017–2018</td><td>75.1</td><td>21.1</td></tr>
+        <tr><td>2018–2019</td><td>74.9</td><td>21.6</td></tr>
+        <tr><td>2019–2020</td><td>75.8</td><td>26.3</td></tr>
+        <tr><td>2020–2021</td><td>75.8</td><td>27.5</td></tr>
+        <tr><td>2021–2022</td><td>75.9</td><td>27.2</td></tr>
+        <tr><td>2022–2023</td><td>77.4</td><td>31.6</td></tr>
+      </table>
+      <p class="ml" style="font-size:12.5px;color:#6b5f45">അവലംബം: പീരിയോഡിക് ലേബർഫോഴ്സ് സർവെ റിപ്പോർട്ട്, മിനിസ്ട്രി ഓഫ് സ്റ്റാറ്റിസ്റ്റിക്സ് ആൻഡ് പ്രോഗ്രാം ഇംപ്ലിമെന്റേഷൻ</p>
+      <p class="en" style="font-size:12.5px;color:#6b5f45">Source: Periodic Labour Force Survey Report, Ministry of Statistics and Programme Implementation</p>
+      <p class="ml">ഒരു പ്രദേശത്തിന്റെ സാമ്പത്തികപുരോഗതിയെ സ്വാധീനിക്കുന്ന പ്രധാനഘടകമാണ് തൊഴിൽപങ്കാളിത്തം. എല്ലാ വർഷങ്ങളിലും സ്ത്രീകളുടെയും പുരുഷന്മാരുടെയും നിരക്കുകൾ തമ്മിൽ വലിയ വിടവ് (Gap) ഉണ്ട്.</p>
+      <p class="en">Labour force participation is a key factor in a region's economic progress. There is a large gap between men's and women's rates in every year.</p>
+      <p class="ml">സ്ത്രീകൾ മുന്നോട്ട് വരാത്തതാണ് കാരണമെന്ന സാമാന്യബോധജ്ഞാനത്തിനപ്പുറം, സമൂഹശാസ്ത്രസങ്കല്പം ഈ കാരണങ്ങൾ കണ്ടെത്തുന്നു:</p>
+      <p class="en">Beyond the commonsense view that women simply don't come forward, the sociological imagination finds these causes:</p>
+      <ul class="ml">
+        <li>കുടുംബത്തെ മുഴുവൻ പോറ്റേണ്ട ഉത്തരവാദിത്വം 'പുരുഷന്മാർക്ക്', കുടുംബത്തെ പരിപാലിക്കേണ്ടത് 'സ്ത്രീകൾ' എന്ന <b>ലിംഗപദവി വഴക്കം (Gender norms)</b></li>
+        <li>ഇതുകാരണം സ്ത്രീകൾക്ക് വരുമാനമുള്ള തൊഴിൽ ചെയ്യാൻ സാധിക്കുന്നില്ല → സാമ്പത്തികപിന്നാക്കാവസ്ഥ</li>
+        <li>ചില സമൂഹങ്ങളിൽ പെൺകുട്ടികൾക്ക് വിദ്യാഭ്യാസ അവസരം കുറവ് → തൊഴിൽപങ്കാളിത്തത്തിൽ കുറവ്</li>
+      </ul>
+      <ul class="en">
+        <li><b>Gender norms</b> that expect 'men' to support the family and 'women' to care for it</li>
+        <li>So women are unable to take up paid work → economic backwardness</li>
+        <li>In some communities girls get fewer educational opportunities → lower participation</li>
+      </ul>
+      <p class="ml">വ്യക്തിഗതപ്രശ്നങ്ങളുടെ സാമൂഹികബന്ധത്തെക്കുറിച്ച് ചിന്തിക്കാൻ മാത്രമല്ല, സാമൂഹികപ്രശ്നങ്ങളെ ആഴത്തിൽ മനസ്സിലാക്കാനും സമൂഹശാസ്ത്രസങ്കല്പം പ്രയോജനപ്പെടുന്നു.</p>
+      <p class="en">The sociological imagination helps not only to relate personal problems to society but also to understand social problems in depth.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ml">സവിശേഷത 3: സ്വയംപ്രതിഫലനം സാധ്യമാക്കുന്നു</span><span class="en">Feature 3: Enables Self-reflexivity</span></h3>
+      <div class="quote ml">"ഞാൻ ഒരു എഞ്ചിനീയറായിരുന്നു. ചെറുപ്പത്തിൽ എന്റെ ആഗ്രഹം ഒരു ചിത്രകാരനാകണമെന്നായിരുന്നു. പക്ഷേ ചിത്രരചന ഒരു ജോലിയായി സ്വീകരിക്കുന്നതിന് മാതാപിതാക്കൾക്കോ അധ്യാപകർക്കോ താൽപര്യമുണ്ടായിരുന്നില്ല... ആഴത്തിൽ ചിന്തിച്ചപ്പോൾ ഞാൻ എഞ്ചിനീയറായത് എന്റെ മാത്രം തീരുമാനത്തിലല്ല എന്ന് എനിക്ക് മനസ്സിലായി. ഇപ്പോൾ ഞാൻ ചിത്രരചനയിലേക്ക് കടന്നിരിക്കുന്നു. ഞാൻ സന്തോഷവാനാണ്." — ഇഷാൻ, പൂർവവിദ്യാർഥി സംഗമത്തിൽ</div>
+      <div class="quote en">"I was an engineer. As a child I wanted to be a painter, but neither my parents nor my teachers wanted me to take up painting as a career... When I thought deeply, I realised that becoming an engineer was not my decision alone. Now I have turned to painting. I am happy." — Ishan, at an alumni meet</div>
+      <p class="ml">ഇഷാന്റെ തീരുമാനത്തെ സ്വാധീനിച്ചവർ: <b>മാതാപിതാക്കൾ, അധ്യാപകർ, കൂട്ടുകാർ</b>. തന്റെ തീരുമാനത്തെക്കുറിച്ച് വിമർശനാത്മകമായി വിലയിരുത്തിയപ്പോഴാണ് ഇഷാന് ഈ തിരിച്ചറിവ് ലഭിച്ചത്.</p>
+      <p class="en">Those who influenced Ishan's decision: <b>parents, teachers and friends</b>. Ishan realised this only when he critically evaluated his own decision.</p>
+      <div class="info-box">
+        <h5 class="ml">സ്വയംപ്രതിഫലനം (Self-reflexivity)</h5>
+        <h5 class="en">Self-reflexivity</h5>
+        <p class="ml">സ്വന്തം ചിന്തകളെയും പ്രവൃത്തികളെയും വിമർശനാത്മകമായി വിലയിരുത്താനുള്ള നൈപുണിയാണ് സ്വയംപ്രതിഫലനം. ഇത് സാമാന്യബോധജ്ഞാനത്തിന്റെ പരിമിതിയിൽ നിന്ന് മാറിയുള്ള വിശാലമായ വിലയിരുത്തലുകൾക്ക് സഹായിക്കുന്നു. അങ്ങനെ വ്യക്തിതലത്തിലും സാമൂഹികതലത്തിലും സമൂഹശാസ്ത്രസങ്കല്പം ഒരുപോലെ നേട്ടമുണ്ടാക്കുന്നു.</p>
+        <p class="en">Self-reflexivity is the skill of critically evaluating one's own thoughts and actions. It allows broader assessment beyond the limits of commonsense. Thus the sociological imagination benefits us both personally and socially.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 9: FEATURES 4–6 -->
+  <div class="panel" data-panel="8">
+    <div class="card">
+      <h3><span class="ml">സവിശേഷത 4: അനുതാപവും സഹിഷ്ണുതയും വളർത്തുന്നു</span><span class="en">Feature 4: Develops Empathy and Tolerance</span></h3>
+      <p class="ml">ക്ലാസിലെ ഒരു കുട്ടിക്ക് പരീക്ഷകളിൽ സ്ഥിരമായി കുറഞ്ഞ സ്കോർ ലഭിക്കുന്നു, പഠനകാര്യങ്ങളിൽ വേണ്ടവിധം ഇടപെടുന്നില്ല എന്ന് വിചാരിക്കുക.</p>
+      <p class="en">Suppose a classmate regularly scores low and does not engage properly in studies.</p>
+      <table class="reform-table">
+        <tr><th class="ml">സാമാന്യബോധജ്ഞാനം</th><th class="en">Commonsense view</th><th class="ml">സമൂഹശാസ്ത്രസങ്കല്പം</th><th class="en">Sociological imagination</th></tr>
+        <tr><td class="ml">അലസതയായിരിക്കാം; പഠിക്കാൻ താൽപര്യമില്ല; കഴിവില്ല</td><td class="en">May be lazy; not interested; not capable</td><td class="ml">കുടുംബപശ്ചാത്തലം, വിഭവങ്ങളുടെ പ്രാപ്യതക്കുറവ്, വീട്ടിലെ സാമ്പത്തികപ്രശ്നം, ആരോഗ്യപ്രശ്നം, പഠനസൗകര്യമില്ലായ്മ</td><td class="en">Family background, lack of access to resources, financial problems at home, health issues, no study facilities</td></tr>
+      </table>
+      <p class="ml">ഇങ്ങനെ സമീപിക്കുമ്പോൾ ആ കുട്ടിയോട് കൂടുതൽ <b>അനുതാപം (Empathy)</b> ഉണ്ടാകുകയും പിന്തുണയും പ്രചോദനവും നൽകാൻ സാധിക്കുകയും ചെയ്യും. മറ്റുള്ളവരുടെ അനുഭവങ്ങൾക്കുപിന്നിലെ സാമൂഹികസാഹചര്യങ്ങൾ മനസ്സിലാക്കുന്നതിലൂടെ അനുതാപവും സഹിഷ്ണുതയും വളർത്തിയെടുക്കാം.</p>
+      <p class="en">Approached this way, we feel more <b>empathy</b> for the child and can offer support and motivation. Understanding the social circumstances behind others' experiences builds empathy and tolerance.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ml">സവിശേഷത 5: വിമർശനാത്മക ചിന്ത വളർത്തുന്നു</span><span class="en">Feature 5: Develops Critical Thinking</span></h3>
+      <p class="ml">ഗ്രാമത്തിൽ ജനിച്ചുവളർന്ന <b>പ്രിയ</b> മികച്ച തൊഴിലും ജീവിതസാഹചര്യങ്ങളും തേടി നഗരത്തിലേക്ക് കുടിയേറി. ജോലിയും സുരക്ഷിതമായ താമസസൗകര്യവും കണ്ടെത്താൻ ബുദ്ധിമുട്ടി; ലഭിച്ച ജോലിയും വൈകാതെ നഷ്ടമായി. ലേബർ ഓഫീസുമായി ബന്ധപ്പെട്ടപ്പോൾ, തന്നെപ്പോലെ തൊഴിൽ നഷ്ടപ്പെട്ട നിരവധി കുടിയേറ്റക്കാർ ആ നഗരത്തിലുണ്ടെന്ന് അവൾക്ക് മനസ്സിലായി. കുടിയേറ്റക്കാരുടെ പ്രശ്നങ്ങളെയും അവകാശങ്ങളെയും കുറിച്ച് അറിവ് നേടി, അവരുടെ സാഹചര്യങ്ങൾ മെച്ചപ്പെടുത്താനുള്ള പ്രവർത്തനങ്ങളിൽ ഇടപെട്ടു.</p>
+      <p class="en"><b>Priya</b>, raised in a village, migrated to a city for a better job and life. She struggled to find work and safe housing, and soon lost the job she found. At the labour office she realised many migrants in the city had lost jobs like her. She learned about migrants' problems and rights and began working to improve their conditions.</p>
+      <p class="ml"><b>കുടിയേറ്റക്കാരുടെ പൊതുപ്രശ്നങ്ങൾ:</b> തൊഴിൽ നഷ്ടം, സുരക്ഷിതമായ താമസസൗകര്യമില്ലായ്മ, കുറഞ്ഞ വേതനം, അവകാശങ്ങളെക്കുറിച്ചുള്ള അറിവില്ലായ്മ.</p>
+      <p class="en"><b>Common problems of migrants:</b> job loss, lack of safe housing, low wages, lack of awareness of rights.</p>
+      <p class="ml">തന്റെ പ്രശ്നം തനിക്ക് മാത്രം സംഭവിച്ച വ്യക്തിപരമായ ഒന്നല്ലെന്ന് വിമർശനാത്മകചിന്തയിലൂടെ പ്രിയ തിരിച്ചറിഞ്ഞു; തന്റെയും മറ്റുള്ളവരുടെയും സാഹചര്യങ്ങൾ മെച്ചപ്പെടുത്താൻ സാധിച്ചു.</p>
+      <p class="en">Through critical thinking Priya realised her problem was not hers alone, and she improved both her own and others' situations.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ml">സവിശേഷത 6: ഗുണാത്മകമല്ലാത്ത വഴക്കങ്ങളെ ചോദ്യം ചെയ്യുന്നു</span><span class="en">Feature 6: Questions Negative Norms</span></h3>
+      <p class="ml">ചെറിയ പട്ടണത്തിൽ താമസിക്കുന്ന <b>റിനു</b>വിന് സംതൃപ്തമായ ജോലിയും കുടുംബവുമുണ്ട്. എങ്കിലും അകാരണമായ ഉൽകണ്ഠയും വിഷാദവും അനുഭവപ്പെട്ടു. മറ്റുള്ളവർ മാനസികരോഗമാണെന്ന് കരുതി ഒറ്റപ്പെടുത്തുമെന്ന ഭയത്താൽ അദ്ദേഹം ആരോടും പറഞ്ഞില്ല. ഒരു മാനസികാരോഗ്യ സെമിനാറിൽ പങ്കെടുത്തപ്പോൾ, ശാരീരികാരോഗ്യം പോലെ തന്നെ പ്രധാനമാണ് മാനസികാരോഗ്യമെന്ന് റിനു തിരിച്ചറിഞ്ഞു. തന്റെ പ്രശ്നങ്ങൾ സുഹൃത്തുക്കളോട് പങ്കുവച്ചു; സുഹൃത്തുക്കളോടൊപ്പം സാമൂഹികാവബോധം സൃഷ്ടിക്കാൻ പ്രവർത്തിച്ചു തുടങ്ങി.</p>
+      <p class="en"><b>Rinu</b>, living in a small town, had a satisfying job and family, yet felt unexplained anxiety and sadness. Fearing he would be labelled mentally ill and isolated, he told no one. At a mental health seminar he realised mental health is as important as physical health. He shared his problems with friends and began working with them to raise awareness.</p>
+      <p class="ml">കുടുംബം, വിദ്യാഭ്യാസസ്ഥാപനങ്ങൾ, സാമ്പത്തികസ്ഥാപനങ്ങൾ തുടങ്ങിയ സാമൂഹികസ്ഥാപനങ്ങൾ വ്യക്തിപരമായ തിരഞ്ഞെടുപ്പുകളിലും അവയുടെ ഫലങ്ങളിലും ചെലുത്തുന്ന സ്വാധീനം മനസ്സിലാക്കാനും സമൂഹശാസ്ത്രസങ്കല്പം സഹായിക്കുന്നു.</p>
+      <p class="en">The sociological imagination also helps us understand how institutions such as family, educational and economic institutions influence personal choices and their outcomes.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ml">സമൂഹശാസ്ത്രസങ്കല്പത്തിന്റെ സവിശേഷതകൾ — ചുരുക്കം</span><span class="en">Features of the Sociological Imagination — Summary</span></h3>
+      <div class="figure-row">
+        <div class="figure-chip"><b class="ml">1. വിശാലമായ വ്യക്തിഗതവീക്ഷണം</b><b class="en">1. Broader personal perspective</b><span class="ml">വാഹനാപകടം</span><span class="en">Road accident</span></div>
+        <div class="figure-chip"><b class="ml">2. സാമൂഹികപ്രശ്നങ്ങളെ ആഴത്തിൽ മനസ്സിലാക്കൽ</b><b class="en">2. Deep understanding of social problems</b><span class="ml">സ്ത്രീകളുടെ തൊഴിൽപങ്കാളിത്തം</span><span class="en">Women's workforce participation</span></div>
+        <div class="figure-chip"><b class="ml">3. സ്വയംപ്രതിഫലനം</b><b class="en">3. Self-reflexivity</b><span class="ml">ഇഷാൻ</span><span class="en">Ishan</span></div>
+        <div class="figure-chip"><b class="ml">4. അനുതാപവും സഹിഷ്ണുതയും</b><b class="en">4. Empathy and tolerance</b><span class="ml">കുറഞ്ഞ സ്കോർ നേടുന്ന കുട്ടി</span><span class="en">The low-scoring student</span></div>
+        <div class="figure-chip"><b class="ml">5. വിമർശനാത്മക ചിന്ത</b><b class="en">5. Critical thinking</b><span class="ml">പ്രിയ</span><span class="en">Priya</span></div>
+        <div class="figure-chip"><b class="ml">6. ഗുണാത്മകമല്ലാത്ത വഴക്കങ്ങളെ ചോദ്യം ചെയ്യൽ</b><b class="en">6. Questioning negative norms</b><span class="ml">റിനു</span><span class="en">Rinu</span></div>
+      </div>
+      <div class="quote ml">"സമൂഹശാസ്ത്രസങ്കല്പത്തിന് അതിരുകളില്ല."</div>
+      <div class="quote en">"The sociological imagination has no boundaries."</div>
+      <p class="ml">വ്യക്തിഗതപ്രശ്നങ്ങൾ കേവലം വ്യക്തിപരമായ പരാജയമായി കാണുന്നതിനുപകരം സാമൂഹികപ്രശ്നങ്ങളായി തിരിച്ചറിയാൻ സമൂഹശാസ്ത്രസങ്കല്പം പ്രാപ്തി നൽകുന്നു. ഇതിലൂടെ പ്രശ്നപരിഹാരത്തിനുള്ള ഇടപെടലിന്റെ സാധ്യത വർധിക്കുന്നു; ഫലപ്രദമായ സാമൂഹികനയങ്ങൾ രൂപീകരിക്കാനും മാറ്റത്തിനായി പ്രവർത്തിക്കാനും സഹായിക്കുന്നു.</p>
+      <p class="en">Instead of seeing personal problems as mere personal failure, the sociological imagination lets us recognise them as social problems. This increases the chance of intervention, and helps form effective social policies and work for change.</p>
+    </div>
+  </div>
+
+  <!-- PANEL 10: COMPARISON -->
+  <div class="panel" data-panel="9">
+    <div class="card">
+      <h3><span class="ml">സാമാന്യബോധജ്ഞാനവും സമൂഹശാസ്ത്രസങ്കല്പവും</span><span class="en">Commonsense Knowledge and Sociological Imagination</span></h3>
+      <p class="ml">സമൂഹശാസ്ത്രം അതിന്റെ അറിവ് തേടുന്നത് സാമാന്യബോധജ്ഞാനത്തിന് അതീതമായാണ്. സമൂഹത്തെ മനസ്സിലാക്കാനുള്ള വ്യത്യസ്ത മാർഗങ്ങളാണ് ഇവ രണ്ടും; ഇവ പരസ്പരബന്ധിതവുമാണ്. രണ്ടും സമന്വയിപ്പിക്കുന്നതിലൂടെ സമൂഹവുമായി വിമർശനാത്മകമായി ഇടപഴകാനും സാമാന്യബോധത്തിൽ മാത്രം അധിഷ്ഠിതമായ നിലപാടുകൾ ഒഴിവാക്കാനും സാധിക്കുന്നു.</p>
+      <p class="en">Sociology seeks knowledge beyond commonsense. The two are different yet interrelated ways of understanding society. Combining them lets us engage critically with society and avoid positions based only on commonsense.</p>
+      <table class="reform-table">
+        <tr><th class="ml">സാമാന്യബോധജ്ഞാന സമീപനം</th><th class="en">Commonsense Knowledge Approach</th><th class="ml">സമൂഹശാസ്ത്രസങ്കല്പ സമീപനം</th><th class="en">Sociological Imagination Approach</th></tr>
+        <tr><td class="ml">വ്യക്തിഗത വീക്ഷണങ്ങളിലും അനുഭവങ്ങളിലുമായി പരിമിതപ്പെട്ടിരിക്കുന്നു.</td><td class="en">Limited to personal views and experiences.</td><td class="ml">വ്യക്തിഗത അനുഭവങ്ങളെ വലിയ സാമൂഹികഘടനകളുമായി ബന്ധിപ്പിക്കുന്നതിനാൽ ഇതിന്റെ വ്യാപ്തി വലുതാണ്.</td><td class="en">Wider in scope, as it links personal experience to large social structures.</td></tr>
+        <tr><td class="ml">പലപ്പോഴും വാർപ്പുമാതൃകകളെ അടിസ്ഥാനമാക്കിയുള്ള ഉപരിതലവിശദീകരണം മാത്രമേ നൽകുന്നുള്ളൂ.</td><td class="en">Often gives only surface explanations based on stereotypes.</td><td class="ml">സാമൂഹികഘടകങ്ങൾ വ്യക്തികളിൽ ചെലുത്തുന്ന സ്വാധീനത്തെക്കുറിച്ച് ആഴത്തിൽ വിശകലനം ചെയ്യുന്നു.</td><td class="en">Analyses in depth how social factors influence individuals.</td></tr>
+        <tr><td class="ml">സാമൂഹികയാഥാർഥ്യങ്ങളെയും പ്രശ്നങ്ങളെയും വിമർശനാത്മക ചിന്തയിലൂടെ സമീപിക്കുന്നില്ല.</td><td class="en">Does not approach social realities and problems critically.</td><td class="ml">വ്യക്തിപരമായ അനുഭവങ്ങളും സാമൂഹികഘടകങ്ങളും തമ്മിലുള്ള പരസ്പരബന്ധത്തെക്കുറിച്ച് വിമർശനാത്മകമായി ചിന്തിക്കാൻ പ്രേരിപ്പിക്കുന്നു.</td><td class="en">Encourages critical thinking about the link between personal experience and social factors.</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3><span class="ml">സാമൂഹികപ്രശ്നങ്ങൾ: രണ്ട് സമീപനങ്ങൾ</span><span class="en">Social Problems: Two Approaches</span></h3>
+      <table class="reform-table">
+        <tr><th class="ml">സാമൂഹികപ്രശ്നം</th><th class="en">Social problem</th><th class="ml">സാമാന്യബോധജ്ഞാന സമീപനം</th><th class="en">Commonsense approach</th><th class="ml">സമൂഹശാസ്ത്രസങ്കല്പ സമീപനം</th><th class="en">Sociological imagination approach</th></tr>
+        <tr><td class="ml"><b>ദാരിദ്ര്യം</b></td><td class="en"><b>Poverty</b></td><td class="ml">കഠിനാധ്വാനത്തിനുള്ള താൽപര്യമില്ലായ്മ; ധൂർത്ത്</td><td class="en">No will to work hard; wastefulness</td><td class="ml">വിഭവങ്ങളുടെ അസമമായ വിതരണം; തൊഴിലവസരങ്ങളുടെയും വിദ്യാഭ്യാസത്തിന്റെയും കുറവ്</td><td class="en">Unequal distribution of resources; lack of jobs and education</td></tr>
+        <tr><td class="ml"><b>തൊഴിലില്ലായ്മ</b></td><td class="en"><b>Unemployment</b></td><td class="ml">അലസത; കഴിവില്ലായ്മ</td><td class="en">Laziness; lack of ability</td><td class="ml">ജനസംഖ്യാവർധനവ്; സാമ്പത്തികമാന്ദ്യം; നൈപുണ്യവും തൊഴിലും തമ്മിലുള്ള പൊരുത്തക്കേട്</td><td class="en">Population growth; economic slowdown; skills–jobs mismatch</td></tr>
+        <tr><td class="ml"><b>പഠനസമ്മർദം</b></td><td class="en"><b>Academic pressure</b></td><td class="ml">പരാജയപ്പെടുമെന്ന ഭയം; ആത്മവിശ്വാസക്കുറവ്</td><td class="en">Fear of failure; low confidence</td><td class="ml">ഉയർന്ന സ്കോർ നേടാൻ വിദ്യാലയത്തിൽ നിന്നുള്ള സമ്മർദം; രക്ഷിതാക്കളുടെ പ്രതീക്ഷ; മത്സരാധിഷ്ഠിത സമ്പ്രദായം</td><td class="en">School pressure for high scores; parents' expectations; competitive system</td></tr>
+      </table>
+      <div class="info-box">
+        <h5 class="ml">സൂക്ഷ്മ-സ്ഥൂല ബന്ധങ്ങൾ (Micro-Macro Relationships)</h5>
+        <h5 class="en">Micro-Macro Relationships</h5>
+        <p class="ml">വ്യക്തിയും സമൂഹവും തമ്മിലുള്ള സൂക്ഷ്മ-സ്ഥൂല ബന്ധങ്ങൾ കണ്ടെത്താൻ സമൂഹശാസ്ത്രസങ്കല്പം സഹായിക്കുന്നു. വ്യക്തിജീവിതവും സാമൂഹികഘടനകളും തമ്മിലുള്ള സങ്കീർണ്ണമായ പരസ്പരബന്ധം മനസ്സിലാക്കാനും അഭിസംബോധന ചെയ്യാനും ഇത് പ്രാപ്തരാക്കുന്നു. സാമൂഹികജീവിതത്തെ സമ്പന്നമാക്കുന്ന ശക്തമായ ഒരു ഉപകരണവും നൈപുണിയും സമീപനവുമായി സമൂഹശാസ്ത്രസങ്കല്പം മാറുന്നു.</p>
+        <p class="en">The sociological imagination helps find the micro-macro relationships between the individual and society. It enables us to understand and address the complex link between personal life and social structures, becoming a powerful tool, skill and approach that enriches social life.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 11: TERMS, Q&A, FOLLOW-UP -->
+  <div class="panel" data-panel="10">
+    <div class="card">
+      <h3><span class="ml">പ്രധാന പദങ്ങൾ</span><span class="en">Key Terms</span></h3>
+      <table class="reform-table">
+        <tr><th class="ml">പദം</th><th class="en">Term</th><th class="ml">അർഥം</th><th class="en">Meaning</th></tr>
+        <tr><td class="ml">സാമാന്യബോധജ്ഞാനം</td><td class="en">Commonsense Knowledge</td><td class="ml">അനുഭവങ്ങളിലൂടെ നേടുന്ന ദൈനംദിന ധാരണ</td><td class="en">Everyday understanding from experience</td></tr>
+        <tr><td class="ml">സാമൂഹീകരണം</td><td class="en">Socialisation</td><td class="ml">സമൂഹത്തിൽ നിന്ന് അറിവും ശീലങ്ങളും പഠിക്കുന്ന പ്രക്രിയ</td><td class="en">Learning knowledge and habits from society</td></tr>
+        <tr><td class="ml">വഴക്കങ്ങൾ</td><td class="en">Norms</td><td class="ml">സമൂഹം അംഗീകരിച്ച പെരുമാറ്റരീതികൾ</td><td class="en">Socially accepted rules of behaviour</td></tr>
+        <tr><td class="ml">കടബാധ്യത</td><td class="en">Indebtedness</td><td class="ml">അനുവും കുടുംബവും നേരിടുന്ന സാമൂഹികപ്രശ്നം</td><td class="en">The social problem Anu's family faces</td></tr>
+        <tr><td class="ml">വാർപ്പുമാതൃക</td><td class="en">Stereotype</td><td class="ml">സാമാന്യവൽക്കരിച്ച വിശ്വാസങ്ങളോ ആശയങ്ങളോ</td><td class="en">Generalised beliefs or ideas</td></tr>
+        <tr><td class="ml">സാമൂഹികവിശകലനം</td><td class="en">Social Analysis</td><td class="ml">സാമൂഹികഘടകങ്ങൾ വ്യക്തിയെയും സമൂഹത്തെയും ബാധിക്കുന്നത് പരിശോധിക്കൽ</td><td class="en">Examining how social elements affect people and society</td></tr>
+        <tr><td class="ml">സമൂഹശാസ്ത്രസങ്കല്പം</td><td class="en">Sociological Imagination</td><td class="ml">വ്യക്തിഗതപ്രശ്നങ്ങളെ സാമൂഹികഘടനയുമായി ബന്ധിപ്പിച്ച് വിശകലനം ചെയ്യാനുള്ള നൈപുണി</td><td class="en">Skill of linking personal problems to social structure</td></tr>
+        <tr><td class="ml">സ്വയംപ്രതിഫലനം</td><td class="en">Self-reflexivity</td><td class="ml">സ്വന്തം ചിന്തകളെയും പ്രവൃത്തികളെയും വിമർശനാത്മകമായി വിലയിരുത്തൽ</td><td class="en">Critically evaluating one's own thoughts and actions</td></tr>
+        <tr><td class="ml">അനുതാപം</td><td class="en">Empathy</td><td class="ml">മറ്റുള്ളവരുടെ സാഹചര്യം മനസ്സിലാക്കി പിന്തുണയ്ക്കൽ</td><td class="en">Understanding and supporting others</td></tr>
+        <tr><td class="ml">ലിംഗപദവി വഴക്കങ്ങൾ</td><td class="en">Gender norms</td><td class="ml">സ്ത്രീ-പുരുഷ റോളുകളെക്കുറിച്ചുള്ള സാമൂഹിക രീതികൾ</td><td class="en">Social rules about gender roles</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3><span class="ml">പരീക്ഷാ ചോദ്യോത്തരങ്ങൾ</span><span class="en">Exam Questions and Answers</span></h3>
+      <h4 class="ml">1. സാമാന്യബോധജ്ഞാനം എന്നാലെന്ത്? രണ്ട് ഉദാഹരണങ്ങൾ എഴുതുക. (2 മാർക്ക്)</h4>
+      <h4 class="en">1. What is commonsense knowledge? Give two examples. (2 marks)</h4>
+      <p class="ml">വ്യക്തിപരമായ അനുഭവങ്ങൾ, സാമൂഹികഇടപെടലുകൾ, സാംസ്കാരിക അറിവുകൾ എന്നിവയിലൂടെ നേടുന്ന അടിസ്ഥാന ദൈനംദിന ധാരണ. ഉദാ: 'സൂര്യൻ കിഴക്ക് ഉദിക്കുന്നു', 'തീയിൽ തൊട്ടാൽ പൊള്ളും'.</p>
+      <p class="en">The basic everyday understanding gained through personal experiences, social interactions and cultural knowledge. E.g. 'The sun rises in the east', 'Touching fire burns you'.</p>
+      <h4 class="ml">2. സാമൂഹികപ്രശ്നം എന്നാലെന്ത്? (2 മാർക്ക്)</h4>
+      <h4 class="en">2. What is a social problem? (2 marks)</h4>
+      <p class="ml">സമൂഹത്തിലെ വലിയൊരു വിഭാഗം ജനങ്ങളെ ബാധിക്കുന്ന, അഭികാമ്യമല്ലാത്തതോ ഹാനികരമോ ആയ പ്രശ്നം/അവസ്ഥ. ഉദാ: ദാരിദ്ര്യം, അസമത്വം, വിവേചനം.</p>
+      <p class="en">A problem or condition, undesirable or harmful, that affects a large section of society. E.g. poverty, inequality, discrimination.</p>
+      <h4 class="ml">3. സാമാന്യബോധജ്ഞാനത്തിന്റെ പരിമിതികൾ എഴുതുക. (4 മാർക്ക്)</h4>
+      <h4 class="en">3. Write the limitations of commonsense knowledge. (4 marks)</h4>
+      <p class="ml">ഭാഗികമായ അറിവുകൾ മാത്രം നൽകുന്നു; ശീലങ്ങളെയോ ഊഹാപോഹങ്ങളെയോ ആശ്രയിക്കുന്നു; വാർപ്പുമാതൃകകളെ അടിസ്ഥാനമാക്കുന്നു; ശാസ്ത്രീയ നിരീക്ഷണങ്ങളുടെയോ പഠനങ്ങളുടെയോ അടിസ്ഥാനമില്ല; സങ്കീർണ്ണമായ സാമൂഹികപ്രശ്നങ്ങളെ മനസ്സിലാക്കാൻ കഴിയില്ല.</p>
+      <p class="en">Gives only partial knowledge; relies on habits or assumptions; is based on stereotypes; lacks a scientific basis; cannot help understand complex social problems.</p>
+      <h4 class="ml">4. സാമൂഹികസ്ഥാപനങ്ങളും സാമൂഹികഘടനയും വേർതിരിച്ചെഴുതുക. (4 മാർക്ക്)</h4>
+      <h4 class="en">4. Distinguish between social institutions and social structure. (4 marks)</h4>
+      <p class="ml">സാമൂഹികസ്ഥാപനങ്ങൾ: സാമൂഹികബന്ധങ്ങളെ സുസ്ഥിരമാക്കാനും നിയന്ത്രിക്കാനുമുള്ള ക്രമങ്ങളുടെ ചട്ടക്കൂട് — കുടുംബം, വിവാഹം, മതം, വിദ്യാഭ്യാസസ്ഥാപനങ്ങൾ. സാമൂഹികഘടന: വ്യക്തികളുടെ സ്ഥാനം, പങ്ക്, ഉത്തരവാദിത്വം എന്നിവ വിശദീകരിക്കുന്നത് — വഴക്കങ്ങൾ, ചട്ടങ്ങൾ; സമൂഹത്തിന് ക്രമവും സ്ഥിരതയും നൽകുന്നു.</p>
+      <p class="en">Social institutions: a framework of arrangements to stabilise and regulate social relationships — family, marriage, religion, schools. Social structure: defines people's status, role and responsibility — norms, rules; gives society order and stability.</p>
+      <h4 class="ml">5. സമൂഹശാസ്ത്രസങ്കല്പം എന്നാലെന്ത്? ഈ ആശയം അവതരിപ്പിച്ചതാര്? (3 മാർക്ക്)</h4>
+      <h4 class="en">5. What is the sociological imagination? Who introduced it? (3 marks)</h4>
+      <p class="ml">വ്യക്തിഗതപ്രശ്നങ്ങൾ വിശാലമായ സാമൂഹികഘടനകളുമായി ബന്ധപ്പെട്ടിരിക്കുന്നുവെന്ന് കണ്ടെത്തി വിശകലനം ചെയ്യാനുള്ള നൈപുണി. അമേരിക്കൻ സമൂഹശാസ്ത്രജ്ഞനായ ചാൾസ് റൈറ്റ് മിൽസ്, 1959-ലെ 'ദി സോഷ്യോളജിക്കൽ ഇമാജിനേഷൻ' എന്ന പുസ്തകത്തിൽ.</p>
+      <p class="en">The skill of recognising and analysing how personal problems connect to broad social structures. Introduced by American sociologist C. Wright Mills in 'The Sociological Imagination' (1959).</p>
+      <h4 class="ml">6. സമൂഹശാസ്ത്രസങ്കല്പത്തിന്റെ സവിശേഷതകൾ ഉദാഹരണസഹിതം വിശദമാക്കുക. (6 മാർക്ക്)</h4>
+      <h4 class="en">6. Explain the features of the sociological imagination with examples. (6 marks)</h4>
+      <p class="ml">(1) വ്യക്തിഗതവീക്ഷണത്തെ വിശാലമാക്കുന്നു — വാഹനാപകടത്തിന് പിന്നിലെ ട്രാഫിക് നിയമലംഘനം, വാഹനപ്പെരുപ്പം, അശാസ്ത്രീയ റോഡ് നിർമ്മാണം. (2) സാമൂഹികപ്രശ്നങ്ങളെ ആഴത്തിൽ മനസ്സിലാക്കുന്നു — സ്ത്രീകളുടെ കുറഞ്ഞ തൊഴിൽപങ്കാളിത്തത്തിന് പിന്നിലെ ലിംഗപദവി വഴക്കങ്ങൾ. (3) സ്വയംപ്രതിഫലനം — ഇഷാൻ. (4) അനുതാപവും സഹിഷ്ണുതയും — കുറഞ്ഞ സ്കോർ നേടുന്ന കുട്ടി. (5) വിമർശനാത്മക ചിന്ത — പ്രിയ. (6) ഗുണാത്മകമല്ലാത്ത വഴക്കങ്ങളെ ചോദ്യം ചെയ്യൽ — റിനു.</p>
+      <p class="en">(1) Broadens personal perspective — traffic violations, vehicle growth and poor road design behind accidents. (2) Deep understanding of social problems — gender norms behind low female participation. (3) Self-reflexivity — Ishan. (4) Empathy and tolerance — the low-scoring student. (5) Critical thinking — Priya. (6) Questioning negative norms — Rinu.</p>
+      <h4 class="ml">7. സ്ത്രീകളുടെ തൊഴിൽപങ്കാളിത്തം കുറയാനുള്ള സാമൂഹികഘടകങ്ങൾ വിശകലനം ചെയ്യുക. (4 മാർക്ക്)</h4>
+      <h4 class="en">7. Analyse the social factors behind low female workforce participation. (4 marks)</h4>
+      <p class="ml">2022–23-ൽ പുരുഷന്മാർ 77.4, സ്ത്രീകൾ 31.6 — വലിയ വിടവ്. കുടുംബം പോറ്റേണ്ടത് പുരുഷനും പരിപാലിക്കേണ്ടത് സ്ത്രീയുമെന്ന ലിംഗപദവി വഴക്കം; പെൺകുട്ടികൾക്ക് വിദ്യാഭ്യാസ അവസരം കുറയൽ; സാമ്പത്തികപിന്നാക്കാവസ്ഥ — സാംസ്കാരിക-സാമ്പത്തിക-വിദ്യാഭ്യാസ ഘടകങ്ങൾ.</p>
+      <p class="en">In 2022–23: men 77.4, women 31.6 — a wide gap. Gender norms (men earn, women care), fewer educational opportunities for girls, economic backwardness — cultural, economic and educational factors.</p>
+      <h4 class="ml">8. സാമാന്യബോധജ്ഞാന സമീപനവും സമൂഹശാസ്ത്രസങ്കല്പ സമീപനവും താരതമ്യം ചെയ്യുക. (4 മാർക്ക്)</h4>
+      <h4 class="en">8. Compare the commonsense and sociological imagination approaches. (4 marks)</h4>
+      <p class="ml">ആദ്യത്തേത് വ്യക്തിഗതാനുഭവങ്ങളിൽ പരിമിതം, വാർപ്പുമാതൃകകളെ ആശ്രയിച്ചുള്ള ഉപരിതലവിശദീകരണം, വിമർശനാത്മകമല്ല. രണ്ടാമത്തേത് വ്യക്തിഗതാനുഭവങ്ങളെ സാമൂഹികഘടനയുമായി ബന്ധിപ്പിക്കുന്നു, ആഴത്തിൽ വിശകലനം ചെയ്യുന്നു, വിമർശനാത്മകചിന്തയ്ക്ക് പ്രേരിപ്പിക്കുന്നു. (ഉദാ: ദാരിദ്ര്യം — അലസത vs വിഭവങ്ങളുടെ അസമവിതരണം)</p>
+      <p class="en">The first is limited to personal experience, gives surface explanations based on stereotypes, and is not critical. The second links personal experience to social structure, analyses in depth, and encourages critical thinking. (E.g. poverty — laziness vs unequal distribution of resources)</p>
+    </div>
+    <div class="card">
+      <h3><span class="ml">തുടർപ്രവർത്തനം</span><span class="en">Follow-up Activities</span></h3>
+      <ul class="ml">
+        <li>'ആരോഗ്യകരമായ സാമൂഹികജീവിതത്തിന് സമൂഹശാസ്ത്രസങ്കല്പത്തിന്റെ ആവശ്യകത' — സ്കൂൾ അസംബ്ലിയിൽ ലഘുപ്രഭാഷണം തയ്യാറാക്കുക.</li>
+        <li>വിവിധ മാധ്യമങ്ങളിലെ സാമൂഹികപ്രശ്ന വാർത്തകൾ ശേഖരിച്ച് അവതരണരീതികൾ സമൂഹശാസ്ത്രസങ്കല്പ സമീപനത്തിലൂടെ താരതമ്യം ചെയ്യുക.</li>
+        <li>സമൂഹശാസ്ത്രസങ്കല്പനൈപുണി പ്രതിഫലിക്കുന്ന നിങ്ങളുടെ ഇടപെടൽ സന്ദർഭങ്ങൾ സാമൂഹ്യശാസ്ത്രക്ലബ്ബിൽ അവതരിപ്പിക്കുക.</li>
+        <li>വ്യക്തിപരമായ അനുഭവങ്ങളും സാമൂഹികപ്രശ്നങ്ങളും ഒരു ജേർണലിൽ രേഖപ്പെടുത്തി വിശകലനം ചെയ്യുക.</li>
+      </ul>
+      <ul class="en">
+        <li>Prepare a short assembly speech on 'The need for sociological imagination for a healthy social life'.</li>
+        <li>Collect news on social problems from different media and compare how they are presented, using the sociological imagination.</li>
+        <li>Present instances where you used sociological imagination skills at the Social Science Club.</li>
+        <li>Record personal experiences and social problems in a journal and analyse them.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quiz-cta">
+    <h3>Test Your Knowledge</h3>
+    <p style="opacity:.85">A quiz on the key ideas of this chapter</p>
+    <a class="js-quiz" href="history-unit3-quiz.html" target="_blank">🏆 Start Quiz</a>
+  </div>
+
+  <div class="nav-btns">
+    <button onclick="go(-1)">← Previous</button>
+    <button onclick="go(1)">Next →</button>
+  </div>
+
+</div>
+
+<footer>
+  <div>© Abacus Academy · Parambil Peedika &amp; Puthur Pallikkal · SSLC / Class 10 Social Science</div>
+</footer>
+
+<script>
+const tabLabelsML=["ആമുഖം","സാമാന്യബോധജ്ഞാനം","അഞ്ച് പ്രസ്താവനകൾ","പരിമിതികൾ","സാമൂഹികഘടകങ്ങൾ","സമൂഹശാസ്ത്രം","സമൂഹശാസ്ത്രസങ്കല്പം","സവിശേഷതകൾ 1–3","സവിശേഷതകൾ 4–6","താരതമ്യം","ചോദ്യോത്തരങ്ങൾ"];
+const tabLabelsEN=["Overview","Commonsense","Five Statements","Limitations","Social Factors","Sociology","Sociological Imagination","Features 1–3","Features 4–6","Comparison","Q&A"];
+/* Quiz link: sibling file on GitHub Pages / local; published link elsewhere */
+(function(){
+  const local=/github\.io$/.test(location.hostname)||location.protocol==="file:";
+  if(!local) document.querySelectorAll('.js-quiz').forEach(a=>a.href="https://claude.ai/artifact/5L1MvJxjhZnnb5Y3GEZXeB");
+})();
+const tabsEl=document.getElementById('tabs');
+let currentLang='ml';
+let activeIdx=0;
+function buildTabs(){
+  tabsEl.innerHTML='';
+  const labels = tabLabelsEN; /* navigation always in English */
+  labels.forEach((label,i)=>{
+    const b=document.createElement('button');
+    b.className='tab-btn'+(i===activeIdx?' active':'');
+    b.textContent=(i+1)+'. '+label;
+    b.onclick=()=>showPanel(i);
+    tabsEl.appendChild(b);
+  });
+}
+function showPanel(i){
+  activeIdx=i;
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector('.panel[data-panel="'+i+'"]').classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach((b,idx)=>b.classList.toggle('active',idx===i));
+  window.scrollTo({top:document.querySelector('.tabs').offsetTop-70,behavior:'smooth'});
+}
+function go(dir){
+  const total=document.querySelectorAll('.panel').length;
+  let next=activeIdx+dir;
+  if(next<0)next=0;
+  if(next>=total)next=total-1;
+  showPanel(next);
+}
+function setLang(lang){
+  currentLang=lang;
+  document.body.classList.toggle('show-en',lang==='en');
+  document.getElementById('btn-ml').classList.toggle('active',lang==='ml');
+  document.getElementById('btn-en').classList.toggle('active',lang==='en');
+  try{localStorage.setItem('aa-medium',lang);}catch(e){}
+  buildTabs();
+}
+try{ const m=new URLSearchParams(location.search).get('medium')||localStorage.getItem('aa-medium'); if(m==='en') setLang('en'); }catch(e){}
+buildTabs();
+showPanel(0);
+</script>
+</body>
+</html>
