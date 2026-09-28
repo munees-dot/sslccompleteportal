@@ -1,314 +1,473 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ml">
 <head>
 <meta charset="UTF-8">
-<title>Daily Exam — Behind the Senses | Biology</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
-<style>:root{--p:#1d6fd8;--pd:#0f3f86;--hd:#1d6fd8;--ac:#f59e0b;--bg:#f2f6fc;--card:#ffffff;--ink:#15233b;--mut:#5b6b84;--line:#d9e4f4;--soft:#e8f0fc;--ok:#1f8a4c;--okbg:#dcf3e6;--bad:#c0392b;--badbg:#fbe3df}</style>
+<title>Geography Unit 3 Quiz | Abacus Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;800&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.55;min-height:100vh}
-body[data-lang="ml"]{font-family:'Noto Sans Malayalam','Segoe UI',system-ui,sans-serif}
-header{background:linear-gradient(135deg,var(--pd),var(--hd));color:#fff;padding:22px 18px 46px;position:relative}
-.hin{max-width:620px;margin:0 auto;display:flex;align-items:flex-start;gap:12px}
-.hin div{flex:1}
-header h1{margin:0 0 3px;font-size:1.35rem}
-header p{margin:0;opacity:.88;font-size:.88rem}
-#langBtn{border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.14);color:#fff;padding:7px 12px;border-radius:999px;cursor:pointer;font:inherit;font-size:.82rem;font-weight:600;white-space:nowrap}
-main{max-width:620px;margin:-30px auto 30px;padding:0 14px;position:relative}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
-.card h2{margin:0 0 4px;font-size:1.15rem}
-.muted{color:var(--mut);font-size:.88rem;margin:0 0 16px}
-label{display:block;font-weight:600;font-size:.85rem;margin:0 0 6px}
-input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font:inherit;font-size:1.05rem;background:var(--card);color:var(--ink);margin-bottom:12px}
-input:focus{outline:none;border-color:var(--p)}
-.btn{display:block;width:100%;border:none;background:var(--p);color:#fff;padding:12px 16px;border-radius:10px;font:inherit;font-weight:700;font-size:.98rem;cursor:pointer}
-.btn:disabled{opacity:.45;cursor:not-allowed}
-.btn.alt{background:transparent;color:var(--p);border:1.5px solid var(--p)}
-.btns{display:flex;gap:10px;margin-top:16px}
-.btns .btn{flex:1}
-.who{min-height:8px;margin:0 0 12px}
-.who .s{font-size:.88rem;color:var(--mut)}
-.who .e{font-size:.88rem;color:var(--bad)}
-.stu{display:flex;align-items:center;gap:12px;background:var(--soft);border:1.5px solid var(--p);border-radius:12px;padding:12px 14px}
-.av{width:44px;height:44px;border-radius:50%;background:var(--p);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.15rem;flex-shrink:0}
-.stu b{display:block;font-size:1.05rem}
-.stu span{font-size:.8rem;color:var(--mut)}
-.warn{margin-top:10px;background:var(--badbg);color:var(--bad);border-radius:10px;padding:10px 12px;font-size:.86rem}
-.note{font-size:.78rem;color:var(--mut);text-align:center;margin:12px 0 0}
-.gate{text-align:center;padding:10px 0}
-.gate .ic{font-size:2.6rem}
-.gate .clk{font-size:1.6rem;font-weight:700;color:var(--p);margin-top:8px;font-variant-numeric:tabular-nums}
-.strip{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:.82rem;margin-bottom:12px}
-.strip b{color:var(--p)}
-.chip{background:var(--soft);border-radius:999px;padding:4px 10px;font-weight:600}
-.bar{height:7px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:18px}
-.bar i{display:block;height:100%;background:var(--ac);border-radius:99px;transition:width .3s}
-.qn{font-size:.78rem;font-weight:700;color:var(--ac);text-transform:uppercase;letter-spacing:.04em}
-.qt{font-size:1.06rem;font-weight:600;margin:4px 0 12px}
-.qb{padding:0 0 18px;margin:0 0 18px;border-bottom:1px dashed var(--line)}
-.qb:last-of-type{border-bottom:none}
-.opt{display:flex;align-items:center;gap:10px;width:100%;text-align:left;margin:7px 0;padding:10px 12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;cursor:pointer;font:inherit;font-size:.95rem}
-.opt:hover:not(:disabled){border-color:var(--p)}
-.opt .k{width:26px;height:26px;border-radius:50%;background:var(--soft);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0}
+:root{
+  --green:#0f7a4a; --green2:#16a765; --ice:#1d6fb8; --ice2:#5fb2ff;
+  --ink:#1b2430; --muted:#5b6776; --bg:#f3f7f5; --card:#ffffff; --line:#dfe7e3;
+  --gold:#f4b400; --red:#d64545; --soft-g:#e7f6ee; --soft-b:#e6f1fc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Poppins','Noto Sans Malayalam',sans-serif;background:var(--bg);color:var(--ink);line-height:1.75}
+.ml,.en{font-family:'Noto Sans Malayalam','Poppins',sans-serif}
+body.en .ml{display:none!important}
+body:not(.en) .en{display:none!important}
+
+/* Header */
+.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,#0b5d39,#0f7a4a 45%,#1d6fb8);color:#fff;box-shadow:0 3px 14px rgba(0,0,0,.18)}
+.topbar-in{max-width:1100px;margin:auto;display:flex;align-items:center;gap:12px;padding:10px 16px}
+.logo{width:42px;height:42px;border-radius:12px;background:#fff;color:var(--green);display:grid;place-items:center;font-weight:800;font-size:18px;flex-shrink:0}
+.brand b{display:block;font-size:16px;letter-spacing:.5px}
+.brand small{opacity:.85;font-size:12px}
+.spacer{flex:1}
+.btn{border:0;border-radius:999px;padding:8px 14px;font:600 13px 'Poppins',sans-serif;cursor:pointer;transition:.2s}
+.btn-w{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.btn-w:hover{background:rgba(255,255,255,.3)}
+.btn-w.on{background:#fff;color:var(--green)}
+.lang{display:flex;background:rgba(0,0,0,.18);border-radius:999px;padding:3px}
+.lang button{border:0;background:transparent;color:#fff;padding:6px 12px;border-radius:999px;font:600 12px 'Poppins';cursor:pointer}
+.lang button.on{background:#fff;color:var(--green)}
+
+/* Hero */
+.hero{max-width:1100px;margin:18px auto 0;padding:0 16px}
+.hero-card{border-radius:22px;overflow:hidden;background:linear-gradient(120deg,#0f7a4a 0%,#138a55 38%,#3a8fd6 62%,#bfe3ff 100%);color:#fff;padding:26px 24px;position:relative}
+.hero-card::after{content:"❄";position:absolute;right:22px;top:10px;font-size:90px;opacity:.25}
+.hero-card::before{content:"🌴";position:absolute;right:120px;bottom:6px;font-size:70px;opacity:.25}
+.tag{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);padding:3px 12px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.5px}
+.hero h1{font-size:clamp(22px,4vw,34px);line-height:1.35;margin:10px 0 6px;font-weight:800;max-width:760px}
+.hero p{max-width:720px;opacity:.95;font-size:15px}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.stat{background:rgba(255,255,255,.18);border-radius:14px;padding:8px 14px;font-size:13px}
+.stat b{font-size:18px;display:block;line-height:1.2}
+
+/* Tabs */
+.tabs-wrap{max-width:1100px;margin:16px auto 0;padding:0 16px;position:sticky;top:62px;z-index:40}
+.tabs{display:flex;gap:6px;overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:16px;padding:6px;box-shadow:0 4px 14px rgba(15,122,74,.08);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;border:0;background:transparent;padding:9px 14px;border-radius:11px;font:600 13px 'Poppins';color:var(--muted);cursor:pointer;white-space:nowrap}
+.tab.on{background:linear-gradient(90deg,var(--green),var(--ice));color:#fff}
+.tab.quiz-tab{color:var(--red)}
+.tab.quiz-tab.on{color:#fff;background:linear-gradient(90deg,#d64545,#f08a24)}
+
+main{max-width:1100px;margin:16px auto 40px;padding:0 16px}
+.panel{display:none;animation:fade .3s}
+.panel.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,.03)}
+h2.sec{font-size:20px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+h2.sec .ico{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:18px}
+.eq .ico{background:var(--soft-g)} .tu .ico{background:var(--soft-b)}
+h3{font-size:16px;margin:14px 0 6px;color:var(--green)}
+.tu h3{color:var(--ice)}
+ul.pts{padding-left:20px}
+ul.pts li{margin:4px 0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.mini{border-radius:14px;padding:14px;border:1px solid var(--line)}
+.mini.g{background:var(--soft-g);border-color:#bfe6d0}
+.mini.b{background:var(--soft-b);border-color:#bcd9f5}
+.mini h4{font-size:15px;margin-bottom:4px}
+.box{border-left:4px solid var(--gold);background:#fff8e1;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:14.5px}
+.box.blue{border-color:var(--ice);background:var(--soft-b)}
+.box.green{border-color:var(--green);background:var(--soft-g)}
+.chip{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 10px;margin:3px 3px 0 0;font-size:13px}
+.zone-head{display:flex;align-items:center;gap:10px;padding:14px 18px;border-radius:16px;color:#fff;margin:6px 0 14px;font-weight:700;font-size:18px}
+.zone-head.eq{background:linear-gradient(90deg,#0b5d39,#16a765)}
+.zone-head.tu{background:linear-gradient(90deg,#134f86,#5fb2ff)}
+
+/* Accordion */
+details.acc{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+details.acc summary{list-style:none;cursor:pointer;padding:13px 16px;font-weight:600;display:flex;align-items:center;gap:10px}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:"+";margin-left:auto;font-size:20px;color:var(--muted)}
+details.acc[open] summary::after{content:"−"}
+details.acc[open] summary{background:#f7faf9;border-bottom:1px solid var(--line)}
+.acc-body{padding:12px 18px 16px}
+.num{min-width:26px;height:26px;border-radius:8px;background:var(--green);color:#fff;font-size:13px;display:grid;place-items:center}
+.tu .num{background:var(--ice)}
+
+/* Tables */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+th{background:#eef5f1}
+th.g{background:#d9f1e4} th.b{background:#dbeafa}
+tr:nth-child(even) td{background:#fafcfb}
+
+/* Rain layers */
+.layers{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.layer{border-radius:10px;padding:10px 14px;color:#fff;font-size:14px}
+.l1{background:#0b5d39}.l2{background:#138a55}.l3{background:#4cb07a}
+
+/* Glossary */
+.term{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff}
+.term b{color:var(--green);font-size:15px}
+.term.t b{color:var(--ice)}
+.term p{font-size:14px;color:#33404d;margin-top:2px}
+.search{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:12px;font:14px 'Poppins','Noto Sans Malayalam';margin-bottom:12px}
+
+/* Q&A */
+.qa{border:1px solid var(--line);border-radius:14px;margin-bottom:10px;background:#fff;overflow:hidden}
+.qa-q{padding:12px 16px;font-weight:600;cursor:pointer;display:flex;gap:10px;align-items:flex-start}
+.qa-q .mk{margin-left:auto;flex-shrink:0;background:#fff3e0;color:#b85c00;font-size:11px;border-radius:999px;padding:2px 9px;font-family:'Poppins'}
+.qa-a{display:none;padding:0 16px 14px 16px;border-top:1px dashed var(--line);font-size:14.5px}
+.qa.open .qa-a{display:block;padding-top:10px}
+.qa-tools{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.btn-g{background:var(--green);color:#fff}
+.btn-o{background:#fff;color:var(--green);border:1px solid var(--green)}
+
+/* Quiz */
+.quiz-start{text-align:center;padding:30px 20px}
+.quiz-start .big{font-size:54px}
+.quiz-start h2{font-size:24px;margin:6px 0}
+.q-input{padding:11px 14px;border:1px solid var(--line);border-radius:12px;width:min(320px,100%);font:15px 'Poppins','Noto Sans Malayalam';margin:14px 0 8px;text-align:center}
+.btn-big{padding:12px 28px;font-size:15px;border-radius:14px}
+.btn-red{background:linear-gradient(90deg,#d64545,#f08a24);color:#fff}
+.q-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600}
+.pill.t{color:var(--red)}
+.bar{height:8px;background:#e7ecea;border-radius:999px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--ice));transition:.3s}
+.q-text{font-size:18px;font-weight:600;margin-bottom:14px}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;cursor:pointer;font:15px 'Noto Sans Malayalam','Poppins';color:var(--ink);transition:.15s}
+.opt:hover{border-color:var(--ice2)}
+.opt .L{width:30px;height:30px;border-radius:9px;background:#eef3f1;display:grid;place-items:center;font-weight:700;flex-shrink:0;font-family:'Poppins'}
+.opt.ok{border-color:#1f9d5a;background:#e9f8ef}.opt.ok .L{background:#1f9d5a;color:#fff}
+.opt.no{border-color:var(--red);background:#fdecec}.opt.no .L{background:var(--red);color:#fff}
 .opt:disabled{cursor:default}
-.opt.ok{background:var(--okbg);border-color:var(--ok)}
-.opt.ok .k{background:var(--ok);color:#fff}
-.opt.no{background:var(--badbg);border-color:var(--bad)}
-.opt.no .k{background:var(--bad);color:#fff}
-.left{text-align:center;font-size:.82rem;color:var(--mut);margin-top:8px}
-.ring{width:150px;height:150px;border-radius:50%;margin:6px auto 12px;display:flex;align-items:center;justify-content:center}
-.ring div{width:118px;height:118px;border-radius:50%;background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center}
-.ring b{font-size:2.2rem;line-height:1;color:var(--p)}
-.ring span{font-size:.85rem;color:var(--mut)}
-.rmsg{text-align:center;font-weight:600;font-size:1.05rem}
-.rwho{text-align:center;font-size:.85rem;color:var(--mut);margin-bottom:6px}
-.save{text-align:center;font-size:.85rem;margin-top:12px;padding:9px;border-radius:10px;background:var(--soft)}
-.save.ok{background:var(--okbg);color:var(--ok)}
-.save.bad{background:var(--badbg);color:var(--bad)}
-.save button{margin-left:6px;border:none;background:none;color:inherit;font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}
-.rv{margin-top:18px}
-.rv h3{font-size:.95rem;margin:0 0 8px}
-.rvi{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:.88rem}
-.rvi p{margin:0 0 4px;font-weight:600}
-.rvi .y{color:var(--bad)}
-.rvi .c{color:var(--ok)}
-footer{text-align:center;font-size:.78rem;color:var(--mut);margin:0 0 20px}
+.exp{display:none;background:var(--soft-b);border-radius:12px;padding:10px 14px;font-size:14px;margin-top:4px}
+.exp.show{display:block}
+.q-nav{display:flex;justify-content:flex-end;margin-top:14px}
+.result{text-align:center;padding:24px 10px}
+.ring{width:150px;height:150px;border-radius:50%;margin:10px auto;display:grid;place-items:center;background:conic-gradient(var(--green) calc(var(--p)*1%),#e7ecea 0)}
+.ring div{width:118px;height:118px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:30px;font-weight:800}
+.ring small{display:block;font-size:13px;color:var(--muted);font-weight:600}
+.grade{font-size:22px;font-weight:800;margin:6px 0}
+.res-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.btn-wa{background:#25d366;color:#fff}
+.review{text-align:left;margin-top:20px}
+.rv{border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:8px;font-size:14px;background:#fff}
+.rv.w{border-left:4px solid var(--red)} .rv.r{border-left:4px solid #1f9d5a}
+
+footer{text-align:center;color:var(--muted);font-size:13px;padding:20px 16px 30px}
+
+/* Print */
+.wm{display:none}
+.print-head{display:none}
+.btn-share{background:linear-gradient(90deg,#1d6fb8,#5fb2ff);color:#fff}
+.share-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+body.quiz-only .hero,body.quiz-only .tabs-wrap,body.quiz-only .no-print{display:none!important}
+body.quiz-only .panel{display:none!important}
+body.quiz-only #p-quiz{display:block!important}
+body.quiz-only main{margin-top:20px}
+.qo-title{display:none;text-align:center;margin-bottom:14px}
+body.quiz-only .qo-title{display:block}
+.qo-title h1{font-size:clamp(18px,3.5vw,24px);line-height:1.4}
+.qo-title small{color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1b2430;color:#fff;padding:9px 16px;border-radius:999px;font-size:13px;opacity:0;transition:.3s;z-index:99;pointer-events:none}
+.toast.show{opacity:1}
+@media print{
+  @page{size:A4;margin:12mm 12mm 14mm}
+  *{box-shadow:none!important;animation:none!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html,body{background:#fff!important;font-size:10.5pt;line-height:1.5;color:#000}
+  .topbar,.tabs-wrap,.hero,.qa-tools,.no-print,footer,#p-quiz,#p-overview .card:nth-child(2),.search,.chip,.stats{display:none!important}
+
+  /* Simple title block */
+  .print-head{display:block;text-align:center;border-bottom:2px solid #000;padding-bottom:6px;margin-bottom:10px}
+  .print-head b{display:block;font-size:13pt;letter-spacing:1px}
+  .print-head h1{font-size:15pt;margin:2px 0;line-height:1.3}
+  .print-head small{font-size:9pt;color:#333}
+
+  main{margin:0!important;padding:0!important;max-width:none}
+  .panel{display:block!important;margin:0}
+
+  /* Flatten cards: no boxes, no padding gaps */
+  .card,details.acc,.qa,.mini,.term{border:0!important;border-radius:0!important;background:none!important;padding:0!important;margin:0 0 6px!important}
+  .grid2,.grid3{display:block!important}
+  .mini{margin-bottom:4px!important}
+
+  /* Headings */
+  h2.sec{font-size:12.5pt;margin:10px 0 4px;padding-bottom:2px;border-bottom:1px solid #999;break-after:avoid}
+  h2.sec .ico{display:none}
+  .zone-head{background:none!important;color:#000!important;border:0;border-bottom:2px solid #000;border-radius:0;padding:0 0 3px;margin:14px 0 6px;font-size:14pt;break-after:avoid}
+  h3{font-size:11pt;margin:6px 0 2px;color:#000!important;break-after:avoid}
+  details.acc{display:block!important;break-inside:auto!important}
+  details.acc summary{display:block!important;padding:4px 0 2px!important;background:none!important;border:0!important;font-size:11.5pt;font-weight:700;break-after:avoid}
+  details.acc summary::after{content:none!important}
+  .num{display:inline!important;background:none!important;color:#000!important;min-width:auto;height:auto;font-weight:700;margin-right:4px}
+  .num::after{content:"."}
+  .acc-body{display:block!important;padding:0 0 0 4px!important}
+  ul.pts{padding-left:16px}
+  ul.pts li{margin:1px 0}
+  p{margin:2px 0}
+
+  /* Info boxes → thin left rule */
+  .box{background:none!important;border:0;border-left:3px solid #555!important;border-radius:0;padding:2px 8px;margin:5px 0;font-size:10pt;break-inside:avoid}
+  .layers{gap:2px;margin:2px 0 4px}
+  .layer{background:none!important;color:#000!important;padding:1px 0;border-radius:0}
+  .layer::before{content:"▸ "}
+
+  /* Tables */
+  .tbl-wrap{overflow:visible}
+  table{font-size:9.5pt;margin:4px 0}
+  th,td{padding:3px 6px;border:1px solid #777}
+  th,th.g,th.b{background:#eee!important}
+  tr:nth-child(even) td{background:none!important}
+  tr{break-inside:avoid}
+
+  /* Key terms: compact two-column list */
+  #termGrid{display:block!important;column-count:2;column-gap:14px}
+  .term{break-inside:avoid;margin:0 0 4px!important}
+  .term b{color:#000!important;font-size:10pt}
+  .term p{font-size:9.5pt;margin:0;color:#000}
+
+  /* Q&A */
+  .qa{break-inside:avoid;margin-bottom:6px!important}
+  .qa-q{padding:0!important;cursor:auto}
+  .qa-q .mk{background:none;color:#000;border:1px solid #777;padding:0 5px}
+  .qa-a{display:block!important;border:0!important;padding:1px 0 0 18px!important;font-size:10pt}
+
+  .wm{display:block;position:fixed;top:45%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:70px;font-weight:800;color:rgba(0,0,0,.05);white-space:nowrap;z-index:-1}
+}
+@media(max-width:600px){
+  .brand small{display:none}
+  .tabs-wrap{top:58px}
+  .hero-card{padding:20px 18px}
+  .card{padding:16px}
+}
+
+.qo-title{display:block}
+.notes-link{display:inline-block;margin-top:8px;font-size:13px;font-weight:600;color:var(--green);text-decoration:none;border:1px solid #bfe6d0;background:var(--soft-g);padding:5px 12px;border-radius:999px}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-<header><div class="hin"><div><h1 id="hTitle"></h1><p id="hSub"></p></div><button id="langBtn"></button></div></header>
-<main id="app"></main>
-<footer>Abacus Academy · EduPro Study Tools</footer>
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="logo">A</div>
+    <div class="brand"><b>ABACUS ACADEMY</b><small>SSLC Quiz · Social Science II</small></div>
+    <div class="spacer"></div>
+    <div class="lang" role="group" aria-label="Medium">
+      <button id="bML" class="on" onclick="setLang('ml')">MAL</button>
+      <button id="bEN" onclick="setLang('en')">ENG</button>
+    </div>
+  </div>
+</header>
+
+<main style="margin-top:20px">
+<section class="panel on" id="p-quiz">
+  <div class="qo-title"><span class="tag" style="background:var(--soft-g);color:var(--green);border-color:#bfe6d0">GEOGRAPHY · UNIT 3 · 20 MARK QUIZ</span>
+    <h1><span class="ml">മഴക്കാടുകളിൽ നിന്നും മഞ്ഞുരുകാത്ത നാട്ടിലേക്ക്</span><span class="en">From Rainforests to the Land of Unmelting Snow</span></h1>
+    <small>Abacus Academy · SSLC Social Science II</small><br>
+    <a class="notes-link" href="geography-unit3.html" target="_blank">📘 Study Notes</a></div>
+  <div class="card" id="quizBox"></div>
+</section>
+</main>
+
+<footer>© Abacus Academy · SSLC Study Portal · Geography Unit 3 Quiz</footer>
+<div class="toast" id="toast"></div>
+
 <script>
-/* Made with Abacus Quiz Builder */
-const CFG = {"titleEn":"Daily Exam","titleMl":"ദിവസേനയുള്ള പരീക്ഷ","subject":"Biology","subjectMl":"ജീവശാസ്ത്രം","chapter":"Behind the Senses","chapterMl":"സംവേദനങ്ങൾക്കുപിന്നിൽ","cls":"10","unit":"Unit 3","quizName":"Behind the Senses | Biology Unit 3","openHour":21,"layout":"one","shuffle":false,"theme":"ocean","supaOn":true,"supaUrl":"https://wrzssivgxituefcwobbr.supabase.co","supaKey":"sb_publishable_3mi5iJCxekZfiyXojUFtQg_gDASyEWm","preview":false};
-const QUIZ = [{"q":"What are the conditions that trigger responses in organisms called?","q_ml":"ജീവികളിൽ പ്രതികരണത്തിന് കാരണമാകുന്ന സാഹചര്യങ്ങളെ എന്ത് വിളിക്കുന്നു?","opts":["Receptors","Stimuli","Neurons","Hormones"],"opts_ml":["ഗ്രാഹികൾ","ഉദ്ദീപനങ്ങൾ","ന്യൂറോണുകൾ","ഹോർമോണുകൾ"],"ans":1},{"q":"What is the electrical signal generated in a receptor called?","q_ml":"ഗ്രാഹികളിൽ ഉണ്ടാകുന്ന വൈദ്യുത സന്ദേശത്തിന്റെ പേരെന്ത്?","opts":["Action potential","Resting potential","Receptor potential","Synaptic potential"],"opts_ml":["ആക്ഷൻ പൊട്ടൻഷ്യൽ","റെസ്റ്റിംഗ് പൊട്ടൻഷ്യൽ","റിസപ്റ്റർ പൊട്ടൻഷ്യൽ","സിനാപ്റ്റിക് പൊട്ടൻഷ്യൽ"],"ans":2},{"q":"What is the middle layer of the eye called?","q_ml":"കണ്ണിന്റെ മധ്യപാളി (Choroid) യുടെ മലയാളം പേരെന്ത്?","opts":["Sclera","Choroid","Retina","Conjunctiva"],"opts_ml":["ദൃഢപടലം","രക്തപടലം","ദൃഷ്ടിപടലം","നേത്രാവരണം"],"ans":1},{"q":"Which photoreceptor cells enable vision in dim light?","q_ml":"മങ്ങിയ വെളിച്ചത്തിൽ കാഴ്ച സാധ്യമാക്കുന്ന പ്രകാശഗ്രാഹീ കോശങ്ങൾ ഏത്?","opts":["Cone cells","Rod cells","Bipolar cells","Ganglion cells"],"opts_ml":["കോൺ കോശങ്ങൾ","റോഡ് കോശങ്ങൾ","ബൈപോളാർ കോശങ്ങൾ","ഗാംഗ്ലിയോൺ കോശങ്ങൾ"],"ans":1},{"q":"What is the pigment found in rod cells called?","q_ml":"റോഡ് കോശങ്ങളിലെ വർണ്ണകത്തിന്റെ പേരെന്ത്?","opts":["Photopsin","Crystallin","Rhodopsin","Melanin"],"opts_ml":["ഫോട്ടോപ്സിൻ","ക്രിസ്റ്റലിൻ","റോഡോപ്സിൻ","മെലാനിൻ"],"ans":2},{"q":"Which is the first of the three middle-ear ossicles?","q_ml":"മധ്യകർണ്ണത്തിലെ മൂന്ന് അസ്ഥികളിൽ ആദ്യത്തേത് ഏത്?","opts":["Incus","Stapes","Malleus","Cochlea"],"opts_ml":["ഇൻകസ്","സ്റ്റേപിസ്","മാലിയസ്","കോക്ലിയ"],"ans":2},{"q":"Which tube connects the middle ear to the throat?","q_ml":"മധ്യകർണ്ണത്തെ ഗ്രസനിയുമായി ബന്ധിപ്പിക്കുന്ന കുഴൽ ഏത്?","opts":["Cochlea","Eustachian canal","Semicircular canal","Ear canal"],"opts_ml":["കോക്ലിയ","യൂസ്റ്റേഷ്യൻ കനാൽ","സെമിസർക്കുലാർ കനാൽ","കർണ്ണനാളം"],"ans":1},{"q":"Which part of the cochlea houses the sound receptors?","q_ml":"ശബ്ദഗ്രാഹികൾ സ്ഥിതി ചെയ്യുന്ന കോക്ലിയയിലെ ഭാഗം ഏത്?","opts":["Oval window","Organ of Corti","Round window","Vestibule"],"opts_ml":["ഓവൽ വിൻഡോ","ഓർഗൻ ഓഫ് കോർട്ടി","റൗണ്ട് വിൻഡോ","വെസ്റ്റിബ്യുൾ"],"ans":1},{"q":"What is the sensation of pain that warns of danger called?","q_ml":"അപകട സൂചന നൽകുന്ന വേദനാ സംവേദനത്തെ എന്ത് വിളിക്കുന്നു?","opts":["Nociception","Accommodation","Binocular fusion","Olfaction"],"opts_ml":["നോസിസെപ്ഷൻ","അക്കോമൊഡേഷൻ","ബൈനോക്കുലർ ഫ്യൂഷൻ","ഓൾഫാക്ഷൻ"],"ans":0},{"q":"Which of these is NOT one of the basic tastes we perceive?","q_ml":"താഴെപ്പറയുന്നവയിൽ നാം തിരിച്ചറിയുന്ന അടിസ്ഥാന രുചിയല്ലാത്തത് ഏത്?","opts":["Sweet","Salty","Cold","Umami"],"opts_ml":["മധുരം","ഉപ്പ്","തണുപ്പ്","ഉമാമി"],"ans":2},{"q":"What is the region where the optic nerve begins — which has no photoreceptor cells — called?","q_ml":"നേത്രനാഡി ആരംഭിക്കുന്ന, പ്രകാശഗ്രാഹീ കോശങ്ങൾ ഇല്ലാത്ത ഭാഗത്തിന്റെ പേരെന്ത്?","opts":["Macula","Blind Spot","Iris","Cornea"],"opts_ml":["മാക്കുല","അന്ധബിന്ദു (Blind Spot)","ഐറിസ്","കോർണിയ"],"ans":1},{"q":"Which part of the retina has the highest concentration of cone cells?","q_ml":"കോൺ കോശങ്ങൾ ഏറ്റവും കൂടുതൽ കേന്ദ്രീകരിച്ചിരിക്കുന്ന റെറ്റിനയിലെ ഭാഗം ഏത്?","opts":["Blind Spot","Macula","Sclera","Choroid"],"opts_ml":["അന്ധബിന്ദു","മാക്കുല","സ്ക്ലീറ","കോറോയിഡ്"],"ans":1},{"q":"Which fluid, between the lens and retina, maintains the eyeball's shape?","q_ml":"ലെൻസിനും റെറ്റിനയ്ക്കും ഇടയിൽ കണ്ണിന്റെ ആകൃതി നിലനിർത്തുന്ന ദ്രവം ഏത്?","opts":["Aqueous humor","Vitreous humor","Endolymph","Perilymph"],"opts_ml":["അക്വസ് ദ്രവം","വിട്രിയസ് ദ്രവം","എൻഡോലിംഫ്","പെരിലിംഫ്"],"ans":1},{"q":"What happens to the ciliary muscles when focusing on a near object (accommodation)?","q_ml":"അടുത്തുള്ള വസ്തുക്കളിൽ ഫോക്കസ് ചെയ്യുമ്പോൾ (accommodation) സീലിയറി പേശികൾക്ക് എന്ത് സംഭവിക്കുന്നു?","opts":["They relax","They contract","No change","They degenerate"],"opts_ml":["അയയുന്നു","സങ്കോചിക്കുന്നു","മാറ്റമില്ല","നശിക്കുന്നു"],"ans":1},{"q":"On which chromosome are the genes for the red- and green-sensitive cone pigments found?","q_ml":"പച്ച, ചുവപ്പ് കോൺ കോശങ്ങളിലെ വർണ്ണകത്തിനുള്ള ജീൻ ഏത് ക്രോമസോമിലാണ്?","opts":["X chromosome","Y chromosome","Chromosome 7","Chromosome 12"],"opts_ml":["X ക്രോമസോം","Y ക്രോമസോം","ക്രോമസോം 7","ക്രോമസോം 12"],"ans":0},{"q":"Which condition is caused by clouding of the eye lens?","q_ml":"നേത്ര ലെൻസ് അതാര്യമാകുന്ന അവസ്ഥ ഏതാണ്?","opts":["Glaucoma","Cataract","Astigmatism","Xerophthalmia"],"opts_ml":["ഗ്ലോക്കോമ","തിമിരം (Cataract)","അസ്റ്റിഗ്മാറ്റിസം","സീറോഫ്താൽമിയ"],"ans":1},{"q":"Which fluid fills the middle chamber of the cochlea?","q_ml":"കോക്ലിയയുടെ മധ്യഅറയിൽ നിറഞ്ഞിരിക്കുന്ന ദ്രവം ഏത്?","opts":["Perilymph","Endolymph","Aqueous humor","Vitreous humor"],"opts_ml":["പെരിലിംഫ്","എൻഡോലിംഫ്","അക്വസ് ദ്രവം","വിട്രിയസ് ദ്രവം"],"ans":1},{"q":"What is the main function of the Eustachian canal?","q_ml":"യൂസ്റ്റേഷ്യൻ കനാലിന്റെ പ്രധാന ധർമ്മം എന്ത്?","opts":["Generate sound impulses","Equalize air pressure on both sides of the eardrum","Maintain body balance","Detect smell"],"opts_ml":["ശബ്ദ ആവേഗങ്ങൾ ഉണ്ടാക്കുക","കർണ്ണപടത്തിന്റെ ഇരുവശത്തുമുള്ള മർദ്ദം തുല്യമാക്കുക","ശരീരതുലനനില പാലിക്കുക","ഗന്ധം തിരിച്ചറിയുക"],"ans":1},{"q":"In what unit is sound intensity measured?","q_ml":"ശബ്ദതീവ്രത അളക്കുന്ന യൂണിറ്റ് ഏത്?","opts":["Hertz","Decibel (dB)","Pascal","Joule"],"opts_ml":["ഹെർട്സ്","ഡെസിബെൽ (dB)","പാസ്കൽ","ജൂൾ"],"ans":1},{"q":"Which structure in the inner ear helps maintain body balance?","q_ml":"ആന്തരകർണ്ണത്തിൽ ശരീരതുലനനില പാലിക്കാൻ സഹായിക്കുന്ന ഭാഗം ഏത്?","opts":["Organ of Corti","Vestibular system (semicircular canals)","Eardrum","Eustachian canal"],"opts_ml":["ഓർഗൻ ഓഫ് കോർട്ടി","വെസ്റ്റിബ്യുലാർ സിസ്റ്റം (സെമിസർക്കുലാർ കനാലുകൾ)","കർണ്ണപടം","യൂസ്റ്റേഷ്യൻ കനാൽ"],"ans":1}];
-</script>
-<script>
-(function(){
-var T={
- en:{gate:"Today's exam opens at ",now:"Current time",welcome:"Ready for today's exam?",enterAdm:"Type your admission number — your name will appear.",adm:"Admission number",admPh:"Admission number",searching:"Searching…",notFound:"No student found with this number. Please check.",dbErr:"Could not connect. Check your internet and try again.",already:"You have already written this exam today. Only one attempt is allowed.",start:"Start exam",name:"Your name",namePh:"Enter your name",offNote:"Offline quiz — score is shown but not saved.",pvNote:"Preview mode — results will not be saved.",q:"Question",of:"of",answered:"Answered",score:"Score",next:"Next",prev:"Back",finish:"Finish exam",submit:"Submit exam",left:" question(s) not answered yet",correct:"correct",good:"Excellent! Well studied.",mid:"Coming along nicely — revise once more.",low:"Read the notes again and try once more.",saving:"Saving your score…",saved:"✓ Score saved",fail:"⚠ Could not save the score.",retry:"Try again",dup:"⚠ A result for this admission number already exists today — this attempt was not saved.",off:"Not saved (offline quiz)",pv:"Preview — not saved",review:"Review your mistakes",yours:"Your answer: ",right:"Correct: ",perfect:"All answers correct! 🎉",nextStu:"Next student",cls:"Class"},
- ml:{gate:"ഇന്നത്തെ പരീക്ഷ ആരംഭിക്കുന്നത് ",now:"ഇപ്പോൾ സമയം",welcome:"ഇന്നത്തെ പരീക്ഷയ്ക്ക് തയ്യാറാണോ?",enterAdm:"അഡ്മിഷൻ നമ്പർ ടൈപ്പ് ചെയ്യൂ — നിങ്ങളുടെ പേര് കാണാം.",adm:"അഡ്മിഷൻ നമ്പർ",admPh:"അഡ്മിഷൻ നമ്പർ",searching:"തിരയുന്നു…",notFound:"ഈ നമ്പറിൽ വിദ്യാർത്ഥിയെ കണ്ടെത്തിയില്ല. നമ്പർ പരിശോധിക്കുക.",dbErr:"കണക്റ്റ് ചെയ്യാനായില്ല. ഇന്റർനെറ്റ് പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.",already:"ഇന്ന് ഈ പരീക്ഷ നിങ്ങൾ എഴുതിക്കഴിഞ്ഞു. ഒരു അവസരം മാത്രം.",start:"പരീക്ഷ തുടങ്ങൂ",name:"നിങ്ങളുടെ പേര്",namePh:"പേര് നൽകുക",offNote:"ഓഫ്‌ലൈൻ ക്വിസ് — മാർക്ക് കാണിക്കും, സേവ് ചെയ്യില്ല.",pvNote:"പ്രിവ്യൂ — ഫലം സേവ് ചെയ്യില്ല.",q:"ചോദ്യം",of:"/",answered:"ഉത്തരം നൽകിയത്",score:"മാർക്ക്",next:"അടുത്തത്",prev:"പിന്നോട്ട്",finish:"പരീക്ഷ പൂർത്തിയാക്കൂ",submit:"സമർപ്പിക്കൂ",left:" ചോദ്യം ഇനിയും ബാക്കി",correct:"ശരി",good:"മികച്ചത്! നന്നായി പഠിച്ചു.",mid:"നന്നായി വരുന്നു — ഒന്നുകൂടി റിവിഷൻ ചെയ്യാം.",low:"കുറിപ്പുകൾ ഒന്നുകൂടി വായിച്ച് വീണ്ടും ശ്രമിക്കാം.",saving:"മാർക്ക് സേവ് ചെയ്യുന്നു…",saved:"✓ മാർക്ക് സേവ് ചെയ്തു",fail:"⚠ മാർക്ക് സേവ് ചെയ്യാനായില്ല.",retry:"വീണ്ടും ശ്രമിക്കുക",dup:"⚠ ഈ അഡ്മിഷൻ നമ്പറിന് ഇന്ന് ഫലം നിലവിലുണ്ട് — ഈ ശ്രമം സേവ് ചെയ്തില്ല.",off:"സേവ് ചെയ്തില്ല (ഓഫ്‌ലൈൻ)",pv:"പ്രിവ്യൂ — സേവ് ചെയ്തില്ല",review:"തെറ്റിയ ചോദ്യങ്ങൾ",yours:"നിങ്ങളുടെ ഉത്തരം: ",right:"ശരിയുത്തരം: ",perfect:"എല്ലാം ശരി! 🎉",nextStu:"അടുത്ത കുട്ടി",cls:"ക്ലാസ്"}
-};
-var lang="en",view="gate",stu=null,found=null,blocked=false,admVal="",nameVal="",order=[],picks=[],cur=0,saveState=null,seq=0,timer=null,clockTimer=null;
-var sb=null;
-try{ if(CFG.supaOn && window.supabase && CFG.supaUrl && CFG.supaKey){ sb=window.supabase.createClient(CFG.supaUrl,CFG.supaKey); } }catch(e){ console.error(e); }
-var app=document.getElementById("app");
-function t(k){ return T[lang][k]; }
-function esc(v){ return String(v==null?"":v).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
-function qText(q){ return lang==="ml"&&q.q_ml?q.q_ml:q.q; }
-function oText(q,i){ return lang==="ml"&&q.opts_ml&&q.opts_ml[i]?q.opts_ml[i]:q.opts[i]; }
-function fmtHour(h){ return (h%12||12)+":00 "+(h>=12?"PM":"AM"); }
-function isOpen(){ return CFG.preview || CFG.openHour<0 || new Date().getHours()>=CFG.openHour; }
-function score(){ var s=0; for(var i=0;i<QUIZ.length;i++){ if(picks[i]===QUIZ[i].ans) s++; } return s; }
-function answeredCount(){ var c=0; for(var i=0;i<picks.length;i++){ if(picks[i]!==null) c++; } return c; }
-var KEYS=["A","B","C","D","E","F"];
+/* ---------- Language ---------- */
+function setLang(l){
+  document.body.classList.toggle('en', l==='en');
+  document.documentElement.lang = l==='en' ? 'en' : 'ml';
+  document.getElementById('bML').classList.toggle('on', l!=='en');
+  document.getElementById('bEN').classList.toggle('on', l==='en');
+  try{localStorage.setItem('geo3_lang', l);}catch(e){}
+  if(quizState.stage==='q') renderQuestion();
+  if(quizState.stage==='done') renderResult();
+  if(quizState.stage==='start') renderStart();
+}
+function L(o){ return document.body.classList.contains('en') ? o.en : o.ml; }
 
-function header(){
-  document.getElementById("hTitle").textContent=lang==="ml"?(CFG.titleMl||CFG.titleEn):CFG.titleEn;
-  var sub=[lang==="ml"?(CFG.subjectMl||CFG.subject):CFG.subject, CFG.cls?(t("cls")+" "+CFG.cls):"", lang==="ml"?(CFG.chapterMl||CFG.chapter):CFG.chapter].filter(Boolean).join(" · ");
-  document.getElementById("hSub").textContent=sub;
-  document.getElementById("langBtn").textContent=lang==="en"?"🌐 മലയാളം":"🌐 English";
-  document.body.setAttribute("data-lang",lang);
-  document.documentElement.lang=lang;
-}
-function render(){
-  clearInterval(clockTimer);
-  header();
-  if(view==="gate") gate(); else if(view==="start") start(); else if(view==="quiz") quiz(); else result();
-}
 
-function gate(){
-  app.innerHTML='<div class="card gate"><div class="ic">⏰</div><h2>'+t("gate")+fmtHour(CFG.openHour)+'</h2><p class="muted" style="margin:6px 0 0">'+t("now")+'</p><div class="clk" id="clk"></div></div>';
-  function tick(){ var el=document.getElementById("clk"); if(el) el.textContent=new Date().toLocaleTimeString("en-IN"); }
-  tick(); clockTimer=setInterval(tick,1000);
-}
+/* ---------- 20 MARK QUIZ ---------- */
+var QUIZ = [
+ {q:{ml:'ഭൂമധ്യരേഖാമേഖലയിലെ മാസിക/വാർഷിക ശരാശരി താപനില എത്ര?',en:'What is the monthly/annual average temperature of the equatorial zone?'},
+  o:[{ml:'20°C',en:'20°C'},{ml:'27°C',en:'27°C'},{ml:'32°C',en:'32°C'},{ml:'10°C',en:'10°C'}],a:1,
+  e:{ml:'വർഷം മുഴുവൻ താപനില ഏറെക്കുറെ ഒരുപോലെ — ശരാശരി 27°C.',en:'Temperature is nearly constant all year — average 27°C.'}},
+ {q:{ml:'ഭൂമധ്യരേഖാമേഖലയിലെ വാർഷിക മഴ ഏകദേശം എത്ര?',en:'What is the approximate annual rainfall of the equatorial zone?'},
+  o:[{ml:'25–50 സെ.മീ',en:'25–50 cm'},{ml:'75–100 സെ.മീ',en:'75–100 cm'},{ml:'175–250 സെ.മീ',en:'175–250 cm'},{ml:'400–500 സെ.മീ',en:'400–500 cm'}],a:2,
+  e:{ml:'ഏകദേശം 175 മുതൽ 250 സെ.മീ വരെ.',en:'About 175 to 250 cm.'}},
+ {q:{ml:'ഭൂമധ്യരേഖാമേഖലയിൽ ഉച്ചകഴിഞ്ഞ് ലഭിക്കുന്ന കനത്ത മഴ ഏത്?',en:'Which heavy rain occurs in the afternoon in the equatorial zone?'},
+  o:[{ml:'ശൈലവൃഷ്ടി',en:'Orographic rain'},{ml:'സംവഹനമഴ',en:'Convectional rain'},{ml:'ചക്രവാതവൃഷ്ടി',en:'Cyclonic rain'},{ml:'മൺസൂൺ മഴ',en:'Monsoon rain'}],a:1,
+  e:{ml:'ഉയർന്ന താപനില → ബാഷ്പീകരണം → ഉച്ചകഴിഞ്ഞ് സംവഹനമഴ.',en:'High heat → evaporation → afternoon convectional rain.'}},
+ {q:{ml:'ഭൂമധ്യരേഖയ്ക്കിരുവശവുമുള്ള, വായുവിന്റെ തിരശ്ചീന സഞ്ചാരമില്ലാത്ത ന്യൂനമർദമേഖല?',en:'The low-pressure belt near the Equator with no horizontal air movement is —'},
+  o:[{ml:'കുതിര അക്ഷാംശം',en:'Horse latitudes'},{ml:'ധ്രുവീയ ഉച്ചമർദമേഖല',en:'Polar high'},{ml:'നിർവാതമേഖല',en:'Doldrum'},{ml:'ടൈഗ',en:'Taiga'}],a:2,
+  e:{ml:'നിർവാതമേഖല (Doldrum) — വാണിജ്യവാതങ്ങളുടെ സംയോജനമേഖല.',en:'Doldrum — convergence zone of trade winds.'}},
+ {q:{ml:'ഭൂമധ്യരേഖാമേഖലയിലാണെങ്കിലും വർഷം മുഴുവൻ മഞ്ഞുമൂടിയ ആഫ്രിക്കൻ കൊടുമുടി?',en:'Which African peak in the equatorial zone is snow-covered all year?'},
+  o:[{ml:'എവറസ്റ്റ്',en:'Everest'},{ml:'കിളിമഞ്ചാരോ',en:'Kilimanjaro'},{ml:'അക്കോൻകാഗ്വ',en:'Aconcagua'},{ml:'മോൺ ബ്ലാങ്ക്',en:'Mont Blanc'}],a:1,
+  e:{ml:'ഉയരക്കൂടുതൽ കാരണം കിളിമഞ്ചാരോ മഞ്ഞുമൂടിക്കിടക്കുന്നു.',en:'Kilimanjaro stays snow-covered due to its high altitude.'}},
+ {q:{ml:'ഗിനിയ തീരത്ത് രാത്രികാലങ്ങളിൽ വീശി താപനില കുറയ്ക്കുന്ന പ്രാദേശികവാതം?',en:'Which local wind blows at night on the Guinea coast and lowers temperature?'},
+  o:[{ml:'ലൂ',en:'Loo'},{ml:'ചിനൂക്ക്',en:'Chinook'},{ml:'ഹർമാറ്റൻ',en:'Harmattan'},{ml:'ഫൊൻ',en:'Foehn'}],a:2,
+  e:{ml:'ഹർമാറ്റൻ.',en:'Harmattan.'}},
+ {q:{ml:'ആമസോൺ തടത്തിലെ മഴക്കാടുകൾ അറിയപ്പെടുന്നത്?',en:'The rainforests of the Amazon basin are called —'},
+  o:[{ml:'സെൽവാസ്',en:'Selvas'},{ml:'ബെലുകാർ',en:'Belukar'},{ml:'ടൈഗ',en:'Taiga'},{ml:'പമ്പാസ്',en:'Pampas'}],a:0,
+  e:{ml:'സെൽവാസ്.',en:'Selvas.'}},
+ {q:{ml:'"ലോകത്തിന്റെ ശ്വാസകോശം" എന്നറിയപ്പെടുന്നത്?',en:'What is known as the "Lungs of the World"?'},
+  o:[{ml:'ടൺഡ്രാ പുൽമേടുകൾ',en:'Tundra grasslands'},{ml:'ഭൂമധ്യരേഖാ നിത്യഹരിത മഴക്കാടുകൾ',en:'Equatorial evergreen rainforests'},{ml:'കണ്ടൽക്കാടുകൾ',en:'Mangroves'},{ml:'ടൈഗ വനങ്ങൾ',en:'Taiga forests'}],a:1,
+  e:{ml:'CO₂ ആഗിരണം ചെയ്ത് O₂ ഉൽപ്പാദിപ്പിക്കുന്നതിനാൽ.',en:'They absorb CO₂ and produce O₂.'}},
+ {q:{ml:'താഴെ പറയുന്നവയിൽ ഭൂമധ്യരേഖാ നിത്യഹരിതവനത്തിലെ വന്മരം അല്ലാത്തത് ഏത്?',en:'Which of these is NOT a giant tree of the equatorial evergreen forest?'},
+  o:[{ml:'എബണി',en:'Ebony'},{ml:'മഹാഗണി',en:'Mahogany'},{ml:'സിൻകോണ',en:'Cinchona'},{ml:'കുള്ളൻ വില്ലോ',en:'Dwarf willow'}],a:3,
+  e:{ml:'കുള്ളൻ വില്ലോ ടൺഡ്രയിലെ സസ്യമാണ്.',en:'Dwarf willow is a tundra plant.'}},
+ {q:{ml:'മഴക്കാടുകളിലെ മധ്യപാളിയുടെ ഉയരം?',en:'What is the height of the middle canopy layer?'},
+  o:[{ml:'30 അടിക്കു താഴെ',en:'Below 30 ft'},{ml:'30–60 അടി',en:'30–60 ft'},{ml:'60–150 അടി',en:'60–150 ft'},{ml:'150 അടിക്കു മുകളിൽ',en:'Above 150 ft'}],a:1,
+  e:{ml:'മധ്യപാളി 30–60 അടി; ഉപരിപാളി 60 അടിക്കു മുകളിൽ; കീഴ്പാളി 30 അടിക്കു താഴെ.',en:'Middle 30–60 ft; upper above 60 ft; lower below 30 ft.'}},
+ {q:{ml:'മരങ്ങളിൽ ജീവിക്കുന്ന ജീവികൾ അറിയപ്പെടുന്നത്?',en:'Animals that live on trees are called —'},
+  o:[{ml:'അർബോറിയൽ ജീവികൾ',en:'Arboreal animals'},{ml:'ഉഭയജീവികൾ',en:'Amphibians'},{ml:'ദേശാടനജീവികൾ',en:'Migratory animals'},{ml:'നിശാചരികൾ',en:'Nocturnal animals'}],a:0,
+  e:{ml:'അർബോറിയൽ ജീവികൾ — ഉദാ: ഒറാങ്ങുട്ടൻ, ലീമർ.',en:'Arboreal animals — e.g. orangutan, lemur.'}},
+ {q:{ml:'നിദ്രാരോഗം (Sleeping sickness) പരത്തുന്നത്?',en:'Sleeping sickness is spread by —'},
+  o:[{ml:'അനോഫിലിസ് കൊതുക്',en:'Anopheles mosquito'},{ml:'സെസെ ഈച്ച',en:'Tsetse fly'},{ml:'എലി',en:'Rat'},{ml:'വവ്വാൽ',en:'Bat'}],a:1,
+  e:{ml:'സെസെ (Tsetse) ഈച്ച. യെല്ലോ ഫീവർ കൊതുക് പരത്തുന്നു.',en:'Tsetse fly. Yellow fever is spread by mosquitoes.'}},
+ {q:{ml:'കോംഗോ തടത്തിലെ ഉയരം കുറഞ്ഞ, വേട്ടയാടി ജീവിക്കുന്ന തദ്ദേശീയർ?',en:'The short-statured hunting natives of the Congo basin are —'},
+  o:[{ml:'ലാപ്പ്സ്',en:'Lapps'},{ml:'ഒറാങ് അസ്‌ലി',en:'Orang Asli'},{ml:'പിഗ്മികൾ',en:'Pygmies'},{ml:'യാക്കൂട്ട്സ്',en:'Yakuts'}],a:2,
+  e:{ml:'പിഗ്മികൾ.',en:'Pygmies.'}},
+ {q:{ml:'ആമസോൺ തടത്തിലെ കുത്തനെ ചരിഞ്ഞ മേൽക്കൂരയുള്ള വലിയ വീടുകൾ?',en:'Large houses with steeply sloping roofs in the Amazon basin are called —'},
+  o:[{ml:'കമ്പോങ്സ്',en:'Kampongs'},{ml:'ഇഗ്ലൂ',en:'Igloo'},{ml:'മലോക',en:'Maloca'},{ml:'യർട്ട്',en:'Yurt'}],a:2,
+  e:{ml:'മലോക. കമ്പോങ്സ് — മലേഷ്യൻ ഗ്രാമങ്ങൾ.',en:'Maloca. Kampongs are Malaysian villages.'}},
+ {q:{ml:'റബ്ബർ ഉൽപ്പാദനത്തിൽ മുൻപന്തിയിലുള്ള രാജ്യങ്ങൾ?',en:'Which countries lead in rubber production?'},
+  o:[{ml:'ബ്രസീൽ, പെറു',en:'Brazil, Peru'},{ml:'മലേഷ്യ, ഇന്തോനേഷ്യ',en:'Malaysia, Indonesia'},{ml:'ഘാന, നൈജീരിയ',en:'Ghana, Nigeria'},{ml:'കോംഗോ, ഗാബോൺ',en:'Congo, Gabon'}],a:1,
+  e:{ml:'മലേഷ്യ, ഇന്തോനേഷ്യ.',en:'Malaysia and Indonesia.'}},
+ {q:{ml:'ലോകത്തിലെ ഏറ്റവും വടക്കുള്ള ജനവാസമേഖലയായ ലോംഗ്ഇയർബൈൻ ഏത് രാജ്യത്തിന്റെ ഭാഗം?',en:'Longyearbyen, the northernmost settlement, belongs to which country?'},
+  o:[{ml:'റഷ്യ',en:'Russia'},{ml:'കാനഡ',en:'Canada'},{ml:'നോർവെ',en:'Norway'},{ml:'ഡെന്മാർക്ക്',en:'Denmark'}],a:2,
+  e:{ml:'നോർവെയുടെ ഭാഗമായ സ്വാൽബാർഡ് ദ്വീപസമൂഹത്തിൽ.',en:'In the Svalbard archipelago, part of Norway.'}},
+ {q:{ml:'ടൺഡ്രയിൽ ശക്തമായ ഹിമപാതത്തിന് കാരണമാകുന്ന ഹിമക്കാറ്റ്?',en:'The strong icy wind causing heavy snowfall in the tundra is —'},
+  o:[{ml:'ബ്ലിസാർഡ്',en:'Blizzard'},{ml:'ടൈഫൂൺ',en:'Typhoon'},{ml:'ടൊർണാഡോ',en:'Tornado'},{ml:'സിറോക്കോ',en:'Sirocco'}],a:0,
+  e:{ml:'ബ്ലിസാർഡ്.',en:'Blizzard.'}},
+ {q:{ml:'സൈബീരിയയിൽ വസിക്കുന്ന ടൺഡ്രാ ഗോത്രം?',en:'Which tundra tribe lives in Siberia?'},
+  o:[{ml:'ലാപ്പ്സ്',en:'Lapps'},{ml:'സമൊയെഡ്സ്',en:'Samoyeds'},{ml:'ഇന്യൂട്ടുകൾ',en:'Inuits'},{ml:'ചുക്ചി',en:'Chukchi'}],a:1,
+  e:{ml:'സമൊയെഡ്സ് — സൈബീരിയ. ലാപ്പ്സ് — സ്കാൻഡിനേവിയ. ചുക്ചി — വ.കി. ഏഷ്യ.',en:'Samoyeds — Siberia. Lapps — Scandinavia. Chukchi — NE Asia.'}},
+ {q:{ml:'എസ്കിമോകൾ മഞ്ഞുകട്ടകൾ കൊണ്ട് നിർമിക്കുന്ന മകുടാകൃതിയിലുള്ള വീട്?',en:'The dome-shaped house Eskimos build with snow blocks is —'},
+  o:[{ml:'മലോക',en:'Maloca'},{ml:'ഇഗ്ലൂ',en:'Igloo'},{ml:'ടെന്റ്',en:'Tent'},{ml:'കമ്പോങ്',en:'Kampong'}],a:1,
+  e:{ml:'ഇഗ്ലൂ — ശൈത്യകാല താൽക്കാലിക വാസയിടം.',en:'Igloo — temporary winter shelter.'}},
+ {q:{ml:'ആഗോളതാപനം മൂലം ടൺഡ്രയിൽ ഉരുകുന്ന ഐസ് പാളികൾ?',en:'The ice layers of the tundra melting due to global warming are —'},
+  o:[{ml:'ഗ്ലേസിയർ',en:'Glacier'},{ml:'ഐസ്ബർഗ്',en:'Iceberg'},{ml:'പെർമാഫ്രോസ്റ്റ്',en:'Permafrost'},{ml:'ഐസ് ക്യാപ്',en:'Ice cap'}],a:2,
+  e:{ml:'പെർമാഫ്രോസ്റ്റ് — ആവാസവ്യവസ്ഥയെ പ്രതികൂലമായി ബാധിക്കുന്നു.',en:'Permafrost — its melting harms the ecosystem.'}}
+];
 
-function stuCard(s){
-  var ini=(s.name||"?").trim().charAt(0).toUpperCase();
-  var meta=[s.adm, s.cls?(t("cls")+" "+s.cls):"", s.centre].filter(Boolean).map(esc).join(" · ");
-  return '<div class="stu"><div class="av">'+esc(ini)+'</div><div><b>'+esc(s.name)+'</b><span>'+meta+'</span></div></div>';
-}
+var quizState = {stage:'start', name:'', order:[], i:0, answers:[], t0:0, timer:null, secs:0, shuffled:{}};
+var QUIZ_TIME = 20*60;
 
-function start(){
-  var pv=CFG.preview?'<p class="note">'+t("pvNote")+'</p>':"";
-  if(sb){
-    app.innerHTML='<div class="card"><h2>'+t("welcome")+'</h2><p class="muted">'+t("enterAdm")+'</p>'+
-      '<label for="adm">'+t("adm")+'</label><input id="adm" inputmode="numeric" autocomplete="off" placeholder="'+t("admPh")+'">'+
-      '<div class="who" id="who"></div><button class="btn" id="go" disabled>'+t("start")+'</button>'+pv+'</div>';
-    var inp=document.getElementById("adm"), go=document.getElementById("go");
-    inp.value=admVal;
-    if(found) showFound();
-    inp.addEventListener("input",function(){
-      var v=inp.value.replace(/\D/g,""); if(v!==inp.value) inp.value=v;
-      admVal=v; found=null; blocked=false; go.disabled=true; clearTimeout(timer); seq++;
-      var who=document.getElementById("who");
-      if(!v){ who.innerHTML=""; return; }
-      who.innerHTML='<div class="s">'+t("searching")+'</div>';
-      var my=seq; timer=setTimeout(function(){ lookup(v,my); },450);
-    });
-    inp.addEventListener("keydown",function(e){ if(e.key==="Enter" && !go.disabled) go.click(); });
-    go.addEventListener("click",function(){ if(!found||blocked) return; stu=found; begin(); });
-    if(!found) inp.focus();
-  } else {
-    app.innerHTML='<div class="card"><h2>'+t("welcome")+'</h2><p class="muted">'+t("offNote")+'</p>'+
-      '<label for="nm">'+t("name")+'</label><input id="nm" autocomplete="off" placeholder="'+t("namePh")+'">'+
-      '<label for="adm">'+t("adm")+'</label><input id="adm" inputmode="numeric" autocomplete="off" placeholder="'+t("admPh")+'">'+
-      '<button class="btn" id="go" disabled>'+t("start")+'</button>'+pv+'</div>';
-    var nm=document.getElementById("nm"), ad=document.getElementById("adm"), g=document.getElementById("go");
-    nm.value=nameVal; ad.value=admVal;
-    function chk(){ ad.value=ad.value.replace(/\D/g,""); nameVal=nm.value; admVal=ad.value; g.disabled=!(nm.value.trim()&&ad.value); }
-    nm.addEventListener("input",chk); ad.addEventListener("input",chk); chk();
-    ad.addEventListener("keydown",function(e){ if(e.key==="Enter"&&!g.disabled) g.click(); });
-    g.addEventListener("click",function(){ stu={adm:admVal,name:nameVal.trim(),cls:"",centre:""}; begin(); });
-  }
-}
+function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
 
-function showFound(){
-  var who=document.getElementById("who"), go=document.getElementById("go");
-  if(!who||!found) return;
-  who.innerHTML=stuCard(found)+(blocked?'<div class="warn">'+t("already")+'</div>':"");
-  go.disabled=blocked;
+function renderStart(){
+  quizState.stage='start';
+  document.getElementById('quizBox').innerHTML =
+   '<div class="quiz-start"><div class="big">🏆</div>'+
+   '<h2><span class="ml">20 മാർക്ക് ക്വിസ്</span><span class="en">20 Mark Quiz</span></h2>'+
+   '<p><span class="ml">അധ്യായം മുഴുവൻ ഉൾക്കൊള്ളുന്ന 20 ചോദ്യങ്ങൾ · ഓരോന്നിനും 1 മാർക്ക് · 20 മിനിറ്റ്</span><span class="en">20 questions covering the whole chapter · 1 mark each · 20 minutes</span></p>'+
+   '<input class="q-input" id="stuName" placeholder="Student name / പേര്" value="'+(quizState.name||'').replace(/"/g,'&quot;')+'">'+
+   '<br><button class="btn btn-big btn-red" onclick="startQuiz()">Start Quiz ▶</button>'+
+   '<div class="share-row">'+shareButtons()+'</div></div>';
 }
-
-function lookup(v,my){
-  sb.rpc("verify_student",{p_admission_no:Number(v)}).then(function(res){
-    if(my!==seq) return;
-    var who=document.getElementById("who"); if(!who) return;
-    if(res.error){ console.error(res.error); who.innerHTML='<div class="e">'+t("dbErr")+'</div>'; return; }
-    var s=Array.isArray(res.data)?res.data[0]:res.data;
-    if(!s){ who.innerHTML='<div class="e">'+t("notFound")+'</div>'; return; }
-    found={adm:String(s.admission_no!=null?s.admission_no:v),name:s.student_name||"",cls:s["class"]||"",centre:s.centre||""};
-    blocked=false;
-    var go=document.getElementById("go");
-    who.innerHTML=stuCard(found); go.disabled=true;
-    if(CFG.preview){ showFound(); return; }
-    sb.rpc("has_attempted",{p_admission_no:Number(found.adm),p_quiz_name:CFG.quizName}).then(function(r){
-      if(my!==seq) return;
-      var d=r&&r.data; if(Array.isArray(d)) d=d[0];
-      if(d&&typeof d==="object") d=d.has_attempted;
-      blocked=(!r.error && d===true);
-      showFound();
-    },function(){ if(my===seq) showFound(); });
-  },function(err){ console.error(err); if(my!==seq) return; var who=document.getElementById("who"); if(who) who.innerHTML='<div class="e">'+t("dbErr")+'</div>'; });
+function startQuiz(){
+  var n=document.getElementById('stuName').value.trim();
+  if(!n){ document.getElementById('stuName').focus(); document.getElementById('stuName').style.borderColor='#d64545'; return; }
+  quizState.name=n;
+  quizState.order=shuffle(QUIZ.map(function(_,i){return i;}));
+  quizState.shuffled={};
+  quizState.order.forEach(function(qi){ quizState.shuffled[qi]=shuffle([0,1,2,3]); });
+  quizState.i=0; quizState.answers=[]; quizState.secs=QUIZ_TIME; quizState.stage='q';
+  clearInterval(quizState.timer);
+  quizState.timer=setInterval(function(){
+    quizState.secs--;
+    var el=document.getElementById('qTimer'); if(el) el.textContent='⏱ '+fmt(quizState.secs);
+    if(quizState.secs<=0){ clearInterval(quizState.timer); finishQuiz(); }
+  },1000);
+  renderQuestion();
 }
-
-function begin(){
-  order=QUIZ.map(function(_,i){return i;});
-  if(CFG.shuffle){ for(var i=order.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=order[i]; order[i]=order[j]; order[j]=x; } }
-  picks=QUIZ.map(function(){return null;});
-  cur=0; saveState=null; view="quiz"; render(); window.scrollTo(0,0);
-}
-
-function optsHtml(qi){
-  var q=QUIZ[qi], p=picks[qi], h="";
-  for(var o=0;o<q.opts.length;o++){
-    var cls="opt";
-    if(p!==null){ if(o===q.ans) cls+=" ok"; else if(o===p) cls+=" no"; }
-    h+='<button class="'+cls+'" data-qi="'+qi+'" data-oi="'+o+'"'+(p!==null?" disabled":"")+'><span class="k">'+KEYS[o]+'</span><span>'+esc(oText(q,o))+'</span></button>';
-  }
-  return h;
-}
-function stripHtml(){
-  var a=answeredCount();
-  return '<div class="strip"><span class="chip">'+esc(stu.name)+' · '+esc(stu.adm)+'</span><span>'+t("score")+': <b id="sc">'+score()+'</b> / '+QUIZ.length+'</span></div>'+
-    '<div class="bar"><i id="bar" style="width:'+Math.round(a/QUIZ.length*100)+'%"></i></div>';
-}
-function quiz(){
-  var h='<div class="card">'+stripHtml();
-  if(CFG.layout==="all"){
-    order.forEach(function(qi,n){
-      h+='<div class="qb" id="qb'+qi+'"><div class="qn">'+t("q")+' '+(n+1)+'</div><div class="qt">'+esc(qText(QUIZ[qi]))+'</div><div class="os">'+optsHtml(qi)+'</div></div>';
-    });
-    var left=QUIZ.length-answeredCount();
-    h+='<button class="btn" id="fin"'+(left?" disabled":"")+'>'+t("submit")+'</button><div class="left" id="left">'+(left?left+t("left"):"")+'</div>';
-  } else {
-    var qi=order[cur];
-    h+='<div class="qn">'+t("q")+' '+(cur+1)+' '+t("of")+' '+QUIZ.length+'</div><div class="qt">'+esc(qText(QUIZ[qi]))+'</div><div class="os" id="qb'+qi+'">'+optsHtml(qi)+'</div>';
-    var last=cur===order.length-1;
-    h+='<div class="btns">'+(cur>0?'<button class="btn alt" id="prv">'+t("prev")+'</button>':"")+
-      '<button class="btn" id="nxt"'+(picks[qi]===null?" disabled":"")+'>'+(last?t("finish"):t("next"))+'</button></div>';
-  }
-  h+='</div>';
-  app.innerHTML=h;
-  var prv=document.getElementById("prv"), nxt=document.getElementById("nxt"), fin=document.getElementById("fin");
-  if(prv) prv.addEventListener("click",function(){ cur--; render(); });
-  if(nxt) nxt.addEventListener("click",function(){ if(cur<order.length-1){ cur++; render(); window.scrollTo(0,0); } else finish(); });
-  if(fin) fin.addEventListener("click",finish);
-}
-app.addEventListener("click",function(e){
-  var b=e.target.closest?e.target.closest(".opt"):null;
-  if(!b||b.disabled||view!=="quiz") return;
-  var qi=+b.getAttribute("data-qi"), oi=+b.getAttribute("data-oi");
-  if(picks[qi]!==null) return;
-  picks[qi]=oi;
-  var box=document.getElementById("qb"+qi);
-  if(box){ var os=box.classList.contains("os")?box:box.querySelector(".os"); os.innerHTML=optsHtml(qi); }
-  document.getElementById("sc").textContent=score();
-  var a=answeredCount(); document.getElementById("bar").style.width=Math.round(a/QUIZ.length*100)+"%";
-  var nxt=document.getElementById("nxt"); if(nxt) nxt.disabled=false;
-  var fin=document.getElementById("fin"), left=document.getElementById("left");
-  if(fin){ var l=QUIZ.length-a; fin.disabled=l>0; left.textContent=l?l+t("left"):""; }
-});
-
-function finish(){ view="result"; render(); window.scrollTo(0,0); save(); }
-
-function saveHtml(){
-  if(saveState==="ok") return '<div class="save ok" id="sv">'+t("saved")+'</div>';
-  if(saveState==="dup") return '<div class="save bad" id="sv">'+t("dup")+'</div>';
-  if(saveState==="fail") return '<div class="save bad" id="sv">'+t("fail")+'<button id="rt">'+t("retry")+'</button></div>';
-  if(saveState==="off") return '<div class="save" id="sv">'+t("off")+'</div>';
-  if(saveState==="pv") return '<div class="save" id="sv">'+t("pv")+'</div>';
-  return '<div class="save" id="sv">'+t("saving")+'</div>';
-}
-function paintSave(){
-  var el=document.getElementById("sv"); if(!el) return;
-  el.outerHTML=saveHtml();
-  var rt=document.getElementById("rt"); if(rt) rt.addEventListener("click",function(){ saveState=null; paintSave(); save(true); });
-}
-function result(){
-  var s=score(), n=QUIZ.length, pct=Math.round(s/n*100);
-  var msg=pct>=80?t("good"):pct>=50?t("mid"):t("low");
-  var h='<div class="card"><div class="rwho">'+esc(stu.name)+' · '+esc(stu.adm)+(stu.centre?' · '+esc(stu.centre):"")+'</div>'+
-    '<div class="ring" style="background:conic-gradient(var(--ac) '+(pct*3.6)+'deg,var(--line) 0)"><div><b>'+s+'</b><span>/ '+n+' · '+pct+'%</span></div></div>'+
-    '<div class="rmsg">'+msg+'</div>'+saveHtml();
-  var wrong=order.filter(function(qi){ return picks[qi]!==QUIZ[qi].ans; });
-  h+='<div class="rv"><h3>'+(wrong.length?t("review"):t("perfect"))+'</h3>';
-  wrong.forEach(function(qi){
-    var q=QUIZ[qi];
-    h+='<div class="rvi"><p>'+esc(qText(q))+'</p><div class="y">✗ '+t("yours")+esc(picks[qi]===null?"—":oText(q,picks[qi]))+'</div><div class="c">✓ '+t("right")+esc(oText(q,q.ans))+'</div></div>';
+function fmt(s){ s=Math.max(0,s); return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2); }
+function renderQuestion(){
+  var qi=quizState.order[quizState.i], Q=QUIZ[qi], ord=quizState.shuffled[qi];
+  var done=quizState.answers[quizState.i];
+  var h='<div class="q-top"><span class="pill">Q '+(quizState.i+1)+' / 20</span><span class="pill">✔ '+score()+'</span><span class="spacer"></span><span class="pill t" id="qTimer">⏱ '+fmt(quizState.secs)+'</span></div>';
+  h+='<div class="bar"><i style="width:'+((quizState.i)/20*100)+'%"></i></div>';
+  h+='<div class="q-text">'+L(Q.q)+'</div>';
+  ord.forEach(function(oi,k){
+    var cls='';
+    if(done!==undefined){ if(oi===Q.a) cls='ok'; else if(oi===done) cls='no'; }
+    h+='<button class="opt '+cls+'" '+(done!==undefined?'disabled':'')+' onclick="pick('+oi+')"><span class="L">'+'ABCD'[k]+'</span><span>'+L(Q.o[oi])+'</span></button>';
   });
-  h+='</div><div class="btns"><button class="btn alt" id="ns">'+t("nextStu")+'</button></div></div>';
-  app.innerHTML=h;
-  var rt=document.getElementById("rt"); if(rt) rt.addEventListener("click",function(){ saveState=null; paintSave(); save(true); });
-  document.getElementById("ns").addEventListener("click",function(){ stu=null; found=null; blocked=false; admVal=""; nameVal=""; picks=[]; saveState=null; view=isOpen()?"start":"gate"; render(); });
+  h+='<div class="exp '+(done!==undefined?'show':'')+'">💡 '+L(Q.e)+'</div>';
+  h+='<div class="q-nav">'+(done!==undefined?'<button class="btn btn-big btn-g" onclick="nextQ()">'+(quizState.i<19?'Next ▶':'See Result 🏁')+'</button>':'')+'</div>';
+  document.getElementById('quizBox').innerHTML=h;
+}
+function pick(oi){
+  if(quizState.answers[quizState.i]!==undefined) return;
+  quizState.answers[quizState.i]=oi;
+  renderQuestion();
+}
+function nextQ(){
+  if(quizState.i<19){ quizState.i++; renderQuestion(); }
+  else finishQuiz();
+}
+function score(){
+  var s=0; quizState.answers.forEach(function(a,i){ if(a===QUIZ[quizState.order[i]].a) s++; }); return s;
+}
+function finishQuiz(){
+  clearInterval(quizState.timer);
+  quizState.stage='done';
+  quizState.used=QUIZ_TIME-Math.max(0,quizState.secs);
+  renderResult();
+}
+function grade(s){
+  if(s>=18) return {g:'A+',ml:'അതിഗംഭീരം! 🌟',en:'Outstanding! 🌟'};
+  if(s>=16) return {g:'A',ml:'വളരെ നല്ലത്! 👏',en:'Excellent! 👏'};
+  if(s>=14) return {g:'B+',ml:'നല്ല പ്രകടനം 👍',en:'Very good 👍'};
+  if(s>=12) return {g:'B',ml:'നല്ലത് — കുറച്ചുകൂടി ശ്രമിക്കൂ',en:'Good — a little more effort'};
+  if(s>=10) return {g:'C+',ml:'നോട്ടുകൾ വീണ്ടും വായിക്കൂ',en:'Revise the notes again'};
+  if(s>=8) return {g:'C',ml:'കൂടുതൽ പഠിക്കണം',en:'Needs more study'};
+  return {g:'D',ml:'നോട്ടുകൾ ശ്രദ്ധയോടെ വായിച്ച് വീണ്ടും ശ്രമിക്കൂ',en:'Read the notes carefully and try again'};
+}
+function renderResult(){
+  var s=score(), g=grade(s), p=s/20*100;
+  var h='<div class="result"><h2>'+quizState.name+'</h2>';
+  h+='<div class="ring" style="--p:'+p+'"><div><span>'+s+'/20<small>'+Math.round(p)+'%</small></span></div></div>';
+  h+='<div class="grade">Grade '+g.g+'</div><p>'+L(g)+'</p>';
+  h+='<p style="color:var(--muted);font-size:13px">⏱ '+fmt(quizState.used||0)+' · '+quizState.answers.length+'/20 attempted</p>';
+  h+='<div class="res-btns"><button class="btn btn-big btn-g" onclick="startQuizAgain()">↻ Retry</button><button class="btn btn-big btn-wa" onclick="shareWA()">Share Score on WhatsApp</button>'+shareButtons()+'</div>';
+  h+='<div class="review"><h3>Review</h3>';
+  quizState.order.forEach(function(qi,i){
+    var Q=QUIZ[qi], a=quizState.answers[i], ok=a===Q.a;
+    h+='<div class="rv '+(ok?'r':'w')+'"><b>'+(i+1)+'. '+L(Q.q)+'</b><br>'+
+       (ok?'✅ ':'❌ '+(a===undefined?'—':L(Q.o[a]))+' &nbsp;→&nbsp; ✅ ')+'<b>'+L(Q.o[Q.a])+'</b></div>';
+  });
+  h+='</div></div>';
+  document.getElementById('quizBox').innerHTML=h;
+}
+function startQuizAgain(){ renderStart(); }
+function shareWA(){
+  var s=score(), g=grade(s);
+  var msg='🏆 *ABACUS ACADEMY — SSLC Geography Unit 3 Quiz*\n'+
+    'മഴക്കാടുകളിൽ നിന്നും മഞ്ഞുരുകാത്ത നാട്ടിലേക്ക്\n\n'+
+    '👤 '+quizState.name+'\n✅ Score: '+s+'/20\n🎖 Grade: '+g.g+'\n⏱ Time: '+fmt(quizState.used||0);
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
 }
 
-function save(force){
-  if(saveState!==null && !force) return;
-  if(CFG.preview){ saveState="pv"; paintSave(); return; }
-  if(!sb){ saveState="off"; paintSave(); return; }
-  saveState="saving";
-  var s=score(), n=QUIZ.length;
-  var answers=QUIZ.map(function(q,i){ return {question_no:i+1,selected_answer:picks[i],correct_answer:q.ans,is_correct:picks[i]===q.ans}; });
-  sb.rpc("submit_quiz",{p_admission_no:Number(stu.adm),p_subject:CFG.subject,p_chapter:CFG.chapter,p_quiz_name:CFG.quizName,p_score:s,p_total:n,p_percentage:Math.round(s/n*100),p_answers:answers}).then(function(res){
-    if(res.error){ console.error(res.error); saveState="fail"; }
-    else { var d=Array.isArray(res.data)?res.data[0]:res.data; saveState=(d&&d.already_submitted)?"dup":"ok"; }
-    paintSave();
-  },function(err){ console.error(err); saveState="fail"; paintSave(); });
+
+/* ---------- Share ---------- */
+function quizURL(){ return location.href.split('#')[0].split('?')[0]; }
+function shareButtons(){ return '<button class="btn btn-big btn-share" onclick="shareQuizLink()">🔗 Share Quiz Link</button>'; }
+function toast(t){ var e=document.getElementById('toast'); e.textContent=t; e.classList.add('show'); setTimeout(function(){e.classList.remove('show');},2200); }
+function shareQuizLink(){
+  var url=quizURL(), text='🏆 Abacus Academy — SSLC Geography Unit 3 · 20 Mark Quiz\nമഴക്കാടുകളിൽ നിന്നും മഞ്ഞുരുകാത്ത നാട്ടിലേക്ക്';
+  if(navigator.share){ navigator.share({title:'Geography Unit 3 Quiz',text:text,url:url}).catch(function(){}); return; }
+  window.open('https://wa.me/?text='+encodeURIComponent(text+'\n'+url),'_blank');
 }
 
-document.getElementById("langBtn").addEventListener("click",function(){ lang=lang==="en"?"ml":"en"; render(); });
-setInterval(function(){
-  if(view==="gate" && isOpen()){ view="start"; render(); }
-  else if(view==="start" && !isOpen()){ view="gate"; render(); }
-},15000);
-view=isOpen()?"start":"gate";
-render();
+/* ---------- Init ---------- */
+(function(){
+  var l='ml'; try{ l=localStorage.getItem('geo3_lang')||'ml'; }catch(e){}
+  renderStart();
+  setLang(l);
 })();
+
 </script>
 </body>
 </html>
