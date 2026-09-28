@@ -160,6 +160,15 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:20px 16px 30p
 /* Print */
 .wm{display:none}
 
+@media(min-width:700px){.tabs{flex-wrap:wrap;overflow:visible}}
+.quiz-cta{display:inline-flex;align-items:center;gap:8px;margin-top:16px;background:#fff;color:#d64545;border:0;border-radius:14px;padding:11px 20px;font:700 15px 'Poppins',sans-serif;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.quiz-cta:hover{transform:translateY(-1px)}
+.btn-quiz{background:#fff;color:#d64545;border:0;font-weight:700}
+@media print{.quiz-cta,.btn-quiz{display:none!important}}
+
+
+@media(max-width:600px){.topbar .bl{display:none}.topbar .btn{padding:8px 11px;font-size:15px}.topbar-in{gap:8px}.lang button{padding:6px 9px}.brand b{font-size:14px}}
+
 .hero-card{background:linear-gradient(120deg,#0b5d39 0%,#0f7a4a 40%,#1d6fb8 100%)}
 .hero-card::after{content:"⚖"}
 .hero-card::before{content:"🛒"}
@@ -292,7 +301,8 @@ body.quiz-only .qo-title{display:block}
       <button id="bML" class="on" onclick="setLang('ml')">MAL</button>
       <button id="bEN" onclick="setLang('en')">ENG</button>
     </div>
-    <button class="btn btn-w no-print" onclick="printNotes()">🖨 Print</button>
+    <button class="btn btn-quiz no-print" onclick="goQuiz()">🏆<span class="bl"> Quiz</span></button>
+    <button class="btn btn-w no-print" onclick="printNotes()">🖨<span class="bl"> Print</span></button>
   </div>
 </header>
 
@@ -307,6 +317,7 @@ body.quiz-only .qo-title{display:block}
       <div class="stat"><b>16</b><span class="ml">പരീക്ഷാ ചോദ്യങ്ങൾ</span><span class="en">Exam questions</span></div>
       <div class="stat"><b>20</b><span class="ml">മാർക്ക് ക്വിസ്</span><span class="en">Mark quiz</span></div>
     </div>
+    <button class="quiz-cta no-print" onclick="goQuiz()">🏆 <span class="ml">20 മാർക്ക് ക്വിസ് എഴുതാം</span><span class="en">Take the 20 Mark Quiz</span> ▶</button>
   </div>
 </section>
 
@@ -834,6 +845,8 @@ function setLang(l){
 }
 function L(o){ return document.body.classList.contains('en') ? o.en : o.ml; }
 
+
+function goQuiz(){ var t=document.querySelector('.tab.quiz-tab'); if(t) t.click(); }
 /* ---------- Tabs ---------- */
 document.querySelectorAll('.tab').forEach(function(t){
   t.addEventListener('click', function(){
