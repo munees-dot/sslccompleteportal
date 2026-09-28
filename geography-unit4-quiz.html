@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Daily Exam — Consumer: Rights and Protection | Social Science II</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
+<style>:root{--p:#2f7d32;--pd:#1b4d1e;--hd:#3b8f3e;--ac:#d9822b;--bg:#f4f8f1;--card:#ffffff;--ink:#1c2a1c;--mut:#5c6b58;--line:#d7e5cf;--soft:#e8f2e3;--ok:#1f8a4c;--okbg:#dcf3e6;--bad:#c0392b;--badbg:#fbe3df}</style>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.55;min-height:100vh}
+body[data-lang="ml"]{font-family:'Noto Sans Malayalam','Segoe UI',system-ui,sans-serif}
+header{background:linear-gradient(135deg,var(--pd),var(--hd));color:#fff;padding:22px 18px 46px;position:relative}
+.hin{max-width:620px;margin:0 auto;display:flex;align-items:flex-start;gap:12px}
+.hin div{flex:1}
+header h1{margin:0 0 3px;font-size:1.35rem}
+header p{margin:0;opacity:.88;font-size:.88rem}
+#langBtn{border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.14);color:#fff;padding:7px 12px;border-radius:999px;cursor:pointer;font:inherit;font-size:.82rem;font-weight:600;white-space:nowrap}
+main{max-width:620px;margin:-30px auto 30px;padding:0 14px;position:relative}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.card h2{margin:0 0 4px;font-size:1.15rem}
+.muted{color:var(--mut);font-size:.88rem;margin:0 0 16px}
+label{display:block;font-weight:600;font-size:.85rem;margin:0 0 6px}
+input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font:inherit;font-size:1.05rem;background:var(--card);color:var(--ink);margin-bottom:12px}
+input:focus{outline:none;border-color:var(--p)}
+.btn{display:block;width:100%;border:none;background:var(--p);color:#fff;padding:12px 16px;border-radius:10px;font:inherit;font-weight:700;font-size:.98rem;cursor:pointer}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.alt{background:transparent;color:var(--p);border:1.5px solid var(--p)}
+.btns{display:flex;gap:10px;margin-top:16px}
+.btns .btn{flex:1}
+.who{min-height:8px;margin:0 0 12px}
+.who .s{font-size:.88rem;color:var(--mut)}
+.who .e{font-size:.88rem;color:var(--bad)}
+.stu{display:flex;align-items:center;gap:12px;background:var(--soft);border:1.5px solid var(--p);border-radius:12px;padding:12px 14px}
+.av{width:44px;height:44px;border-radius:50%;background:var(--p);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.15rem;flex-shrink:0}
+.stu b{display:block;font-size:1.05rem}
+.stu span{font-size:.8rem;color:var(--mut)}
+.warn{margin-top:10px;background:var(--badbg);color:var(--bad);border-radius:10px;padding:10px 12px;font-size:.86rem}
+.note{font-size:.78rem;color:var(--mut);text-align:center;margin:12px 0 0}
+.gate{text-align:center;padding:10px 0}
+.gate .ic{font-size:2.6rem}
+.gate .clk{font-size:1.6rem;font-weight:700;color:var(--p);margin-top:8px;font-variant-numeric:tabular-nums}
+.strip{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:.82rem;margin-bottom:12px}
+.strip b{color:var(--p)}
+.chip{background:var(--soft);border-radius:999px;padding:4px 10px;font-weight:600}
+.bar{height:7px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:18px}
+.bar i{display:block;height:100%;background:var(--ac);border-radius:99px;transition:width .3s}
+.qn{font-size:.78rem;font-weight:700;color:var(--ac);text-transform:uppercase;letter-spacing:.04em}
+.qt{font-size:1.06rem;font-weight:600;margin:4px 0 12px}
+.qb{padding:0 0 18px;margin:0 0 18px;border-bottom:1px dashed var(--line)}
+.qb:last-of-type{border-bottom:none}
+.opt{display:flex;align-items:center;gap:10px;width:100%;text-align:left;margin:7px 0;padding:10px 12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;cursor:pointer;font:inherit;font-size:.95rem}
+.opt:hover:not(:disabled){border-color:var(--p)}
+.opt .k{width:26px;height:26px;border-radius:50%;background:var(--soft);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0}
+.opt:disabled{cursor:default}
+.opt.ok{background:var(--okbg);border-color:var(--ok)}
+.opt.ok .k{background:var(--ok);color:#fff}
+.opt.no{background:var(--badbg);border-color:var(--bad)}
+.opt.no .k{background:var(--bad);color:#fff}
+.left{text-align:center;font-size:.82rem;color:var(--mut);margin-top:8px}
+.ring{width:150px;height:150px;border-radius:50%;margin:6px auto 12px;display:flex;align-items:center;justify-content:center}
+.ring div{width:118px;height:118px;border-radius:50%;background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring b{font-size:2.2rem;line-height:1;color:var(--p)}
+.ring span{font-size:.85rem;color:var(--mut)}
+.rmsg{text-align:center;font-weight:600;font-size:1.05rem}
+.rwho{text-align:center;font-size:.85rem;color:var(--mut);margin-bottom:6px}
+.save{text-align:center;font-size:.85rem;margin-top:12px;padding:9px;border-radius:10px;background:var(--soft)}
+.save.ok{background:var(--okbg);color:var(--ok)}
+.save.bad{background:var(--badbg);color:var(--bad)}
+.save button{margin-left:6px;border:none;background:none;color:inherit;font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}
+.rv{margin-top:18px}
+.rv h3{font-size:.95rem;margin:0 0 8px}
+.rvi{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:.88rem}
+.rvi p{margin:0 0 4px;font-weight:600}
+.rvi .y{color:var(--bad)}
+.rvi .c{color:var(--ok)}
+.rvi .x{color:var(--mut);margin-top:4px}
+.exp{background:var(--soft);border-radius:10px;padding:9px 12px;font-size:.88rem;margin-top:6px}
+footer{text-align:center;font-size:.78rem;color:var(--mut);margin:0 0 20px}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<header><div class="hin"><div><h1 id="hTitle"></h1><p id="hSub"></p></div><button id="langBtn"></button></div></header>
+<main id="app"></main>
+<footer>Abacus Academy · EduPro Study Tools</footer>
+<script>
+/* Made with Abacus Quiz Builder */
+const CFG = {"titleEn":"Daily Exam","titleMl":"ദിവസേനയുള്ള പരീക്ഷ","subject":"Social Science II","subjectMl":"സാമൂഹ്യശാസ്ത്രം II","chapter":"Consumer: Rights and Protection","chapterMl":"ഉപഭോക്താവ്: അവകാശങ്ങളും സംരക്ഷണവും","cls":"10","unit":"Unit 4","quizName":"Consumer: Rights and Protection | Social Science II Unit 4","openHour":-1,"layout":"one","shuffle":true,"theme":"forest","lang":"ml","supaOn":true,"supaUrl":"https://wrzssivgxituefcwobbr.supabase.co","supaKey":"sb_publishable_3mi5iJCxekZfiyXojUFtQg_gDASyEWm","preview":false};
+const QUIZ = [{"q":"Who first tried to measure consumer satisfaction?","q_ml":"ഉപഭോക്തൃ സംതൃപ്തി അളക്കാൻ ആദ്യശ്രമം നടത്തിയ സാമ്പത്തിക ശാസ്ത്രജ്ഞൻ?","opts":["Adam Smith","Alfred Marshall","J.M. Keynes","Amartya Sen"],"opts_ml":["ആഡം സ്മിത്ത്","ആൽഫ്രഡ് മാർഷൽ","ജെ.എം. കെയ്ൻസ്","അമർത്യ സെൻ"],"ans":1,"e":"Alfred Marshall.","e_ml":"ആൽഫ്രഡ് മാർഷൽ."},{"q":"The unit of utility is —","q_ml":"ഉപയുക്തത അളക്കുന്ന യൂണിറ്റ്?","opts":["Utils","Rupees","Kilogram","Percent"],"opts_ml":["യൂട്ടിൽസ്","രൂപ","കിലോഗ്രാം","ശതമാനം"],"ans":0,"e":"Utils.","e_ml":"യൂട്ടിൽസ് (Utils)."},{"q":"TU is 20 after one orange and 38 after two. MU of the 2nd orange?","q_ml":"ആദ്യ ഓറഞ്ചിന് 20, രണ്ടാമത്തേതിന് ശേഷം TU 38. രണ്ടാമത്തെ ഓറഞ്ചിന്റെ MU?","opts":["38","20","18","58"],"opts_ml":["38","20","18","58"],"ans":2,"e":"MU = 38 − 20 = 18.","e_ml":"MU = 38 − 20 = 18."},{"q":"When MU is zero, TU is —","q_ml":"സീമാന്ത ഉപയുക്തത പൂജ്യമാകുമ്പോൾ മൊത്തം ഉപയുക്തത —","opts":["Zero","Maximum","Negative","Falling"],"opts_ml":["പൂജ്യം","പരമാവധി","നെഗറ്റീവ്","കുറയുന്നു"],"ans":1,"e":"When MU = 0, TU is at its maximum (67).","e_ml":"MU = 0 ആകുമ്പോൾ TU പരമാവധി (67)."},{"q":"When MU is negative, TU —","q_ml":"സീമാന്ത ഉപയുക്തത നെഗറ്റീവ് ആകുമ്പോൾ മൊത്തം ഉപയുക്തത —","opts":["Rises","Stays constant","Falls","Becomes zero"],"opts_ml":["കൂടുന്നു","സ്ഥിരമാകുന്നു","കുറയുന്നു","പൂജ്യമാകുന്നു"],"ans":2,"e":"Negative MU → TU falls.","e_ml":"MU നെഗറ്റീവ് → TU കുറയുന്നു."},{"q":"The theory that satisfaction can be measured in cardinal numbers?","q_ml":"സംതൃപ്തി എണ്ണൽസംഖ്യ ഉപയോഗിച്ച് തിട്ടപ്പെടുത്താമെന്ന വാദം?","opts":["Ordinal theory","Cardinal utility theory","Law of demand","Production theory"],"opts_ml":["ഓർഡിനൽ വാദം","കാർഡിനൽ ഉപയുക്തതാവാദം","ചോദന നിയമം","ഉൽപ്പാദന വാദം"],"ans":1,"e":"Cardinal Utility Theory.","e_ml":"കാർഡിനൽ ഉപയുക്തതാവാദം."},{"q":"Which is an assumption of the Law of Diminishing MU?","q_ml":"അപചയ സീമാന്ത ഉപയുക്തത നിയമത്തിന്റെ അനുമാനം ഏത്?","opts":["Income keeps changing","All units are of the same quality","Consumption with long gaps","Taste changes"],"opts_ml":["വരുമാനം മാറിക്കൊണ്ടിരിക്കണം","ഉൽപ്പന്നങ്ങൾ ഒരേ ഗുണമേന്മയുള്ളതായിരിക്കണം","ഉപഭോഗം ഇടവിട്ടായിരിക്കണം","അഭിരുചി മാറണം"],"ans":1,"e":"Same quality; income and taste constant.","e_ml":"ഒരേ ഗുണമേന്മ; വരുമാനവും അഭിരുചിയും സ്ഥിരം."},{"q":"Sunlight and air are —","q_ml":"സൂര്യപ്രകാശവും വായുവും ഏത് തരം സാധനങ്ങൾ?","opts":["Free goods","Economic goods","Capital goods","Durable goods"],"opts_ml":["സൗജന്യസാധനങ്ങൾ","ഇക്കണോമിക് സാധനങ്ങൾ","മൂലധനസാധനങ്ങൾ","ഈട് നിൽക്കുന്ന സാധനങ്ങൾ"],"ans":0,"e":"Abundant in nature with no price — free goods.","e_ml":"പ്രകൃതിയിൽ ധാരാളമുള്ള, വില നൽകേണ്ടാത്തവ — സൗജന്യസാധനങ്ങൾ."},{"q":"Factories and machinery are —","q_ml":"ഫാക്ടറികളും യന്ത്രങ്ങളും ഏത് വിഭാഗത്തിൽ?","opts":["Consumer goods","Free goods","Capital goods","Non-durable goods"],"opts_ml":["ഉപഭോഗ സാധനങ്ങൾ","സൗജന്യസാധനങ്ങൾ","മൂലധനസാധനങ്ങൾ","ഈട് നിൽക്കാത്ത സാധനങ്ങൾ"],"ans":2,"e":"Used to produce other goods — capital goods.","e_ml":"മറ്റ് ഉൽപ്പന്നങ്ങൾ ഉൽപ്പാദിപ്പിക്കാനുള്ളവ — മൂലധനസാധനങ്ങൾ."},{"q":"GST came into force in India on —","q_ml":"ഇന്ത്യയിൽ GST നിലവിൽ വന്നത്?","opts":["1 April 2016","1 July 2017","1 January 2019","20 July 2020"],"opts_ml":["2016 ഏപ്രിൽ 1","2017 ജൂലൈ 1","2019 ജനുവരി 1","2020 ജൂലൈ 20"],"ans":1,"e":"101st Amendment; 1 July 2017.","e_ml":"ഭരണഘടനയുടെ 101-ാം ഭേദഗതി; 2017 ജൂലൈ 1."},{"q":"What share of GST goes to the State (SGST)?","q_ml":"GST-യുടെ എത്ര ശതമാനമാണ് സംസ്ഥാന സർക്കാരിന് (SGST) ലഭിക്കുന്നത്?","opts":["25%","40%","50%","75%"],"opts_ml":["25%","40%","50%","75%"],"ans":2,"e":"50% SGST, 50% CGST.","e_ml":"50% SGST, 50% CGST."},{"q":"India's consumer protection movement began with —","q_ml":"ഇന്ത്യയിൽ ഉപഭോക്തൃ സംരക്ഷണ പ്രസ്ഥാനം ആരംഭിച്ചത്?","opts":["Consumer Guidance Society of India, Bombay, 1966","NCDRC, Delhi, 1986","BIS, 1947","CCPA, 2019"],"opts_ml":["1966-ൽ കൺസ്യൂമർ ഗൈഡൻസ് സൊസൈറ്റി ഓഫ് ഇന്ത്യ, ബോംബെ","1986-ൽ ഡൽഹിയിൽ NCDRC","1947-ൽ BIS","2019-ൽ CCPA"],"ans":0,"e":"1966, Bombay.","e_ml":"1966, ബോംബെ."},{"q":"National Consumer Day is —","q_ml":"ദേശീയ ഉപഭോക്തൃദിനം?","opts":["15 March","24 December","1 July","2 October"],"opts_ml":["മാർച്ച് 15","ഡിസംബർ 24","ജൂലൈ 1","ഒക്ടോബർ 2"],"ans":1,"e":"Marks the 1986 Act coming into force on 24 December.","e_ml":"1986 ഡിസംബർ 24-ന് നിയമം നിലവിൽ വന്നതിന്റെ ഓർമ്മ."},{"q":"The Consumer Protection Act 2019 came into force on —","q_ml":"ഉപഭോക്തൃ സംരക്ഷണ നിയമം 2019 നിലവിൽ വന്നത്?","opts":["24 December 2019","20 July 2020","1 July 2017","1 January 2021"],"opts_ml":["2019 ഡിസംബർ 24","2020 ജൂലൈ 20","2017 ജൂലൈ 1","2021 ജനുവരി 1"],"ans":1,"e":"20 July 2020.","e_ml":"2020 ജൂലൈ 20."},{"q":"Which authority was set up under the 2019 Act?","q_ml":"2019-ലെ നിയമപ്രകാരം സ്ഥാപിച്ച അതോറിറ്റി?","opts":["RBI","SEBI","CCPA","TRAI"],"opts_ml":["RBI","SEBI","CCPA","TRAI"],"ans":2,"e":"Central Consumer Protection Authority (CCPA).","e_ml":"സെൻട്രൽ കൺസ്യൂമർ പ്രൊട്ടക്ഷൻ അതോറിറ്റി (CCPA)."},{"q":"The right to know quality, quantity, purity and price is —","q_ml":"ഗുണമേന്മ, അളവ്, പരിശുദ്ധി, വിലനിലവാരം എന്നിവ അറിയാനുള്ള അവകാശം?","opts":["Right to safety","Right to choose","Right to information","Right to seek redressal"],"opts_ml":["സുരക്ഷിതത്വത്തിനുള്ള അവകാശം","തിരഞ്ഞെടുക്കാനുള്ള അവകാശം","അറിയാനുള്ള അവകാശം","പരിഹാരം തേടാനുള്ള അവകാശം"],"ans":2,"e":"Right to information.","e_ml":"അറിയാനുള്ള അവകാശം."},{"q":"A case claiming ₹5 crore compensation goes to —","q_ml":"5 കോടി രൂപ നഷ്ടപരിഹാരം ആവശ്യപ്പെടുന്ന കേസ് പരിഗണിക്കുന്നത്?","opts":["District Commission","State Commission","National Commission","Supreme Court"],"opts_ml":["ജില്ലാ കമ്മീഷൻ","സംസ്ഥാന കമ്മീഷൻ","ദേശീയ കമ്മീഷൻ","സുപ്രീം കോടതി"],"ans":1,"e":"₹1–10 crore — State Commission.","e_ml":"1 കോടി മുതൽ 10 കോടി വരെ — സംസ്ഥാന കമ്മീഷൻ."},{"q":"If the bank does not reply within 30 days, approach —","q_ml":"ബാങ്ക് 30 ദിവസത്തിനുള്ളിൽ മറുപടി നൽകിയില്ലെങ്കിൽ സമീപിക്കേണ്ടത്?","opts":["Cyber Cell","RBI Ombudsman","POE","FSSAI"],"opts_ml":["സൈബർ സെൽ","RBI ഓംബുഡ്സ്മാൻ","POE","FSSAI"],"ans":1,"e":"RBI Ombudsman — toll-free 14448.","e_ml":"RBI ഓംബുഡ്സ്മാൻ — ടോൾ ഫ്രീ 14448."},{"q":"The quality mark for agricultural and forest products is —","q_ml":"കാർഷിക-വന ഉൽപ്പന്നങ്ങളുടെ ഗുണമേന്മ ഉറപ്പാക്കുന്ന ചിഹ്നം?","opts":["ISI","AGMARK","FSSAI","BIS Hallmark"],"opts_ml":["ISI","AGMARK","FSSAI","BIS Hallmark"],"ans":1,"e":"AGMARK. ISI — industrial; FSSAI — food safety.","e_ml":"AGMARK. ISI — വ്യാവസായിക ഉൽപ്പന്നങ്ങൾ; FSSAI — ഭക്ഷ്യസുരക്ഷ."},{"q":"The National Consumer Helpline number is —","q_ml":"ദേശീയ ഉപഭോക്തൃ ഹെൽപ്പ്‌ലൈൻ നമ്പർ?","opts":["1800-11-4000","14448","1800-11-3090","112"],"opts_ml":["1800-11-4000","14448","1800-11-3090","112"],"ans":0,"e":"1800-11-4000 — Jago Grahak Jago.","e_ml":"1800-11-4000 — ജാഗോ ഗ്രാഹക് ജാഗോ."}];
+</script>
+<script>
+(function(){
+var T={
+ en:{gate:"Today's exam opens at ",now:"Current time",welcome:"Ready for today's exam?",enterAdm:"Type your admission number — your name will appear.",adm:"Admission number",admPh:"Admission number",searching:"Searching…",notFound:"No student found with this number. Please check.",dbErr:"Could not connect. Check your internet and try again.",already:"You have already written this exam today. Only one attempt is allowed.",start:"Start exam",name:"Your name",namePh:"Enter your name",offNote:"Offline quiz — score is shown but not saved.",pvNote:"Preview mode — results will not be saved.",q:"Question",of:"of",answered:"Answered",score:"Score",next:"Next",prev:"Back",finish:"Finish exam",submit:"Submit exam",left:" question(s) not answered yet",correct:"correct",good:"Excellent! Well studied.",mid:"Coming along nicely — revise once more.",low:"Read the notes again and try once more.",saving:"Saving your score…",saved:"✓ Score saved",fail:"⚠ Could not save the score.",retry:"Try again",dup:"⚠ A result for this admission number already exists today — this attempt was not saved.",off:"Not saved (offline quiz)",pv:"Preview — not saved",review:"Review your mistakes",yours:"Your answer: ",right:"Correct: ",perfect:"All answers correct! 🎉",nextStu:"Next student",cls:"Class"},
+ ml:{gate:"ഇന്നത്തെ പരീക്ഷ ആരംഭിക്കുന്നത് ",now:"ഇപ്പോൾ സമയം",welcome:"ഇന്നത്തെ പരീക്ഷയ്ക്ക് തയ്യാറാണോ?",enterAdm:"അഡ്മിഷൻ നമ്പർ ടൈപ്പ് ചെയ്യൂ — നിങ്ങളുടെ പേര് കാണാം.",adm:"അഡ്മിഷൻ നമ്പർ",admPh:"അഡ്മിഷൻ നമ്പർ",searching:"തിരയുന്നു…",notFound:"ഈ നമ്പറിൽ വിദ്യാർത്ഥിയെ കണ്ടെത്തിയില്ല. നമ്പർ പരിശോധിക്കുക.",dbErr:"കണക്റ്റ് ചെയ്യാനായില്ല. ഇന്റർനെറ്റ് പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.",already:"ഇന്ന് ഈ പരീക്ഷ നിങ്ങൾ എഴുതിക്കഴിഞ്ഞു. ഒരു അവസരം മാത്രം.",start:"പരീക്ഷ തുടങ്ങൂ",name:"നിങ്ങളുടെ പേര്",namePh:"പേര് നൽകുക",offNote:"ഓഫ്‌ലൈൻ ക്വിസ് — മാർക്ക് കാണിക്കും, സേവ് ചെയ്യില്ല.",pvNote:"പ്രിവ്യൂ — ഫലം സേവ് ചെയ്യില്ല.",q:"ചോദ്യം",of:"/",answered:"ഉത്തരം നൽകിയത്",score:"മാർക്ക്",next:"അടുത്തത്",prev:"പിന്നോട്ട്",finish:"പരീക്ഷ പൂർത്തിയാക്കൂ",submit:"സമർപ്പിക്കൂ",left:" ചോദ്യം ഇനിയും ബാക്കി",correct:"ശരി",good:"മികച്ചത്! നന്നായി പഠിച്ചു.",mid:"നന്നായി വരുന്നു — ഒന്നുകൂടി റിവിഷൻ ചെയ്യാം.",low:"കുറിപ്പുകൾ ഒന്നുകൂടി വായിച്ച് വീണ്ടും ശ്രമിക്കാം.",saving:"മാർക്ക് സേവ് ചെയ്യുന്നു…",saved:"✓ മാർക്ക് സേവ് ചെയ്തു",fail:"⚠ മാർക്ക് സേവ് ചെയ്യാനായില്ല.",retry:"വീണ്ടും ശ്രമിക്കുക",dup:"⚠ ഈ അഡ്മിഷൻ നമ്പറിന് ഇന്ന് ഫലം നിലവിലുണ്ട് — ഈ ശ്രമം സേവ് ചെയ്തില്ല.",off:"സേവ് ചെയ്തില്ല (ഓഫ്‌ലൈൻ)",pv:"പ്രിവ്യൂ — സേവ് ചെയ്തില്ല",review:"തെറ്റിയ ചോദ്യങ്ങൾ",yours:"നിങ്ങളുടെ ഉത്തരം: ",right:"ശരിയുത്തരം: ",perfect:"എല്ലാം ശരി! 🎉",nextStu:"അടുത്ത കുട്ടി",cls:"ക്ലാസ്"}
+};
+var lang=CFG.lang==="ml"?"ml":"en",view="gate",stu=null,found=null,blocked=false,admVal="",nameVal="",order=[],picks=[],cur=0,saveState=null,seq=0,timer=null,clockTimer=null;
+var sb=null;
+try{ if(CFG.supaOn && window.supabase && CFG.supaUrl && CFG.supaKey){ sb=window.supabase.createClient(CFG.supaUrl,CFG.supaKey); } }catch(e){ console.error(e); }
+var app=document.getElementById("app");
+function t(k){ return T[lang][k]; }
+function esc(v){ return String(v==null?"":v).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+function qText(q){ return lang==="ml"&&q.q_ml?q.q_ml:q.q; }
+function eText(q){ return lang==="ml"&&q.e_ml?q.e_ml:(q.e||q.e_ml||""); }
+function oText(q,i){ return lang==="ml"&&q.opts_ml&&q.opts_ml[i]?q.opts_ml[i]:q.opts[i]; }
+function fmtHour(h){ return (h%12||12)+":00 "+(h>=12?"PM":"AM"); }
+function isOpen(){ return CFG.preview || CFG.openHour<0 || new Date().getHours()>=CFG.openHour; }
+function score(){ var s=0; for(var i=0;i<QUIZ.length;i++){ if(picks[i]===QUIZ[i].ans) s++; } return s; }
+function answeredCount(){ var c=0; for(var i=0;i<picks.length;i++){ if(picks[i]!==null) c++; } return c; }
+var KEYS=["A","B","C","D","E","F"];
+
+function header(){
+  document.getElementById("hTitle").textContent=lang==="ml"?(CFG.titleMl||CFG.titleEn):CFG.titleEn;
+  var sub=[lang==="ml"?(CFG.subjectMl||CFG.subject):CFG.subject, CFG.cls?(t("cls")+" "+CFG.cls):"", lang==="ml"?(CFG.chapterMl||CFG.chapter):CFG.chapter].filter(Boolean).join(" · ");
+  document.getElementById("hSub").textContent=sub;
+  document.getElementById("langBtn").textContent=lang==="en"?"🌐 മലയാളം":"🌐 English";
+  document.body.setAttribute("data-lang",lang);
+  document.documentElement.lang=lang;
+}
+function render(){
+  clearInterval(clockTimer);
+  header();
+  if(view==="gate") gate(); else if(view==="start") start(); else if(view==="quiz") quiz(); else result();
+}
+
+function gate(){
+  app.innerHTML='<div class="card gate"><div class="ic">⏰</div><h2>'+t("gate")+fmtHour(CFG.openHour)+'</h2><p class="muted" style="margin:6px 0 0">'+t("now")+'</p><div class="clk" id="clk"></div></div>';
+  function tick(){ var el=document.getElementById("clk"); if(el) el.textContent=new Date().toLocaleTimeString("en-IN"); }
+  tick(); clockTimer=setInterval(tick,1000);
+}
+
+function stuCard(s){
+  var ini=(s.name||"?").trim().charAt(0).toUpperCase();
+  var meta=[s.adm, s.cls?(t("cls")+" "+s.cls):"", s.centre].filter(Boolean).map(esc).join(" · ");
+  return '<div class="stu"><div class="av">'+esc(ini)+'</div><div><b>'+esc(s.name)+'</b><span>'+meta+'</span></div></div>';
+}
+
+function start(){
+  var pv=CFG.preview?'<p class="note">'+t("pvNote")+'</p>':"";
+  if(sb){
+    app.innerHTML='<div class="card"><h2>'+t("welcome")+'</h2><p class="muted">'+t("enterAdm")+'</p>'+
+      '<label for="adm">'+t("adm")+'</label><input id="adm" inputmode="numeric" autocomplete="off" placeholder="'+t("admPh")+'">'+
+      '<div class="who" id="who"></div><button class="btn" id="go" disabled>'+t("start")+'</button>'+pv+'</div>';
+    var inp=document.getElementById("adm"), go=document.getElementById("go");
+    inp.value=admVal;
+    if(found) showFound();
+    inp.addEventListener("input",function(){
+      var v=inp.value.replace(/\D/g,""); if(v!==inp.value) inp.value=v;
+      admVal=v; found=null; blocked=false; go.disabled=true; clearTimeout(timer); seq++;
+      var who=document.getElementById("who");
+      if(!v){ who.innerHTML=""; return; }
+      who.innerHTML='<div class="s">'+t("searching")+'</div>';
+      var my=seq; timer=setTimeout(function(){ lookup(v,my); },450);
+    });
+    inp.addEventListener("keydown",function(e){ if(e.key==="Enter" && !go.disabled) go.click(); });
+    go.addEventListener("click",function(){ if(!found||blocked) return; stu=found; begin(); });
+    if(!found) inp.focus();
+  } else {
+    app.innerHTML='<div class="card"><h2>'+t("welcome")+'</h2><p class="muted">'+t("offNote")+'</p>'+
+      '<label for="nm">'+t("name")+'</label><input id="nm" autocomplete="off" placeholder="'+t("namePh")+'">'+
+      '<label for="adm">'+t("adm")+'</label><input id="adm" inputmode="numeric" autocomplete="off" placeholder="'+t("admPh")+'">'+
+      '<button class="btn" id="go" disabled>'+t("start")+'</button>'+pv+'</div>';
+    var nm=document.getElementById("nm"), ad=document.getElementById("adm"), g=document.getElementById("go");
+    nm.value=nameVal; ad.value=admVal;
+    function chk(){ ad.value=ad.value.replace(/\D/g,""); nameVal=nm.value; admVal=ad.value; g.disabled=!(nm.value.trim()&&ad.value); }
+    nm.addEventListener("input",chk); ad.addEventListener("input",chk); chk();
+    ad.addEventListener("keydown",function(e){ if(e.key==="Enter"&&!g.disabled) g.click(); });
+    g.addEventListener("click",function(){ stu={adm:admVal,name:nameVal.trim(),cls:"",centre:""}; begin(); });
+  }
+}
+
+function showFound(){
+  var who=document.getElementById("who"), go=document.getElementById("go");
+  if(!who||!found) return;
+  who.innerHTML=stuCard(found)+(blocked?'<div class="warn">'+t("already")+'</div>':"");
+  go.disabled=blocked;
+}
+
+function lookup(v,my){
+  sb.rpc("verify_student",{p_admission_no:Number(v)}).then(function(res){
+    if(my!==seq) return;
+    var who=document.getElementById("who"); if(!who) return;
+    if(res.error){ console.error(res.error); who.innerHTML='<div class="e">'+t("dbErr")+'</div>'; return; }
+    var s=Array.isArray(res.data)?res.data[0]:res.data;
+    if(!s){ who.innerHTML='<div class="e">'+t("notFound")+'</div>'; return; }
+    found={adm:String(s.admission_no!=null?s.admission_no:v),name:s.student_name||"",cls:s["class"]||"",centre:s.centre||""};
+    blocked=false;
+    var go=document.getElementById("go");
+    who.innerHTML=stuCard(found); go.disabled=true;
+    if(CFG.preview){ showFound(); return; }
+    sb.rpc("has_attempted",{p_admission_no:Number(found.adm),p_quiz_name:CFG.quizName}).then(function(r){
+      if(my!==seq) return;
+      var d=r&&r.data; if(Array.isArray(d)) d=d[0];
+      if(d&&typeof d==="object") d=d.has_attempted;
+      blocked=(!r.error && d===true);
+      showFound();
+    },function(){ if(my===seq) showFound(); });
+  },function(err){ console.error(err); if(my!==seq) return; var who=document.getElementById("who"); if(who) who.innerHTML='<div class="e">'+t("dbErr")+'</div>'; });
+}
+
+function begin(){
+  order=QUIZ.map(function(_,i){return i;});
+  if(CFG.shuffle){ for(var i=order.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=order[i]; order[i]=order[j]; order[j]=x; } }
+  picks=QUIZ.map(function(){return null;});
+  cur=0; saveState=null; view="quiz"; render(); window.scrollTo(0,0);
+}
+
+function optsHtml(qi){
+  var q=QUIZ[qi], p=picks[qi], h="";
+  for(var o=0;o<q.opts.length;o++){
+    var cls="opt";
+    if(p!==null){ if(o===q.ans) cls+=" ok"; else if(o===p) cls+=" no"; }
+    h+='<button class="'+cls+'" data-qi="'+qi+'" data-oi="'+o+'"'+(p!==null?" disabled":"")+'><span class="k">'+KEYS[o]+'</span><span>'+esc(oText(q,o))+'</span></button>';
+  }
+  if(p!==null && eText(q)) h+='<div class="exp">💡 '+esc(eText(q))+'</div>';
+  return h;
+}
+function stripHtml(){
+  var a=answeredCount();
+  return '<div class="strip"><span class="chip">'+esc(stu.name)+' · '+esc(stu.adm)+'</span><span>'+t("score")+': <b id="sc">'+score()+'</b> / '+QUIZ.length+'</span></div>'+
+    '<div class="bar"><i id="bar" style="width:'+Math.round(a/QUIZ.length*100)+'%"></i></div>';
+}
+function quiz(){
+  var h='<div class="card">'+stripHtml();
+  if(CFG.layout==="all"){
+    order.forEach(function(qi,n){
+      h+='<div class="qb" id="qb'+qi+'"><div class="qn">'+t("q")+' '+(n+1)+'</div><div class="qt">'+esc(qText(QUIZ[qi]))+'</div><div class="os">'+optsHtml(qi)+'</div></div>';
+    });
+    var left=QUIZ.length-answeredCount();
+    h+='<button class="btn" id="fin"'+(left?" disabled":"")+'>'+t("submit")+'</button><div class="left" id="left">'+(left?left+t("left"):"")+'</div>';
+  } else {
+    var qi=order[cur];
+    h+='<div class="qn">'+t("q")+' '+(cur+1)+' '+t("of")+' '+QUIZ.length+'</div><div class="qt">'+esc(qText(QUIZ[qi]))+'</div><div class="os" id="qb'+qi+'">'+optsHtml(qi)+'</div>';
+    var last=cur===order.length-1;
+    h+='<div class="btns">'+(cur>0?'<button class="btn alt" id="prv">'+t("prev")+'</button>':"")+
+      '<button class="btn" id="nxt"'+(picks[qi]===null?" disabled":"")+'>'+(last?t("finish"):t("next"))+'</button></div>';
+  }
+  h+='</div>';
+  app.innerHTML=h;
+  var prv=document.getElementById("prv"), nxt=document.getElementById("nxt"), fin=document.getElementById("fin");
+  if(prv) prv.addEventListener("click",function(){ cur--; render(); });
+  if(nxt) nxt.addEventListener("click",function(){ if(cur<order.length-1){ cur++; render(); window.scrollTo(0,0); } else finish(); });
+  if(fin) fin.addEventListener("click",finish);
+}
+app.addEventListener("click",function(e){
+  var b=e.target.closest?e.target.closest(".opt"):null;
+  if(!b||b.disabled||view!=="quiz") return;
+  var qi=+b.getAttribute("data-qi"), oi=+b.getAttribute("data-oi");
+  if(picks[qi]!==null) return;
+  picks[qi]=oi;
+  var box=document.getElementById("qb"+qi);
+  if(box){ var os=box.classList.contains("os")?box:box.querySelector(".os"); os.innerHTML=optsHtml(qi); }
+  document.getElementById("sc").textContent=score();
+  var a=answeredCount(); document.getElementById("bar").style.width=Math.round(a/QUIZ.length*100)+"%";
+  var nxt=document.getElementById("nxt"); if(nxt) nxt.disabled=false;
+  var fin=document.getElementById("fin"), left=document.getElementById("left");
+  if(fin){ var l=QUIZ.length-a; fin.disabled=l>0; left.textContent=l?l+t("left"):""; }
+});
+
+function finish(){ view="result"; render(); window.scrollTo(0,0); save(); }
+
+function saveHtml(){
+  if(saveState==="ok") return '<div class="save ok" id="sv">'+t("saved")+'</div>';
+  if(saveState==="dup") return '<div class="save bad" id="sv">'+t("dup")+'</div>';
+  if(saveState==="fail") return '<div class="save bad" id="sv">'+t("fail")+'<button id="rt">'+t("retry")+'</button></div>';
+  if(saveState==="off") return '<div class="save" id="sv">'+t("off")+'</div>';
+  if(saveState==="pv") return '<div class="save" id="sv">'+t("pv")+'</div>';
+  return '<div class="save" id="sv">'+t("saving")+'</div>';
+}
+function paintSave(){
+  var el=document.getElementById("sv"); if(!el) return;
+  el.outerHTML=saveHtml();
+  var rt=document.getElementById("rt"); if(rt) rt.addEventListener("click",function(){ saveState=null; paintSave(); save(true); });
+}
+function result(){
+  var s=score(), n=QUIZ.length, pct=Math.round(s/n*100);
+  var msg=pct>=80?t("good"):pct>=50?t("mid"):t("low");
+  var h='<div class="card"><div class="rwho">'+esc(stu.name)+' · '+esc(stu.adm)+(stu.centre?' · '+esc(stu.centre):"")+'</div>'+
+    '<div class="ring" style="background:conic-gradient(var(--ac) '+(pct*3.6)+'deg,var(--line) 0)"><div><b>'+s+'</b><span>/ '+n+' · '+pct+'%</span></div></div>'+
+    '<div class="rmsg">'+msg+'</div>'+saveHtml();
+  var wrong=order.filter(function(qi){ return picks[qi]!==QUIZ[qi].ans; });
+  h+='<div class="rv"><h3>'+(wrong.length?t("review"):t("perfect"))+'</h3>';
+  wrong.forEach(function(qi){
+    var q=QUIZ[qi];
+    h+='<div class="rvi"><p>'+esc(qText(q))+'</p><div class="y">✗ '+t("yours")+esc(picks[qi]===null?"—":oText(q,picks[qi]))+'</div><div class="c">✓ '+t("right")+esc(oText(q,q.ans))+'</div>'+(eText(q)?'<div class="x">💡 '+esc(eText(q))+'</div>':'')+'</div>';
+  });
+  h+='</div><div class="btns"><button class="btn alt" id="ns">'+t("nextStu")+'</button></div></div>';
+  app.innerHTML=h;
+  var rt=document.getElementById("rt"); if(rt) rt.addEventListener("click",function(){ saveState=null; paintSave(); save(true); });
+  document.getElementById("ns").addEventListener("click",function(){ stu=null; found=null; blocked=false; admVal=""; nameVal=""; picks=[]; saveState=null; view=isOpen()?"start":"gate"; render(); });
+}
+
+function save(force){
+  if(saveState!==null && !force) return;
+  if(CFG.preview){ saveState="pv"; paintSave(); return; }
+  if(!sb){ saveState="off"; paintSave(); return; }
+  saveState="saving";
+  var s=score(), n=QUIZ.length;
+  var answers=QUIZ.map(function(q,i){ return {question_no:i+1,selected_answer:picks[i],correct_answer:q.ans,is_correct:picks[i]===q.ans}; });
+  sb.rpc("submit_quiz",{p_admission_no:Number(stu.adm),p_subject:CFG.subject,p_chapter:CFG.chapter,p_quiz_name:CFG.quizName,p_score:s,p_total:n,p_percentage:Math.round(s/n*100),p_answers:answers}).then(function(res){
+    if(res.error){ console.error(res.error); saveState="fail"; }
+    else { var d=Array.isArray(res.data)?res.data[0]:res.data; saveState=(d&&d.already_submitted)?"dup":"ok"; }
+    paintSave();
+  },function(err){ console.error(err); saveState="fail"; paintSave(); });
+}
+
+document.getElementById("langBtn").addEventListener("click",function(){ lang=lang==="en"?"ml":"en"; render(); });
+setInterval(function(){
+  if(view==="gate" && isOpen()){ view="start"; render(); }
+  else if(view==="start" && !isOpen()){ view="gate"; render(); }
+},15000);
+view=isOpen()?"start":"gate";
+render();
+})();
+</script>
+</body>
+</html>

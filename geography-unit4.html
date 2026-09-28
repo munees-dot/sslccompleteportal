@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SS II Unit 4 — Consumer Rights | Abacus Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;800&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#0f7a4a; --green2:#16a765; --ice:#1d6fb8; --ice2:#5fb2ff;
+  --ink:#1b2430; --muted:#5b6776; --bg:#f3f7f5; --card:#ffffff; --line:#dfe7e3;
+  --gold:#f4b400; --red:#d64545; --soft-g:#e7f6ee; --soft-b:#e6f1fc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Poppins','Noto Sans Malayalam',sans-serif;background:var(--bg);color:var(--ink);line-height:1.75}
+.ml,.en{font-family:'Noto Sans Malayalam','Poppins',sans-serif}
+body.en .ml{display:none!important}
+body:not(.en) .en{display:none!important}
+
+/* Header */
+.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,#0b5d39,#0f7a4a 45%,#1d6fb8);color:#fff;box-shadow:0 3px 14px rgba(0,0,0,.18)}
+.topbar-in{max-width:1100px;margin:auto;display:flex;align-items:center;gap:12px;padding:10px 16px}
+.logo{width:42px;height:42px;border-radius:12px;background:#fff;color:var(--green);display:grid;place-items:center;font-weight:800;font-size:18px;flex-shrink:0}
+.brand b{display:block;font-size:16px;letter-spacing:.5px}
+.brand small{opacity:.85;font-size:12px}
+.spacer{flex:1}
+.btn{border:0;border-radius:999px;padding:8px 14px;font:600 13px 'Poppins',sans-serif;cursor:pointer;transition:.2s}
+.btn-w{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.btn-w:hover{background:rgba(255,255,255,.3)}
+.btn-w.on{background:#fff;color:var(--green)}
+.lang{display:flex;background:rgba(0,0,0,.18);border-radius:999px;padding:3px}
+.lang button{border:0;background:transparent;color:#fff;padding:6px 12px;border-radius:999px;font:600 12px 'Poppins';cursor:pointer}
+.lang button.on{background:#fff;color:var(--green)}
+
+/* Hero */
+.hero{max-width:1100px;margin:18px auto 0;padding:0 16px}
+.hero-card{border-radius:22px;overflow:hidden;background:linear-gradient(120deg,#0f7a4a 0%,#138a55 38%,#3a8fd6 62%,#bfe3ff 100%);color:#fff;padding:26px 24px;position:relative}
+.hero-card::after{content:"❄";position:absolute;right:22px;top:10px;font-size:90px;opacity:.25}
+.hero-card::before{content:"🌴";position:absolute;right:120px;bottom:6px;font-size:70px;opacity:.25}
+.tag{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);padding:3px 12px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.5px}
+.hero h1{font-size:clamp(22px,4vw,34px);line-height:1.35;margin:10px 0 6px;font-weight:800;max-width:760px}
+.hero p{max-width:720px;opacity:.95;font-size:15px}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.stat{background:rgba(255,255,255,.18);border-radius:14px;padding:8px 14px;font-size:13px}
+.stat b{font-size:18px;display:block;line-height:1.2}
+
+/* Tabs */
+.tabs-wrap{max-width:1100px;margin:16px auto 0;padding:0 16px;position:sticky;top:62px;z-index:40}
+.tabs{display:flex;gap:6px;overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:16px;padding:6px;box-shadow:0 4px 14px rgba(15,122,74,.08);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;border:0;background:transparent;padding:9px 14px;border-radius:11px;font:600 13px 'Poppins';color:var(--muted);cursor:pointer;white-space:nowrap}
+.tab.on{background:linear-gradient(90deg,var(--green),var(--ice));color:#fff}
+.tab.quiz-tab{color:var(--red)}
+.tab.quiz-tab.on{color:#fff;background:linear-gradient(90deg,#d64545,#f08a24)}
+
+main{max-width:1100px;margin:16px auto 40px;padding:0 16px}
+.panel{display:none;animation:fade .3s}
+.panel.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,.03)}
+h2.sec{font-size:20px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+h2.sec .ico{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:18px}
+.eq .ico{background:var(--soft-g)} .tu .ico{background:var(--soft-b)}
+h3{font-size:16px;margin:14px 0 6px;color:var(--green)}
+.tu h3{color:var(--ice)}
+ul.pts{padding-left:20px}
+ul.pts li{margin:4px 0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.mini{border-radius:14px;padding:14px;border:1px solid var(--line)}
+.mini.g{background:var(--soft-g);border-color:#bfe6d0}
+.mini.b{background:var(--soft-b);border-color:#bcd9f5}
+.mini h4{font-size:15px;margin-bottom:4px}
+.box{border-left:4px solid var(--gold);background:#fff8e1;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:14.5px}
+.box.blue{border-color:var(--ice);background:var(--soft-b)}
+.box.green{border-color:var(--green);background:var(--soft-g)}
+.chip{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 10px;margin:3px 3px 0 0;font-size:13px}
+.zone-head{display:flex;align-items:center;gap:10px;padding:14px 18px;border-radius:16px;color:#fff;margin:6px 0 14px;font-weight:700;font-size:18px}
+.zone-head.eq{background:linear-gradient(90deg,#0b5d39,#16a765)}
+.zone-head.tu{background:linear-gradient(90deg,#134f86,#5fb2ff)}
+
+/* Accordion */
+details.acc{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+details.acc summary{list-style:none;cursor:pointer;padding:13px 16px;font-weight:600;display:flex;align-items:center;gap:10px}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:"+";margin-left:auto;font-size:20px;color:var(--muted)}
+details.acc[open] summary::after{content:"−"}
+details.acc[open] summary{background:#f7faf9;border-bottom:1px solid var(--line)}
+.acc-body{padding:12px 18px 16px}
+.num{min-width:26px;height:26px;border-radius:8px;background:var(--green);color:#fff;font-size:13px;display:grid;place-items:center}
+.tu .num{background:var(--ice)}
+
+/* Tables */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+th{background:#eef5f1}
+th.g{background:#d9f1e4} th.b{background:#dbeafa}
+tr:nth-child(even) td{background:#fafcfb}
+
+/* Rain layers */
+.layers{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.layer{border-radius:10px;padding:10px 14px;color:#fff;font-size:14px}
+.l1{background:#0b5d39}.l2{background:#138a55}.l3{background:#4cb07a}
+
+/* Glossary */
+.term{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff}
+.term b{color:var(--green);font-size:15px}
+.term.t b{color:var(--ice)}
+.term p{font-size:14px;color:#33404d;margin-top:2px}
+.search{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:12px;font:14px 'Poppins','Noto Sans Malayalam';margin-bottom:12px}
+
+/* Q&A */
+.qa{border:1px solid var(--line);border-radius:14px;margin-bottom:10px;background:#fff;overflow:hidden}
+.qa-q{padding:12px 16px;font-weight:600;cursor:pointer;display:flex;gap:10px;align-items:flex-start}
+.qa-q .mk{margin-left:auto;flex-shrink:0;background:#fff3e0;color:#b85c00;font-size:11px;border-radius:999px;padding:2px 9px;font-family:'Poppins'}
+.qa-a{display:none;padding:0 16px 14px 16px;border-top:1px dashed var(--line);font-size:14.5px}
+.qa.open .qa-a{display:block;padding-top:10px}
+.qa-tools{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.btn-g{background:var(--green);color:#fff}
+.btn-o{background:#fff;color:var(--green);border:1px solid var(--green)}
+
+/* Quiz */
+.quiz-start{text-align:center;padding:30px 20px}
+.quiz-start .big{font-size:54px}
+.quiz-start h2{font-size:24px;margin:6px 0}
+.q-input{padding:11px 14px;border:1px solid var(--line);border-radius:12px;width:min(320px,100%);font:15px 'Poppins','Noto Sans Malayalam';margin:14px 0 8px;text-align:center}
+.btn-big{padding:12px 28px;font-size:15px;border-radius:14px}
+.btn-red{background:linear-gradient(90deg,#d64545,#f08a24);color:#fff}
+.q-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600}
+.pill.t{color:var(--red)}
+.bar{height:8px;background:#e7ecea;border-radius:999px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--ice));transition:.3s}
+.q-text{font-size:18px;font-weight:600;margin-bottom:14px}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;cursor:pointer;font:15px 'Noto Sans Malayalam','Poppins';color:var(--ink);transition:.15s}
+.opt:hover{border-color:var(--ice2)}
+.opt .L{width:30px;height:30px;border-radius:9px;background:#eef3f1;display:grid;place-items:center;font-weight:700;flex-shrink:0;font-family:'Poppins'}
+.opt.ok{border-color:#1f9d5a;background:#e9f8ef}.opt.ok .L{background:#1f9d5a;color:#fff}
+.opt.no{border-color:var(--red);background:#fdecec}.opt.no .L{background:var(--red);color:#fff}
+.opt:disabled{cursor:default}
+.exp{display:none;background:var(--soft-b);border-radius:12px;padding:10px 14px;font-size:14px;margin-top:4px}
+.exp.show{display:block}
+.q-nav{display:flex;justify-content:flex-end;margin-top:14px}
+.result{text-align:center;padding:24px 10px}
+.ring{width:150px;height:150px;border-radius:50%;margin:10px auto;display:grid;place-items:center;background:conic-gradient(var(--green) calc(var(--p)*1%),#e7ecea 0)}
+.ring div{width:118px;height:118px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:30px;font-weight:800}
+.ring small{display:block;font-size:13px;color:var(--muted);font-weight:600}
+.grade{font-size:22px;font-weight:800;margin:6px 0}
+.res-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.btn-wa{background:#25d366;color:#fff}
+.review{text-align:left;margin-top:20px}
+.rv{border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:8px;font-size:14px;background:#fff}
+.rv.w{border-left:4px solid var(--red)} .rv.r{border-left:4px solid #1f9d5a}
+
+footer{text-align:center;color:var(--muted);font-size:13px;padding:20px 16px 30px}
+
+/* Print */
+.wm{display:none}
+
+.hero-card{background:linear-gradient(120deg,#0b5d39 0%,#0f7a4a 40%,#1d6fb8 100%)}
+.hero-card::after{content:"⚖"}
+.hero-card::before{content:"🛒"}
+table.ctr td,table.ctr th{text-align:center}
+tr.hl td{background:#fff3d6!important;font-weight:700}
+.chart-card{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}
+.chart-title{font-weight:700;font-size:14px;margin-bottom:4px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-bottom:4px}
+.legend>span{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:18px;height:0;border-top:3px solid}
+.sw.tu{border-color:#d9730d}.sw.mu{border-color:#0f7a4a;border-top-style:dashed}
+.chart-wrap{position:relative}
+#uChart{width:100%;height:auto;display:block}
+#uChart text,#uChart .axl{font:16px 'Poppins',sans-serif;fill:#5b6776}
+#uChart .lbl{font-weight:700;fill:#1b2430;font-size:17px}
+.tip{position:absolute;pointer-events:none;background:#1b2430;color:#fff;font-size:12px;padding:6px 9px;border-radius:8px;opacity:0;transition:opacity .12s;white-space:nowrap;transform:translate(-50%,-110%)}
+.tip.show{opacity:1}
+.tier{display:flex;flex-direction:column;align-items:center;gap:2px;margin:10px 0 14px}
+.tier>div:not(.arr){width:min(520px,100%);text-align:center;border-radius:12px;padding:9px 12px;border:1.5px solid}
+.tier small{display:block;font-size:12.5px;opacity:.85}
+.tier .t0{background:#e6f1fc;border-color:#5fb2ff;font-weight:700;width:min(260px,100%)!important}
+.tier .t1{background:#fdecec;border-color:#e08a8a}
+.tier .t2{background:#e7f6ee;border-color:#7cc7a0}
+.tier .t3{background:#fff8e1;border-color:#f0c85a}
+.tier .arr{color:var(--muted);font-size:13px;line-height:1}
+.rights{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.right{border:1px solid #bfe6d0;background:var(--soft-g);border-radius:14px;padding:12px 14px}
+.right b{font-size:15px}.right p{font-size:14px;margin-top:4px}
+ol.pts{padding-left:22px}
+@media print{
+  .chart-card{border:0;padding:0;max-width:105mm;margin:4px 0}.tip{display:none}
+  .tier>div:not(.arr){background:none!important;border:1px solid #777;padding:4px 8px}
+  .rights{display:block}.right{background:none!important;border:0;padding:0;margin-bottom:4px}
+  tr.hl td{background:#eee!important}
+}
+
+.print-head{display:none}
+.btn-share{background:linear-gradient(90deg,#1d6fb8,#5fb2ff);color:#fff}
+.share-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+body.quiz-only .hero,body.quiz-only .tabs-wrap,body.quiz-only .no-print{display:none!important}
+body.quiz-only .panel{display:none!important}
+body.quiz-only #p-quiz{display:block!important}
+body.quiz-only main{margin-top:20px}
+.qo-title{display:none;text-align:center;margin-bottom:14px}
+body.quiz-only .qo-title{display:block}
+.qo-title h1{font-size:clamp(18px,3.5vw,24px);line-height:1.4}
+.qo-title small{color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1b2430;color:#fff;padding:9px 16px;border-radius:999px;font-size:13px;opacity:0;transition:.3s;z-index:99;pointer-events:none}
+.toast.show{opacity:1}
+@media print{
+  @page{size:A4;margin:12mm 12mm 14mm}
+  *{box-shadow:none!important;animation:none!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html,body{background:#fff!important;font-size:10.5pt;line-height:1.5;color:#000}
+  .topbar,.tabs-wrap,.hero,.qa-tools,.no-print,footer,#p-quiz,#p-overview .card:nth-child(2),.search,.chip,.stats{display:none!important}
+
+  /* Simple title block */
+  .print-head{display:block;text-align:center;border-bottom:2px solid #000;padding-bottom:6px;margin-bottom:10px}
+  .print-head b{display:block;font-size:13pt;letter-spacing:1px}
+  .print-head h1{font-size:15pt;margin:2px 0;line-height:1.3}
+  .print-head small{font-size:9pt;color:#333}
+
+  main{margin:0!important;padding:0!important;max-width:none}
+  .panel{display:block!important;margin:0}
+
+  /* Flatten cards: no boxes, no padding gaps */
+  .card,details.acc,.qa,.mini,.term{border:0!important;border-radius:0!important;background:none!important;padding:0!important;margin:0 0 6px!important}
+  .grid2,.grid3{display:block!important}
+  .mini{margin-bottom:4px!important}
+
+  /* Headings */
+  h2.sec{font-size:12.5pt;margin:10px 0 4px;padding-bottom:2px;border-bottom:1px solid #999;break-after:avoid}
+  h2.sec .ico{display:none}
+  .zone-head{background:none!important;color:#000!important;border:0;border-bottom:2px solid #000;border-radius:0;padding:0 0 3px;margin:14px 0 6px;font-size:14pt;break-after:avoid}
+  h3{font-size:11pt;margin:6px 0 2px;color:#000!important;break-after:avoid}
+  details.acc{display:block!important;break-inside:auto!important}
+  details.acc summary{display:block!important;padding:4px 0 2px!important;background:none!important;border:0!important;font-size:11.5pt;font-weight:700;break-after:avoid}
+  details.acc summary::after{content:none!important}
+  .num{display:inline!important;background:none!important;color:#000!important;min-width:auto;height:auto;font-weight:700;margin-right:4px}
+  .num::after{content:"."}
+  .acc-body{display:block!important;padding:0 0 0 4px!important}
+  ul.pts{padding-left:16px}
+  ul.pts li{margin:1px 0}
+  p{margin:2px 0}
+
+  /* Info boxes → thin left rule */
+  .box{background:none!important;border:0;border-left:3px solid #555!important;border-radius:0;padding:2px 8px;margin:5px 0;font-size:10pt;break-inside:avoid}
+  .layers{gap:2px;margin:2px 0 4px}
+  .layer{background:none!important;color:#000!important;padding:1px 0;border-radius:0}
+  .layer::before{content:"▸ "}
+
+  /* Tables */
+  .tbl-wrap{overflow:visible}
+  table{font-size:9.5pt;margin:4px 0}
+  th,td{padding:3px 6px;border:1px solid #777}
+  th,th.g,th.b{background:#eee!important}
+  tr:nth-child(even) td{background:none!important}
+  tr{break-inside:avoid}
+
+  /* Key terms: compact two-column list */
+  #termGrid{display:block!important;column-count:2;column-gap:14px}
+  .term{break-inside:avoid;margin:0 0 4px!important}
+  .term b{color:#000!important;font-size:10pt}
+  .term p{font-size:9.5pt;margin:0;color:#000}
+
+  /* Q&A */
+  .qa{break-inside:avoid;margin-bottom:6px!important}
+  .qa-q{padding:0!important;cursor:auto}
+  .qa-q .mk{background:none;color:#000;border:1px solid #777;padding:0 5px}
+  .qa-a{display:block!important;border:0!important;padding:1px 0 0 18px!important;font-size:10pt}
+
+  .wm{display:block;position:fixed;top:45%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:70px;font-weight:800;color:rgba(0,0,0,.05);white-space:nowrap;z-index:-1}
+}
+@media(max-width:600px){
+  .brand small{display:none}
+  .tabs-wrap{top:58px}
+  .hero-card{padding:20px 18px}
+  .card{padding:16px}
+}
+</style>
+</head>
+<body>
+<div class="wm">ABACUS ACADEMY</div>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="logo">A</div>
+    <div class="brand"><b>ABACUS ACADEMY</b><small>SSLC Study Portal · Social Science II</small></div>
+    <div class="spacer"></div>
+    <div class="lang" role="group" aria-label="Medium">
+      <button id="bML" class="on" onclick="setLang('ml')">MAL</button>
+      <button id="bEN" onclick="setLang('en')">ENG</button>
+    </div>
+    <button class="btn btn-w no-print" onclick="printNotes()">🖨 Print</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-card">
+    <span class="tag">SOCIAL SCIENCE II · UNIT 4 · ECONOMICS · STANDARD X</span>
+    <h1><span class="ml">ഉപഭോക്താവ്: അവകാശങ്ങളും സംരക്ഷണവും</span><span class="en">Consumer: Rights and Protection</span></h1>
+    <p><span class="ml">ഉപയുക്തത, സാധനങ്ങളുടെ തരങ്ങൾ, GST, ഉപഭോക്തൃ അവകാശങ്ങൾ, നിയമങ്ങൾ, ഉപഭോക്തൃ കോടതികൾ, പരാതി നൽകൽ, ഉപഭോക്തൃ വിദ്യാഭ്യാസം — ഒറ്റ പേജിൽ.</span><span class="en">Utility, types of goods, GST, consumer rights, laws, consumer courts, filing complaints and consumer education — all on one page.</span></p>
+    <div class="stats">
+      <div class="stat"><b>5</b><span class="ml">ഉപഭോക്തൃ അവകാശങ്ങൾ</span><span class="en">Consumer rights</span></div>
+      <div class="stat"><b>3</b><span class="ml">തല കോടതികൾ</span><span class="en">Tier courts</span></div>
+      <div class="stat"><b>16</b><span class="ml">പരീക്ഷാ ചോദ്യങ്ങൾ</span><span class="en">Exam questions</span></div>
+      <div class="stat"><b>20</b><span class="ml">മാർക്ക് ക്വിസ്</span><span class="en">Mark quiz</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="tabs-wrap">
+  <nav class="tabs">
+    <button class="tab on" data-p="overview">Overview</button>
+    <button class="tab" data-p="utility">📈 Utility</button>
+    <button class="tab" data-p="goods">🛒 Goods &amp; GST</button>
+    <button class="tab" data-p="rights">⚖ Rights &amp; Laws</button>
+    <button class="tab" data-p="courts">🏛 Courts &amp; Complaints</button>
+    <button class="tab" data-p="education">🎓 Consumer Education</button>
+    <button class="tab" data-p="activities">Activities</button>
+    <button class="tab" data-p="terms">Key Terms</button>
+    <button class="tab" data-p="qa">Q &amp; A</button>
+    <button class="tab quiz-tab" data-p="quiz">🏆 20 Mark Quiz</button>
+  </nav>
+</div>
+
+<main>
+<div class="print-head">
+  <b>ABACUS ACADEMY</b>
+  <h1><span class="ml">ഉപഭോക്താവ്: അവകാശങ്ങളും സംരക്ഷണവും</span><span class="en">Consumer: Rights and Protection</span></h1>
+  <small>SSLC · Social Science II · Unit 4 (Economics) · Study Notes</small>
+</div>
+
+
+<!-- ============ OVERVIEW ============ -->
+<section class="panel on" id="p-overview">
+  <div class="card">
+    <h2 class="sec"><span class="ico" style="background:#fff3e0">🧭</span><span class="ml">അധ്യായം ഒറ്റനോട്ടത്തിൽ</span><span class="en">Chapter at a Glance</span></h2>
+    <div class="ml">
+      <p>നമുക്ക് ആവശ്യമായ സാധനങ്ങളും സേവനങ്ങളും ലഭിക്കുന്നത് ചെറിയ കടകൾ മുതൽ ഓൺലൈൻ ശൃംഖലകൾ വരെയുള്ള വിപണികളിൽ നിന്നാണ്. വിൽപ്പനക്കാരും വാങ്ങുന്നവരും തമ്മിൽ ബന്ധം സ്ഥാപിക്കുന്ന ഇടമാണ് <b>വിപണി / കമ്പോളം (Market)</b>.</p>
+      <ul class="pts">
+        <li>ആവശ്യങ്ങൾ നിറവേറ്റാൻ സാധനങ്ങളും സേവനങ്ങളും വാങ്ങി ഉപയോഗിക്കുന്നത് — <b>ഉപഭോഗം (Consumption)</b>.</li>
+        <li>വില കൊടുത്തോ വില കൊടുക്കാമെന്ന കരാറിലോ സാധനസേവനങ്ങൾ വാങ്ങി ഉപയോഗിക്കുന്ന ആൾ — <b>ഉപഭോക്താവ് (Consumer)</b>.</li>
+      </ul>
+    </div>
+    <div class="en">
+      <p>We get the goods and services we need from markets — from small shops to worldwide online networks. The place that connects sellers and buyers is the <b>Market</b>.</p>
+      <ul class="pts">
+        <li>Buying and using goods and services to satisfy wants — <b>Consumption</b>.</li>
+        <li>A person who buys and uses goods and services by paying, or agreeing to pay, a price — <b>Consumer</b>.</li>
+      </ul>
+    </div>
+    <h3><span class="ml">ഉപഭോഗത്തെ സ്വാധീനിക്കുന്ന ഘടകങ്ങൾ</span><span class="en">Factors Influencing Consumption</span></h3>
+    <div class="grid3">
+      <div class="mini g"><span class="ml">💰 സാധനങ്ങളുടെ വില</span><span class="en">💰 Price of goods</span></div>
+      <div class="mini g"><span class="ml">👛 ഉപഭോക്താവിന്റെ വരുമാനം</span><span class="en">👛 Income of the consumer</span></div>
+      <div class="mini g"><span class="ml">❤ അഭിരുചി / താൽപ്പര്യം</span><span class="en">❤ Taste / preference</span></div>
+      <div class="mini g"><span class="ml">📺 പരസ്യങ്ങൾ</span><span class="en">📺 Advertisements</span></div>
+      <div class="mini g"><span class="ml">🏪 സാധനങ്ങളുടെ ലഭ്യത</span><span class="en">🏪 Availability of goods</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2 class="sec"><span class="ico" style="background:#fdecec">🗺</span><span class="ml">പാഠത്തിന്റെ ഘടന</span><span class="en">Chapter Map</span></h2>
+    <div class="grid3">
+      <div class="mini b"><b>1.</b> <span class="ml">ഉപഭോക്തൃ സംതൃപ്തി, ഉപയുക്തത, TU, MU, അപചയ സീമാന്ത ഉപയുക്തത നിയമം</span><span class="en">Consumer satisfaction, utility, TU, MU, Law of Diminishing Marginal Utility</span></div>
+      <div class="mini b"><b>2.</b> <span class="ml">സാധനങ്ങളുടെ തരങ്ങൾ, ബില്ല്, GST</span><span class="en">Types of goods, bills, GST</span></div>
+      <div class="mini b"><b>3.</b> <span class="ml">ഉപഭോക്തൃ സംരക്ഷണപ്രസ്ഥാനം, നിയമങ്ങൾ 1986 &amp; 2019, അവകാശങ്ങൾ</span><span class="en">Consumer movement, Acts of 1986 &amp; 2019, rights</span></div>
+      <div class="mini b"><b>4.</b> <span class="ml">ഉപഭോക്തൃ കോടതികൾ, തട്ടിപ്പുകൾ, പരാതി, ഗുണമേന്മ ചിഹ്നങ്ങൾ</span><span class="en">Consumer courts, frauds, complaints, quality marks</span></div>
+      <div class="mini b"><b>5.</b> <span class="ml">ഉപഭോക്തൃ വിദ്യാഭ്യാസം, ജാഗോ ഗ്രാഹക് ജാഗോ</span><span class="en">Consumer education, Jago Grahak Jago</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ UTILITY ============ -->
+<section class="panel eq" id="p-utility">
+  <div class="zone-head eq">📈 <span class="ml">ഉപഭോക്തൃ സംതൃപ്തിയും ഉപയുക്തതയും</span><span class="en">Consumer Satisfaction and Utility</span></div>
+
+  <details class="acc" open><summary><span class="num">1</span><span class="ml">ഉപഭോക്തൃ സംതൃപ്തി (Consumer Satisfaction)</span><span class="en">Consumer Satisfaction</span></summary>
+    <div class="acc-body">
+      <div class="ml"><ul class="pts">
+        <li>സാധനസേവനങ്ങൾ ഉപയോഗിക്കുന്നതിലൂടെ ഉപഭോക്താവിന് ലഭിക്കുന്നത് — <b>സംതൃപ്തി</b>.</li>
+        <li>ഉപഭോക്താവിന്റെ സംതൃപ്തിയാണ് എല്ലാ സാമ്പത്തിക പ്രവർത്തനങ്ങളുടെയും പ്രധാന ലക്ഷ്യം.</li>
+        <li>സംതൃപ്തി വ്യക്തിഗതവും മാനസികവുമായതിനാൽ ഗണിതപരമായി അളക്കുക പ്രയാസം.</li>
+        <li>സംതൃപ്തി അളക്കാൻ ആദ്യശ്രമം നടത്തിയ സാമ്പത്തിക ശാസ്ത്രജ്ഞൻ — <b>ആൽഫ്രഡ് മാർഷൽ</b>.</li>
+        <li>ഉപഭോഗം വഴി ലഭിക്കുന്ന സംതൃപ്തിയെ സാധനസേവനങ്ങളുടെ <b>ഉപയുക്തത</b>യായി കണക്കാക്കാം.</li>
+      </ul></div>
+      <div class="en"><ul class="pts">
+        <li>Using goods and services gives the consumer <b>satisfaction</b>.</li>
+        <li>Consumer satisfaction is the main aim of all economic activities.</li>
+        <li>Satisfaction is personal and psychological, so it is hard to measure mathematically.</li>
+        <li>The first attempt to measure it was made by economist <b>Alfred Marshall</b>.</li>
+        <li>Satisfaction from consumption can be taken as the <b>utility</b> of goods and services.</li>
+      </ul></div>
+    </div>
+  </details>
+
+  <details class="acc" open><summary><span class="num">2</span><span class="ml">ഉപയുക്തത (Utility)</span><span class="en">Utility</span></summary>
+    <div class="acc-body">
+      <div class="ml"><ul class="pts">
+        <li>ഒരു വസ്തു ഉപഭോഗം ചെയ്യുമ്പോൾ അതിൽ നിന്ന് ലഭിക്കുന്ന സംതൃപ്തി — <b>ഉപയുക്തത (Utility)</b>.</li>
+        <li>അളവുയൂണിറ്റ് — <b>യൂട്ടിൽസ് (Utils)</b>.</li>
+        <li>സംതൃപ്തിയെ എണ്ണൽസംഖ്യ ഉപയോഗിച്ച് തിട്ടപ്പെടുത്താമെന്ന് പറയുന്നത് — <b>കാർഡിനൽ ഉപയുക്തതാവാദം (Cardinal Utility Theory)</b>.</li>
+      </ul>
+      <div class="grid2">
+        <div class="mini g"><h4>മൊത്തം ഉപയുക്തത (TU)</h4>ഒരു വസ്തുവിന്റെ പല യൂണിറ്റുകൾ തുടർച്ചയായി ഉപയോഗിക്കുമ്പോൾ ലഭിക്കുന്ന ഉപയുക്തതയുടെ ആകെ തുക.</div>
+        <div class="mini b"><h4>സീമാന്ത ഉപയുക്തത (MU)</h4>ഒരു അധിക യൂണിറ്റ് ഉപഭോഗം ചെയ്യുമ്പോൾ മൊത്തം ഉപയുക്തതയിൽ ഉണ്ടാകുന്ന മാറ്റം.<br><b>MU = TU<sub>n</sub> − TU<sub>n−1</sub></b></div>
+      </div></div>
+      <div class="en"><ul class="pts">
+        <li>The satisfaction obtained from consuming a commodity — <b>Utility</b>.</li>
+        <li>Unit of measurement — <b>Utils</b>.</li>
+        <li>The idea that satisfaction can be measured in cardinal numbers — <b>Cardinal Utility Theory</b>.</li>
+      </ul>
+      <div class="grid2">
+        <div class="mini g"><h4>Total Utility (TU)</h4>The sum of utility a person gets from consuming several units of a commodity continuously.</div>
+        <div class="mini b"><h4>Marginal Utility (MU)</h4>The change in total utility from consuming one additional unit.<br><b>MU = TU<sub>n</sub> − TU<sub>n−1</sub></b></div>
+      </div></div>
+    </div>
+  </details>
+
+  <details class="acc" open><summary><span class="num">3</span><span class="ml">ഉദാഹരണം — ഓറഞ്ച് ഉപഭോഗം</span><span class="en">Example — Eating Oranges</span></summary>
+    <div class="acc-body">
+      <p class="ml">നീനയ്ക്ക് ഓരോ ഓറഞ്ചായി കഴിക്കാൻ കൊടുക്കുന്നു. ആദ്യ ഓറഞ്ചിൽ 20 യൂട്ടിൽസ്, രണ്ടാമത്തേതിൽ 18 യൂട്ടിൽസ് → മൊത്തം 38. രണ്ടാമത്തെ ഓറഞ്ചിന്റെ സീമാന്ത ഉപയുക്തത = 38 − 20 = 18.</p>
+      <p class="en">Neena is given oranges one at a time. The 1st gives 20 utils, the 2nd 18 utils → total 38. MU of the 2nd orange = 38 − 20 = 18.</p>
+      <div class="grid2" style="align-items:start">
+        <div class="tbl-wrap"><table class="ctr">
+          <tr><th class="g"><span class="ml">ഓറഞ്ചിന്റെ അളവ്</span><span class="en">Oranges</span></th><th class="g">TU</th><th class="g">MU</th></tr>
+          <tr><td>1</td><td>20</td><td>20</td></tr><tr><td>2</td><td>38</td><td>18</td></tr><tr><td>3</td><td>53</td><td>15</td></tr><tr><td>4</td><td>63</td><td>10</td></tr><tr><td>5</td><td>67</td><td>4</td></tr><tr class="hl"><td>6</td><td><b>67</b></td><td><b>0</b></td></tr><tr><td>7</td><td>64</td><td>−3</td></tr><tr><td>8</td><td>57</td><td>−7</td></tr>
+        </table></div>
+        <div class="chart-card">
+  <div class="chart-title"><span class="ml">മൊത്തം ഉപയുക്തതയും സീമാന്ത ഉപയുക്തതയും (ചിത്രം 4.4)</span><span class="en">Total Utility and Marginal Utility (Fig 4.4)</span></div>
+  <div class="legend"><span><i class="sw tu"></i><span class="ml">മൊത്തം ഉപയുക്തത (TU)</span><span class="en">Total Utility (TU)</span></span><span><i class="sw mu"></i><span class="ml">സീമാന്ത ഉപയുക്തത (MU)</span><span class="en">Marginal Utility (MU)</span></span></div>
+  <div class="chart-wrap"><svg id="uChart" viewBox="0 0 560 320" role="img" aria-label="TU and MU curve"></svg><div class="tip" id="uTip"></div></div>
+</div>
+      </div>
+      <h3><span class="ml">പട്ടികയിൽ നിന്നുള്ള നിരീക്ഷണങ്ങൾ</span><span class="en">Observations from the Table</span></h3>
+      <div class="ml"><ul class="pts">
+        <li>1 മുതൽ 5 വരെ യൂണിറ്റുകളിൽ മൊത്തം ഉപയുക്തത <b>കൂടുന്നു</b>, പക്ഷേ കുറഞ്ഞ നിരക്കിൽ.</li>
+        <li>6-ാം യൂണിറ്റിൽ മൊത്തം ഉപയുക്തത <b>പരമാവധി (67)</b>; അതിനുശേഷം കുറയുന്നു.</li>
+        <li>6-ാം യൂണിറ്റിൽ സീമാന്ത ഉപയുക്തത <b>പൂജ്യം</b> — പൂർണ സംതൃപ്തിയിലെത്തുന്നു.</li>
+        <li>7, 8 യൂണിറ്റുകളിൽ MU <b>നെഗറ്റീവ്</b> — സംതൃപ്തി കൈവരിച്ച ശേഷമുള്ള ഉപഭോഗം അതൃപ്തി ഉണ്ടാക്കുന്നു; അതിനാൽ TU കുറയുന്നു.</li>
+      </ul></div>
+      <div class="en"><ul class="pts">
+        <li>From units 1 to 5, total utility <b>increases</b>, but at a decreasing rate.</li>
+        <li>At the 6th unit, total utility is at its <b>maximum (67)</b>; after that it falls.</li>
+        <li>At the 6th unit, marginal utility is <b>zero</b> — the point of full satisfaction.</li>
+        <li>At units 7 and 8, MU is <b>negative</b> — consuming after satisfaction causes dissatisfaction, so TU falls.</li>
+      </ul></div>
+      <div class="tbl-wrap"><table>
+        <tr><th><span class="ml">സീമാന്ത ഉപയുക്തത (MU)</span><span class="en">Marginal Utility (MU)</span></th><th><span class="ml">മൊത്തം ഉപയുക്തത (TU)</span><span class="en">Total Utility (TU)</span></th></tr>
+        <tr><td><span class="ml">കുറയുന്നു, പക്ഷേ പോസിറ്റീവ്</span><span class="en">Falling but positive</span></td><td><span class="ml">കൂടുന്നു (കുറഞ്ഞ നിരക്കിൽ)</span><span class="en">Rises (at a decreasing rate)</span></td></tr>
+        <tr><td><span class="ml">പൂജ്യം</span><span class="en">Zero</span></td><td><span class="ml">പരമാവധി</span><span class="en">Maximum</span></td></tr>
+        <tr><td><span class="ml">നെഗറ്റീവ്</span><span class="en">Negative</span></td><td><span class="ml">കുറയുന്നു</span><span class="en">Falls</span></td></tr>
+      </table></div>
+    </div>
+  </details>
+
+  <details class="acc"><summary><span class="num">4</span><span class="ml">അപചയ സീമാന്ത ഉപയുക്തത നിയമം</span><span class="en">Law of Diminishing Marginal Utility</span></summary>
+    <div class="acc-body">
+      <div class="box green"><span class="ml">മറ്റ് വസ്തുക്കളുടെ ഉപഭോഗത്തിൽ മാറ്റമില്ലാതെ ഒരു സാധനത്തിന്റെ കൂടുതൽ യൂണിറ്റുകൾ തുടർച്ചയായി ഉപഭോഗം ചെയ്യുമ്പോൾ അതിൽ നിന്ന് ലഭിക്കുന്ന <b>സീമാന്ത ഉപയുക്തത കുറഞ്ഞുവരുന്നു</b> എന്നാണ് അപചയ സീമാന്ത ഉപയുക്തത നിയമം പറയുന്നത്.</span><span class="en">When more units of a commodity are consumed continuously, keeping the consumption of other goods unchanged, the <b>marginal utility obtained keeps diminishing</b>. This is the Law of Diminishing Marginal Utility.</span></div>
+      <div class="grid2">
+        <div class="mini g"><h4><span class="ml">അനുമാനങ്ങൾ</span><span class="en">Assumptions</span></h4>
+          <ul class="pts ml"><li>ഉൽപ്പന്നങ്ങളെല്ലാം ഒരേ ഗുണമേന്മയുള്ളതായിരിക്കണം.</li><li>ഉപഭോക്താവിന്റെ വരുമാനം, അഭിരുചി എന്നിവ സ്ഥിരമായിരിക്കണം.</li></ul>
+          <ul class="pts en"><li>All units must be of the same quality.</li><li>The consumer's income and taste must remain constant.</li></ul></div>
+        <div class="mini b"><h4><span class="ml">പരിമിതികൾ</span><span class="en">Limitations</span></h4>
+          <ul class="pts ml"><li>ഉപഭോഗം തുടർച്ചയുള്ളതായിരിക്കണം.</li><li>മറ്റ് സാധനങ്ങളുടെ ഉപഭോഗം നിജപ്പെടുത്തിയിരിക്കണം.</li><li>യൂണിറ്റുകൾ നിശ്ചിത അളവിലും ഗുണത്തിലും ഉള്ളവയായിരിക്കണം.</li></ul>
+          <ul class="pts en"><li>Consumption must be continuous.</li><li>Consumption of other goods must be fixed.</li><li>Units must be of a definite size and quality.</li></ul></div>
+      </div>
+      <div class="ml"><ul class="pts">
+        <li>ഉപയുക്തത എണ്ണൽസംഖ്യകൊണ്ട് തിട്ടപ്പെടുത്താൻ കഴിയാത്തതിനാൽ കാർഡിനൽ വാദത്തിന് പകരം പുതിയ സിദ്ധാന്തങ്ങൾ വന്നു. എങ്കിലും അധിക യൂണിറ്റുകളിൽ നിന്നുള്ള ഉപയുക്തത കുറയുന്നു എന്ന വസ്തുത ഉപഭോഗത്തെ സ്വാധീനിക്കുന്നു.</li>
+        <li>ഉപയുക്തത <b>വ്യക്തിയധിഷ്ഠിതം</b>; സ്ഥലം, കാലം എന്നിവയനുസരിച്ച് മാറുന്നു (ചൂടുള്ള കാലാവസ്ഥയിലെ ഫാൻ × തണുപ്പുള്ള കാലാവസ്ഥ).</li>
+        <li>ഉപഭോക്താവ് കൂടുതൽ ഉപയുക്തതയുള്ളവ തിരഞ്ഞെടുക്കാൻ ശ്രമിക്കും; എന്നാൽ <b>വിലയും വരുമാനവും</b> തിരഞ്ഞെടുപ്പിനെ സ്വാധീനിക്കുന്നു.</li>
+        <li>ഗുണമേന്മയുള്ള സാധനസേവനങ്ങൾ മിതമായ വിലയിലും കൃത്യമായ അളവിലും ലഭ്യമാകുക ഉപഭോക്താവിന്റെ <b>അവകാശമാണ്</b>.</li>
+      </ul></div>
+      <div class="en"><ul class="pts">
+        <li>Since utility cannot be measured in cardinal numbers, new theories replaced the cardinal approach. Still, the fact that extra units give less utility does influence consumption.</li>
+        <li>Utility is <b>subjective</b>; it changes with place and time (a fan in hot weather × cold weather).</li>
+        <li>A consumer tries to choose what gives the most utility, but <b>price and income</b> influence the choice.</li>
+        <li>Getting quality goods and services at a fair price and correct measure is the consumer's <b>right</b>.</li>
+      </ul></div>
+      <div class="box blue"><b><span class="ml">ഉപയുക്തതയും ഉപയോഗ്യതയും</span><span class="en">Utility and Usefulness</span></b><br><span class="ml">എല്ലാ സാധനങ്ങൾക്കും ഉപയുക്തതയുണ്ട്; എന്നാൽ എല്ലാം ഉപയോഗപ്രദമല്ല. സിഗരറ്റ് വലിക്കുന്നയാൾക്ക് ഉപയുക്തത ലഭിക്കുന്നു, പക്ഷേ അത് ഉപയോഗപ്രദമല്ല, ആരോഗ്യത്തിന് ഹാനികരവുമാണ്. <b>ഉപയുക്തതയിൽ നൈതികതയ്ക്ക് പ്രസക്തിയില്ല.</b></span><span class="en">All goods have utility, but not all are useful. A smoker gets utility from a cigarette, but it is not useful and is harmful to health. <b>Ethics has no relevance in utility.</b></span></div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ GOODS & GST ============ -->
+<section class="panel tu" id="p-goods">
+  <div class="zone-head tu">🛒 <span class="ml">സാധനങ്ങളുടെ തരങ്ങൾ, ബില്ല്, GST</span><span class="en">Types of Goods, Bills and GST</span></div>
+
+  <details class="acc" open><summary><span class="num">1</span><span class="ml">വിവിധതരം സാധനങ്ങൾ</span><span class="en">Types of Goods</span></summary>
+    <div class="acc-body"><div class="tbl-wrap"><table>
+      <tr><th class="b"><span class="ml">തരം</span><span class="en">Type</span></th><th class="b"><span class="ml">പ്രത്യേകതകൾ</span><span class="en">Features</span></th><th class="b"><span class="ml">ഉദാഹരണം</span><span class="en">Examples</span></th></tr>
+      <tr><td><b><span class="ml">സൗജന്യസാധനങ്ങൾ</span><span class="en">Free goods</span></b></td><td><span class="ml">പ്രകൃതിയിൽ ധാരാളമായുള്ളവ, എല്ലാവർക്കും ലഭ്യമായവ; വില നൽകേണ്ടതില്ല.</span><span class="en">Abundant in nature and available to all; no price is paid.</span></td><td><span class="ml">സൂര്യപ്രകാശം, വായു</span><span class="en">Sunlight, air</span></td></tr>
+      <tr><td><b><span class="ml">ഇക്കണോമിക് സാധനങ്ങൾ</span><span class="en">Economic goods</span></b></td><td><span class="ml">വില കൊടുത്തു വാങ്ങി ഉപയോഗിക്കുന്നവ; നിർമിക്കപ്പെടുന്നതോ പ്രകൃതിയിൽ നിന്ന് ശേഖരിക്കുന്നതോ ആകാം.</span><span class="en">Bought for a price; may be manufactured or collected from nature.</span></td><td><span class="ml">വസ്ത്രങ്ങൾ, ധാതുക്കൾ</span><span class="en">Clothes, minerals</span></td></tr>
+      <tr><td><b><span class="ml">ഉപഭോഗ സാധനങ്ങൾ</span><span class="en">Consumer goods</span></b></td><td><span class="ml">ആവശ്യങ്ങൾ നിറവേറ്റാൻ അന്തിമമായി ഉപയോഗിക്കുന്നവ; വീണ്ടും ഉൽപ്പാദനപ്രക്രിയയ്ക്ക് വിധേയമാകാത്തവ.</span><span class="en">Used finally to satisfy wants; not put back into production.</span></td><td><span class="ml">ഭക്ഷണം, വാഹനങ്ങൾ</span><span class="en">Food, vehicles</span></td></tr>
+      <tr><td><b><span class="ml">മൂലധനസാധനങ്ങൾ</span><span class="en">Capital goods</span></b></td><td><span class="ml">മറ്റ് ഉൽപ്പന്നങ്ങളും സേവനങ്ങളും ഉൽപ്പാദിപ്പിക്കാൻ നിർമിച്ചവ; ഉപഭോഗത്തിന് ഉപയോഗിക്കുമ്പോൾ മൂലധനസാധനങ്ങളല്ല.</span><span class="en">Made to produce other goods and services; when used for consumption they are not capital goods.</span></td><td><span class="ml">ഫാക്ടറികൾ, ഉപകരണങ്ങൾ</span><span class="en">Factories, machinery</span></td></tr>
+      <tr><td><b><span class="ml">ഈട് നിൽക്കുന്ന സാധനങ്ങൾ</span><span class="en">Durable goods</span></b></td><td><span class="ml">ദീർഘകാലം വീണ്ടും വീണ്ടും ഉപയോഗിക്കാവുന്നവ.</span><span class="en">Used again and again over a long period.</span></td><td><span class="ml">മേശ, വീട്, ചെരിപ്പ്</span><span class="en">Table, house, footwear</span></td></tr>
+      <tr><td><b><span class="ml">ഈട് നിൽക്കാത്ത സാധനങ്ങൾ</span><span class="en">Non-durable goods</span></b></td><td><span class="ml">കുറച്ചു കാലത്തേക്ക് മാത്രം ഉപയോഗിക്കാവുന്നവ.</span><span class="en">Usable only for a short time.</span></td><td><span class="ml">പാൽ, പച്ചക്കറി</span><span class="en">Milk, vegetables</span></td></tr>
+    </table></div></div>
+  </details>
+
+  <details class="acc" open><summary><span class="num">2</span><span class="ml">സാധനങ്ങൾ വാങ്ങുമ്പോൾ ശ്രദ്ധിക്കേണ്ടവ</span><span class="en">What to Check When Buying</span></summary>
+    <div class="acc-body">
+      <div class="grid3">
+        <div class="mini"><span class="ml">✔ ഉൽപ്പന്നങ്ങളുടെ ഗുണമേന്മ</span><span class="en">✔ Quality of the product</span></div>
+        <div class="mini"><span class="ml">✔ പരമാവധി ഉപയോഗ കാലാവധി / തീയതി</span><span class="en">✔ Expiry / best-before date</span></div>
+        <div class="mini"><span class="ml">✔ പരമാവധി ചില്ലറ വില (MRP)</span><span class="en">✔ Maximum Retail Price (MRP)</span></div>
+        <div class="mini"><span class="ml">✔ അളവും തൂക്കവും</span><span class="en">✔ Weight and measure</span></div>
+        <div class="mini"><span class="ml">✔ നിർമാണ തീയതി</span><span class="en">✔ Manufacturing date</span></div>
+        <div class="mini"><span class="ml">✔ വാറന്റി / ഗ്യാരന്റി</span><span class="en">✔ Warranty / guarantee</span></div>
+        <div class="mini"><span class="ml">✔ ഗുണമേന്മ ചിഹ്നങ്ങൾ (ISI, AGMARK, FSSAI)</span><span class="en">✔ Quality marks (ISI, AGMARK, FSSAI)</span></div>
+        <div class="mini"><span class="ml">✔ ബില്ല് ചോദിച്ചു വാങ്ങുക</span><span class="en">✔ Always ask for a bill</span></div>
+      </div>
+      <div class="ml"><ul class="pts" style="margin-top:10px">
+        <li>വില, ഗുണനിലവാരം, വാറന്റി, സുരക്ഷാമാനദണ്ഡങ്ങൾ എന്നിവയെക്കുറിച്ച് ധാരണയില്ലാത്ത ഉപഭോക്താക്കൾ കബളിപ്പിക്കപ്പെടുകയും ചൂഷണം ചെയ്യപ്പെടുകയും ചെയ്യാം.</li>
+        <li>ബില്ല് ലഭിക്കേണ്ടത് ഉപഭോക്താവിന്റെ <b>അവകാശമാണ്</b>. ബില്ലിൽ <b>GST നമ്പർ</b> ഉണ്ടോ എന്ന് ഉറപ്പാക്കണം.</li>
+        <li>ബില്ല് വാങ്ങുന്നത് ഉപഭോക്തൃ അവകാശം സംരക്ഷിക്കുന്നതോടൊപ്പം ഒരു <b>സാമൂഹിക പ്രതിബദ്ധത</b> കൂടിയാണ് (നികുതി സർക്കാരിലെത്തുന്നു; പരാതിക്ക് തെളിവാകുന്നു).</li>
+      </ul></div>
+      <div class="en"><ul class="pts" style="margin-top:10px">
+        <li>Consumers unaware of price, quality, warranty and safety standards may be cheated and exploited.</li>
+        <li>Getting a bill is the consumer's <b>right</b>. Make sure the bill has a <b>GST number</b>.</li>
+        <li>Taking a bill protects consumer rights and is also a <b>social responsibility</b> (tax reaches the government; it is evidence for a complaint).</li>
+      </ul></div>
+    </div>
+  </details>
+
+  <details class="acc" open><summary><span class="num">3</span><span class="ml">ചരക്ക് സേവന നികുതി (GST)</span><span class="en">Goods and Services Tax (GST)</span></summary>
+    <div class="acc-body">
+      <div class="ml"><ul class="pts">
+        <li>ഭരണഘടനയുടെ <b>101-ാം ഭേദഗതി</b> നടപ്പാക്കിയതിന്റെ ഭാഗമായി <b>2017 ജൂലൈ 1</b>-ന് ഇന്ത്യയിൽ നിലവിൽ വന്നു.</li>
+        <li>പല തരത്തിലുള്ള നികുതികൾ ഒന്നാക്കി — <b>"ഒരു രാജ്യം : ഒരു നികുതി"</b>. സമ്പദ്‌വ്യവസ്ഥ സുതാര്യമാക്കുകയാണ് ലക്ഷ്യം.</li>
+        <li>നിരക്കുകൾ: <b>5%, 12%, 18%, 28%</b>. ചില ഉൽപ്പന്നങ്ങളെ GST-യിൽ നിന്ന് ഒഴിവാക്കിയിട്ടുണ്ട്.</li>
+        <li>GST-യുടെ <b>50% സംസ്ഥാന സർക്കാരിനും (SGST)</b>, <b>50% കേന്ദ്രസർക്കാരിനും (CGST)</b>.</li>
+        <li><b>20 ലക്ഷം രൂപയിൽ</b> കൂടുതൽ വാർഷിക വിറ്റുവരവുള്ള വ്യാപാരികൾക്ക് GST രജിസ്ട്രേഷൻ നിർബന്ധം.</li>
+      </ul></div>
+      <div class="en"><ul class="pts">
+        <li>Came into force in India on <b>1 July 2017</b> as part of the <b>101st Constitutional Amendment</b>.</li>
+        <li>Merged many taxes into one — <b>"One Nation : One Tax"</b>. Aim: make the economy transparent.</li>
+        <li>Rates: <b>5%, 12%, 18%, 28%</b>. Some products are exempt from GST.</li>
+        <li><b>50% goes to the State (SGST)</b> and <b>50% to the Centre (CGST)</b>.</li>
+        <li>Traders with an annual turnover above <b>₹20 lakh</b> must register for GST.</li>
+      </ul></div>
+      <div class="box"><b><span class="ml">ബില്ലിൽ പരിശോധിക്കേണ്ടവ:</span><span class="en">Check on a bill:</span></b> <span class="ml">GST നമ്പർ, GST നിരക്ക്, സ്ഥാപനത്തിന്റെ പേരും വിലാസവും, തീയതി, സാധനത്തിന്റെ പേര്, അളവ്, വില, ആകെ തുക.</span><span class="en">GST number, GST rate, shop name and address, date, item name, quantity, price, total amount.</span></div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ RIGHTS & LAWS ============ -->
+<section class="panel eq" id="p-rights">
+  <div class="zone-head eq">⚖ <span class="ml">ഉപഭോക്തൃ സംരക്ഷണം — പ്രസ്ഥാനം, നിയമങ്ങൾ, അവകാശങ്ങൾ</span><span class="en">Consumer Protection — Movement, Laws, Rights</span></div>
+
+  <details class="acc" open><summary><span class="num">1</span><span class="ml">ഉപഭോക്തൃ സംരക്ഷണപ്രസ്ഥാനം</span><span class="en">Consumer Protection Movement</span></summary>
+    <div class="acc-body">
+      <div class="ml"><ul class="pts">
+        <li>പത്രങ്ങളിലും ഇലക്ട്രോണിക് മാധ്യമങ്ങളിലും ഉപഭോക്തൃ തട്ടിപ്പ് വാർത്തകൾ ധാരാളം — അവകാശലംഘനവും വഞ്ചനയുമാണ് അടിസ്ഥാനം.</li>
+        <li>ഇന്ത്യയിൽ പ്രസ്ഥാനം ആരംഭിച്ചത് <b>1966-ൽ ബോംബെയിൽ കൺസ്യൂമർ ഗൈഡൻസ് സൊസൈറ്റി ഓഫ് ഇന്ത്യ</b> രൂപീകരിച്ചതോടെ.</li>
+        <li>ഉപഭോക്താവിന്റെ അവകാശങ്ങൾ സംരക്ഷിക്കാനും ക്ഷേമം ഉറപ്പാക്കാനുമുള്ള ഒരു <b>സാമൂഹിക മുന്നേറ്റം</b>.</li>
+      </ul></div>
+      <div class="en"><ul class="pts">
+        <li>Newspapers and electronic media carry many consumer-fraud reports — based on violation of rights and cheating.</li>
+        <li>The movement began in India in <b>1966 in Bombay with the Consumer Guidance Society of India</b>.</li>
+        <li>A <b>social movement</b> to protect consumer rights and ensure welfare.</li>
+      </ul></div>
+      <h3><span class="ml">ലക്ഷ്യങ്ങൾ</span><span class="en">Aims</span></h3>
+      <div class="grid3">
+        <div class="mini g"><span class="ml">ഉപഭോക്തൃ അവകാശങ്ങൾ സംരക്ഷിക്കുക</span><span class="en">Protect consumer rights</span></div>
+        <div class="mini g"><span class="ml">തട്ടിപ്പുകളെ തടയുക</span><span class="en">Prevent frauds</span></div>
+        <div class="mini g"><span class="ml">ഉപഭോക്താവിനെ ശാക്തീകരിക്കുക</span><span class="en">Empower the consumer</span></div>
+        <div class="mini g"><span class="ml">നിയമനിർമാണം നടത്തുക</span><span class="en">Bring legislation</span></div>
+        <div class="mini g"><span class="ml">പരസ്യങ്ങളിൽ സത്യസന്ധമായ വിവരങ്ങൾ ഉറപ്പാക്കുക</span><span class="en">Ensure truthful advertisements</span></div>
+        <div class="mini g"><span class="ml">രാഷ്ട്രീയ വേദികളിൽ ഉപഭോക്തൃ പ്രാതിനിധ്യം</span><span class="en">Consumer representation on political platforms</span></div>
+      </div>
+    </div>
+  </details>
+
+  <details class="acc" open><summary><span class="num">2</span><span class="ml">ഉപഭോക്തൃ സംരക്ഷണനിയമം — 1986</span><span class="en">Consumer Protection Act — 1986</span></summary>
+    <div class="acc-body">
+      <div class="ml"><ul class="pts">
+        <li><b>1985</b>-ൽ ഐക്യരാഷ്ട്രസഭ ഉപഭോക്തൃസംരക്ഷണ മാർഗരേഖകൾ ഉൾക്കൊള്ളുന്ന പ്രമേയം അംഗീകരിച്ചു.</li>
+        <li>അതിന്റെ അടിസ്ഥാനത്തിൽ <b>1986 ഡിസംബർ 24</b>-ന് ഇന്ത്യയിൽ ഉപഭോക്തൃ സംരക്ഷണ നിയമം നിലവിൽ വന്നു. പാർലമെന്റിലെ ഇരുസഭകളും പാസ്സാക്കി.</li>
+        <li><b>ഡിസംബർ 24 — ദേശീയ ഉപഭോക്തൃദിനം</b>.</li>
+        <li>അവകാശങ്ങൾ സ്പഷ്ടമായി നിർവചിച്ചു; ഉപഭോക്തൃ സംരക്ഷണത്തിനായി പ്രത്യേക നീതിന്യായ സംവിധാനങ്ങൾ (ഉപഭോക്തൃ കോടതികൾ) സ്ഥാപിച്ചു.</li>
+      </ul></div>
+      <div class="en"><ul class="pts">
+        <li>In <b>1985</b> the United Nations adopted a resolution with guidelines on consumer protection.</li>
+        <li>Based on it, India's Consumer Protection Act came into force on <b>24 December 1986</b>, passed by both Houses of Parliament.</li>
+        <li><b>24 December — National Consumer Day</b>.</li>
+        <li>It clearly defined consumer rights and set up special judicial bodies (consumer courts).</li>
+      </ul></div>
+    </div>
+  </details>
+
+  <details class="acc" open><summary><span class="num">3</span><span class="ml">ഉപഭോക്തൃ സംരക്ഷണനിയമം — 2019</span><span class="en">Consumer Protection Act — 2019</span></summary>
+    <div class="acc-body">
+      <div class="ml"><ul class="pts">
+        <li>ഇ-കൊമേഴ്‌സ് പ്ലാറ്റ്ഫോമുകൾ വന്ന പുതിയ സാഹചര്യത്തിൽ 1986-ലെ നിയമത്തിന് പകരം <b>2020 ജൂലൈ 20</b>-ന് നിലവിൽ വന്നു.</li>
+        <li>ലക്ഷ്യം: ഉപഭോക്താക്കളെ ശാക്തീകരിക്കുക, അവകാശങ്ങൾ സംരക്ഷിക്കുക.</li>
+      </ul><h3>സവിശേഷതകൾ</h3><ul class="pts">
+        <li><b>സെൻട്രൽ കൺസ്യൂമർ പ്രൊട്ടക്ഷൻ അതോറിറ്റി (CCPA)</b> സ്ഥാപിച്ചു.</li>
+        <li>ഇ-കൊമേഴ്‌സ് പ്ലാറ്റ്ഫോമുകളിലെ അന്യായ വ്യാപാരം തടയാൻ നിയമങ്ങൾ.</li>
+        <li>ഉപഭോക്തൃ തർക്കപരിഹാരപ്രക്രിയ ലളിതമാക്കി.</li>
+        <li>മായം കലർന്ന / വ്യാജ വസ്തുക്കൾ നിർമിക്കുന്നവർക്കും വിൽക്കുന്നവർക്കും ശിക്ഷ.</li>
+        <li>തെറ്റിദ്ധരിപ്പിക്കുന്ന പരസ്യങ്ങൾ തടയുന്നു.</li>
+        <li>ഉപഭോക്തൃ വിദ്യാഭ്യാസം ലഭിക്കാനുള്ള അവകാശം ഉറപ്പാക്കുന്നു.</li>
+      </ul></div>
+      <div class="en"><ul class="pts">
+        <li>With the rise of e-commerce platforms, it replaced the 1986 Act and came into force on <b>20 July 2020</b>.</li>
+        <li>Aim: empower consumers and protect their rights.</li>
+      </ul><h3>Features</h3><ul class="pts">
+        <li>Set up the <b>Central Consumer Protection Authority (CCPA)</b>.</li>
+        <li>Rules to stop unfair trade practices on e-commerce platforms.</li>
+        <li>Simplified the consumer dispute-resolution process.</li>
+        <li>Punishment for making or selling adulterated / spurious goods.</li>
+        <li>Prevents misleading advertisements.</li>
+        <li>Ensures the right to consumer education.</li>
+      </ul></div>
+      <div class="box blue"><span class="ml"><b>മറ്റ് നിയമങ്ങൾ:</b> നിശ്ചിത വിഷയങ്ങളിൽ ഉപഭോക്തൃ സംരക്ഷണത്തിനായി മറ്റ് നിയമങ്ങളുമുണ്ട്. ഉദാ: ഭക്ഷ്യോൽപ്പന്നങ്ങളുടെ ഗുണനിലവാരം ഉറപ്പാക്കാൻ <b>ഭക്ഷ്യസുരക്ഷാ സ്റ്റാൻഡേർഡ് ആക്ട് 2006</b>.</span><span class="en"><b>Other laws:</b> Some laws protect consumers in specific areas, e.g. the <b>Food Safety and Standards Act 2006</b> ensures quality of food products.</span></div>
+    </div>
+  </details>
+
+  <details class="acc" open><summary><span class="num">4</span><span class="ml">ഉപഭോക്താവിന്റെ അവകാശങ്ങൾ</span><span class="en">Rights of the Consumer</span></summary>
+    <div class="acc-body">
+      <div class="rights">
+        <div class="right"><b>🛡 <span class="ml">സുരക്ഷിതത്വത്തിനുള്ള അവകാശം</span><span class="en">Right to Safety</span></b><p><span class="ml">ജീവനും സ്വത്തിനും അപകടകരമായ സാധനസേവനങ്ങളുടെ വിപണനത്തിൽ നിന്ന് രക്ഷ നേടാനുള്ള അവകാശം.</span><span class="en">Protection against marketing of goods and services hazardous to life and property.</span></p></div>
+        <div class="right"><b>🧺 <span class="ml">തിരഞ്ഞെടുക്കാനുള്ള അവകാശം</span><span class="en">Right to Choose</span></b><p><span class="ml">മത്സരാധിഷ്ഠിത വിലയിൽ സാധനസേവനങ്ങൾ തിരഞ്ഞെടുക്കാനുള്ള അവകാശം.</span><span class="en">To choose goods and services at competitive prices.</span></p></div>
+        <div class="right"><b>ℹ <span class="ml">അറിയാനുള്ള അവകാശം</span><span class="en">Right to Information</span></b><p><span class="ml">അന്യായ വ്യാപാരത്തിൽ നിന്ന് സംരക്ഷിക്കാൻ സാധനങ്ങളുടെ ഗുണമേന്മ, അളവ്, പരിശുദ്ധി, വിലനിലവാരം എന്നിവ അറിയാനുള്ള അവകാശം.</span><span class="en">To know the quality, quantity, purity and price of goods, to be protected from unfair trade.</span></p></div>
+        <div class="right"><b>⚖ <span class="ml">പരിഹാരം തേടാനുള്ള അവകാശം</span><span class="en">Right to Seek Redressal</span></b><p><span class="ml">അന്യായ വ്യാപാരസമ്പ്രദായങ്ങൾക്കും ചൂഷണങ്ങൾക്കുമെതിരെ പരിഹാരം തേടാനുള്ള അവകാശം.</span><span class="en">To seek remedy against unfair trade practices and exploitation.</span></p></div>
+        <div class="right"><b>🎓 <span class="ml">ഉപഭോക്തൃ വിദ്യാഭ്യാസത്തിനുള്ള അവകാശം</span><span class="en">Right to Consumer Education</span></b><p><span class="ml">വിവരമുള്ള ഉപഭോക്താവാകാനുള്ള അറിവും വൈദഗ്ധ്യവും നേടാനുള്ള അവകാശം.</span><span class="en">To gain the knowledge and skill to be an informed consumer.</span></p></div>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ COURTS ============ -->
+<section class="panel tu" id="p-courts">
+  <div class="zone-head tu">🏛 <span class="ml">ഉപഭോക്തൃ കോടതികളും പരാതി പരിഹാരവും</span><span class="en">Consumer Courts and Grievance Redressal</span></div>
+
+  <details class="acc" open><summary><span class="num">1</span><span class="ml">ത്രിതല ഉപഭോക്തൃ തർക്ക പരിഹാര സംവിധാനം</span><span class="en">Three-tier Consumer Dispute Redressal System</span></summary>
+    <div class="acc-body">
+      <p class="ml">1986-ലെ ഉപഭോക്തൃ സംരക്ഷണ നിയമത്തോടെ ഉപഭോക്തൃ കോടതികളും ട്രൈബ്യൂണലുകളും നിലവിൽ വന്നു. പരാതികൾ വേഗത്തിൽ പരിഹരിക്കാൻ മൂന്ന് തലങ്ങൾ:</p>
+      <p class="en">Consumer courts and tribunals came with the 1986 Act. Three tiers settle complaints quickly:</p>
+      <div class="tier">
+        <div class="t0"><span class="ml">സുപ്രീം കോടതി</span><span class="en">Supreme Court</span></div>
+        <div class="arr">▲</div>
+        <div class="t1"><b><span class="ml">ദേശീയ ഉപഭോക്തൃ തർക്ക പരിഹാര കമ്മീഷൻ</span><span class="en">National Consumer Dispute Redressal Commission</span></b><small><span class="ml">10 കോടി രൂപയ്ക്ക് മുകളിൽ നഷ്ടപരിഹാരം</span><span class="en">Compensation above ₹10 crore</span></small></div>
+        <div class="arr">▲</div>
+        <div class="t2"><b><span class="ml">സംസ്ഥാന ഉപഭോക്തൃ തർക്ക പരിഹാര കമ്മീഷൻ</span><span class="en">State Consumer Dispute Redressal Commission</span></b><small><span class="ml">1 കോടി മുതൽ 10 കോടി രൂപ വരെ</span><span class="en">₹1 crore to ₹10 crore</span></small></div>
+        <div class="arr">▲</div>
+        <div class="t3"><b><span class="ml">ജില്ലാ ഉപഭോക്തൃ തർക്ക പരിഹാര കമ്മീഷൻ</span><span class="en">District Consumer Dispute Redressal Commission</span></b><small><span class="ml">1 കോടി രൂപ വരെ</span><span class="en">Up to ₹1 crore</span></small></div>
+      </div>
+      <div class="ml"><ul class="pts">
+        <li>ഇന്ത്യയിൽ <b>അറുനൂറിലധികം ജില്ലാ ഫോറങ്ങളും 35 സംസ്ഥാന കമ്മീഷനുകളും</b>.</li>
+        <li>എല്ലാറ്റിനും മുകളിൽ അപെക്സ് ബോഡി — <b>നാഷണൽ കൺസ്യൂമർ ഡിസ്പ്യൂട്ട്സ് റിഡ്രസ്സൽ കമ്മീഷൻ (NCDRC)</b>.</li>
+      </ul></div>
+      <div class="en"><ul class="pts">
+        <li>India has <b>over 600 district forums and 35 state commissions</b>.</li>
+        <li>At the top is the apex body — the <b>National Consumer Disputes Redressal Commission (NCDRC)</b>.</li>
+      </ul></div>
+      <div class="box green"><b><span class="ml">ത്രിതല ഉപദേശക സമിതികൾ</span><span class="en">Three-tier Advisory Councils</span></b><br><span class="ml">ജില്ലാ / സംസ്ഥാന / ദേശീയ ഉപഭോക്തൃ സംരക്ഷണ കൗൺസിലുകൾ — ഉപഭോക്തൃ അവകാശങ്ങളുമായി ബന്ധപ്പെട്ട കാര്യങ്ങളിൽ അതത് സർക്കാരുകൾക്ക് <b>ഉപദേശം നൽകുക</b> എന്നതാണ് ധർമ്മം.</span><span class="en">District / State / National Consumer Protection Councils — their role is to <b>advise</b> the respective governments on consumer-rights matters.</span></div>
+    </div>
+  </details>
+
+  <details class="acc"><summary><span class="num">2</span><span class="ml">തട്ടിപ്പുകളും പരാതി നൽകേണ്ട സ്ഥാപനങ്ങളും</span><span class="en">Frauds and Where to Complain</span></summary>
+    <div class="acc-body"><div class="tbl-wrap"><table>
+      <tr><th class="b"><span class="ml">തട്ടിപ്പ്</span><span class="en">Fraud</span></th><th class="b"><span class="ml">പരിഹാരമാർഗങ്ങൾ</span><span class="en">Remedies</span></th></tr>
+      <tr><td><b><span class="ml">1. വിദ്യാഭ്യാസ സ്ഥാപനങ്ങൾ</span><span class="en">1. Educational institutions</span></b></td><td><span class="ml">UGC / AICTE / State Board; ഉപഭോക്തൃ ഫോറം; പോലീസിൽ പരാതി; വിദ്യാഭ്യാസ മന്ത്രാലയം.</span><span class="en">UGC / AICTE / State Board; consumer forum; police complaint; Ministry of Education.</span></td></tr>
+      <tr><td><b><span class="ml">2. ആരോഗ്യരംഗം</span><span class="en">2. Health sector</span></b></td><td><span class="ml">സ്റ്റേറ്റ്/നാഷണൽ മെഡിക്കൽ കൗൺസിൽ ഗ്രീവൻസ് പോർട്ടൽ; ആരോഗ്യവകുപ്പ് ഡയറക്ടർ; ഗുരുതര കേസുകളിൽ ഹൈക്കോടതി/സുപ്രീംകോടതിയിൽ <b>PIL</b>; <b>ആരോഗ്യ സേതു ആപ്പ്</b>.</span><span class="en">State/National Medical Council grievance portal; Director of Health Services; <b>PIL</b> in High Court/Supreme Court for serious cases; <b>Aarogya Setu app</b>.</span></td></tr>
+      <tr><td><b><span class="ml">3. വിദേശ ജോലി വാഗ്ദാനം</span><span class="en">3. Overseas job offers</span></b></td><td><span class="ml">പ്രൊട്ടക്ടറേറ്റ് ഓഫ് എമിഗ്രന്റ്സ് (<b>POE</b>); <b>IPC സെക്ഷൻ 420</b> പ്രകാരം കേസ്; വിദേശത്തെങ്കിൽ ഇന്ത്യൻ എംബസി/ഹൈക്കമ്മീഷൻ; പ്രവാസി ഭാരതീയ സഹായതാകേന്ദ്രം (<b>PBSK</b>) 1800-11-3090.</span><span class="en">Protector of Emigrants (<b>POE</b>); case under <b>IPC Section 420</b>; Indian Embassy/High Commission if abroad; Pravasi Bharatiya Sahayata Kendra (<b>PBSK</b>) 1800-11-3090.</span></td></tr>
+      <tr><td><b><span class="ml">4. ഓൺലൈൻ തട്ടിപ്പുകൾ</span><span class="en">4. Online frauds</span></b></td><td><span class="ml">സൈബർ ക്രൈം സെൽ (<b>cybercrime.gov.in</b>); <b>CERT-In</b> (Indian Computer Emergency Response Team); ദേശീയ ഉപഭോക്തൃ ഹെൽപ്പ്‌ലൈൻ / info@cert.in.org.in.</span><span class="en">Cyber Crime Cell (<b>cybercrime.gov.in</b>); <b>CERT-In</b> (Indian Computer Emergency Response Team); National Consumer Helpline / info@cert.in.org.in.</span></td></tr>
+      <tr><td><b><span class="ml">5. ബാങ്കിംഗ് രംഗം</span><span class="en">5. Banking</span></b></td><td><span class="ml">ബാങ്ക് ഗ്രീവൻസ് റിഡ്രസ്സൽ മെക്കാനിസം (ബ്രാഞ്ച് മാനേജർ); <b>30 ദിവസത്തിനുള്ളിൽ</b> മറുപടിയില്ലെങ്കിൽ <b>RBI ഓംബുഡ്സ്മാൻ</b> (ടോൾ ഫ്രീ <b>14448</b>, cgmbank@rbi.org.in).</span><span class="en">Bank grievance redressal (branch manager); if no reply within <b>30 days</b>, the <b>RBI Ombudsman</b> (toll-free <b>14448</b>, cgmbank@rbi.org.in).</span></td></tr>
+    </table></div></div>
+  </details>
+
+  <details class="acc"><summary><span class="num">3</span><span class="ml">പരാതികൾ എങ്ങനെ സമർപ്പിക്കാം</span><span class="en">How to File a Complaint</span></summary>
+    <div class="acc-body">
+      <div class="ml"><ul class="pts">
+        <li>കബളിപ്പിക്കപ്പെട്ടാൽ ബന്ധപ്പെട്ട ഓഫീസിലോ ഉപഭോക്തൃ കോടതിയിലോ പരാതി നൽകാം.</li>
+        <li>പരാതി ഉള്ള ഏതൊരാൾക്കും <b>വെള്ള പേപ്പറിൽ</b> പരാതി വിശദമായി എഴുതി ഉപഭോക്തൃ തർക്ക പരിഹാര കോടതിയിൽ <b>നേരിട്ട്</b> സമർപ്പിക്കാം.</li>
+        <li>തെളിവായി ആവശ്യമായ <b>രേഖകൾ</b> ചേർക്കണം — ഇവിടെയാണ് <b>ബില്ല്</b> ചോദിച്ചു വാങ്ങേണ്ടതിന്റെ പ്രസക്തി.</li>
+      </ul></div>
+      <div class="en"><ul class="pts">
+        <li>If cheated, complain at the concerned office or a consumer court.</li>
+        <li>Anyone can write the complaint in detail on <b>plain paper</b> and submit it <b>directly</b> to the consumer dispute redressal court.</li>
+        <li>Attach the required <b>documents</b> as evidence — this is why asking for a <b>bill</b> matters.</li>
+      </ul></div>
+    </div>
+  </details>
+
+  <details class="acc" open><summary><span class="num">4</span><span class="ml">ഗുണമേന്മ ചിഹ്നങ്ങൾ</span><span class="en">Quality Marks</span></summary>
+    <div class="acc-body">
+      <div class="tbl-wrap"><table>
+        <tr><th class="b"><span class="ml">ചിഹ്നം</span><span class="en">Mark</span></th><th class="b"><span class="ml">ബന്ധപ്പെട്ട മേഖല</span><span class="en">Related area</span></th></tr>
+        <tr><td><b>ISI</b></td><td><span class="ml">ബ്യൂറോ ഓഫ് ഇന്ത്യൻ സ്റ്റാൻഡേർഡ്സ് (<b>BIS</b>) നൽകുന്നു. വൈദ്യുത ഉപകരണങ്ങൾ, സിമന്റ്, പേപ്പർ, പെയിന്റ്, ഗ്യാസ് സിലിണ്ടർ തുടങ്ങിയ വ്യാവസായിക ഉൽപ്പന്നങ്ങൾ.</span><span class="en">Given by the Bureau of Indian Standards (<b>BIS</b>). Industrial products like electrical appliances, cement, paper, paint, gas cylinders.</span></td></tr>
+        <tr><td><b>AGMARK</b></td><td><span class="ml">കാർഷിക-വന ഉൽപ്പന്നങ്ങളുടെ ഗുണമേന്മ.</span><span class="en">Quality of agricultural and forest products.</span></td></tr>
+        <tr><td><b>FSSAI</b></td><td><span class="ml">ഭക്ഷ്യസുരക്ഷ ഉറപ്പാക്കുന്നു.</span><span class="en">Ensures food safety.</span></td></tr>
+      </table></div>
+    </div>
+  </details>
+
+  <details class="acc"><summary><span class="num">5</span><span class="ml">അശ്രദ്ധയും അറിവില്ലായ്മയും കബളിപ്പിക്കപ്പെടലും</span><span class="en">Carelessness, Ignorance and Being Cheated</span></summary>
+    <div class="acc-body">
+      <p class="ml">പലപ്പോഴും ഉപഭോക്താവിന്റെ <b>അശ്രദ്ധയും അജ്ഞതയുമാണ്</b> കബളിപ്പിക്കപ്പെടലിന് കാരണം. നല്ല ശീലങ്ങൾ:</p>
+      <p class="en">Often the consumer's own <b>carelessness and ignorance</b> lead to being cheated. Good habits:</p>
+      <div class="grid2">
+        <ul class="pts ml"><li>അളവുതൂക്കം ശരിയാണോ എന്ന് പരിശോധിക്കുക.</li><li>പരമാവധി കാലയളവ്, നിർമാണ തീയതി നോക്കുക.</li><li>രേഖപ്പെടുത്തിയ വിലയും ബില്ലിലെ വിലയും ഒത്തുനോക്കുക.</li><li>ഉപയോഗിച്ച ഘടകങ്ങളും മുന്നറിയിപ്പുകളും വായിക്കുക.</li><li>വാറന്റി / ഗ്യാരന്റി പരിശോധിക്കുക.</li></ul>
+        <ul class="pts ml"><li>ഓൺലൈൻ ഓർഡർ പരസ്യത്തിലേതു തന്നെയോ എന്ന് ഉറപ്പാക്കുക.</li><li>ലീഗൽ മെട്രോളജി അംഗീകരിച്ച തൂക്കക്കട്ടികളാണോ എന്ന് ശ്രദ്ധിക്കുക.</li><li>ഇന്ധനത്തിന്റെ സാന്ദ്രത പരിശോധിക്കുക; ഓട്ടോ മീറ്റർ ചാർജ് നൽകുക.</li><li>ഗ്യാസ് സിലിണ്ടർ ലീക്ക് പരിശോധിപ്പിക്കുക.</li><li>കബളിപ്പിക്കപ്പെട്ടാൽ പരാതിപ്പെടുക.</li></ul>
+        <ul class="pts en"><li>Check that weights and measures are correct.</li><li>Look at the expiry and manufacturing dates.</li><li>Compare the printed price with the billed price.</li><li>Read ingredients and warnings.</li><li>Check warranty / guarantee.</li></ul>
+        <ul class="pts en"><li>Make sure online orders match the advertisement.</li><li>Watch that weights are Legal Metrology approved.</li><li>Check fuel density; pay the auto meter fare.</li><li>Get the gas cylinder checked for leaks.</li><li>Complain when cheated.</li></ul>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section class="panel eq" id="p-education">
+  <div class="zone-head eq">🎓 <span class="ml">ഉപഭോക്തൃ വിദ്യാഭ്യാസം</span><span class="en">Consumer Education</span></div>
+  <div class="card">
+    <div class="ml"><p>ഉപഭോക്താക്കൾക്ക് അവകാശങ്ങൾ, ഉത്തരവാദിത്വങ്ങൾ, ഉൽപ്പന്ന-സേവന തിരഞ്ഞെടുപ്പ്, വിപണിയിലെ വ്യത്യാസങ്ങൾ, ഉപഭോക്തൃ നിയമങ്ങൾ എന്നിവയെക്കുറിച്ച് അറിവ് നൽകുന്നതാണ് <b>ഉപഭോക്തൃ വിദ്യാഭ്യാസം</b>.</p></div>
+    <div class="en"><p><b>Consumer education</b> gives consumers knowledge about their rights, responsibilities, choice of goods and services, market differences and consumer laws.</p></div>
+    <h3><span class="ml">ലക്ഷ്യങ്ങൾ</span><span class="en">Aims</span></h3>
+    <ol class="pts ml"><li>ഉപഭോക്താവിന്റെ അവകാശങ്ങൾ സംരക്ഷിക്കുക.</li><li>ഉപഭോക്തൃ ഉത്തരവാദിത്വങ്ങൾ ബോധ്യമാക്കുക.</li><li>വ്യാപാരത്തിൽ, പ്രത്യേകിച്ച് ഓൺലൈൻ വ്യാപാരത്തിൽ സുരക്ഷ ഉറപ്പാക്കുക.</li><li>വിപണിയിലെ ധാർമികതയും ചട്ടങ്ങളും തിരിച്ചറിയുക.</li><li>ഉപഭോക്തൃസംരക്ഷണ നിയമത്തെക്കുറിച്ച് ബോധവൽക്കരണം.</li><li>ആരോഗ്യ സുരക്ഷ ഉറപ്പാക്കുക.</li><li>ഉപഭോക്തൃനീതി പ്രോത്സാഹിപ്പിക്കുക.</li></ol>
+    <ol class="pts en"><li>Protect consumer rights.</li><li>Make consumers aware of their responsibilities.</li><li>Ensure safety in trade, especially online trade.</li><li>Recognise ethics and rules in the market.</li><li>Create awareness about consumer protection law.</li><li>Ensure health safety.</li><li>Promote consumer justice.</li></ol>
+    <div class="ml"><ul class="pts">
+      <li>ബോധവൽക്കരണത്തിലൂടെ സ്വയംസുരക്ഷാമൂല്യം ഉയരുന്നു; തട്ടിപ്പുകളിൽ നിന്ന് സംരക്ഷണം.</li>
+      <li>പാഠ്യപദ്ധതിയിൽ പ്രത്യേക വിഷയമായി; ഓൺലൈൻ കോഴ്സുകൾ; സ്കൂളുകളിലെ <b>ഉപഭോക്തൃ ക്ലബ്ബുകൾ</b>.</li>
+      <li>മുദ്രാവാക്യം — <b>"ജാഗോ ഗ്രാഹക് ജാഗോ"</b> (ഉണരൂ ഉപഭോക്താവേ ഉണരൂ).</li>
+    </ul></div>
+    <div class="en"><ul class="pts">
+      <li>Awareness raises self-protection and guards against fraud.</li>
+      <li>Taught as a subject in the curriculum; online courses; <b>consumer clubs</b> in schools.</li>
+      <li>Slogan — <b>"Jago Grahak Jago"</b> (Wake up, consumer, wake up).</li>
+    </ul></div>
+  </div>
+  <div class="card">
+    <h2 class="sec"><span class="ico">📞</span><span class="ml">ഹെൽപ്പ്‌ലൈനുകൾ</span><span class="en">Helplines</span></h2>
+    <div class="grid3">
+      <div class="mini g"><h4><span class="ml">ദേശീയ ഉപഭോക്തൃ ഹെൽപ്പ്‌ലൈൻ</span><span class="en">National Consumer Helpline</span></h4><b>1800-11-4000</b></div>
+      <div class="mini g"><h4><span class="ml">കേരള കൺസ്യൂമർ ഹെൽപ്പ്‌ലൈൻ</span><span class="en">Kerala Consumer Helpline</span></h4><b>1800 425 1550 · 1967 · 1915</b><br><small>consumeraffairs.kerala.gov.in</small></div>
+      <div class="mini g"><h4><span class="ml">ബാങ്കിംഗ് ഓംബുഡ്സ്മാൻ</span><span class="en">Banking Ombudsman</span></h4><b>14448</b></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2 class="sec"><span class="ico">🤝</span><span class="ml">സമൂഹത്തിന്റെ പങ്ക്</span><span class="en">Role of Society</span></h2>
+    <div class="ml"><ul class="pts">
+      <li>നിയമങ്ങൾ കൊണ്ടുമാത്രം ഉപഭോക്തൃ സംതൃപ്തി ഉറപ്പാക്കാനാവില്ല; <b>പൗരബോധമുള്ള സമൂഹത്തിന്റെ</b> ഇടപെടൽ വേണം.</li>
+      <li>ആവശ്യമുള്ള സാധനസേവനങ്ങൾ മാത്രം ഉപഭോഗം ചെയ്യുന്ന മനോഭാവം വളർത്തണം — ലഭ്യമല്ലാത്തവർക്കും അവ ലഭിക്കാൻ അവസരം; <b>സുസ്ഥിര ഉപഭോഗവും വികസനവും</b>.</li>
+      <li>ഉൽപ്പാദകരും ഉപഭോക്താക്കളും ബന്ധപ്പെടുന്ന വ്യാപാരമേഖലയിൽ നൈതികത ഉറപ്പാക്കാൻ ഉപഭോക്തൃ സംരക്ഷണ നിയമത്തിന് വലിയ പങ്ക്.</li>
+    </ul></div>
+    <div class="en"><ul class="pts">
+      <li>Laws alone cannot ensure consumer satisfaction; a <b>socially aware society</b> must intervene.</li>
+      <li>Develop the habit of consuming only what is needed — so others get access too; <b>sustainable consumption and development</b>.</li>
+      <li>The Consumer Protection Act plays a big role in ensuring ethics in trade between producers and consumers.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ============ ACTIVITIES ============ -->
+<section class="panel" id="p-activities">
+  <div class="card eq">
+    <h2 class="sec"><span class="ico">📊</span><span class="ml">TU / MU പട്ടിക — ചോദ്യങ്ങൾ (പേജ് 85)</span><span class="en">TU / MU Table — Questions (Page 85)</span></h2>
+    <div class="ml"><ul class="pts">
+      <li><b>1–5 യൂണിറ്റ് വരെ TU-യ്ക്ക് എന്ത് സംഭവിക്കുന്നു?</b> കൂടുന്നു (20 → 67), പക്ഷേ ഓരോ യൂണിറ്റിലും വർധന കുറയുന്നു.</li>
+      <li><b>6 യൂണിറ്റിന് ശേഷം?</b> TU കുറയുന്നു (67 → 64 → 57).</li>
+      <li><b>MU പൂജ്യമാകുന്നത്?</b> 6-ാം യൂണിറ്റിൽ.</li>
+      <li><b>7, 8 യൂണിറ്റിൽ MU നെഗറ്റീവ് ആകുന്നതെന്തുകൊണ്ട്?</b> പൂർണ സംതൃപ്തിക്ക് ശേഷമുള്ള ഉപഭോഗം അതൃപ്തി (disutility) ഉണ്ടാക്കുന്നു.</li>
+    </ul></div>
+    <div class="en"><ul class="pts">
+      <li><b>What happens to TU from units 1–5?</b> It rises (20 → 67), but the increase gets smaller each unit.</li>
+      <li><b>After unit 6?</b> TU falls (67 → 64 → 57).</li>
+      <li><b>When does MU become zero?</b> At the 6th unit.</li>
+      <li><b>Why is MU negative at units 7 and 8?</b> Consuming after full satisfaction causes dissatisfaction (disutility).</li>
+    </ul></div>
+    <div class="box green"><span class="ml"><b>ചിത്രം 4.4 — കുറിപ്പ്:</b> MU കുറയുന്തോറും TU കുറഞ്ഞ നിരക്കിൽ ഉയരുന്നു. MU പൂജ്യമാകുമ്പോൾ TU പരമാവധിയിലെത്തുന്നു (വക്രത്തിന്റെ ഉച്ചസ്ഥാനം). MU നെഗറ്റീവ് ആകുമ്പോൾ TU വക്രം താഴേക്ക് ചരിയുന്നു. അതായത് MU വക്രം തുടർച്ചയായി താഴേക്ക് ചരിയുന്നു — അപചയ സീമാന്ത ഉപയുക്തത നിയമം.</span><span class="en"><b>Fig 4.4 — note:</b> As MU falls, TU rises at a decreasing rate. When MU is zero, TU reaches its maximum (the peak of the curve). When MU turns negative, the TU curve slopes downward. The MU curve slopes down continuously — the Law of Diminishing Marginal Utility.</span></div>
+  </div>
+  <div class="card tu">
+    <h2 class="sec"><span class="ico">🧾</span><span class="ml">ബില്ല് പ്രവർത്തനം (പേജ് 89)</span><span class="en">Bill Activity (Page 89)</span></h2>
+    <div class="ml"><ul class="pts"><li><b>GST നമ്പർ, GST നിരക്ക്</b>, സ്ഥാപനത്തിന്റെ പേര്/വിലാസം, തീയതി, ബിൽ നമ്പർ, സാധനത്തിന്റെ പേര്, അളവ്, യൂണിറ്റ് വില, ആകെ തുക.</li>
+      <li>GST നിരക്ക് പട്ടിക (മാതൃക): 5% — പാക്ക് ചെയ്ത ഭക്ഷ്യവസ്തുക്കൾ; 12% — പാക്ക് ചെയ്ത വെണ്ണ, നെയ്യ്; 18% — സോപ്പ്, ടൂത്ത്പേസ്റ്റ്; 28% — വാഹനങ്ങൾ, എസി. (വീട്ടിലെ ബില്ലുകൾ നോക്കി പൂർത്തിയാക്കുക — നിരക്കുകൾ കാലാനുസൃതമായി മാറാം.)</li></ul></div>
+    <div class="en"><ul class="pts"><li><b>GST number, GST rate</b>, shop name/address, date, bill number, item name, quantity, unit price, total.</li>
+      <li>Sample GST-rate table: 5% — packaged food items; 12% — packaged butter, ghee; 18% — soap, toothpaste; 28% — vehicles, AC. (Complete it from bills at home — rates may be revised over time.)</li></ul></div>
+  </div>
+  <div class="card eq">
+    <h2 class="sec"><span class="ico">🪥</span><span class="ml">ടൂത്ത്പേസ്റ്റ് ലേബൽ (ചിത്രം 4.14)</span><span class="en">Toothpaste Label (Fig 4.14)</span></h2>
+    <div class="ml"><ul class="pts"><li><b>MRP</b> (എല്ലാ നികുതികളും ഉൾപ്പെടെ) — പരമാവധി ചില്ലറ വില.</li><li><b>Net Wt.</b> — അറ്റ തൂക്കം (ഉദാ: 150 g × 2).</li><li><b>നിർമാണ തീയതി, ബാച്ച് നമ്പർ, ഉപയോഗ കാലാവധി</b> (ഉദാ: നിർമാണ തീയതി മുതൽ 36 മാസം).</li><li><b>പച്ച ചതുരത്തിലെ പച്ച വൃത്തം</b> — സസ്യാഹാര ഉൽപ്പന്നം.</li><li><b>ഘടകങ്ങൾ (Ingredients)</b>, നിർമാതാവിന്റെ പേരും വിലാസവും, <b>കസ്റ്റമർ കെയർ</b> നമ്പർ/ഇമെയിൽ.</li><li><b>ബാർകോഡ്</b>, പുനരുപയോഗ ചിഹ്നം, കുട്ടികൾക്കുള്ള മുന്നറിയിപ്പ്.</li></ul></div>
+    <div class="en"><ul class="pts"><li><b>MRP</b> (incl. of all taxes) — maximum retail price.</li><li><b>Net Wt.</b> — net weight (e.g. 150 g × 2).</li><li><b>Manufacturing date, batch number, best before</b> (e.g. 36 months from manufacture).</li><li><b>Green dot in a green square</b> — vegetarian product.</li><li><b>Ingredients</b>, manufacturer's name and address, <b>customer care</b> number/email.</li><li><b>Barcode</b>, recycling symbol, warning for children.</li></ul></div>
+  </div>
+</section>
+
+<!-- ============ KEY TERMS ============ -->
+<section class="panel" id="p-terms">
+  <div class="card">
+    <h2 class="sec"><span class="ico" style="background:#fff3e0">📘</span><span class="ml">പ്രധാന പദങ്ങൾ</span><span class="en">Key Terms</span></h2>
+    <input class="search" id="termSearch" placeholder="Search terms… / പദം തിരയുക…">
+    <div class="grid3" id="termGrid"></div>
+  </div>
+</section>
+
+<!-- ============ Q&A ============ -->
+<section class="panel" id="p-qa">
+  <div class="card">
+    <h2 class="sec"><span class="ico" style="background:#fdecec">✍</span><span class="ml">പരീക്ഷാ ചോദ്യങ്ങളും ഉത്തരങ്ങളും</span><span class="en">Exam Questions &amp; Answers</span></h2>
+    <div class="qa-tools">
+      <button class="btn btn-g" onclick="toggleAllQA(true)">Show all answers</button>
+      <button class="btn btn-o" onclick="toggleAllQA(false)">Hide all</button>
+    </div>
+    <div id="qaList"></div>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="panel" id="p-quiz">
+  <div class="qo-title"><span class="tag" style="background:var(--soft-g);color:var(--green);border-color:#bfe6d0">SOCIAL SCIENCE II · UNIT 4 · 20 MARK QUIZ</span>
+    <h1><span class="ml">ഉപഭോക്താവ്: അവകാശങ്ങളും സംരക്ഷണവും</span><span class="en">Consumer: Rights and Protection</span></h1>
+    <small>Abacus Academy · SSLC Social Science II</small></div>
+  <div class="card" id="quizBox"></div>
+</section>
+
+</main>
+
+<footer>© Abacus Academy · SSLC Study Portal · Social Science II — Unit 4</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- Language ---------- */
+function setLang(l){
+  document.body.classList.toggle('en', l==='en');
+  document.documentElement.lang = l==='en' ? 'en' : 'ml';
+  document.getElementById('bML').classList.toggle('on', l!=='en');
+  document.getElementById('bEN').classList.toggle('on', l==='en');
+  try{localStorage.setItem('geo4_lang', l);}catch(e){}
+  if(quizState.stage==='q') renderQuestion();
+  if(quizState.stage==='done') renderResult();
+  if(quizState.stage==='start') renderStart();
+}
+function L(o){ return document.body.classList.contains('en') ? o.en : o.ml; }
+
+/* ---------- Tabs ---------- */
+document.querySelectorAll('.tab').forEach(function(t){
+  t.addEventListener('click', function(){
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');});
+    document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('on');});
+    t.classList.add('on');
+    document.getElementById('p-'+t.dataset.p).classList.add('on');
+    window.scrollTo({top: document.querySelector('.tabs-wrap').offsetTop - 70, behavior:'smooth'});
+  });
+});
+
+function printNotes(){
+  document.querySelectorAll('details.acc').forEach(function(d){d.open=true;});
+  window.print();
+}
+
+/* ---------- Key Terms ---------- */
+var TERMS = [{"z": "e", "ml": ["വിപണി / കമ്പോളം", "വിൽപ്പനക്കാരും വാങ്ങുന്നവരും തമ്മിൽ ബന്ധം സ്ഥാപിക്കുന്ന ഇടം."], "en": ["Market", "The place that connects sellers and buyers."]}, {"z": "e", "ml": ["ഉപഭോഗം", "ആവശ്യങ്ങൾ നിറവേറ്റാൻ സാധനസേവനങ്ങൾ വാങ്ങി ഉപയോഗിക്കൽ."], "en": ["Consumption", "Buying and using goods and services to satisfy wants."]}, {"z": "e", "ml": ["ഉപഭോക്താവ്", "വില കൊടുത്തോ കൊടുക്കാമെന്ന കരാറിലോ സാധനസേവനങ്ങൾ വാങ്ങി ഉപയോഗിക്കുന്നയാൾ."], "en": ["Consumer", "One who buys and uses goods/services by paying or agreeing to pay."]}, {"z": "e", "ml": ["ഉപയുക്തത", "ഒരു വസ്തു ഉപഭോഗം ചെയ്യുമ്പോൾ ലഭിക്കുന്ന സംതൃപ്തി."], "en": ["Utility", "Satisfaction obtained by consuming a commodity."]}, {"z": "e", "ml": ["യൂട്ടിൽസ്", "ഉപയുക്തത അളക്കുന്ന യൂണിറ്റ്."], "en": ["Utils", "Unit for measuring utility."]}, {"z": "e", "ml": ["ആൽഫ്രഡ് മാർഷൽ", "ഉപഭോക്തൃ സംതൃപ്തി അളക്കാൻ ആദ്യശ്രമം നടത്തിയ സാമ്പത്തിക ശാസ്ത്രജ്ഞൻ."], "en": ["Alfred Marshall", "Economist who first tried to measure consumer satisfaction."]}, {"z": "e", "ml": ["കാർഡിനൽ ഉപയുക്തതാവാദം", "സംതൃപ്തി എണ്ണൽസംഖ്യകൊണ്ട് അളക്കാമെന്ന വാദം."], "en": ["Cardinal Utility Theory", "Theory that satisfaction can be measured in cardinal numbers."]}, {"z": "e", "ml": ["മൊത്തം ഉപയുക്തത (TU)", "പല യൂണിറ്റുകളിൽ നിന്ന് ലഭിക്കുന്ന ഉപയുക്തതയുടെ ആകെ തുക."], "en": ["Total Utility (TU)", "Sum of utility from all units consumed."]}, {"z": "e", "ml": ["സീമാന്ത ഉപയുക്തത (MU)", "ഒരു അധിക യൂണിറ്റ് മൂലം TU-യിലുണ്ടാകുന്ന മാറ്റം."], "en": ["Marginal Utility (MU)", "Change in TU from one additional unit."]}, {"z": "e", "ml": ["അപചയ സീമാന്ത ഉപയുക്തത നിയമം", "തുടർച്ചയായ ഉപഭോഗത്തിൽ സീമാന്ത ഉപയുക്തത കുറഞ്ഞുവരുന്നു."], "en": ["Law of Diminishing MU", "MU keeps falling with continuous consumption."]}, {"z": "e", "ml": ["ഉപയോഗ്യത", "ഉപയോഗപ്രദമാണോ എന്നത്; ഉപയുക്തതയിൽ നൈതികതയ്ക്ക് പ്രസക്തിയില്ല."], "en": ["Usefulness", "Whether something is beneficial; utility ignores ethics."]}, {"z": "t", "ml": ["സൗജന്യസാധനങ്ങൾ", "പ്രകൃതിയിൽ ധാരാളമുള്ള, വില നൽകേണ്ടാത്തവ — സൂര്യപ്രകാശം, വായു."], "en": ["Free goods", "Abundant in nature, no price — sunlight, air."]}, {"z": "t", "ml": ["ഇക്കണോമിക് സാധനങ്ങൾ", "വില കൊടുത്തു വാങ്ങുന്നവ."], "en": ["Economic goods", "Goods bought for a price."]}, {"z": "t", "ml": ["ഉപഭോഗ സാധനങ്ങൾ", "അന്തിമ ഉപയോഗത്തിനുള്ളവ; വീണ്ടും ഉൽപ്പാദനത്തിന് പോകാത്തവ."], "en": ["Consumer goods", "For final use; not used again in production."]}, {"z": "t", "ml": ["മൂലധനസാധനങ്ങൾ", "മറ്റ് ഉൽപ്പന്നങ്ങൾ ഉൽപ്പാദിപ്പിക്കാനുള്ളവ — ഫാക്ടറികൾ, യന്ത്രങ്ങൾ."], "en": ["Capital goods", "Used to produce other goods — factories, machines."]}, {"z": "t", "ml": ["ഈട് നിൽക്കുന്ന / നിൽക്കാത്ത സാധനങ്ങൾ", "ദീർഘകാലം ഉപയോഗിക്കാവുന്നവ (മേശ) / കുറച്ചു കാലം മാത്രം (പാൽ)."], "en": ["Durable / Non-durable goods", "Long-lasting (table) / short-lived (milk)."]}, {"z": "t", "ml": ["GST", "ചരക്ക് സേവന നികുതി; 2017 ജൂലൈ 1; 101-ാം ഭേദഗതി; ഒരു രാജ്യം ഒരു നികുതി."], "en": ["GST", "Goods and Services Tax; 1 July 2017; 101st Amendment; One Nation One Tax."]}, {"z": "t", "ml": ["SGST / CGST", "GST-യുടെ 50% സംസ്ഥാനത്തിന് / 50% കേന്ദ്രത്തിന്."], "en": ["SGST / CGST", "50% of GST to the State / 50% to the Centre."]}, {"z": "e", "ml": ["കൺസ്യൂമർ ഗൈഡൻസ് സൊസൈറ്റി ഓഫ് ഇന്ത്യ", "1966-ൽ ബോംബെയിൽ; ഇന്ത്യയിലെ ഉപഭോക്തൃ പ്രസ്ഥാനത്തിന്റെ തുടക്കം."], "en": ["Consumer Guidance Society of India", "1966, Bombay; start of India's consumer movement."]}, {"z": "e", "ml": ["ഉപഭോക്തൃ സംരക്ഷണ നിയമം 1986", "1986 ഡിസംബർ 24-ന് നിലവിൽ വന്നു."], "en": ["Consumer Protection Act 1986", "Came into force on 24 December 1986."]}, {"z": "e", "ml": ["ദേശീയ ഉപഭോക്തൃദിനം", "ഡിസംബർ 24."], "en": ["National Consumer Day", "24 December."]}, {"z": "e", "ml": ["ഉപഭോക്തൃ സംരക്ഷണ നിയമം 2019", "2020 ജൂലൈ 20-ന് നിലവിൽ വന്നു; ഇ-കൊമേഴ്‌സ് ഉൾപ്പെടുത്തി."], "en": ["Consumer Protection Act 2019", "In force 20 July 2020; covers e-commerce."]}, {"z": "e", "ml": ["CCPA", "സെൻട്രൽ കൺസ്യൂമർ പ്രൊട്ടക്ഷൻ അതോറിറ്റി — 2019 നിയമപ്രകാരം."], "en": ["CCPA", "Central Consumer Protection Authority — under the 2019 Act."]}, {"z": "t", "ml": ["NCDRC", "നാഷണൽ കൺസ്യൂമർ ഡിസ്പ്യൂട്ട്സ് റിഡ്രസ്സൽ കമ്മീഷൻ — അപെക്സ് ബോഡി; 10 കോടിക്ക് മുകളിൽ."], "en": ["NCDRC", "National Consumer Disputes Redressal Commission — apex; above ₹10 crore."]}, {"z": "t", "ml": ["ജില്ലാ കമ്മീഷൻ", "1 കോടി രൂപ വരെയുള്ള നഷ്ടപരിഹാര കേസുകൾ."], "en": ["District Commission", "Cases up to ₹1 crore compensation."]}, {"z": "t", "ml": ["സംസ്ഥാന കമ്മീഷൻ", "1 കോടി മുതൽ 10 കോടി വരെ."], "en": ["State Commission", "₹1 crore to ₹10 crore."]}, {"z": "t", "ml": ["PIL", "പബ്ലിക് ഇന്ററസ്റ്റ് ലിറ്റിഗേഷൻ — ഗുരുതര ആരോഗ്യ തട്ടിപ്പുകളിൽ."], "en": ["PIL", "Public Interest Litigation — for serious health frauds."]}, {"z": "t", "ml": ["IPC 420", "വഞ്ചനയ്ക്കെതിരായ വകുപ്പ്; വിദേശ ജോലി തട്ടിപ്പിൽ കേസ്."], "en": ["IPC 420", "Section on cheating; used in overseas job frauds."]}, {"z": "t", "ml": ["CERT-In", "ഇന്ത്യൻ കമ്പ്യൂട്ടർ എമർജൻസി റെസ്പോൺസ് ടീം — ഓൺലൈൻ തട്ടിപ്പ്."], "en": ["CERT-In", "Indian Computer Emergency Response Team — online fraud."]}, {"z": "t", "ml": ["RBI ഓംബുഡ്സ്മാൻ", "ബാങ്ക് 30 ദിവസത്തിനുള്ളിൽ മറുപടി നൽകിയില്ലെങ്കിൽ; 14448."], "en": ["RBI Ombudsman", "If the bank doesn't reply in 30 days; 14448."]}, {"z": "t", "ml": ["ISI", "BIS നൽകുന്ന ചിഹ്നം — വ്യാവസായിക ഉൽപ്പന്നങ്ങൾ."], "en": ["ISI Mark", "Given by BIS — industrial products."]}, {"z": "t", "ml": ["AGMARK", "കാർഷിക-വന ഉൽപ്പന്നങ്ങളുടെ ഗുണമേന്മ ചിഹ്നം."], "en": ["AGMARK", "Quality mark for agricultural and forest products."]}, {"z": "t", "ml": ["FSSAI", "ഭക്ഷ്യസുരക്ഷ ഉറപ്പാക്കുന്ന ചിഹ്നം."], "en": ["FSSAI", "Mark ensuring food safety."]}, {"z": "e", "ml": ["ഉപഭോക്തൃ വിദ്യാഭ്യാസം", "അവകാശങ്ങൾ, ഉത്തരവാദിത്വങ്ങൾ, നിയമങ്ങൾ എന്നിവയെക്കുറിച്ചുള്ള അറിവ്."], "en": ["Consumer Education", "Knowledge of rights, responsibilities and laws."]}, {"z": "e", "ml": ["ജാഗോ ഗ്രാഹക് ജാഗോ", "\"ഉണരൂ ഉപഭോക്താവേ ഉണരൂ\" — ബോധവൽക്കരണ മുദ്രാവാക്യം."], "en": ["Jago Grahak Jago", "\"Wake up, consumer\" — awareness slogan."]}];
+function renderTerms(){
+  var q=(document.getElementById('termSearch').value||'').toLowerCase();
+  var h='';
+  TERMS.forEach(function(t){
+    var s=(t.ml.join(' ')+' '+t.en.join(' ')).toLowerCase();
+    if(q && s.indexOf(q)<0) return;
+    h+='<div class="term '+(t.z==='t'?'t':'')+'"><b>'+(t.z==='t'?'🏛 ':'📈 ')+'<span class="ml">'+t.ml[0]+'</span><span class="en">'+t.en[0]+'</span></b><p><span class="ml">'+t.ml[1]+'</span><span class="en">'+t.en[1]+'</span></p></div>';
+  });
+  document.getElementById('termGrid').innerHTML=h||'<p>No match.</p>';
+}
+document.getElementById('termSearch').addEventListener('input',renderTerms);
+renderTerms();
+
+/* ---------- Q&A ---------- */
+var QA = [{"m": 1, "q": {"ml": "ഉപഭോക്താവ് എന്നാലാര്?", "en": "Who is a consumer?"}, "a": {"ml": "വില കൊടുത്തോ വില കൊടുക്കാമെന്ന കരാറിലോ സാധനസേവനങ്ങൾ വാങ്ങി ഉപയോഗിക്കുന്ന ആളാണ് ഉപഭോക്താവ്.", "en": "A person who buys and uses goods and services by paying a price or agreeing to pay it."}}, {"m": 2, "q": {"ml": "ഉപഭോഗത്തെ സ്വാധീനിക്കുന്ന നാല് ഘടകങ്ങൾ എഴുതുക.", "en": "Write four factors that influence consumption."}, "a": {"ml": "• സാധനങ്ങളുടെ വില<br>• ഉപഭോക്താവിന്റെ വരുമാനം<br>• അഭിരുചി / താൽപ്പര്യം<br>• പരസ്യങ്ങൾ, ലഭ്യത", "en": "• Price of goods<br>• Income of the consumer<br>• Taste / preference<br>• Advertisements, availability"}}, {"m": 2, "q": {"ml": "ഉപയുക്തത എന്നാലെന്ത്? അതിന്റെ അളവുയൂണിറ്റ് ഏത്?", "en": "What is utility? What is its unit?"}, "a": {"ml": "ഒരു വസ്തു ഉപഭോഗം ചെയ്യുമ്പോൾ അതിൽ നിന്ന് ലഭിക്കുന്ന സംതൃപ്തിയാണ് ഉപയുക്തത. അളവുയൂണിറ്റ് — യൂട്ടിൽസ് (Utils).", "en": "Utility is the satisfaction obtained by consuming a commodity. Its unit is Utils."}}, {"m": 3, "q": {"ml": "മൊത്തം ഉപയുക്തതയും സീമാന്ത ഉപയുക്തതയും വേർതിരിക്കുക.", "en": "Distinguish between Total Utility and Marginal Utility."}, "a": {"ml": "<b>TU:</b> ഒരു വസ്തുവിന്റെ പല യൂണിറ്റുകൾ തുടർച്ചയായി ഉപയോഗിക്കുമ്പോൾ ലഭിക്കുന്ന ഉപയുക്തതയുടെ ആകെ തുക.<br><b>MU:</b> ഒരു അധിക യൂണിറ്റ് ഉപഭോഗം ചെയ്യുമ്പോൾ TU-യിലുണ്ടാകുന്ന മാറ്റം. MU = TUn − TUn−1. ഉദാ: 38 − 20 = 18.", "en": "<b>TU:</b> the sum of utility from consuming several units of a commodity continuously.<br><b>MU:</b> the change in TU from consuming one more unit. MU = TUn − TUn−1. E.g. 38 − 20 = 18."}}, {"m": 4, "q": {"ml": "മൊത്തം ഉപയുക്തതയും സീമാന്ത ഉപയുക്തതയും തമ്മിലുള്ള ബന്ധം വ്യക്തമാക്കുക.", "en": "Explain the relationship between TU and MU."}, "a": {"ml": "• MU കുറയുന്നുവെങ്കിലും പോസിറ്റീവ് ആയിരിക്കുമ്പോൾ TU കൂടുന്നു (കുറഞ്ഞ നിരക്കിൽ).<br>• MU പൂജ്യമാകുമ്പോൾ TU പരമാവധി (ഉദാ: 6-ാം ഓറഞ്ച്, TU = 67).<br>• MU നെഗറ്റീവ് ആകുമ്പോൾ TU കുറയുന്നു (7, 8 യൂണിറ്റുകൾ).<br>• MU വക്രം തുടർച്ചയായി താഴേക്ക് ചരിയുന്നു.", "en": "• While MU falls but stays positive, TU rises (at a decreasing rate).<br>• When MU is zero, TU is maximum (e.g. 6th orange, TU = 67).<br>• When MU is negative, TU falls (units 7, 8).<br>• The MU curve slopes downward continuously."}}, {"m": 2, "q": {"ml": "7, 8 യൂണിറ്റ് ഓറഞ്ച് കഴിക്കുമ്പോൾ സീമാന്ത ഉപയുക്തത നെഗറ്റീവ് ആകുന്നതെന്തുകൊണ്ട്?", "en": "Why does MU become negative at the 7th and 8th oranges?"}, "a": {"ml": "6-ാം യൂണിറ്റിൽ ഉപഭോക്താവ് പൂർണ സംതൃപ്തിയിലെത്തുന്നു (MU = 0). അതിനുശേഷമുള്ള ഉപഭോഗം സംതൃപ്തിക്ക് പകരം അതൃപ്തിയാണ് നൽകുന്നത്. അതിനാൽ MU നെഗറ്റീവ് ആകുകയും TU കുറയുകയും ചെയ്യുന്നു.", "en": "At the 6th unit the consumer reaches full satisfaction (MU = 0). Consuming more gives dissatisfaction instead. So MU turns negative and TU falls."}}, {"m": 3, "q": {"ml": "അപചയ സീമാന്ത ഉപയുക്തത നിയമം നിർവചിക്കുക. രണ്ട് അനുമാനങ്ങൾ എഴുതുക.", "en": "Define the Law of Diminishing Marginal Utility. Write two assumptions."}, "a": {"ml": "മറ്റ് വസ്തുക്കളുടെ ഉപഭോഗത്തിൽ മാറ്റമില്ലാതെ ഒരു സാധനത്തിന്റെ കൂടുതൽ യൂണിറ്റുകൾ തുടർച്ചയായി ഉപഭോഗം ചെയ്യുമ്പോൾ ലഭിക്കുന്ന സീമാന്ത ഉപയുക്തത കുറഞ്ഞുവരുന്നു.<br><b>അനുമാനങ്ങൾ:</b> ഉൽപ്പന്നങ്ങളെല്ലാം ഒരേ ഗുണമേന്മ; ഉപഭോക്താവിന്റെ വരുമാനവും അഭിരുചിയും സ്ഥിരം.", "en": "When more units of a commodity are consumed continuously, with other goods' consumption unchanged, the marginal utility keeps diminishing.<br><b>Assumptions:</b> all units of the same quality; consumer's income and taste constant."}}, {"m": 2, "q": {"ml": "\"ഉപയുക്തതയിൽ നൈതികതയ്ക്ക് പ്രസക്തിയില്ല.\" ഉദാഹരണസഹിതം വ്യക്തമാക്കുക.", "en": "\"Ethics has no relevance in utility.\" Explain with an example."}, "a": {"ml": "എല്ലാ സാധനങ്ങൾക്കും ഉപയുക്തതയുണ്ട്, എന്നാൽ എല്ലാം ഉപയോഗപ്രദമല്ല. സിഗരറ്റ് വലിക്കുന്നയാൾക്ക് അതിൽ നിന്ന് ഉപയുക്തത ലഭിക്കുന്നു; പക്ഷേ സിഗരറ്റ് ഉപയോഗപ്രദമല്ല, ആരോഗ്യത്തിന് ഹാനികരവുമാണ്.", "en": "All goods have utility but not all are useful. A smoker gets utility from a cigarette, yet it is not useful and harms health."}}, {"m": 3, "q": {"ml": "മൂലധനസാധനങ്ങൾ, ഉപഭോഗ സാധനങ്ങൾ എന്നിവ ഉദാഹരണസഹിതം വിശദമാക്കുക.", "en": "Explain capital goods and consumer goods with examples."}, "a": {"ml": "<b>ഉപഭോഗ സാധനങ്ങൾ:</b> ആവശ്യങ്ങൾ നിറവേറ്റാൻ അന്തിമമായി ഉപയോഗിക്കുന്നവ; വീണ്ടും ഉൽപ്പാദനപ്രക്രിയയ്ക്ക് വിധേയമാകാത്തവ — ഭക്ഷണം, വാഹനങ്ങൾ.<br><b>മൂലധനസാധനങ്ങൾ:</b> മറ്റ് ഉൽപ്പന്നങ്ങളും സേവനങ്ങളും ഉൽപ്പാദിപ്പിക്കാൻ നിർമിച്ചവ — ഫാക്ടറികൾ, ഉപകരണങ്ങൾ. ഉപഭോഗത്തിന് ഉപയോഗിക്കുമ്പോൾ അവ മൂലധനസാധനങ്ങളല്ല.", "en": "<b>Consumer goods:</b> used finally to satisfy wants; not put back into production — food, vehicles.<br><b>Capital goods:</b> made to produce other goods and services — factories, machinery. When used for consumption they are not capital goods."}}, {"m": 4, "q": {"ml": "GST-യുടെ സവിശേഷതകൾ എഴുതുക.", "en": "Write the features of GST."}, "a": {"ml": "• ഭരണഘടനയുടെ 101-ാം ഭേദഗതി പ്രകാരം 2017 ജൂലൈ 1-ന് നിലവിൽ വന്നു.<br>• \"ഒരു രാജ്യം : ഒരു നികുതി\" — പല നികുതികൾ ഒന്നാക്കി; സുതാര്യത ലക്ഷ്യം.<br>• നിരക്കുകൾ 5%, 12%, 18%, 28%; ചില ഉൽപ്പന്നങ്ങൾ ഒഴിവാക്കി.<br>• 50% SGST (സംസ്ഥാനം), 50% CGST (കേന്ദ്രം).<br>• 20 ലക്ഷത്തിന് മുകളിൽ വാർഷിക വിറ്റുവരവുള്ളവർക്ക് രജിസ്ട്രേഷൻ നിർബന്ധം.", "en": "• In force from 1 July 2017 under the 101st Constitutional Amendment.<br>• \"One Nation : One Tax\" — merged many taxes; aims at transparency.<br>• Rates 5%, 12%, 18%, 28%; some items exempt.<br>• 50% SGST (State), 50% CGST (Centre).<br>• Registration compulsory for turnover above ₹20 lakh."}}, {"m": 3, "q": {"ml": "ബില്ല് ചോദിച്ചു വാങ്ങേണ്ടതിന്റെ പ്രാധാന്യം എന്ത്?", "en": "Why is it important to ask for a bill?"}, "a": {"ml": "• ബില്ല് ലഭിക്കേണ്ടത് ഉപഭോക്താവിന്റെ അവകാശം.<br>• കബളിപ്പിക്കപ്പെട്ടാൽ പരാതിക്ക് തെളിവ്/രേഖയാകുന്നു.<br>• GST നമ്പറുള്ള ബില്ലിലൂടെ നികുതി സർക്കാരിലെത്തുന്നു — സാമൂഹിക പ്രതിബദ്ധത.", "en": "• A bill is the consumer's right.<br>• It is evidence for a complaint if cheated.<br>• A GST bill ensures tax reaches the government — social responsibility."}}, {"m": 4, "q": {"ml": "ഉപഭോക്തൃ സംരക്ഷണ നിയമം 2019-ന്റെ സവിശേഷതകൾ എഴുതുക.", "en": "Write the features of the Consumer Protection Act 2019."}, "a": {"ml": "• 2020 ജൂലൈ 20-ന് 1986-ലെ നിയമത്തിന് പകരം നിലവിൽ വന്നു.<br>• CCPA സ്ഥാപിച്ചു.<br>• ഇ-കൊമേഴ്‌സിലെ അന്യായ വ്യാപാരം തടയുന്നു.<br>• തർക്കപരിഹാരപ്രക്രിയ ലളിതമാക്കി.<br>• മായം കലർന്ന/വ്യാജ വസ്തുക്കൾക്ക് ശിക്ഷ.<br>• തെറ്റിദ്ധരിപ്പിക്കുന്ന പരസ്യങ്ങൾ തടയുന്നു.<br>• ഉപഭോക്തൃ വിദ്യാഭ്യാസത്തിനുള്ള അവകാശം ഉറപ്പാക്കുന്നു.", "en": "• Replaced the 1986 Act from 20 July 2020.<br>• Set up the CCPA.<br>• Stops unfair trade on e-commerce.<br>• Simplified dispute resolution.<br>• Punishes adulterated/spurious goods.<br>• Prevents misleading ads.<br>• Ensures the right to consumer education."}}, {"m": 5, "q": {"ml": "ഉപഭോക്താവിന്റെ അവകാശങ്ങൾ വിശദമാക്കുക.", "en": "Explain the rights of the consumer."}, "a": {"ml": "• <b>സുരക്ഷിതത്വത്തിനുള്ള അവകാശം</b> — ജീവനും സ്വത്തിനും അപകടകരമായ സാധനസേവനങ്ങളിൽ നിന്ന് രക്ഷ.<br>• <b>തിരഞ്ഞെടുക്കാനുള്ള അവകാശം</b> — മത്സരാധിഷ്ഠിത വിലയിൽ തിരഞ്ഞെടുക്കാൻ.<br>• <b>അറിയാനുള്ള അവകാശം</b> — ഗുണമേന്മ, അളവ്, പരിശുദ്ധി, വില അറിയാൻ.<br>• <b>പരിഹാരം തേടാനുള്ള അവകാശം</b> — അന്യായ വ്യാപാരത്തിനും ചൂഷണത്തിനുമെതിരെ.<br>• <b>ഉപഭോക്തൃ വിദ്യാഭ്യാസത്തിനുള്ള അവകാശം</b> — വിവരമുള്ള ഉപഭോക്താവാകാനുള്ള അറിവും വൈദഗ്ധ്യവും.", "en": "• <b>Right to safety</b> — protection from goods/services hazardous to life and property.<br>• <b>Right to choose</b> — at competitive prices.<br>• <b>Right to information</b> — about quality, quantity, purity, price.<br>• <b>Right to seek redressal</b> — against unfair trade and exploitation.<br>• <b>Right to consumer education</b> — knowledge and skill to be an informed consumer."}}, {"m": 4, "q": {"ml": "ത്രിതല ഉപഭോക്തൃ തർക്ക പരിഹാര സംവിധാനം വിശദമാക്കുക.", "en": "Explain the three-tier consumer dispute redressal system."}, "a": {"ml": "• <b>ജില്ലാ കമ്മീഷൻ</b> — 1 കോടി രൂപ വരെയുള്ള നഷ്ടപരിഹാര കേസുകൾ.<br>• <b>സംസ്ഥാന കമ്മീഷൻ</b> — 1 കോടി മുതൽ 10 കോടി വരെ.<br>• <b>ദേശീയ കമ്മീഷൻ (NCDRC)</b> — 10 കോടിക്ക് മുകളിൽ; അപെക്സ് ബോഡി.<br>• അതിനു മുകളിൽ സുപ്രീം കോടതി. ഇന്ത്യയിൽ 600-ലധികം ജില്ലാ ഫോറങ്ങളും 35 സംസ്ഥാന കമ്മീഷനുകളും.", "en": "• <b>District Commission</b> — compensation up to ₹1 crore.<br>• <b>State Commission</b> — ₹1 crore to ₹10 crore.<br>• <b>National Commission (NCDRC)</b> — above ₹10 crore; apex body.<br>• Above it, the Supreme Court. India has 600+ district forums and 35 state commissions."}}, {"m": 3, "q": {"ml": "ഓൺലൈൻ തട്ടിപ്പിനും ബാങ്കിംഗ് തട്ടിപ്പിനും ഇരയായാൽ സമീപിക്കാവുന്ന മാർഗങ്ങൾ എഴുതുക.", "en": "Where can you complain about online and banking frauds?"}, "a": {"ml": "<b>ഓൺലൈൻ:</b> സൈബർ ക്രൈം സെൽ (cybercrime.gov.in); CERT-In; ദേശീയ ഉപഭോക്തൃ ഹെൽപ്പ്‌ലൈൻ.<br><b>ബാങ്കിംഗ്:</b> ബാങ്ക് ഗ്രീവൻസ് റിഡ്രസ്സൽ (ബ്രാഞ്ച് മാനേജർ); 30 ദിവസത്തിനുള്ളിൽ മറുപടിയില്ലെങ്കിൽ RBI ഓംബുഡ്സ്മാൻ (14448).", "en": "<b>Online:</b> Cyber Crime Cell (cybercrime.gov.in); CERT-In; National Consumer Helpline.<br><b>Banking:</b> bank grievance redressal (branch manager); if no reply in 30 days, the RBI Ombudsman (14448)."}}, {"m": 3, "q": {"ml": "ISI, AGMARK, FSSAI ചിഹ്നങ്ങൾ എന്തിനെ സൂചിപ്പിക്കുന്നു?", "en": "What do the ISI, AGMARK and FSSAI marks indicate?"}, "a": {"ml": "• <b>ISI</b> — BIS നൽകുന്നു; വൈദ്യുത ഉപകരണങ്ങൾ, സിമന്റ്, പേപ്പർ, പെയിന്റ്, ഗ്യാസ് സിലിണ്ടർ തുടങ്ങിയ വ്യാവസായിക ഉൽപ്പന്നങ്ങളുടെ ഗുണനിലവാരം.<br>• <b>AGMARK</b> — കാർഷിക-വന ഉൽപ്പന്നങ്ങളുടെ ഗുണമേന്മ.<br>• <b>FSSAI</b> — ഭക്ഷ്യസുരക്ഷ.", "en": "• <b>ISI</b> — given by BIS; quality of industrial products like electrical appliances, cement, paper, paint, gas cylinders.<br>• <b>AGMARK</b> — quality of agricultural and forest products.<br>• <b>FSSAI</b> — food safety."}}, {"m": 4, "q": {"ml": "ഉപഭോക്തൃ വിദ്യാഭ്യാസം എന്നാലെന്ത്? ലക്ഷ്യങ്ങൾ എഴുതുക.", "en": "What is consumer education? Write its aims."}, "a": {"ml": "അവകാശങ്ങൾ, ഉത്തരവാദിത്വങ്ങൾ, സാധനസേവന തിരഞ്ഞെടുപ്പ്, വിപണിയിലെ വ്യത്യാസങ്ങൾ, ഉപഭോക്തൃ നിയമങ്ങൾ എന്നിവയെക്കുറിച്ച് അറിവ് നൽകുന്നത്.<br><b>ലക്ഷ്യങ്ങൾ:</b> അവകാശസംരക്ഷണം; ഉത്തരവാദിത്വബോധം; ഓൺലൈൻ വ്യാപാരത്തിൽ സുരക്ഷ; വിപണിയിലെ ധാർമികതയും ചട്ടങ്ങളും തിരിച്ചറിയൽ; നിയമത്തെക്കുറിച്ച് ബോധവൽക്കരണം; ആരോഗ്യസുരക്ഷ; ഉപഭോക്തൃനീതി.", "en": "Giving knowledge about rights, responsibilities, choice of goods/services, market differences and consumer laws.<br><b>Aims:</b> protect rights; awareness of responsibilities; safety in online trade; recognise market ethics and rules; awareness of the law; health safety; consumer justice."}}];
+(function(){
+  var h='';
+  QA.forEach(function(x,i){
+    h+='<div class="qa"><div class="qa-q" onclick="this.parentNode.classList.toggle(\'open\')"><span>'+(i+1)+'.</span><span><span class="ml">'+x.q.ml+'</span><span class="en">'+x.q.en+'</span></span><span class="mk">'+x.m+' Mark'+(x.m>1?'s':'')+'</span></div><div class="qa-a"><span class="ml">'+x.a.ml+'</span><span class="en">'+x.a.en+'</span></div></div>';
+  });
+  document.getElementById('qaList').innerHTML=h;
+})();
+function toggleAllQA(s){document.querySelectorAll('.qa').forEach(function(q){q.classList.toggle('open',s);});}
+
+/* ---------- 20 MARK QUIZ ---------- */
+var QUIZ = [{"q": {"ml": "ഉപഭോക്തൃ സംതൃപ്തി അളക്കാൻ ആദ്യശ്രമം നടത്തിയ സാമ്പത്തിക ശാസ്ത്രജ്ഞൻ?", "en": "Who first tried to measure consumer satisfaction?"}, "o": [{"ml": "ആഡം സ്മിത്ത്", "en": "Adam Smith"}, {"ml": "ആൽഫ്രഡ് മാർഷൽ", "en": "Alfred Marshall"}, {"ml": "ജെ.എം. കെയ്ൻസ്", "en": "J.M. Keynes"}, {"ml": "അമർത്യ സെൻ", "en": "Amartya Sen"}], "a": 1, "e": {"ml": "ആൽഫ്രഡ് മാർഷൽ.", "en": "Alfred Marshall."}}, {"q": {"ml": "ഉപയുക്തത അളക്കുന്ന യൂണിറ്റ്?", "en": "The unit of utility is —"}, "o": [{"ml": "യൂട്ടിൽസ്", "en": "Utils"}, {"ml": "രൂപ", "en": "Rupees"}, {"ml": "കിലോഗ്രാം", "en": "Kilogram"}, {"ml": "ശതമാനം", "en": "Percent"}], "a": 0, "e": {"ml": "യൂട്ടിൽസ് (Utils).", "en": "Utils."}}, {"q": {"ml": "ആദ്യ ഓറഞ്ചിന് 20, രണ്ടാമത്തേതിന് ശേഷം TU 38. രണ്ടാമത്തെ ഓറഞ്ചിന്റെ MU?", "en": "TU is 20 after one orange and 38 after two. MU of the 2nd orange?"}, "o": [{"ml": "38", "en": "38"}, {"ml": "20", "en": "20"}, {"ml": "18", "en": "18"}, {"ml": "58", "en": "58"}], "a": 2, "e": {"ml": "MU = 38 − 20 = 18.", "en": "MU = 38 − 20 = 18."}}, {"q": {"ml": "സീമാന്ത ഉപയുക്തത പൂജ്യമാകുമ്പോൾ മൊത്തം ഉപയുക്തത —", "en": "When MU is zero, TU is —"}, "o": [{"ml": "പൂജ്യം", "en": "Zero"}, {"ml": "പരമാവധി", "en": "Maximum"}, {"ml": "നെഗറ്റീവ്", "en": "Negative"}, {"ml": "കുറയുന്നു", "en": "Falling"}], "a": 1, "e": {"ml": "MU = 0 ആകുമ്പോൾ TU പരമാവധി (67).", "en": "When MU = 0, TU is at its maximum (67)."}}, {"q": {"ml": "സീമാന്ത ഉപയുക്തത നെഗറ്റീവ് ആകുമ്പോൾ മൊത്തം ഉപയുക്തത —", "en": "When MU is negative, TU —"}, "o": [{"ml": "കൂടുന്നു", "en": "Rises"}, {"ml": "സ്ഥിരമാകുന്നു", "en": "Stays constant"}, {"ml": "കുറയുന്നു", "en": "Falls"}, {"ml": "പൂജ്യമാകുന്നു", "en": "Becomes zero"}], "a": 2, "e": {"ml": "MU നെഗറ്റീവ് → TU കുറയുന്നു.", "en": "Negative MU → TU falls."}}, {"q": {"ml": "സംതൃപ്തി എണ്ണൽസംഖ്യ ഉപയോഗിച്ച് തിട്ടപ്പെടുത്താമെന്ന വാദം?", "en": "The theory that satisfaction can be measured in cardinal numbers?"}, "o": [{"ml": "ഓർഡിനൽ വാദം", "en": "Ordinal theory"}, {"ml": "കാർഡിനൽ ഉപയുക്തതാവാദം", "en": "Cardinal utility theory"}, {"ml": "ചോദന നിയമം", "en": "Law of demand"}, {"ml": "ഉൽപ്പാദന വാദം", "en": "Production theory"}], "a": 1, "e": {"ml": "കാർഡിനൽ ഉപയുക്തതാവാദം.", "en": "Cardinal Utility Theory."}}, {"q": {"ml": "അപചയ സീമാന്ത ഉപയുക്തത നിയമത്തിന്റെ അനുമാനം ഏത്?", "en": "Which is an assumption of the Law of Diminishing MU?"}, "o": [{"ml": "വരുമാനം മാറിക്കൊണ്ടിരിക്കണം", "en": "Income keeps changing"}, {"ml": "ഉൽപ്പന്നങ്ങൾ ഒരേ ഗുണമേന്മയുള്ളതായിരിക്കണം", "en": "All units are of the same quality"}, {"ml": "ഉപഭോഗം ഇടവിട്ടായിരിക്കണം", "en": "Consumption with long gaps"}, {"ml": "അഭിരുചി മാറണം", "en": "Taste changes"}], "a": 1, "e": {"ml": "ഒരേ ഗുണമേന്മ; വരുമാനവും അഭിരുചിയും സ്ഥിരം.", "en": "Same quality; income and taste constant."}}, {"q": {"ml": "സൂര്യപ്രകാശവും വായുവും ഏത് തരം സാധനങ്ങൾ?", "en": "Sunlight and air are —"}, "o": [{"ml": "സൗജന്യസാധനങ്ങൾ", "en": "Free goods"}, {"ml": "ഇക്കണോമിക് സാധനങ്ങൾ", "en": "Economic goods"}, {"ml": "മൂലധനസാധനങ്ങൾ", "en": "Capital goods"}, {"ml": "ഈട് നിൽക്കുന്ന സാധനങ്ങൾ", "en": "Durable goods"}], "a": 0, "e": {"ml": "പ്രകൃതിയിൽ ധാരാളമുള്ള, വില നൽകേണ്ടാത്തവ — സൗജന്യസാധനങ്ങൾ.", "en": "Abundant in nature with no price — free goods."}}, {"q": {"ml": "ഫാക്ടറികളും യന്ത്രങ്ങളും ഏത് വിഭാഗത്തിൽ?", "en": "Factories and machinery are —"}, "o": [{"ml": "ഉപഭോഗ സാധനങ്ങൾ", "en": "Consumer goods"}, {"ml": "സൗജന്യസാധനങ്ങൾ", "en": "Free goods"}, {"ml": "മൂലധനസാധനങ്ങൾ", "en": "Capital goods"}, {"ml": "ഈട് നിൽക്കാത്ത സാധനങ്ങൾ", "en": "Non-durable goods"}], "a": 2, "e": {"ml": "മറ്റ് ഉൽപ്പന്നങ്ങൾ ഉൽപ്പാദിപ്പിക്കാനുള്ളവ — മൂലധനസാധനങ്ങൾ.", "en": "Used to produce other goods — capital goods."}}, {"q": {"ml": "ഇന്ത്യയിൽ GST നിലവിൽ വന്നത്?", "en": "GST came into force in India on —"}, "o": [{"ml": "2016 ഏപ്രിൽ 1", "en": "1 April 2016"}, {"ml": "2017 ജൂലൈ 1", "en": "1 July 2017"}, {"ml": "2019 ജനുവരി 1", "en": "1 January 2019"}, {"ml": "2020 ജൂലൈ 20", "en": "20 July 2020"}], "a": 1, "e": {"ml": "ഭരണഘടനയുടെ 101-ാം ഭേദഗതി; 2017 ജൂലൈ 1.", "en": "101st Amendment; 1 July 2017."}}, {"q": {"ml": "GST-യുടെ എത്ര ശതമാനമാണ് സംസ്ഥാന സർക്കാരിന് (SGST) ലഭിക്കുന്നത്?", "en": "What share of GST goes to the State (SGST)?"}, "o": [{"ml": "25%", "en": "25%"}, {"ml": "40%", "en": "40%"}, {"ml": "50%", "en": "50%"}, {"ml": "75%", "en": "75%"}], "a": 2, "e": {"ml": "50% SGST, 50% CGST.", "en": "50% SGST, 50% CGST."}}, {"q": {"ml": "ഇന്ത്യയിൽ ഉപഭോക്തൃ സംരക്ഷണ പ്രസ്ഥാനം ആരംഭിച്ചത്?", "en": "India's consumer protection movement began with —"}, "o": [{"ml": "1966-ൽ കൺസ്യൂമർ ഗൈഡൻസ് സൊസൈറ്റി ഓഫ് ഇന്ത്യ, ബോംബെ", "en": "Consumer Guidance Society of India, Bombay, 1966"}, {"ml": "1986-ൽ ഡൽഹിയിൽ NCDRC", "en": "NCDRC, Delhi, 1986"}, {"ml": "1947-ൽ BIS", "en": "BIS, 1947"}, {"ml": "2019-ൽ CCPA", "en": "CCPA, 2019"}], "a": 0, "e": {"ml": "1966, ബോംബെ.", "en": "1966, Bombay."}}, {"q": {"ml": "ദേശീയ ഉപഭോക്തൃദിനം?", "en": "National Consumer Day is —"}, "o": [{"ml": "മാർച്ച് 15", "en": "15 March"}, {"ml": "ഡിസംബർ 24", "en": "24 December"}, {"ml": "ജൂലൈ 1", "en": "1 July"}, {"ml": "ഒക്ടോബർ 2", "en": "2 October"}], "a": 1, "e": {"ml": "1986 ഡിസംബർ 24-ന് നിയമം നിലവിൽ വന്നതിന്റെ ഓർമ്മ.", "en": "Marks the 1986 Act coming into force on 24 December."}}, {"q": {"ml": "ഉപഭോക്തൃ സംരക്ഷണ നിയമം 2019 നിലവിൽ വന്നത്?", "en": "The Consumer Protection Act 2019 came into force on —"}, "o": [{"ml": "2019 ഡിസംബർ 24", "en": "24 December 2019"}, {"ml": "2020 ജൂലൈ 20", "en": "20 July 2020"}, {"ml": "2017 ജൂലൈ 1", "en": "1 July 2017"}, {"ml": "2021 ജനുവരി 1", "en": "1 January 2021"}], "a": 1, "e": {"ml": "2020 ജൂലൈ 20.", "en": "20 July 2020."}}, {"q": {"ml": "2019-ലെ നിയമപ്രകാരം സ്ഥാപിച്ച അതോറിറ്റി?", "en": "Which authority was set up under the 2019 Act?"}, "o": [{"ml": "RBI", "en": "RBI"}, {"ml": "SEBI", "en": "SEBI"}, {"ml": "CCPA", "en": "CCPA"}, {"ml": "TRAI", "en": "TRAI"}], "a": 2, "e": {"ml": "സെൻട്രൽ കൺസ്യൂമർ പ്രൊട്ടക്ഷൻ അതോറിറ്റി (CCPA).", "en": "Central Consumer Protection Authority (CCPA)."}}, {"q": {"ml": "ഗുണമേന്മ, അളവ്, പരിശുദ്ധി, വിലനിലവാരം എന്നിവ അറിയാനുള്ള അവകാശം?", "en": "The right to know quality, quantity, purity and price is —"}, "o": [{"ml": "സുരക്ഷിതത്വത്തിനുള്ള അവകാശം", "en": "Right to safety"}, {"ml": "തിരഞ്ഞെടുക്കാനുള്ള അവകാശം", "en": "Right to choose"}, {"ml": "അറിയാനുള്ള അവകാശം", "en": "Right to information"}, {"ml": "പരിഹാരം തേടാനുള്ള അവകാശം", "en": "Right to seek redressal"}], "a": 2, "e": {"ml": "അറിയാനുള്ള അവകാശം.", "en": "Right to information."}}, {"q": {"ml": "5 കോടി രൂപ നഷ്ടപരിഹാരം ആവശ്യപ്പെടുന്ന കേസ് പരിഗണിക്കുന്നത്?", "en": "A case claiming ₹5 crore compensation goes to —"}, "o": [{"ml": "ജില്ലാ കമ്മീഷൻ", "en": "District Commission"}, {"ml": "സംസ്ഥാന കമ്മീഷൻ", "en": "State Commission"}, {"ml": "ദേശീയ കമ്മീഷൻ", "en": "National Commission"}, {"ml": "സുപ്രീം കോടതി", "en": "Supreme Court"}], "a": 1, "e": {"ml": "1 കോടി മുതൽ 10 കോടി വരെ — സംസ്ഥാന കമ്മീഷൻ.", "en": "₹1–10 crore — State Commission."}}, {"q": {"ml": "ബാങ്ക് 30 ദിവസത്തിനുള്ളിൽ മറുപടി നൽകിയില്ലെങ്കിൽ സമീപിക്കേണ്ടത്?", "en": "If the bank does not reply within 30 days, approach —"}, "o": [{"ml": "സൈബർ സെൽ", "en": "Cyber Cell"}, {"ml": "RBI ഓംബുഡ്സ്മാൻ", "en": "RBI Ombudsman"}, {"ml": "POE", "en": "POE"}, {"ml": "FSSAI", "en": "FSSAI"}], "a": 1, "e": {"ml": "RBI ഓംബുഡ്സ്മാൻ — ടോൾ ഫ്രീ 14448.", "en": "RBI Ombudsman — toll-free 14448."}}, {"q": {"ml": "കാർഷിക-വന ഉൽപ്പന്നങ്ങളുടെ ഗുണമേന്മ ഉറപ്പാക്കുന്ന ചിഹ്നം?", "en": "The quality mark for agricultural and forest products is —"}, "o": [{"ml": "ISI", "en": "ISI"}, {"ml": "AGMARK", "en": "AGMARK"}, {"ml": "FSSAI", "en": "FSSAI"}, {"ml": "BIS Hallmark", "en": "BIS Hallmark"}], "a": 1, "e": {"ml": "AGMARK. ISI — വ്യാവസായിക ഉൽപ്പന്നങ്ങൾ; FSSAI — ഭക്ഷ്യസുരക്ഷ.", "en": "AGMARK. ISI — industrial; FSSAI — food safety."}}, {"q": {"ml": "ദേശീയ ഉപഭോക്തൃ ഹെൽപ്പ്‌ലൈൻ നമ്പർ?", "en": "The National Consumer Helpline number is —"}, "o": [{"ml": "1800-11-4000", "en": "1800-11-4000"}, {"ml": "14448", "en": "14448"}, {"ml": "1800-11-3090", "en": "1800-11-3090"}, {"ml": "112", "en": "112"}], "a": 0, "e": {"ml": "1800-11-4000 — ജാഗോ ഗ്രാഹക് ജാഗോ.", "en": "1800-11-4000 — Jago Grahak Jago."}}];
+
+var quizState = {stage:'start', name:'', order:[], i:0, answers:[], t0:0, timer:null, secs:0, shuffled:{}};
+var QUIZ_TIME = 20*60;
+
+function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+
+function renderStart(){
+  quizState.stage='start';
+  document.getElementById('quizBox').innerHTML =
+   '<div class="quiz-start"><div class="big">🏆</div>'+
+   '<h2><span class="ml">20 മാർക്ക് ക്വിസ്</span><span class="en">20 Mark Quiz</span></h2>'+
+   '<p><span class="ml">അധ്യായം മുഴുവൻ ഉൾക്കൊള്ളുന്ന 20 ചോദ്യങ്ങൾ · ഓരോന്നിനും 1 മാർക്ക് · 20 മിനിറ്റ്</span><span class="en">20 questions covering the whole chapter · 1 mark each · 20 minutes</span></p>'+
+   '<input class="q-input" id="stuName" placeholder="Student name / പേര്" value="'+(quizState.name||'').replace(/"/g,'&quot;')+'">'+
+   '<br><button class="btn btn-big btn-red" onclick="startQuiz()">Start Quiz ▶</button>'+
+   '<div class="share-row">'+shareButtons()+'</div></div>';
+}
+function startQuiz(){
+  var n=document.getElementById('stuName').value.trim();
+  if(!n){ document.getElementById('stuName').focus(); document.getElementById('stuName').style.borderColor='#d64545'; return; }
+  quizState.name=n;
+  quizState.order=shuffle(QUIZ.map(function(_,i){return i;}));
+  quizState.shuffled={};
+  quizState.order.forEach(function(qi){ quizState.shuffled[qi]=shuffle([0,1,2,3]); });
+  quizState.i=0; quizState.answers=[]; quizState.secs=QUIZ_TIME; quizState.stage='q';
+  clearInterval(quizState.timer);
+  quizState.timer=setInterval(function(){
+    quizState.secs--;
+    var el=document.getElementById('qTimer'); if(el) el.textContent='⏱ '+fmt(quizState.secs);
+    if(quizState.secs<=0){ clearInterval(quizState.timer); finishQuiz(); }
+  },1000);
+  renderQuestion();
+}
+function fmt(s){ s=Math.max(0,s); return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2); }
+function renderQuestion(){
+  var qi=quizState.order[quizState.i], Q=QUIZ[qi], ord=quizState.shuffled[qi];
+  var done=quizState.answers[quizState.i];
+  var h='<div class="q-top"><span class="pill">Q '+(quizState.i+1)+' / 20</span><span class="pill">✔ '+score()+'</span><span class="spacer"></span><span class="pill t" id="qTimer">⏱ '+fmt(quizState.secs)+'</span></div>';
+  h+='<div class="bar"><i style="width:'+((quizState.i)/20*100)+'%"></i></div>';
+  h+='<div class="q-text">'+L(Q.q)+'</div>';
+  ord.forEach(function(oi,k){
+    var cls='';
+    if(done!==undefined){ if(oi===Q.a) cls='ok'; else if(oi===done) cls='no'; }
+    h+='<button class="opt '+cls+'" '+(done!==undefined?'disabled':'')+' onclick="pick('+oi+')"><span class="L">'+'ABCD'[k]+'</span><span>'+L(Q.o[oi])+'</span></button>';
+  });
+  h+='<div class="exp '+(done!==undefined?'show':'')+'">💡 '+L(Q.e)+'</div>';
+  h+='<div class="q-nav">'+(done!==undefined?'<button class="btn btn-big btn-g" onclick="nextQ()">'+(quizState.i<19?'Next ▶':'See Result 🏁')+'</button>':'')+'</div>';
+  document.getElementById('quizBox').innerHTML=h;
+}
+function pick(oi){
+  if(quizState.answers[quizState.i]!==undefined) return;
+  quizState.answers[quizState.i]=oi;
+  renderQuestion();
+}
+function nextQ(){
+  if(quizState.i<19){ quizState.i++; renderQuestion(); }
+  else finishQuiz();
+}
+function score(){
+  var s=0; quizState.answers.forEach(function(a,i){ if(a===QUIZ[quizState.order[i]].a) s++; }); return s;
+}
+function finishQuiz(){
+  clearInterval(quizState.timer);
+  quizState.stage='done';
+  quizState.used=QUIZ_TIME-Math.max(0,quizState.secs);
+  renderResult();
+}
+function grade(s){
+  if(s>=18) return {g:'A+',ml:'അതിഗംഭീരം! 🌟',en:'Outstanding! 🌟'};
+  if(s>=16) return {g:'A',ml:'വളരെ നല്ലത്! 👏',en:'Excellent! 👏'};
+  if(s>=14) return {g:'B+',ml:'നല്ല പ്രകടനം 👍',en:'Very good 👍'};
+  if(s>=12) return {g:'B',ml:'നല്ലത് — കുറച്ചുകൂടി ശ്രമിക്കൂ',en:'Good — a little more effort'};
+  if(s>=10) return {g:'C+',ml:'നോട്ടുകൾ വീണ്ടും വായിക്കൂ',en:'Revise the notes again'};
+  if(s>=8) return {g:'C',ml:'കൂടുതൽ പഠിക്കണം',en:'Needs more study'};
+  return {g:'D',ml:'നോട്ടുകൾ ശ്രദ്ധയോടെ വായിച്ച് വീണ്ടും ശ്രമിക്കൂ',en:'Read the notes carefully and try again'};
+}
+function renderResult(){
+  var s=score(), g=grade(s), p=s/20*100;
+  var h='<div class="result"><h2>'+quizState.name+'</h2>';
+  h+='<div class="ring" style="--p:'+p+'"><div><span>'+s+'/20<small>'+Math.round(p)+'%</small></span></div></div>';
+  h+='<div class="grade">Grade '+g.g+'</div><p>'+L(g)+'</p>';
+  h+='<p style="color:var(--muted);font-size:13px">⏱ '+fmt(quizState.used||0)+' · '+quizState.answers.length+'/20 attempted</p>';
+  h+='<div class="res-btns"><button class="btn btn-big btn-g" onclick="startQuizAgain()">↻ Retry</button><button class="btn btn-big btn-wa" onclick="shareWA()">Share Score on WhatsApp</button>'+shareButtons()+'</div>';
+  h+='<div class="review"><h3>Review</h3>';
+  quizState.order.forEach(function(qi,i){
+    var Q=QUIZ[qi], a=quizState.answers[i], ok=a===Q.a;
+    h+='<div class="rv '+(ok?'r':'w')+'"><b>'+(i+1)+'. '+L(Q.q)+'</b><br>'+
+       (ok?'✅ ':'❌ '+(a===undefined?'—':L(Q.o[a]))+' &nbsp;→&nbsp; ✅ ')+'<b>'+L(Q.o[Q.a])+'</b></div>';
+  });
+  h+='</div></div>';
+  document.getElementById('quizBox').innerHTML=h;
+}
+function startQuizAgain(){ renderStart(); }
+function shareWA(){
+  var s=score(), g=grade(s);
+  var msg='🏆 *ABACUS ACADEMY — SSLC Social Science II Unit 4 Quiz*\n'+
+    'ഉപഭോക്താവ്: അവകാശങ്ങളും സംരക്ഷണവും\n\n'+
+    '👤 '+quizState.name+'\n✅ Score: '+s+'/20\n🎖 Grade: '+g.g+'\n⏱ Time: '+fmt(quizState.used||0);
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+}
+
+
+/* ---------- TU / MU chart ---------- */
+(function(){
+  var svg=document.getElementById('uChart'); if(!svg) return;
+  var TU=[20,38,53,63,67,67,64,57], MU=[20,18,15,10,4,0,-3,-7];
+  var W=560,H=320,L=44,R=16,T=22,B=44, y0=-10,y1=80;
+  function X(i){return L+(i+0.5)*(W-L-R)/8;} function Y(v){return T+(y1-v)*(H-T-B)/(y1-y0);}
+  var s='';
+  for(var g=-10; g<=80; g+=10){ s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(g)+'" y2="'+Y(g)+'" stroke="'+(g===0?'#9aa5b1':'#e7ecea')+'" stroke-width="1"/><text x="'+(L-6)+'" y="'+(Y(g)+4)+'" text-anchor="end">'+g+'</text>'; }
+  for(var i=0;i<8;i++) s+='<text x="'+X(i)+'" y="'+(H-B+20)+'" text-anchor="middle">'+(i+1)+'</text>';
+  s+='<text x="'+((L+W-R)/2)+'" y="'+(H-4)+'" text-anchor="middle" class="axl">Oranges (units)</text>';
+  function path(d){return d.map(function(v,i){return (i?'L':'M')+X(i)+' '+Y(v);}).join(' ');}
+  s+='<line id="cx" x1="0" x2="0" y1="'+T+'" y2="'+(H-B)+'" stroke="#9aa5b1" stroke-width="1" opacity="0"/>';
+  s+='<path d="'+path(TU)+'" fill="none" stroke="#d9730d" stroke-width="2"/>';
+  s+='<path d="'+path(MU)+'" fill="none" stroke="#0f7a4a" stroke-width="2" stroke-dasharray="6 4"/>';
+  TU.forEach(function(v,i){ s+='<circle cx="'+X(i)+'" cy="'+Y(v)+'" r="4" fill="#d9730d" stroke="#fff" stroke-width="2"/>'; });
+  MU.forEach(function(v,i){ s+='<circle cx="'+X(i)+'" cy="'+Y(v)+'" r="4" fill="#0f7a4a" stroke="#fff" stroke-width="2"/>'; });
+  s+='<text class="lbl" x="'+(X(7)-4)+'" y="'+(Y(57)-10)+'" text-anchor="end">TU</text>';
+  s+='<text class="lbl" x="'+(X(7)-4)+'" y="'+(Y(-7)-10)+'" text-anchor="end">MU</text>';
+  s+='<text class="lbl" x="'+X(5)+'" y="'+(Y(67)-10)+'" text-anchor="middle">max 67</text>';
+  for(var j=0;j<8;j++) s+='<rect class="hit" data-i="'+j+'" x="'+(X(j)-(W-L-R)/16)+'" y="'+T+'" width="'+((W-L-R)/8)+'" height="'+(H-T-B)+'" fill="transparent"/>';
+  svg.innerHTML=s;
+  var tip=document.getElementById('uTip'), cx=document.getElementById('cx');
+  function show(i){
+    var r=svg.getBoundingClientRect(), k=r.width/W;
+    tip.innerHTML='<b>'+(i+1)+' 🍊</b> &nbsp;TU '+TU[i]+' · MU '+MU[i];
+    tip.style.left=(X(i)*k)+'px'; tip.style.top=(Y(Math.max(TU[i],MU[i]))*k)+'px'; tip.classList.add('show');
+    cx.setAttribute('x1',X(i)); cx.setAttribute('x2',X(i)); cx.setAttribute('opacity',1);
+  }
+  function hide(){ tip.classList.remove('show'); cx.setAttribute('opacity',0); }
+  svg.querySelectorAll('.hit').forEach(function(h){
+    h.addEventListener('mouseenter',function(){show(+h.dataset.i);});
+    h.addEventListener('touchstart',function(){show(+h.dataset.i);},{passive:true});
+  });
+  svg.addEventListener('mouseleave',hide);
+})();
+
+/* ---------- Quiz share link ---------- */
+function quizURL(){ return location.href.split('#')[0].split('?')[0]+'#quiz'; }
+function isQuizOnly(){ return location.hash==='#quiz'; }
+function shareButtons(){
+  return isQuizOnly()
+    ? '<button class="btn btn-big btn-share" onclick="shareQuizLink()">🔗 Share Quiz Link</button>'
+    : '<button class="btn btn-big btn-share" onclick="openQuizTab()">🔗 Share Quiz</button>';
+}
+function openQuizTab(){ window.open(location.href.split('#')[0].split('?')[0].replace(/[^\/]*$/,'geography-unit4-quiz.html'),'_blank'); }
+function toast(t){ var e=document.getElementById('toast'); e.textContent=t; e.classList.add('show'); setTimeout(function(){e.classList.remove('show');},2200); }
+function shareQuizLink(){
+  var url=quizURL(), text='🏆 Abacus Academy — SSLC Social Science II Unit 4 · 20 Mark Quiz\nഉപഭോക്താവ്: അവകാശങ്ങളും സംരക്ഷണവും';
+  if(navigator.share){ navigator.share({title:'SS II Unit 4 Quiz',text:text,url:url}).catch(function(){}); return; }
+  window.open('https://wa.me/?text='+encodeURIComponent(text+'\n'+url),'_blank');
+}
+function applyQuizOnly(){
+  if(!isQuizOnly()) return;
+  document.body.classList.add('quiz-only');
+  document.title='SS II Unit 4 Quiz | Abacus Academy';
+}
+
+/* ---------- Init ---------- */
+(function(){
+  var l='ml'; try{ l=localStorage.getItem('geo4_lang')||'ml'; }catch(e){}
+  applyQuizOnly();
+  renderStart();
+  setLang(l);
+})();
+</script>
+</body>
+</html>
