@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Daily Exam — Behind the Senses | Biology</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
+<style>:root{--p:#1d6fd8;--pd:#0f3f86;--hd:#1d6fd8;--ac:#f59e0b;--bg:#f2f6fc;--card:#ffffff;--ink:#15233b;--mut:#5b6b84;--line:#d9e4f4;--soft:#e8f0fc;--ok:#1f8a4c;--okbg:#dcf3e6;--bad:#c0392b;--badbg:#fbe3df}</style>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.55;min-height:100vh}
+body[data-lang="ml"]{font-family:'Noto Sans Malayalam','Segoe UI',system-ui,sans-serif}
+header{background:linear-gradient(135deg,var(--pd),var(--hd));color:#fff;padding:22px 18px 46px;position:relative}
+.hin{max-width:620px;margin:0 auto;display:flex;align-items:flex-start;gap:12px}
+.hin div{flex:1}
+header h1{margin:0 0 3px;font-size:1.35rem}
+header p{margin:0;opacity:.88;font-size:.88rem}
+#langBtn{border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.14);color:#fff;padding:7px 12px;border-radius:999px;cursor:pointer;font:inherit;font-size:.82rem;font-weight:600;white-space:nowrap}
+main{max-width:620px;margin:-30px auto 30px;padding:0 14px;position:relative}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.card h2{margin:0 0 4px;font-size:1.15rem}
+.muted{color:var(--mut);font-size:.88rem;margin:0 0 16px}
+label{display:block;font-weight:600;font-size:.85rem;margin:0 0 6px}
+input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font:inherit;font-size:1.05rem;background:var(--card);color:var(--ink);margin-bottom:12px}
+input:focus{outline:none;border-color:var(--p)}
+.btn{display:block;width:100%;border:none;background:var(--p);color:#fff;padding:12px 16px;border-radius:10px;font:inherit;font-weight:700;font-size:.98rem;cursor:pointer}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.alt{background:transparent;color:var(--p);border:1.5px solid var(--p)}
+.btns{display:flex;gap:10px;margin-top:16px}
+.btns .btn{flex:1}
+.who{min-height:8px;margin:0 0 12px}
+.who .s{font-size:.88rem;color:var(--mut)}
+.who .e{font-size:.88rem;color:var(--bad)}
+.stu{display:flex;align-items:center;gap:12px;background:var(--soft);border:1.5px solid var(--p);border-radius:12px;padding:12px 14px}
+.av{width:44px;height:44px;border-radius:50%;background:var(--p);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.15rem;flex-shrink:0}
+.stu b{display:block;font-size:1.05rem}
+.stu span{font-size:.8rem;color:var(--mut)}
+.warn{margin-top:10px;background:var(--badbg);color:var(--bad);border-radius:10px;padding:10px 12px;font-size:.86rem}
+.note{font-size:.78rem;color:var(--mut);text-align:center;margin:12px 0 0}
+.gate{text-align:center;padding:10px 0}
+.gate .ic{font-size:2.6rem}
+.gate .clk{font-size:1.6rem;font-weight:700;color:var(--p);margin-top:8px;font-variant-numeric:tabular-nums}
+.strip{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:.82rem;margin-bottom:12px}
+.strip b{color:var(--p)}
+.chip{background:var(--soft);border-radius:999px;padding:4px 10px;font-weight:600}
+.bar{height:7px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:18px}
+.bar i{display:block;height:100%;background:var(--ac);border-radius:99px;transition:width .3s}
+.qn{font-size:.78rem;font-weight:700;color:var(--ac);text-transform:uppercase;letter-spacing:.04em}
+.qt{font-size:1.06rem;font-weight:600;margin:4px 0 12px}
+.qb{padding:0 0 18px;margin:0 0 18px;border-bottom:1px dashed var(--line)}
+.qb:last-of-type{border-bottom:none}
+.opt{display:flex;align-items:center;gap:10px;width:100%;text-align:left;margin:7px 0;padding:10px 12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;cursor:pointer;font:inherit;font-size:.95rem}
+.opt:hover:not(:disabled){border-color:var(--p)}
+.opt .k{width:26px;height:26px;border-radius:50%;background:var(--soft);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0}
+.opt:disabled{cursor:default}
+.opt.ok{background:var(--okbg);border-color:var(--ok)}
+.opt.ok .k{background:var(--ok);color:#fff}
+.opt.no{background:var(--badbg);border-color:var(--bad)}
+.opt.no .k{background:var(--bad);color:#fff}
+.left{text-align:center;font-size:.82rem;color:var(--mut);margin-top:8px}
+.ring{width:150px;height:150px;border-radius:50%;margin:6px auto 12px;display:flex;align-items:center;justify-content:center}
+.ring div{width:118px;height:118px;border-radius:50%;background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring b{font-size:2.2rem;line-height:1;color:var(--p)}
+.ring span{font-size:.85rem;color:var(--mut)}
+.rmsg{text-align:center;font-weight:600;font-size:1.05rem}
+.rwho{text-align:center;font-size:.85rem;color:var(--mut);margin-bottom:6px}
+.save{text-align:center;font-size:.85rem;margin-top:12px;padding:9px;border-radius:10px;background:var(--soft)}
+.save.ok{background:var(--okbg);color:var(--ok)}
+.save.bad{background:var(--badbg);color:var(--bad)}
+.save button{margin-left:6px;border:none;background:none;color:inherit;font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}
+.rv{margin-top:18px}
+.rv h3{font-size:.95rem;margin:0 0 8px}
+.rvi{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:.88rem}
+.rvi p{margin:0 0 4px;font-weight:600}
+.rvi .y{color:var(--bad)}
+.rvi .c{color:var(--ok)}
+footer{text-align:center;font-size:.78rem;color:var(--mut);margin:0 0 20px}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<header><div class="hin"><div><h1 id="hTitle"></h1><p id="hSub"></p></div><button id="langBtn"></button></div></header>
+<main id="app"></main>
+<footer>Abacus Academy · EduPro Study Tools</footer>
+<script>
+/* Made with Abacus Quiz Builder */
+const CFG = {"titleEn":"Daily Exam","titleMl":"ദിവസേനയുള്ള പരീക്ഷ","subject":"Biology","subjectMl":"ജീവശാസ്ത്രം","chapter":"Behind the Senses","chapterMl":"സംവേദനങ്ങൾക്കുപിന്നിൽ","cls":"10","unit":"Unit 3","quizName":"Behind the Senses | Biology Unit 3","openHour":-1,"layout":"one","shuffle":false,"theme":"ocean","supaOn":true,"supaUrl":"https://wrzssivgxituefcwobbr.supabase.co","supaKey":"sb_publishable_3mi5iJCxekZfiyXojUFtQg_gDASyEWm","preview":false};
+const QUIZ = [{"q":"What are the conditions that trigger responses in organisms called?","q_ml":"ജീവികളിൽ പ്രതികരണത്തിന് കാരണമാകുന്ന സാഹചര്യങ്ങളെ എന്ത് വിളിക്കുന്നു?","opts":["Receptors","Stimuli","Neurons","Hormones"],"opts_ml":["ഗ്രാഹികൾ","ഉദ്ദീപനങ്ങൾ","ന്യൂറോണുകൾ","ഹോർമോണുകൾ"],"ans":1},{"q":"What is the electrical signal generated in a receptor called?","q_ml":"ഗ്രാഹികളിൽ ഉണ്ടാകുന്ന വൈദ്യുത സന്ദേശത്തിന്റെ പേരെന്ത്?","opts":["Action potential","Resting potential","Receptor potential","Synaptic potential"],"opts_ml":["ആക്ഷൻ പൊട്ടൻഷ്യൽ","റെസ്റ്റിംഗ് പൊട്ടൻഷ്യൽ","റിസപ്റ്റർ പൊട്ടൻഷ്യൽ","സിനാപ്റ്റിക് പൊട്ടൻഷ്യൽ"],"ans":2},{"q":"What is the middle layer of the eye called?","q_ml":"കണ്ണിന്റെ മധ്യപാളി (Choroid) യുടെ മലയാളം പേരെന്ത്?","opts":["Sclera","Choroid","Retina","Conjunctiva"],"opts_ml":["ദൃഢപടലം","രക്തപടലം","ദൃഷ്ടിപടലം","നേത്രാവരണം"],"ans":1},{"q":"Which photoreceptor cells enable vision in dim light?","q_ml":"മങ്ങിയ വെളിച്ചത്തിൽ കാഴ്ച സാധ്യമാക്കുന്ന പ്രകാശഗ്രാഹീ കോശങ്ങൾ ഏത്?","opts":["Cone cells","Rod cells","Bipolar cells","Ganglion cells"],"opts_ml":["കോൺ കോശങ്ങൾ","റോഡ് കോശങ്ങൾ","ബൈപോളാർ കോശങ്ങൾ","ഗാംഗ്ലിയോൺ കോശങ്ങൾ"],"ans":1},{"q":"What is the pigment found in rod cells called?","q_ml":"റോഡ് കോശങ്ങളിലെ വർണ്ണകത്തിന്റെ പേരെന്ത്?","opts":["Photopsin","Crystallin","Rhodopsin","Melanin"],"opts_ml":["ഫോട്ടോപ്സിൻ","ക്രിസ്റ്റലിൻ","റോഡോപ്സിൻ","മെലാനിൻ"],"ans":2},{"q":"Which is the first of the three middle-ear ossicles?","q_ml":"മധ്യകർണ്ണത്തിലെ മൂന്ന് അസ്ഥികളിൽ ആദ്യത്തേത് ഏത്?","opts":["Incus","Stapes","Malleus","Cochlea"],"opts_ml":["ഇൻകസ്","സ്റ്റേപിസ്","മാലിയസ്","കോക്ലിയ"],"ans":2},{"q":"Which tube connects the middle ear to the throat?","q_ml":"മധ്യകർണ്ണത്തെ ഗ്രസനിയുമായി ബന്ധിപ്പിക്കുന്ന കുഴൽ ഏത്?","opts":["Cochlea","Eustachian canal","Semicircular canal","Ear canal"],"opts_ml":["കോക്ലിയ","യൂസ്റ്റേഷ്യൻ കനാൽ","സെമിസർക്കുലാർ കനാൽ","കർണ്ണനാളം"],"ans":1},{"q":"Which part of the cochlea houses the sound receptors?","q_ml":"ശബ്ദഗ്രാഹികൾ സ്ഥിതി ചെയ്യുന്ന കോക്ലിയയിലെ ഭാഗം ഏത്?","opts":["Oval window","Organ of Corti","Round window","Vestibule"],"opts_ml":["ഓവൽ വിൻഡോ","ഓർഗൻ ഓഫ് കോർട്ടി","റൗണ്ട് വിൻഡോ","വെസ്റ്റിബ്യുൾ"],"ans":1},{"q":"What is the sensation of pain that warns of danger called?","q_ml":"അപകട സൂചന നൽകുന്ന വേദനാ സംവേദനത്തെ എന്ത് വിളിക്കുന്നു?","opts":["Nociception","Accommodation","Binocular fusion","Olfaction"],"opts_ml":["നോസിസെപ്ഷൻ","അക്കോമൊഡേഷൻ","ബൈനോക്കുലർ ഫ്യൂഷൻ","ഓൾഫാക്ഷൻ"],"ans":0},{"q":"Which of these is NOT one of the basic tastes we perceive?","q_ml":"താഴെപ്പറയുന്നവയിൽ നാം തിരിച്ചറിയുന്ന അടിസ്ഥാന രുചിയല്ലാത്തത് ഏത്?","opts":["Sweet","Salty","Cold","Umami"],"opts_ml":["മധുരം","ഉപ്പ്","തണുപ്പ്","ഉമാമി"],"ans":2},{"q":"What is the region where the optic nerve begins — which has no photoreceptor cells — called?","q_ml":"നേത്രനാഡി ആരംഭിക്കുന്ന, പ്രകാശഗ്രാഹീ കോശങ്ങൾ ഇല്ലാത്ത ഭാഗത്തിന്റെ പേരെന്ത്?","opts":["Macula","Blind Spot","Iris","Cornea"],"opts_ml":["മാക്കുല","അന്ധബിന്ദു (Blind Spot)","ഐറിസ്","കോർണിയ"],"ans":1},{"q":"Which part of the retina has the highest concentration of cone cells?","q_ml":"കോൺ കോശങ്ങൾ ഏറ്റവും കൂടുതൽ കേന്ദ്രീകരിച്ചിരിക്കുന്ന റെറ്റിനയിലെ ഭാഗം ഏത്?","opts":["Blind Spot","Macula","Sclera","Choroid"],"opts_ml":["അന്ധബിന്ദു","മാക്കുല","സ്ക്ലീറ","കോറോയിഡ്"],"ans":1},{"q":"Which fluid, between the lens and retina, maintains the eyeball's shape?","q_ml":"ലെൻസിനും റെറ്റിനയ്ക്കും ഇടയിൽ കണ്ണിന്റെ ആകൃതി നിലനിർത്തുന്ന ദ്രവം ഏത്?","opts":["Aqueous humor","Vitreous humor","Endolymph","Perilymph"],"opts_ml":["അക്വസ് ദ്രവം","വിട്രിയസ് ദ്രവം","എൻഡോലിംഫ്","പെരിലിംഫ്"],"ans":1},{"q":"What happens to the ciliary muscles when focusing on a near object (accommodation)?","q_ml":"അടുത്തുള്ള വസ്തുക്കളിൽ ഫോക്കസ് ചെയ്യുമ്പോൾ (accommodation) സീലിയറി പേശികൾക്ക് എന്ത് സംഭവിക്കുന്നു?","opts":["They relax","They contract","No change","They degenerate"],"opts_ml":["അയയുന്നു","സങ്കോചിക്കുന്നു","മാറ്റമില്ല","നശിക്കുന്നു"],"ans":1},{"q":"On which chromosome are the genes for the red- and green-sensitive cone pigments found?","q_ml":"പച്ച, ചുവപ്പ് കോൺ കോശങ്ങളിലെ വർണ്ണകത്തിനുള്ള ജീൻ ഏത് ക്രോമസോമിലാണ്?","opts":["X chromosome","Y chromosome","Chromosome 7","Chromosome 12"],"opts_ml":["X ക്രോമസോം","Y ക്രോമസോം","ക്രോമസോം 7","ക്രോമസോം 12"],"ans":0},{"q":"Which condition is caused by clouding of the eye lens?","q_ml":"നേത്ര ലെൻസ് അതാര്യമാകുന്ന അവസ്ഥ ഏതാണ്?","opts":["Glaucoma","Cataract","Astigmatism","Xerophthalmia"],"opts_ml":["ഗ്ലോക്കോമ","തിമിരം (Cataract)","അസ്റ്റിഗ്മാറ്റിസം","സീറോഫ്താൽമിയ"],"ans":1},{"q":"Which fluid fills the middle chamber of the cochlea?","q_ml":"കോക്ലിയയുടെ മധ്യഅറയിൽ നിറഞ്ഞിരിക്കുന്ന ദ്രവം ഏത്?","opts":["Perilymph","Endolymph","Aqueous humor","Vitreous humor"],"opts_ml":["പെരിലിംഫ്","എൻഡോലിംഫ്","അക്വസ് ദ്രവം","വിട്രിയസ് ദ്രവം"],"ans":1},{"q":"What is the main function of the Eustachian canal?","q_ml":"യൂസ്റ്റേഷ്യൻ കനാലിന്റെ പ്രധാന ധർമ്മം എന്ത്?","opts":["Generate sound impulses","Equalize air pressure on both sides of the eardrum","Maintain body balance","Detect smell"],"opts_ml":["ശബ്ദ ആവേഗങ്ങൾ ഉണ്ടാക്കുക","കർണ്ണപടത്തിന്റെ ഇരുവശത്തുമുള്ള മർദ്ദം തുല്യമാക്കുക","ശരീരതുലനനില പാലിക്കുക","ഗന്ധം തിരിച്ചറിയുക"],"ans":1},{"q":"In what unit is sound intensity measured?","q_ml":"ശബ്ദതീവ്രത അളക്കുന്ന യൂണിറ്റ് ഏത്?","opts":["Hertz","Decibel (dB)","Pascal","Joule"],"opts_ml":["ഹെർട്സ്","ഡെസിബെൽ (dB)","പാസ്കൽ","ജൂൾ"],"ans":1},{"q":"Which structure in the inner ear helps maintain body balance?","q_ml":"ആന്തരകർണ്ണത്തിൽ ശരീരതുലനനില പാലിക്കാൻ സഹായിക്കുന്ന ഭാഗം ഏത്?","opts":["Organ of Corti","Vestibular system (semicircular canals)","Eardrum","Eustachian canal"],"opts_ml":["ഓർഗൻ ഓഫ് കോർട്ടി","വെസ്റ്റിബ്യുലാർ സിസ്റ്റം (സെമിസർക്കുലാർ കനാലുകൾ)","കർണ്ണപടം","യൂസ്റ്റേഷ്യൻ കനാൽ"],"ans":1}];
+</script>
+<script>
+(function(){
+var T={
+ en:{gate:"Today's exam opens at ",now:"Current time",welcome:"Ready for today's exam?",enterAdm:"Type your admission number — your name will appear.",adm:"Admission number",admPh:"Admission number",searching:"Searching…",notFound:"No student found with this number. Please check.",dbErr:"Could not connect. Check your internet and try again.",already:"You have already written this exam today. Only one attempt is allowed.",start:"Start exam",name:"Your name",namePh:"Enter your name",offNote:"Offline quiz — score is shown but not saved.",pvNote:"Preview mode — results will not be saved.",q:"Question",of:"of",answered:"Answered",score:"Score",next:"Next",prev:"Back",finish:"Finish exam",submit:"Submit exam",left:" question(s) not answered yet",correct:"correct",good:"Excellent! Well studied.",mid:"Coming along nicely — revise once more.",low:"Read the notes again and try once more.",saving:"Saving your score…",saved:"✓ Score saved",fail:"⚠ Could not save the score.",retry:"Try again",dup:"⚠ A result for this admission number already exists today — this attempt was not saved.",off:"Not saved (offline quiz)",pv:"Preview — not saved",review:"Review your mistakes",yours:"Your answer: ",right:"Correct: ",perfect:"All answers correct! 🎉",nextStu:"Next student",cls:"Class"},
+ ml:{gate:"ഇന്നത്തെ പരീക്ഷ ആരംഭിക്കുന്നത് ",now:"ഇപ്പോൾ സമയം",welcome:"ഇന്നത്തെ പരീക്ഷയ്ക്ക് തയ്യാറാണോ?",enterAdm:"അഡ്മിഷൻ നമ്പർ ടൈപ്പ് ചെയ്യൂ — നിങ്ങളുടെ പേര് കാണാം.",adm:"അഡ്മിഷൻ നമ്പർ",admPh:"അഡ്മിഷൻ നമ്പർ",searching:"തിരയുന്നു…",notFound:"ഈ നമ്പറിൽ വിദ്യാർത്ഥിയെ കണ്ടെത്തിയില്ല. നമ്പർ പരിശോധിക്കുക.",dbErr:"കണക്റ്റ് ചെയ്യാനായില്ല. ഇന്റർനെറ്റ് പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.",already:"ഇന്ന് ഈ പരീക്ഷ നിങ്ങൾ എഴുതിക്കഴിഞ്ഞു. ഒരു അവസരം മാത്രം.",start:"പരീക്ഷ തുടങ്ങൂ",name:"നിങ്ങളുടെ പേര്",namePh:"പേര് നൽകുക",offNote:"ഓഫ്‌ലൈൻ ക്വിസ് — മാർക്ക് കാണിക്കും, സേവ് ചെയ്യില്ല.",pvNote:"പ്രിവ്യൂ — ഫലം സേവ് ചെയ്യില്ല.",q:"ചോദ്യം",of:"/",answered:"ഉത്തരം നൽകിയത്",score:"മാർക്ക്",next:"അടുത്തത്",prev:"പിന്നോട്ട്",finish:"പരീക്ഷ പൂർത്തിയാക്കൂ",submit:"സമർപ്പിക്കൂ",left:" ചോദ്യം ഇനിയും ബാക്കി",correct:"ശരി",good:"മികച്ചത്! നന്നായി പഠിച്ചു.",mid:"നന്നായി വരുന്നു — ഒന്നുകൂടി റിവിഷൻ ചെയ്യാം.",low:"കുറിപ്പുകൾ ഒന്നുകൂടി വായിച്ച് വീണ്ടും ശ്രമിക്കാം.",saving:"മാർക്ക് സേവ് ചെയ്യുന്നു…",saved:"✓ മാർക്ക് സേവ് ചെയ്തു",fail:"⚠ മാർക്ക് സേവ് ചെയ്യാനായില്ല.",retry:"വീണ്ടും ശ്രമിക്കുക",dup:"⚠ ഈ അഡ്മിഷൻ നമ്പറിന് ഇന്ന് ഫലം നിലവിലുണ്ട് — ഈ ശ്രമം സേവ് ചെയ്തില്ല.",off:"സേവ് ചെയ്തില്ല (ഓഫ്‌ലൈൻ)",pv:"പ്രിവ്യൂ — സേവ് ചെയ്തില്ല",review:"തെറ്റിയ ചോദ്യങ്ങൾ",yours:"നിങ്ങളുടെ ഉത്തരം: ",right:"ശരിയുത്തരം: ",perfect:"എല്ലാം ശരി! 🎉",nextStu:"അടുത്ത കുട്ടി",cls:"ക്ലാസ്"}
+};
+var lang="en",view="gate",stu=null,found=null,blocked=false,admVal="",nameVal="",order=[],picks=[],cur=0,saveState=null,seq=0,timer=null,clockTimer=null;
+var sb=null;
+try{ if(CFG.supaOn && window.supabase && CFG.supaUrl && CFG.supaKey){ sb=window.supabase.createClient(CFG.supaUrl,CFG.supaKey); } }catch(e){ console.error(e); }
+var app=document.getElementById("app");
+function t(k){ return T[lang][k]; }
+function esc(v){ return String(v==null?"":v).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+function qText(q){ return lang==="ml"&&q.q_ml?q.q_ml:q.q; }
+function oText(q,i){ return lang==="ml"&&q.opts_ml&&q.opts_ml[i]?q.opts_ml[i]:q.opts[i]; }
+function fmtHour(h){ return (h%12||12)+":00 "+(h>=12?"PM":"AM"); }
+function isOpen(){ return CFG.preview || CFG.openHour<0 || new Date().getHours()>=CFG.openHour; }
+function score(){ var s=0; for(var i=0;i<QUIZ.length;i++){ if(picks[i]===QUIZ[i].ans) s++; } return s; }
+function answeredCount(){ var c=0; for(var i=0;i<picks.length;i++){ if(picks[i]!==null) c++; } return c; }
+var KEYS=["A","B","C","D","E","F"];
+
+function header(){
+  document.getElementById("hTitle").textContent=lang==="ml"?(CFG.titleMl||CFG.titleEn):CFG.titleEn;
+  var sub=[lang==="ml"?(CFG.subjectMl||CFG.subject):CFG.subject, CFG.cls?(t("cls")+" "+CFG.cls):"", lang==="ml"?(CFG.chapterMl||CFG.chapter):CFG.chapter].filter(Boolean).join(" · ");
+  document.getElementById("hSub").textContent=sub;
+  document.getElementById("langBtn").textContent=lang==="en"?"🌐 മലയാളം":"🌐 English";
+  document.body.setAttribute("data-lang",lang);
+  document.documentElement.lang=lang;
+}
+function render(){
+  clearInterval(clockTimer);
+  header();
+  if(view==="gate") gate(); else if(view==="start") start(); else if(view==="quiz") quiz(); else result();
+}
+
+function gate(){
+  app.innerHTML='<div class="card gate"><div class="ic">⏰</div><h2>'+t("gate")+fmtHour(CFG.openHour)+'</h2><p class="muted" style="margin:6px 0 0">'+t("now")+'</p><div class="clk" id="clk"></div></div>';
+  function tick(){ var el=document.getElementById("clk"); if(el) el.textContent=new Date().toLocaleTimeString("en-IN"); }
+  tick(); clockTimer=setInterval(tick,1000);
+}
+
+function stuCard(s){
+  var ini=(s.name||"?").trim().charAt(0).toUpperCase();
+  var meta=[s.adm, s.cls?(t("cls")+" "+s.cls):"", s.centre].filter(Boolean).map(esc).join(" · ");
+  return '<div class="stu"><div class="av">'+esc(ini)+'</div><div><b>'+esc(s.name)+'</b><span>'+meta+'</span></div></div>';
+}
+
+function start(){
+  var pv=CFG.preview?'<p class="note">'+t("pvNote")+'</p>':"";
+  if(sb){
+    app.innerHTML='<div class="card"><h2>'+t("welcome")+'</h2><p class="muted">'+t("enterAdm")+'</p>'+
+      '<label for="adm">'+t("adm")+'</label><input id="adm" inputmode="numeric" autocomplete="off" placeholder="'+t("admPh")+'">'+
+      '<div class="who" id="who"></div><button class="btn" id="go" disabled>'+t("start")+'</button>'+pv+'</div>';
+    var inp=document.getElementById("adm"), go=document.getElementById("go");
+    inp.value=admVal;
+    if(found) showFound();
+    inp.addEventListener("input",function(){
+      var v=inp.value.replace(/\D/g,""); if(v!==inp.value) inp.value=v;
+      admVal=v; found=null; blocked=false; go.disabled=true; clearTimeout(timer); seq++;
+      var who=document.getElementById("who");
+      if(!v){ who.innerHTML=""; return; }
+      who.innerHTML='<div class="s">'+t("searching")+'</div>';
+      var my=seq; timer=setTimeout(function(){ lookup(v,my); },450);
+    });
+    inp.addEventListener("keydown",function(e){ if(e.key==="Enter" && !go.disabled) go.click(); });
+    go.addEventListener("click",function(){ if(!found||blocked) return; stu=found; begin(); });
+    if(!found) inp.focus();
+  } else {
+    app.innerHTML='<div class="card"><h2>'+t("welcome")+'</h2><p class="muted">'+t("offNote")+'</p>'+
+      '<label for="nm">'+t("name")+'</label><input id="nm" autocomplete="off" placeholder="'+t("namePh")+'">'+
+      '<label for="adm">'+t("adm")+'</label><input id="adm" inputmode="numeric" autocomplete="off" placeholder="'+t("admPh")+'">'+
+      '<button class="btn" id="go" disabled>'+t("start")+'</button>'+pv+'</div>';
+    var nm=document.getElementById("nm"), ad=document.getElementById("adm"), g=document.getElementById("go");
+    nm.value=nameVal; ad.value=admVal;
+    function chk(){ ad.value=ad.value.replace(/\D/g,""); nameVal=nm.value; admVal=ad.value; g.disabled=!(nm.value.trim()&&ad.value); }
+    nm.addEventListener("input",chk); ad.addEventListener("input",chk); chk();
+    ad.addEventListener("keydown",function(e){ if(e.key==="Enter"&&!g.disabled) g.click(); });
+    g.addEventListener("click",function(){ stu={adm:admVal,name:nameVal.trim(),cls:"",centre:""}; begin(); });
+  }
+}
+
+function showFound(){
+  var who=document.getElementById("who"), go=document.getElementById("go");
+  if(!who||!found) return;
+  who.innerHTML=stuCard(found)+(blocked?'<div class="warn">'+t("already")+'</div>':"");
+  go.disabled=blocked;
+}
+
+function lookup(v,my){
+  sb.rpc("verify_student",{p_admission_no:Number(v)}).then(function(res){
+    if(my!==seq) return;
+    var who=document.getElementById("who"); if(!who) return;
+    if(res.error){ console.error(res.error); who.innerHTML='<div class="e">'+t("dbErr")+'</div>'; return; }
+    var s=Array.isArray(res.data)?res.data[0]:res.data;
+    if(!s){ who.innerHTML='<div class="e">'+t("notFound")+'</div>'; return; }
+    found={adm:String(s.admission_no!=null?s.admission_no:v),name:s.student_name||"",cls:s["class"]||"",centre:s.centre||""};
+    blocked=false;
+    var go=document.getElementById("go");
+    who.innerHTML=stuCard(found); go.disabled=true;
+    if(CFG.preview){ showFound(); return; }
+    sb.rpc("has_attempted",{p_admission_no:Number(found.adm),p_quiz_name:CFG.quizName}).then(function(r){
+      if(my!==seq) return;
+      var d=r&&r.data; if(Array.isArray(d)) d=d[0];
+      if(d&&typeof d==="object") d=d.has_attempted;
+      blocked=(!r.error && d===true);
+      showFound();
+    },function(){ if(my===seq) showFound(); });
+  },function(err){ console.error(err); if(my!==seq) return; var who=document.getElementById("who"); if(who) who.innerHTML='<div class="e">'+t("dbErr")+'</div>'; });
+}
+
+function begin(){
+  order=QUIZ.map(function(_,i){return i;});
+  if(CFG.shuffle){ for(var i=order.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=order[i]; order[i]=order[j]; order[j]=x; } }
+  picks=QUIZ.map(function(){return null;});
+  cur=0; saveState=null; view="quiz"; render(); window.scrollTo(0,0);
+}
+
+function optsHtml(qi){
+  var q=QUIZ[qi], p=picks[qi], h="";
+  for(var o=0;o<q.opts.length;o++){
+    var cls="opt";
+    if(p!==null){ if(o===q.ans) cls+=" ok"; else if(o===p) cls+=" no"; }
+    h+='<button class="'+cls+'" data-qi="'+qi+'" data-oi="'+o+'"'+(p!==null?" disabled":"")+'><span class="k">'+KEYS[o]+'</span><span>'+esc(oText(q,o))+'</span></button>';
+  }
+  return h;
+}
+function stripHtml(){
+  var a=answeredCount();
+  return '<div class="strip"><span class="chip">'+esc(stu.name)+' · '+esc(stu.adm)+'</span><span>'+t("score")+': <b id="sc">'+score()+'</b> / '+QUIZ.length+'</span></div>'+
+    '<div class="bar"><i id="bar" style="width:'+Math.round(a/QUIZ.length*100)+'%"></i></div>';
+}
+function quiz(){
+  var h='<div class="card">'+stripHtml();
+  if(CFG.layout==="all"){
+    order.forEach(function(qi,n){
+      h+='<div class="qb" id="qb'+qi+'"><div class="qn">'+t("q")+' '+(n+1)+'</div><div class="qt">'+esc(qText(QUIZ[qi]))+'</div><div class="os">'+optsHtml(qi)+'</div></div>';
+    });
+    var left=QUIZ.length-answeredCount();
+    h+='<button class="btn" id="fin"'+(left?" disabled":"")+'>'+t("submit")+'</button><div class="left" id="left">'+(left?left+t("left"):"")+'</div>';
+  } else {
+    var qi=order[cur];
+    h+='<div class="qn">'+t("q")+' '+(cur+1)+' '+t("of")+' '+QUIZ.length+'</div><div class="qt">'+esc(qText(QUIZ[qi]))+'</div><div class="os" id="qb'+qi+'">'+optsHtml(qi)+'</div>';
+    var last=cur===order.length-1;
+    h+='<div class="btns">'+(cur>0?'<button class="btn alt" id="prv">'+t("prev")+'</button>':"")+
+      '<button class="btn" id="nxt"'+(picks[qi]===null?" disabled":"")+'>'+(last?t("finish"):t("next"))+'</button></div>';
+  }
+  h+='</div>';
+  app.innerHTML=h;
+  var prv=document.getElementById("prv"), nxt=document.getElementById("nxt"), fin=document.getElementById("fin");
+  if(prv) prv.addEventListener("click",function(){ cur--; render(); });
+  if(nxt) nxt.addEventListener("click",function(){ if(cur<order.length-1){ cur++; render(); window.scrollTo(0,0); } else finish(); });
+  if(fin) fin.addEventListener("click",finish);
+}
+app.addEventListener("click",function(e){
+  var b=e.target.closest?e.target.closest(".opt"):null;
+  if(!b||b.disabled||view!=="quiz") return;
+  var qi=+b.getAttribute("data-qi"), oi=+b.getAttribute("data-oi");
+  if(picks[qi]!==null) return;
+  picks[qi]=oi;
+  var box=document.getElementById("qb"+qi);
+  if(box){ var os=box.classList.contains("os")?box:box.querySelector(".os"); os.innerHTML=optsHtml(qi); }
+  document.getElementById("sc").textContent=score();
+  var a=answeredCount(); document.getElementById("bar").style.width=Math.round(a/QUIZ.length*100)+"%";
+  var nxt=document.getElementById("nxt"); if(nxt) nxt.disabled=false;
+  var fin=document.getElementById("fin"), left=document.getElementById("left");
+  if(fin){ var l=QUIZ.length-a; fin.disabled=l>0; left.textContent=l?l+t("left"):""; }
+});
+
+function finish(){ view="result"; render(); window.scrollTo(0,0); save(); }
+
+function saveHtml(){
+  if(saveState==="ok") return '<div class="save ok" id="sv">'+t("saved")+'</div>';
+  if(saveState==="dup") return '<div class="save bad" id="sv">'+t("dup")+'</div>';
+  if(saveState==="fail") return '<div class="save bad" id="sv">'+t("fail")+'<button id="rt">'+t("retry")+'</button></div>';
+  if(saveState==="off") return '<div class="save" id="sv">'+t("off")+'</div>';
+  if(saveState==="pv") return '<div class="save" id="sv">'+t("pv")+'</div>';
+  return '<div class="save" id="sv">'+t("saving")+'</div>';
+}
+function paintSave(){
+  var el=document.getElementById("sv"); if(!el) return;
+  el.outerHTML=saveHtml();
+  var rt=document.getElementById("rt"); if(rt) rt.addEventListener("click",function(){ saveState=null; paintSave(); save(true); });
+}
+function result(){
+  var s=score(), n=QUIZ.length, pct=Math.round(s/n*100);
+  var msg=pct>=80?t("good"):pct>=50?t("mid"):t("low");
+  var h='<div class="card"><div class="rwho">'+esc(stu.name)+' · '+esc(stu.adm)+(stu.centre?' · '+esc(stu.centre):"")+'</div>'+
+    '<div class="ring" style="background:conic-gradient(var(--ac) '+(pct*3.6)+'deg,var(--line) 0)"><div><b>'+s+'</b><span>/ '+n+' · '+pct+'%</span></div></div>'+
+    '<div class="rmsg">'+msg+'</div>'+saveHtml();
+  var wrong=order.filter(function(qi){ return picks[qi]!==QUIZ[qi].ans; });
+  h+='<div class="rv"><h3>'+(wrong.length?t("review"):t("perfect"))+'</h3>';
+  wrong.forEach(function(qi){
+    var q=QUIZ[qi];
+    h+='<div class="rvi"><p>'+esc(qText(q))+'</p><div class="y">✗ '+t("yours")+esc(picks[qi]===null?"—":oText(q,picks[qi]))+'</div><div class="c">✓ '+t("right")+esc(oText(q,q.ans))+'</div></div>';
+  });
+  h+='</div><div class="btns"><button class="btn alt" id="ns">'+t("nextStu")+'</button></div></div>';
+  app.innerHTML=h;
+  var rt=document.getElementById("rt"); if(rt) rt.addEventListener("click",function(){ saveState=null; paintSave(); save(true); });
+  document.getElementById("ns").addEventListener("click",function(){ stu=null; found=null; blocked=false; admVal=""; nameVal=""; picks=[]; saveState=null; view=isOpen()?"start":"gate"; render(); });
+}
+
+function save(force){
+  if(saveState!==null && !force) return;
+  if(CFG.preview){ saveState="pv"; paintSave(); return; }
+  if(!sb){ saveState="off"; paintSave(); return; }
+  saveState="saving";
+  var s=score(), n=QUIZ.length;
+  var answers=QUIZ.map(function(q,i){ return {question_no:i+1,selected_answer:picks[i],correct_answer:q.ans,is_correct:picks[i]===q.ans}; });
+  sb.rpc("submit_quiz",{p_admission_no:Number(stu.adm),p_subject:CFG.subject,p_chapter:CFG.chapter,p_quiz_name:CFG.quizName,p_score:s,p_total:n,p_percentage:Math.round(s/n*100),p_answers:answers}).then(function(res){
+    if(res.error){ console.error(res.error); saveState="fail"; }
+    else { var d=Array.isArray(res.data)?res.data[0]:res.data; saveState=(d&&d.already_submitted)?"dup":"ok"; }
+    paintSave();
+  },function(err){ console.error(err); saveState="fail"; paintSave(); });
+}
+
+document.getElementById("langBtn").addEventListener("click",function(){ lang=lang==="en"?"ml":"en"; render(); });
+setInterval(function(){
+  if(view==="gate" && isOpen()){ view="start"; render(); }
+  else if(view==="start" && !isOpen()){ view="gate"; render(); }
+},15000);
+view=isOpen()?"start":"gate";
+render();
+})();
+</script>
+</body>
+</html>

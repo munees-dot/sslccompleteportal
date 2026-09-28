@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geography Unit 3 | Abacus Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;800&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#0f7a4a; --green2:#16a765; --ice:#1d6fb8; --ice2:#5fb2ff;
+  --ink:#1b2430; --muted:#5b6776; --bg:#f3f7f5; --card:#ffffff; --line:#dfe7e3;
+  --gold:#f4b400; --red:#d64545; --soft-g:#e7f6ee; --soft-b:#e6f1fc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Poppins','Noto Sans Malayalam',sans-serif;background:var(--bg);color:var(--ink);line-height:1.75}
+.ml,.en{font-family:'Noto Sans Malayalam','Poppins',sans-serif}
+body.en .ml{display:none!important}
+body:not(.en) .en{display:none!important}
+
+/* Header */
+.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,#0b5d39,#0f7a4a 45%,#1d6fb8);color:#fff;box-shadow:0 3px 14px rgba(0,0,0,.18)}
+.topbar-in{max-width:1100px;margin:auto;display:flex;align-items:center;gap:12px;padding:10px 16px}
+.logo{width:42px;height:42px;border-radius:12px;background:#fff;color:var(--green);display:grid;place-items:center;font-weight:800;font-size:18px;flex-shrink:0}
+.brand b{display:block;font-size:16px;letter-spacing:.5px}
+.brand small{opacity:.85;font-size:12px}
+.spacer{flex:1}
+.btn{border:0;border-radius:999px;padding:8px 14px;font:600 13px 'Poppins',sans-serif;cursor:pointer;transition:.2s}
+.btn-w{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.btn-w:hover{background:rgba(255,255,255,.3)}
+.btn-w.on{background:#fff;color:var(--green)}
+.lang{display:flex;background:rgba(0,0,0,.18);border-radius:999px;padding:3px}
+.lang button{border:0;background:transparent;color:#fff;padding:6px 12px;border-radius:999px;font:600 12px 'Poppins';cursor:pointer}
+.lang button.on{background:#fff;color:var(--green)}
+
+/* Hero */
+.hero{max-width:1100px;margin:18px auto 0;padding:0 16px}
+.hero-card{border-radius:22px;overflow:hidden;background:linear-gradient(120deg,#0f7a4a 0%,#138a55 38%,#3a8fd6 62%,#bfe3ff 100%);color:#fff;padding:26px 24px;position:relative}
+.hero-card::after{content:"❄";position:absolute;right:22px;top:10px;font-size:90px;opacity:.25}
+.hero-card::before{content:"🌴";position:absolute;right:120px;bottom:6px;font-size:70px;opacity:.25}
+.tag{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);padding:3px 12px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.5px}
+.hero h1{font-size:clamp(22px,4vw,34px);line-height:1.35;margin:10px 0 6px;font-weight:800;max-width:760px}
+.hero p{max-width:720px;opacity:.95;font-size:15px}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.stat{background:rgba(255,255,255,.18);border-radius:14px;padding:8px 14px;font-size:13px}
+.stat b{font-size:18px;display:block;line-height:1.2}
+
+/* Tabs */
+.tabs-wrap{max-width:1100px;margin:16px auto 0;padding:0 16px;position:sticky;top:62px;z-index:40}
+.tabs{display:flex;gap:6px;overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:16px;padding:6px;box-shadow:0 4px 14px rgba(15,122,74,.08);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;border:0;background:transparent;padding:9px 14px;border-radius:11px;font:600 13px 'Poppins';color:var(--muted);cursor:pointer;white-space:nowrap}
+.tab.on{background:linear-gradient(90deg,var(--green),var(--ice));color:#fff}
+.tab.quiz-tab{color:var(--red)}
+.tab.quiz-tab.on{color:#fff;background:linear-gradient(90deg,#d64545,#f08a24)}
+
+main{max-width:1100px;margin:16px auto 40px;padding:0 16px}
+.panel{display:none;animation:fade .3s}
+.panel.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,.03)}
+h2.sec{font-size:20px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+h2.sec .ico{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:18px}
+.eq .ico{background:var(--soft-g)} .tu .ico{background:var(--soft-b)}
+h3{font-size:16px;margin:14px 0 6px;color:var(--green)}
+.tu h3{color:var(--ice)}
+ul.pts{padding-left:20px}
+ul.pts li{margin:4px 0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.mini{border-radius:14px;padding:14px;border:1px solid var(--line)}
+.mini.g{background:var(--soft-g);border-color:#bfe6d0}
+.mini.b{background:var(--soft-b);border-color:#bcd9f5}
+.mini h4{font-size:15px;margin-bottom:4px}
+.box{border-left:4px solid var(--gold);background:#fff8e1;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:14.5px}
+.box.blue{border-color:var(--ice);background:var(--soft-b)}
+.box.green{border-color:var(--green);background:var(--soft-g)}
+.chip{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 10px;margin:3px 3px 0 0;font-size:13px}
+.zone-head{display:flex;align-items:center;gap:10px;padding:14px 18px;border-radius:16px;color:#fff;margin:6px 0 14px;font-weight:700;font-size:18px}
+.zone-head.eq{background:linear-gradient(90deg,#0b5d39,#16a765)}
+.zone-head.tu{background:linear-gradient(90deg,#134f86,#5fb2ff)}
+
+/* Accordion */
+details.acc{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+details.acc summary{list-style:none;cursor:pointer;padding:13px 16px;font-weight:600;display:flex;align-items:center;gap:10px}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:"+";margin-left:auto;font-size:20px;color:var(--muted)}
+details.acc[open] summary::after{content:"−"}
+details.acc[open] summary{background:#f7faf9;border-bottom:1px solid var(--line)}
+.acc-body{padding:12px 18px 16px}
+.num{min-width:26px;height:26px;border-radius:8px;background:var(--green);color:#fff;font-size:13px;display:grid;place-items:center}
+.tu .num{background:var(--ice)}
+
+/* Tables */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+th{background:#eef5f1}
+th.g{background:#d9f1e4} th.b{background:#dbeafa}
+tr:nth-child(even) td{background:#fafcfb}
+
+/* Rain layers */
+.layers{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.layer{border-radius:10px;padding:10px 14px;color:#fff;font-size:14px}
+.l1{background:#0b5d39}.l2{background:#138a55}.l3{background:#4cb07a}
+
+/* Glossary */
+.term{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff}
+.term b{color:var(--green);font-size:15px}
+.term.t b{color:var(--ice)}
+.term p{font-size:14px;color:#33404d;margin-top:2px}
+.search{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:12px;font:14px 'Poppins','Noto Sans Malayalam';margin-bottom:12px}
+
+/* Q&A */
+.qa{border:1px solid var(--line);border-radius:14px;margin-bottom:10px;background:#fff;overflow:hidden}
+.qa-q{padding:12px 16px;font-weight:600;cursor:pointer;display:flex;gap:10px;align-items:flex-start}
+.qa-q .mk{margin-left:auto;flex-shrink:0;background:#fff3e0;color:#b85c00;font-size:11px;border-radius:999px;padding:2px 9px;font-family:'Poppins'}
+.qa-a{display:none;padding:0 16px 14px 16px;border-top:1px dashed var(--line);font-size:14.5px}
+.qa.open .qa-a{display:block;padding-top:10px}
+.qa-tools{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.btn-g{background:var(--green);color:#fff}
+.btn-o{background:#fff;color:var(--green);border:1px solid var(--green)}
+
+/* Quiz */
+.quiz-start{text-align:center;padding:30px 20px}
+.quiz-start .big{font-size:54px}
+.quiz-start h2{font-size:24px;margin:6px 0}
+.q-input{padding:11px 14px;border:1px solid var(--line);border-radius:12px;width:min(320px,100%);font:15px 'Poppins','Noto Sans Malayalam';margin:14px 0 8px;text-align:center}
+.btn-big{padding:12px 28px;font-size:15px;border-radius:14px}
+.btn-red{background:linear-gradient(90deg,#d64545,#f08a24);color:#fff}
+.q-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600}
+.pill.t{color:var(--red)}
+.bar{height:8px;background:#e7ecea;border-radius:999px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--ice));transition:.3s}
+.q-text{font-size:18px;font-weight:600;margin-bottom:14px}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;cursor:pointer;font:15px 'Noto Sans Malayalam','Poppins';color:var(--ink);transition:.15s}
+.opt:hover{border-color:var(--ice2)}
+.opt .L{width:30px;height:30px;border-radius:9px;background:#eef3f1;display:grid;place-items:center;font-weight:700;flex-shrink:0;font-family:'Poppins'}
+.opt.ok{border-color:#1f9d5a;background:#e9f8ef}.opt.ok .L{background:#1f9d5a;color:#fff}
+.opt.no{border-color:var(--red);background:#fdecec}.opt.no .L{background:var(--red);color:#fff}
+.opt:disabled{cursor:default}
+.exp{display:none;background:var(--soft-b);border-radius:12px;padding:10px 14px;font-size:14px;margin-top:4px}
+.exp.show{display:block}
+.q-nav{display:flex;justify-content:flex-end;margin-top:14px}
+.result{text-align:center;padding:24px 10px}
+.ring{width:150px;height:150px;border-radius:50%;margin:10px auto;display:grid;place-items:center;background:conic-gradient(var(--green) calc(var(--p)*1%),#e7ecea 0)}
+.ring div{width:118px;height:118px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:30px;font-weight:800}
+.ring small{display:block;font-size:13px;color:var(--muted);font-weight:600}
+.grade{font-size:22px;font-weight:800;margin:6px 0}
+.res-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.btn-wa{background:#25d366;color:#fff}
+.review{text-align:left;margin-top:20px}
+.rv{border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:8px;font-size:14px;background:#fff}
+.rv.w{border-left:4px solid var(--red)} .rv.r{border-left:4px solid #1f9d5a}
+
+footer{text-align:center;color:var(--muted);font-size:13px;padding:20px 16px 30px}
+
+/* Print */
+.wm{display:none}
+.print-head{display:none}
+.btn-share{background:linear-gradient(90deg,#1d6fb8,#5fb2ff);color:#fff}
+.share-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+body.quiz-only .hero,body.quiz-only .tabs-wrap,body.quiz-only .no-print{display:none!important}
+body.quiz-only .panel{display:none!important}
+body.quiz-only #p-quiz{display:block!important}
+body.quiz-only main{margin-top:20px}
+.qo-title{display:none;text-align:center;margin-bottom:14px}
+body.quiz-only .qo-title{display:block}
+.qo-title h1{font-size:clamp(18px,3.5vw,24px);line-height:1.4}
+.qo-title small{color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1b2430;color:#fff;padding:9px 16px;border-radius:999px;font-size:13px;opacity:0;transition:.3s;z-index:99;pointer-events:none}
+.toast.show{opacity:1}
+@media print{
+  @page{size:A4;margin:12mm 12mm 14mm}
+  *{box-shadow:none!important;animation:none!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html,body{background:#fff!important;font-size:10.5pt;line-height:1.5;color:#000}
+  .topbar,.tabs-wrap,.hero,.qa-tools,.no-print,footer,#p-quiz,#p-overview .card:nth-child(2),.search,.chip,.stats{display:none!important}
+
+  /* Simple title block */
+  .print-head{display:block;text-align:center;border-bottom:2px solid #000;padding-bottom:6px;margin-bottom:10px}
+  .print-head b{display:block;font-size:13pt;letter-spacing:1px}
+  .print-head h1{font-size:15pt;margin:2px 0;line-height:1.3}
+  .print-head small{font-size:9pt;color:#333}
+
+  main{margin:0!important;padding:0!important;max-width:none}
+  .panel{display:block!important;margin:0}
+
+  /* Flatten cards: no boxes, no padding gaps */
+  .card,details.acc,.qa,.mini,.term{border:0!important;border-radius:0!important;background:none!important;padding:0!important;margin:0 0 6px!important}
+  .grid2,.grid3{display:block!important}
+  .mini{margin-bottom:4px!important}
+
+  /* Headings */
+  h2.sec{font-size:12.5pt;margin:10px 0 4px;padding-bottom:2px;border-bottom:1px solid #999;break-after:avoid}
+  h2.sec .ico{display:none}
+  .zone-head{background:none!important;color:#000!important;border:0;border-bottom:2px solid #000;border-radius:0;padding:0 0 3px;margin:14px 0 6px;font-size:14pt;break-after:avoid}
+  h3{font-size:11pt;margin:6px 0 2px;color:#000!important;break-after:avoid}
+  details.acc{display:block!important;break-inside:auto!important}
+  details.acc summary{display:block!important;padding:4px 0 2px!important;background:none!important;border:0!important;font-size:11.5pt;font-weight:700;break-after:avoid}
+  details.acc summary::after{content:none!important}
+  .num{display:inline!important;background:none!important;color:#000!important;min-width:auto;height:auto;font-weight:700;margin-right:4px}
+  .num::after{content:"."}
+  .acc-body{display:block!important;padding:0 0 0 4px!important}
+  ul.pts{padding-left:16px}
+  ul.pts li{margin:1px 0}
+  p{margin:2px 0}
+
+  /* Info boxes → thin left rule */
+  .box{background:none!important;border:0;border-left:3px solid #555!important;border-radius:0;padding:2px 8px;margin:5px 0;font-size:10pt;break-inside:avoid}
+  .layers{gap:2px;margin:2px 0 4px}
+  .layer{background:none!important;color:#000!important;padding:1px 0;border-radius:0}
+  .layer::before{content:"▸ "}
+
+  /* Tables */
+  .tbl-wrap{overflow:visible}
+  table{font-size:9.5pt;margin:4px 0}
+  th,td{padding:3px 6px;border:1px solid #777}
+  th,th.g,th.b{background:#eee!important}
+  tr:nth-child(even) td{background:none!important}
+  tr{break-inside:avoid}
+
+  /* Key terms: compact two-column list */
+  #termGrid{display:block!important;column-count:2;column-gap:14px}
+  .term{break-inside:avoid;margin:0 0 4px!important}
+  .term b{color:#000!important;font-size:10pt}
+  .term p{font-size:9.5pt;margin:0;color:#000}
+
+  /* Q&A */
+  .qa{break-inside:avoid;margin-bottom:6px!important}
+  .qa-q{padding:0!important;cursor:auto}
+  .qa-q .mk{background:none;color:#000;border:1px solid #777;padding:0 5px}
+  .qa-a{display:block!important;border:0!important;padding:1px 0 0 18px!important;font-size:10pt}
+
+  .wm{display:block;position:fixed;top:45%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:70px;font-weight:800;color:rgba(0,0,0,.05);white-space:nowrap;z-index:-1}
+}
+@media(max-width:600px){
+  .brand small{display:none}
+  .tabs-wrap{top:58px}
+  .hero-card{padding:20px 18px}
+  .card{padding:16px}
+}
+</style>
+</head>
+<body>
+<div class="wm">ABACUS ACADEMY</div>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="logo">A</div>
+    <div class="brand"><b>ABACUS ACADEMY</b><small>SSLC Study Portal · Social Science II</small></div>
+    <div class="spacer"></div>
+    <div class="lang" role="group" aria-label="Medium">
+      <button id="bML" class="on" onclick="setLang('ml')">MAL</button>
+      <button id="bEN" onclick="setLang('en')">ENG</button>
+    </div>
+    <button class="btn btn-w no-print" onclick="printNotes()">🖨 Print</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-card">
+    <span class="tag">GEOGRAPHY · UNIT 3 · STANDARD X</span>
+    <h1><span class="ml">മഴക്കാടുകളിൽ നിന്നും മഞ്ഞുരുകാത്ത നാട്ടിലേക്ക്</span><span class="en">From Rainforests to the Land of Unmelting Snow</span></h1>
+    <p><span class="ml">ഭൂമധ്യരേഖാകാലാവസ്ഥാമേഖലയും ടൺഡ്രാമേഖലയും — കാലാവസ്ഥ, സസ്യജന്തുജാലങ്ങൾ, ജനജീവിതം, വെല്ലുവിളികൾ എന്നിവ ഒറ്റ പേജിൽ.</span><span class="en">The Equatorial and Tundra climatic zones — climate, flora and fauna, human life and challenges, all on one page.</span></p>
+    <div class="stats">
+      <div class="stat"><b>2</b><span class="ml">കാലാവസ്ഥാമേഖലകൾ</span><span class="en">Climatic zones</span></div>
+      <div class="stat"><b>30+</b><span class="ml">പ്രധാന പദങ്ങൾ</span><span class="en">Key terms</span></div>
+      <div class="stat"><b>16</b><span class="ml">പരീക്ഷാ ചോദ്യങ്ങൾ</span><span class="en">Exam questions</span></div>
+      <div class="stat"><b>20</b><span class="ml">മാർക്ക് ക്വിസ്</span><span class="en">Mark quiz</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="tabs-wrap">
+  <nav class="tabs">
+    <button class="tab on" data-p="overview">Overview</button>
+    <button class="tab" data-p="equatorial">🌴 Equatorial</button>
+    <button class="tab" data-p="tundra">❄ Tundra</button>
+    <button class="tab" data-p="compare">Compare</button>
+    <button class="tab" data-p="activities">Activities</button>
+    <button class="tab" data-p="terms">Key Terms</button>
+    <button class="tab" data-p="qa">Q &amp; A</button>
+    <button class="tab quiz-tab" data-p="quiz">🏆 20 Mark Quiz</button>
+  </nav>
+</div>
+
+<main>
+<div class="print-head">
+  <b>ABACUS ACADEMY</b>
+  <h1><span class="ml">മഴക്കാടുകളിൽ നിന്നും മഞ്ഞുരുകാത്ത നാട്ടിലേക്ക്</span><span class="en">From Rainforests to the Land of Unmelting Snow</span></h1>
+  <small>SSLC · Social Science II · Geography Unit 3 · Study Notes</small>
+</div>
+
+<!-- ============ OVERVIEW ============ -->
+<section class="panel on" id="p-overview">
+  <div class="card">
+    <h2 class="sec"><span class="ico" style="background:#fff3e0">🧭</span><span class="ml">അധ്യായം ഒറ്റനോട്ടത്തിൽ</span><span class="en">Chapter at a Glance</span></h2>
+    <div class="ml">
+      <p>ഈ അധ്യായം രണ്ട് യാത്രാക്കുറിപ്പുകളിലൂടെയാണ് തുടങ്ങുന്നത്. കോംഗോയിലെ കസായി പ്രവിശ്യയിൽ നിന്നുള്ള ഒരു സഞ്ചാരി റഷ്യയിലെ നര്യൻമാർ (പെച്ചോരാ നദീതീരം) വഴി സൈബീരിയൻ ടൺഡ്രയിലേക്കും, മറ്റൊരു സഞ്ചാരി നോർവെയുടെ ഭാഗമായ സ്വാൽബാർഡിലെ ലോംഗ്ഇയർബൈൻ എന്ന പട്ടണത്തിലേക്കും നടത്തുന്ന യാത്രകൾ. ഭൂമധ്യരേഖയിലെ ചൂടും മഴയും നിറഞ്ഞ ലോകവും ധ്രുവപ്രദേശത്തെ അതിശൈത്യലോകവും തമ്മിലുള്ള വ്യത്യാസമാണ് പാഠത്തിന്റെ കാതൽ.</p>
+    </div>
+    <div class="en">
+      <p>The chapter opens with two travelogues. A traveller from the Kasai province of Congo reaches Naryan-Mar (on the Pechora river, Russia) on the way to the Siberian tundra, and another visits Longyearbyen in Svalbard, part of Norway. The heart of the lesson is the contrast between the hot, rainy equatorial world and the extremely cold polar world.</p>
+    </div>
+    <div class="grid2" style="margin-top:14px">
+      <div class="mini g">
+        <h4>🌴 <span class="ml">ഭൂമധ്യരേഖാകാലാവസ്ഥാമേഖല</span><span class="en">Equatorial Climatic Zone</span></h4>
+        <ul class="pts ml"><li>ശരാശരി താപനില 27°C</li><li>വാർഷികമഴ 175–250 സെ.മീ.</li><li>നിത്യഹരിത മഴക്കാടുകൾ (സെൽവാസ്)</li><li>അർബോറിയൽ ജീവികൾ</li><li>പിഗ്മികൾ, ഒറാങ് അസ്‌ലി</li></ul>
+        <ul class="pts en"><li>Average temperature 27°C</li><li>Annual rainfall 175–250 cm</li><li>Evergreen rainforests (Selvas)</li><li>Arboreal animals</li><li>Pygmies, Orang Asli</li></ul>
+      </div>
+      <div class="mini b">
+        <h4>❄ <span class="ml">ടൺഡ്രാമേഖല</span><span class="en">Tundra Zone</span></h4>
+        <ul class="pts ml"><li>ശൈത്യകാലത്ത് −30°C വരെ</li><li>മഞ്ഞുവീഴ്ച, ബ്ലിസാർഡ്</li><li>പായലുകൾ, ലൈക്കണുകൾ</li><li>ധ്രുവക്കരടി, റെയിൻഡീർ</li><li>എസ്കിമോകൾ, ലാപ്പ്സ്</li></ul>
+        <ul class="pts en"><li>Winter temperature down to −30°C</li><li>Snowfall, blizzards</li><li>Mosses, lichens</li><li>Polar bear, reindeer</li><li>Eskimos, Lapps</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <h2 class="sec"><span class="ico" style="background:#fdecec">🎯</span><span class="ml">പഠിക്കേണ്ടത് എങ്ങനെ?</span><span class="en">How to Study This Page</span></h2>
+    <div class="grid3">
+      <div class="mini"><b>1.</b> <span class="ml">Equatorial, Tundra ടാബുകളിൽ നോട്ടുകൾ വായിക്കുക</span><span class="en">Read the notes in the Equatorial and Tundra tabs</span></div>
+      <div class="mini"><b>2.</b> <span class="ml">Compare ടാബിൽ രണ്ട് മേഖലകളും താരതമ്യം ചെയ്യുക</span><span class="en">Compare both zones in the Compare tab</span></div>
+      <div class="mini"><b>3.</b> <span class="ml">Activities-ൽ പാഠപുസ്തക പ്രവർത്തനങ്ങളുടെ ഉത്തരങ്ങൾ</span><span class="en">Textbook activity answers are under Activities</span></div>
+      <div class="mini"><b>4.</b> <span class="ml">Key Terms, Q&amp;A എന്നിവ റിവിഷൻ ചെയ്യുക</span><span class="en">Revise Key Terms and Q&amp;A</span></div>
+      <div class="mini"><b>5.</b> <span class="ml">അവസാനം 20 മാർക്ക് ക്വിസ് എഴുതുക</span><span class="en">Finish with the 20-mark quiz</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EQUATORIAL ============ -->
+<section class="panel eq" id="p-equatorial">
+  <div class="zone-head eq">🌴 <span class="ml">ഭൂമധ്യരേഖാകാലാവസ്ഥാമേഖല</span><span class="en">Equatorial Climatic Zone</span></div>
+
+  <details class="acc" open><summary><span class="num">1</span><span class="ml">സ്ഥാനം</span><span class="en">Location</span></summary>
+    <div class="acc-body">
+      <div class="ml">
+        <ul class="pts">
+          <li>ഭൂമധ്യരേഖയുടെ ഇരുവശങ്ങളിലുമായി, ഉഷ്ണമേഖലയിൽ (ഉഷ്ണതാപീയമേഖല) സ്ഥിതി ചെയ്യുന്നു. അതിനാലാണ് ഭൂമധ്യരേഖാകാലാവസ്ഥാമേഖല എന്ന പേര്.</li>
+          <li>വൻകരകൾ: <b>തെക്കേ അമേരിക്ക, ആഫ്രിക്ക, ഏഷ്യ</b>.</li>
+          <li>പ്രദേശങ്ങൾ: ആമസോൺ തടം, മധ്യ ആഫ്രിക്ക (കോംഗോ തടം), തെക്കുകിഴക്കൻ ഏഷ്യ.</li>
+        </ul>
+      </div>
+      <div class="en">
+        <ul class="pts">
+          <li>Lies on both sides of the Equator, within the torrid (tropical) heat zone — hence the name Equatorial Climatic Zone.</li>
+          <li>Continents: <b>South America, Africa and Asia</b>.</li>
+          <li>Regions: Amazon basin, Central Africa (Congo basin), South-East Asia.</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <details class="acc" open><summary><span class="num">2</span><span class="ml">കാലാവസ്ഥ</span><span class="en">Climate</span></summary>
+    <div class="acc-body">
+      <div class="ml">
+        <ul class="pts">
+          <li>വർഷം മുഴുവൻ താപനില ഏറെക്കുറെ ഒരുപോലെ — ഏറ്റവും ശ്രദ്ധേയമായ സവിശേഷത.</li>
+          <li>കാലികമായും ദൈനികമായും താപനിലയിൽ കാര്യമായ വ്യതിയാനമില്ല. മാസിക/വാർഷിക ശരാശരി താപനില <b>27°C</b>.</li>
+          <li>വർഷം മുഴുവൻ സൂര്യരശ്മികൾ <b>ലംബമായി</b> പതിക്കുന്നു → ശൈത്യകാലം അനുഭവപ്പെടാറില്ല.</li>
+          <li>രാവിലെ മിതമായ താപനില → ഉച്ചയോടെ ഉയർന്ന താപനില → ഉയർന്ന ബാഷ്പീകരണം → ഉച്ചകഴിഞ്ഞ് കനത്ത <b>സംവഹനമഴ</b>.</li>
+          <li>വാർഷികമഴ ഏകദേശം <b>175–250 സെ.മീ</b>. ഇന്തോനേഷ്യയിലെയും ആഫ്രിക്കയിലെയും പർവതപ്രദേശങ്ങളിൽ <b>ശൈലവൃഷ്ടി</b>യും ലഭിക്കും.</li>
+          <li>നിർവാതമേഖലയിലെ അന്തരീക്ഷ അസ്വസ്ഥതകൾ ഇടവിട്ട് നേരിയ <b>ചക്രവാതവൃഷ്ടി</b>ക്കും കാരണമാകുന്നു.</li>
+          <li>എല്ലാ മാസവും മഴ ലഭിക്കുന്നു — പ്രത്യേക <b>വരണ്ടകാലം ഇല്ല</b>.</li>
+          <li>ഉയർന്ന ആർദ്രത, തീവ്ര സൂര്യപ്രകാശം, അത്യുഷ്ണം — പകൽ അസഹനീയമായ അന്തരീക്ഷം. തീരങ്ങളിൽ കടൽക്കാറ്റ് ആശ്വാസം നൽകുന്നതിനാൽ ജനവാസം കൂടുതൽ.</li>
+        </ul>
+        <div class="box"><b>നിർവാതമേഖല (Doldrum):</b> വർഷം മുഴുവൻ ഉയർന്ന സൗരോർജ്ജം മൂലം ഭൂമധ്യരേഖയ്ക്കിരുവശവും രൂപപ്പെടുന്ന ന്യൂനമർദമേഖല. വായുവിന്റെ തിരശ്ചീന സഞ്ചാരമില്ല. ഇരു അർധഗോളങ്ങളിൽ നിന്നുള്ള വാണിജ്യവാതങ്ങളുടെ സംയോജനമേഖല.</div>
+        <div class="box blue"><b>കിളിമഞ്ചാരോ:</b> ആഫ്രിക്കയിലെ ഏറ്റവും ഉയരമുള്ള കൊടുമുടി. ഭൂമധ്യരേഖാമേഖലയിലാണെങ്കിലും <b>ഉയരക്കൂടുതൽ</b> മൂലം വർഷം മുഴുവൻ മഞ്ഞുമൂടിക്കിടക്കുന്നു (ഉയരം കൂടുംതോറും താപനില കുറയുന്നു).</div>
+        <div class="box green"><b>ഹർമാറ്റൻ:</b> ഗിനിയയുടെ തീരങ്ങളിൽ രാത്രികാലങ്ങളിൽ വീശുന്ന പ്രാദേശികവാതം; താപനില കുറയ്ക്കുന്നു.</div>
+      </div>
+      <div class="en">
+        <ul class="pts">
+          <li>Temperature remains almost the same throughout the year — the most notable feature.</li>
+          <li>No significant seasonal or daily variation. Monthly and annual average temperature is <b>27°C</b>.</li>
+          <li>Sun's rays fall <b>vertically</b> all year → no winter season.</li>
+          <li>Moderate temperature in the morning → very high by noon → high evaporation → heavy <b>convectional rain</b> in the afternoon.</li>
+          <li>Annual rainfall about <b>175–250 cm</b>. Mountainous parts of Indonesia and Africa also get <b>orographic rain</b>.</li>
+          <li>Atmospheric disturbances in the doldrums occasionally cause light <b>cyclonic rain</b>.</li>
+          <li>Rain in every month — <b>no distinct dry season</b>.</li>
+          <li>High humidity, intense sunlight and heat make daytime uncomfortable. Sea breezes give relief on coasts, so coasts are more densely populated.</li>
+        </ul>
+        <div class="box"><b>Doldrum:</b> A low-pressure belt formed on both sides of the Equator due to high solar energy all year. No horizontal movement of air. It is the zone where trade winds from both hemispheres converge.</div>
+        <div class="box blue"><b>Kilimanjaro:</b> Africa's highest peak. Though in the equatorial zone, it is snow-covered all year because of its <b>high altitude</b> (temperature falls with height).</div>
+        <div class="box green"><b>Harmattan:</b> A local wind blowing at night along the Guinea coast; it lowers the temperature.</div>
+      </div>
+    </div>
+  </details>
+
+  <details class="acc"><summary><span class="num">3</span><span class="ml">നൈസർഗിക സസ്യജാലങ്ങൾ</span><span class="en">Natural Vegetation</span></summary>
+    <div class="acc-body">
+      <div class="ml">
+        <ul class="pts">
+          <li>നിബിഡവനങ്ങൾ — <b>ഉഷ്ണമേഖലാമഴക്കാടുകൾ</b>. ആമസോൺ തടം, മധ്യപശ്ചിമ ആഫ്രിക്ക, ഇന്തോനേഷ്യ, മലായ് ഉപദ്വീപ്, ന്യൂ ഗിനിയ എന്നിവിടങ്ങളിൽ.</li>
+          <li>ആമസോൺ തടത്തിലെ മഴക്കാടുകൾ — <b>സെൽവാസ്</b>.</li>
+          <li>വിത്ത് മുളയ്ക്കാനോ പൂക്കാനോ കായ്ക്കാനോ ഇലപൊഴിക്കാനോ പ്രത്യേക കാലമില്ല → എപ്പോഴും പച്ച → <b>ഭൂമധ്യരേഖാ നിത്യഹരിതവനങ്ങൾ</b>.</li>
+          <li>വന്മരങ്ങൾ: <b>എബണി, മഹാഗണി, സിൻകോണ, റോസ്‌വുഡ്</b>.</li>
+          <li>ചെറുപനകൾ, ലിയാനാസ് (വള്ളിച്ചെടികൾ), മരവാഴകൾ പോലുള്ള എപ്പിഫൈറ്റുകൾ, പരാദസസ്യങ്ങൾ, പന്നൽച്ചെടികൾ, ലാലങ് പോലുള്ള പുൽവർഗങ്ങൾ.</li>
+          <li>ഒരു പ്രദേശത്ത് അനേകം സസ്യവർഗങ്ങൾ — മലേഷ്യൻ മഴക്കാടുകളിൽ ഒരു ഏക്കറിൽ <b>200-ൽ അധികം</b> സസ്യവർഗങ്ങൾ.</li>
+          <li>ധാരാളം CO₂ ആഗിരണം ചെയ്ത് O₂ ഉൽപ്പാദിപ്പിക്കുന്നതിനാൽ <b>'ലോകത്തിന്റെ ശ്വാസകോശം'</b>.</li>
+          <li>സ്ഥാനമാറ്റക്കൃഷിക്ക് ശേഷം ഉപേക്ഷിക്കുന്നിടത്ത് വളരുന്ന ദ്വിതീയവനങ്ങൾ — മലേഷ്യയിൽ <b>ബെലുകാർ</b>.</li>
+          <li>തീരങ്ങളിലും ഉപ്പുരസമുള്ള ചതുപ്പുകളിലും <b>കണ്ടൽക്കാടുകൾ</b>.</li>
+        </ul>
+        <h3>മേലാപ്പുകൾ (സൂര്യപ്രകാശലഭ്യതയനുസരിച്ച് ഉയരവ്യത്യാസം)</h3>
+      </div>
+      <div class="en">
+        <ul class="pts">
+          <li>Dense forests — <b>tropical rainforests</b> — in the Amazon basin, Central-West Africa, Indonesia, the Malay Peninsula and New Guinea.</li>
+          <li>Amazon rainforests are called <b>Selvas</b>.</li>
+          <li>No particular season for germination, flowering, fruiting or leaf-shedding → always green → <b>Equatorial evergreen forests</b>.</li>
+          <li>Giant trees: <b>ebony, mahogany, cinchona, rosewood</b>.</li>
+          <li>Small palms, lianas (climbers), epiphytes, parasitic plants, ferns and grasses like lalang.</li>
+          <li>Many species together — over <b>200 plant species per acre</b> in Malaysian rainforests.</li>
+          <li>Absorb huge amounts of CO₂ and release O₂ — the <b>'Lungs of the World'</b>.</li>
+          <li>Secondary forests growing on land abandoned after shifting cultivation are called <b>Belukar</b> in Malaysia.</li>
+          <li><b>Mangroves</b> grow on coasts and saline swamps.</li>
+        </ul>
+        <h3>Canopy Layers (height varies with availability of sunlight)</h3>
+      </div>
+      <div class="layers">
+        <div class="layer l1"><b><span class="ml">ഉപരിപാളി</span><span class="en">Upper layer</span></b> — 60 <span class="ml">അടിക്കു മുകളിൽ (150 അടി വരെ)</span><span class="en">ft and above (up to 150 ft)</span></div>
+        <div class="layer l2"><b><span class="ml">മധ്യപാളി</span><span class="en">Middle layer</span></b> — 30 – 60 <span class="ml">അടി</span><span class="en">ft</span></div>
+        <div class="layer l3"><b><span class="ml">കീഴ്പാളി</span><span class="en">Lower layer</span></b> — 30 <span class="ml">അടിക്കു താഴെ</span><span class="en">ft and below</span></div>
+      </div>
+    </div>
+  </details>
+
+  <details class="acc"><summary><span class="num">4</span><span class="ml">ജന്തുവൈവിധ്യം</span><span class="en">Fauna</span></summary>
+    <div class="acc-body">
+      <div class="ml">
+        <ul class="pts">
+          <li>ജന്തുവൈവിധ്യത്താൽ സമ്പന്നം. മിക്ക ജീവികളും മരങ്ങളിൽ ജീവിക്കുന്നു — <b>അർബോറിയൽ ജീവികൾ</b>.</li>
+          <li>മഴക്കാടുകളുടെ ഉള്ളിലേക്ക് സൂര്യപ്രകാശം എത്താത്തതിനാൽ അടിക്കാടുകൾ വളരുന്നില്ല → നിലത്തു ജീവിക്കുന്ന സസ്യഭോജികൾ കുറവ് → മാംസഭോജികളും കുറവ്.</li>
+          <li>ലീമറുകൾ, ആൾക്കുരങ്ങുകൾ, ഒറാങ്ങുട്ടൻ, മരങ്ങൾക്കിടയിൽ സഞ്ചരിക്കുന്ന ഉരഗങ്ങൾ, നീർക്കുതിര, ചീങ്കണ്ണി; തത്ത, ടൂക്കാൻ, വേഴാമ്പൽ തുടങ്ങിയ പക്ഷികൾ.</li>
+        </ul>
+      </div>
+      <div class="en">
+        <ul class="pts">
+          <li>Rich in animal diversity. Most animals live on trees — <b>arboreal animals</b>.</li>
+          <li>Sunlight cannot reach the forest floor, so undergrowth doesn't develop → few ground-dwelling herbivores → few carnivores.</li>
+          <li>Lemurs, apes, orangutans, reptiles moving from tree to tree, hippopotamus, crocodile; birds like parrots, toucans and hornbills.</li>
+        </ul>
+      </div>
+      <div style="margin-top:6px"><span class="chip">🦧 Orangutan</span><span class="chip">🐒 Howler monkey</span><span class="chip">🐍 Emerald tree boa</span><span class="chip">Kinkajou</span><span class="chip">Lemur</span><span class="chip">🐊 Crocodile</span><span class="chip">🦛 Hippopotamus</span><span class="chip">🐍 Anaconda</span><span class="chip">🦜 Macaw</span></div>
+    </div>
+  </details>
+
+  <details class="acc"><summary><span class="num">5</span><span class="ml">ജനജീവിതം</span><span class="en">Human Life</span></summary>
+    <div class="acc-body">
+      <div class="ml">
+        <ul class="pts">
+          <li>ഭൗതിക സാഹചര്യങ്ങൾ മൂലം ജനവാസം പൊതുവെ കുറവ്.</li>
+          <li>തദ്ദേശവാസികൾ: ആഫ്രിക്കയിലെ <b>പിഗ്മികൾ</b>, ആമസോണിലെ <b>ഇന്ത്യൻ ഗോത്രക്കാർ</b>, മലേഷ്യയിലെ <b>ഒറാങ് അസ്‌ലി</b>.</li>
+          <li>ഉപജീവനം: വേട്ടയാടൽ, കായ്കനി ശേഖരണം, മത്സ്യബന്ധനം.</li>
+          <li><b>സ്ഥാനമാറ്റക്കൃഷി / വെട്ടിച്ചുട്ടുകൃഷി:</b> കാട് വെട്ടിത്തെളിച്ച് ചുട്ട് കൃഷി ചെയ്യുന്നു; ഫലഭൂയിഷ്ഠത നഷ്ടപ്പെടുമ്പോൾ ഉപേക്ഷിച്ച് മറ്റൊരിടത്തേക്ക്. വിളകൾ: മരച്ചീനി, ചേന, ചോളം, വാഴ, നിലക്കടല.</li>
+          <li>യൂറോപ്യന്മാരുടെ വരവോടെ <b>തോട്ടവിളക്കൃഷി</b>. <b>റബ്ബർ</b> — മലേഷ്യ, ഇന്തോനേഷ്യ മുന്നിൽ. <b>കൊക്കൊ</b> — പശ്ചിമ ആഫ്രിക്ക. <b>എണ്ണപ്പന</b> — ഇന്തോനേഷ്യ. മറ്റുള്ളവ: തെങ്ങ്, കരിമ്പ്, തേയില, കാപ്പി, വാഴ, കൈതച്ചക്ക.</li>
+          <li>ഭൂരിഭാഗം തദ്ദേശീയരും നാടോടികൾ; പ്രാദേശിക വിഭവങ്ങൾ കൊണ്ട് വീടുകൾ.</li>
+          <li><b>മലോക (Maloca):</b> ആമസോണിലെ കുത്തനെ ചരിഞ്ഞ മേൽക്കൂരയുള്ള വലിയ വീടുകൾ. <b>കമ്പോങ്സ് (Kampongs):</b> മലേഷ്യയിലെ ഗ്രാമങ്ങൾ; തടികൊണ്ടുള്ള വീടുകൾ — മരം, മുള, ഇല ഉപയോഗിക്കുന്നതിനാൽ അകത്ത് ചൂട് കുറവ്.</li>
+          <li>ആധുനിക നഗരങ്ങൾ: <b>ബൊഗോട്ട, സിംഗപ്പൂർ, ജക്കാർത്ത, ഇക്വിറ്റോസ്, ക്വിറ്റോ, മനൗസ്, ബെലെ</b>. മലേഷ്യ, സിംഗപ്പൂർ, കിഴക്കൻ ബ്രസീൽ — വളരെയധികം പുരോഗതി.</li>
+        </ul>
+        <div class="box"><b>പിഗ്മികൾ:</b> കോംഗോ തടം ഉൾപ്പെടെ ആഫ്രിക്കയിലെ ഉൾപ്രദേശങ്ങളിലെ ഉയരം കുറഞ്ഞ തദ്ദേശീയർ. വേട്ടയാടലും ശേഖരണവും; നാടോടി ജീവിതം; ഇലയും മരച്ചില്ലയും കൊണ്ടുള്ള താൽക്കാലിക കുടിലുകൾ; കൂട്ടമായി താമസം; പ്രകൃതികേന്ദ്രീകൃത വിശ്വാസങ്ങൾ; സംഗീതം, നൃത്തം, താളവാദ്യങ്ങൾ.</div>
+      </div>
+      <div class="en">
+        <ul class="pts">
+          <li>Population is generally low because of the physical conditions.</li>
+          <li>Natives: <b>Pygmies</b> of Africa, <b>Indian tribes</b> of the Amazon, <b>Orang Asli</b> of Malaysia.</li>
+          <li>Livelihood: hunting, gathering forest produce, fishing.</li>
+          <li><b>Shifting / slash-and-burn cultivation:</b> forest is cleared and burnt for farming; when fertility is lost the land is abandoned for a new patch. Crops: tapioca, yam, maize, banana, groundnut.</li>
+          <li>Europeans introduced <b>plantation agriculture</b>. <b>Rubber</b> — Malaysia and Indonesia lead. <b>Cocoa</b> — West Africa. <b>Oil palm</b> — Indonesia. Others: coconut, sugarcane, tea, coffee, banana, pineapple.</li>
+          <li>Most natives are nomads; houses are built with local materials.</li>
+          <li><b>Maloca:</b> large Amazon houses with steeply sloping roofs. <b>Kampongs:</b> villages of Malaysia; wooden houses — wood, bamboo and leaves keep the inside cool.</li>
+          <li>Modern cities: <b>Bogota, Singapore, Jakarta, Iquitos, Quito, Manaus, Belem</b>. Malaysia, Singapore and eastern Brazil have progressed greatly.</li>
+        </ul>
+        <div class="box"><b>Pygmies:</b> Short-statured natives of interior Africa including the Congo basin. Hunters and gatherers; nomadic; temporary huts of leaves and branches; live in groups; nature-centred beliefs; music, dance and percussion.</div>
+      </div>
+    </div>
+  </details>
+
+  <details class="acc"><summary><span class="num">6</span><span class="ml">വെല്ലുവിളികൾ</span><span class="en">Challenges</span></summary>
+    <div class="acc-body">
+      <div class="ml">
+        <ul class="pts">
+          <li>ചൂടും ഈർപ്പവും കീടങ്ങളുടെയും ബാക്ടീരിയകളുടെയും വളർച്ചയ്ക്ക് കാരണം → രോഗവ്യാപനം, വിളനാശം.</li>
+          <li><b>നിദ്രാരോഗം</b> — <b>സെസെ (Tsetse) ഈച്ച</b> പരത്തുന്നു. <b>യെല്ലോ ഫീവർ</b> — കൊതുക് പരത്തുന്നു.</li>
+          <li>അടിസ്ഥാന സൗകര്യങ്ങൾ കുറവ്; നിബിഡവനങ്ങളിലൂടെയും ചതുപ്പുകളിലൂടെയും റോഡ്, റെയിൽ നിർമാണം ചെലവേറിയത്.</li>
+          <li>മരങ്ങൾ മുറിച്ചാലുടൻ <b>ലാലങ്</b> പോലുള്ള ഉയരമേറിയ പുല്ലുകളും അടിക്കാടുകളും വളർന്ന് കൃഷിയെ ബാധിക്കുന്നു.</li>
+          <li>വന്യമൃഗങ്ങൾ, രോഗം പരത്തുന്ന ജീവികൾ, വിഷജന്തുക്കൾ.</li>
+          <li>ആമസോൺ, കോംഗോ, ബോർണിയോ ഉൾപ്രദേശങ്ങളിൽ ആധുനിക വാർത്താവിനിമയമില്ല — <b>നദികളാണ് പ്രകൃതിദത്ത ഹൈവേകൾ</b>.</li>
+          <li>വാണിജ്യ മരംവെട്ടിന് തടസ്സം: മരങ്ങളുടെ അതിബാഹുല്യം (ഒരേ ഇനം ഒരുമിച്ചില്ല), തടി നീക്കാനുള്ള ബുദ്ധിമുട്ട്, ഭാരക്കൂടുതൽ മൂലം നദികളിലൂടെ ഒഴുക്കാനാവില്ല.</li>
+          <li>മേച്ചിൽസ്ഥലങ്ങളുടെ അഭാവം, മൃഗങ്ങളുടെ ആക്രമണം → കന്നുകാലിവളർത്തൽ വളർന്നില്ല.</li>
+          <li>ലോകവനഭൂമിയുടെ <b>മൂന്നിൽ ഒന്ന്</b> ആമസോൺ, കോംഗോ, തെക്കുകിഴക്കൻ ഏഷ്യ എന്നിവിടങ്ങളിൽ. <b>കാട്ടുതീ</b> (ആമസോൺ), മനുഷ്യപ്രേരിത <b>വനനശീകരണം</b> (കൃഷി, നിർമാണം, നഗരവൽക്കരണം, ഖനനം) വലിയ ഭീഷണി.</li>
+        </ul>
+      </div>
+      <div class="en">
+        <ul class="pts">
+          <li>Heat and humidity favour pests and bacteria → spread of disease and crop damage.</li>
+          <li><b>Sleeping sickness</b> — spread by the <b>Tsetse fly</b>. <b>Yellow fever</b> — spread by mosquitoes.</li>
+          <li>Poor infrastructure; building roads and railways through dense forests and swamps is costly.</li>
+          <li>When trees are cut, tall grasses like <b>lalang</b> and undergrowth take over, affecting farming.</li>
+          <li>Wild animals, disease carriers and poisonous creatures.</li>
+          <li>Interior Amazon, Congo and Borneo lack modern communication — <b>rivers are natural highways</b>.</li>
+          <li>Commercial logging is hard: mixed variety of trees (same species not together), difficulty moving logs, heavy logs cannot be floated down rivers.</li>
+          <li>Lack of pastures and animal attacks → cattle rearing has not developed.</li>
+          <li><b>One-third</b> of world forest area lies in the Amazon, Congo and South-East Asia. <b>Forest fires</b> (Amazon) and human-induced <b>deforestation</b> (agriculture, construction, urbanisation, mining) are major threats.</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ TUNDRA ============ -->
+<section class="panel tu" id="p-tundra">
+  <div class="zone-head tu">❄ <span class="ml">ടൺഡ്രാമേഖല</span><span class="en">Tundra Zone</span></div>
+
+  <details class="acc" open><summary><span class="num">1</span><span class="ml">ലോംഗ്ഇയർബൈൻ — യാത്രാക്കുറിപ്പിൽ നിന്ന്</span><span class="en">Longyearbyen — From the Travelogue</span></summary>
+    <div class="acc-body">
+      <div class="ml"><ul class="pts">
+        <li>നോർവെയുടെ വടക്ക് ആർട്ടിക് കടലിലെ <b>സ്വാൽബാർഡ്</b> ദ്വീപസമൂഹത്തിലെ പട്ടണം; ആയിരത്തിലധികം ജനങ്ങൾ — ലോകത്തിലെ <b>ഏറ്റവും വടക്കുള്ള ജനവാസമേഖല</b>.</li>
+        <li>നവംബർ പകുതി മുതൽ ജനുവരി വരെ പൂർണ ഇരുട്ട് — <b>ധ്രുവരാത്രി</b>.</li>
+        <li>ഇരുട്ടിൽ തിരിച്ചറിയാൻ രോമക്കുപ്പായങ്ങൾക്ക് പുറമെ <b>റിഫ്ലക്ടർ</b> ഘടിപ്പിച്ച വസ്ത്രങ്ങൾ.</li>
+        <li>ബഹുവർണ ആകാശം — <b>ധ്രുവദീപ്തി</b> (Aurora).</li>
+        <li>സൈബീരിയൻ ടൺഡ്രയിൽ ജൂലൈയിൽ പോലും ശരാശരി താപനില 10°C-ൽ താഴെ; ശൈത്യകാലത്ത് −50°C വരെ.</li>
+      </ul></div>
+      <div class="en"><ul class="pts">
+        <li>A town in the <b>Svalbard</b> archipelago in the Arctic Sea, north of Norway; over a thousand people — the world's <b>northernmost settlement</b>.</li>
+        <li>Total darkness from mid-November to January — <b>polar night</b>.</li>
+        <li>People wear clothes fitted with <b>reflectors</b> over fur coats to be seen in the dark.</li>
+        <li>Multi-coloured sky — <b>polar lights (Aurora)</b>.</li>
+        <li>In the Siberian tundra, even July average is below 10°C; winter falls to −50°C.</li>
+      </ul></div>
+    </div>
+  </details>
+
+  <details class="acc" open><summary><span class="num">2</span><span class="ml">സ്ഥാനം</span><span class="en">Location</span></summary>
+    <div class="acc-body">
+      <div class="ml"><ul class="pts">
+        <li><b>ടൈഗാമേഖലയുടെ വടക്ക്</b>. വടക്കേ അമേരിക്കയുടെയും യുറേഷ്യയുടെയും ആർട്ടിക് തീരങ്ങളിലും ഗ്രീൻലാൻഡ് തീരങ്ങളിലും.</li>
+        <li>ഗ്രീൻലാൻഡിന്റെ ഉൾഭാഗം — <b>ഐസ് ക്യാപ്</b>.</li>
+        <li><b>ആർട്ടിക് ടൺഡ്ര:</b> അലാസ്ക, കാനഡ, സൈബീരിയ, ഗ്രീൻലാൻഡ്, ഐസ്‌ലാൻഡ്, സ്കാൻഡിനേവിയ — ടൈഗയുടെ വടക്ക്.</li>
+        <li><b>ആൽപൈൻ ടൺഡ്ര:</b> ഉയരമേറിയ പർവതപ്രദേശങ്ങളിൽ.</li>
+      </ul></div>
+      <div class="en"><ul class="pts">
+        <li><b>North of the Taiga zone</b>, along the Arctic coasts of North America and Eurasia and the coasts of Greenland.</li>
+        <li>Interior of Greenland — <b>Ice cap</b>.</li>
+        <li><b>Arctic tundra:</b> Alaska, Canada, Siberia, Greenland, Iceland, Scandinavia — north of the Taiga.</li>
+        <li><b>Alpine tundra:</b> on high mountains.</li>
+      </ul></div>
+    </div>
+  </details>
+
+  <details class="acc"><summary><span class="num">3</span><span class="ml">കാലാവസ്ഥ</span><span class="en">Climate</span></summary>
+    <div class="acc-body">
+      <div class="ml"><ul class="pts">
+        <li>ആർട്ടിക് / ധ്രുവീയ കാലാവസ്ഥാമേഖല എന്നും വിളിക്കുന്നു. <b>ഹ്രസ്വമായ വേനൽ, ദീർഘമായ ശൈത്യം</b>.</li>
+        <li>വളരെ കുറഞ്ഞ വാർഷിക ശരാശരി താപനില. ശൈത്യമധ്യത്തിൽ <b>−30°C</b> വരെ; ഉൾഭാഗങ്ങളിൽ ഇതിലും താഴെ.</li>
+        <li>വേനലിലെ ഏതാനും ആഴ്ചകളിൽ മാത്രം താപനില 0°C-ന് മുകളിൽ.</li>
+        <li>ആർട്ടിക് വൃത്തം മുതൽ ധ്രുവം വരെ ആഴ്ചകളോളം സൂര്യൻ അസ്തമിക്കില്ല / ഉദിക്കില്ല.</li>
+        <li>സൂര്യന്റെ ആപേക്ഷികസ്ഥാനം ഉത്തരാർധഗോളത്തിലാകുമ്പോൾ ഉത്തരധ്രുവത്തിൽ 6 മാസം പകൽ; ദക്ഷിണാർധഗോളത്തിലാകുമ്പോൾ 6 മാസം രാത്രി.</li>
+        <li>ശൈത്യകാലത്ത് വർഷണം <b>മഞ്ഞുവീഴ്ച</b>യായി. ചക്രവാതങ്ങൾ ശക്തമായ തീരങ്ങളിൽ കനത്ത മഴ.</li>
+        <li><b>ബ്ലിസാർഡ്:</b> ശക്തിയേറിയ ഹിമക്കാറ്റുകൾ — ശക്തമായ ഹിമപാതത്തിന് കാരണം.</li>
+      </ul></div>
+      <div class="en"><ul class="pts">
+        <li>Also called the Arctic or Polar climatic zone. <b>Short summer, long winter</b>.</li>
+        <li>Very low annual average temperature. Mid-winter falls to <b>−30°C</b>, lower in the interior.</li>
+        <li>Only for a few weeks in summer does temperature rise above 0°C.</li>
+        <li>From the Arctic Circle to the Pole, the sun doesn't set / rise for weeks.</li>
+        <li>When the sun's apparent position is in the Northern Hemisphere, the North Pole has 6 months of day; when in the Southern Hemisphere, 6 months of night.</li>
+        <li>Winter precipitation is <b>snowfall</b>. Coasts with strong cyclones get heavy rain.</li>
+        <li><b>Blizzard:</b> strong icy winds causing heavy snowfall.</li>
+      </ul></div>
+    </div>
+  </details>
+
+  <details class="acc"><summary><span class="num">4</span><span class="ml">സസ്യജാലങ്ങൾ</span><span class="en">Vegetation</span></summary>
+    <div class="acc-body">
+      <div class="ml"><ul class="pts">
+        <li>കുറഞ്ഞ സൂര്യപ്രകാശവും അതിശൈത്യവും → സസ്യജാലം വിരളം; ജന്തുവൈവിധ്യവും കുറവ്.</li>
+        <li>സാധാരണ മരങ്ങൾ ഒന്നും കാണില്ല. പ്രധാനം: <b>പായലുകൾ, ലൈക്കണുകൾ, സെഡ്ജുകൾ, കുറ്റിച്ചെടികൾ</b>.</li>
+        <li><b>കുള്ളൻ വില്ലോസ്, ബിർച്ചസ്</b> ചിലയിടങ്ങളിൽ.</li>
+        <li>തീരങ്ങളിലെ താഴ്ന്ന പ്രദേശങ്ങളിൽ കട്ടിയുള്ള പുല്ലുകൾ → <b>റെയിൻഡീർ</b> പോലുള്ള സസ്യഭോജികളുടെ അതിജീവനം.</li>
+        <li>ഹ്രസ്വ വേനലിൽ മഞ്ഞുരുകുമ്പോൾ കുറ്റിച്ചെടികൾ പൂക്കുന്നു, കായ്ക്കുന്നു; തെക്കുനിന്ന് പക്ഷികൾ <b>ദേശാടനം</b> ചെയ്യുന്നു.</li>
+      </ul></div>
+      <div class="en"><ul class="pts">
+        <li>Low sunlight and extreme cold → sparse vegetation; animal diversity is also low.</li>
+        <li>Trees are generally absent. Main plants: <b>mosses, lichens, sedges, shrubs</b>.</li>
+        <li><b>Dwarf willows and birches</b> survive in some places.</li>
+        <li>Low coastal areas have tough grasses → support herbivores like <b>reindeer</b>.</li>
+        <li>In the short summer, snow melts, shrubs flower and fruit; birds <b>migrate</b> from the south.</li>
+      </ul></div>
+    </div>
+  </details>
+
+  <details class="acc"><summary><span class="num">5</span><span class="ml">ജന്തുജാലങ്ങൾ</span><span class="en">Fauna</span></summary>
+    <div class="acc-body">
+      <p class="ml">ആർട്ടിക് കുറുക്കൻ, ചെന്നായ, ധ്രുവക്കരടി, കസ്തൂരി കാള, ആർട്ടിക് മുയൽ, റെയിൻഡീർ (കാരിബു), ദേശാടനപ്പക്ഷികൾ.</p>
+      <p class="en">Arctic fox, wolf, polar bear, musk ox, Arctic hare, reindeer (caribou) and migratory birds.</p>
+      <div><span class="chip">🐻‍❄️ Polar bear</span><span class="chip">🦊 Arctic fox</span><span class="chip">🐇 Arctic hare</span><span class="chip">🐂 Musk ox</span><span class="chip">🐺 Wolf</span><span class="chip">🦌 Reindeer</span></div>
+    </div>
+  </details>
+
+  <details class="acc"><summary><span class="num">6</span><span class="ml">ടൺഡ്രയിലെ ജനജീവിതം</span><span class="en">Human Life in the Tundra</span></summary>
+    <div class="acc-body">
+      <div class="ml"><ul class="pts">
+        <li>ജനവാസം കുറവ്; പ്രധാനമായും തീരപ്രദേശങ്ങളിൽ. പീഠഭൂമികളും പർവതങ്ങളും സ്ഥിരമായി മഞ്ഞുമൂടിയതിനാൽ വാസയോഗ്യമല്ല.</li>
+        <li>ഉപജീവനം: <b>വേട്ടയാടലും മത്സ്യബന്ധനവും</b> — തിമിംഗലം, സീൽ, കാരിബു, മത്സ്യം, പക്ഷികൾ, രോമമുള്ള മൃഗങ്ങൾ. എല്ലുകൾ ആയുധങ്ങളും ഉപകരണങ്ങളും പാത്രങ്ങളും.</li>
+        <li>ഗ്രീൻലാൻഡിലെ <b>പോളാർ എസ്കിമോകൾ</b> പൂർവികരുടേതിൽ നിന്ന് വ്യത്യസ്തമല്ലാത്ത പ്രാകൃത ജീവിതം.</li>
+        <li>ശൈത്യകാലത്ത് <b>ഇഗ്ലൂ</b>വിൽ; വേനലിൽ നദീതീരങ്ങളിൽ മൃഗത്തോലുകൊണ്ടുള്ള <b>ടെന്റുകളിൽ</b>. ഹിമകരടികളെ പോലും വേട്ടയാടുന്നു.</li>
+        <li>കഴിഞ്ഞ 60 വർഷത്തിൽ യൂറോപ്യൻ സമ്പർക്കം → ആധുനിക വീടുകൾ, <b>കയാക്കുകൾക്ക്</b> (തുഴവഞ്ചി) പകരം സ്പീഡ് ബോട്ടുകൾ, രോമമൃഗങ്ങളെ വാണിജ്യാടിസ്ഥാനത്തിൽ വളർത്തൽ. കാനഡ, അലാസ്ക എന്നിവിടങ്ങളിൽ സ്കൂളുകൾ.</li>
+        <li>യുറേഷ്യൻ ടൺഡ്രയിലെ ഗോത്രങ്ങൾ റെയിൻഡീർ കൂട്ടങ്ങളുമായി <b>നാടോടി ഇടയജീവിതം</b>. സൈബീരിയയിൽ വലിയ റെയിൻഡീർ ഫാമുകൾ.</li>
+        <li><b>ധാതുഖനനം</b> പുതിയ വാസയിടങ്ങൾക്ക് കാരണം. തെക്കുഭാഗത്ത് ഹ്രസ്വകാല ധാന്യങ്ങൾ, ഹരിതഗൃഹക്കൃഷി.</li>
+        <li><b>ഡോഗ് സ്ലെഡ്ജ്:</b> നായ്ക്കൾ വലിക്കുന്ന, മഞ്ഞിലൂടെ തെന്നിനീങ്ങുന്ന വണ്ടി.</li>
+      </ul></div>
+      <div class="en"><ul class="pts">
+        <li>Sparse population, mostly on the coasts. Permanently snow-covered plateaus and mountains are uninhabitable.</li>
+        <li>Livelihood: <b>hunting and fishing</b> — whales, seals, caribou, fish, birds, fur-bearing animals. Bones are used as weapons, tools and vessels.</li>
+        <li>The <b>Polar Eskimos</b> of Greenland still live a primitive life much like their ancestors.</li>
+        <li>In winter they live in <b>igloos</b>; in summer in animal-skin <b>tents</b> by rivers. Some even hunt polar bears.</li>
+        <li>In the last 60 years, contact with Europeans → modern houses, speedboats instead of <b>kayaks</b> (paddle boats), commercial fur farming. Schools set up in Canada and Alaska.</li>
+        <li>Eurasian tundra tribes lead a <b>nomadic herding life</b> with reindeer. Large reindeer farms in Siberia.</li>
+        <li><b>Mining</b> has created new settlements. Short-duration crops and greenhouse farming in the south.</li>
+        <li><b>Dog sledge:</b> a vehicle pulled by dogs that slides over snow.</li>
+      </ul></div>
+      <h3><span class="ml">ഗോത്രവിഭാഗങ്ങൾ</span><span class="en">Tribes</span></h3>
+      <div class="tbl-wrap"><table>
+        <tr><th class="b"><span class="ml">പ്രദേശം</span><span class="en">Region</span></th><th class="b"><span class="ml">ഗോത്രം</span><span class="en">Tribe</span></th></tr>
+        <tr><td><span class="ml">ഗ്രീൻലാൻഡ്, വടക്കൻ കാനഡ, അലാസ്ക</span><span class="en">Greenland, Northern Canada, Alaska</span></td><td><span class="ml">എസ്കിമോസ് / ഇന്യൂട്ടുകൾ</span><span class="en">Eskimos / Inuits</span></td></tr>
+        <tr><td><span class="ml">വടക്കൻ ഫിൻലാൻഡ്, സ്കാൻഡിനേവിയ</span><span class="en">Northern Finland, Scandinavia</span></td><td><span class="ml">ലാപ്പ്സ്</span><span class="en">Lapps</span></td></tr>
+        <tr><td><span class="ml">സൈബീരിയ</span><span class="en">Siberia</span></td><td><span class="ml">സമൊയെഡ്സ്</span><span class="en">Samoyeds</span></td></tr>
+        <tr><td><span class="ml">ലെന തടം</span><span class="en">Lena basin</span></td><td><span class="ml">യാക്കൂട്ട്സ്</span><span class="en">Yakuts</span></td></tr>
+        <tr><td><span class="ml">വടക്കുകിഴക്കൻ ഏഷ്യ</span><span class="en">North-East Asia</span></td><td><span class="ml">കൊറിയാക്സ്, ചുക്ചി</span><span class="en">Koryaks, Chukchi</span></td></tr>
+      </table></div>
+      <div class="box blue"><b><span class="ml">ഇഗ്ലൂ:</span><span class="en">Igloo:</span></b> <span class="ml">മഞ്ഞുകട്ടകൾ വെട്ടിയെടുത്ത് അടിത്തട്ട് വൃത്താകൃതിയിലും മുകൾഭാഗം മകുടാകൃതിയിലും നിർമിച്ച താൽക്കാലിക വാസയിടം.</span><span class="en">A temporary shelter built of cut snow blocks with a circular base and a dome-shaped top.</span></div>
+    </div>
+  </details>
+
+  <details class="acc"><summary><span class="num">7</span><span class="ml">ടൺഡ്രയും കാലാവസ്ഥാവ്യതിയാനവും</span><span class="en">Tundra and Climate Change</span></summary>
+    <div class="acc-body">
+      <p class="ml">ആഗോളതാപനത്തിന്റെ ഫലമായി ടൺഡ്രയിലെ ഐസ് പാളികൾ (<b>പെർമാഫ്രോസ്റ്റ്</b>) ഗണ്യമായ തോതിൽ ഉരുകുന്നു. ഇത് സ്വാഭാവിക ആവാസവ്യവസ്ഥയെയും പാരിസ്ഥിതിക സന്തുലനത്തെയും പ്രതികൂലമായി ബാധിക്കുന്നു.</p>
+      <p class="en">Due to global warming, the frozen ice layers of the tundra (<b>permafrost</b>) are melting at a significant rate. This badly affects the natural habitat and the ecological balance.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ COMPARE ============ -->
+<section class="panel" id="p-compare">
+  <div class="card">
+    <h2 class="sec"><span class="ico" style="background:#fff3e0">⚖</span><span class="ml">താരതമ്യം — ഭൂമധ്യരേഖാമേഖല × ടൺഡ്ര</span><span class="en">Comparison — Equatorial × Tundra</span></h2>
+    <div class="tbl-wrap"><table>
+      <tr><th><span class="ml">സൂചകം</span><span class="en">Indicator</span></th><th class="g">🌴 <span class="ml">ഭൂമധ്യരേഖാമേഖല</span><span class="en">Equatorial</span></th><th class="b">❄ <span class="ml">ടൺഡ്ര</span><span class="en">Tundra</span></th></tr>
+      <tr><td><b><span class="ml">സ്ഥാനം</span><span class="en">Location</span></b></td><td><span class="ml">ഭൂമധ്യരേഖയ്ക്കിരുവശവും; ആമസോൺ, കോംഗോ, തെ.കി. ഏഷ്യ</span><span class="en">Both sides of the Equator; Amazon, Congo, SE Asia</span></td><td><span class="ml">ടൈഗയുടെ വടക്ക്; ആർട്ടിക് തീരങ്ങൾ, ഗ്രീൻലാൻഡ് തീരം</span><span class="en">North of Taiga; Arctic coasts, Greenland coasts</span></td></tr>
+      <tr><td><b><span class="ml">താപനില</span><span class="en">Temperature</span></b></td><td><span class="ml">വർഷം മുഴുവൻ ഉയർന്നത്; ശരാശരി 27°C; ശൈത്യമില്ല</span><span class="en">High all year; avg 27°C; no winter</span></td><td><span class="ml">വളരെ താഴ്ന്നത്; ശൈത്യത്തിൽ −30°C; ഹ്രസ്വ വേനൽ</span><span class="en">Very low; −30°C in winter; short summer</span></td></tr>
+      <tr><td><b><span class="ml">വാർഷിക താപാന്തരം</span><span class="en">Annual range</span></b></td><td><span class="ml">വളരെ കുറവ് (ക്വാലാലമ്പൂർ 1.2°C)</span><span class="en">Very small (Kuala Lumpur 1.2°C)</span></td><td><span class="ml">വളരെ കൂടുതൽ (അപർനാവിക് 29.8°C)</span><span class="en">Very large (Upernavik 29.8°C)</span></td></tr>
+      <tr><td><b><span class="ml">വർഷണം</span><span class="en">Precipitation</span></b></td><td><span class="ml">175–250 സെ.മീ; സംവഹനമഴ; എല്ലാ മാസവും</span><span class="en">175–250 cm; convectional; every month</span></td><td><span class="ml">കുറവ്; ശൈത്യത്തിൽ മഞ്ഞുവീഴ്ച; ബ്ലിസാർഡ്</span><span class="en">Low; snowfall in winter; blizzards</span></td></tr>
+      <tr><td><b><span class="ml">പകൽ / രാത്രി</span><span class="en">Day / Night</span></b></td><td><span class="ml">ഏറെക്കുറെ തുല്യം</span><span class="en">Almost equal</span></td><td><span class="ml">ആഴ്ചകളോളം നീളുന്ന പകലും രാത്രിയും (ധ്രുവരാത്രി)</span><span class="en">Days and nights lasting weeks (polar night)</span></td></tr>
+      <tr><td><b><span class="ml">സസ്യങ്ങൾ</span><span class="en">Vegetation</span></b></td><td><span class="ml">നിബിഡ നിത്യഹരിതവനങ്ങൾ; എബണി, മഹാഗണി; 3 മേലാപ്പുകൾ</span><span class="en">Dense evergreen forests; ebony, mahogany; 3 canopy layers</span></td><td><span class="ml">മരങ്ങളില്ല; പായൽ, ലൈക്കൺ, സെഡ്ജ്, കുള്ളൻ വില്ലോ</span><span class="en">No trees; mosses, lichens, sedges, dwarf willow</span></td></tr>
+      <tr><td><b><span class="ml">ജന്തുക്കൾ</span><span class="en">Animals</span></b></td><td><span class="ml">അർബോറിയൽ ജീവികൾ; ഒറാങ്ങുട്ടൻ, ലീമർ, അനക്കോണ്ട</span><span class="en">Arboreal; orangutan, lemur, anaconda</span></td><td><span class="ml">ധ്രുവക്കരടി, ആർട്ടിക് കുറുക്കൻ, കസ്തൂരി കാള</span><span class="en">Polar bear, Arctic fox, musk ox</span></td></tr>
+      <tr><td><b><span class="ml">ജനങ്ങൾ</span><span class="en">People</span></b></td><td><span class="ml">പിഗ്മികൾ, ഇന്ത്യൻ ഗോത്രങ്ങൾ, ഒറാങ് അസ്‌ലി</span><span class="en">Pygmies, Indian tribes, Orang Asli</span></td><td><span class="ml">എസ്കിമോ, ലാപ്പ്സ്, സമൊയെഡ്സ്, യാക്കൂട്ട്സ്</span><span class="en">Eskimos, Lapps, Samoyeds, Yakuts</span></td></tr>
+      <tr><td><b><span class="ml">ഉപജീവനം</span><span class="en">Livelihood</span></b></td><td><span class="ml">വേട്ട, ശേഖരണം, സ്ഥാനമാറ്റക്കൃഷി, തോട്ടക്കൃഷി</span><span class="en">Hunting, gathering, shifting & plantation farming</span></td><td><span class="ml">വേട്ട, മത്സ്യബന്ധനം, റെയിൻഡീർ ഇടയജീവിതം, ഖനനം</span><span class="en">Hunting, fishing, reindeer herding, mining</span></td></tr>
+      <tr><td><b><span class="ml">വീടുകൾ</span><span class="en">Houses</span></b></td><td><span class="ml">മലോക, കമ്പോങ്, ഇല-മരച്ചില്ല കുടിലുകൾ</span><span class="en">Maloca, Kampongs, leaf & bark huts</span></td><td><span class="ml">ഇഗ്ലൂ, തോൽ ടെന്റുകൾ</span><span class="en">Igloo, skin tents</span></td></tr>
+      <tr><td><b><span class="ml">ഗതാഗതം</span><span class="en">Transport</span></b></td><td><span class="ml">നദികൾ — പ്രകൃതിദത്ത ഹൈവേ</span><span class="en">Rivers — natural highways</span></td><td><span class="ml">ഡോഗ് സ്ലെഡ്ജ്, കയാക്ക് / സ്പീഡ് ബോട്ട്</span><span class="en">Dog sledge, kayak / speedboat</span></td></tr>
+      <tr><td><b><span class="ml">വെല്ലുവിളി</span><span class="en">Challenges</span></b></td><td><span class="ml">രോഗങ്ങൾ, വനനശീകരണം, കാട്ടുതീ, ഗതാഗതക്കുറവ്</span><span class="en">Diseases, deforestation, forest fires, poor transport</span></td><td><span class="ml">അതിശൈത്യം, പെർമാഫ്രോസ്റ്റ് ഉരുകൽ</span><span class="en">Extreme cold, melting permafrost</span></td></tr>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============ ACTIVITIES ============ -->
+<section class="panel" id="p-activities">
+  <div class="card eq">
+    <h2 class="sec"><span class="ico">🗺</span><span class="ml">ഭൂമധ്യരേഖാമേഖല — ഭൂപട പ്രവർത്തനം (ചിത്രം 3.3)</span><span class="en">Equatorial Zone — Map Activity (Fig 3.3)</span></h2>
+    <div class="ml"><ul class="pts">
+      <li><b>വൻകരകൾ:</b> തെക്കേ അമേരിക്ക, ആഫ്രിക്ക, ഏഷ്യ.</li>
+      <li><b>പ്രദേശങ്ങൾ:</b> ആമസോൺ തടം, മധ്യ ആഫ്രിക്ക, തെക്കുകിഴക്കൻ ഏഷ്യ.</li>
+      <li><b>താപീയമേഖല:</b> ഉഷ്ണമേഖല (23½° വടക്കിനും 23½° തെക്കിനും ഇടയിൽ).</li>
+      <li><b>എന്തുകൊണ്ട് ഈ പേര്?</b> ഭൂമധ്യരേഖയുടെ ഇരുവശത്തുമായി സ്ഥിതി ചെയ്യുന്നതിനാൽ.</li>
+    </ul></div>
+    <div class="en"><ul class="pts">
+      <li><b>Continents:</b> South America, Africa, Asia.</li>
+      <li><b>Regions:</b> Amazon basin, Central Africa, South-East Asia.</li>
+      <li><b>Heat zone:</b> Torrid zone (between 23½°N and 23½°S).</li>
+      <li><b>Why the name?</b> Because it lies on both sides of the Equator.</li>
+    </ul></div>
+    <div class="tbl-wrap" style="margin-top:10px"><table>
+      <tr><th class="g"><span class="ml">വൻകര</span><span class="en">Continent</span></th><th class="g"><span class="ml">രാജ്യങ്ങൾ (മാതൃക ഉത്തരം)</span><span class="en">Countries (model answer)</span></th></tr>
+      <tr><td><span class="ml">ഏഷ്യ</span><span class="en">Asia</span></td><td><span class="ml">ഇന്തോനേഷ്യ, മലേഷ്യ, സിംഗപ്പൂർ, ബ്രൂണൈ</span><span class="en">Indonesia, Malaysia, Singapore, Brunei</span></td></tr>
+      <tr><td><span class="ml">ആഫ്രിക്ക</span><span class="en">Africa</span></td><td><span class="ml">ഡെമോക്രാറ്റിക് റിപ്പബ്ലിക് ഓഫ് കോംഗോ, റിപ്പബ്ലിക് ഓഫ് കോംഗോ, ഗാബോൺ, കാമറൂൺ</span><span class="en">Democratic Republic of Congo, Republic of Congo, Gabon, Cameroon</span></td></tr>
+      <tr><td><span class="ml">തെക്കേ അമേരിക്ക</span><span class="en">South America</span></td><td><span class="ml">ബ്രസീൽ, കൊളംബിയ, ഇക്വഡോർ, പെറു</span><span class="en">Brazil, Colombia, Ecuador, Peru</span></td></tr>
+    </table></div>
+  </div>
+
+  <div class="card eq">
+    <h2 class="sec"><span class="ico">📊</span><span class="ml">കാലാവസ്ഥാ ഗ്രാഫ് വിശകലനം (ചിത്രം 3.4, 3.5)</span><span class="en">Climate Graph Analysis (Fig 3.4, 3.5)</span></h2>
+    <div class="tbl-wrap"><table>
+      <tr><th></th><th class="g"><span class="ml">ക്വാലാലമ്പൂർ</span><span class="en">Kuala Lumpur</span></th><th class="g"><span class="ml">ബൊഗോട്ട</span><span class="en">Bogota</span></th></tr>
+      <tr><td><span class="ml">ഉയർന്ന മാസിക ശരാശരി താപനില</span><span class="en">Highest monthly avg temp</span></td><td>26.3°C (<span class="ml">മെയ്</span><span class="en">May</span>)</td><td>13.3°C (<span class="ml">സെപ്റ്റംബർ</span><span class="en">September</span>)</td></tr>
+      <tr><td><span class="ml">താഴ്ന്ന മാസിക ശരാശരി താപനില</span><span class="en">Lowest monthly avg temp</span></td><td>25.1°C (<span class="ml">ജനുവരി, ഡിസംബർ</span><span class="en">January, December</span>)</td><td>12.5°C (<span class="ml">നവംബർ</span><span class="en">November</span>)</td></tr>
+      <tr><td><b><span class="ml">വാർഷിക താപാന്തരം</span><span class="en">Annual temperature range</span></b></td><td><b>1.2°C</b></td><td><b>0.8°C</b></td></tr>
+      <tr><td><span class="ml">കൂടുതൽ മഴ</span><span class="en">Maximum rainfall</span></td><td>373 mm (<span class="ml">നവംബർ</span><span class="en">November</span>)</td><td>152 mm (<span class="ml">ഏപ്രിൽ</span><span class="en">April</span>)</td></tr>
+      <tr><td><span class="ml">കുറവ് മഴ</span><span class="en">Minimum rainfall</span></td><td>174 mm (<span class="ml">ഫെബ്രുവരി, ജൂൺ</span><span class="en">February, June</span>)</td><td>31 mm (<span class="ml">ആഗസ്റ്റ്</span><span class="en">August</span>)</td></tr>
+      <tr><td><span class="ml">മഴ ലഭിക്കാത്ത മാസം?</span><span class="en">Any rainless month?</span></td><td><span class="ml">ഇല്ല</span><span class="en">No</span></td><td><span class="ml">ഇല്ല</span><span class="en">No</span></td></tr>
+    </table></div>
+    <div class="box green"><span class="ml"><b>നിഗമനം:</b> ഉയർന്ന താപനിലയും നേരിയ താപാന്തരവും വർഷം മുഴുവൻ മഴയും ലഭിക്കുന്ന പ്രദേശമാണ് ഭൂമധ്യരേഖാകാലാവസ്ഥാമേഖല. (ബൊഗോട്ടയിൽ താപനില കുറവ് — ഉയരം കൂടിയ ആൻഡീസ് പ്രദേശത്തായതിനാൽ.)</span><span class="en"><b>Conclusion:</b> The equatorial zone has high temperature, a small temperature range and rain throughout the year. (Bogota is cooler because it lies at a high altitude in the Andes.)</span></div>
+    <div class="box"><span class="ml"><b>കേരളത്തിൽ സംവഹനമഴ?</b> ഉണ്ട് — വേനൽക്കാലത്ത് (മാർച്ച്–മെയ്) ഉച്ചകഴിഞ്ഞുള്ള ഇടിമിന്നലോടുകൂടിയ മഴയും, തുലാവർഷക്കാലത്ത് (ഒക്ടോബർ–നവംബർ) ഉച്ചകഴിഞ്ഞുള്ള മഴയും.</span><span class="en"><b>Convectional rain in Kerala?</b> Yes — afternoon thunderstorms in summer (March–May) and afternoon rains during the north-east monsoon (October–November).</span></div>
+  </div>
+
+  <div class="card tu">
+    <h2 class="sec"><span class="ico">🗺</span><span class="ml">ടൺഡ്രാമേഖല — ഭൂപട പ്രവർത്തനം (ചിത്രം 3.25)</span><span class="en">Tundra Zone — Map Activity (Fig 3.25)</span></h2>
+    <div class="ml"><ul class="pts">
+      <li><b>ലോംഗ്ഇയർബൈനിലെ വ്യത്യസ്ത പ്രത്യേകതകൾ:</b> ഹിമപാതം, ധ്രുവരാത്രി, ധ്രുവദീപ്തി, അതിശൈത്യം, വർഷം മുഴുവൻ മഞ്ഞുമൂടിയ പ്രദേശം.</li>
+      <li><b>ലോംഗ്ഇയർബൈൻ ഏത് മേഖലയിൽ?</b> ടൺഡ്രാ (ധ്രുവീയ) കാലാവസ്ഥാമേഖല.</li>
+      <li><b>ഭൂപടത്തിലെ മേഖലകൾ:</b> ഐസ് ക്യാപ്, ടൺഡ്ര.</li>
+    </ul></div>
+    <div class="en"><ul class="pts">
+      <li><b>Distinct features of Longyearbyen:</b> snowfall, polar night, aurora, extreme cold, snow cover all year.</li>
+      <li><b>Which zone is Longyearbyen in?</b> Tundra (Polar) climatic zone.</li>
+      <li><b>Zones on the map:</b> Ice cap, Tundra.</li>
+    </ul></div>
+    <div class="tbl-wrap" style="margin-top:10px"><table>
+      <tr><th class="b"><span class="ml">പ്രദേശം</span><span class="en">Region</span></th><th class="b"><span class="ml">വൻകര</span><span class="en">Continent</span></th></tr>
+      <tr><td><span class="ml">സൈബീരിയ</span><span class="en">Siberia</span></td><td><span class="ml">ഏഷ്യ</span><span class="en">Asia</span></td></tr>
+      <tr><td><span class="ml">ഗ്രീൻലാൻഡ്</span><span class="en">Greenland</span></td><td><span class="ml">വടക്കേ അമേരിക്ക</span><span class="en">North America</span></td></tr>
+      <tr><td><span class="ml">ഐസ്‌ലാൻഡ്</span><span class="en">Iceland</span></td><td><span class="ml">യൂറോപ്പ്</span><span class="en">Europe</span></td></tr>
+      <tr><td><span class="ml">വടക്കൻ സ്കാൻഡിനേവിയ</span><span class="en">Northern Scandinavia</span></td><td><span class="ml">യൂറോപ്പ്</span><span class="en">Europe</span></td></tr>
+      <tr><td><span class="ml">വടക്കൻ കാനഡ</span><span class="en">Northern Canada</span></td><td><span class="ml">വടക്കേ അമേരിക്ക</span><span class="en">North America</span></td></tr>
+      <tr><td><span class="ml">അലാസ്ക</span><span class="en">Alaska</span></td><td><span class="ml">വടക്കേ അമേരിക്ക</span><span class="en">North America</span></td></tr>
+    </table></div>
+  </div>
+
+  <div class="card tu">
+    <h2 class="sec"><span class="ico">☀</span><span class="ml">സൂര്യന്റെ ആപേക്ഷികസ്ഥാനം (പേജ് 75)</span><span class="en">Apparent Position of the Sun (Page 75)</span></h2>
+    <div class="ml"><ul class="pts">
+      <li><b>ഉത്തരാർധഗോളത്തിൽ:</b> മാർച്ച് 21 മുതൽ സെപ്റ്റംബർ 23 വരെ.</li>
+      <li><b>ദക്ഷിണാർധഗോളത്തിൽ:</b> സെപ്റ്റംബർ 23 മുതൽ മാർച്ച് 21 വരെ.</li>
+      <li><b>ധ്രുവങ്ങളിൽ:</b> ഏകദേശം ആറുമാസം തുടർച്ചയായ പകലും ആറുമാസം തുടർച്ചയായ രാത്രിയും.</li>
+    </ul></div>
+    <div class="en"><ul class="pts">
+      <li><b>In the Northern Hemisphere:</b> from March 21 to September 23.</li>
+      <li><b>In the Southern Hemisphere:</b> from September 23 to March 21.</li>
+      <li><b>At the poles:</b> about six months of continuous day and six months of continuous night.</li>
+    </ul></div>
+  </div>
+
+  <div class="card tu">
+    <h2 class="sec"><span class="ico">📊</span><span class="ml">അപർനാവിക് (ഗ്രീൻലാൻഡ്) ഗ്രാഫ് വിശകലനം (ചിത്രം 3.29)</span><span class="en">Upernavik (Greenland) Graph Analysis (Fig 3.29)</span></h2>
+    <div class="tbl-wrap"><table>
+      <tr><th class="b"><span class="ml">സൂചകം</span><span class="en">Indicator</span></th><th class="b"><span class="ml">ഉത്തരം</span><span class="en">Answer</span></th></tr>
+      <tr><td><span class="ml">ഏറ്റവും കൂടുതൽ മഴ ലഭിച്ച മാസം</span><span class="en">Month with highest rainfall</span></td><td><span class="ml">ആഗസ്റ്റ്</span><span class="en">August</span> — 55 mm</td></tr>
+      <tr><td><span class="ml">ഏറ്റവും കുറവ് മഴ ലഭിച്ച മാസം</span><span class="en">Month with lowest rainfall</span></td><td><span class="ml">ഫെബ്രുവരി</span><span class="en">February</span> — 13 mm</td></tr>
+      <tr><td><span class="ml">കൂടിയ ശരാശരി താപനില</span><span class="en">Highest average temperature</span></td><td><span class="ml">ജൂലായ്</span><span class="en">July</span> — 6.4°C</td></tr>
+      <tr><td><span class="ml">കുറഞ്ഞ ശരാശരി താപനില</span><span class="en">Lowest average temperature</span></td><td><span class="ml">ഫെബ്രുവരി</span><span class="en">February</span> — −23.4°C</td></tr>
+      <tr><td><b><span class="ml">വാർഷിക താപാന്തരം</span><span class="en">Annual temperature range</span></b></td><td><b>6.4 − (−23.4) = 29.8°C</b></td></tr>
+    </table></div>
+    <div class="box blue"><span class="ml">ജൂൺ–സെപ്റ്റംബർ (4 മാസം) മാത്രമാണ് താപനില 0°C-ന് മുകളിൽ — ഹ്രസ്വമായ വേനലും ദീർഘമായ ശൈത്യവും.</span><span class="en">Only June–September (4 months) are above 0°C — a short summer and a long winter.</span></div>
+  </div>
+</section>
+
+<!-- ============ KEY TERMS ============ -->
+<section class="panel" id="p-terms">
+  <div class="card">
+    <h2 class="sec"><span class="ico" style="background:#fff3e0">📘</span><span class="ml">പ്രധാന പദങ്ങൾ</span><span class="en">Key Terms</span></h2>
+    <input class="search" id="termSearch" placeholder="Search terms… / പദം തിരയുക…">
+    <div class="grid3" id="termGrid"></div>
+  </div>
+</section>
+
+<!-- ============ Q&A ============ -->
+<section class="panel" id="p-qa">
+  <div class="card">
+    <h2 class="sec"><span class="ico" style="background:#fdecec">✍</span><span class="ml">പരീക്ഷാ ചോദ്യങ്ങളും ഉത്തരങ്ങളും</span><span class="en">Exam Questions &amp; Answers</span></h2>
+    <div class="qa-tools">
+      <button class="btn btn-g" onclick="toggleAllQA(true)">Show all answers</button>
+      <button class="btn btn-o" onclick="toggleAllQA(false)">Hide all</button>
+    </div>
+    <div id="qaList"></div>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="panel" id="p-quiz">
+  <div class="qo-title"><span class="tag" style="background:var(--soft-g);color:var(--green);border-color:#bfe6d0">GEOGRAPHY · UNIT 3 · 20 MARK QUIZ</span>
+    <h1><span class="ml">മഴക്കാടുകളിൽ നിന്നും മഞ്ഞുരുകാത്ത നാട്ടിലേക്ക്</span><span class="en">From Rainforests to the Land of Unmelting Snow</span></h1>
+    <small>Abacus Academy · SSLC Social Science II</small></div>
+  <div class="card" id="quizBox"></div>
+</section>
+
+</main>
+
+<footer>© Abacus Academy · SSLC Study Portal · Social Science II — Unit 3</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- Language ---------- */
+function setLang(l){
+  document.body.classList.toggle('en', l==='en');
+  document.documentElement.lang = l==='en' ? 'en' : 'ml';
+  document.getElementById('bML').classList.toggle('on', l!=='en');
+  document.getElementById('bEN').classList.toggle('on', l==='en');
+  try{localStorage.setItem('geo3_lang', l);}catch(e){}
+  if(quizState.stage==='q') renderQuestion();
+  if(quizState.stage==='done') renderResult();
+  if(quizState.stage==='start') renderStart();
+}
+function L(o){ return document.body.classList.contains('en') ? o.en : o.ml; }
+
+/* ---------- Tabs ---------- */
+document.querySelectorAll('.tab').forEach(function(t){
+  t.addEventListener('click', function(){
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');});
+    document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('on');});
+    t.classList.add('on');
+    document.getElementById('p-'+t.dataset.p).classList.add('on');
+    window.scrollTo({top: document.querySelector('.tabs-wrap').offsetTop - 70, behavior:'smooth'});
+  });
+});
+
+function printNotes(){
+  document.querySelectorAll('details.acc').forEach(function(d){d.open=true;});
+  window.print();
+}
+
+/* ---------- Key Terms ---------- */
+var TERMS = [
+ {z:'e', ml:['ഭൂമധ്യരേഖാകാലാവസ്ഥാമേഖല','ഭൂമധ്യരേഖയുടെ ഇരുവശത്തുമായി വർഷം മുഴുവൻ ഉയർന്ന താപനിലയും മഴയും ലഭിക്കുന്ന മേഖല.'], en:['Equatorial Climatic Zone','Zone on both sides of the Equator with high temperature and rain throughout the year.']},
+ {z:'e', ml:['സംവഹനമഴ','ഉയർന്ന താപനില മൂലമുള്ള ബാഷ്പീകരണത്തിലൂടെ ഉച്ചകഴിഞ്ഞ് ലഭിക്കുന്ന കനത്ത മഴ.'], en:['Convectional Rain','Heavy afternoon rain caused by high evaporation due to intense heat.']},
+ {z:'e', ml:['ശൈലവൃഷ്ടി','പർവതങ്ങൾ തടഞ്ഞുനിർത്തുന്ന ഈർപ്പക്കാറ്റുകൾ മൂലമുള്ള മഴ; ഇന്തോനേഷ്യ, ആഫ്രിക്ക പർവതപ്രദേശങ്ങളിൽ.'], en:['Orographic Rain','Rain caused when mountains obstruct moist winds; in mountains of Indonesia and Africa.']},
+ {z:'e', ml:['നിർവാതമേഖല (Doldrum)','ഭൂമധ്യരേഖയ്ക്കിരുവശവുമുള്ള താപജന്യ ന്യൂനമർദമേഖല; വാണിജ്യവാതങ്ങളുടെ സംയോജനമേഖല.'], en:['Doldrum','Thermally induced low-pressure belt near the Equator; convergence zone of trade winds.']},
+ {z:'e', ml:['ഹർമാറ്റൻ','ഗിനിയ തീരത്ത് രാത്രി വീശി താപനില കുറയ്ക്കുന്ന പ്രാദേശികവാതം.'], en:['Harmattan','Local wind on the Guinea coast at night that lowers the temperature.']},
+ {z:'e', ml:['കിളിമഞ്ചാരോ','ആഫ്രിക്കയിലെ ഏറ്റവും ഉയരമുള്ള, വർഷം മുഴുവൻ മഞ്ഞുമൂടിയ കൊടുമുടി.'], en:['Kilimanjaro','Africa\'s highest peak, snow-covered all year despite being in the equatorial zone.']},
+ {z:'e', ml:['സെൽവാസ്','ആമസോൺ തടത്തിലെ മഴക്കാടുകൾ.'], en:['Selvas','Rainforests of the Amazon basin.']},
+ {z:'e', ml:['നിത്യഹരിതവനങ്ങൾ','ഇലപൊഴിക്കാൻ പ്രത്യേക കാലമില്ലാത്തതിനാൽ എപ്പോഴും പച്ചയായ വനങ്ങൾ.'], en:['Evergreen Forests','Forests that stay green always as there is no particular leaf-shedding season.']},
+ {z:'e', ml:['ലിയാനാസ്','മഴക്കാടുകളിലെ വള്ളിച്ചെടികൾ.'], en:['Lianas','Woody climbers of the rainforest.']},
+ {z:'e', ml:['എപ്പിഫൈറ്റ്','മരവാഴകൾ പോലെ മറ്റ് മരങ്ങളിൽ പറ്റിപ്പിടിച്ചു വളരുന്ന സസ്യങ്ങൾ.'], en:['Epiphyte','Plants like orchids that grow attached to other trees.']},
+ {z:'e', ml:['ലോകത്തിന്റെ ശ്വാസകോശം','CO₂ ആഗിരണം ചെയ്ത് O₂ ഉൽപ്പാദിപ്പിക്കുന്ന ഭൂമധ്യരേഖാ മഴക്കാടുകൾക്കുള്ള വിശേഷണം.'], en:['Lungs of the World','Title of equatorial rainforests as they absorb CO₂ and produce O₂.']},
+ {z:'e', ml:['ബെലുകാർ','മലേഷ്യയിൽ ഉപേക്ഷിക്കപ്പെട്ട കൃഷിയിടങ്ങളിൽ വളരുന്ന ദ്വിതീയവനങ്ങൾ.'], en:['Belukar','Secondary forests in Malaysia growing on abandoned farmland.']},
+ {z:'e', ml:['അർബോറിയൽ ജീവികൾ','മരങ്ങളിൽ ജീവിക്കുന്ന ജീവികൾ — ഒറാങ്ങുട്ടൻ, ലീമർ, കിങ്കജൂ.'], en:['Arboreal Animals','Animals living on trees — orangutan, lemur, kinkajou.']},
+ {z:'e', ml:['പിഗ്മികൾ','കോംഗോ തടത്തിലെ ഉയരം കുറഞ്ഞ, വേട്ടയാടി ജീവിക്കുന്ന നാടോടി ഗോത്രം.'], en:['Pygmies','Short-statured nomadic hunting tribe of the Congo basin.']},
+ {z:'e', ml:['ഒറാങ് അസ്‌ലി','മലേഷ്യയിലെ തദ്ദേശീയ ഗോത്രം.'], en:['Orang Asli','Indigenous tribe of Malaysia.']},
+ {z:'e', ml:['സ്ഥാനമാറ്റക്കൃഷി','കാട് വെട്ടിച്ചുട്ട് കൃഷി ചെയ്ത്, ഫലഭൂയിഷ്ഠത നഷ്ടപ്പെടുമ്പോൾ ഉപേക്ഷിക്കുന്ന രീതി (വെട്ടിച്ചുട്ടുകൃഷി).'], en:['Shifting Cultivation','Slash-and-burn farming; land abandoned once fertility is lost.']},
+ {z:'e', ml:['മലോക','ആമസോണിലെ കുത്തനെ ചരിഞ്ഞ മേൽക്കൂരയുള്ള വലിയ വീടുകൾ.'], en:['Maloca','Large Amazon houses with steeply sloping roofs.']},
+ {z:'e', ml:['കമ്പോങ്സ്','മലേഷ്യയിലെ ഭൂമധ്യരേഖാഗ്രാമങ്ങൾ; തടിവീടുകൾ.'], en:['Kampongs','Equatorial villages of Malaysia with wooden houses.']},
+ {z:'e', ml:['നിദ്രാരോഗം','സെസെ ഈച്ച പരത്തുന്ന രോഗം (Sleeping sickness).'], en:['Sleeping Sickness','Disease spread by the Tsetse fly.']},
+ {z:'e', ml:['ലാലങ്','മരം മുറിച്ചിടത്ത് വളരുന്ന ഉയരമേറിയ പുല്ല്.'], en:['Lalang','Tall grass that grows where trees are cut.']},
+ {z:'t', ml:['ടൺഡ്രാമേഖല','ടൈഗയുടെ വടക്ക്, ആർട്ടിക് തീരങ്ങളിലെ അതിശൈത്യമേഖല.'], en:['Tundra Zone','Extremely cold zone on Arctic coasts, north of the Taiga.']},
+ {z:'t', ml:['ആൽപൈൻ ടൺഡ്ര','ഉയരമേറിയ പർവതപ്രദേശങ്ങളിലെ ടൺഡ്ര.'], en:['Alpine Tundra','Tundra found on high mountains.']},
+ {z:'t', ml:['ഐസ് ക്യാപ്','ഗ്രീൻലാൻഡ് ഉൾഭാഗം പോലെ സ്ഥിരമായി ഹിമം മൂടിയ പ്രദേശം.'], en:['Ice Cap','Permanently ice-covered area like interior Greenland.']},
+ {z:'t', ml:['ലോംഗ്ഇയർബൈൻ','സ്വാൽബാർഡിലെ (നോർവെ) ലോകത്തിലെ ഏറ്റവും വടക്കുള്ള ജനവാസമേഖല.'], en:['Longyearbyen','World\'s northernmost settlement, in Svalbard (Norway).']},
+ {z:'t', ml:['ധ്രുവരാത്രി','ആർട്ടിക് വൃത്തത്തിനുള്ളിൽ ആഴ്ചകളോളം സൂര്യൻ ഉദിക്കാത്ത കാലം.'], en:['Polar Night','Period of weeks without sunrise inside the Arctic Circle.']},
+ {z:'t', ml:['ധ്രുവദീപ്തി','ധ്രുവപ്രദേശങ്ങളിലെ ബഹുവർണ ആകാശപ്രതിഭാസം (Aurora).'], en:['Aurora (Polar Lights)','Multi-coloured light display in polar skies.']},
+ {z:'t', ml:['ബ്ലിസാർഡ്','ടൺഡ്രയിലെ ശക്തമായ ഹിമക്കാറ്റ്; കനത്ത ഹിമപാതം.'], en:['Blizzard','Strong icy wind in the tundra causing heavy snowfall.']},
+ {z:'t', ml:['ലൈക്കണുകൾ','ടൺഡ്രയിലെ പ്രധാന സസ്യവർഗം; പായലുകൾക്കൊപ്പം വളരുന്നു.'], en:['Lichens','A main plant type of the tundra, growing with mosses.']},
+ {z:'t', ml:['ഇഗ്ലൂ','മഞ്ഞുകട്ടകൾ കൊണ്ട് നിർമിച്ച മകുടാകൃതിയിലുള്ള എസ്കിമോ വീട്.'], en:['Igloo','Dome-shaped Eskimo shelter made of snow blocks.']},
+ {z:'t', ml:['കയാക്ക്','എസ്കിമോകളുടെ തുഴവഞ്ചി.'], en:['Kayak','Paddle boat used by Eskimos.']},
+ {z:'t', ml:['ഡോഗ് സ്ലെഡ്ജ്','നായ്ക്കൾ വലിക്കുന്ന മഞ്ഞുവണ്ടി.'], en:['Dog Sledge','Snow vehicle pulled by dogs.']},
+ {z:'t', ml:['പെർമാഫ്രോസ്റ്റ്','ടൺഡ്രയിലെ സ്ഥിരമായി ഉറഞ്ഞ മണ്ണ്/ഐസ് പാളി; ആഗോളതാപനം മൂലം ഉരുകുന്നു.'], en:['Permafrost','Permanently frozen ground in the tundra; melting due to global warming.']}
+];
+function renderTerms(){
+  var q=(document.getElementById('termSearch').value||'').toLowerCase();
+  var h='';
+  TERMS.forEach(function(t){
+    var s=(t.ml.join(' ')+' '+t.en.join(' ')).toLowerCase();
+    if(q && s.indexOf(q)<0) return;
+    h+='<div class="term '+(t.z==='t'?'t':'')+'"><b>'+(t.z==='t'?'❄ ':'🌴 ')+'<span class="ml">'+t.ml[0]+'</span><span class="en">'+t.en[0]+'</span></b><p><span class="ml">'+t.ml[1]+'</span><span class="en">'+t.en[1]+'</span></p></div>';
+  });
+  document.getElementById('termGrid').innerHTML=h||'<p>No match.</p>';
+}
+document.getElementById('termSearch').addEventListener('input',renderTerms);
+renderTerms();
+
+/* ---------- Q&A ---------- */
+var QA = [
+ {m:1, q:{ml:'ഭൂമധ്യരേഖാകാലാവസ്ഥാമേഖല എന്ന പേര് ലഭിക്കാൻ കാരണമെന്ത്?',en:'Why is it called the Equatorial Climatic Zone?'},
+  a:{ml:'ഭൂമധ്യരേഖയുടെ ഇരുവശത്തുമായി സ്ഥിതി ചെയ്യുന്നതിനാൽ.',en:'Because it lies on both sides of the Equator.'}},
+ {m:2, q:{ml:'ഭൂമധ്യരേഖാപ്രദേശത്ത് ശൈത്യകാലം അനുഭവപ്പെടാത്തത് എന്തുകൊണ്ട്?',en:'Why is there no winter in the equatorial region?'},
+  a:{ml:'വർഷം മുഴുവൻ സൂര്യരശ്മികൾ ലംബമായി പതിക്കുന്നു. ഉയർന്ന അളവിൽ ലഭിക്കുന്ന സൂര്യപ്രകാശം വർഷം മുഴുവൻ ഉയർന്ന താപനിലയ്ക്ക് (ശരാശരി 27°C) കാരണമാകുന്നു. അതിനാൽ ശൈത്യം അനുഭവപ്പെടാറില്ല.',en:'The sun\'s rays fall vertically throughout the year. The high amount of sunlight keeps the temperature high (avg 27°C) all year, so there is no winter.'}},
+ {m:3, q:{ml:'ഭൂമധ്യരേഖാമേഖലയിൽ ഉച്ചകഴിഞ്ഞ് കനത്ത മഴ ലഭിക്കുന്നതെങ്ങനെ?',en:'How does heavy afternoon rain occur in the equatorial zone?'},
+  a:{ml:'• രാവിലെ മിതമായ താപനില, ക്രമേണ വൻതോതിൽ ഉയരുന്നു.<br>• ഉയർന്ന താപനില ഉയർന്ന തോതിലുള്ള ബാഷ്പീകരണത്തിന് കാരണമാകുന്നു.<br>• ചൂടുപിടിച്ച ഈർപ്പവായു മുകളിലേക്ക് ഉയർന്ന് തണുത്ത് ഘനീഭവിക്കുന്നു.<br>• ഉച്ചകഴിഞ്ഞ് കനത്ത സംവഹനമഴ ലഭിക്കുന്നു.',en:'• Temperature is moderate in the morning and rises sharply.<br>• High temperature causes high evaporation.<br>• Warm moist air rises, cools and condenses.<br>• Heavy convectional rain falls in the afternoon.'}},
+ {m:2, q:{ml:'നിർവാതമേഖല എന്നാലെന്ത്?',en:'What is a Doldrum?'},
+  a:{ml:'വർഷം മുഴുവൻ ഉയർന്ന സൗരോർജ്ജം ലഭിക്കുന്നതിനാൽ ഭൂമധ്യരേഖയ്ക്കിരുവശവും രൂപപ്പെടുന്ന താപജന്യ ന്യൂനമർദമേഖല. ഇവിടെ വായുവിന്റെ തിരശ്ചീന സഞ്ചാരമില്ല. ഇരു അർധഗോളങ്ങളിൽ നിന്നുമുള്ള വാണിജ്യവാതങ്ങളുടെ സംയോജനമേഖല.',en:'A thermally induced low-pressure belt on both sides of the Equator formed due to high solar energy all year. There is no horizontal movement of air. It is the convergence zone of trade winds from both hemispheres.'}},
+ {m:2, q:{ml:'ഭൂമധ്യരേഖാമേഖലയിലാണെങ്കിലും കിളിമഞ്ചാരോ വർഷം മുഴുവൻ മഞ്ഞുമൂടിക്കിടക്കുന്നത് എന്തുകൊണ്ട്?',en:'Why is Kilimanjaro snow-covered all year though it is in the equatorial zone?'},
+  a:{ml:'ഉയരം കൂടുംതോറും താപനില കുറയുന്നു. ആഫ്രിക്കയിലെ ഏറ്റവും ഉയരമുള്ള കൊടുമുടിയായ കിളിമഞ്ചാരോയുടെ ശിഖരത്തിൽ താപനില വളരെ താഴ്ന്നതായതിനാൽ മഞ്ഞ് ഉരുകാതെ നിലനിൽക്കുന്നു.',en:'Temperature decreases with altitude. Kilimanjaro, Africa\'s highest peak, is so high that its summit stays very cold, so the snow does not melt.'}},
+ {m:3, q:{ml:'ഭൂമധ്യരേഖാവനങ്ങൾ നിത്യഹരിതവനങ്ങൾ എന്നറിയപ്പെടുന്നതെന്തുകൊണ്ട്? രണ്ട് പ്രധാന വൃക്ഷങ്ങൾ എഴുതുക.',en:'Why are equatorial forests called evergreen forests? Name two important trees.'},
+  a:{ml:'ഇവിടെ വിത്ത് മുളയ്ക്കാനോ പുഷ്പിക്കാനോ കായ്ക്കാനോ ഇലപൊഴിക്കാനോ സസ്യങ്ങൾക്ക് പ്രത്യേക കാലമില്ല. വർഷം മുഴുവൻ ഈ പ്രക്രിയകൾ നടക്കുന്നതിനാൽ വനങ്ങൾ എപ്പോഴും പച്ചയായി കാണപ്പെടുന്നു. വൃക്ഷങ്ങൾ: എബണി, മഹാഗണി (സിൻകോണ, റോസ്‌വുഡ്).',en:'Plants have no particular season for germination, flowering, fruiting or shedding leaves. As these happen throughout the year, the forests always look green. Trees: ebony, mahogany (cinchona, rosewood).'}},
+ {m:2, q:{ml:'ഭൂമധ്യരേഖാമഴക്കാടുകളിൽ നിലത്തു ജീവിക്കുന്ന സസ്യഭോജികൾ കുറവാകാൻ കാരണമെന്ത്?',en:'Why are ground-dwelling herbivores few in equatorial rainforests?'},
+  a:{ml:'നിബിഡമായ മേലാപ്പുകൾ കാരണം മതിയായ സൂര്യപ്രകാശം കാടിനുള്ളിലേക്ക് എത്തുന്നില്ല. അതിനാൽ അടിക്കാടുകൾ വളരുന്നില്ല; ഭക്ഷണമില്ലാത്തതിനാൽ നിലത്തെ സസ്യഭോജികളും അവയെ ആശ്രയിക്കുന്ന മാംസഭോജികളും കുറവാണ്.',en:'Due to the dense canopy, enough sunlight doesn\'t reach the forest floor, so undergrowth doesn\'t develop. With little food, ground herbivores — and the carnivores that depend on them — are few.'}},
+ {m:3, q:{ml:'മഴക്കാടുകളിലെ മേലാപ്പുകൾ വിശദമാക്കുക.',en:'Explain the canopy layers of the rainforest.'},
+  a:{ml:'സൂര്യപ്രകാശലഭ്യതയനുസരിച്ച് സസ്യങ്ങളിൽ ഉയരവ്യത്യാസം കാണപ്പെടുന്നു; വൃക്ഷത്തലപ്പുകൾ പല തട്ടുകളായ മേലാപ്പുകൾ സൃഷ്ടിക്കുന്നു.<br>• ഉപരിപാളി — 60 അടിക്കു മുകളിൽ (150 അടി വരെ)<br>• മധ്യപാളി — 30 മുതൽ 60 അടി വരെ<br>• കീഴ്പാളി — 30 അടിക്കു താഴെ',en:'Plants vary in height according to sunlight availability; tree crowns form canopies in several tiers.<br>• Upper layer — above 60 ft (up to 150 ft)<br>• Middle layer — 30 to 60 ft<br>• Lower layer — below 30 ft'}},
+ {m:3, q:{ml:'സ്ഥാനമാറ്റക്കൃഷി എന്താണ്? പ്രധാന വിളകൾ ഏതെല്ലാം?',en:'What is shifting cultivation? Name the main crops.'},
+  a:{ml:'കാട് വെട്ടിത്തെളിച്ചും ചുട്ടെരിച്ചും കൃഷിയോഗ്യമാക്കി കൃഷി ചെയ്യുന്നു. ഫലഭൂയിഷ്ഠത നഷ്ടപ്പെടുന്നതുവരെ തുടർന്ന ശേഷം ആ പ്രദേശം ഉപേക്ഷിച്ച് മറ്റൊരു വനപ്രദേശം തേടുന്നു (വെട്ടിച്ചുട്ടുകൃഷി). വിളകൾ: മരച്ചീനി, ചേന, ചോളം, വാഴ, നിലക്കടല.',en:'Forest is cleared and burnt to make land cultivable. Farming continues until fertility is lost, then the land is abandoned for a new forest patch (slash-and-burn). Crops: tapioca, yam, maize, banana, groundnut.'}},
+ {m:4, q:{ml:'ഭൂമധ്യരേഖാമേഖലയിൽ വാണിജ്യാടിസ്ഥാനത്തിലുള്ള മരംവെട്ടും കന്നുകാലിവളർത്തലും നേരിടുന്ന തടസ്സങ്ങൾ എഴുതുക.',en:'What hinders commercial logging and cattle rearing in the equatorial zone?'},
+  a:{ml:'<b>മരംവെട്ട്:</b> മരങ്ങളുടെ അതിബാഹുല്യം (ഒരേ ഇനം ഒരുമിച്ചില്ല); തടികൾ ഒരിടത്തുനിന്ന് മറ്റൊരിടത്തേക്ക് നീക്കാനുള്ള ബുദ്ധിമുട്ട്; ഭാരക്കൂടുതൽ മൂലം നദികളിലൂടെ ഒഴുക്കാനാവില്ല; റോഡ്-റെയിൽ സൗകര്യക്കുറവ്.<br><b>കന്നുകാലിവളർത്തൽ:</b> മേച്ചിൽസ്ഥലങ്ങളുടെ അഭാവം; വന്യമൃഗങ്ങളുടെ ആക്രമണം; രോഗം പരത്തുന്ന പ്രാണികൾ (സെസെ ഈച്ച).',en:'<b>Logging:</b> great variety of trees (same species not together); difficulty moving logs; heavy logs can\'t be floated in rivers; lack of roads and railways.<br><b>Cattle rearing:</b> lack of pastures; attacks by wild animals; disease-carrying insects (Tsetse fly).'}},
+ {m:2, q:{ml:'ഭൂമധ്യരേഖാമഴക്കാടുകളെ "ലോകത്തിന്റെ ശ്വാസകോശം" എന്ന് വിശേഷിപ്പിക്കുന്നതെന്തുകൊണ്ട്?',en:'Why are equatorial rainforests called the "Lungs of the World"?'},
+  a:{ml:'വലിയ അളവിൽ കാർബൺ ഡൈഓക്സൈഡ് ആഗിരണം ചെയ്യുകയും ഓക്സിജൻ ഉൽപ്പാദിപ്പിക്കുകയും ചെയ്യുന്നതിനാൽ. ലോക കാലാവസ്ഥയെ സുസ്ഥിരമാക്കുന്നതിൽ ഇവ നിർണായക പങ്ക് വഹിക്കുന്നു.',en:'Because they absorb large amounts of carbon dioxide and produce oxygen. They play a crucial role in stabilising world climate.'}},
+ {m:3, q:{ml:'ആർട്ടിക് വൃത്തത്തിന് വടക്ക് ദീർഘമായ പകലും രാത്രിയും അനുഭവപ്പെടുന്നതെന്തുകൊണ്ട്?',en:'Why are there long days and nights north of the Arctic Circle?'},
+  a:{ml:'സൂര്യന്റെ ആപേക്ഷികസ്ഥാനം ഉത്തരാർധഗോളത്തിലായിരിക്കുന്ന ആറുമാസം (മാർച്ച് 21 – സെപ്റ്റംബർ 23) ഉത്തരധ്രുവത്തിൽ തുടർച്ചയായ പകൽ. ദക്ഷിണാർധഗോളത്തിലായിരിക്കുന്ന ആറുമാസം (സെപ്റ്റംബർ 23 – മാർച്ച് 21) പകൽവെളിച്ചമില്ല — ധ്രുവരാത്രി. ആർട്ടിക് വൃത്തം മുതൽ ധ്രുവം വരെ ആഴ്ചകളോളം സൂര്യൻ അസ്തമിക്കുകയോ ഉദിക്കുകയോ ചെയ്യില്ല.',en:'For six months when the sun\'s apparent position is in the Northern Hemisphere (Mar 21 – Sep 23) the North Pole has continuous day. For the six months it is in the Southern Hemisphere (Sep 23 – Mar 21) there is no daylight — polar night. From the Arctic Circle to the Pole the sun doesn\'t set or rise for weeks.'}},
+ {m:3, q:{ml:'ടൺഡ്രാമേഖലയിലെ സസ്യജാലങ്ങളുടെ സവിശേഷതകൾ എഴുതുക.',en:'Write the features of tundra vegetation.'},
+  a:{ml:'• കുറഞ്ഞ സൂര്യപ്രകാശവും അതിശൈത്യവും മൂലം സസ്യങ്ങൾ വിരളം.<br>• സാധാരണഗതിയിൽ മരങ്ങളില്ല.<br>• പായലുകൾ, ലൈക്കണുകൾ, സെഡ്ജുകൾ, കുറ്റിച്ചെടികൾ പ്രധാനം.<br>• കുള്ളൻ വില്ലോസ്, ബിർച്ചസ് ചിലയിടങ്ങളിൽ.<br>• തീരങ്ങളിലെ താഴ്ന്ന പ്രദേശങ്ങളിൽ കട്ടിയുള്ള പുല്ലുകൾ.<br>• വേനലിൽ കുറ്റിച്ചെടികൾ പൂക്കുകയും കായ്ക്കുകയും ചെയ്യുന്നു.',en:'• Sparse vegetation due to low sunlight and extreme cold.<br>• Trees are generally absent.<br>• Mosses, lichens, sedges and shrubs dominate.<br>• Dwarf willows and birches in some places.<br>• Tough grasses in low coastal areas.<br>• Shrubs flower and fruit in summer.'}},
+ {m:4, q:{ml:'കഴിഞ്ഞ അറുപത് വർഷത്തിനിടയിൽ എസ്കിമോകളുടെ ജീവിതരീതിയിൽ ഉണ്ടായ മാറ്റങ്ങൾ എന്തെല്ലാം?',en:'What changes have occurred in the Eskimo way of life in the last sixty years?'},
+  a:{ml:'യൂറോപ്യന്മാരുമായുള്ള സമ്പർക്കം മൂലം:<br>• ഇഗ്ലൂവിനും ടെന്റിനും പകരം തീരഗ്രാമങ്ങളിൽ ആധുനിക സൗകര്യങ്ങളോടുകൂടിയ വീടുകൾ.<br>• കയാക്കുകൾക്ക് (തുഴവഞ്ചി) പകരം മത്സ്യബന്ധനത്തിന് സ്പീഡ് ബോട്ടുകൾ.<br>• രോമമുള്ള മൃഗങ്ങളെ വാണിജ്യാടിസ്ഥാനത്തിൽ വളർത്തുന്നു.<br>• കാനഡ, അലാസ്ക എന്നിവിടങ്ങളിൽ കുട്ടികൾക്കായി സ്കൂളുകൾ.',en:'Due to contact with Europeans:<br>• Modern houses in coastal villages instead of igloos and tents.<br>• Speedboats instead of kayaks for fishing.<br>• Commercial rearing of fur-bearing animals.<br>• Schools for children in Canada and Alaska.'}},
+ {m:2, q:{ml:'കാലാവസ്ഥാവ്യതിയാനം ടൺഡ്രാമേഖലയെ ബാധിക്കുന്നതെങ്ങനെ?',en:'How does climate change affect the tundra?'},
+  a:{ml:'ആഗോളതാപനത്തിന്റെ ഫലമായി ടൺഡ്രയിലെ ഐസ് പാളികൾ (പെർമാഫ്രോസ്റ്റ്) ഗണ്യമായി ഉരുകുന്നു. ഇത് സ്വാഭാവിക ആവാസവ്യവസ്ഥയെയും പാരിസ്ഥിതിക സന്തുലനത്തെയും പ്രതികൂലമായി ബാധിക്കുന്നു.',en:'Global warming is melting the tundra\'s ice layers (permafrost) at a significant rate, badly affecting the natural habitat and ecological balance.'}},
+ {m:5, q:{ml:'ഭൂമധ്യരേഖാകാലാവസ്ഥയും ടൺഡ്രാകാലാവസ്ഥയും താരതമ്യം ചെയ്ത് കുറിപ്പ് തയ്യാറാക്കുക.',en:'Prepare a note comparing Equatorial and Tundra climates.'},
+  a:{ml:'<b>ഭൂമധ്യരേഖ:</b> വർഷം മുഴുവൻ ഉയർന്ന താപനില (27°C); നേരിയ വാർഷിക താപാന്തരം; ശൈത്യമില്ല; 175–250 സെ.മീ മഴ, ഉച്ചകഴിഞ്ഞുള്ള സംവഹനമഴ; വരണ്ടകാലമില്ല; പകലും രാത്രിയും ഏറെക്കുറെ തുല്യം.<br><b>ടൺഡ്ര:</b> വളരെ താഴ്ന്ന ശരാശരി താപനില; ശൈത്യത്തിൽ −30°C; ഹ്രസ്വമായ വേനലും ദീർഘമായ ശൈത്യവും; വലിയ വാർഷിക താപാന്തരം; വർഷണം മഞ്ഞുവീഴ്ചയായി; ബ്ലിസാർഡ്; ആഴ്ചകളോളം നീളുന്ന പകലും രാത്രിയും.',en:'<b>Equatorial:</b> high temperature all year (27°C); small annual range; no winter; 175–250 cm rain, afternoon convectional rain; no dry season; day and night almost equal.<br><b>Tundra:</b> very low average temperature; −30°C in winter; short summer and long winter; large annual range; precipitation as snow; blizzards; days and nights lasting weeks.'}}
+];
+(function(){
+  var h='';
+  QA.forEach(function(x,i){
+    h+='<div class="qa"><div class="qa-q" onclick="this.parentNode.classList.toggle(\'open\')"><span>'+(i+1)+'.</span><span><span class="ml">'+x.q.ml+'</span><span class="en">'+x.q.en+'</span></span><span class="mk">'+x.m+' Mark'+(x.m>1?'s':'')+'</span></div><div class="qa-a"><span class="ml">'+x.a.ml+'</span><span class="en">'+x.a.en+'</span></div></div>';
+  });
+  document.getElementById('qaList').innerHTML=h;
+})();
+function toggleAllQA(s){document.querySelectorAll('.qa').forEach(function(q){q.classList.toggle('open',s);});}
+
+/* ---------- 20 MARK QUIZ ---------- */
+var QUIZ = [
+ {q:{ml:'ഭൂമധ്യരേഖാമേഖലയിലെ മാസിക/വാർഷിക ശരാശരി താപനില എത്ര?',en:'What is the monthly/annual average temperature of the equatorial zone?'},
+  o:[{ml:'20°C',en:'20°C'},{ml:'27°C',en:'27°C'},{ml:'32°C',en:'32°C'},{ml:'10°C',en:'10°C'}],a:1,
+  e:{ml:'വർഷം മുഴുവൻ താപനില ഏറെക്കുറെ ഒരുപോലെ — ശരാശരി 27°C.',en:'Temperature is nearly constant all year — average 27°C.'}},
+ {q:{ml:'ഭൂമധ്യരേഖാമേഖലയിലെ വാർഷിക മഴ ഏകദേശം എത്ര?',en:'What is the approximate annual rainfall of the equatorial zone?'},
+  o:[{ml:'25–50 സെ.മീ',en:'25–50 cm'},{ml:'75–100 സെ.മീ',en:'75–100 cm'},{ml:'175–250 സെ.മീ',en:'175–250 cm'},{ml:'400–500 സെ.മീ',en:'400–500 cm'}],a:2,
+  e:{ml:'ഏകദേശം 175 മുതൽ 250 സെ.മീ വരെ.',en:'About 175 to 250 cm.'}},
+ {q:{ml:'ഭൂമധ്യരേഖാമേഖലയിൽ ഉച്ചകഴിഞ്ഞ് ലഭിക്കുന്ന കനത്ത മഴ ഏത്?',en:'Which heavy rain occurs in the afternoon in the equatorial zone?'},
+  o:[{ml:'ശൈലവൃഷ്ടി',en:'Orographic rain'},{ml:'സംവഹനമഴ',en:'Convectional rain'},{ml:'ചക്രവാതവൃഷ്ടി',en:'Cyclonic rain'},{ml:'മൺസൂൺ മഴ',en:'Monsoon rain'}],a:1,
+  e:{ml:'ഉയർന്ന താപനില → ബാഷ്പീകരണം → ഉച്ചകഴിഞ്ഞ് സംവഹനമഴ.',en:'High heat → evaporation → afternoon convectional rain.'}},
+ {q:{ml:'ഭൂമധ്യരേഖയ്ക്കിരുവശവുമുള്ള, വായുവിന്റെ തിരശ്ചീന സഞ്ചാരമില്ലാത്ത ന്യൂനമർദമേഖല?',en:'The low-pressure belt near the Equator with no horizontal air movement is —'},
+  o:[{ml:'കുതിര അക്ഷാംശം',en:'Horse latitudes'},{ml:'ധ്രുവീയ ഉച്ചമർദമേഖല',en:'Polar high'},{ml:'നിർവാതമേഖല',en:'Doldrum'},{ml:'ടൈഗ',en:'Taiga'}],a:2,
+  e:{ml:'നിർവാതമേഖല (Doldrum) — വാണിജ്യവാതങ്ങളുടെ സംയോജനമേഖല.',en:'Doldrum — convergence zone of trade winds.'}},
+ {q:{ml:'ഭൂമധ്യരേഖാമേഖലയിലാണെങ്കിലും വർഷം മുഴുവൻ മഞ്ഞുമൂടിയ ആഫ്രിക്കൻ കൊടുമുടി?',en:'Which African peak in the equatorial zone is snow-covered all year?'},
+  o:[{ml:'എവറസ്റ്റ്',en:'Everest'},{ml:'കിളിമഞ്ചാരോ',en:'Kilimanjaro'},{ml:'അക്കോൻകാഗ്വ',en:'Aconcagua'},{ml:'മോൺ ബ്ലാങ്ക്',en:'Mont Blanc'}],a:1,
+  e:{ml:'ഉയരക്കൂടുതൽ കാരണം കിളിമഞ്ചാരോ മഞ്ഞുമൂടിക്കിടക്കുന്നു.',en:'Kilimanjaro stays snow-covered due to its high altitude.'}},
+ {q:{ml:'ഗിനിയ തീരത്ത് രാത്രികാലങ്ങളിൽ വീശി താപനില കുറയ്ക്കുന്ന പ്രാദേശികവാതം?',en:'Which local wind blows at night on the Guinea coast and lowers temperature?'},
+  o:[{ml:'ലൂ',en:'Loo'},{ml:'ചിനൂക്ക്',en:'Chinook'},{ml:'ഹർമാറ്റൻ',en:'Harmattan'},{ml:'ഫൊൻ',en:'Foehn'}],a:2,
+  e:{ml:'ഹർമാറ്റൻ.',en:'Harmattan.'}},
+ {q:{ml:'ആമസോൺ തടത്തിലെ മഴക്കാടുകൾ അറിയപ്പെടുന്നത്?',en:'The rainforests of the Amazon basin are called —'},
+  o:[{ml:'സെൽവാസ്',en:'Selvas'},{ml:'ബെലുകാർ',en:'Belukar'},{ml:'ടൈഗ',en:'Taiga'},{ml:'പമ്പാസ്',en:'Pampas'}],a:0,
+  e:{ml:'സെൽവാസ്.',en:'Selvas.'}},
+ {q:{ml:'"ലോകത്തിന്റെ ശ്വാസകോശം" എന്നറിയപ്പെടുന്നത്?',en:'What is known as the "Lungs of the World"?'},
+  o:[{ml:'ടൺഡ്രാ പുൽമേടുകൾ',en:'Tundra grasslands'},{ml:'ഭൂമധ്യരേഖാ നിത്യഹരിത മഴക്കാടുകൾ',en:'Equatorial evergreen rainforests'},{ml:'കണ്ടൽക്കാടുകൾ',en:'Mangroves'},{ml:'ടൈഗ വനങ്ങൾ',en:'Taiga forests'}],a:1,
+  e:{ml:'CO₂ ആഗിരണം ചെയ്ത് O₂ ഉൽപ്പാദിപ്പിക്കുന്നതിനാൽ.',en:'They absorb CO₂ and produce O₂.'}},
+ {q:{ml:'താഴെ പറയുന്നവയിൽ ഭൂമധ്യരേഖാ നിത്യഹരിതവനത്തിലെ വന്മരം അല്ലാത്തത് ഏത്?',en:'Which of these is NOT a giant tree of the equatorial evergreen forest?'},
+  o:[{ml:'എബണി',en:'Ebony'},{ml:'മഹാഗണി',en:'Mahogany'},{ml:'സിൻകോണ',en:'Cinchona'},{ml:'കുള്ളൻ വില്ലോ',en:'Dwarf willow'}],a:3,
+  e:{ml:'കുള്ളൻ വില്ലോ ടൺഡ്രയിലെ സസ്യമാണ്.',en:'Dwarf willow is a tundra plant.'}},
+ {q:{ml:'മഴക്കാടുകളിലെ മധ്യപാളിയുടെ ഉയരം?',en:'What is the height of the middle canopy layer?'},
+  o:[{ml:'30 അടിക്കു താഴെ',en:'Below 30 ft'},{ml:'30–60 അടി',en:'30–60 ft'},{ml:'60–150 അടി',en:'60–150 ft'},{ml:'150 അടിക്കു മുകളിൽ',en:'Above 150 ft'}],a:1,
+  e:{ml:'മധ്യപാളി 30–60 അടി; ഉപരിപാളി 60 അടിക്കു മുകളിൽ; കീഴ്പാളി 30 അടിക്കു താഴെ.',en:'Middle 30–60 ft; upper above 60 ft; lower below 30 ft.'}},
+ {q:{ml:'മരങ്ങളിൽ ജീവിക്കുന്ന ജീവികൾ അറിയപ്പെടുന്നത്?',en:'Animals that live on trees are called —'},
+  o:[{ml:'അർബോറിയൽ ജീവികൾ',en:'Arboreal animals'},{ml:'ഉഭയജീവികൾ',en:'Amphibians'},{ml:'ദേശാടനജീവികൾ',en:'Migratory animals'},{ml:'നിശാചരികൾ',en:'Nocturnal animals'}],a:0,
+  e:{ml:'അർബോറിയൽ ജീവികൾ — ഉദാ: ഒറാങ്ങുട്ടൻ, ലീമർ.',en:'Arboreal animals — e.g. orangutan, lemur.'}},
+ {q:{ml:'നിദ്രാരോഗം (Sleeping sickness) പരത്തുന്നത്?',en:'Sleeping sickness is spread by —'},
+  o:[{ml:'അനോഫിലിസ് കൊതുക്',en:'Anopheles mosquito'},{ml:'സെസെ ഈച്ച',en:'Tsetse fly'},{ml:'എലി',en:'Rat'},{ml:'വവ്വാൽ',en:'Bat'}],a:1,
+  e:{ml:'സെസെ (Tsetse) ഈച്ച. യെല്ലോ ഫീവർ കൊതുക് പരത്തുന്നു.',en:'Tsetse fly. Yellow fever is spread by mosquitoes.'}},
+ {q:{ml:'കോംഗോ തടത്തിലെ ഉയരം കുറഞ്ഞ, വേട്ടയാടി ജീവിക്കുന്ന തദ്ദേശീയർ?',en:'The short-statured hunting natives of the Congo basin are —'},
+  o:[{ml:'ലാപ്പ്സ്',en:'Lapps'},{ml:'ഒറാങ് അസ്‌ലി',en:'Orang Asli'},{ml:'പിഗ്മികൾ',en:'Pygmies'},{ml:'യാക്കൂട്ട്സ്',en:'Yakuts'}],a:2,
+  e:{ml:'പിഗ്മികൾ.',en:'Pygmies.'}},
+ {q:{ml:'ആമസോൺ തടത്തിലെ കുത്തനെ ചരിഞ്ഞ മേൽക്കൂരയുള്ള വലിയ വീടുകൾ?',en:'Large houses with steeply sloping roofs in the Amazon basin are called —'},
+  o:[{ml:'കമ്പോങ്സ്',en:'Kampongs'},{ml:'ഇഗ്ലൂ',en:'Igloo'},{ml:'മലോക',en:'Maloca'},{ml:'യർട്ട്',en:'Yurt'}],a:2,
+  e:{ml:'മലോക. കമ്പോങ്സ് — മലേഷ്യൻ ഗ്രാമങ്ങൾ.',en:'Maloca. Kampongs are Malaysian villages.'}},
+ {q:{ml:'റബ്ബർ ഉൽപ്പാദനത്തിൽ മുൻപന്തിയിലുള്ള രാജ്യങ്ങൾ?',en:'Which countries lead in rubber production?'},
+  o:[{ml:'ബ്രസീൽ, പെറു',en:'Brazil, Peru'},{ml:'മലേഷ്യ, ഇന്തോനേഷ്യ',en:'Malaysia, Indonesia'},{ml:'ഘാന, നൈജീരിയ',en:'Ghana, Nigeria'},{ml:'കോംഗോ, ഗാബോൺ',en:'Congo, Gabon'}],a:1,
+  e:{ml:'മലേഷ്യ, ഇന്തോനേഷ്യ.',en:'Malaysia and Indonesia.'}},
+ {q:{ml:'ലോകത്തിലെ ഏറ്റവും വടക്കുള്ള ജനവാസമേഖലയായ ലോംഗ്ഇയർബൈൻ ഏത് രാജ്യത്തിന്റെ ഭാഗം?',en:'Longyearbyen, the northernmost settlement, belongs to which country?'},
+  o:[{ml:'റഷ്യ',en:'Russia'},{ml:'കാനഡ',en:'Canada'},{ml:'നോർവെ',en:'Norway'},{ml:'ഡെന്മാർക്ക്',en:'Denmark'}],a:2,
+  e:{ml:'നോർവെയുടെ ഭാഗമായ സ്വാൽബാർഡ് ദ്വീപസമൂഹത്തിൽ.',en:'In the Svalbard archipelago, part of Norway.'}},
+ {q:{ml:'ടൺഡ്രയിൽ ശക്തമായ ഹിമപാതത്തിന് കാരണമാകുന്ന ഹിമക്കാറ്റ്?',en:'The strong icy wind causing heavy snowfall in the tundra is —'},
+  o:[{ml:'ബ്ലിസാർഡ്',en:'Blizzard'},{ml:'ടൈഫൂൺ',en:'Typhoon'},{ml:'ടൊർണാഡോ',en:'Tornado'},{ml:'സിറോക്കോ',en:'Sirocco'}],a:0,
+  e:{ml:'ബ്ലിസാർഡ്.',en:'Blizzard.'}},
+ {q:{ml:'സൈബീരിയയിൽ വസിക്കുന്ന ടൺഡ്രാ ഗോത്രം?',en:'Which tundra tribe lives in Siberia?'},
+  o:[{ml:'ലാപ്പ്സ്',en:'Lapps'},{ml:'സമൊയെഡ്സ്',en:'Samoyeds'},{ml:'ഇന്യൂട്ടുകൾ',en:'Inuits'},{ml:'ചുക്ചി',en:'Chukchi'}],a:1,
+  e:{ml:'സമൊയെഡ്സ് — സൈബീരിയ. ലാപ്പ്സ് — സ്കാൻഡിനേവിയ. ചുക്ചി — വ.കി. ഏഷ്യ.',en:'Samoyeds — Siberia. Lapps — Scandinavia. Chukchi — NE Asia.'}},
+ {q:{ml:'എസ്കിമോകൾ മഞ്ഞുകട്ടകൾ കൊണ്ട് നിർമിക്കുന്ന മകുടാകൃതിയിലുള്ള വീട്?',en:'The dome-shaped house Eskimos build with snow blocks is —'},
+  o:[{ml:'മലോക',en:'Maloca'},{ml:'ഇഗ്ലൂ',en:'Igloo'},{ml:'ടെന്റ്',en:'Tent'},{ml:'കമ്പോങ്',en:'Kampong'}],a:1,
+  e:{ml:'ഇഗ്ലൂ — ശൈത്യകാല താൽക്കാലിക വാസയിടം.',en:'Igloo — temporary winter shelter.'}},
+ {q:{ml:'ആഗോളതാപനം മൂലം ടൺഡ്രയിൽ ഉരുകുന്ന ഐസ് പാളികൾ?',en:'The ice layers of the tundra melting due to global warming are —'},
+  o:[{ml:'ഗ്ലേസിയർ',en:'Glacier'},{ml:'ഐസ്ബർഗ്',en:'Iceberg'},{ml:'പെർമാഫ്രോസ്റ്റ്',en:'Permafrost'},{ml:'ഐസ് ക്യാപ്',en:'Ice cap'}],a:2,
+  e:{ml:'പെർമാഫ്രോസ്റ്റ് — ആവാസവ്യവസ്ഥയെ പ്രതികൂലമായി ബാധിക്കുന്നു.',en:'Permafrost — its melting harms the ecosystem.'}}
+];
+
+var quizState = {stage:'start', name:'', order:[], i:0, answers:[], t0:0, timer:null, secs:0, shuffled:{}};
+var QUIZ_TIME = 20*60;
+
+function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+
+function renderStart(){
+  quizState.stage='start';
+  document.getElementById('quizBox').innerHTML =
+   '<div class="quiz-start"><div class="big">🏆</div>'+
+   '<h2><span class="ml">20 മാർക്ക് ക്വിസ്</span><span class="en">20 Mark Quiz</span></h2>'+
+   '<p><span class="ml">അധ്യായം മുഴുവൻ ഉൾക്കൊള്ളുന്ന 20 ചോദ്യങ്ങൾ · ഓരോന്നിനും 1 മാർക്ക് · 20 മിനിറ്റ്</span><span class="en">20 questions covering the whole chapter · 1 mark each · 20 minutes</span></p>'+
+   '<input class="q-input" id="stuName" placeholder="Student name / പേര്" value="'+(quizState.name||'').replace(/"/g,'&quot;')+'">'+
+   '<br><button class="btn btn-big btn-red" onclick="startQuiz()">Start Quiz ▶</button>'+
+   '<div class="share-row">'+shareButtons()+'</div></div>';
+}
+function startQuiz(){
+  var n=document.getElementById('stuName').value.trim();
+  if(!n){ document.getElementById('stuName').focus(); document.getElementById('stuName').style.borderColor='#d64545'; return; }
+  quizState.name=n;
+  quizState.order=shuffle(QUIZ.map(function(_,i){return i;}));
+  quizState.shuffled={};
+  quizState.order.forEach(function(qi){ quizState.shuffled[qi]=shuffle([0,1,2,3]); });
+  quizState.i=0; quizState.answers=[]; quizState.secs=QUIZ_TIME; quizState.stage='q';
+  clearInterval(quizState.timer);
+  quizState.timer=setInterval(function(){
+    quizState.secs--;
+    var el=document.getElementById('qTimer'); if(el) el.textContent='⏱ '+fmt(quizState.secs);
+    if(quizState.secs<=0){ clearInterval(quizState.timer); finishQuiz(); }
+  },1000);
+  renderQuestion();
+}
+function fmt(s){ s=Math.max(0,s); return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2); }
+function renderQuestion(){
+  var qi=quizState.order[quizState.i], Q=QUIZ[qi], ord=quizState.shuffled[qi];
+  var done=quizState.answers[quizState.i];
+  var h='<div class="q-top"><span class="pill">Q '+(quizState.i+1)+' / 20</span><span class="pill">✔ '+score()+'</span><span class="spacer"></span><span class="pill t" id="qTimer">⏱ '+fmt(quizState.secs)+'</span></div>';
+  h+='<div class="bar"><i style="width:'+((quizState.i)/20*100)+'%"></i></div>';
+  h+='<div class="q-text">'+L(Q.q)+'</div>';
+  ord.forEach(function(oi,k){
+    var cls='';
+    if(done!==undefined){ if(oi===Q.a) cls='ok'; else if(oi===done) cls='no'; }
+    h+='<button class="opt '+cls+'" '+(done!==undefined?'disabled':'')+' onclick="pick('+oi+')"><span class="L">'+'ABCD'[k]+'</span><span>'+L(Q.o[oi])+'</span></button>';
+  });
+  h+='<div class="exp '+(done!==undefined?'show':'')+'">💡 '+L(Q.e)+'</div>';
+  h+='<div class="q-nav">'+(done!==undefined?'<button class="btn btn-big btn-g" onclick="nextQ()">'+(quizState.i<19?'Next ▶':'See Result 🏁')+'</button>':'')+'</div>';
+  document.getElementById('quizBox').innerHTML=h;
+}
+function pick(oi){
+  if(quizState.answers[quizState.i]!==undefined) return;
+  quizState.answers[quizState.i]=oi;
+  renderQuestion();
+}
+function nextQ(){
+  if(quizState.i<19){ quizState.i++; renderQuestion(); }
+  else finishQuiz();
+}
+function score(){
+  var s=0; quizState.answers.forEach(function(a,i){ if(a===QUIZ[quizState.order[i]].a) s++; }); return s;
+}
+function finishQuiz(){
+  clearInterval(quizState.timer);
+  quizState.stage='done';
+  quizState.used=QUIZ_TIME-Math.max(0,quizState.secs);
+  renderResult();
+}
+function grade(s){
+  if(s>=18) return {g:'A+',ml:'അതിഗംഭീരം! 🌟',en:'Outstanding! 🌟'};
+  if(s>=16) return {g:'A',ml:'വളരെ നല്ലത്! 👏',en:'Excellent! 👏'};
+  if(s>=14) return {g:'B+',ml:'നല്ല പ്രകടനം 👍',en:'Very good 👍'};
+  if(s>=12) return {g:'B',ml:'നല്ലത് — കുറച്ചുകൂടി ശ്രമിക്കൂ',en:'Good — a little more effort'};
+  if(s>=10) return {g:'C+',ml:'നോട്ടുകൾ വീണ്ടും വായിക്കൂ',en:'Revise the notes again'};
+  if(s>=8) return {g:'C',ml:'കൂടുതൽ പഠിക്കണം',en:'Needs more study'};
+  return {g:'D',ml:'നോട്ടുകൾ ശ്രദ്ധയോടെ വായിച്ച് വീണ്ടും ശ്രമിക്കൂ',en:'Read the notes carefully and try again'};
+}
+function renderResult(){
+  var s=score(), g=grade(s), p=s/20*100;
+  var h='<div class="result"><h2>'+quizState.name+'</h2>';
+  h+='<div class="ring" style="--p:'+p+'"><div><span>'+s+'/20<small>'+Math.round(p)+'%</small></span></div></div>';
+  h+='<div class="grade">Grade '+g.g+'</div><p>'+L(g)+'</p>';
+  h+='<p style="color:var(--muted);font-size:13px">⏱ '+fmt(quizState.used||0)+' · '+quizState.answers.length+'/20 attempted</p>';
+  h+='<div class="res-btns"><button class="btn btn-big btn-g" onclick="startQuizAgain()">↻ Retry</button><button class="btn btn-big btn-wa" onclick="shareWA()">Share Score on WhatsApp</button>'+shareButtons()+'</div>';
+  h+='<div class="review"><h3>Review</h3>';
+  quizState.order.forEach(function(qi,i){
+    var Q=QUIZ[qi], a=quizState.answers[i], ok=a===Q.a;
+    h+='<div class="rv '+(ok?'r':'w')+'"><b>'+(i+1)+'. '+L(Q.q)+'</b><br>'+
+       (ok?'✅ ':'❌ '+(a===undefined?'—':L(Q.o[a]))+' &nbsp;→&nbsp; ✅ ')+'<b>'+L(Q.o[Q.a])+'</b></div>';
+  });
+  h+='</div></div>';
+  document.getElementById('quizBox').innerHTML=h;
+}
+function startQuizAgain(){ renderStart(); }
+function shareWA(){
+  var s=score(), g=grade(s);
+  var msg='🏆 *ABACUS ACADEMY — SSLC Geography Unit 3 Quiz*\n'+
+    'മഴക്കാടുകളിൽ നിന്നും മഞ്ഞുരുകാത്ത നാട്ടിലേക്ക്\n\n'+
+    '👤 '+quizState.name+'\n✅ Score: '+s+'/20\n🎖 Grade: '+g.g+'\n⏱ Time: '+fmt(quizState.used||0);
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+}
+
+/* ---------- Quiz share link ---------- */
+function quizURL(){ return location.href.split('#')[0].split('?')[0]+'#quiz'; }
+function isQuizOnly(){ return location.hash==='#quiz'; }
+function shareButtons(){
+  return isQuizOnly()
+    ? '<button class="btn btn-big btn-share" onclick="shareQuizLink()">🔗 Share Quiz Link</button>'
+    : '<button class="btn btn-big btn-share" onclick="openQuizTab()">🔗 Share Quiz</button>';
+}
+function openQuizTab(){ window.open(location.href.split('#')[0].split('?')[0].replace(/[^\/]*$/,'geography-unit3-quiz.html'),'_blank'); }
+function toast(t){ var e=document.getElementById('toast'); e.textContent=t; e.classList.add('show'); setTimeout(function(){e.classList.remove('show');},2200); }
+function shareQuizLink(){
+  var url=quizURL(), text='🏆 Abacus Academy — SSLC Geography Unit 3 · 20 Mark Quiz\nമഴക്കാടുകളിൽ നിന്നും മഞ്ഞുരുകാത്ത നാട്ടിലേക്ക്';
+  if(navigator.share){ navigator.share({title:'Geography Unit 3 Quiz',text:text,url:url}).catch(function(){}); return; }
+  window.open('https://wa.me/?text='+encodeURIComponent(text+'\n'+url),'_blank');
+}
+function applyQuizOnly(){
+  if(!isQuizOnly()) return;
+  document.body.classList.add('quiz-only');
+  document.title='Geography Unit 3 Quiz | Abacus Academy';
+}
+
+/* ---------- Init ---------- */
+(function(){
+  var l='ml'; try{ l=localStorage.getItem('geo3_lang')||'ml'; }catch(e){}
+  applyQuizOnly();
+  renderStart();
+  setLang(l);
+})();
+</script>
+</body>
+</html>
