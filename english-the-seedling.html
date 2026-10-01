@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Seedling — Study Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#FBF3E4;
+    --parchment-dark:#F0E4CC;
+    --ink:#2B1E14;
+    --ink-soft:#5A4632;
+    --rust:#A63D2F;
+    --amber:#E8934A;
+    --teal:#1E6E67;
+    --gold:#C9932F;
+    --leaf:#4E8A3A;
+    --card-shadow: 0 10px 30px rgba(43,30,20,0.12);
+    --radius: 14px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(232,147,74,0.15), transparent 40%),
+      radial-gradient(circle at 90% 10%, rgba(78,138,58,0.12), transparent 40%),
+      var(--parchment);
+    color:var(--ink);
+    font-family:'Source Serif 4', serif;
+    line-height:1.65;
+  }
+  .malayalam{font-family:'Noto Sans Malayalam','Source Serif 4',serif;}
+
+  header.hero{
+    position:relative;
+    padding:56px 24px 40px;
+    text-align:center;
+    overflow:hidden;
+    background:linear-gradient(180deg, #FDEBD3 0%, var(--parchment) 100%);
+    border-bottom:2px solid var(--parchment-dark);
+  }
+  header.hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(ellipse at 50% 120%, rgba(78,138,58,0.14), transparent 60%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    letter-spacing:3px; text-transform:uppercase; font-size:12px;
+    color:var(--teal); font-weight:600; font-family:'Source Serif 4',serif;
+  }
+  h1.title{
+    font-family:'Playfair Display', serif; font-weight:700; color:var(--rust);
+    font-size:clamp(28px, 5vw, 48px); margin:8px 0 6px;
+  }
+  .subtitle{ font-style:italic; color:var(--ink-soft); font-size:16px; margin:0 0 4px; }
+  .byline{color:var(--ink-soft); font-size:14px;}
+  .feather-divider{ width:120px; height:40px; margin:14px auto 0; opacity:0.9; }
+
+  nav.tabs{
+    position:sticky; top:0; z-index:50;
+    display:flex; flex-wrap:wrap; gap:6px; justify-content:center;
+    padding:12px 16px;
+    background:rgba(251,243,228,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--parchment-dark);
+  }
+  nav.tabs button{
+    font-family:'Source Serif 4', serif; font-size:14px;
+    padding:9px 16px; border-radius:999px; border:1.5px solid transparent;
+    background:transparent; color:var(--ink-soft); cursor:pointer; transition:all .2s ease;
+  }
+  nav.tabs button:hover{ border-color:var(--gold); color:var(--ink); }
+  nav.tabs button.active{
+    background:var(--rust); color:#fff; border-color:var(--rust);
+    box-shadow:0 4px 10px rgba(166,61,47,0.3);
+  }
+
+  main{ max-width:920px; margin:0 auto; padding:32px 20px 80px; }
+  .panel{ display:none; animation:fade .35s ease; }
+  .panel.active{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  .card{
+    background:#fff; border:1px solid var(--parchment-dark); border-radius:var(--radius);
+    box-shadow:var(--card-shadow); padding:24px 26px; margin-bottom:22px;
+  }
+  h2.section-title{
+    font-family:'Playfair Display', serif; color:var(--teal); font-size:24px;
+    margin-top:0; border-bottom:2px solid var(--parchment-dark); padding-bottom:10px;
+  }
+  h3{ color:var(--rust); font-family:'Playfair Display', serif; font-size:18px;}
+
+  .torn-card{
+    background:#F5F0E4; border-radius:2px; padding:22px 26px; position:relative;
+    box-shadow:var(--card-shadow); margin-bottom:22px;
+  }
+  .torn-card::after{
+    content:""; position:absolute; right:-2px; top:0; bottom:0; width:14px;
+    background:repeating-linear-gradient(-45deg, var(--parchment) 0 6px, transparent 6px 12px);
+  }
+
+  /* Poem */
+  .poem-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:6px 32px; }
+  .stanza{ margin:0 0 20px; font-size:16.5px; line-height:1.75; }
+  .stanza .ln{ display:block; }
+  .stanza .ln.in{ padding-left:22px; }
+  .stanza-no{ font-size:11px; letter-spacing:1px; color:var(--gold); font-weight:600; text-transform:uppercase; }
+  .poem-ornament{ text-align:center; color:var(--rust); letter-spacing:18px; margin-top:4px; }
+  @media (max-width:640px){ .poem-wrap{ grid-template-columns:1fr; } }
+
+  .stanza-note{ padding:12px 0; border-bottom:1px dashed var(--parchment-dark); }
+  .stanza-note:last-child{ border-bottom:none; }
+  .stanza-note .lbl{ font-weight:700; color:var(--rust); }
+
+  table{ width:100%; border-collapse:collapse; margin:14px 0; font-size:15px;}
+  th, td{ border:1px solid var(--parchment-dark); padding:10px 12px; text-align:left; vertical-align:top;}
+  th{ background:var(--teal); color:#fff; font-family:'Playfair Display',serif; font-weight:600;}
+  tr:nth-child(even) td{ background:#FBF6EA; }
+
+  .glossary-term{ font-weight:700; color:var(--rust); }
+  .glossary-item{ padding:10px 0; border-bottom:1px dashed var(--parchment-dark); }
+  .glossary-item:last-child{ border-bottom:none; }
+
+  .btn{
+    background:var(--rust); color:#fff; border:none; padding:12px 22px;
+    border-radius:999px; font-size:15px; cursor:pointer; font-family:'Source Serif 4',serif;
+  }
+  .btn:hover{ background:#8B3226; }
+  .btn:disabled{ opacity:0.4; cursor:not-allowed; }
+  .btn-outline{ background:transparent; color:var(--rust); border:1.5px solid var(--rust); }
+  .btn-outline:hover{ background:var(--rust); color:#fff; }
+
+  .quiz-q{ margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--parchment-dark);}
+  .quiz-options label{
+    display:block; padding:8px 12px; margin:6px 0; border:1.5px solid var(--parchment-dark);
+    border-radius:8px; cursor:pointer; transition:all .15s;
+  }
+  .quiz-options label:hover{ border-color:var(--amber); }
+  .quiz-options input{ margin-right:8px; }
+  #quiz-result{ font-family:'Playfair Display',serif; font-size:20px; color:var(--teal); margin-top:16px; }
+
+  .quiz-progress{ display:flex; gap:6px; justify-content:center; margin-bottom:20px; flex-wrap:wrap; }
+  .quiz-header-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+  .quiz-invite-btn{ font-size:13px; padding:8px 16px; white-space:nowrap; }
+  #quiz-invite-fallback{ max-width:420px; margin:0 0 14px; font-size:13px; color:var(--ink-soft); }
+  #quiz-invite-fallback textarea{
+    width:100%; min-height:60px; margin-top:6px; padding:10px; border:1px solid var(--parchment-dark);
+    border-radius:8px; font-family:'Source Serif 4',serif; font-size:13px; background:#FBF6EA;
+  }
+  .quiz-dot{ width:10px; height:10px; border-radius:50%; background:var(--parchment-dark); transition:all .2s; }
+  .quiz-dot.done{ background:var(--gold); }
+  .quiz-dot.active{ background:var(--rust); transform:scale(1.3); }
+  .quiz-nav{ display:flex; justify-content:space-between; margin-top:18px; }
+  .quiz-final-actions{ display:flex; gap:12px; margin-top:14px; flex-wrap:wrap; }
+  #share-fallback{ margin-top:12px; font-size:13.5px; color:var(--ink-soft); }
+  #share-fallback textarea{
+    width:100%; min-height:70px; margin-top:6px; padding:10px; border:1px solid var(--parchment-dark);
+    border-radius:8px; font-family:'Source Serif 4',serif; font-size:13.5px; background:#FBF6EA;
+  }
+
+  .qa-item{ margin-bottom:14px; }
+  .qa-item .q{ font-weight:600; color:var(--rust); }
+  .qa-item .a{ margin-top:4px; color:var(--ink-soft); }
+  .qa-subhead{ font-family:'Playfair Display',serif; color:var(--teal); font-size:17px; margin:22px 0 10px; }
+
+  .ep-group{ margin-bottom:26px; }
+  .ep-tag{
+    display:inline-block; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+    background:var(--teal); color:#fff; padding:3px 10px; border-radius:999px; margin-bottom:8px;
+  }
+  .ep-marks{ float:right; color:var(--ink-soft); font-size:13px; font-style:italic; }
+  .ep-passage{
+    background:#F5F0E4; border-left:4px solid var(--gold); padding:12px 16px; margin:10px 0;
+    font-style:italic; font-size:14.5px; border-radius:4px;
+  }
+  .ep-q{ margin:10px 0 6px; }
+  .ep-options{ margin:6px 0 6px 18px; color:var(--ink-soft); font-size:14.5px; }
+  .ep-options div{ margin:2px 0; }
+  .reveal-btn{
+    background:transparent; border:1.5px solid var(--teal); color:var(--teal);
+    padding:5px 14px; border-radius:999px; font-size:13px; cursor:pointer; margin-top:6px;
+  }
+  .reveal-btn:hover{ background:var(--teal); color:#fff; }
+  .ep-answer{
+    display:none; margin-top:10px; padding:10px 14px; background:#EAF3E9;
+    border-left:4px solid #5A9A4A; border-radius:4px; font-size:14.5px; color:var(--ink);
+  }
+  .ep-answer.show{ display:block; }
+  .ep-table{ width:100%; border-collapse:collapse; font-size:14px; margin:10px 0; }
+  .ep-table td, .ep-table th{ border:1px solid var(--parchment-dark); padding:6px 10px; }
+
+  footer{ text-align:center; padding:24px; color:var(--ink-soft); font-size:13px; }
+
+  .print-btn{
+    position:fixed; bottom:20px; right:20px; z-index:60;
+    background:var(--teal); color:#fff; border:none; padding:12px 18px; border-radius:999px;
+    font-size:14px; cursor:pointer; font-family:'Source Serif 4',serif;
+    box-shadow:0 6px 16px rgba(30,110,103,0.35); display:flex; align-items:center; gap:6px;
+  }
+  .print-btn:hover{ background:#15544F; }
+
+  @media print{
+    nav.tabs, .print-btn, .reveal-btn, .quiz-nav, .quiz-progress,
+    .quiz-header-row .quiz-invite-btn, #quiz-invite-fallback, #share-fallback,
+    .quiz-final-actions, header.hero .feather-divider{ display:none !important; }
+    body{ background:#fff; }
+    .panel{ display:block !important; page-break-after:always; }
+    .card, .torn-card{ box-shadow:none; border:1px solid #ccc; }
+    .ep-answer{ display:block !important; }
+  }
+
+  @media (max-width:600px){
+    nav.tabs{ justify-content:flex-start; overflow-x:auto; flex-wrap:nowrap; }
+    nav.tabs button{ flex:0 0 auto; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()" type="button">🖨️ Print</button>
+
+<header class="hero">
+  <div class="eyebrow">Class X · English · Unit 2 — Poem</div>
+  <h1 class="title">The Seedling</h1>
+  <p class="subtitle">Paul Laurence Dunbar</p>
+  <p class="byline">Let's Read and Enjoy · Perseverance in the Face of Adversity</p>
+  <svg class="feather-divider" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10,34 Q35,26 60,34 Q85,26 110,34" stroke="#C9932F" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M60,34 L60,12" stroke="#4E8A3A" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M60,22 Q48,20 46,10 Q58,12 60,22 Z" fill="#4E8A3A"/>
+    <path d="M60,17 Q72,15 75,5 Q62,7 60,17 Z" fill="#6FA85A"/>
+    <circle cx="60" cy="34" r="3" fill="#A63D2F"/>
+  </svg>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button data-tab="overview" class="active">Overview</button>
+  <button data-tab="poem">The Poem</button>
+  <button data-tab="summary">Summary</button>
+  <button data-tab="malayalam">മലയാളം സംഗ്രഹം</button>
+  <button data-tab="devices">Poetic Devices</button>
+  <button data-tab="glossary">Glossary</button>
+  <button data-tab="qa">Q &amp; A</button>
+  <button data-tab="language">Language Activities</button>
+  <button data-tab="examprep">Exam Practice</button>
+  <button data-tab="quiz">Quiz</button>
+</nav>
+
+<main>
+
+  <!-- OVERVIEW -->
+  <section class="panel active" id="overview">
+    <div class="card">
+      <h2 class="section-title">About the Poem</h2>
+      <p>'The Seedling' is the poem in Unit 2, a unit about turning problems into opportunities and becoming solution providers who transform the world. The poem asks a simple question: can we stay motivated when the path to success is long, difficult and challenging?</p>
+      <p>Dunbar answers through the story of a tiny seedling lying in the dark soil. It admits it is not strong, yet decides to do its best. Step by step — a leaflet, a stem, more leaves — it grows into a plant and finally a flower. The poet then turns to children and asks them to be like the seedling: to work hard, share life's labour, and trust that help will come through the lonely, struggling hours.</p>
+    </div>
+    <div class="card">
+      <h2 class="section-title">About the Poet</h2>
+      <p><strong>Paul Laurence Dunbar</strong> (1872–1906) was an American poet, novelist and short story writer. He was enslaved in Kentucky before the American Civil War. He published his first poem, 'Our Martyred Soldiers', at the age of sixteen, and became one of the first African-American writers to win international acclaim.</p>
+      <p>He worked with the Wright brothers on their publication <em>The Tatler</em>. His first book of poems, <em>Oak and Ivy</em>, appeared in 1893. He went on to publish many collections of poems, short stories, four novels and a play.</p>
+    </div>
+    <div class="torn-card">
+      <h3>The Poet's Message in One Line</h3>
+      <p>Weakness is not a reason to stop — begin with "I'll do the best I can", keep growing, and the sun and showers of life will help you bloom.</p>
+    </div>
+  </section>
+
+  <!-- POEM -->
+  <section class="panel" id="poem">
+    <div class="card">
+      <h2 class="section-title">The Seedling</h2>
+      <div class="poem-wrap">
+        <div class="stanza"><div class="stanza-no">Stanza 1</div>
+          <span class="ln">As a quiet little seedling</span><span class="ln in">Lay within its darksome bed,</span>
+          <span class="ln">To itself it fell a-talking,</span><span class="ln in">And this is what it said:</span></div>
+        <div class="stanza"><div class="stanza-no">Stanza 2</div>
+          <span class="ln">"I am not so very robust,</span><span class="ln in">But I'll do the best I can;"</span>
+          <span class="ln">And the seedling from that moment</span><span class="ln in">Its work of life began.</span></div>
+        <div class="stanza"><div class="stanza-no">Stanza 3</div>
+          <span class="ln">So it pushed a little leaflet</span><span class="ln in">Up into the light of day,</span>
+          <span class="ln">To examine the surroundings</span><span class="ln in">And show the rest the way.</span></div>
+        <div class="stanza"><div class="stanza-no">Stanza 4</div>
+          <span class="ln">The leaflet liked the prospect,</span><span class="ln in">So it called its brother, Stem;</span>
+          <span class="ln">Then two other leaflets heard it,</span><span class="ln in">And quickly followed them.</span></div>
+        <div class="stanza"><div class="stanza-no">Stanza 5</div>
+          <span class="ln">To be sure, the haste and hurry</span><span class="ln in">Made the seedling sweat and pant;</span>
+          <span class="ln">But almost before it knew it</span><span class="ln in">It found itself a plant.</span></div>
+        <div class="stanza"><div class="stanza-no">Stanza 6</div>
+          <span class="ln">The sunshine poured upon it,</span><span class="ln in">And the clouds they gave a shower;</span>
+          <span class="ln">And the little plant kept growing</span><span class="ln in">Till it found itself a flower.</span></div>
+        <div class="stanza"><div class="stanza-no">Stanza 7</div>
+          <span class="ln">Little folks, be like the seedling,</span><span class="ln in">Always do the best you can;</span>
+          <span class="ln">Every child must share life's labour</span><span class="ln in">Just as well as every man.</span></div>
+        <div class="stanza"><div class="stanza-no">Stanza 8</div>
+          <span class="ln">And the sun and showers will help you</span><span class="ln in">Through the lonesome, struggling hours,</span>
+          <span class="ln">Till you raise to light and beauty</span><span class="ln in">Virtue's fair, unfading flowers.</span></div>
+      </div>
+      <div class="poem-ornament">◆◆◆</div>
+    </div>
+
+    <div class="card">
+      <h2 class="section-title">Stanza-wise Explanation</h2>
+      <div class="stanza-note"><span class="lbl">Stanza 1 —</span> A small, silent seedling lies in the dark soil (its "darksome bed"). It begins to talk to itself — the poet gives it a voice.</div>
+      <div class="stanza-note"><span class="lbl">Stanza 2 —</span> The seedling honestly admits it is not strong, but resolves to do its best. That single decision starts its "work of life" — its growth.</div>
+      <div class="stanza-note"><span class="lbl">Stanza 3 —</span> It pushes up a tiny leaflet into the daylight to look around and to lead the way for the other parts to follow. It acts like a brave scout.</div>
+      <div class="stanza-note"><span class="lbl">Stanza 4 —</span> The leaflet likes what it sees and calls its "brother", the Stem. Two more leaflets hear and quickly follow. One brave start inspires others.</div>
+      <div class="stanza-note"><span class="lbl">Stanza 5 —</span> Growing so fast is hard work — the seedling "sweats and pants". But before it realises it, it has become a plant. Effort brings results almost without our noticing.</div>
+      <div class="stanza-note"><span class="lbl">Stanza 6 —</span> Nature helps: sunshine pours down and clouds give rain. The plant keeps growing until it blossoms into a flower — the reward of steady effort.</div>
+      <div class="stanza-note"><span class="lbl">Stanza 7 —</span> The poet speaks directly to children: be like the seedling, always do your best. Children too must share the work of life, just as adults do.</div>
+      <div class="stanza-note"><span class="lbl">Stanza 8 —</span> Help (sun and showers) will come during lonely, difficult times, until you grow the lasting flowers of virtue — good character that never fades.</div>
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section class="panel" id="summary">
+    <div class="card">
+      <h2 class="section-title">Summary (English)</h2>
+      <p>A quiet little seedling lies in the dark earth and begins talking to itself. It admits that it is not very strong, but it promises to do the best it can. From that moment, its work of life begins.</p>
+      <p>It pushes a small leaflet up into the daylight to examine the surroundings and show the others the way. The leaflet likes what it sees and calls its brother, the Stem. Two more leaflets follow quickly. The hurry makes the seedling sweat and pant, but almost before it knows it, it has become a plant.</p>
+      <p>The sun shines on it and the clouds give it rain, and the little plant keeps growing until it becomes a flower. The poet then addresses children directly: be like the seedling and always do your best. Every child must share life's labour just as every adult does. The sun and showers will help them through lonely, difficult hours, until they bring out the beautiful, lasting flowers of virtue.</p>
+      <p><strong>Theme:</strong> Self-motivation, perseverance and a positive attitude lead to success. Even the weak can achieve greatness if they begin with determination and keep trying; nature and life offer support to those who make the effort.</p>
+      <p><strong>Tone:</strong> Optimistic, encouraging and instructive (didactic).</p>
+    </div>
+  </section>
+
+  <!-- MALAYALAM SUMMARY -->
+  <section class="panel malayalam" id="malayalam">
+    <div class="card malayalam">
+      <h2 class="section-title malayalam">മലയാളം സംഗ്രഹം</h2>
+      <p>ഇരുണ്ട മണ്ണിനടിയിൽ കിടക്കുന്ന ഒരു കൊച്ചു വിത്തുമുള സ്വയം സംസാരിക്കാൻ തുടങ്ങുന്നു. "എനിക്ക് അത്ര കരുത്തൊന്നുമില്ല, എങ്കിലും എന്നാൽ കഴിയുന്നതിന്റെ പരമാവധി ഞാൻ ചെയ്യും" എന്ന് അത് പറയുന്നു. ആ നിമിഷം മുതൽ അതിന്റെ ജീവിതപ്രവർത്തനം ആരംഭിക്കുന്നു.</p>
+      <p>ചുറ്റുപാടുകൾ പരിശോധിക്കാനും മറ്റുള്ളവർക്ക് വഴികാട്ടാനുമായി അത് ഒരു കുഞ്ഞിലയെ പകൽവെളിച്ചത്തിലേക്ക് തള്ളി ഉയർത്തുന്നു. കാഴ്ച ഇഷ്ടപ്പെട്ട ഇല തന്റെ സഹോദരനായ തണ്ടിനെ വിളിക്കുന്നു; മറ്റ് രണ്ട് ഇലകളും അത് കേട്ട് വേഗം പിന്തുടരുന്നു. ഈ തിടുക്കം വിത്തുമുളയെ വിയർപ്പിക്കുകയും കിതപ്പിക്കുകയും ചെയ്യുന്നു — പക്ഷേ അറിയുന്നതിനുമുമ്പേ അത് ഒരു ചെടിയായി മാറുന്നു.</p>
+      <p>സൂര്യപ്രകാശം അതിന്മേൽ ചൊരിയുന്നു, മേഘങ്ങൾ മഴ നൽകുന്നു. ചെടി വളർന്നുവളർന്ന് ഒടുവിൽ ഒരു പൂവായി വിരിയുന്നു. തുടർന്ന് കവി കുട്ടികളോട് നേരിട്ട് പറയുന്നു: വിത്തുമുളയെപ്പോലെയാകൂ, എപ്പോഴും നിങ്ങളാൽ കഴിയുന്നതിന്റെ പരമാവധി ചെയ്യൂ. മുതിർന്നവരെപ്പോലെ ഓരോ കുട്ടിയും ജീവിതത്തിലെ അധ്വാനത്തിൽ പങ്കുചേരണം. ഏകാന്തവും പ്രയാസമേറിയതുമായ മണിക്കൂറുകളിൽ സൂര്യനും മഴയും നിങ്ങളെ സഹായിക്കും — ഒടുവിൽ നിങ്ങൾ നന്മയുടെ ഒരിക്കലും വാടാത്ത മനോഹരമായ പൂക്കൾ വിരിയിക്കും.</p>
+      <p><strong>ആശയം:</strong> ആത്മപ്രചോദനവും സ്ഥിരോത്സാഹവും ശുഭാപ്തിവിശ്വാസവും വിജയത്തിലേക്ക് നയിക്കുന്നു. ദുർബലർക്കുപോലും ദൃഢനിശ്ചയത്തോടെ തുടങ്ങി പരിശ്രമം തുടർന്നാൽ മഹത്തായ നേട്ടങ്ങൾ കൈവരിക്കാം.</p>
+      <p><strong>ഭാവം:</strong> ശുഭാപ്തിവിശ്വാസം നിറഞ്ഞതും പ്രോത്സാഹിപ്പിക്കുന്നതും ഉപദേശരൂപത്തിലുള്ളതും.</p>
+    </div>
+  </section>
+
+  <!-- POETIC DEVICES -->
+  <section class="panel" id="devices">
+    <div class="card">
+      <h2 class="section-title">Poetic Devices (Activity 2)</h2>
+      <table>
+        <tr><th>Poetic Device</th><th>Examples from the Poem</th><th>Explanation</th></tr>
+        <tr><td>Imagery</td><td>"pushed a little leaflet / Up into the light of day"; "The sunshine poured upon it"; "Made the seedling sweat and pant"</td><td>Creates vivid images of optimistic expression — we can see the seedling's growth and feel its effort.</td></tr>
+        <tr><td>Alliteration</td><td>"<b>l</b>ittle <b>l</b>eaflet", "<b>h</b>aste and <b>h</b>urry", "<b>s</b>un and <b>s</b>howers", "<b>f</b>air, un<b>f</b>ading <b>f</b>lowers"</td><td>Repetition of the same consonant sound at the beginning of nearby words; adds music and rhythm.</td></tr>
+        <tr><td>Personification</td><td>"To itself it fell a-talking"; "The leaflet liked the prospect"; "called its brother, Stem"; "sweat and pant"</td><td>Human qualities are given to the seedling and its parts, making its struggle feel like our own.</td></tr>
+        <tr><td>Metaphor</td><td>"darksome bed" (the soil); "Virtue's fair, unfading flowers"</td><td>The soil is a bed; good qualities are flowers that never fade.</td></tr>
+        <tr><td>Symbolism</td><td>Seedling = a child / a beginner; sun and showers = help, blessings and opportunities; flower = success</td><td>Objects in nature stand for ideas about human life.</td></tr>
+        <tr><td>Apostrophe / Direct address</td><td>"Little folks, be like the seedling"</td><td>The poet speaks directly to children to deliver the moral.</td></tr>
+        <tr><td>Rhyme scheme</td><td>bed / said; can / began; day / way; Stem / them; pant / plant; shower / flower; can / man; hours / flowers</td><td><strong>abcb</strong> in every stanza — only the 2nd and 4th lines rhyme.</td></tr>
+      </table>
+      <p><strong>Metre &amp; rhythm:</strong> The lines have a steady, song-like trochaic beat (stressed–unstressed: "<b>As</b> a <b>qui</b>et <b>lit</b>tle <b>seed</b>ling"). Long lines alternate with shorter indented lines, giving the poem the movement of a nursery song.</p>
+      <p><strong>Archaic words:</strong> "a-talking", "darksome", "folks" give the poem an old-fashioned, story-telling charm.</p>
+      <p><strong>Tone:</strong> Optimistic, gentle, encouraging and didactic.</p>
+    </div>
+  </section>
+
+  <!-- GLOSSARY -->
+  <section class="panel" id="glossary">
+    <div class="card">
+      <h2 class="section-title">Glossary — Poem Words</h2>
+      <div class="glossary-item"><span class="glossary-term">Seedling</span> — a very young plant just grown from a seed. <span class="malayalam">(വിത്തുമുള / തൈ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Darksome</span> — dark, gloomy (old-fashioned word). <span class="malayalam">(ഇരുണ്ട)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Fell a-talking</span> — began to talk. <span class="malayalam">(സംസാരിക്കാൻ തുടങ്ങി)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Robust</span> — strong and healthy. <span class="malayalam">(കരുത്തുള്ള)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Leaflet</span> — a small young leaf. <span class="malayalam">(കുഞ്ഞില)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Examine</span> — to look at closely. <span class="malayalam">(പരിശോധിക്കുക)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Prospect</span> — the possibility of a good future; a view. <span class="malayalam">(ഭാവി സാധ്യത / കാഴ്ച)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Haste</span> — hurry, great speed. <span class="malayalam">(തിടുക്കം)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Pant</span> — to breathe quickly and heavily. <span class="malayalam">(കിതയ്ക്കുക)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Folks</span> — people. <span class="malayalam">(ആളുകൾ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Labour</span> — hard work. <span class="malayalam">(അധ്വാനം)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Lonesome</span> — lonely. <span class="malayalam">(ഏകാന്തമായ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Virtue</span> — goodness; high moral quality. <span class="malayalam">(നന്മ / സദ്ഗുണം)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Unfading</span> — never losing freshness or beauty. <span class="malayalam">(വാടാത്ത)</span></div>
+    </div>
+    <div class="card">
+      <h2 class="section-title">Unit Glossary (Textbook)</h2>
+      <div class="glossary-item"><span class="glossary-term">Accomplishment</span> — achievement <span class="malayalam">(നേട്ടം)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Affordable</span> — inexpensive, within one's spending capacity <span class="malayalam">(താങ്ങാനാവുന്ന)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Beseech</span> — request <span class="malayalam">(അപേക്ഷിക്കുക)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Coarse</span> — rough <span class="malayalam">(പരുക്കൻ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Contemptuous</span> — expressing strong dislike <span class="malayalam">(അവജ്ഞയോടെ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Defy</span> — disobey <span class="malayalam">(ധിക്കരിക്കുക)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Dejected</span> — sad <span class="malayalam">(നിരാശനായ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Dilemma</span> — a difficult choice <span class="malayalam">(ധർമ്മസങ്കടം)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Entrepreneur</span> — one who starts a new venture / business project <span class="malayalam">(സംരംഭകൻ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Essential</span> — necessary <span class="malayalam">(അത്യാവശ്യമായ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Exorbitant</span> — expensive <span class="malayalam">(അമിതവിലയുള്ള)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Follow suit</span> — to do the same thing as someone else <span class="malayalam">(പിന്തുടരുക)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Gauze</span> — thin cloth <span class="malayalam">(നേർത്ത തുണി)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Hesitant</span> — shy, afraid <span class="malayalam">(മടിയുള്ള)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Humiliate</span> — to shame someone <span class="malayalam">(അപമാനിക്കുക)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Impact</span> — effect <span class="malayalam">(സ്വാധീനം)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Impaired</span> — disabled <span class="malayalam">(വൈകല്യമുള്ള)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Mortgage</span> — a property pledged to a bank for a loan <span class="malayalam">(പണയം)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Obsession</span> — something one thinks about all the time <span class="malayalam">(അഭിനിവേശം)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Patent</span> — the legal right to an invention <span class="malayalam">(പേറ്റന്റ്)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Perception</span> — belief <span class="malayalam">(ധാരണ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Persevere</span> — to strive hard to achieve something <span class="malayalam">(സ്ഥിരോത്സാഹത്തോടെ ശ്രമിക്കുക)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Procure</span> — to get something with an effort <span class="malayalam">(സംഘടിപ്പിക്കുക)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Rehabilitate</span> — to restore to good health <span class="malayalam">(പുനരധിവസിപ്പിക്കുക)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Saunter</span> — to walk in a relaxed way <span class="malayalam">(ഉലാത്തുക)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Smother</span> — to kill by preventing breathing <span class="malayalam">(ശ്വാസം മുട്ടിക്കുക)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Sordid</span> — dirty, unpleasant <span class="malayalam">(വൃത്തികെട്ട)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Sterilise</span> — to make clean and germ-free <span class="malayalam">(അണുവിമുക്തമാക്കുക)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Subsidised</span> — partly paid for by the government or an organisation <span class="malayalam">(സബ്സിഡിയുള്ള)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Sue</span> — to take legal action against someone <span class="malayalam">(കേസ് കൊടുക്കുക)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Trek</span> — to walk a long distance <span class="malayalam">(ദീർഘദൂരം നടക്കുക)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Waive</span> — to exempt from a tax or duty <span class="malayalam">(ഒഴിവാക്കുക)</span></div>
+    </div>
+  </section>
+
+  <!-- Q&A -->
+  <section class="panel" id="qa">
+    <div class="card">
+      <h2 class="section-title">Let's Rewind and Rejoice — Q &amp; A</h2>
+      <div class="qa-item"><div class="q">1. What triggered the seedling's 'work of life'?</div><div class="a">Its decision and self-talk — "I am not so very robust, but I'll do the best I can." The moment it resolved to try its best in spite of its weakness, its work of life began.</div></div>
+      <div class="qa-item"><div class="q">2. What is inspiring about the seedling's attitude to life?</div><div class="a">It honestly accepts that it is weak, yet it does not give up. It is positive, self-motivated and determined to do its best. It even wants to "show the rest the way", which makes it a leader.</div></div>
+      <div class="qa-item"><div class="q">3. Why was the seedling in a hurry to come out of the earth?</div><div class="a">It was eager to see the world above, examine its surroundings and lead the way for the others. Once the leaflet liked the prospect, the whole seedling was keen to grow into the light.</div></div>
+      <div class="qa-item"><div class="q">4. How is the growth of the plant described in the poem?</div><div class="a">Step by step: first a leaflet pushes into the daylight, then it calls its brother Stem, then two more leaflets follow. Working hard, it sweats and pants, and soon finds itself a plant. With the help of sunshine and rain, it keeps growing until it becomes a flower.</div></div>
+      <div class="qa-item"><div class="q">5. What message does the seedling give us?</div><div class="a">Always do the best you can, however weak you may feel. Share life's labour, persevere through lonely and difficult times, and help will come; in the end you will achieve success and develop lasting virtue.</div></div>
+    </div>
+
+    <div class="card">
+      <h2 class="qa-subhead" style="margin-top:0;">Let's Appreciate — Activity 1 (Discuss)</h2>
+      <div class="qa-item"><div class="q">1. How does the poem relate to the challenges of life?</div><div class="a">Like the seedling in the dark soil, everyone begins life with limitations and difficulties. The seedling's struggle to push through the earth mirrors our struggle against problems. Its success shows that challenges can be overcome with steady effort, and that support (sun and showers) comes to those who keep trying.</div></div>
+      <div class="qa-item"><div class="q">2. What does the poem tell us about the importance of self-motivation to achieve success?</div><div class="a">Nobody pushes the seedling — it motivates itself with the words "I'll do the best I can." Success begins with that inner decision. Self-motivation keeps us going through "lonesome, struggling hours" when no one else is watching, and it leads to growth and achievement.</div></div>
+    </div>
+
+    <div class="card">
+      <h2 class="qa-subhead" style="margin-top:0;">Activity 3 — Appreciation (Model)</h2>
+      <p><strong>Title:</strong> The Seedling</p>
+      <p><strong>Introduction:</strong> 'The Seedling' is a short, inspiring poem by the American poet Paul Laurence Dunbar. Through the growth of a tiny seedling, the poet teaches children the value of effort, self-belief and perseverance.</p>
+      <p><strong>Theme:</strong> A weak little seedling lying in the dark earth decides to do its best. It pushes up a leaflet, then a stem and more leaves, works hard, and becomes a plant. Helped by sunshine and rain, it finally blooms into a flower. The poet asks children to be like the seedling, to share life's labour, and to trust that help will come through difficult times until they bring out the unfading flowers of virtue. The theme is that self-motivation and perseverance lead to success.</p>
+      <p><strong>Poetic devices:</strong> The poem uses personification — the seedling talks, the leaflet likes the prospect and calls its brother Stem, and the seedling sweats and pants. Alliteration adds music: "little leaflet", "haste and hurry", "sun and showers", "fair, unfading flowers". Vivid imagery lets us see the leaflet rising "into the light of day" and the sunshine pouring upon it. "Virtue's fair, unfading flowers" is a beautiful metaphor. The rhyme scheme is abcb, and the steady trochaic rhythm makes it sound like a song. The tone is optimistic and encouraging.</p>
+      <p><strong>Conclusion:</strong> The poem is highly relevant today, when young people face competition and pressure. The lines I like most are "I am not so very robust, / But I'll do the best I can" because they show that success does not depend on strength but on the will to try. The poem leaves us hopeful and motivated.</p>
+    </div>
+
+    <div class="card">
+      <h2 class="qa-subhead" style="margin-top:0;">Activity 4 — Paragraph: Importance of Self-motivation</h2>
+      <p>Self-motivation is the inner drive that pushes us to act without waiting for others to push us. The seedling in Dunbar's poem is weak, yet it motivates itself and grows into a flower. Social entrepreneurs like Srikanth Bolla, who was born blind, and Arunachalam Muruganantham, who was mocked for his experiments, succeeded because they refused to give up. They turned their challenges into opportunities that changed thousands of lives. Self-motivation helps us stay focused when the path is long, bounce back from failure, and keep learning. Success rarely comes easily, but those who believe in themselves and keep trying will surely reach their goal.</p>
+    </div>
+
+    <div class="card">
+      <h2 class="qa-subhead" style="margin-top:0;">Let's Listen — 'It Couldn't Be Done' vs 'The Seedling'</h2>
+      <p>Both poems celebrate determination. In Edgar A. Guest's poem, a man is told a task is impossible, but he starts it cheerfully and completes it. Dunbar's seedling, though not robust, decides to do its best and grows into a flower. Both teach that a positive attitude and effort can overcome doubt and weakness — just as Srikanth Bolla overcame blindness and Muruganantham overcame ridicule to succeed.</p>
+    </div>
+  </section>
+
+  <!-- LANGUAGE ACTIVITIES -->
+  <section class="panel" id="language">
+    <div class="card ep-group">
+      <span class="ep-tag">Let's Play with Words</span>
+      <h3 style="margin-top:6px;">Activity 1A — Match the words</h3>
+      <table class="ep-table">
+        <tr><th>A</th><th>B (Answer)</th></tr>
+        <tr><td>Humiliate</td><td>to shame someone</td></tr>
+        <tr><td>Exorbitant</td><td>expensive</td></tr>
+        <tr><td>Affordable</td><td>inexpensive, within one's spending capacity</td></tr>
+        <tr><td>Perseverance</td><td>the continued effort to achieve something</td></tr>
+        <tr><td>Procure</td><td>to get something with an effort</td></tr>
+        <tr><td>Entrepreneur</td><td>one who starts an enterprise</td></tr>
+      </table>
+      <h3>Activity 1B — Complete the passage</h3>
+      <div class="ep-passage">Today, the nation needs young ……(1)…… to create job opportunities… With the cost of living rising to ……(2)…… levels… Everyone wants essential goods at ……(3)…… prices… entrepreneurs may still be ……(4)…… by criticism… They would need foresight and ……(5)…… to succeed.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">(1) entrepreneurs &nbsp; (2) exorbitant &nbsp; (3) affordable &nbsp; (4) humiliated &nbsp; (5) perseverance</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Phrasal Verbs</span>
+      <h3 style="margin-top:6px;">Activity 2 — "figure out"</h3>
+      <p>"It took me two years of trial and error to <strong>figure out</strong> it was pinewood pulp and not cotton." → <em>figure out</em> = to finally find a solution to, or understand something.</p>
+      <h3>Phrasal verbs from 'The Forest Post'</h3>
+      <table class="ep-table">
+        <tr><th>Phrasal Verb</th><th>Meaning</th></tr>
+        <tr><td>sort out</td><td>to solve or settle a problem</td></tr>
+        <tr><td>work out</td><td>to plan or find a way to do something</td></tr>
+        <tr><td>make out</td><td>to understand or notice something</td></tr>
+        <tr><td>run out (of)</td><td>to use up completely; have nothing left</td></tr>
+        <tr><td>turn out</td><td>to prove to be; to result in</td></tr>
+        <tr><td>set out</td><td>to begin a journey or an undertaking</td></tr>
+      </table>
+      <h3>Noorangu — Fill in the blanks</h3>
+      <div class="ep-passage">…a group of ten tribal women ……(a)…… on a mission to preserve traditional varieties of tuber crops… they could ……(b)…… that the new generation knew nothing… have successfully ……(c)…… a plan… The initiative ……(d)…… to be a great success… help the general public to ……(e)…… the vital aspect of their heritage…</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">(a) set out &nbsp; (b) make out &nbsp; (c) worked out &nbsp; (d) turned out &nbsp; (e) figure out &nbsp; <em>(run out is the extra option)</em></div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Let's Analyse — Subordinating Conjunctions</span>
+      <h3 style="margin-top:6px;">Cause and Effect</h3>
+      <table class="ep-table">
+        <tr><th>Sl. no</th><th>Cause (subordinate clause)</th><th>Effect (main clause)</th><th>Linking word</th></tr>
+        <tr><td>1</td><td>my father passed away unexpectedly</td><td>I dropped out of school at the age of 14</td><td>because</td></tr>
+        <tr><td>2</td><td>my mother struggled to make ends meet</td><td>I had to work in a welding workshop</td><td>since</td></tr>
+        <tr><td>3</td><td>my mother had to care for two daughters and a son</td><td>she struggled to support our family</td><td>as</td></tr>
+      </table>
+      <p><strong>Subordinating conjunctions connect</strong> a subordinate (dependent) clause to a main (independent) clause, showing relationships like cause, time, condition or contrast.</p>
+      <p><strong>B. Others:</strong> although, after, though, when, while, if, unless, until, before, whenever, whereas, so that, once, as soon as.</p>
+      <h3>C. Complete with conjunctions</h3>
+      <div class="ep-options">
+        <div>1. ……… it was raining, they decided to go for a hike.</div>
+        <div>2. ……… she studied hard, she passed the exam with flying colours.</div>
+        <div>3. ……… you practise regularly, you will improve your skills.</div>
+        <div>4. ……… I see a sunset, I feel at peace.</div>
+        <div>5. ……… he moved to a new city, he has made many friends.</div>
+        <div>6. ……… the task was difficult, they completed it on time.</div>
+        <div>7. ……… she was cooking, her phone rang.</div>
+        <div>8. ……… you hurry, you will miss the train.</div>
+        <div>9. ……… they finished dinner, they watched a movie.</div>
+        <div>10. ……… the bell rang, the students left the classroom.</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">1. Although &nbsp; 2. Because &nbsp; 3. If &nbsp; 4. Whenever &nbsp; 5. Since &nbsp; 6. Though &nbsp; 7. While &nbsp; 8. Unless &nbsp; 9. After &nbsp; 10. When / As soon as</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Conditionals — Impossible Condition</span>
+      <table class="ep-table">
+        <tr><th>Sentence</th><th>Cause</th><th>Effect</th></tr>
+        <tr><td>1</td><td>had got</td><td>would not have gone</td></tr>
+        <tr><td>2</td><td>had given up</td><td>would have failed</td></tr>
+        <tr><td>3</td><td>hadn't been admitted</td><td>wouldn't have had</td></tr>
+        <tr><td>4</td><td>had stopped</td><td>would have stayed</td></tr>
+        <tr><td>5</td><td>had not turned</td><td>would not have changed</td></tr>
+      </table>
+      <table class="ep-table">
+        <tr><th>Verb in if clause</th><th>Verb in main clause</th></tr>
+        <tr><td>had + V3 (past participle)</td><td>would / could / might + have + V3</td></tr>
+      </table>
+      <p>The condition "If Sreekanth had got admission to the IIT" cannot be fulfilled because it refers to the past — it did not happen. Effect: <em>he would not have gone to the USA.</em></p>
+      <h3>B. Complete the sentences</h3>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">1. would have attended &nbsp; 2. would have caught &nbsp; 3. would have replied &nbsp; 4. would have won &nbsp; 5. would have gone &nbsp; 6. would not have missed … had arrived &nbsp; 7. had told … would have helped &nbsp; 8. had read … would have understood</div>
+      <h3>C. Match the conditional sentences</h3>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">
+        If she had studied harder, she would have passed the exam.<br>
+        If I were rich, I would travel around the world.<br>
+        If I see her at the mall, I will buy her the dress.<br>
+        If we win the game, we will celebrate tonight.<br>
+        If you had told me you were not well, I would have visited you.
+      </div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Let's Converse</span>
+      <table class="ep-table">
+        <tr><th>Seeking information</th><th>Explaining / Convincing</th></tr>
+        <tr><td>Would you say that your childhood was a hard time for you?</td><td>Of course, my friend. First of all…</td></tr>
+        <tr><td>Could you tell me more about…?</td><td>…I was born blind, you know.</td></tr>
+      </table>
+      <h3>Picture story — sample answers</h3>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Sample Answer</button>
+      <div class="ep-answer">
+        1. <em>Interviewer:</em> Sir, <strong>would you mind explaining</strong>, why did you think of starting a new business project at this age?<br>
+        2. <em>Farmer:</em> <strong>Let me explain.</strong> It was always my ambition to start a farm here. <strong>The reason is that</strong> there is great demand even from the nearby towns.<br>
+        3. <em>Interviewer:</em> <strong>Could you clarify</strong>? How did you find that there was a great demand for your farm products?<br>
+        4. <em>Farmer:</em> <strong>Let me walk you through it.</strong> I went to the towns and talked to the people there…<br>
+        5. <em>Interviewer:</em> <strong>Can you go into more detail?</strong> Why, in your opinion, is there so much demand for your products?<br>
+        6. <em>Farmer:</em> <strong>It has been proven that</strong> most of the products available elsewhere have pesticides far above the permitted level.<br>
+        7. <em>Interviewer:</em> <strong>Could you break that down</strong> — what techniques of farming do you follow?<br>
+        8. <em>Farmer:</em> <strong>It is important to note</strong> that pesticides not only affect insects, but the entire environment and us too…
+      </div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Let's Team Up — Survey Report Format</span>
+      <p>Choose a sector (food &amp; water, home, fashion, digital literacy, tourism, entertainment, elderly care…), prepare a questionnaire on availability, demand, supply and public opinion, survey your neighbourhood, and write the report under: <strong>Title → Introduction → Body of the report → Discussion → Conclusion</strong>. Present the papers in a seminar on 'New Start-Ups for a New Kerala'.</p>
+    </div>
+  </section>
+
+  <!-- EXAM PRACTICE -->
+  <section class="panel" id="examprep">
+    <div class="card">
+      <h2 class="section-title">Exam-Pattern Practice Questions</h2>
+      <p style="color:var(--ink-soft); font-size:14.5px;">Modelled on the SSLC Summative Assessment pattern. Tap <strong>Show Answer</strong> to check your response.</p>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Poem Comprehension</span><span class="ep-marks">5×1=5</span>
+      <div class="ep-passage">"I am not so very robust,<br>&nbsp;&nbsp;But I'll do the best I can;"<br>And the seedling from that moment<br>&nbsp;&nbsp;Its work of life began.<br><br>So it pushed a little leaflet<br>&nbsp;&nbsp;Up into the light of day,<br>To examine the surroundings<br>&nbsp;&nbsp;And show the rest the way.</div>
+      <div class="ep-q">1. What does the seedling admit about itself?</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">It admits that it is not very robust (strong).</div>
+
+      <div class="ep-q">2. When did the seedling begin its "work of life"?</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">From the moment it decided to do the best it could.</div>
+
+      <div class="ep-q">3. Why did the seedling push a leaflet into the light of day?</div>
+      <div class="ep-options">
+        <div>A. To escape from the rain</div>
+        <div>B. To examine the surroundings and show the rest the way</div>
+        <div>C. To call the sun</div>
+        <div>D. To hide from the other plants</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Correct answer: B</div>
+
+      <div class="ep-q">4. Pick out the rhyming words from the lines.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">can – began; day – way</div>
+
+      <div class="ep-q">5. Identify the alliteration in the lines.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">"<b>l</b>ittle <b>l</b>eaflet" (repetition of the 'l' sound)</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Poem Comprehension</span><span class="ep-marks">4×1=4</span>
+      <div class="ep-passage">Little folks, be like the seedling,<br>&nbsp;&nbsp;Always do the best you can;<br>Every child must share life's labour<br>&nbsp;&nbsp;Just as well as every man.<br><br>And the sun and showers will help you<br>&nbsp;&nbsp;Through the lonesome, struggling hours,<br>Till you raise to light and beauty<br>&nbsp;&nbsp;Virtue's fair, unfading flowers.</div>
+      <div class="ep-q">6. Who are the "little folks"?</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Children.</div>
+      <div class="ep-q">7. What do "sun and showers" stand for?</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Help, support, blessings and opportunities that come in life.</div>
+      <div class="ep-q">8. What does the poet mean by "Virtue's fair, unfading flowers"?</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Good qualities and character, beautiful and lasting like flowers that never fade — the true reward of effort.</div>
+      <div class="ep-q">9. Name the poetic device in "Little folks, be like the seedling".</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Simile (be <em>like</em> the seedling) / direct address to the reader.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Statement-based MCQ</span><span class="ep-marks">2×1=2</span>
+      <div class="ep-q">10. Which of the following statements are <strong>TRUE</strong> about the seedling?</div>
+      <div class="ep-options">
+        <div>A. It believed it was very strong.</div>
+        <div>B. It decided to do its best.</div>
+        <div>C. The leaflet called its brother, Stem.</div>
+        <div>D. It grew without any effort.</div>
+      </div>
+      <div class="ep-options"><div>i. A and B &nbsp; ii. B and C &nbsp; iii. C and D &nbsp; iv. A and D</div></div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Correct answer: ii. B and C</div>
+
+      <div class="ep-q">11. Which of the following are <strong>NOT TRUE</strong> about the poem?</div>
+      <div class="ep-options">
+        <div>A. The rhyme scheme is abcb.</div>
+        <div>B. The tone of the poem is pessimistic.</div>
+        <div>C. The seedling is personified.</div>
+        <div>D. The poem is written by Edgar A. Guest.</div>
+      </div>
+      <div class="ep-options"><div>i. A and C &nbsp; ii. B only &nbsp; iii. B and D &nbsp; iv. A and D</div></div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">Correct answer: iii. B and D</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Appreciation</span><span class="ep-marks">1×7=7</span>
+      <div class="ep-q">12. Write an <strong>appreciation</strong> of the poem 'The Seedling', focusing on its theme and tone, and analysing the use of poetic devices.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Guidance</button>
+      <div class="ep-answer">Follow: Title → Introduction (poet + general theme) → Theme (seedling's journey, message to children) → Poetic devices (personification, alliteration, imagery, metaphor, abcb rhyme, trochaic rhythm, optimistic tone) → Conclusion (relevance today + favourite lines with reason). See the full model in the Q &amp; A tab.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Write-up (choice)</span><span class="ep-marks">1×6=6</span>
+      <div class="ep-q">13. <strong>[A]</strong> Prepare a <strong>write-up</strong> on 'Challenges are stepping stones to success', based on 'The Seedling' and the lives of Srikanth Bolla and Arunachalam Muruganantham.<br><strong>OR [B]</strong> Prepare a <strong>speech</strong> to be delivered in the school assembly on 'Self-motivation — the seed of success'.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Guidance</button>
+      <div class="ep-answer"><strong>[A]</strong> Introduce the idea → the seedling's weakness and resolve → Bolla born blind, rejected by IIT, succeeded at MIT and started a business → Muruganantham ridiculed yet created affordable pads → conclude that challenges build strength.<br><strong>[B]</strong> Greeting → define self-motivation → the seedling's example → real-life examples → practical tips (goals, positive self-talk, not fearing failure) → closing call to action → thanks.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Paragraph</span><span class="ep-marks">1×4=4</span>
+      <div class="ep-q">14. Write a <strong>paragraph</strong> on the importance of self-motivation for success in life.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Guidance</button>
+      <div class="ep-answer">Topic sentence (what self-motivation is) → example from the poem → example from real life → how it helps (focus, resilience, learning) → concluding sentence. Model paragraph is in the Q &amp; A tab.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Editing</span><span class="ep-marks">6×½=3</span>
+      <div class="ep-q">15. Edit the passage. Errors are given in bold.</div>
+      <div class="ep-passage">The seedling <strong>lie</strong> (a) in its darksome bed. It <strong>say</strong> (b) that it was not very robust. <strong>A</strong> (c) leaflet came out first. It <strong>call</strong> (d) its brother, Stem. The sunshine <strong>pour</strong> (e) upon the little plant. Soon it <strong>become</strong> (f) a flower.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">(a) lay &nbsp; (b) said &nbsp; (c) The &nbsp; (d) called &nbsp; (e) poured &nbsp; (f) became</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Phrasal Verbs</span><span class="ep-marks">5×1=5</span>
+      <div class="ep-q">16. Complete the paragraph using appropriate forms of the phrasal verbs given: <em>(set out, figure out, run out of, turn out, work out)</em></div>
+      <div class="ep-passage">The little seedling ……(a)…… on its journey towards the light. It had to ……(b)…… the best way to push through the hard soil. It never ……(c)…… hope, even when it was tired. It ……(d)…… a plan to send a leaflet first. In the end, its effort ……(e)…… to be a great success.</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">(a) set out &nbsp; (b) figure out &nbsp; (c) ran out of &nbsp; (d) worked out &nbsp; (e) turned out</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Conditionals</span><span class="ep-marks">3×1=3</span>
+      <div class="ep-q">17. Complete the sentences using the correct forms of the verbs.</div>
+      <div class="ep-options">
+        <div>a. If the seedling had given up, it (not become) ……… a flower.</div>
+        <div>b. If the clouds had not given a shower, the plant (die) ……… .</div>
+        <div>c. The leaflet would not have called Stem if it (not like) ……… the prospect.</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">a. would not have become &nbsp; b. would have died &nbsp; c. had not liked</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Conjunctions</span><span class="ep-marks">4×½=2</span>
+      <div class="ep-q">18. Combine using suitable subordinating conjunctions.</div>
+      <div class="ep-options">
+        <div>a. The seedling was not robust. It did its best. (although)</div>
+        <div>b. The sun shone. The plant grew. (because)</div>
+        <div>c. The leaflet came out. Two other leaflets followed. (after)</div>
+        <div>d. You do your best. You will succeed. (if)</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">a. Although the seedling was not robust, it did its best.<br>b. The plant grew because the sun shone.<br>c. After the leaflet came out, two other leaflets followed.<br>d. If you do your best, you will succeed.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Dialogue Completion</span><span class="ep-marks">4×1=4</span>
+      <div class="ep-q">19. Complete the interview with Srikanth Bolla using suitable expressions.</div>
+      <div class="ep-passage">
+        Interviewer: Good morning, Srikanth. ……(a)…… about your childhood?<br>
+        Srikanth: ……(b)…… I was born blind, and many people thought I was a burden.<br>
+        Interviewer: ……(c)…… how you reached MIT?<br>
+        Srikanth: ……(d)…… IIT rejected me, so I applied abroad and got admission.
+      </div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Sample Answer</button>
+      <div class="ep-answer">(a) Would you mind telling us &nbsp; (b) Let me explain. &nbsp; (c) Could you walk us through &nbsp; (d) The reason is that</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Reported Speech</span><span class="ep-marks">2×1=2</span>
+      <div class="ep-q">20. Report the seedling's words.</div>
+      <div class="ep-passage">The seedling said, "I am not so very robust, but I'll do the best I can."</div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Answer</button>
+      <div class="ep-answer">The seedling said that it was not so very robust, but it would do the best it could.</div>
+    </div>
+
+    <div class="card ep-group">
+      <span class="ep-tag">Caption Writing</span><span class="ep-marks">2×1=2</span>
+      <div class="ep-q">21. Create captions using words from the box: <em>(hope, grow, rise, bloom, effort, light)</em></div>
+      <div class="ep-options">
+        <div>a. A tiny seedling breaking through cracked, dry soil → ……………</div>
+        <div>b. A flower blooming in bright sunshine → ……………</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleAns(this)">Show Sample Answer</button>
+      <div class="ep-answer">a. "Rise with hope" &nbsp;&nbsp; b. "Effort blooms in light"</div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="panel" id="quiz">
+    <div class="card">
+      <div class="quiz-header-row">
+        <h2 class="section-title" style="border:none; margin:0; padding:0;">Quiz Time</h2>
+        <button id="quiz-invite-share" class="btn btn-outline quiz-invite-btn" type="button">↗ Share Quiz</button>
+      </div>
+      <div id="quiz-invite-fallback"></div>
+      <div id="quiz-progress" class="quiz-progress"></div>
+      <div id="quiz-active">
+        <div id="quiz-question-wrap" class="quiz-q"></div>
+        <div class="quiz-nav">
+          <button id="quiz-prev" class="btn btn-outline" type="button">Previous</button>
+          <button id="quiz-next" class="btn" type="button">Next</button>
+        </div>
+      </div>
+      <div id="quiz-final" style="display:none;">
+        <div id="quiz-result"></div>
+        <div class="quiz-final-actions">
+          <button id="quiz-restart" class="btn btn-outline" type="button">Retake Quiz</button>
+          <button id="quiz-share" class="btn" type="button">Share Result</button>
+        </div>
+        <div id="share-fallback"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>Study Portal · Class X English · Unit 2 — The Seedling</footer>
+
+<script>
+function toggleAns(btn){
+  const ans = btn.nextElementSibling;
+  ans.classList.toggle('show');
+  const base = btn.dataset.label || btn.textContent.replace(/^(Show|Hide) /,'');
+  btn.dataset.label = base;
+  btn.textContent = (ans.classList.contains('show') ? 'Hide ' : 'Show ') + base;
+}
+
+const tabs = document.querySelectorAll('nav.tabs button');
+const panels = document.querySelectorAll('.panel');
+
+function activateTab(tabId, scroll=true){
+  const targetBtn = Array.from(tabs).find(b => b.dataset.tab === tabId);
+  if(!targetBtn) return;
+  tabs.forEach(b=>b.classList.remove('active'));
+  panels.forEach(p=>p.classList.remove('active'));
+  targetBtn.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+  if(scroll) window.scrollTo({top:0, behavior:'smooth'});
+}
+
+tabs.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    activateTab(btn.dataset.tab);
+    window.location.hash = btn.dataset.tab;
+  });
+});
+
+const initialHash = window.location.hash.replace('#','');
+if(initialHash && document.getElementById(initialHash)){
+  activateTab(initialHash, false);
+} else {
+  activateTab('overview', false);
+}
+
+const quizData = [
+  { q: "1. Who wrote the poem 'The Seedling'?",
+    options: ["Edgar A. Guest", "Paul Laurence Dunbar", "William Wordsworth", "Robert Frost"], answer: 1 },
+  { q: "2. Where was the seedling lying at the beginning of the poem?",
+    options: ["In a flower pot", "In its darksome bed", "On a rock", "In a river"], answer: 1 },
+  { q: "3. What did the seedling say about itself?",
+    options: ["It was the strongest plant", "It was not so very robust", "It was afraid of the sun", "It wanted to sleep"], answer: 1 },
+  { q: "4. What did the seedling promise to do?",
+    options: ["Grow faster than others", "Do the best it can", "Wait for the rain", "Stay underground"], answer: 1 },
+  { q: "5. What did the seedling push up first into the light of day?",
+    options: ["A flower", "A root", "A little leaflet", "A stem"], answer: 2 },
+  { q: "6. Why did the leaflet come out?",
+    options: ["To drink rain", "To examine the surroundings and show the rest the way", "To find the sun", "To escape insects"], answer: 1 },
+  { q: "7. Whom did the leaflet call after it liked the prospect?",
+    options: ["Its sister, Root", "Its brother, Stem", "The Sun", "The Clouds"], answer: 1 },
+  { q: "8. How many other leaflets followed?",
+    options: ["One", "Two", "Three", "Four"], answer: 1 },
+  { q: "9. What did the haste and hurry make the seedling do?",
+    options: ["Sleep and dream", "Sweat and pant", "Cry and weep", "Stop and rest"], answer: 1 },
+  { q: "10. What helped the little plant to keep growing?",
+    options: ["Wind and snow", "Sunshine and showers", "Moon and stars", "Soil and stones"], answer: 1 },
+  { q: "11. What did the plant finally become?",
+    options: ["A tree", "A fruit", "A flower", "A seed"], answer: 2 },
+  { q: "12. Whom does the poet address as 'Little folks'?",
+    options: ["Farmers", "Children", "Plants", "Birds"], answer: 1 },
+  { q: "13. According to the poet, every child must share —",
+    options: ["life's pleasures", "life's labour", "life's riches", "life's sorrows"], answer: 1 },
+  { q: "14. What kind of hours will the sun and showers help us through?",
+    options: ["Happy, joyful hours", "Lonesome, struggling hours", "Busy, noisy hours", "Early morning hours"], answer: 1 },
+  { q: "15. What are 'Virtue's fair, unfading flowers'?",
+    options: ["Real flowers in a garden", "Good qualities that last forever", "Flowers that bloom at night", "Plastic flowers"], answer: 1 },
+  { q: "16. What is the rhyme scheme of the poem?",
+    options: ["aabb", "abab", "abcb", "abba"], answer: 2 },
+  { q: "17. 'The leaflet liked the prospect' is an example of —",
+    options: ["Simile", "Personification", "Hyperbole", "Onomatopoeia"], answer: 1 },
+  { q: "18. 'Haste and hurry' is an example of —",
+    options: ["Alliteration", "Metaphor", "Irony", "Oxymoron"], answer: 0 },
+  { q: "19. What is the tone of the poem?",
+    options: ["Sad and gloomy", "Angry", "Optimistic and encouraging", "Humorous and mocking"], answer: 2 },
+  { q: "20. What was the title of Dunbar's first book of poems?",
+    options: ["Leaves of Grass", "Oak and Ivy", "The Tatler", "Our Martyred Soldiers"], answer: 1 }
+];
+
+let currentQ = 0;
+const userAnswers = new Array(quizData.length).fill(null);
+
+const progressEl = document.getElementById('quiz-progress');
+const qWrap = document.getElementById('quiz-question-wrap');
+const prevBtn = document.getElementById('quiz-prev');
+const nextBtn = document.getElementById('quiz-next');
+const activeBlock = document.getElementById('quiz-active');
+const finalBlock = document.getElementById('quiz-final');
+
+function buildProgress(){
+  progressEl.innerHTML = '';
+  quizData.forEach((_, i)=>{
+    const dot = document.createElement('div');
+    dot.className = 'quiz-dot';
+    dot.id = `dot-${i}`;
+    progressEl.appendChild(dot);
+  });
+}
+
+function updateProgress(){
+  quizData.forEach((_, i)=>{
+    const dot = document.getElementById(`dot-${i}`);
+    dot.classList.remove('active','done');
+    if(i === currentQ) dot.classList.add('active');
+    else if(userAnswers[i] !== null) dot.classList.add('done');
+  });
+}
+
+function renderQuestion(){
+  const item = quizData[currentQ];
+  const optsHtml = item.options.map((opt, j)=>{
+    const checked = userAnswers[currentQ] === j ? 'checked' : '';
+    return `<label><input type="radio" name="qcurrent" value="${j}" ${checked}> ${opt}</label>`;
+  }).join('');
+  qWrap.innerHTML = `<div><strong>${item.q}</strong></div><div class="quiz-options">${optsHtml}</div>`;
+
+  qWrap.querySelectorAll('input[name="qcurrent"]').forEach(input=>{
+    input.addEventListener('change', (e)=>{
+      userAnswers[currentQ] = parseInt(e.target.value);
+      updateProgress();
+    });
+  });
+
+  prevBtn.disabled = currentQ === 0;
+  nextBtn.textContent = currentQ === quizData.length - 1 ? 'Finish' : 'Next';
+  updateProgress();
+}
+
+prevBtn.addEventListener('click', ()=>{
+  if(currentQ > 0){ currentQ--; renderQuestion(); }
+});
+
+nextBtn.addEventListener('click', ()=>{
+  if(currentQ < quizData.length - 1){
+    currentQ++;
+    renderQuestion();
+  } else {
+    finishQuiz();
+  }
+});
+
+function finishQuiz(){
+  let score = 0;
+  quizData.forEach((item, i)=>{ if(userAnswers[i] === item.answer) score++; });
+  activeBlock.style.display = 'none';
+  finalBlock.style.display = 'block';
+  document.getElementById('quiz-result').textContent = `You scored ${score} out of ${quizData.length}!`;
+  document.getElementById('share-fallback').innerHTML = '';
+  document.getElementById('quiz-share').dataset.score = score;
+}
+
+document.getElementById('quiz-restart').addEventListener('click', ()=>{
+  currentQ = 0;
+  userAnswers.fill(null);
+  activeBlock.style.display = 'block';
+  finalBlock.style.display = 'none';
+  document.getElementById('share-fallback').innerHTML = '';
+  renderQuestion();
+});
+
+document.getElementById('quiz-share').addEventListener('click', async ()=>{
+  const score = document.getElementById('quiz-share').dataset.score;
+  const quizUrl = window.location.origin + window.location.pathname.replace('english-the-seedling.html', 'english-the-seedling-quiz.html');
+  const shareText = `I scored ${score}/${quizData.length} on "The Seedling" quiz! Try it yourself.`;
+  const fallback = document.getElementById('share-fallback');
+
+  if(navigator.share){
+    try{
+      await navigator.share({ title: 'The Seedling Quiz Result', text: shareText, url: quizUrl });
+      return;
+    }catch(err){}
+  }
+  try{
+    await navigator.clipboard.writeText(`${shareText}\n${quizUrl}`);
+    fallback.innerHTML = `Result copied to clipboard! You can paste it anywhere.<br><textarea readonly>${shareText}\n${quizUrl}</textarea>`;
+  }catch(err){
+    fallback.innerHTML = `<textarea readonly>${shareText}\n${quizUrl}</textarea>`;
+  }
+});
+
+document.getElementById('quiz-invite-share').addEventListener('click', async ()=>{
+  const quizUrl = window.location.origin + window.location.pathname.replace('english-the-seedling.html', 'english-the-seedling-quiz.html');
+  const shareData = {
+    title: 'The Seedling Quiz',
+    text: 'Take this quiz on "The Seedling" (Class X English, Unit 2) and test what you know!',
+    url: quizUrl
+  };
+  const fallback = document.getElementById('quiz-invite-fallback');
+
+  if(navigator.share){
+    try{
+      await navigator.share(shareData);
+      return;
+    }catch(err){}
+  }
+  try{
+    await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
+    fallback.innerHTML = `Quiz link copied! Paste it to invite others.<br><textarea readonly>${shareData.text}\n${shareData.url}</textarea>`;
+  }catch(err){
+    fallback.innerHTML = `<textarea readonly>${shareData.text}\n${shareData.url}</textarea>`;
+  }
+});
+
+buildProgress();
+renderQuestion();
+</script>
+</body>
+</html>

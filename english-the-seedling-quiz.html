@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Seedling — Quiz</title>
+<meta property="og:title" content="The Seedling — Quiz (Class X English, Unit 2)">
+<meta property="og:description" content="20 questions on Paul Laurence Dunbar's poem 'The Seedling'. Test what you know!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#FBF3E4;
+    --parchment-dark:#F0E4CC;
+    --ink:#2B1E14;
+    --ink-soft:#5A4632;
+    --rust:#A63D2F;
+    --amber:#E8934A;
+    --teal:#1E6E67;
+    --gold:#C9932F;
+    --leaf:#4E8A3A;
+    --card-shadow: 0 10px 30px rgba(43,30,20,0.12);
+    --radius: 14px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(232,147,74,0.15), transparent 40%),
+      radial-gradient(circle at 90% 10%, rgba(78,138,58,0.12), transparent 40%),
+      var(--parchment);
+    color:var(--ink);
+    font-family:'Source Serif 4', serif;
+    line-height:1.65;
+  }
+  .malayalam{font-family:'Noto Sans Malayalam','Source Serif 4',serif;}
+
+  header.hero{
+    position:relative;
+    padding:56px 24px 40px;
+    text-align:center;
+    overflow:hidden;
+    background:linear-gradient(180deg, #FDEBD3 0%, var(--parchment) 100%);
+    border-bottom:2px solid var(--parchment-dark);
+  }
+  header.hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(ellipse at 50% 120%, rgba(78,138,58,0.14), transparent 60%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    letter-spacing:3px; text-transform:uppercase; font-size:12px;
+    color:var(--teal); font-weight:600; font-family:'Source Serif 4',serif;
+  }
+  h1.title{
+    font-family:'Playfair Display', serif; font-weight:700; color:var(--rust);
+    font-size:clamp(28px, 5vw, 48px); margin:8px 0 6px;
+  }
+  .subtitle{ font-style:italic; color:var(--ink-soft); font-size:16px; margin:0 0 4px; }
+  .byline{color:var(--ink-soft); font-size:14px;}
+  .feather-divider{ width:120px; height:40px; margin:14px auto 0; opacity:0.9; }
+
+  nav.tabs{
+    position:sticky; top:0; z-index:50;
+    display:flex; flex-wrap:wrap; gap:6px; justify-content:center;
+    padding:12px 16px;
+    background:rgba(251,243,228,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--parchment-dark);
+  }
+  nav.tabs button{
+    font-family:'Source Serif 4', serif; font-size:14px;
+    padding:9px 16px; border-radius:999px; border:1.5px solid transparent;
+    background:transparent; color:var(--ink-soft); cursor:pointer; transition:all .2s ease;
+  }
+  nav.tabs button:hover{ border-color:var(--gold); color:var(--ink); }
+  nav.tabs button.active{
+    background:var(--rust); color:#fff; border-color:var(--rust);
+    box-shadow:0 4px 10px rgba(166,61,47,0.3);
+  }
+
+  main{ max-width:920px; margin:0 auto; padding:32px 20px 80px; }
+  .panel{ display:none; animation:fade .35s ease; }
+  .panel.active{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  .card{
+    background:#fff; border:1px solid var(--parchment-dark); border-radius:var(--radius);
+    box-shadow:var(--card-shadow); padding:24px 26px; margin-bottom:22px;
+  }
+  h2.section-title{
+    font-family:'Playfair Display', serif; color:var(--teal); font-size:24px;
+    margin-top:0; border-bottom:2px solid var(--parchment-dark); padding-bottom:10px;
+  }
+  h3{ color:var(--rust); font-family:'Playfair Display', serif; font-size:18px;}
+
+  .torn-card{
+    background:#F5F0E4; border-radius:2px; padding:22px 26px; position:relative;
+    box-shadow:var(--card-shadow); margin-bottom:22px;
+  }
+  .torn-card::after{
+    content:""; position:absolute; right:-2px; top:0; bottom:0; width:14px;
+    background:repeating-linear-gradient(-45deg, var(--parchment) 0 6px, transparent 6px 12px);
+  }
+
+  /* Poem */
+  .poem-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:6px 32px; }
+  .stanza{ margin:0 0 20px; font-size:16.5px; line-height:1.75; }
+  .stanza .ln{ display:block; }
+  .stanza .ln.in{ padding-left:22px; }
+  .stanza-no{ font-size:11px; letter-spacing:1px; color:var(--gold); font-weight:600; text-transform:uppercase; }
+  .poem-ornament{ text-align:center; color:var(--rust); letter-spacing:18px; margin-top:4px; }
+  @media (max-width:640px){ .poem-wrap{ grid-template-columns:1fr; } }
+
+  .stanza-note{ padding:12px 0; border-bottom:1px dashed var(--parchment-dark); }
+  .stanza-note:last-child{ border-bottom:none; }
+  .stanza-note .lbl{ font-weight:700; color:var(--rust); }
+
+  table{ width:100%; border-collapse:collapse; margin:14px 0; font-size:15px;}
+  th, td{ border:1px solid var(--parchment-dark); padding:10px 12px; text-align:left; vertical-align:top;}
+  th{ background:var(--teal); color:#fff; font-family:'Playfair Display',serif; font-weight:600;}
+  tr:nth-child(even) td{ background:#FBF6EA; }
+
+  .glossary-term{ font-weight:700; color:var(--rust); }
+  .glossary-item{ padding:10px 0; border-bottom:1px dashed var(--parchment-dark); }
+  .glossary-item:last-child{ border-bottom:none; }
+
+  .btn{
+    background:var(--rust); color:#fff; border:none; padding:12px 22px;
+    border-radius:999px; font-size:15px; cursor:pointer; font-family:'Source Serif 4',serif;
+  }
+  .btn:hover{ background:#8B3226; }
+  .btn:disabled{ opacity:0.4; cursor:not-allowed; }
+  .btn-outline{ background:transparent; color:var(--rust); border:1.5px solid var(--rust); }
+  .btn-outline:hover{ background:var(--rust); color:#fff; }
+
+  .quiz-q{ margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--parchment-dark);}
+  .quiz-options label{
+    display:block; padding:8px 12px; margin:6px 0; border:1.5px solid var(--parchment-dark);
+    border-radius:8px; cursor:pointer; transition:all .15s;
+  }
+  .quiz-options label:hover{ border-color:var(--amber); }
+  .quiz-options input{ margin-right:8px; }
+  #quiz-result{ font-family:'Playfair Display',serif; font-size:20px; color:var(--teal); margin-top:16px; }
+
+  .quiz-progress{ display:flex; gap:6px; justify-content:center; margin-bottom:20px; flex-wrap:wrap; }
+  .quiz-header-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+  .quiz-invite-btn{ font-size:13px; padding:8px 16px; white-space:nowrap; }
+  #quiz-invite-fallback{ max-width:420px; margin:0 0 14px; font-size:13px; color:var(--ink-soft); }
+  #quiz-invite-fallback textarea{
+    width:100%; min-height:60px; margin-top:6px; padding:10px; border:1px solid var(--parchment-dark);
+    border-radius:8px; font-family:'Source Serif 4',serif; font-size:13px; background:#FBF6EA;
+  }
+  .quiz-dot{ width:10px; height:10px; border-radius:50%; background:var(--parchment-dark); transition:all .2s; }
+  .quiz-dot.done{ background:var(--gold); }
+  .quiz-dot.active{ background:var(--rust); transform:scale(1.3); }
+  .quiz-nav{ display:flex; justify-content:space-between; margin-top:18px; }
+  .quiz-final-actions{ display:flex; gap:12px; margin-top:14px; flex-wrap:wrap; }
+  #share-fallback{ margin-top:12px; font-size:13.5px; color:var(--ink-soft); }
+  #share-fallback textarea{
+    width:100%; min-height:70px; margin-top:6px; padding:10px; border:1px solid var(--parchment-dark);
+    border-radius:8px; font-family:'Source Serif 4',serif; font-size:13.5px; background:#FBF6EA;
+  }
+
+  .qa-item{ margin-bottom:14px; }
+  .qa-item .q{ font-weight:600; color:var(--rust); }
+  .qa-item .a{ margin-top:4px; color:var(--ink-soft); }
+  .qa-subhead{ font-family:'Playfair Display',serif; color:var(--teal); font-size:17px; margin:22px 0 10px; }
+
+  .ep-group{ margin-bottom:26px; }
+  .ep-tag{
+    display:inline-block; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+    background:var(--teal); color:#fff; padding:3px 10px; border-radius:999px; margin-bottom:8px;
+  }
+  .ep-marks{ float:right; color:var(--ink-soft); font-size:13px; font-style:italic; }
+  .ep-passage{
+    background:#F5F0E4; border-left:4px solid var(--gold); padding:12px 16px; margin:10px 0;
+    font-style:italic; font-size:14.5px; border-radius:4px;
+  }
+  .ep-q{ margin:10px 0 6px; }
+  .ep-options{ margin:6px 0 6px 18px; color:var(--ink-soft); font-size:14.5px; }
+  .ep-options div{ margin:2px 0; }
+  .reveal-btn{
+    background:transparent; border:1.5px solid var(--teal); color:var(--teal);
+    padding:5px 14px; border-radius:999px; font-size:13px; cursor:pointer; margin-top:6px;
+  }
+  .reveal-btn:hover{ background:var(--teal); color:#fff; }
+  .ep-answer{
+    display:none; margin-top:10px; padding:10px 14px; background:#EAF3E9;
+    border-left:4px solid #5A9A4A; border-radius:4px; font-size:14.5px; color:var(--ink);
+  }
+  .ep-answer.show{ display:block; }
+  .ep-table{ width:100%; border-collapse:collapse; font-size:14px; margin:10px 0; }
+  .ep-table td, .ep-table th{ border:1px solid var(--parchment-dark); padding:6px 10px; }
+
+  footer{ text-align:center; padding:24px; color:var(--ink-soft); font-size:13px; }
+
+  .print-btn{
+    position:fixed; bottom:20px; right:20px; z-index:60;
+    background:var(--teal); color:#fff; border:none; padding:12px 18px; border-radius:999px;
+    font-size:14px; cursor:pointer; font-family:'Source Serif 4',serif;
+    box-shadow:0 6px 16px rgba(30,110,103,0.35); display:flex; align-items:center; gap:6px;
+  }
+  .print-btn:hover{ background:#15544F; }
+
+  @media print{
+    nav.tabs, .print-btn, .reveal-btn, .quiz-nav, .quiz-progress,
+    .quiz-header-row .quiz-invite-btn, #quiz-invite-fallback, #share-fallback,
+    .quiz-final-actions, header.hero .feather-divider{ display:none !important; }
+    body{ background:#fff; }
+    .panel{ display:block !important; page-break-after:always; }
+    .card, .torn-card{ box-shadow:none; border:1px solid #ccc; }
+    .ep-answer{ display:block !important; }
+  }
+
+  @media (max-width:600px){
+    nav.tabs{ justify-content:flex-start; overflow-x:auto; flex-wrap:nowrap; }
+    nav.tabs button{ flex:0 0 auto; }
+  }
+
+  main{ max-width:760px; }
+  .back-link{ display:inline-block; margin-bottom:18px; color:var(--teal); text-decoration:none; font-size:14.5px; border:1.5px solid var(--teal); padding:7px 16px; border-radius:999px; }
+  .back-link:hover{ background:var(--teal); color:#fff; }
+  .name-row{ margin-bottom:18px; }
+  .name-row label{ font-size:14px; color:var(--ink-soft); display:block; margin-bottom:6px; }
+  .name-row input{ width:100%; padding:10px 14px; border:1.5px solid var(--parchment-dark); border-radius:10px; font-family:'Source Serif 4',serif; font-size:15px; background:#FBF6EA; }
+  .name-row input:focus{ outline:none; border-color:var(--amber); }
+  .q-counter{ font-size:13px; color:var(--gold); letter-spacing:1px; text-transform:uppercase; font-weight:600; margin-bottom:6px; }
+  .score-ring{ text-align:center; margin:10px 0 6px; }
+  .score-big{ font-family:'Playfair Display',serif; font-size:54px; color:var(--rust); line-height:1; }
+  .score-msg{ font-style:italic; color:var(--ink-soft); margin-top:6px; }
+  .review-item{ padding:12px 0; border-bottom:1px dashed var(--parchment-dark); font-size:14.5px; }
+  .review-item:last-child{ border-bottom:none; }
+  .review-q{ font-weight:600; margin-bottom:4px; }
+  .r-ok{ color:#3E7D32; } .r-bad{ color:var(--rust); } .r-skip{ color:var(--ink-soft); }
+  #quiz-result{ text-align:center; }
+  .stu-card{ display:flex; align-items:center; gap:12px; margin-top:10px; padding:12px 14px; background:#EAF3E9; border:1.5px solid var(--leaf); border-radius:12px; }
+  .stu-av{ width:42px; height:42px; border-radius:50%; background:var(--teal); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:20px; flex-shrink:0; }
+  .stu-card b{ display:block; font-size:16px; }
+  .stu-card span{ font-size:13px; color:var(--ink-soft); }
+  .stu-msg{ margin-top:8px; font-size:14px; color:var(--ink-soft); }
+  .stu-msg.bad{ color:var(--rust); }
+  .stu-warn{ margin-top:10px; padding:10px 12px; background:#FBE9E4; border-left:4px solid var(--rust); border-radius:6px; font-size:14px; color:var(--rust); }
+  .gate{ text-align:center; padding:18px 6px; }
+  .gate .gt{ font-family:'Playfair Display',serif; font-size:22px; color:var(--rust); }
+  .gate .gc{ font-size:28px; color:var(--teal); font-weight:600; margin-top:6px; font-variant-numeric:tabular-nums; }
+  .save-status{ margin:14px auto 0; max-width:420px; padding:9px 12px; border-radius:10px; font-size:14px; background:#F5F0E4; color:var(--ink-soft); }
+  .save-status.ok{ background:#EAF3E9; color:#3E7D32; }
+  .save-status.bad{ background:#FBE9E4; color:var(--rust); }
+  .save-status button{ border:none; background:none; color:inherit; font:inherit; font-weight:700; text-decoration:underline; cursor:pointer; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">Class X · English · Unit 2 — Quiz</div>
+  <h1 class="title">The Seedling</h1>
+  <p class="subtitle">Paul Laurence Dunbar</p>
+  <p class="byline">20 Questions · Test Your Understanding</p>
+  <svg class="feather-divider" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10,34 Q35,26 60,34 Q85,26 110,34" stroke="#C9932F" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M60,34 L60,12" stroke="#4E8A3A" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M60,22 Q48,20 46,10 Q58,12 60,22 Z" fill="#4E8A3A"/>
+    <path d="M60,17 Q72,15 75,5 Q62,7 60,17 Z" fill="#6FA85A"/>
+    <circle cx="60" cy="34" r="3" fill="#A63D2F"/>
+  </svg>
+</header>
+
+<main>
+  <a class="back-link" href="english-the-seedling.html">← Study Portal</a>
+
+  <section class="panel active" id="quiz">
+    <div class="card">
+      <div class="quiz-header-row">
+        <h2 class="section-title" style="border:none; margin:0; padding:0;">Quiz Time</h2>
+        <button id="quiz-invite-share" class="btn btn-outline quiz-invite-btn" type="button">↗ Share Quiz</button>
+      </div>
+      <div id="quiz-invite-fallback"></div>
+      <div id="gate-box" class="gate" style="display:none;"></div>
+      <div class="name-row" id="name-row">
+        <label for="adm-no">Admission number</label>
+        <input id="adm-no" type="text" inputmode="numeric" autocomplete="off" placeholder="Type your admission number">
+        <div id="stu-info"></div>
+        <button id="start-btn" class="btn" type="button" disabled style="width:100%; margin-top:14px;">Start Quiz</button>
+      </div>
+      <div id="quiz-progress" class="quiz-progress" style="display:none;"></div>
+      <div id="quiz-active" style="display:none;">
+        <div class="q-counter" id="q-counter"></div>
+        <div id="quiz-question-wrap" class="quiz-q"></div>
+        <div class="quiz-nav">
+          <button id="quiz-prev" class="btn btn-outline" type="button">Previous</button>
+          <button id="quiz-next" class="btn" type="button">Next</button>
+        </div>
+      </div>
+      <div id="quiz-final" style="display:none;">
+        <div id="quiz-result">
+          <div class="score-ring"><div class="score-big" id="score-big"></div></div>
+          <div id="score-line"></div>
+          <div class="score-msg" id="score-msg"></div>
+          <div class="save-status" id="save-status"></div>
+        </div>
+        <div class="quiz-final-actions" style="justify-content:center;">
+          <button id="quiz-restart" class="btn btn-outline" type="button">Next Student</button>
+          <button id="quiz-share" class="btn" type="button">Share Result</button>
+        </div>
+        <div id="share-fallback"></div>
+      </div>
+    </div>
+
+    <div class="card" id="review-card" style="display:none;">
+      <h2 class="section-title">Answer Review</h2>
+      <div id="review-list"></div>
+    </div>
+  </section>
+</main>
+
+<footer>Study Portal · Class X English · Unit 2 — The Seedling · Quiz</footer>
+
+<script>
+/* ---- Daily exam settings ---- */
+const QUIZ_OPEN_HOUR = 21;            /* 21 = opens 9 PM (device clock) · -1 = always open */
+const SUBJECT   = "English";
+const CHAPTER   = "The Seedling";
+const QUIZ_NAME = "The Seedling | English Unit 2";
+const SUPABASE_URL = "https://wrzssivgxituefcwobbr.supabase.co";
+const SUPABASE_KEY = "sb_publishable_3mi5iJCxekZfiyXojUFtQg_gDASyEWm";
+let sb = null;
+try{ sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); }catch(e){ console.error(e); }
+let student = null;
+
+const quizData = [
+  { q: "1. Who wrote the poem 'The Seedling'?",
+    options: ["Edgar A. Guest", "Paul Laurence Dunbar", "William Wordsworth", "Robert Frost"], answer: 1 },
+  { q: "2. Where was the seedling lying at the beginning of the poem?",
+    options: ["In a flower pot", "In its darksome bed", "On a rock", "In a river"], answer: 1 },
+  { q: "3. What did the seedling say about itself?",
+    options: ["It was the strongest plant", "It was not so very robust", "It was afraid of the sun", "It wanted to sleep"], answer: 1 },
+  { q: "4. What did the seedling promise to do?",
+    options: ["Grow faster than others", "Do the best it can", "Wait for the rain", "Stay underground"], answer: 1 },
+  { q: "5. What did the seedling push up first into the light of day?",
+    options: ["A flower", "A root", "A little leaflet", "A stem"], answer: 2 },
+  { q: "6. Why did the leaflet come out?",
+    options: ["To drink rain", "To examine the surroundings and show the rest the way", "To find the sun", "To escape insects"], answer: 1 },
+  { q: "7. Whom did the leaflet call after it liked the prospect?",
+    options: ["Its sister, Root", "Its brother, Stem", "The Sun", "The Clouds"], answer: 1 },
+  { q: "8. How many other leaflets followed?",
+    options: ["One", "Two", "Three", "Four"], answer: 1 },
+  { q: "9. What did the haste and hurry make the seedling do?",
+    options: ["Sleep and dream", "Sweat and pant", "Cry and weep", "Stop and rest"], answer: 1 },
+  { q: "10. What helped the little plant to keep growing?",
+    options: ["Wind and snow", "Sunshine and showers", "Moon and stars", "Soil and stones"], answer: 1 },
+  { q: "11. What did the plant finally become?",
+    options: ["A tree", "A fruit", "A flower", "A seed"], answer: 2 },
+  { q: "12. Whom does the poet address as 'Little folks'?",
+    options: ["Farmers", "Children", "Plants", "Birds"], answer: 1 },
+  { q: "13. According to the poet, every child must share —",
+    options: ["life's pleasures", "life's labour", "life's riches", "life's sorrows"], answer: 1 },
+  { q: "14. What kind of hours will the sun and showers help us through?",
+    options: ["Happy, joyful hours", "Lonesome, struggling hours", "Busy, noisy hours", "Early morning hours"], answer: 1 },
+  { q: "15. What are 'Virtue's fair, unfading flowers'?",
+    options: ["Real flowers in a garden", "Good qualities that last forever", "Flowers that bloom at night", "Plastic flowers"], answer: 1 },
+  { q: "16. What is the rhyme scheme of the poem?",
+    options: ["aabb", "abab", "abcb", "abba"], answer: 2 },
+  { q: "17. 'The leaflet liked the prospect' is an example of —",
+    options: ["Simile", "Personification", "Hyperbole", "Onomatopoeia"], answer: 1 },
+  { q: "18. 'Haste and hurry' is an example of —",
+    options: ["Alliteration", "Metaphor", "Irony", "Oxymoron"], answer: 0 },
+  { q: "19. What is the tone of the poem?",
+    options: ["Sad and gloomy", "Angry", "Optimistic and encouraging", "Humorous and mocking"], answer: 2 },
+  { q: "20. What was the title of Dunbar's first book of poems?",
+    options: ["Leaves of Grass", "Oak and Ivy", "The Tatler", "Our Martyred Soldiers"], answer: 1 }
+];
+
+let currentQ = 0;
+const userAnswers = new Array(quizData.length).fill(null);
+
+const progressEl = document.getElementById('quiz-progress');
+const qWrap = document.getElementById('quiz-question-wrap');
+const prevBtn = document.getElementById('quiz-prev');
+const nextBtn = document.getElementById('quiz-next');
+const activeBlock = document.getElementById('quiz-active');
+const finalBlock = document.getElementById('quiz-final');
+
+const pageUrl = window.location.origin + window.location.pathname;
+const portalUrl = pageUrl.replace('english-the-seedling-quiz.html', 'english-the-seedling.html');
+
+function stripNum(q){ return q.replace(/^\d+\.\s*/, ''); }
+
+function buildProgress(){
+  progressEl.innerHTML = '';
+  quizData.forEach((_, i)=>{
+    const dot = document.createElement('div');
+    dot.className = 'quiz-dot';
+    dot.id = `dot-${i}`;
+    dot.style.cursor = 'pointer';
+    dot.title = `Question ${i+1}`;
+    dot.addEventListener('click', ()=>{ currentQ = i; renderQuestion(); });
+    progressEl.appendChild(dot);
+  });
+}
+
+function updateProgress(){
+  quizData.forEach((_, i)=>{
+    const dot = document.getElementById(`dot-${i}`);
+    dot.classList.remove('active','done');
+    if(i === currentQ) dot.classList.add('active');
+    else if(userAnswers[i] !== null) dot.classList.add('done');
+  });
+}
+
+function renderQuestion(){
+  const item = quizData[currentQ];
+  document.getElementById('q-counter').textContent = `Question ${currentQ+1} of ${quizData.length}`;
+  const optsHtml = item.options.map((opt, j)=>{
+    const checked = userAnswers[currentQ] === j ? 'checked' : '';
+    return `<label><input type="radio" name="qcurrent" value="${j}" ${checked}> ${opt}</label>`;
+  }).join('');
+  qWrap.innerHTML = `<div><strong>${item.q}</strong></div><div class="quiz-options">${optsHtml}</div>`;
+
+  qWrap.querySelectorAll('input[name="qcurrent"]').forEach(input=>{
+    input.addEventListener('change', (e)=>{
+      userAnswers[currentQ] = parseInt(e.target.value);
+      updateProgress();
+    });
+  });
+
+  prevBtn.disabled = currentQ === 0;
+  nextBtn.textContent = currentQ === quizData.length - 1 ? 'Finish' : 'Next';
+  updateProgress();
+}
+
+prevBtn.addEventListener('click', ()=>{
+  if(currentQ > 0){ currentQ--; renderQuestion(); }
+});
+
+nextBtn.addEventListener('click', ()=>{
+  if(currentQ < quizData.length - 1){
+    currentQ++;
+    renderQuestion();
+  } else {
+    const unanswered = userAnswers.filter(a => a === null).length;
+    if(unanswered > 0 && !confirm(`You have ${unanswered} unanswered question(s). Finish anyway?`)) return;
+    finishQuiz();
+  }
+});
+
+function finishQuiz(){
+  let score = 0;
+  quizData.forEach((item, i)=>{ if(userAnswers[i] === item.answer) score++; });
+  activeBlock.style.display = 'none';
+  progressEl.style.display = 'none';
+  document.getElementById('name-row').style.display = 'none';
+  finalBlock.style.display = 'block';
+
+  const name = (student ? student.name : '');
+  const pct = Math.round(score / quizData.length * 100);
+  document.getElementById('score-big').textContent = `${score}/${quizData.length}`;
+  document.getElementById('score-line').textContent = (name ? name + ', you' : 'You') + ` scored ${pct}%`;
+  document.getElementById('score-msg').textContent =
+    pct >= 90 ? 'Outstanding! Like the seedling, you have bloomed into a flower.' :
+    pct >= 70 ? 'Very good! Keep growing — a little more effort and you will bloom.' :
+    pct >= 50 ? 'Good try! Revise the poem once more and do the best you can.' :
+                'Don\'t give up! "I\'ll do the best I can" — read the poem again and retake the quiz.';
+  document.getElementById('share-fallback').innerHTML = '';
+  document.getElementById('quiz-share').dataset.score = score;
+  saveResult(score);
+
+  const list = document.getElementById('review-list');
+  list.innerHTML = quizData.map((item, i)=>{
+    const ua = userAnswers[i];
+    const correct = item.options[item.answer];
+    let status;
+    if(ua === null) status = `<div class="r-skip">✗ Not answered · Correct: <strong>${correct}</strong></div>`;
+    else if(ua === item.answer) status = `<div class="r-ok">✓ ${correct}</div>`;
+    else status = `<div class="r-bad">✗ Your answer: ${item.options[ua]}</div><div class="r-ok">Correct: <strong>${correct}</strong></div>`;
+    return `<div class="review-item"><div class="review-q">${i+1}. ${stripNum(item.q)}</div>${status}</div>`;
+  }).join('');
+  document.getElementById('review-card').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+document.getElementById('quiz-restart').addEventListener('click', ()=>{
+  currentQ = 0;
+  userAnswers.fill(null);
+  student = null; foundStu = null; blocked = false;
+  admInput.value = ''; stuInfo.innerHTML = ''; startBtn.disabled = true;
+  activeBlock.style.display = 'none';
+  progressEl.style.display = 'none';
+  document.getElementById('name-row').style.display = 'block';
+  finalBlock.style.display = 'none';
+  document.getElementById('review-card').style.display = 'none';
+  document.getElementById('share-fallback').innerHTML = '';
+  renderQuestion();
+});
+
+async function shareOrCopy(data, fallbackEl, copiedMsg){
+  if(navigator.share){
+    try{ await navigator.share(data); return; }catch(err){ if(err && err.name === 'AbortError') return; }
+  }
+  const full = `${data.text}\n${data.url}`;
+  try{
+    await navigator.clipboard.writeText(full);
+    fallbackEl.innerHTML = `${copiedMsg}<br><textarea readonly>${full}</textarea>`;
+  }catch(err){
+    fallbackEl.innerHTML = `<textarea readonly>${full}</textarea>`;
+  }
+}
+
+document.getElementById('quiz-share').addEventListener('click', ()=>{
+  const score = document.getElementById('quiz-share').dataset.score;
+  const name = (student ? student.name : '');
+  const who = name ? `${name} scored` : 'I scored';
+  shareOrCopy(
+    { title: 'The Seedling Quiz Result', text: `${who} ${score}/${quizData.length} on "The Seedling" quiz! Try it yourself.`, url: pageUrl },
+    document.getElementById('share-fallback'),
+    'Result copied to clipboard! You can paste it anywhere.'
+  );
+});
+
+document.getElementById('quiz-invite-share').addEventListener('click', ()=>{
+  shareOrCopy(
+    { title: 'The Seedling Quiz', text: 'Take this quiz on "The Seedling" (Class X English, Unit 2) and test what you know!', url: pageUrl },
+    document.getElementById('quiz-invite-fallback'),
+    'Quiz link copied! Paste it to invite others.'
+  );
+});
+
+document.querySelector('.back-link').href = portalUrl;
+
+/* ---- Admission number lookup ---- */
+const admInput = document.getElementById('adm-no');
+const stuInfo  = document.getElementById('stu-info');
+const startBtn = document.getElementById('start-btn');
+let foundStu = null, blocked = false, seq = 0, lookTimer = null;
+
+function esc(v){ return String(v==null?'':v).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function showStudent(){
+  const s = foundStu;
+  const meta = [s.adm, s.cls ? 'Class '+s.cls : '', s.centre].filter(Boolean).map(esc).join(' · ');
+  stuInfo.innerHTML = `<div class="stu-card"><div class="stu-av">${esc((s.name||'?').trim().charAt(0).toUpperCase())}</div><div><b>${esc(s.name)}</b><span>${meta}</span></div></div>` +
+    (blocked ? `<div class="stu-warn">You have already written this quiz today. Only one attempt is allowed.</div>` : '');
+  startBtn.disabled = blocked;
+}
+admInput.addEventListener('input', ()=>{
+  const v = admInput.value.replace(/\D/g,''); if(v !== admInput.value) admInput.value = v;
+  foundStu = null; blocked = false; startBtn.disabled = true; clearTimeout(lookTimer); const my = ++seq;
+  if(!v){ stuInfo.innerHTML = ''; return; }
+  if(!sb){ stuInfo.innerHTML = '<div class="stu-msg bad">Could not connect. Check your internet and reload the page.</div>'; return; }
+  stuInfo.innerHTML = '<div class="stu-msg">Searching…</div>';
+  lookTimer = setTimeout(async ()=>{
+    try{
+      const { data, error } = await sb.rpc('verify_student', { p_admission_no: Number(v) });
+      if(my !== seq) return;
+      if(error) throw error;
+      const s = Array.isArray(data) ? data[0] : data;
+      if(!s){ stuInfo.innerHTML = '<div class="stu-msg bad">No student found with this number. Please check.</div>'; return; }
+      foundStu = { adm:String(s.admission_no ?? v), name:s.student_name || '', cls:s['class'] || '', centre:s.centre || '' };
+      showStudent(); startBtn.disabled = true;
+      try{
+        const r = await sb.rpc('has_attempted', { p_admission_no: Number(foundStu.adm), p_quiz_name: QUIZ_NAME });
+        if(my !== seq) return;
+        let d = r && r.data; if(Array.isArray(d)) d = d[0]; if(d && typeof d === 'object') d = d.has_attempted;
+        blocked = (!r.error && d === true);
+      }catch(e){ /* optional check not installed */ }
+      if(my === seq) showStudent();
+    }catch(err){
+      console.error(err);
+      if(my === seq) stuInfo.innerHTML = '<div class="stu-msg bad">Could not connect. Check your internet and try again.</div>';
+    }
+  }, 450);
+});
+admInput.addEventListener('keydown', e=>{ if(e.key === 'Enter' && !startBtn.disabled) startBtn.click(); });
+startBtn.addEventListener('click', ()=>{
+  if(!foundStu || blocked) return;
+  student = foundStu;
+  document.getElementById('name-row').style.display = 'none';
+  progressEl.style.display = 'flex';
+  activeBlock.style.display = 'block';
+  currentQ = 0; userAnswers.fill(null);
+  renderQuestion();
+});
+
+/* ---- Save score to Supabase ---- */
+async function saveResult(score){
+  const el = document.getElementById('save-status');
+  el.className = 'save-status'; el.textContent = 'Saving your score…';
+  const answers = quizData.map((item, i)=>({ question_no:i+1, selected_answer:userAnswers[i], correct_answer:item.answer, is_correct:userAnswers[i] === item.answer }));
+  try{
+    const { data, error } = await sb.rpc('submit_quiz', {
+      p_admission_no: Number(student.adm), p_subject: SUBJECT, p_chapter: CHAPTER, p_quiz_name: QUIZ_NAME,
+      p_score: score, p_total: quizData.length, p_percentage: Math.round(score / quizData.length * 100), p_answers: answers
+    });
+    if(error) throw error;
+    const r = Array.isArray(data) ? data[0] : data;
+    if(r && r.already_submitted){ el.className = 'save-status bad'; el.textContent = '⚠ A result for this admission number already exists today — this attempt was not saved.'; }
+    else { el.className = 'save-status ok'; el.textContent = '✓ Score saved'; }
+  }catch(err){
+    console.error(err);
+    el.className = 'save-status bad';
+    el.innerHTML = '⚠ Could not save the score. <button type="button" id="save-retry">Try again</button>';
+    document.getElementById('save-retry').addEventListener('click', ()=>saveResult(score));
+  }
+}
+
+/* ---- Time gate ---- */
+const gateBox = document.getElementById('gate-box');
+function isOpen(){ return QUIZ_OPEN_HOUR < 0 || new Date().getHours() >= QUIZ_OPEN_HOUR; }
+function fmtHour(h){ return ((h % 12) || 12) + ':00 ' + (h >= 12 ? 'PM' : 'AM'); }
+function applyGate(){
+  const open = isOpen();
+  if(!open && !student){
+    document.getElementById('name-row').style.display = 'none';
+    gateBox.style.display = 'block';
+    gateBox.innerHTML = `<div class="gt">Today's quiz opens at ${fmtHour(QUIZ_OPEN_HOUR)}</div><div class="stu-msg">Current time</div><div class="gc">${new Date().toLocaleTimeString('en-IN')}</div>`;
+  } else if(gateBox.style.display !== 'none'){
+    gateBox.style.display = 'none';
+    if(!student) document.getElementById('name-row').style.display = 'block';
+  }
+}
+setInterval(applyGate, 1000);
+
+buildProgress();
+applyGate();
+</script>
+</body>
+</html>
