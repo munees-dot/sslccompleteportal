@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Probability Quiz – Class X Maths</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1c2541;--muted:#5b6784;--bg:#f4f7fc;--line:#dfe6f2;--brand:#1f4fd8;--brand2:#0e2a8a;--accent:#ff7a1a;--green:#16a34a;--red:#dc2626;--soft:#eaf0ff;--sun:#fff4d6;--mint:#e4f8ee;--pink:#fde7f1}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Noto Sans Malayalam','Poppins',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:16px}
+body.lang-ml .en{display:none}body.lang-en .ml{display:none}
+header{background:linear-gradient(120deg,var(--brand2),var(--brand) 60%,#3b82f6);color:#fff;position:sticky;top:0;z-index:20}
+.hw{max-width:760px;margin:auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.ht{flex:1}.ht b{display:block;font-size:17px;line-height:1.3}.ht small{opacity:.85;font-family:Poppins,sans-serif;font-size:12px}
+.lang{display:flex;border:1.5px solid rgba(255,255,255,.7);border-radius:20px;overflow:hidden;font-family:Poppins,sans-serif;font-size:13px}
+.lang button{background:transparent;color:#fff;border:0;padding:6px 14px;cursor:pointer;font:inherit}
+body.lang-ml .lang .bml,body.lang-en .lang .ben{background:#fff;color:var(--brand2);font-weight:600}
+main{max-width:760px;margin:auto;padding:16px 16px 60px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin:14px 0;box-shadow:0 2px 10px rgba(30,60,120,.06)}
+h2{margin:4px 0 8px;color:var(--brand2);font-size:23px;line-height:1.35}
+h3{margin:0 0 8px;color:var(--brand2)}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin:0 2px;font-family:Poppins,sans-serif}
+.fr .n{border-bottom:1.5px solid currentColor;padding:0 4px 1px}.fr .d{padding:1px 4px 0}
+.btn{font-family:Poppins,sans-serif;background:var(--brand);color:#fff;border:0;padding:10px 20px;border-radius:10px;cursor:pointer;font-size:15px;font-weight:500;text-decoration:none;display:inline-block}
+.btn:hover{background:var(--brand2)}.btn.alt{background:#fff;color:var(--brand2);border:1.5px solid var(--brand)}.btn.grn{background:var(--green)}.btn.org{background:var(--accent)}
+.btn[disabled]{opacity:.4;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+input[type=text]{font:inherit;font-family:Poppins,'Noto Sans Malayalam',sans-serif;padding:9px 12px;border:1.5px solid #b9c6e0;border-radius:8px;width:100%;max-width:320px}
+label{font-family:Poppins,sans-serif;font-size:13px;color:var(--muted);display:block}
+.bar{background:#e4eaf6;border-radius:8px;height:12px;overflow:hidden;margin:6px 0 10px}.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--brand),#38bdf8);transition:width .3s}
+.qno{font-family:Poppins,sans-serif;font-size:13px;color:var(--muted);display:flex;justify-content:space-between}
+.qtext{font-size:19px;margin:8px 0 14px;font-weight:500}
+.opt{display:block;width:100%;text-align:left;font:inherit;background:#fff;border:2px solid #c9d4ea;border-radius:12px;padding:11px 16px;margin:9px 0;cursor:pointer;font-size:17px}
+.opt:hover{background:var(--soft)}.opt.sel{border-color:var(--brand);background:#e3ecff;font-weight:600}
+.opt .L{display:inline-block;width:28px;font-family:Poppins,sans-serif;font-weight:700;color:var(--brand2)}
+.opt.right{border-color:var(--green);background:#dcf7e6}.opt.wrong{border-color:var(--red);background:#fde3e3}
+.opt.static{cursor:default}.opt.static:hover{background:inherit}.opt.right.static:hover{background:#dcf7e6}
+.dots{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.dot{width:32px;height:32px;border-radius:50%;border:2px solid #c9d4ea;background:#fff;font-family:Poppins,sans-serif;font-size:12px;cursor:pointer;color:var(--muted)}
+.dot.done{background:#cfe0ff;border-color:var(--brand);color:var(--brand2)}.dot.cur{outline:3px solid var(--accent);outline-offset:1px}
+.score{font-family:Poppins,sans-serif;font-size:56px;font-weight:700;color:var(--brand);line-height:1.1}
+.note{background:var(--mint);border-left:5px solid var(--green);padding:8px 14px;border-radius:10px;margin:8px 0}
+.warn{background:var(--pink);border-left:5px solid #e0368b;padding:8px 14px;border-radius:10px;margin:8px 0}
+.tag{display:inline-block;font-family:Poppins,sans-serif;font-size:12px;padding:2px 10px;border-radius:12px;background:#ffe9d6;color:#9a4300;font-weight:600;margin-left:6px}
+.pill{font-family:Poppins,sans-serif;font-size:12px;font-weight:600;padding:2px 9px;border-radius:10px;margin-left:8px}
+.pill.g{background:#dcf7e6;color:#166534}.pill.r{background:#fde3e3;color:#991b1b}
+.rv{border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:14px 0;background:#fff}
+.rv .qh{display:flex;gap:10px}.rv .qn{flex:0 0 auto;background:var(--brand);color:#fff;border-radius:50%;width:30px;height:30px;text-align:center;font-family:Poppins,sans-serif;font-size:13px;line-height:30px}
+.rv.ok .qn{background:var(--green)}.rv.bad .qn{background:var(--red)}
+.hide{display:none}
+@media(max-width:560px){.qtext{font-size:17px}.opt{font-size:16px}}
+</style>
+</head>
+<body class="lang-ml">
+<header><div class="hw"><div class="ht"><b><span class="ml">സാധ്യതകളുടെ ഗണിതം – ക്വിസ്</span><span class="en">Mathematics of Chances – Quiz</span></b><small>Class X · Mathematics Part I · Chapter 4 · 20 marks</small></div>
+<div class="lang"><button class="bml" onclick="setLang('ml')">മലയാളം</button><button class="ben" onclick="setLang('en')">English</button></div></div></header>
+<main id="app"></main>
+<script>
+function fx(s){return s.replace(/\{([^{}\/]+)\/([^{}]+)\}/g,'<span class="fr"><span class="n">$1</span><span class="d">$2</span></span>');}
+function B(m,e){return '<span class="ml">'+fx(m)+'</span><span class="en">'+fx(e)+'</span>';}
+function esc(t){return (t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function setLang(l){document.body.className='lang-'+l;document.documentElement.lang=l;}
+function optTxt(o){return typeof o==='string'?B(o,o):B(o[0],o[1]);}
+var TOPICS={a:['അടിസ്ഥാനാശയവും താരതമ്യവും','Basic idea & comparing'],b:['സംഖ്യാസാധ്യത','Probability with numbers'],c:['ജ്യാമിതീയസാധ്യത','Geometric probability'],d:['ജോടികൾ','Pairs & "at least one"']};
+var QZ=[
+{t:'a',q:['ഒരു ചെപ്പിൽ 3 ചുവന്ന മുത്തും 7 നീല മുത്തുമുണ്ട്. നോക്കാതെ ഒരു മുത്തെടുത്താൽ അത് ചുവപ്പാകാനുള്ള സാധ്യത എത്ര?','A bag has 3 red and 7 blue beads. One bead is taken without looking. What is the chance that it is red?'],o:['{3/7}','{3/10}','{7/10}','{1/3}'],a:1,e:['ചുവപ്പ് 3, ആകെ 3 + 7 = 10 → {3/10}.','Red = 3, total = 3 + 7 = 10 → {3/10}.']},
+{t:'a',q:['ചെപ്പ് A യിൽ 6 കറുത്തതും 5 വെളുത്തതും, ചെപ്പ് B യിൽ 5 കറുത്തതും 4 വെളുത്തതുമായ മുത്തുകളുണ്ട്. കറുത്ത മുത്ത് കിട്ടാൻ കൂടുതൽ സാധ്യത ഏത് ചെപ്പിൽ നിന്നെടുക്കുമ്പോൾ?','Bag A has 6 black and 5 white beads; bag B has 5 black and 4 white. From which bag is a black bead more likely?'],o:[['ചെപ്പ് A','Bag A'],['ചെപ്പ് B','Bag B'],['രണ്ടിലും തുല്യം','Equal in both'],['പറയാൻ കഴിയില്ല','Cannot say']],a:1,e:['A: {6/11}, B: {5/9}. 6×9 = 54 , 5×11 = 55 → {5/9} വലുത്.','A: {6/11}, B: {5/9}. 6×9 = 54 , 5×11 = 55 → {5/9} is bigger.']},
+{t:'a',q:['മുകളിലെ ചെപ്പ് B യിൽ (5 കറുപ്പ്, 4 വെളുപ്പ്) നിന്ന് വെളുത്ത മുത്ത് കിട്ടാനുള്ള സാധ്യത?','From bag B above (5 black, 4 white), what is the chance of a white bead?'],o:['{5/9}','{4/5}','{4/9}','{1/9}'],a:2,e:['വെളുപ്പ് 4, ആകെ 9 → {4/9}.','White = 4, total = 9 → {4/9}.']},
+{t:'b',q:['1 മുതൽ 25 വരെ സംഖ്യകളെഴുതിയ കടലാസുകളിൽ നിന്ന് ഒന്നെടുത്താൽ അത് ഇരട്ടസംഖ്യയാകാനുള്ള സാധ്യത?','One slip is drawn from slips numbered 1 to 25. Chance that it is an even number?'],o:['{13/25}','{12/25}','{1/2}','{12/13}'],a:1,e:['2, 4, …, 24 → 12 ഇരട്ടസംഖ്യകൾ → {12/25}.','2, 4, …, 24 → 12 even numbers → {12/25}.']},
+{t:'b',q:['1, 2, 3, …, 100 ൽ നിന്ന് ഒരു സംഖ്യയെടുത്താൽ അത് രണ്ടക്കസംഖ്യയാകാനുള്ള സാധ്യത?','One number is taken from 1, 2, 3, …, 100. Chance that it is a two-digit number?'],o:['{1/10}','{99/100}','{9/10}','{89/100}'],a:2,e:['രണ്ടക്കസംഖ്യകൾ 10 മുതൽ 99 വരെ = 90 → {90/100} = {9/10}.','Two-digit numbers: 10 to 99 = 90 → {90/100} = {9/10}.']},
+{t:'b',q:['1, 2, 3, …, 10 ൽ നിന്ന് ഒന്നെടുത്താൽ അത് അഭാജ്യസംഖ്യയാകാനുള്ള സാധ്യത?','One number is taken from 1, 2, 3, …, 10. Chance that it is a prime number?'],o:['{2/5}','{1/2}','{3/10}','{1/5}'],a:0,e:['2, 3, 5, 7 → 4 → {4/10} = {2/5}.','2, 3, 5, 7 → 4 → {4/10} = {2/5}.']},
+{t:'b',q:['1000 = 2³ × 5³ ആണ്. 1000 ന് ആകെ എത്ര ഘടകങ്ങളുണ്ട്?','1000 = 2³ × 5³. How many factors does 1000 have in all?'],o:['6','8','12','16'],a:3,e:['(3 + 1) × (3 + 1) = 16.','(3 + 1) × (3 + 1) = 16.']},
+{t:'b',q:['ഒരു സാധ്യത {2/125} ആണ്. ഇതിനെ ശതമാനമായി എഴുതിയാൽ?','A probability is {2/125}. Written as a percentage it is:'],o:['12.5%','16%','1.6%','0.16%'],a:2,e:['{2/125} = 0.016 ; 0.016 × 100 = 1.6%.','{2/125} = 0.016 ; 0.016 × 100 = 1.6%.']},
+{t:'b',q:['എല്ലാ മൂന്നക്കസംഖ്യകളും ഓരോ കടലാസിലെഴുതി ഒന്നെടുത്താൽ അത് ഇരുവഴി (palindrome) സംഖ്യയാകാനുള്ള സാധ്യത?','All three-digit numbers are written on slips and one is drawn. Chance that it is a palindrome (reads the same both ways)?'],o:['{1/100}','{9/100}','{1/9}','{1/10}'],a:3,e:['ഇരുവഴി സംഖ്യകൾ 9 × 10 = 90 ; മൂന്നക്കസംഖ്യകൾ 900 → {90/900} = {1/10}.','Palindromes: 9 × 10 = 90 ; three-digit numbers: 900 → {90/900} = {1/10}.']},
+{t:'b',q:['രണ്ടക്കസംഖ്യകളിൽ നിന്ന് ഒന്നെടുത്താൽ അത് പൂർണ്ണവർഗ്ഗമാകാനുള്ള സാധ്യത?','One number is taken from the two-digit numbers. Chance that it is a perfect square?'],o:['{1/10}','{1/15}','{1/9}','{6/100}'],a:1,e:['16, 25, 36, 49, 64, 81 → 6 ; ആകെ 90 → {6/90} = {1/15}.','16, 25, 36, 49, 64, 81 → 6 ; total 90 → {6/90} = {1/15}.']},
+{t:'c',q:['8 തുല്യ ഭാഗങ്ങളുള്ള ഒരു വട്ടത്തിൽ 3 ഭാഗം മഞ്ഞയാണ്. കറക്കി നിർത്തുമ്പോൾ അമ്പടയാളം മഞ്ഞയ്ക്ക് നേരെ വരാനുള്ള സാധ്യത?','A disc has 8 equal parts and 3 of them are yellow. Chance that the arrow stops on yellow?'],o:['{3/5}','{5/8}','{1/3}','{3/8}'],a:3,e:['3 അനുകൂലഭാഗം, ആകെ 8 → {3/8}.','3 favourable parts out of 8 → {3/8}.']},
+{t:'c',q:['ഒരു ചതുരത്തിനകത്ത്, ചതുരത്തിന്റെ അതേ പാദവും അതേ ഉയരവുമുള്ള ഒരു ത്രികോണം വരച്ചിരിക്കുന്നു. ചതുരത്തിൽ കണ്ണടച്ച് കുത്തിട്ടാൽ അത് ത്രികോണത്തിനകത്താകാനുള്ള സാധ്യത?','A triangle with the same base and height as a rectangle is drawn inside it. A dot is dropped blindly on the rectangle. Chance that it lands inside the triangle?'],o:['{1/3}','{1/4}','{1/2}','{2/3}'],a:2,e:['ത്രികോണത്തിന്റെ പരപ്പളവ് ചതുരത്തിന്റെ പകുതി → {1/2}.','Area of the triangle is half the area of the rectangle → {1/2}.']},
+{t:'c',q:['ഒരു സമചതുരത്തിന്റെ വശങ്ങളുടെ മധ്യബിന്ദുക്കൾ യോജിപ്പിച്ച് ഒരു സമചതുരം വരച്ചു. വലിയ സമചതുരത്തിൽ കുത്തിട്ടാൽ അത് ചെറിയ സമചതുരത്തിനകത്താകാനുള്ള സാധ്യത?','A square is drawn by joining the midpoints of the sides of a square. A dot is dropped on the big square. Chance that it lands inside the small square?'],o:['{1/2}','{1/4}','{1/3}','{3/4}'],a:0,e:['ചെറിയ സമചതുരത്തിന്റെ പരപ്പളവ് വലിയതിന്റെ പകുതിയാണ് → {1/2}.','The inner square has half the area of the outer one → {1/2}.']},
+{t:'c',q:['ഒരു സമചതുരത്തിനകത്ത് കൃത്യമായി ചേർന്നിരിക്കുന്ന ഒരു വൃത്തം വരച്ചിരിക്കുന്നു. സമചതുരത്തിൽ കുത്തിട്ടാൽ വൃത്തത്തിനകത്താകാനുള്ള സാധ്യത?','A circle fits exactly inside a square. A dot is dropped on the square. Chance that it lands inside the circle?'],o:['{1/2}','{π/4}','{4/π}','{2/π}'],a:1,e:['ആരം r → വൃത്തം πr², സമചതുരം (2r)² = 4r² → {π/4}.','Radius r → circle πr², square (2r)² = 4r² → {π/4}.']},
+{t:'d',q:['ജോണിക്ക് ചുവപ്പ്, പച്ച, നീല നിറങ്ങളിൽ 3 ഷർട്ടുകളും നീല, പച്ച നിറങ്ങളിൽ 2 പാന്റ്സുകളുമുണ്ട്. ഒരു ഷർട്ടും ഒരു പാന്റ്സുമെടുത്താൽ രണ്ടും ഒരേ നിറമാകാനുള്ള സാധ്യത?','Johnny has red, green and blue shirts and blue and green trousers. He picks one shirt and one pair of trousers. Chance that both are the same colour?'],o:['{1/6}','{1/2}','{1/3}','{2/3}'],a:2,e:['ആകെ 3 × 2 = 6 ; ഒരേ നിറം (പച്ച-പച്ച, നീല-നീല) 2 → {2/6} = {1/3}.','Total 3 × 2 = 6 ; same colour (green-green, blue-blue) 2 → {2/6} = {1/3}.']},
+{t:'d',q:['ഒരു പെട്ടിയിൽ 1, 2, 3, 4 എന്നെഴുതിയ 4 കടലാസുകളും മറ്റൊരു പെട്ടിയിൽ 1, 2 എന്നെഴുതിയ 2 കടലാസുകളുമുണ്ട്. ഓരോന്നിൽ നിന്നും ഓരോന്നെടുത്താൽ ആകെ എത്ര സംഖ്യാജോടികൾ കിട്ടും?','Box 1 has slips 1, 2, 3, 4 and box 2 has slips 1, 2. One slip is taken from each. How many number pairs are possible in all?'],o:['8','4','6','12'],a:0,e:['4 × 2 = 8.','4 × 2 = 8.']},
+{t:'d',q:['മുകളിലെ പെട്ടികളിൽ നിന്ന് ഓരോ കടലാസെടുത്താൽ രണ്ടും ഒറ്റസംഖ്യയാകാനുള്ള സാധ്യത?','From the same two boxes, one slip from each. Chance that both are odd?'],o:['{1/2}','{1/8}','{3/8}','{1/4}'],a:3,e:['(1,1), (3,1) → 2 ; ആകെ 8 → {2/8} = {1/4}.','(1,1), (3,1) → 2 ; total 8 → {2/8} = {1/4}.']},
+{t:'d',q:['ഒരു പെട്ടിയിൽ 1 മുതൽ 10 വരെയും മറ്റൊന്നിൽ 1 മുതൽ 5 വരെയും എഴുതിയ കടലാസുകളുണ്ട്. ഓരോന്നിൽ നിന്നും ഒന്നെടുത്താൽ രണ്ടും ഒറ്റസംഖ്യയാകാനുള്ള സാധ്യത?','One box has slips 1 to 10 and another has 1 to 5. One slip from each. Chance that both are odd?'],o:['{3/10}','{1/4}','{1/2}','{3/5}'],a:0,e:['ഒറ്റ: 5 × 3 = 15 ; ആകെ 10 × 5 = 50 → {15/50} = {3/10}.','Odd: 5 × 3 = 15 ; total 10 × 5 = 50 → {15/50} = {3/10}.']},
+{t:'d',q:['ഒരു കുട്ടയിൽ 50 മാങ്ങ, അതിൽ 20 പഴുത്തിട്ടില്ല. മറ്റൊരു കുട്ടയിൽ 40 മാങ്ങ, അതിൽ 15 പഴുത്തിട്ടില്ല. ഓരോന്നിൽ നിന്നും ഒരു മാങ്ങയെടുത്താൽ രണ്ടും പഴുത്തതാകാനുള്ള സാധ്യത?','One basket has 50 mangoes of which 20 are unripe; another has 40 mangoes of which 15 are unripe. One mango from each. Chance that both are ripe?'],o:['{5/8}','{3/20}','{3/8}','{17/20}'],a:2,e:['പഴുത്തത് 30, 25 → 30 × 25 = 750 ; ആകെ 2000 → {750/2000} = {3/8}.','Ripe: 30 and 25 → 30 × 25 = 750 ; total 2000 → {750/2000} = {3/8}.']},
+{t:'d',q:['10 A യിൽ 30 ആൺകുട്ടികളും 20 പെൺകുട്ടികളും; 10 B യിൽ 15 ആൺകുട്ടികളും 25 പെൺകുട്ടികളും. ഓരോ ക്ലാസിൽ നിന്നും ഒരാളെ തിരഞ്ഞെടുത്താൽ ഒരാളെങ്കിലും ആൺകുട്ടിയാകാനുള്ള സാധ്യത?','10 A has 30 boys and 20 girls; 10 B has 15 boys and 25 girls. One student from each class. Chance that at least one is a boy?'],o:['{9/40}','{21/40}','{1/4}','{3/4}'],a:3,e:['രണ്ടും പെൺകുട്ടികൾ: 20 × 25 = 500 → {500/2000} = {1/4}. ഒരാളെങ്കിലും ആൺ = 1 − {1/4} = {3/4}.','Both girls: 20 × 25 = 500 → {500/2000} = {1/4}. At least one boy = 1 − {1/4} = {3/4}.']}
+];
+var cur=0,ans=QZ.map(function(){return null;}),stu={name:'',div:''},app=document.getElementById('app'),LET='ABCD';
+
+function start(){
+  cur=0;ans=QZ.map(function(){return null;});
+  app.innerHTML='<div class="card"><h2>'+B('20 സ്കോർ ഒബ്ജക്ടീവ് ക്വിസ്','20-Mark Objective Quiz')+'</h2>'+
+  '<p>'+B('ഒരു സമയം ഒരു ചോദ്യം മാത്രം കാണിക്കും. ശരിയുത്തരം തിരഞ്ഞെടുത്ത് <b>Next</b> അമർത്തുക. ഉത്തരം മാറ്റാൻ Previous അല്ലെങ്കിൽ താഴെയുള്ള നമ്പറുകൾ ഉപയോഗിക്കാം. അവസാനം ഫലവും ഓരോ ചോദ്യത്തിന്റെ ശരിയുത്തരവും കാണാം.','One question is shown at a time. Pick the correct answer and press <b>Next</b>. You can change answers with Previous or the numbers below. At the end you will see your result and the correct answer to every question.')+'</p>'+
+  '<p>'+B('20 ചോദ്യങ്ങൾ · ഓരോന്നിനും 1 സ്കോർ · കടലാസും പേനയും കരുതുക.','20 questions · 1 mark each · keep paper and pen ready.')+'</p>'+
+  '<div class="row"><div><label>Name</label><input type="text" id="sn" placeholder="Student name"></div><div><label>Class / Div</label><input type="text" id="sd" placeholder="10 A" style="max-width:120px"></div></div>'+
+  '<button class="btn grn" onclick="begin()">Start quiz</button></div>';
+}
+function begin(){stu.name=document.getElementById('sn').value.trim();stu.div=document.getElementById('sd').value.trim();showQ();}
+
+function showQ(){
+  var q=QZ[cur],n=ans.filter(function(x){return x!==null;}).length;
+  var h='<div class="card"><div class="qno"><span>Question '+(cur+1)+' / '+QZ.length+'</span><span>Answered '+n+'</span></div>'+
+  '<div class="bar"><i style="width:'+((cur+1)/QZ.length*100)+'%"></i></div>'+
+  '<div class="qtext">'+B(q.q[0],q.q[1])+'</div>';
+  q.o.forEach(function(o,j){h+='<button class="opt'+(ans[cur]===j?' sel':'')+'" onclick="pick('+j+')"><span class="L">'+LET[j]+')</span> '+optTxt(o)+'</button>';});
+  h+='<div class="row" style="justify-content:space-between"><button class="btn alt" onclick="go(-1)" '+(cur===0?'disabled':'')+'>← Previous</button>';
+  h+=cur===QZ.length-1?'<button class="btn grn" onclick="finish()">Submit quiz</button>':'<button class="btn" onclick="go(1)">Next →</button>';
+  h+='</div><div class="dots">';
+  QZ.forEach(function(_,i){h+='<button class="dot'+(ans[i]!==null?' done':'')+(i===cur?' cur':'')+'" onclick="jump('+i+')">'+(i+1)+'</button>';});
+  h+='</div></div>';
+  app.innerHTML=h;window.scrollTo({top:0});
+}
+function pick(j){ans[cur]=j;showQ();}
+function go(d){cur=Math.max(0,Math.min(QZ.length-1,cur+d));showQ();}
+function jump(i){cur=i;showQ();}
+
+function finish(){
+  var un=ans.filter(function(x){return x===null;}).length;
+  if(un&&!confirm(un+' question(s) not answered. Submit anyway?'))return;
+  var score=0,tt={a:[0,0],b:[0,0],c:[0,0],d:[0,0]};
+  QZ.forEach(function(q,i){tt[q.t][1]++;if(ans[i]===q.a){score++;tt[q.t][0]++;}});
+  var msg=score>=17?['വളരെ നന്നായി! ഈ അധ്യായത്തിലെ പ്രധാന ആശയങ്ങൾ വ്യക്തമായി മനസ്സിലായിട്ടുണ്ട്.','Excellent! The main ideas of the chapter are clear.']:
+    score>=12?['നല്ല ധാരണയുണ്ട്. താഴെ "revise" എന്ന് അടയാളപ്പെടുത്തിയ ഭാഗങ്ങൾ ഒന്നുകൂടി വായിക്കുക.','A good grasp. Re-read the topics marked "revise" below.']:
+    ['ആശയങ്ങൾ ഒന്നുകൂടി ഉറപ്പിക്കാം. പോർട്ടലിലെ Notes വായിച്ച്, പരിശീലന ചോദ്യങ്ങൾ ചെയ്ത ശേഷം ക്വിസ് വീണ്ടും എഴുതുക.','Let us settle the ideas once more. Read the Notes in the portal, practise the questions, then take the quiz again.'];
+  var parts=[],h='<div class="card"><div class="row"><div class="score">'+score+' / 20</div><div>'+(stu.name?'<b>'+esc(stu.name)+'</b>'+(stu.div?' ('+esc(stu.div)+')':'')+'<br>':'')+'<span style="font-family:Poppins">'+(score*5)+'%</span></div></div><p>'+B(msg[0],msg[1])+'</p><h3>'+B('വിഭാഗം തിരിച്ച്','Topic-wise')+'</h3>';
+  for(var k in tt){var pc=Math.round(tt[k][0]/tt[k][1]*100);h+='<div>'+B(TOPICS[k][0],TOPICS[k][1])+' — <b>'+tt[k][0]+' / '+tt[k][1]+'</b>'+(pc<60?'<span class="tag">revise</span>':'')+'</div><div class="bar"><i style="width:'+pc+'%"></i></div>';parts.push(TOPICS[k][1]+' '+tt[k][0]+'/'+tt[k][1]);}
+  var sum=(stu.name||'Student')+(stu.div?' ('+stu.div+')':'')+' – Probability quiz: '+score+'/20 | '+parts.join(', ');
+  window._sum=sum;
+  h+='<div class="row"><button class="btn" onclick="copySum()">Copy result for teacher</button><a class="btn org" target="_blank" rel="noopener" href="https://wa.me/?text='+encodeURIComponent(sum)+'">Share on WhatsApp</a><button class="btn alt" onclick="start();window.scrollTo({top:0})">Retake quiz</button></div></div>';
+  h+='<div class="card"><h2>'+B('ചോദ്യങ്ങളും ഉത്തരങ്ങളും','Questions and answers')+'</h2><div class="row"><button class="btn alt" id="fa" onclick="filt(0)">All 20</button><button class="btn alt" id="fw" onclick="filt(1)">Wrong / unanswered only</button></div></div><div id="rvlist"></div>';
+  app.innerHTML=h;window.scrollTo({top:0});filt(0);
+}
+function filt(onlyWrong){
+  var h='';
+  QZ.forEach(function(q,i){
+    var ok=ans[i]===q.a;if(onlyWrong&&ok)return;
+    h+='<div class="rv '+(ok?'ok':'bad')+'"><div class="qh"><span class="qn">'+(i+1)+'</span><div><div>'+B(q.q[0],q.q[1])+'<span class="pill '+(ok?'g':'r')+'">'+(ok?'Correct':(ans[i]===null?'Not answered':'Wrong'))+'</span></div></div></div>';
+    q.o.forEach(function(o,j){
+      var c='opt static';if(j===q.a)c+=' right';else if(j===ans[i])c+=' wrong';
+      var lab=j===q.a?' <span class="pill g">Correct answer</span>':(j===ans[i]?' <span class="pill r">Your answer</span>':'');
+      h+='<div class="'+c+'"><span class="L">'+LET[j]+')</span> '+optTxt(o)+lab+'</div>';});
+    h+='<div class="'+(ok?'note':'warn')+'">'+B(q.e[0],q.e[1])+'</div></div>';
+  });
+  document.getElementById('rvlist').innerHTML=h||'<div class="card note">'+B('എല്ലാ ഉത്തരങ്ങളും ശരിയാണ്! 🎉','All answers are correct! 🎉')+'</div>';
+}
+function copySum(){try{navigator.clipboard.writeText(window._sum);alert('Copied');}catch(e){prompt('Copy:',window._sum);}}
+start();
+</script>
+</body>
+</html>
