@@ -145,6 +145,20 @@ function pick(j){ans[cur]=j;showQ();}
 function go(d){cur=Math.max(0,Math.min(QZ.length-1,cur+d));showQ();}
 function jump(i){cur=i;showQ();}
 
+function showQ(){
+  var q=QZ[cur],n=ans.filter(function(x){return x!==null;}).length;
+  var h='<div class="card"><div class="qno"><span>Question '+(cur+1)+' / '+QZ.length+'</span><span>Answered '+n+'</span></div>'+
+  '<div class="bar"><i style="width:'+((cur+1)/QZ.length*100)+'%"></i></div>'+
+  '<div class="qtext">'+B(q.q[0],q.q[1])+'</div>';
+  q.o.forEach(function(o,j){h+='<button class="opt'+(ans[cur]===j?' sel':'')+'" onclick="pick('+j+')"><span class="L">'+LET[j]+')</span> '+optTxt(o)+'</button>';});
+  h+='<div class="row" style="justify-content:space-between"><button class="btn alt" onclick="go(-1)" '+(cur===0?'disabled':'')+'>← Previous</button>';
+  h+=cur===QZ.length-1?'<button class="btn grn" onclick="finish()">Submit quiz</button>':'<button class="btn" onclick="go(1)">Next →</button>';
+  h+='</div><div class="dots">';
+  QZ.forEach(function(_,i){h+='<button class="dot'+(ans[i]!==null?' done':'')+(i===cur?' cur':'')+'" onclick="jump('+i+')">'+(i+1)+'</button>';});
+  h+='</div></div>';
+  app.innerHTML=h;window.scrollTo({top:0});
+}
+
 async function finish(){
   var un=ans.filter(function(x){return x===null;}).length;
   if(un&&!confirm(un+' question(s) not answered. Submit anyway?'))return;
