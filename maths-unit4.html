@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mathematics of Chances – Class X Maths | Abacus Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c2541; --muted:#5b6784; --bg:#f4f7fc; --card:#ffffff; --line:#dfe6f2;
+  --brand:#1f4fd8; --brand2:#0e2a8a; --accent:#ff7a1a; --green:#16a34a; --red:#dc2626;
+  --soft:#eaf0ff; --pink:#fde7f1; --mint:#e4f8ee; --sun:#fff4d6;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Noto Sans Malayalam','Poppins',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:16px}
+body.lang-ml .en{display:none}
+body.lang-en .ml{display:none}
+/* header */
+header{background:linear-gradient(120deg,var(--brand2),var(--brand) 60%,#3b82f6);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 12px rgba(14,42,138,.35)}
+.hwrap{max-width:1100px;margin:auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-family:'Poppins',sans-serif;font-weight:700;letter-spacing:.5px;background:#fff;color:var(--brand2);padding:4px 12px;border-radius:8px;font-size:14px;white-space:nowrap}
+.htitle{flex:1;min-width:200px}
+.htitle b{display:block;font-size:17px;line-height:1.3}
+.htitle small{opacity:.85;font-family:'Poppins',sans-serif;font-size:12px}
+.langbtn{display:flex;border:1.5px solid rgba(255,255,255,.7);border-radius:20px;overflow:hidden;font-family:'Poppins',sans-serif;font-size:13px}
+.langbtn button{background:transparent;color:#fff;border:0;padding:6px 14px;cursor:pointer;font:inherit}
+body.lang-ml .langbtn .bml, body.lang-en .langbtn .ben{background:#fff;color:var(--brand2);font-weight:600}
+nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:62px;z-index:40}
+.navwrap{max-width:1100px;margin:auto;display:flex;overflow-x:auto;gap:4px;padding:6px 12px;scrollbar-width:thin}
+nav button{font-family:'Poppins',sans-serif;border:0;background:transparent;padding:9px 16px;border-radius:20px;font-size:14px;color:var(--muted);cursor:pointer;white-space:nowrap;font-weight:500}
+nav button.on{background:var(--brand);color:#fff}
+nav button:hover:not(.on){background:var(--soft)}
+main{max-width:1100px;margin:auto;padding:18px 16px 60px}
+.panel{display:none}.panel.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+h2{font-size:24px;margin:8px 0 10px;color:var(--brand2);line-height:1.35}
+h3{font-size:19px;margin:0 0 8px;color:var(--brand2);line-height:1.4}
+h4{margin:10px 0 4px;font-size:16px;color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin:14px 0;box-shadow:0 2px 8px rgba(30,60,120,.05)}
+.hero{background:linear-gradient(135deg,#e7f0ff,#fde9f3);border:0;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.hero .big{font-family:'Poppins',sans-serif;font-size:64px;font-weight:700;color:var(--brand);line-height:1;background:#fff;border-radius:18px;padding:12px 22px;box-shadow:0 4px 14px rgba(31,79,216,.2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.mini{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.mini .ico{font-size:26px}
+.tag{display:inline-block;font-family:'Poppins',sans-serif;font-size:12px;padding:2px 10px;border-radius:12px;background:var(--soft);color:var(--brand2);font-weight:600;margin-right:6px}
+.tag.o{background:#ffe9d6;color:#9a4300}
+.key{background:var(--sun);border-left:5px solid var(--accent);padding:10px 14px;border-radius:10px;margin:10px 0}
+.note{background:var(--mint);border-left:5px solid var(--green);padding:10px 14px;border-radius:10px;margin:10px 0}
+.warn{background:var(--pink);border-left:5px solid #e0368b;padding:10px 14px;border-radius:10px;margin:10px 0}
+.formula{background:var(--soft);border:1.5px dashed var(--brand);border-radius:12px;padding:12px;text-align:center;font-size:19px;margin:10px 0}
+table.t{border-collapse:collapse;margin:10px 0;font-size:15px;max-width:100%}
+table.t th,table.t td{border:1px solid #b9c6e0;padding:6px 12px;text-align:center}
+table.t th{background:var(--soft)}
+.scroll{overflow-x:auto}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin:0 2px;font-family:'Poppins',sans-serif}
+.fr .n{border-bottom:1.5px solid currentColor;padding:0 4px 1px}
+.fr .d{padding:1px 4px 0}
+.sec-nav{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 6px}
+.sec-nav a{font-family:'Poppins',sans-serif;font-size:13px;text-decoration:none;background:#fff;border:1px solid var(--line);color:var(--brand2);padding:5px 12px;border-radius:16px}
+.sec-nav a:hover{background:var(--soft)}
+button.btn{font-family:'Poppins',sans-serif;background:var(--brand);color:#fff;border:0;padding:9px 18px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:500}
+button.btn:hover{background:var(--brand2)}
+button.btn.alt{background:#fff;color:var(--brand2);border:1.5px solid var(--brand)}
+button.btn.org{background:var(--accent)}
+button.btn.grn{background:var(--green)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:8px 0}
+label.lb{font-family:'Poppins',sans-serif;font-size:13px;color:var(--muted)}
+input[type=number],input[type=text],select{font:inherit;font-family:'Poppins','Noto Sans Malayalam',sans-serif;padding:7px 10px;border:1.5px solid #b9c6e0;border-radius:8px;background:#fff;max-width:100%}
+input[type=number]{width:80px}
+/* widgets */
+.beads{display:flex;flex-wrap:wrap;gap:4px;padding:10px;background:#f1e9dc;border-radius:12px;min-height:46px;border:2px solid #c9b79b}
+.bead{width:20px;height:20px;border-radius:50%;border:1.5px solid #333}
+.bead.k{background:#222}.bead.w{background:#fff}
+.res{background:var(--soft);padding:10px 14px;border-radius:10px;margin-top:10px;font-family:'Poppins','Noto Sans Malayalam',sans-serif;font-size:14.5px}
+.pg td{width:44px;height:34px;font-size:12px;font-family:'Poppins',sans-serif;padding:2px}
+.pg td.hit{background:#ffd9a8;font-weight:700;border-color:#ff9a3d}
+canvas{max-width:100%;border:1px solid var(--line);border-radius:10px;background:#fff}
+/* practice */
+.q{border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:10px 0;background:#fff}
+.q .qh{display:flex;gap:8px;align-items:flex-start}
+.q .qn{flex:0 0 auto;background:var(--brand);color:#fff;border-radius:50%;width:28px;height:28px;text-align:center;font-family:'Poppins',sans-serif;font-size:13px;line-height:28px;margin-top:2px}
+.q .qt{flex:1}
+.mk{font-family:'Poppins',sans-serif;font-size:12px;background:#ffe9d6;color:#9a4300;padding:1px 9px;border-radius:10px;margin-left:6px;white-space:nowrap}
+details.ans{margin-top:6px}
+details.ans summary{cursor:pointer;color:var(--brand);font-family:'Poppins',sans-serif;font-size:13.5px;font-weight:600}
+details.ans .a{background:var(--mint);border-radius:8px;padding:8px 12px;margin-top:6px}
+/* quiz */
+.opt{display:block;width:100%;text-align:left;font:inherit;background:#fff;border:1.5px solid #c9d4ea;border-radius:10px;padding:8px 14px;margin:6px 0;cursor:pointer}
+.opt:hover{background:var(--soft)}
+.opt.sel{border-color:var(--brand);background:#e3ecff;font-weight:600}
+.opt.right{border-color:var(--green);background:#dcf7e6}
+.opt.wrong{border-color:var(--red);background:#fde3e3}
+.opt .L{display:inline-block;width:24px;font-family:'Poppins',sans-serif;font-weight:600;color:var(--brand2)}
+.score{font-family:'Poppins',sans-serif;font-size:46px;font-weight:700;color:var(--brand)}
+.bar{background:#e4eaf6;border-radius:8px;height:14px;overflow:hidden;margin:4px 0 10px}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--brand),#38bdf8)}
+.progress{position:sticky;top:112px;z-index:30;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 14px;font-family:'Poppins',sans-serif;font-size:13px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+ol.plain{padding-left:22px}
+ul.tight{margin:4px 0;padding-left:22px}
+.foot{text-align:center;color:var(--muted);font-size:13px;margin-top:30px;font-family:'Poppins',sans-serif}
+@media(max-width:600px){h2{font-size:20px}.hero .big{font-size:46px}nav{top:92px}.progress{top:142px}}
+@media print{header,nav,.noprint,button{display:none!important}.panel{display:none!important}.panel.on{display:block!important}body{background:#fff}.card{box-shadow:none}}
+</style>
+</head>
+<body class="lang-ml">
+
+<header>
+  <div class="hwrap">
+    <div class="htitle">
+      <b><span class="ml">സാധ്യതകളുടെ ഗണിതം</span><span class="en">Mathematics of Chances (Probability)</span></b>
+      <small>Class X · Mathematics Part I · Chapter 4 · Pages 73–84</small>
+    </div>
+    <div class="langbtn"><button class="bml" onclick="setLang('ml')">മലയാളം</button><button class="ben" onclick="setLang('en')">English</button></div>
+  </div>
+</header>
+<nav><div class="navwrap" id="nav"></div></nav>
+
+<main>
+  <section class="panel on" id="p-home"></section>
+  <section class="panel" id="p-notes"></section>
+  <section class="panel" id="p-explore"></section>
+  <section class="panel" id="p-book"></section>
+  <section class="panel" id="p-practice"></section>
+  <section class="panel" id="p-test"></section>
+  <section class="panel" id="p-teacher"></section>
+  <div class="foot">Abacus Academy · Class X Maths · Mathematics of Chances</div>
+</main>
+
+<script>
+/* ============ helpers ============ */
+function fx(s){return s.replace(/\{([^{}\/]+)\/([^{}]+)\}/g,'<span class="fr"><span class="n">$1</span><span class="d">$2</span></span>');}
+function B(m,e){return '<span class="ml">'+fx(m)+'</span><span class="en">'+fx(e)+'</span>';}
+function P(m,e,cls){return '<p'+(cls?' class="'+cls+'"':'')+'>'+B(m,e)+'</p>';}
+function LI(arr){return '<ul class="tight">'+arr.map(function(x){return '<li>'+B(x[0],x[1])+'</li>';}).join('')+'</ul>';}
+function gcd(a,b){return b?gcd(b,a%b):a;}
+function frac(a,b){var g=gcd(a,b);return '{'+(a/g)+'/'+(b/g)+'}';}
+function pct(a,b){return (Math.round(a/b*10000)/100)+'%';}
+
+var TABS=[['home','Overview'],['notes','Notes'],['explore','Explore'],['book','Textbook Solutions'],['practice','Practice'],['test','20-Mark Test'],['teacher','Teacher Corner']];
+function showTab(id){
+  TABS.forEach(function(t){document.getElementById('p-'+t[0]).classList.toggle('on',t[0]===id);});
+  [].forEach.call(document.querySelectorAll('#nav button'),function(b){b.classList.toggle('on',b.dataset.id===id);});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function setLang(l){document.body.className='lang-'+l;document.documentElement.lang=l==='ml'?'ml':'en';}
+document.getElementById('nav').innerHTML=TABS.map(function(t,i){return '<button data-id="'+t[0]+'" class="'+(i===0?'on':'')+'" onclick="showTab(\''+t[0]+'\')">'+t[1]+'</button>';}).join('');
+
+/* ============ HOME ============ */
+document.getElementById('p-home').innerHTML=
+'<div class="card hero"><div class="big">4</div><div><h2 style="margin:0">'+B('സാധ്യതകളുടെ ഗണിതം','Mathematics of Chances')+'</h2>'+
+P('ഒരു സംഭവം നടക്കാനുള്ള സാധ്യത ഭിന്നസംഖ്യയായും ദശാംശമായും ശതമാനമായും കണ്ടെത്താനും, എണ്ണിയും പരപ്പളവുകൊണ്ടും ജോടികൾ ഉണ്ടാക്കിയും ഈ ആശയം ഉപയോഗിക്കാനും പഠിക്കുന്ന അധ്യായം.','A chapter on finding the chance of an event as a fraction, decimal and percentage — by counting, by comparing areas, and by making pairs.')+'</div></div>'+
+'<div class="card"><h3>'+B('ഈ അധ്യായത്തിന്റെ ഘടന','Chapter map')+'</h3><div class="grid">'+
+'<div class="mini"><div class="ico">🎲</div><h4>'+B('1. സാധ്യതകളും സംഖ്യകളും','1. Chances and numbers')+'</h4>'+P('ചെപ്പിലെ മുത്തുകൾ, രണ്ടു ചെപ്പുകളുടെ താരതമ്യം, സാധ്യത = {അനുകൂലം/ആകെ}','Beads in bags, comparing two bags, probability = {favourable/total}')+'</div>'+
+'<div class="mini"><div class="ico">🔢</div><h4>'+B('2. സംഖ്യാസാധ്യത','2. Probability with numbers')+'</h4>'+P('കടലാസുകഷണങ്ങൾ, ഘടകങ്ങൾ, ദശാംശവും ശതമാനവും','Number slips, factors, decimal and percentage')+'</div>'+
+'<div class="mini"><div class="ico">🎯</div><h4>'+B('3. ജ്യാമിതീയസാധ്യത','3. Geometric probability')+'</h4>'+P('വട്ടം കറക്കൽ, കുത്തിടൽ, പരപ്പളവുകളുടെ അംശബന്ധം','Spinners, dropping a dot, ratio of areas')+'</div>'+
+'<div class="mini"><div class="ico">👕</div><h4>'+B('4. ജോടികൾ','4. Pairs')+'</h4>'+P('രണ്ടു പെട്ടികളിൽ നിന്ന് ഓരോന്ന്, ആകെ ജോടികൾ = ഗുണനം','One from each of two boxes, total pairs = product')+'</div>'+
+'<div class="mini"><div class="ico">🥭</div><h4>'+B('5. കൂടുതൽ ജോടികൾ','5. More pairs')+'</h4>'+P('"ഒന്നെങ്കിലും" സാധ്യത = 1 − "ഒന്നുമില്ല" സാധ്യത','"At least one" = 1 − "none"')+'</div>'+
+'<div class="mini"><div class="ico">📊</div><h4>'+B('6. അറിവിന്റെ വിസ്താരം','6. Extra boxes')+'</h4>'+P('മോണ്ടി കാർലോ രീതി, സാധ്യതയും ആവൃത്തിയും, അനിശ്ചിതത്വത്തിന്റെ അളവ്','Monte Carlo method, probability and frequency, measure of uncertainty')+'</div>'+
+'</div></div>'+
+'<div class="card"><h3>'+B('ഈ അധ്യായം കഴിയുമ്പോൾ നിങ്ങൾക്ക് കഴിയണം','By the end of this chapter you should be able to')+'</h3>'+LI([
+['സാധ്യത = {അനുകൂലഫലങ്ങൾ/ആകെ ഫലങ്ങൾ} എന്ന് എഴുതി കണക്കാക്കാൻ','write probability = {favourable outcomes/total outcomes} and calculate it'],
+['രണ്ടു സാഹചര്യങ്ങളിലെ സാധ്യതകൾ ഭിന്നസംഖ്യകളായി താരതമ്യം ചെയ്ത് തീരുമാനമെടുക്കാൻ','compare chances in two situations using fractions and make a decision'],
+['സാധ്യത ഭിന്നസംഖ്യ, ദശാംശം, ശതമാനം എന്നീ രൂപങ്ങളിൽ എഴുതാൻ','write a probability as a fraction, a decimal and a percentage'],
+['വിസ്തീർണ്ണങ്ങളുടെ അംശബന്ധം ഉപയോഗിച്ച് ജ്യാമിതീയസാധ്യത കണ്ടെത്താൻ','find geometric probability using the ratio of areas'],
+['ആകെ ജോടികളുടെ എണ്ണം ഗുണനം ഉപയോഗിച്ച് കണ്ടെത്തി "രണ്ടും", "ഒന്നെങ്കിലും" സാധ്യതകൾ കണക്കാക്കാൻ','count pairs by multiplication and find "both" and "at least one" probabilities']
+])+'</div>'+
+'<div class="card"><h3>'+B('എങ്ങനെ പഠിക്കാം','How to use this portal')+'</h3><ol class="plain">'+
+'<li>'+B('<b>Notes</b> വായിച്ച് ഓരോ ആശയവും ഉദാഹരണത്തോടെ മനസ്സിലാക്കുക.','Read the <b>Notes</b> and follow each idea with its example.')+'</li>'+
+'<li>'+B('<b>Explore</b> ലെ പരീക്ഷണങ്ങൾ സ്വയം ചെയ്തുനോക്കുക.','Try the experiments in <b>Explore</b> yourself.')+'</li>'+
+'<li>'+B('<b>Textbook Solutions</b> ൽ പാഠപുസ്തകത്തിലെ എല്ലാ ചോദ്യങ്ങൾക്കും ഉത്തരം ഘട്ടം ഘട്ടമായി നോക്കാം. ആദ്യം സ്വയം ചെയ്ത ശേഷം മാത്രം നോക്കുക.','<b>Textbook Solutions</b> has step-by-step answers to every textbook question. Try first, then check.')+'</li>'+
+'<li>'+B('<b>Practice</b> ൽ Step 1 മുതൽ Step 3 വരെയും പരീക്ഷാരീതിയിലുമുള്ള ചോദ്യങ്ങൾ ചെയ്യുക.','Work through Steps 1 to 3 and exam-style questions in <b>Practice</b>.')+'</li>'+
+'<li>'+B('അവസാനം <b>20-Mark Test</b> എഴുതി ആശയം എത്രത്തോളം മനസ്സിലായി എന്ന് പരിശോധിക്കുക.','Finally take the <b>20-Mark Test</b> to check how well the ideas have settled.')+'</li>'+
+'</ol></div>';
+
+/* ============ NOTES ============ */
+var N='';
+N+='<h2>'+B('പഠനക്കുറിപ്പുകൾ','Study Notes')+'</h2><div class="sec-nav">'+
+['n1|1 Chances & numbers','n2|2 Numbers','n3|3 Geometric','n4|4 Pairs','n5|5 More pairs','n6|6 Extra boxes','n7|Quick summary'].map(function(s){var a=s.split('|');return '<a href="#'+a[0]+'" onclick="document.getElementById(\''+a[0]+'\').scrollIntoView({behavior:\'smooth\'});return false">'+a[1]+'</a>';}).join('')+'</div>';
+
+N+='<div class="card" id="n1"><h3>'+B('1. സാധ്യതകളും സംഖ്യകളും','1. Chances and numbers')+'</h3>'+
+P('ഒരു ചെപ്പിൽ 10 മുത്തുകളുണ്ട്: 9 കറുത്തതും 1 വെളുത്തതും. നോക്കാതെ ഒന്നെടുത്താൽ മിക്കവാറും കറുത്തതായിരിക്കും. എടുക്കുന്നത് വെളുത്തതാകാനും സാധ്യതയുണ്ട്, പക്ഷേ വളരെ കുറവ്.','A bag holds 10 beads: 9 black and 1 white. If you take one without looking, it will most likely be black. White is possible, but much less likely.')+
+'<div class="formula">'+B('സാധ്യത = {അനുകൂലഫലങ്ങളുടെ എണ്ണം/ആകെ ഫലങ്ങളുടെ എണ്ണം}','Probability = {number of favourable outcomes/total number of outcomes}')+'</div>'+
+P('ഇവിടെ കറുപ്പ് കിട്ടാനുള്ള സാധ്യത {9/10}, വെളുപ്പ് കിട്ടാനുള്ള സാധ്യത {1/10}.','Here the chance of black is {9/10} and the chance of white is {1/10}.')+
+'<h4>'+B('രണ്ടു ചെപ്പുകൾ താരതമ്യം ചെയ്യാം','Comparing two bags')+'</h4>'+
+P('ഒന്നാം ചെപ്പിൽ 6 കറുത്തതും 5 വെളുത്തതും; രണ്ടാം ചെപ്പിൽ 5 കറുത്തതും 4 വെളുത്തതും. കറുത്ത മുത്ത് കിട്ടിയാൽ ജയിക്കുന്ന കളിയിൽ ഏത് ചെപ്പിൽനിന്നെടുക്കണം?','Bag 1 has 6 black and 5 white beads; Bag 2 has 5 black and 4 white. In a game where you win by getting black, which bag should you pick from?')+
+'<div class="scroll"><table class="t"><tr><th></th><th>'+B('ചെപ്പ് 1','Bag 1')+'</th><th>'+B('ചെപ്പ് 2','Bag 2')+'</th></tr>'+
+'<tr><td>'+B('കറുപ്പ് / വെളുപ്പ്','black / white')+'</td><td>6 / 5</td><td>5 / 4</td></tr>'+
+'<tr><td>'+B('ആകെ','total')+'</td><td>11</td><td>9</td></tr>'+
+'<tr><td>'+B('P (കറുപ്പ്)','P (black)')+'</td><td>{6/11}</td><td>{5/9}</td></tr>'+
+'<tr><td>'+B('P (വെളുപ്പ്)','P (white)')+'</td><td>{5/11}</td><td>{4/9}</td></tr></table></div>'+
+'<div class="key"><b>'+B('എങ്ങനെ താരതമ്യം ചെയ്യും?','How to compare?')+'</b><br>'+B('{6/11} ഉം {5/9} ഉം: ഛേദം തുല്യമാക്കുക (ഛേദങ്ങളുടെ ലസാഗു 99): {54/99} , {55/99}. അതിനാൽ {5/9} വലുത് → ചെപ്പ് 2 ൽ നിന്നെടുക്കുന്നതാണ് നല്ലത്. <br>കുറുക്കുവഴി: വിലങ്ങനെ ഗുണിക്കുക: 6×9 = 54, 5×11 = 55; 55 വലുത്.','Compare {6/11} and {5/9} by a common denominator (LCM 99): {54/99} and {55/99}. So {5/9} is bigger → pick from Bag 2.<br>Shortcut: cross-multiply: 6×9 = 54, 5×11 = 55; 55 is bigger.')+'</div>'+
+P('വെളുത്ത മുത്താണ് വേണ്ടതെങ്കിൽ {5/11} ഉം {4/9} ഉം താരതമ്യം ചെയ്യണം: 5×9 = 45, 4×11 = 44. അതിനാൽ {5/11} വലുത് → ചെപ്പ് 1.','If white is wanted, compare {5/11} and {4/9}: 5×9 = 45, 4×11 = 44, so {5/11} is bigger → Bag 1.')+
+'<div class="warn"><b>'+B('ശ്രദ്ധിക്കുക','Be careful')+'</b><br>'+B('കറുത്ത മുത്തുകളുടെ എണ്ണം (6, 5) മാത്രം നോക്കിയല്ല തീരുമാനിക്കേണ്ടത്; <u>മൊത്തം മുത്തുകളുടെ എണ്ണവും</u> ചേർത്ത ഭിന്നസംഖ്യ നോക്കണം. ഒരു ചെപ്പിൽ P(കറുപ്പ്) + P(വെളുപ്പ്) = 1 ആയിരിക്കും ({6/11} + {5/11} = 1).','Do not decide by the number of black beads (6, 5) alone. Look at the fraction that includes the <u>total</u>. In one bag P(black) + P(white) = 1 ({6/11} + {5/11} = 1).')+'</div></div>';
+
+N+='<div class="card" id="n2"><h3>'+B('2. സംഖ്യാസാധ്യത','2. Probability with numbers')+'</h3>'+
+P('1 മുതൽ 25 വരെ സംഖ്യകൾ കടലാസുകഷണങ്ങളിലെഴുതി പെട്ടിയിലിട്ട് ഒന്നെടുക്കുന്നു.','Numbers 1 to 25 are written on slips of paper, put in a box, and one slip is drawn.')+
+'<div class="scroll"><table class="t"><tr><th>'+B('സംഭവം','Event')+'</th><th>'+B('അനുകൂലം','Favourable')+'</th><th>'+B('സാധ്യത','Probability')+'</th></tr>'+
+'<tr><td>'+B('ഇരട്ടസംഖ്യ','even number')+'</td><td>12</td><td>{12/25}</td></tr>'+
+'<tr><td>'+B('ഒറ്റസംഖ്യ','odd number')+'</td><td>13</td><td>{13/25}</td></tr>'+
+'<tr><td>'+B('3 ന്റെ ഗുണിതം (3, 6, …, 24)','multiple of 3 (3, 6, …, 24)')+'</td><td>8</td><td>{8/25}</td></tr>'+
+'<tr><td>'+B('6 ന്റെ ഗുണിതം (6, 12, 18, 24)','multiple of 6 (6, 12, 18, 24)')+'</td><td>4</td><td>{4/25}</td></tr></table></div>'+
+'<h4>'+B('ഘടകങ്ങളുടെ സാധ്യത','Chance of a factor')+'</h4>'+
+P('1, 2, 3, …, 1000 ൽ നിന്ന് ഒരു സംഖ്യയെടുത്താൽ അത് 1000 ന്റെ ഘടകമാകാനുള്ള സാധ്യത?','One number is taken from 1, 2, 3, …, 1000. What is the chance that it is a factor of 1000?')+
+'<ol class="plain"><li>'+B('1000 = 2³ × 5³ (അഭാജ്യഘടകങ്ങളുടെ ഗുണനമായി എഴുതുക)','1000 = 2³ × 5³ (write as a product of prime powers)')+'</li>'+
+'<li>'+B('ഘടകങ്ങളുടെ എണ്ണം = (3 + 1) × (3 + 1) = 16 (ഘാതങ്ങളോട് 1 കൂട്ടി ഗുണിക്കുക)','number of factors = (3 + 1) × (3 + 1) = 16 (add 1 to each power and multiply)')+'</li>'+
+'<li>'+B('സാധ്യത = {16/1000} = {2/125}','probability = {16/1000} = {2/125}')+'</li></ol>'+
+'<h4>'+B('ഭിന്നസംഖ്യ → ദശാംശം → ശതമാനം','Fraction → decimal → percentage')+'</h4>'+
+'<div class="formula">'+B('{16/1000} = 0.016 &nbsp;;&nbsp; {16/1000} × 100 = 1.6%','{16/1000} = 0.016 &nbsp;;&nbsp; {16/1000} × 100 = 1.6%')+'</div>'+
+'<div class="key"><b>'+B('ഉപയോഗപ്രദമായ എണ്ണങ്ങൾ','Handy counts')+'</b>'+LI([
+['ഒരക്കസംഖ്യകൾ 9, രണ്ടക്കസംഖ്യകൾ 90, മൂന്നക്കസംഖ്യകൾ 900, നാലക്കസംഖ്യകൾ 9000','one-digit numbers 9, two-digit 90, three-digit 900, four-digit 9000'],
+['രണ്ടക്ക പൂർണ്ണവർഗ്ഗങ്ങൾ: 16, 25, 36, 49, 64, 81 (6 എണ്ണം)','two-digit perfect squares: 16, 25, 36, 49, 64, 81 (6 of them)'],
+['മൂന്നക്ക ഇരുവഴി (palindrome) സംഖ്യകൾ: 9 × 10 = 90 (ആദ്യ അക്കം 9 രീതി, നടുവിലെ അക്കം 10 രീതി)','three-digit palindromes: 9 × 10 = 90 (9 choices for the first digit, 10 for the middle)'],
+['1 മുതൽ 10 വരെ അഭാജ്യസംഖ്യകൾ: 2, 3, 5, 7 (4 എണ്ണം)','primes from 1 to 10: 2, 3, 5, 7 (4 of them)']
+])+'</div></div>';
+
+N+='<div class="card" id="n3"><h3>'+B('3. ജ്യാമിതീയസാധ്യത','3. Geometric probability')+'</h3>'+
+P('പല നിറങ്ങളുള്ള 8 തുല്യ ഭാഗങ്ങളുള്ള വട്ടം കറക്കുമ്പോൾ അമ്പടയാളത്തിനു നേരെ മഞ്ഞ വരാനുള്ള സാധ്യത: 8 ഭാഗങ്ങളിൽ 3 എണ്ണം മഞ്ഞ → {3/8}. ഇതേപോലെ മറ്റു നിറങ്ങൾക്കും കണക്കാക്കാം.','A disc with 8 equal parts of different colours is spun. The chance that the arrow stops on yellow: 3 of 8 parts are yellow → {3/8}. Other colours work the same way.')+
+P('ഇവിടെ വൈവിധ്യം: ഭാഗങ്ങൾ തുല്യമായിരിക്കുമ്പോൾ എണ്ണം നോക്കിയാൽ മതി. തുല്യമല്ലെങ്കിൽ <b>വിസ്തീർണ്ണം</b> (പരപ്പളവ്) നോക്കണം.','When the parts are equal we can simply count them. When they are not equal we must compare <b>areas</b>.')+
+'<div class="formula">'+B('സാധ്യത = {അനുകൂലഭാഗത്തിന്റെ പരപ്പളവ്/ആകെ ഭാഗത്തിന്റെ പരപ്പളവ്}','Probability = {area of the favourable region/area of the whole region}')+'</div>'+
+'<h4>'+B('ഉദാഹരണം: ചതുരത്തിലെ ത്രികോണം','Example: triangle inside a rectangle')+'</h4>'+
+P('ചതുരത്തിന്റെ ഒരു വശത്തിന്റെ മധ്യബിന്ദുവും എതിർവശത്തിന്റെ മൂലകളും ചേർത്ത് ത്രികോണം വരച്ചാൽ ത്രികോണത്തിനും ചതുരത്തിനും ഒരേ പാദവും ഒരേ ഉയരവും. ത്രികോണത്തിന്റെ പരപ്പളവ് = ചതുരത്തിന്റെ പകുതി. അതിനാൽ കുത്ത് ത്രികോണത്തിനകത്താകാനുള്ള സാധ്യത {1/2}.','A triangle is drawn using one side of a rectangle as its base and the midpoint of the opposite side as the apex: it has the same base and height as the rectangle. Its area is half the rectangle. So the chance that the dot lies inside the triangle is {1/2}.')+
+'<div class="scroll"><table class="t"><tr><th>'+B('ചിത്രം','Figure')+'</th><th>'+B('പച്ച ഭാഗം','Green part')+'</th><th>'+B('സാധ്യത','Probability')+'</th></tr>'+
+'<tr><td>'+B('സമചതുരത്തിൽ മധ്യബിന്ദുക്കൾ യോജിപ്പിച്ച സമചതുരം','square joining midpoints of a square')+'</td><td>'+B('ചെറിയ സമചതുരം','inner square')+'</td><td>{1/2}</td></tr>'+
+'<tr><td>'+B('സമഷഡ്ഭുജത്തിലെ ഒന്നിടവിട്ട മൂലകൾ ചേർത്ത ത്രികോണം','triangle on alternate vertices of a regular hexagon')+'</td><td>'+B('ത്രികോണം','triangle')+'</td><td>{1/2}</td></tr>'+
+'<tr><td>'+B('രണ്ടു തുല്യസമഭുജത്രികോണങ്ങൾക്കിടയിലെ സമഷഡ്ഭുജം','hexagon in the middle of a six-pointed star')+'</td><td>'+B('നടുവിലെ ഷഡ്ഭുജം','central hexagon')+'</td><td>{1/2}</td></tr>'+
+'<tr><td>'+B('വൃത്തത്തിനകത്ത് ചേർന്ന സമചതുരം','square inside a circle')+'</td><td>'+B('സമചതുരം','square')+'</td><td>{2/π} ≈ 0.64</td></tr>'+
+'<tr><td>'+B('സമചതുരത്തിനകത്ത് ചേർന്ന വൃത്തം','circle inside a square')+'</td><td>'+B('വൃത്തം','circle')+'</td><td>{π/4} ≈ 0.785</td></tr></table></div>'+
+'<div class="note"><b>'+B('മോണ്ടി കാർലോ രീതി','Monte Carlo method')+'</b><br>'+B('സങ്കീർണ്ണമായ രൂപത്തിന്റെ പരപ്പളവ് കണ്ടുപിടിക്കാൻ: അറിയാവുന്ന ഒരു സമചതുരത്തിനകത്ത് രൂപം വരച്ച്, ക്രമരഹിതമായി ധാരാളം കുത്തുകളിടുക. രൂപത്തിനകത്ത് വീണ കുത്തുകളുടെ എണ്ണത്തെ ആകെ കുത്തുകൾ കൊണ്ട് ഹരിച്ചാൽ കിട്ടുന്ന സംഖ്യ ≈ (രൂപത്തിന്റെ പരപ്പളവ്) ÷ (സമചതുരത്തിന്റെ പരപ്പളവ്). കുത്തുകൾ കൂടുന്തോറും കൃത്യത കൂടും. (Explore ൽ ഇത് പരീക്ഷിക്കാം.)','To estimate the area of a complicated shape: draw it inside a square of known area and drop many random dots. (dots inside the shape) ÷ (all dots) ≈ (area of shape) ÷ (area of square). More dots give a better estimate. (Try it in Explore.)')+'</div></div>';
+
+N+='<div class="card" id="n4"><h3>'+B('4. ജോടികൾ','4. Pairs')+'</h3>'+
+P('ജോണിക്ക് ചുവപ്പ്, പച്ച, നീല ഷർട്ടുകളും നീല, പച്ച പാന്റ്സുകളുമുണ്ട്. ഓരോ ഷർട്ടിനോടൊപ്പവും രണ്ടു പാന്റ്സ് ഇടാം → 3 × 2 = <b>6</b> വ്യത്യസ്ത രീതികൾ. ഇതിൽ ഷർട്ടും പാന്റ്സും ഒരേ നിറമാകുന്നത് 2 രീതികളിൽ (പച്ച-പച്ച, നീല-നീല). അതിനാൽ സാധ്യത {2/6} = {1/3}.','Johnny has red, green and blue shirts and blue and green trousers. Each shirt can go with 2 trousers → 3 × 2 = <b>6</b> different outfits. Shirt and trousers have the same colour in 2 outfits (green-green, blue-blue). So the probability is {2/6} = {1/3}.')+
+'<h4>'+B('രണ്ടു പെട്ടികൾ','Two boxes')+'</h4>'+
+P('പെട്ടി 1: 1, 2, 3, 4 ; പെട്ടി 2: 1, 2. ഓരോന്നിൽനിന്നും ഓരോ കടലാസെടുക്കുമ്പോൾ ലഭിക്കുന്ന ജോടികൾ:','Box 1: 1, 2, 3, 4 ; Box 2: 1, 2. Pairs obtained by taking one slip from each:')+
+'<div class="scroll"><table class="t"><tr><th></th><th>1</th><th>2</th></tr><tr><th>1</th><td>(1,1)</td><td>(1,2)</td></tr><tr><th>2</th><td>(2,1)</td><td>(2,2)</td></tr><tr><th>3</th><td>(3,1)</td><td>(3,2)</td></tr><tr><th>4</th><td>(4,1)</td><td>(4,2)</td></tr></table></div>'+
+P('ആകെ 4 × 2 = 8 ജോടികൾ. രണ്ടും ഒറ്റസംഖ്യയായ ജോടികൾ (1,1), (3,1) മാത്രം → സാധ്യത {2/8} = {1/4}.','Total 4 × 2 = 8 pairs. Both odd: only (1,1) and (3,1) → probability {2/8} = {1/4}.')+
+'<div class="key"><b>'+B('ഗുണനതത്വം','The multiplication idea')+'</b><br>'+B('ആകെ ജോടികൾ = (ആദ്യ പെട്ടിയിലെ എണ്ണം) × (രണ്ടാം പെട്ടിയിലെ എണ്ണം). അനുകൂല ജോടികൾ = (ആദ്യ പെട്ടിയിലെ അനുകൂല എണ്ണം) × (രണ്ടാം പെട്ടിയിലെ അനുകൂല എണ്ണം). ജോടികൾ എല്ലാം എഴുതേണ്ടതില്ല!','Total pairs = (count in box 1) × (count in box 2). Favourable pairs = (favourable in box 1) × (favourable in box 2). No need to list every pair!')+'</div>'+
+'<h4>'+B('1–10 ഉം 1–5 ഉം','Boxes 1–10 and 1–5')+'</h4>'+
+P('ആകെ ജോടികൾ 10 × 5 = 50.','Total pairs 10 × 5 = 50.')+
+'<div class="scroll"><table class="t"><tr><th>'+B('സംഭവം','Event')+'</th><th>'+B('അനുകൂല ജോടികൾ','Favourable pairs')+'</th><th>'+B('സാധ്യത','Probability')+'</th></tr>'+
+'<tr><td>'+B('രണ്ടും ഒറ്റ','both odd')+'</td><td>5 × 3 = 15</td><td>{15/50} = {3/10}</td></tr>'+
+'<tr><td>'+B('രണ്ടും ഇരട്ട','both even')+'</td><td>5 × 2 = 10</td><td>{10/50} = {1/5}</td></tr>'+
+'<tr><td>'+B('ഒന്ന് ഒറ്റ, ഒന്ന് ഇരട്ട','one odd, one even')+'</td><td>5×2 + 5×3 = 25</td><td>{25/50} = {1/2}</td></tr></table></div>'+
+P('പരിശോധന: 15 + 10 + 25 = 50 ✓ (എല്ലാ സാധ്യതകളുടെയും തുക 1).','Check: 15 + 10 + 25 = 50 ✓ (all possibilities add up to 1).')+
+'<div class="note"><b>'+B('ഒരു പ്രശ്നം (ഗലീലിയോ)','A puzzle (Galileo)')+'</b><br>'+B('മൂന്നു പകിട ഒന്നിച്ചുരുട്ടുമ്പോൾ തുക 9 കിട്ടുന്നത് 25 രീതികളിലും, 10 കിട്ടുന്നത് 27 രീതികളിലുമാണ്. അതിനാൽ 10 ആണ് 9 നേക്കാൾ കൂടുതൽ വരുന്നത്. കാരണം 1,2,6 എന്ന ഒരേ സംഖ്യകൾ പല ക്രമത്തിൽ വരാം: (1,2,6),(1,6,2),(2,1,6),(2,6,1),(6,1,2),(6,2,1).','When three dice are rolled together, the sum 9 can occur in 25 ways and the sum 10 in 27 ways, so 10 turns up more often. The same numbers can come in different orders: (1,2,6), (1,6,2), (2,1,6), (2,6,1), (6,1,2), (6,2,1).')+'</div></div>';
+
+N+='<div class="card" id="n5"><h3>'+B('5. കൂടുതൽ ജോടികൾ','5. More pairs')+'</h3>'+
+P('ഒരു കുട്ടയിൽ 50 മാങ്ങ (20 എണ്ണം പഴുത്തിട്ടില്ല); മറ്റൊന്നിൽ 40 മാങ്ങ (15 എണ്ണം പഴുത്തിട്ടില്ല). ഓരോന്നിൽനിന്നും ഒന്ന് വീതമെടുക്കുന്നു.','One basket has 50 mangoes (20 unripe); another has 40 mangoes (15 unripe). One mango is taken from each.')+
+'<div class="scroll"><table class="t"><tr><th></th><th>'+B('കുട്ട 1','Basket 1')+'</th><th>'+B('കുട്ട 2','Basket 2')+'</th></tr>'+
+'<tr><td>'+B('ആകെ','total')+'</td><td>50</td><td>40</td></tr><tr><td>'+B('പഴുത്തത്','ripe')+'</td><td>30</td><td>25</td></tr><tr><td>'+B('പച്ച','unripe')+'</td><td>20</td><td>15</td></tr></table></div>'+
+'<ol class="plain"><li>'+B('ആകെ ജോടികൾ = 50 × 40 = 2000','Total pairs = 50 × 40 = 2000')+'</li>'+
+'<li>'+B('രണ്ടും പഴുത്തത്: 30 × 25 = 750 → {750/2000} = {3/8}','Both ripe: 30 × 25 = 750 → {750/2000} = {3/8}')+'</li>'+
+'<li>'+B('രണ്ടും പച്ച: 20 × 15 = 300 → {300/2000} = {3/20}','Both unripe: 20 × 15 = 300 → {300/2000} = {3/20}')+'</li>'+
+'<li>'+B('ഒന്നു മാത്രം പഴുത്തത്: 30×15 + 20×25 = 450 + 500 = 950 → {950/2000} = {19/40}','Exactly one ripe: 30×15 + 20×25 = 450 + 500 = 950 → {950/2000} = {19/40}')+'</li></ol>'+
+'<h4>'+B('"ഒരെണ്ണമെങ്കിലും പഴുത്തത്" – രണ്ടു വഴികൾ','"At least one ripe" – two ways')+'</h4>'+
+'<div class="grid"><div class="mini"><b>'+B('വഴി 1: കൂട്ടിയെടുക്കാം','Way 1: add up')+'</b>'+P('ഒന്നു മാത്രം പഴുത്തത് 950 + രണ്ടും പഴുത്തത് 750 = 1700 → {1700/2000} = {17/20}','Exactly one ripe 950 + both ripe 750 = 1700 → {1700/2000} = {17/20}')+'</div>'+
+'<div class="mini"><b>'+B('വഴി 2: മറിച്ച് ചിന്തിക്കാം','Way 2: think the other way')+'</b>'+P('ഒന്നെങ്കിലും പഴുത്തതാകാതിരിക്കുന്നത് രണ്ടും പച്ചയാകുമ്പോൾ മാത്രം: 2000 − 300 = 1700 → {17/20}','"At least one ripe" fails only when both are unripe: 2000 − 300 = 1700 → {17/20}')+'</div></div>'+
+'<div class="formula">'+B('P (ഒന്നെങ്കിലും) = 1 − P (ഒന്നുമില്ല)','P (at least one) = 1 − P (none)')+'</div></div>';
+
+N+='<div class="card" id="n6"><h3>'+B('6. അറിവിന്റെ വിസ്താരം (പാഠത്തിലെ പെട്ടികൾ)','6. Extra boxes in the chapter')+'</h3>'+
+'<h4>'+B('സാധ്യതയും ആവൃത്തിയും','Probability and frequency')+'</h4>'+
+P('നാണയം എറിയുമ്പോൾ തലയും വാലും {1/2} വീതമെന്ന് കരുതാം. പക്ഷേ നാണയം ഉണ്ടാക്കിയതിലെ അപാകത കൊണ്ടാകാം, ചിലപ്പോൾ ഒരു വശം കൂടുതൽ വീഴാം. കൂടുതൽ തവണ എറിഞ്ഞ് ഫലം രേഖപ്പെടുത്തി നോക്കുന്നതാണ് വഴി:','We assume a coin gives head and tail with chance {1/2} each. But because of a flaw in the coin, one side may fall more often. The way to find out is to toss many times and record:')+
+'<div class="scroll"><table class="t"><tr><th>'+B('എറിഞ്ഞത്','Tosses')+'</th><th>'+B('തല','Heads')+'</th><th>'+B('വാൽ','Tails')+'</th><th>'+B('തല ÷ എറിഞ്ഞത്','Heads ÷ tosses')+'</th></tr>'+
+'<tr><td>10</td><td>6</td><td>4</td><td>0.6</td></tr><tr><td>100</td><td>58</td><td>42</td><td>0.58</td></tr><tr><td>1000</td><td>576</td><td>424</td><td>0.576</td></tr><tr><td>10000</td><td>5865</td><td>4135</td><td>0.5865</td></tr></table></div>'+
+P('തലയുടെ സാധ്യത 0.6 എന്നും വാലിന്റേത് 0.4 എന്നും എടുക്കുന്നതാണ് രണ്ടും 0.5 എടുക്കുന്നതിനേക്കാൾ ശരി. ഇത്തരം കണക്കുകൂട്ടലുകൾ ഉപരിപഠനത്തിലെ <b>സാധ്യതാസിദ്ധാന്തം (Probability theory)</b> ൽ പഠിക്കാം.','So taking P(head) = 0.6 and P(tail) = 0.4 is more reasonable than taking both as 0.5. Such calculations are studied further in <b>probability theory</b>.')+
+'<h4>'+B('അനിശ്ചിതത്വത്തിന്റെ അളവ്','A measure of uncertainty')+'</h4>'+
+P('സൂര്യോദയം, ചന്ദ്രഗ്രഹണം തുടങ്ങിയവ ഗണിതനിയമങ്ങൾ കൊണ്ട് മുൻകൂട്ടി കൃത്യമായി പറയാം. എന്നാൽ മഴ പോലെ പല ഘടകങ്ങളുടെ പരസ്പരബന്ധം കൊണ്ടുണ്ടാകുന്ന കാര്യങ്ങൾ കൃത്യമായി പറയാനാകില്ല. അവിടെ "മഴയ്ക്ക് 70% സാധ്യത" എന്ന് പറയുന്നു. സാധ്യത അനിശ്ചിതത്വത്തിന്റെ അളവാണ്.','Sunrise or an eclipse can be predicted exactly using mathematical laws. But things like rain depend on many factors acting together and cannot be predicted exactly. So we say "70% chance of rain". Probability is a measure of uncertainty.')+'</div>';
+
+N+='<div class="card" id="n7"><h3>'+B('ഒറ്റനോട്ടത്തിൽ','Quick summary')+'</h3><div class="grid">'+
+'<div class="mini"><b>'+B('എണ്ണൽ','Counting')+'</b><div class="formula" style="font-size:16px">'+B('P = {അനുകൂലം/ആകെ}','P = {favourable/total}')+'</div></div>'+
+'<div class="mini"><b>'+B('പരപ്പളവ്','Area')+'</b><div class="formula" style="font-size:16px">'+B('P = {അനുകൂല പരപ്പളവ്/ആകെ പരപ്പളവ്}','P = {favourable area/total area}')+'</div></div>'+
+'<div class="mini"><b>'+B('ജോടികൾ','Pairs')+'</b><div class="formula" style="font-size:16px">'+B('ആകെ = m × n','total = m × n')+'</div></div>'+
+'<div class="mini"><b>'+B('ഒന്നെങ്കിലും','At least one')+'</b><div class="formula" style="font-size:16px">'+B('1 − P(ഒന്നുമില്ല)','1 − P(none)')+'</div></div>'+
+'<div class="mini"><b>'+B('രൂപമാറ്റം','Forms')+'</b><div class="formula" style="font-size:16px">'+B('{a/b} → ദശാംശം → ×100 = %','{a/b} → decimal → ×100 = %')+'</div></div>'+
+'<div class="mini"><b>'+B('പരിശോധന','Check')+'</b><div class="formula" style="font-size:16px">'+B('എല്ലാ സാധ്യതകളുടെയും തുക = 1','all chances add to 1')+'</div></div>'+
+'</div></div>';
+document.getElementById('p-notes').innerHTML=N;
+
+/* ============ EXPLORE ============ */
+document.getElementById('p-explore').innerHTML=
+'<h2>'+B('പരീക്ഷിച്ചു നോക്കാം','Explore and experiment')+'</h2>'+
+'<div class="card"><h3>🎲 '+B('1. ചെപ്പിൽ നിന്ന് മുത്തെടുക്കാം','1. Draw beads from a bag')+'</h3>'+
+P('ചെപ്പിലെ കറുത്തതും വെളുത്തതുമായ മുത്തുകളുടെ എണ്ണം മാറ്റി, ധാരാളം തവണ എടുത്തുനോക്കൂ. പരീക്ഷണത്തിലെ അംശം കണക്കുകൂട്ടിയ സാധ്യതയോട് അടുക്കുന്നുണ്ടോ?','Change the number of black and white beads, then draw many times. Does the experimental fraction come close to the calculated probability?')+
+'<div class="row"><label class="lb">Black <input type="number" id="bk" min="0" max="30" value="6"></label><label class="lb">White <input type="number" id="wh" min="0" max="30" value="5"></label>'+
+'<button class="btn" onclick="bagSet()">Set bag</button></div><div class="beads" id="beads"></div>'+
+'<div class="row"><button class="btn org" onclick="bagDraw(1)">Draw 1</button><button class="btn org" onclick="bagDraw(10)">Draw 10</button><button class="btn org" onclick="bagDraw(100)">Draw 100</button><button class="btn org" onclick="bagDraw(1000)">Draw 1000</button><button class="btn alt" onclick="bagSet()">Reset</button></div>'+
+'<div class="res" id="bagres"></div></div>'+
+
+'<div class="card"><h3>🎡 '+B('2. വട്ടം കറക്കാം','2. Spin the wheel')+'</h3>'+
+P('8 തുല്യ ഭാഗങ്ങൾ: 3 മഞ്ഞ, 2 വയലറ്റ്, 2 നീല, 1 ഓറഞ്ച്. ഓരോ നിറത്തിന്റെയും സാധ്യത എഴുതിനോക്കി, കറക്കിയ ഫലവുമായി ഒത്തുനോക്കുക.','8 equal parts: 3 yellow, 2 purple, 2 blue, 1 orange. Write the chance of each colour, then compare with the spin results.')+
+'<div class="row"><svg id="wheel" width="200" height="200" viewBox="-100 -100 200 200"></svg>'+
+'<div><button class="btn org" onclick="spin(1)">Spin 1</button> <button class="btn org" onclick="spin(50)">Spin 50</button> <button class="btn org" onclick="spin(500)">Spin 500</button> <button class="btn alt" onclick="spinReset()">Reset</button>'+
+'<div class="res" id="spinres" style="min-width:230px"></div></div></div></div>'+
+
+'<div class="card"><h3>👕 '+B('3. ജോടികളുടെ പട്ടിക','3. Pair table')+'</h3>'+
+P('രണ്ടു പെട്ടികളിലെ കടലാസുകളുടെ എണ്ണം തിരഞ്ഞെടുത്ത്, ഒരു സംഭവം നൽകൂ. അനുകൂല ജോടികൾ ഓറഞ്ച് നിറത്തിൽ കാണാം. ആകെ = വരികൾ × നിരകൾ എന്ന് ശ്രദ്ധിക്കുക.','Choose how many slips are in each box, then pick an event. Favourable pairs turn orange. Notice total = rows × columns.')+
+'<div class="row"><label class="lb">Box 1: 1 to <input type="number" id="pn" min="2" max="12" value="4"></label><label class="lb">Box 2: 1 to <input type="number" id="pm" min="2" max="10" value="2"></label>'+
+'<select id="pc"><option value="bo">both odd</option><option value="be">both even</option><option value="so">sum is odd</option><option value="se">sum is even</option><option value="eq">both numbers equal</option><option value="po">product is odd</option><option value="pe">product is even</option></select>'+
+'<button class="btn" onclick="pairDraw()">Show</button></div><div class="scroll" id="pgrid"></div><div class="res" id="pres"></div></div>'+
+
+'<div class="card"><h3>🎯 '+B('4. കുത്തുകളിട്ട് പരപ്പളവ് കണ്ടെത്താം (മോണ്ടി കാർലോ)','4. Drop dots and estimate area (Monte Carlo)')+'</h3>'+
+P('ക്രമരഹിതമായി കുത്തുകളിടുക. കുത്തുകൾ കൂടുന്തോറും അകത്തുള്ള കുത്തുകളുടെ അംശം കണക്കുകൂട്ടിയ സാധ്യതയോട് അടുക്കുന്നത് കാണുക.','Drop random dots. Watch how the fraction of dots inside gets closer to the calculated probability as dots increase.')+
+'<div class="row"><select id="dshape" onchange="dartReset()"><option value="tri">triangle in rectangle (½)</option><option value="cis">circle in square (π/4)</option><option value="sic">square in circle (2/π)</option></select>'+
+'<button class="btn org" onclick="dartAdd(10)">+10</button><button class="btn org" onclick="dartAdd(100)">+100</button><button class="btn org" onclick="dartAdd(1000)">+1000</button><button class="btn alt" onclick="dartReset()">Reset</button></div>'+
+'<canvas id="cv" width="320" height="220"></canvas><div class="res" id="dres"></div></div>';
+
+/* bag */
+var bagB=6,bagW=5,bagNb=0,bagNw=0;
+function bagSet(){bagB=Math.max(0,Math.min(30,+document.getElementById('bk').value||0));bagW=Math.max(0,Math.min(30,+document.getElementById('wh').value||0));bagNb=0;bagNw=0;bagShow();}
+function bagDraw(n){if(bagB+bagW===0)return;for(var i=0;i<n;i++){if(Math.random()<bagB/(bagB+bagW))bagNb++;else bagNw++;}bagShow();}
+function bagShow(){
+  var h='';for(var i=0;i<bagB;i++)h+='<span class="bead k"></span>';for(var j=0;j<bagW;j++)h+='<span class="bead w"></span>';
+  document.getElementById('beads').innerHTML=h||'(empty)';
+  var t=bagB+bagW,d=bagNb+bagNw;
+  var r='Total beads: '+t+' &nbsp;|&nbsp; Calculated P(black) = '+(t?fx(frac(bagB,t))+' = '+(bagB/t).toFixed(3):'–')+' &nbsp;|&nbsp; P(white) = '+(t?fx(frac(bagW,t))+' = '+(bagW/t).toFixed(3):'–');
+  r+='<br>Draws: '+d+' &nbsp;|&nbsp; Black: '+bagNb+' &nbsp;|&nbsp; White: '+bagNw;
+  if(d)r+='<br>Experiment: black = '+(bagNb/d).toFixed(3)+' , white = '+(bagNw/d).toFixed(3);
+  document.getElementById('bagres').innerHTML=r;
+}
+/* spinner */
+var COL=[['#f4e511','Yellow'],['#a8319a','Purple'],['#f4e511','Yellow'],['#6ac8e0','Blue'],['#f7941d','Orange'],['#f4e511','Yellow'],['#6ac8e0','Blue'],['#a8319a','Purple']];
+var spinT={Yellow:0,Purple:0,Blue:0,Orange:0},spinN=0,spinLast=-1;
+function drawWheel(){
+  var s='';for(var i=0;i<8;i++){var a0=(i*45-90-22.5)*Math.PI/180,a1=((i+1)*45-90-22.5)*Math.PI/180;
+    s+='<path d="M0 0 L'+(90*Math.cos(a0)).toFixed(2)+' '+(90*Math.sin(a0)).toFixed(2)+' A90 90 0 0 1 '+(90*Math.cos(a1)).toFixed(2)+' '+(90*Math.sin(a1)).toFixed(2)+' Z" fill="'+COL[i][0]+'" stroke="#fff" stroke-width="2" '+(i===spinLast?'opacity="1" stroke="#000" stroke-width="3"':(spinLast>=0?'opacity=".45"':''))+'/>';}
+  s+='<circle r="5" fill="#e11"/><polygon points="96,0 112,-8 112,8" fill="#e11" transform="rotate(-90)"/>';
+  document.getElementById('wheel').innerHTML=s;
+}
+function spin(n){for(var i=0;i<n;i++){spinLast=Math.floor(Math.random()*8);spinT[COL[spinLast][1]]++;spinN++;}drawWheel();spinShow();}
+function spinReset(){spinT={Yellow:0,Purple:0,Blue:0,Orange:0};spinN=0;spinLast=-1;drawWheel();spinShow();}
+function spinShow(){
+  var th={Yellow:3,Purple:2,Blue:2,Orange:1},h='<table class="t" style="font-size:13px"><tr><th>Colour</th><th>Calculated</th><th>Spins</th><th>Experiment</th></tr>';
+  for(var k in th){h+='<tr><td>'+k+'</td><td>'+fx('{'+th[k]+'/8}')+'</td><td>'+spinT[k]+'</td><td>'+(spinN?(spinT[k]/spinN).toFixed(3):'–')+'</td></tr>';}
+  document.getElementById('spinres').innerHTML=h+'</table>Total spins: '+spinN;
+}
+/* pairs */
+function pairDraw(){
+  var n=Math.max(2,Math.min(12,+document.getElementById('pn').value||4)),m=Math.max(2,Math.min(10,+document.getElementById('pm').value||2)),c=document.getElementById('pc').value;
+  var f={bo:function(a,b){return a%2&&b%2;},be:function(a,b){return !(a%2)&&!(b%2);},so:function(a,b){return (a+b)%2===1;},se:function(a,b){return (a+b)%2===0;},eq:function(a,b){return a===b;},po:function(a,b){return (a*b)%2===1;},pe:function(a,b){return (a*b)%2===0;}}[c];
+  var h='<table class="t pg"><tr><th></th>',hit=0;
+  for(var j=1;j<=m;j++)h+='<th>'+j+'</th>';h+='</tr>';
+  for(var i=1;i<=n;i++){h+='<tr><th>'+i+'</th>';for(var k=1;k<=m;k++){var ok=f(i,k);if(ok)hit++;h+='<td class="'+(ok?'hit':'')+'">('+i+','+k+')</td>';}h+='</tr>';}
+  h+='</table>';
+  document.getElementById('pgrid').innerHTML=h;
+  var tot=n*m;
+  document.getElementById('pres').innerHTML='Total pairs = '+n+' × '+m+' = <b>'+tot+'</b> &nbsp;|&nbsp; Favourable = <b>'+hit+'</b><br>Probability = '+fx('{'+hit+'/'+tot+'}')+(hit?' = '+fx(frac(hit,tot)):'')+' = '+(hit/tot).toFixed(3)+' = '+pct(hit,tot);
+}
+/* darts */
+var dIn=0,dTot=0,dPts=[];
+function inShape(t,x,y){ // x,y in 0..1 (x), 0..1 (y)
+  if(t==='tri'){return y>=(1-1)&&(function(){var yy=1-y;var half=(1-yy)/2; /* triangle apex top centre, base bottom */ return Math.abs(x-0.5)<=half*1;})();}
+  if(t==='cis'){return Math.pow(x-.5,2)+Math.pow(y-.5,2)<=.25;}
+  if(t==='sic'){return Math.abs(x-.5)<=Math.SQRT1_2*.5*1&&Math.abs(y-.5)<=Math.SQRT1_2*.5*1;}
+}
+function drawBoard(){
+  var c=document.getElementById('cv'),g=c.getContext('2d'),t=document.getElementById('dshape').value;
+  g.clearRect(0,0,320,220);g.lineWidth=2;
+  if(t==='tri'){g.strokeStyle='#999';g.fillStyle='#fdebd0';g.fillRect(10,10,300,200);g.strokeRect(10,10,300,200);g.fillStyle='rgba(220,40,40,.35)';g.beginPath();g.moveTo(10,210);g.lineTo(310,210);g.lineTo(160,10);g.closePath();g.fill();g.stroke();}
+  if(t==='cis'){g.strokeStyle='#999';g.fillStyle='#fdebd0';g.fillRect(60,10,200,200);g.strokeRect(60,10,200,200);g.fillStyle='rgba(40,160,70,.35)';g.beginPath();g.arc(160,110,100,0,7);g.fill();g.stroke();}
+  if(t==='sic'){var r=100;g.strokeStyle='#999';g.fillStyle='#fdebd0';g.beginPath();g.arc(160,110,r,0,7);g.fill();g.stroke();g.fillStyle='rgba(40,160,70,.35)';var s=r/Math.SQRT2;g.fillRect(160-s,110-s,2*s,2*s);g.strokeRect(160-s,110-s,2*s,2*s);}
+}
+function dartBox(t){if(t==='tri')return [10,10,300,200];if(t==='cis')return [60,10,200,200];return [60,10,200,200];}
+function dartAdd(n){
+  var t=document.getElementById('dshape').value,c=document.getElementById('cv'),g=c.getContext('2d'),b=dartBox(t);
+  if(dTot===0)drawBoard();
+  for(var i=0;i<n;i++){var x=Math.random(),y=Math.random(),ok;
+    if(t==='tri'){var yy=1-y;ok=Math.abs(x-.5)<=(1-yy)/2;}else if(t==='cis'){ok=(x-.5)*(x-.5)+(y-.5)*(y-.5)<=.25;}else{ok=(x-.5)*(x-.5)+(y-.5)*(y-.5)<=.25&&Math.abs(x-.5)<=.3536&&Math.abs(y-.5)<=.3536;}
+    if(t==='sic'){ /* sample inside circle's bounding square; square (inside) vs circle (whole) → use circle as whole */
+      var xx=Math.random()*2-1,yy2=Math.random()*2-1; while(xx*xx+yy2*yy2>1){xx=Math.random()*2-1;yy2=Math.random()*2-1;}
+      ok=Math.abs(xx)<=.7071&&Math.abs(yy2)<=.7071;
+      g.fillStyle=ok?'#15803d':'#c2410c';g.fillRect(160+xx*100-1.5,110+yy2*100-1.5,3,3);
+    }else{g.fillStyle=ok?'#15803d':'#c2410c';g.fillRect(b[0]+x*b[2]-1.5,b[1]+y*b[3]-1.5,3,3);}
+    dTot++;if(ok)dIn++;}
+  var ex={tri:0.5,cis:Math.PI/4,sic:2/Math.PI}[t];
+  document.getElementById('dres').innerHTML='Dots: '+dTot+' &nbsp;|&nbsp; Inside (shaded): '+dIn+'<br>Experiment: '+(dIn/dTot).toFixed(4)+' &nbsp;|&nbsp; Calculated: '+ex.toFixed(4);
+}
+function dartReset(){dIn=0;dTot=0;drawBoard();document.getElementById('dres').innerHTML='Press + to drop dots.';}
+
+/* ============ TEXTBOOK SOLUTIONS ============ */
+var BK=[
+{h:['പേജ് 74 – ചിന്തിക്കാം','Page 74 – Think'],qs:[
+ ['(1) ഒരു പെട്ടിയിൽ 6 കറുത്ത പന്തുകളും 4 വെളുത്ത പന്തുകളും. ഒരു പന്തെടുത്താൽ കറുത്തതാകാനുള്ള സാധ്യത? വെളുത്തതാകാനോ?','(1) A box has 6 black balls and 4 white balls. Chance that the ball taken is black? white?',
+  'ആകെ പന്തുകൾ = 6 + 4 = 10.<br>P(കറുപ്പ്) = {6/10} = {3/5} ; P(വെളുപ്പ്) = {4/10} = {2/5}.<br>പരിശോധന: {3/5} + {2/5} = 1 ✓','Total balls = 6 + 4 = 10.<br>P(black) = {6/10} = {3/5} ; P(white) = {4/10} = {2/5}.<br>Check: {3/5} + {2/5} = 1 ✓']]},
+{h:['പേജ് 75 – ചിന്തിക്കാം','Page 75 – Think'],qs:[
+ ['(2) ഒരു സഞ്ചിയിൽ 3 ചുവന്ന പന്തും 7 പച്ച പന്തുമുണ്ട്. മറ്റൊരു സഞ്ചിയിൽ 8 ചുവന്ന പന്തും 7 പച്ച പന്തും. (i) ആദ്യത്തെ സഞ്ചിയിൽനിന്ന് ചുവന്നതാകാനുള്ള സാധ്യത? (ii) രണ്ടാമത്തെ സഞ്ചിയിൽ നിന്നെടുത്താലോ? (iii) രണ്ടു സഞ്ചിയിലെയും പന്തുകൾ ഒരു സഞ്ചിയിലാക്കി ഒന്നെടുത്താൽ ചുവന്നതാകാനുള്ള സാധ്യത?','(2) One bag has 3 red and 7 green balls; another has 8 red and 7 green. (i) Chance of red from the first bag? (ii) from the second? (iii) If all balls are put into one bag, chance of red?',
+  '(i) ആകെ 10 → {3/10}.<br>(ii) ആകെ 15 → {8/15}.<br>(iii) ചുവപ്പ് 3 + 8 = 11, ആകെ 10 + 15 = 25 → {11/25}.','(i) Total 10 → {3/10}.<br>(ii) Total 15 → {8/15}.<br>(iii) Red 3 + 8 = 11, total 10 + 15 = 25 → {11/25}.'],
+ ['(3) ഒരു സഞ്ചിയിൽ 3 ചുവന്ന മുത്തും 7 പച്ച മുത്തും. മറ്റൊന്നിൽ ചുവന്നതും പച്ചയും ഓരോന്ന് കൂടുതൽ. ചുവന്ന മുത്ത് കിട്ടാൻ സാധ്യത കൂടുതൽ ഏത് സഞ്ചിയിൽനിന്ന്?','(3) One bag has 3 red and 7 green beads. Another has one more red and one more green. From which bag is red more likely?',
+  'രണ്ടാം സഞ്ചിയിൽ 4 ചുവപ്പ്, 8 പച്ച (ആകെ 12).<br>ഒന്നാമത്: {3/10} ; രണ്ടാമത്: {4/12} = {1/3}.<br>വിലങ്ങനെ ഗുണിക്കുമ്പോൾ 3×3 = 9 , 1×10 = 10 → {1/3} വലുത്. <b>രണ്ടാം സഞ്ചി</b> തിരഞ്ഞെടുക്കണം.','Second bag: 4 red, 8 green (total 12).<br>First: {3/10} ; second: {4/12} = {1/3}.<br>Cross-multiplying: 3×3 = 9 , 1×10 = 10 → {1/3} is larger. Choose the <b>second bag</b>.']]},
+{h:['പേജ് 76 – ചിന്തിക്കാം','Page 76 – Think'],qs:[
+ ['(1)(i) 1, 2, …, 10 ൽ നിന്ന് ഒന്നെടുത്താൽ അഭാജ്യസംഖ്യയാകാനുള്ള സാധ്യത? (ഭിന്നസംഖ്യ, ദശാംശം, ശതമാനം)','(1)(i) One number from 1, 2, …, 10. Chance it is prime? (fraction, decimal, percentage)',
+  'അഭാജ്യസംഖ്യകൾ: 2, 3, 5, 7 → 4.<br>{4/10} = {2/5} = 0.4 = 40%.','Primes: 2, 3, 5, 7 → 4.<br>{4/10} = {2/5} = 0.4 = 40%.'],
+ ['(1)(ii) 1, 2, …, 100 ൽ നിന്ന് ഒന്നെടുത്താൽ രണ്ടക്കസംഖ്യയാകാനുള്ള സാധ്യത?','(1)(ii) One number from 1, 2, …, 100. Chance it is a two-digit number?',
+  'രണ്ടക്കസംഖ്യകൾ 10 മുതൽ 99 വരെ → 90.<br>{90/100} = {9/10} = 0.9 = 90%.','Two-digit numbers: 10 to 99 → 90.<br>{90/100} = {9/10} = 0.9 = 90%.'],
+ ['(1)(iii) എല്ലാ മൂന്നക്കസംഖ്യകളും കടലാസുകഷണങ്ങളിലെഴുതി ഒന്നെടുത്താൽ ഇരുവഴി (palindrome) സംഖ്യയാകാനുള്ള സാധ്യത?','(1)(iii) All three-digit numbers on slips, one drawn. Chance it is a palindrome?',
+  'മൂന്നക്കസംഖ്യകൾ: 900.<br>ഇരുവഴി സംഖ്യ aba: a ക്ക് 9 രീതി (1–9), b ക്ക് 10 രീതി (0–9) → 90.<br>{90/900} = {1/10} = 0.1 = 10%.','Three-digit numbers: 900.<br>Palindrome aba: 9 choices for a (1–9), 10 for b (0–9) → 90.<br>{90/900} = {1/10} = 0.1 = 10%.'],
+ ['(2) ഒരാളോട് ഒരു രണ്ടക്കസംഖ്യ പറയാൻ ആവശ്യപ്പെടുന്നു. പറയുന്ന സംഖ്യ പൂർണ്ണവർഗ്ഗമാകാനുള്ള സാധ്യത?','(2) A person is asked to say a two-digit number. Chance it is a perfect square?',
+  'രണ്ടക്കപൂർണ്ണവർഗ്ഗങ്ങൾ: 16, 25, 36, 49, 64, 81 → 6.<br>{6/90} = {1/15}.','Two-digit perfect squares: 16, 25, 36, 49, 64, 81 → 6.<br>{6/90} = {1/15}.'],
+ ['(3) ഒരാളോട് ഒരു മൂന്നക്കസംഖ്യ പറയാൻ ആവശ്യപ്പെടുന്നു. (i) മൂന്നക്കങ്ങളും തുല്യമാകാനുള്ള സാധ്യത? (ii) ഒന്നിന്റെ സ്ഥാനത്തെ അക്കം പൂജ്യമാകാനുള്ള സാധ്യത? (iii) സംഖ്യ 3 ന്റെ ഗുണിതമാകാനുള്ള സാധ്യത?','(3) A person says a three-digit number. (i) Chance all three digits are equal? (ii) Chance the units digit is zero? (iii) Chance it is a multiple of 3?',
+  '(i) 111, 222, …, 999 → 9 → {9/900} = {1/100}.<br>(ii) 100, 110, …, 990 → 90 → {90/900} = {1/10}.<br>(iii) 102, 105, …, 999 ; 3 ന്റെ ഗുണിതങ്ങൾ 1 മുതൽ 999 വരെ 333, 1 മുതൽ 99 വരെ 33 → 300 → {300/900} = {1/3}.','(i) 111, 222, …, 999 → 9 → {9/900} = {1/100}.<br>(ii) 100, 110, …, 990 → 90 → {90/900} = {1/10}.<br>(iii) Multiples of 3 up to 999: 333; up to 99: 33 → 300 → {300/900} = {1/3}.'],
+ ['(4) 1, 2, 3, 4 എഴുതിയ നാല് കാർഡുകൾ പലതരത്തിൽ ചേർത്തുവച്ച് നാലക്കസംഖ്യകളുണ്ടാക്കുന്നു. (i) സംഖ്യ 4000 ത്തിൽ കൂടുതലാകാനുള്ള സാധ്യത? (ii) 4000 ത്തിൽ കുറവാകാനുള്ള സാധ്യത?','(4) Four cards 1, 2, 3, 4 are arranged to make four-digit numbers. (i) Chance the number is more than 4000? (ii) less than 4000?',
+  'ആകെ സംഖ്യകൾ: 4 × 3 × 2 × 1 = 24.<br>(i) 4000 ത്തിൽ കൂടുതൽ → ആദ്യ അക്കം 4: ബാക്കി 3 കാർഡ് 3×2×1 = 6 രീതി → {6/24} = {1/4}.<br>(ii) കുറവ് → 24 − 6 = 18 → {18/24} = {3/4} (അല്ലെങ്കിൽ 1 − {1/4}).','Total numbers: 4 × 3 × 2 × 1 = 24.<br>(i) More than 4000 → first digit 4; the other 3 cards in 3×2×1 = 6 ways → {6/24} = {1/4}.<br>(ii) Less → 24 − 6 = 18 → {18/24} = {3/4} (or 1 − {1/4}).']]},
+{h:['പേജ് 78 – ജ്യാമിതീയസാധ്യത','Page 78 – Geometric probability'],qs:[
+ ['(1) സമചതുരത്തിന്റെ വശങ്ങളുടെ മധ്യബിന്ദുക്കൾ യോജിപ്പിച്ച സമചതുരം (പച്ച). കുത്തിട്ടാൽ പച്ചഭാഗത്താകാനുള്ള സാധ്യത?','(1) A square formed by joining midpoints of the sides of a square (green). Chance the dot lands in green?',
+  'വലിയ സമചതുരത്തിന്റെ വശം a ആയാൽ പരപ്പളവ് a². ചെറിയതിന്റെ വശം {a/√2} → പരപ്പളവ് {a²/2}. (നാല് മൂലത്രികോണങ്ങൾ ചേർന്നാൽ പകുതി). സാധ്യത = {1/2}.','If the big square has side a, its area is a². The small square has side {a/√2}, so area {a²/2} (the four corner triangles make up the other half). Probability = {1/2}.'],
+ ['(2) സമഷഡ്ഭുജത്തിലെ ഒന്നിടവിട്ട മൂലകൾ ചേർത്തുവരച്ച ത്രികോണം (പച്ച).','(2) Triangle joining alternate vertices of a regular hexagon (green).',
+  'സമഷഡ്ഭുജത്തെ 6 സമഭുജത്രികോണങ്ങളാക്കാം. ഉള്ളിലെ ത്രികോണം ഇതിലെ 3 എണ്ണവും 3 എണ്ണത്തിന്റെ പകുതി വീതമായ ഭാഗങ്ങളും ചേർന്നത് → ഷഡ്ഭുജത്തിന്റെ പകുതി. സാധ്യത = {1/2}. (വശം a ആയാൽ ഷഡ്ഭുജം = {3√3/2}a², ത്രികോണം = {3√3/4}a²)','A regular hexagon splits into 6 equilateral triangles. The inner triangle covers exactly half the hexagon. Probability = {1/2}. (For side a: hexagon = {3√3/2}a², triangle = {3√3/4}a².)'],
+ ['(3) രണ്ടു തുല്യസമഭുജത്രികോണങ്ങൾക്കിടയിൽ രൂപപ്പെടുന്ന സമഷഡ്ഭുജം (ആറ് മുനയുള്ള നക്ഷത്രത്തിനകത്ത്).','(3) The regular hexagon formed between two equal equilateral triangles (inside the six-pointed star).',
+  'നക്ഷത്രത്തെ ഒരേ വലിപ്പമുള്ള ചെറിയ 12 സമഭുജത്രികോണങ്ങളായി ഭാഗിക്കാം: നടുവിലെ ഷഡ്ഭുജം 6 എണ്ണം, ആറ് മുനകൾ 6 എണ്ണം. സാധ്യത = {6/12} = {1/2}.','Divide the star into 12 small equal equilateral triangles: the middle hexagon has 6 and the six points have 6. Probability = {6/12} = {1/2}.'],
+ ['(4) മൂലകളെല്ലാം ഒരു വൃത്തത്തിലായി വരച്ച സമചതുരം (പച്ച), വൃത്തത്തിൽ കുത്തിടുന്നു.','(4) A square with all corners on a circle (green); the dot is dropped in the circle.',
+  'വൃത്തത്തിന്റെ ആരം r. സമചതുരത്തിന്റെ വികർണ്ണം 2r → വശം r√2 → പരപ്പളവ് 2r². വൃത്തത്തിന്റേത് πr². സാധ്യത = {2r²/πr²} = {2/π} ≈ 0.64.','Circle radius r. The diagonal of the square is 2r → side r√2 → area 2r². Circle area πr². Probability = {2r²/πr²} = {2/π} ≈ 0.64.'],
+ ['(5) സമചതുരത്തിനകത്ത് കൃത്യമായി ചേർന്നിരിക്കുന്ന വൃത്തം (പച്ച).','(5) A circle that fits exactly inside a square (green).',
+  'വൃത്തത്തിന്റെ ആരം r ആയാൽ സമചതുരത്തിന്റെ വശം 2r → പരപ്പളവ് 4r². വൃത്തം πr². സാധ്യത = {πr²/4r²} = {π/4} ≈ 0.785.','If the circle has radius r, the square has side 2r → area 4r². Circle = πr². Probability = {πr²/4r²} = {π/4} ≈ 0.785.']]},
+{h:['പേജ് 80, 81 – ജോടികൾ','Pages 80, 81 – Pairs'],qs:[
+ ['(1) രജനിക്ക് പച്ച, നീല, ചുവപ്പ് നിറങ്ങളിൽ കല്ലുമാലയും കമ്മലുമുണ്ട്. എത്ര രീതികളിൽ മാലയും കമ്മലുമണിയാം? ഒരേ നിറമുള്ള മാലയും കമ്മലും അണിയാനുള്ള സാധ്യത? വ്യത്യസ്ത നിറമുള്ളതോ?','(1) Rajani has stone necklaces and earrings in green, blue and red. In how many ways can she wear a necklace and earrings? Chance of the same colour? of different colours?',
+  'രീതികൾ = 3 × 3 = 9.<br>ഒരേ നിറം 3 രീതി → {3/9} = {1/3}.<br>വ്യത്യസ്ത നിറം 9 − 3 = 6 → {6/9} = {2/3}.','Ways = 3 × 3 = 9.<br>Same colour: 3 ways → {3/9} = {1/3}.<br>Different: 9 − 3 = 6 → {6/9} = {2/3}.'],
+ ['(2) ഒരു പെട്ടിയിൽ 1, 2, 3, 4 എഴുതിയ 4 കടലാസുകൾ; മറ്റൊന്നിൽ 1, 2. ഓരോന്നിൽനിന്നുമെടുത്താൽ കിട്ടുന്ന സംഖ്യകളുടെ തുക ഒറ്റസംഖ്യയാകാനുള്ള സാധ്യത? ഇരട്ടസംഖ്യയാകാനോ?','(2) Box 1 has slips 1, 2, 3, 4; box 2 has 1, 2. One from each. Chance the sum is odd? even?',
+  'ജോടികൾ 8: തുകകൾ 2, 3, 3, 4, 4, 5, 5, 6.<br>ഒറ്റ: 3, 3, 5, 5 → 4 → {4/8} = {1/2}.<br>ഇരട്ട: 4 → {1/2}.','8 pairs; sums: 2, 3, 3, 4, 4, 5, 5, 6.<br>Odd: 3, 3, 5, 5 → 4 → {4/8} = {1/2}.<br>Even: 4 → {1/2}.'],
+ ['(3) ഒരു പെട്ടിയിൽ 1, 2, 3, 4; മറ്റൊന്നിൽ 1, 2, 3. ഗുണനഫലം ഒറ്റസംഖ്യയാകാനുള്ള സാധ്യത? ഇരട്ടസംഖ്യയാകാനോ?','(3) Box 1 has 1, 2, 3, 4; box 2 has 1, 2, 3. Chance the product is odd? even?',
+  'ആകെ ജോടികൾ 4 × 3 = 12.<br>ഗുണനഫലം ഒറ്റ ആകണമെങ്കിൽ രണ്ടും ഒറ്റ: 2 × 2 = 4 → {4/12} = {1/3}.<br>ഇരട്ട: 12 − 4 = 8 → {8/12} = {2/3}.','Total pairs 4 × 3 = 12.<br>Product is odd only if both are odd: 2 × 2 = 4 → {4/12} = {1/3}.<br>Even: 12 − 4 = 8 → {8/12} = {2/3}.'],
+ ['(4) 1, 2, 3 അക്കങ്ങൾ ഉപയോഗിച്ച് എഴുതാവുന്ന രണ്ടക്കസംഖ്യകളിൽ ഒരെണ്ണമെടുത്താൽ (i) രണ്ടക്കങ്ങളും തുല്യമാകാനുള്ള സാധ്യത? (ii) അക്കങ്ങളുടെ തുക 4 ആകാനുള്ള സാധ്യത?','(4) From the two-digit numbers that can be written using digits 1, 2, 3, one is taken. (i) Chance both digits are equal? (ii) Chance the digit sum is 4?',
+  'സംഖ്യകൾ (അക്കം ആവർത്തിക്കാം): 11, 12, 13, 21, 22, 23, 31, 32, 33 → 3 × 3 = 9.<br>(i) 11, 22, 33 → {3/9} = {1/3}.<br>(ii) 13, 22, 31 → {3/9} = {1/3}.','Numbers (digits may repeat): 11, 12, 13, 21, 22, 23, 31, 32, 33 → 3 × 3 = 9.<br>(i) 11, 22, 33 → {3/9} = {1/3}.<br>(ii) 13, 22, 31 → {3/9} = {1/3}.'],
+ ['(5) രണ്ടുപേർ തമ്മിലുള്ള കളി: ഓരോരുത്തരും ഒറ്റസംഖ്യവേണോ ഇരട്ടസംഖ്യവേണോ എന്ന് തീരുമാനിക്കണം. ഇരുവരും ഒരു കൈയിലെ കുറെ വിരലുകൾ ഒരുമിച്ചുയർത്തുന്നു. ആകെ വിരലുകൾ ഒറ്റസംഖ്യയാണെങ്കിൽ ഒറ്റസംഖ്യ എടുത്തയാൾ ജയിക്കും. ഏത് എടുക്കുന്നതാണ് നല്ലത്? (ഓരോരുത്തരും 1 മുതൽ 5 വരെ വിരലുകൾ ഉയർത്തുമെന്ന് കരുതുക)','(5) Two players each choose "odd" or "even". Both raise some fingers of one hand together; if the total is odd, the player who chose odd wins. Which is the better choice? (Assume each raises 1 to 5 fingers.)',
+  'ആകെ ജോടികൾ 5 × 5 = 25.<br>തുക ഒറ്റ: ഒരാൾ ഒറ്റ, മറ്റേയാൾ ഇരട്ട → 3×2 + 2×3 = 12 → {12/25}.<br>തുക ഇരട്ട: 25 − 12 = 13 → {13/25}.<br>അതിനാൽ <b>ഇരട്ടസംഖ്യ</b> എടുക്കുന്നതാണ് അല്പം നല്ലത്.','Total pairs 5 × 5 = 25.<br>Sum odd: one odd and one even → 3×2 + 2×3 = 12 → {12/25}.<br>Sum even: 25 − 12 = 13 → {13/25}.<br>So choosing <b>even</b> is slightly better.']]},
+{h:['പേജ് 83, 84 – കൂടുതൽ ജോടികൾ','Pages 83, 84 – More pairs'],qs:[
+ ['(1) 10 A ക്ലാസിൽ 30 ആൺകുട്ടികളും 20 പെൺകുട്ടികളും; 10 B ക്ലാസിൽ 15 ആൺകുട്ടികളും 25 പെൺകുട്ടികളും. ഓരോ ക്ലാസിൽ നിന്നും ഒരു കുട്ടിയെ തിരഞ്ഞെടുക്കുന്നു. (i) രണ്ടും പെൺകുട്ടികൾ (ii) രണ്ടും ആൺകുട്ടികൾ (iii) ഒരു ആൺകുട്ടിയും ഒരു പെൺകുട്ടിയും (iv) ഒരാളെങ്കിലും ആൺകുട്ടി – സാധ്യത?','(1) Class 10 A has 30 boys and 20 girls; 10 B has 15 boys and 25 girls. One child is chosen from each class. Chance of (i) both girls (ii) both boys (iii) one boy and one girl (iv) at least one boy?',
+  'ആകെ ജോടികൾ 50 × 40 = 2000.<br>(i) 20 × 25 = 500 → {500/2000} = {1/4}.<br>(ii) 30 × 15 = 450 → {450/2000} = {9/40}.<br>(iii) 30×25 + 20×15 = 750 + 300 = 1050 → {1050/2000} = {21/40}.<br>(iv) 1 − P(രണ്ടും പെൺകുട്ടികൾ) = 1 − {1/4} = {3/4}. (പരിശോധന: 450 + 1050 = 1500 → {1500/2000} = {3/4} ✓)','Total pairs 50 × 40 = 2000.<br>(i) 20 × 25 = 500 → {500/2000} = {1/4}.<br>(ii) 30 × 15 = 450 → {450/2000} = {9/40}.<br>(iii) 30×25 + 20×15 = 750 + 300 = 1050 → {1050/2000} = {21/40}.<br>(iv) 1 − P(both girls) = 1 − {1/4} = {3/4}. (Check: 450 + 1050 = 1500 → {1500/2000} = {3/4} ✓)'],
+ ['(2) ഒരാളോട് ഒരു രണ്ടക്കസംഖ്യ പറയാനാവശ്യപ്പെടുന്നു. (i) രണ്ടക്കങ്ങളും തുല്യമാകാനുള്ള സാധ്യത? (ii) ആദ്യത്തെ അക്കം രണ്ടാമത്തേതിനേക്കാൾ വലുതാകാനുള്ള സാധ്യത? (iii) ആദ്യത്തെ അക്കം രണ്ടാമത്തേതിനേക്കാൾ ചെറുതാകാനുള്ള സാധ്യത?','(2) A person says a two-digit number. (i) Chance both digits are equal? (ii) first digit bigger than second? (iii) first digit smaller than second?',
+  'ആകെ 90 സംഖ്യകൾ.<br>(i) 11, 22, …, 99 → 9 → {9/90} = {1/10}.<br>(ii) പത്തിന്റെ സ്ഥാനത്ത് a ആയാൽ ഒന്നിന്റെ സ്ഥാനത്ത് a യേക്കാൾ ചെറിയ അക്കങ്ങൾ a എണ്ണം (0 മുതൽ a−1 വരെ): 1+2+…+9 = 45 → {45/90} = {1/2}.<br>(iii) a യേക്കാൾ വലിയ അക്കങ്ങൾ 9 − a എണ്ണം: 8+7+…+0 = 36 → {36/90} = {2/5}.<br>പരിശോധന: 9 + 45 + 36 = 90 ✓','90 numbers in all.<br>(i) 11, 22, …, 99 → 9 → {9/90} = {1/10}.<br>(ii) If the tens digit is a, there are a smaller digits (0 to a−1) for the units place: 1+2+…+9 = 45 → {45/90} = {1/2}.<br>(iii) There are 9 − a bigger digits: 8+7+…+0 = 36 → {36/90} = {2/5}.<br>Check: 9 + 45 + 36 = 90 ✓'],
+ ['(3) 1 മുതൽ 6 വരെ സംഖ്യകളെഴുതിയ രണ്ടു പകിടകൾ ഒന്നിച്ചുരുട്ടുന്നു. കിട്ടുന്ന സംഖ്യകളുടെ തുക ഏതൊക്കെയാകാം? ഏറ്റവും കൂടുതൽ സാധ്യതയുള്ള തുക ഏത്?','(3) Two dice numbered 1 to 6 are rolled together. What sums are possible? Which sum is most likely?',
+  'സാധ്യമായ തുകകൾ: 2, 3, …, 12. ആകെ ജോടികൾ 6 × 6 = 36.<br>തുക 7 കിട്ടുന്നത് 6 രീതി: (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) – ഏറ്റവും കൂടുതൽ. P(7) = {6/36} = {1/6}.<br>(തുക 2 → (1,1) മാത്രം → {1/36}; തുക 12 → (6,6) മാത്രം → {1/36}.)','Possible sums: 2, 3, …, 12. Total pairs 6 × 6 = 36.<br>Sum 7 occurs in 6 ways: (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) – the most. P(7) = {6/36} = {1/6}.<br>(Sum 2 → only (1,1) → {1/36}; sum 12 → only (6,6) → {1/36}.)'],
+ ['(4) ഒരു പെട്ടിയിൽ 1 മുതൽ 10 വരെയെഴുതിയ 10 കടലാസുകൾ; മറ്റൊന്നിൽ 25 വരെയുള്ള 5 ന്റെ ഗുണിതങ്ങളെഴുതിയ കടലാസുകൾ. ഓരോന്നിൽനിന്നും ഒന്നെടുക്കുന്നു. (i) രണ്ടും ഒറ്റസംഖ്യ (ii) ഗുണനഫലം ഒറ്റസംഖ്യ (iii) തുക ഒറ്റസംഖ്യ – സാധ്യത?','(4) Box 1 has slips 1 to 10; box 2 has slips with the multiples of 5 up to 25. One slip from each. Chance of (i) both odd (ii) product odd (iii) sum odd?',
+  'പെട്ടി 2: 5, 10, 15, 20, 25 (ഒറ്റ: 5, 15, 25 = 3 ; ഇരട്ട: 10, 20 = 2). ആകെ ജോടികൾ 10 × 5 = 50.<br>(i) 5 × 3 = 15 → {15/50} = {3/10}.<br>(ii) ഗുണനഫലം ഒറ്റ ആകാൻ രണ്ടും ഒറ്റ വേണം → {3/10}.<br>(iii) തുക ഒറ്റ → ഒന്ന് ഒറ്റ, ഒന്ന് ഇരട്ട: 5×2 + 5×3 = 10 + 15 = 25 → {25/50} = {1/2}.','Box 2: 5, 10, 15, 20, 25 (odd: 5, 15, 25 = 3 ; even: 10, 20 = 2). Total pairs 10 × 5 = 50.<br>(i) 5 × 3 = 15 → {15/50} = {3/10}.<br>(ii) A product is odd only if both are odd → {3/10}.<br>(iii) Sum odd → one odd, one even: 5×2 + 5×3 = 10 + 15 = 25 → {25/50} = {1/2}.']]}
+];
+var bh='<h2>'+B('പാഠപുസ്തകത്തിലെ ചോദ്യങ്ങളും ഉത്തരങ്ങളും','Textbook questions with solutions')+'</h2>'+P('ആദ്യം സ്വയം ചെയ്തു നോക്കൂ. ശേഷം "Show solution" അമർത്തി ഉത്തരം പരിശോധിക്കാം.','Try each question yourself first. Then press "Show solution" to check.');
+BK.forEach(function(sec){
+  bh+='<div class="card"><h3>'+B(sec.h[0],sec.h[1])+'</h3>';
+  sec.qs.forEach(function(q){
+    bh+='<div class="q"><div class="qt">'+B(q[0],q[1])+'</div><details class="ans"><summary>Show solution</summary><div class="a">'+B(q[2],q[3])+'</div></details></div>';
+  });
+  bh+='</div>';
+});
+document.getElementById('p-book').innerHTML=bh;
+
+/* ============ PRACTICE ============ */
+var PR=[
+{id:'s1',h:['Step 1 – തുടങ്ങാം','Step 1 – Start here'],sub:['ലളിതമായ ചോദ്യങ്ങൾ. ഓരോന്നിനും 1 സ്കോർ.','Short questions. 1 mark each.'],mk:1,qs:[
+ ['ഒരു ചെപ്പിൽ 4 ചുവന്ന മുത്തും 6 നീല മുത്തുമുണ്ട്. ഒരു മുത്തെടുത്താൽ ചുവപ്പാകാനുള്ള സാധ്യത?','A bag has 4 red and 6 blue beads. Chance that a bead taken is red?','{4/10} = {2/5}','{4/10} = {2/5}'],
+ ['1 മുതൽ 20 വരെ സംഖ്യകളിൽനിന്ന് ഒന്നെടുത്താൽ 5 ന്റെ ഗുണിതമാകാനുള്ള സാധ്യത?','One number from 1 to 20. Chance it is a multiple of 5?','5, 10, 15, 20 → 4 → {4/20} = {1/5}','5, 10, 15, 20 → 4 → {4/20} = {1/5}'],
+ ['12 തുല്യ ഭാഗങ്ങളുള്ള ഒരു വട്ടത്തിൽ 5 ഭാഗം പച്ചയാണ്. കറക്കി നിർത്തുമ്പോൾ അമ്പടയാളം പച്ചയ്ക്ക് നേരെ വരാനുള്ള സാധ്യത?','A wheel has 12 equal parts of which 5 are green. Chance the arrow stops on green?','{5/12}','{5/12}'],
+ ['1 മുതൽ 30 വരെയുള്ള സംഖ്യകളിൽ ഒന്നെടുത്താൽ ഒറ്റസംഖ്യയാകാനുള്ള സാധ്യത?','One number from 1 to 30. Chance it is odd?','15 ഒറ്റസംഖ്യകൾ → {15/30} = {1/2}','15 odd numbers → {15/30} = {1/2}'],
+ ['സാധ്യത {7/20} ആണ്. ഇത് ദശാംശമായും ശതമാനമായും എഴുതുക.','A probability is {7/20}. Write it as a decimal and a percentage.','{7/20} = {35/100} = 0.35 ; 0.35 × 100 = 35%','{7/20} = {35/100} = 0.35 ; 0.35 × 100 = 35%'],
+ ['1 മുതൽ 10 വരെ സംഖ്യകൾ എഴുതിയ 10 തുല്യഭാഗങ്ങളുള്ള ഒരു ചക്രം കറക്കുന്നു. അഭാജ്യസംഖ്യ വരാനുള്ള സാധ്യത?','A disc has 10 equal parts numbered 1 to 10 and is spun. Chance of a prime number?','2, 3, 5, 7 → {4/10} = {2/5}','2, 3, 5, 7 → {4/10} = {2/5}'],
+ ['6 കറുത്തതും 4 വെളുത്തതും മുത്തുകളുള്ള ചെപ്പിൽ P(കറുപ്പ്) + P(വെളുപ്പ്) എത്ര?','In a bag with 6 black and 4 white beads, find P(black) + P(white).','{6/10} + {4/10} = 1','{6/10} + {4/10} = 1']]},
+{id:'s2',h:['Step 2 – കൂടുതൽ ഉറപ്പിക്കാം','Step 2 – Build up'],sub:['രണ്ടോ മൂന്നോ ഘട്ടമുള്ള ചോദ്യങ്ങൾ. ഓരോന്നിനും 2 സ്കോർ.','Two or three step questions. 2 marks each.'],mk:2,qs:[
+ ['1 മുതൽ 50 വരെ സംഖ്യകളിൽനിന്ന് ഒന്നെടുത്താൽ 7 ന്റെ ഗുണിതമാകാനുള്ള സാധ്യത ദശാംശമായും ശതമാനമായും എഴുതുക.','One number from 1 to 50. Write the chance of a multiple of 7 as a decimal and a percentage.','7, 14, …, 49 → 7 സംഖ്യകൾ → {7/50} = 0.14 = 14%','7, 14, …, 49 → 7 numbers → {7/50} = 0.14 = 14%'],
+ ['എല്ലാ മൂന്നക്കസംഖ്യകളിൽനിന്നും ഒന്നെടുത്താൽ അത് 5 ന്റെ ഗുണിതമാകാനുള്ള സാധ്യത?','One number is taken from all three-digit numbers. Chance it is a multiple of 5?','100, 105, …, 995 → (995 − 100) ÷ 5 + 1 = 180 ; മൂന്നക്കസംഖ്യകൾ 900 → {180/900} = {1/5}','100, 105, …, 995 → (995 − 100)÷5 + 1 = 180 ; three-digit numbers 900 → {180/900} = {1/5}'],
+ ['രണ്ടക്കസംഖ്യകളിൽനിന്ന് ഒന്നെടുത്താൽ അത് 11 ന്റെ ഗുണിതമാകാനുള്ള സാധ്യത?','One two-digit number is taken. Chance it is a multiple of 11?','11, 22, …, 99 → 9 → {9/90} = {1/10}','11, 22, …, 99 → 9 → {9/90} = {1/10}'],
+ ['ചെപ്പ് A യിൽ 5 ചുവപ്പും 3 നീലയും, ചെപ്പ് B യിൽ 4 ചുവപ്പും 2 നീലയും മുത്തുകളാണ്. ചുവപ്പ് കിട്ടാൻ കൂടുതൽ സാധ്യത ഏത് ചെപ്പിൽനിന്ന്?','Bag A has 5 red and 3 blue beads; bag B has 4 red and 2 blue. From which bag is red more likely?','A: {5/8} ; B: {4/6} = {2/3}. വിലങ്ങനെ ഗുണിക്കുക: 5×3 = 15 , 2×8 = 16 → {2/3} വലുത് → <b>ചെപ്പ് B</b>','A: {5/8} ; B: {4/6} = {2/3}. Cross-multiply: 5×3 = 15 , 2×8 = 16 → {2/3} is bigger → <b>bag B</b>'],
+ ['20 സെ.മീ × 10 സെ.മീ ഉള്ള ഒരു ചതുരബോർഡിനകത്ത് 10 സെ.മീ × 4 സെ.മീ ഉള്ള ഒരു ചതുരം ചായം പൂശിയിരിക്കുന്നു. ബോർഡിൽ കണ്ണടച്ച് കുത്തിട്ടാൽ ചായം പൂശിയ ഭാഗത്താകാനുള്ള സാധ്യത?','A 20 cm × 10 cm board has a 10 cm × 4 cm rectangle painted on it. A dot is dropped blindly on the board. Chance it lands on the painted part?','{40/200} = {1/5}','{40/200} = {1/5}'],
+ ['ഒരു പെട്ടിയിൽ 1 മുതൽ 6 വരെയും മറ്റൊന്നിൽ 1 മുതൽ 3 വരെയും എഴുതിയ കടലാസുകളുണ്ട്. ഓരോന്നിൽനിന്നുമെടുത്താൽ രണ്ടും ഇരട്ടസംഖ്യയാകാനുള്ള സാധ്യത?','One box has slips 1 to 6 and another has 1 to 3. One slip from each. Chance both are even?','ആകെ 6 × 3 = 18 ; ഇരട്ട: 3 × 1 = 3 → {3/18} = {1/6}','Total 6 × 3 = 18 ; even: 3 × 1 = 3 → {3/18} = {1/6}'],
+ ['ഒരു പെട്ടിയിൽ 1 മുതൽ 8 വരെയും മറ്റൊന്നിൽ 1 മുതൽ 5 വരെയും എഴുതിയ കടലാസുകൾ. ഓരോന്നിൽനിന്നുമെടുത്താൽ തുക ഇരട്ടസംഖ്യയാകാനുള്ള സാധ്യത?','One box has slips 1 to 8 and another 1 to 5. One slip from each. Chance the sum is even?','ആകെ 8 × 5 = 40. രണ്ടും ഒറ്റ: 4 × 3 = 12 ; രണ്ടും ഇരട്ട: 4 × 2 = 8. ആകെ 20 → {20/40} = {1/2}','Total 8 × 5 = 40. Both odd: 4 × 3 = 12 ; both even: 4 × 2 = 8. Total 20 → {20/40} = {1/2}'],
+ ['ഒരു നാണയം എറിയുകയും ഒരു പകിട ഉരുട്ടുകയും ചെയ്യുന്നു. തല വരികയും ഇരട്ടസംഖ്യ കിട്ടുകയും ചെയ്യാനുള്ള സാധ്യത?','A coin is tossed and a die is rolled. Chance of a head and an even number?','ആകെ 2 × 6 = 12 ; (തല,2), (തല,4), (തല,6) → 3 → {3/12} = {1/4}','Total 2 × 6 = 12 ; (H,2), (H,4), (H,6) → 3 → {3/12} = {1/4}'],
+ ['1 മുതൽ 200 വരെ സംഖ്യകളിൽനിന്ന് ഒന്നെടുത്താൽ അത് പൂർണ്ണവർഗ്ഗമാകാനുള്ള സാധ്യത ഭിന്നസംഖ്യയായും ശതമാനമായും എഴുതുക.','One number from 1 to 200. Write the chance of a perfect square as a fraction and a percentage.','1², 2², …, 14² (14² = 196) → 14 → {14/200} = {7/100} = 7%','1², 2², …, 14² (14² = 196) → 14 → {14/200} = {7/100} = 7%']]},
+{id:'s3',h:['Step 3 – പരീക്ഷയ്ക്ക് തയ്യാറാകാം','Step 3 – Exam ready'],sub:['പരീക്ഷാരീതിയിലുള്ള ചോദ്യങ്ങൾ. 3, 4 സ്കോർ.','Exam-style questions. 3 and 4 marks.'],mk:0,qs:[
+ ['(3 സ്കോർ) ഒരു കൊട്ടയിൽ 40 ഓറഞ്ചുണ്ട്, അതിൽ 8 എണ്ണം കേടാണ്. മറ്റൊരു കൊട്ടയിൽ 25 ഓറഞ്ച്, അതിൽ 5 കേട്. ഓരോ കൊട്ടയിൽനിന്നും ഒന്നു വീതമെടുത്താൽ (i) രണ്ടും നല്ലത് (ii) രണ്ടും കേട് (iii) ഒരെണ്ണമെങ്കിലും നല്ലത് – ഇവയുടെ സാധ്യത കണ്ടെത്തുക.','(3 marks) One basket has 40 oranges of which 8 are rotten; another has 25 oranges of which 5 are rotten. One orange from each basket. Find the chance that (i) both are good (ii) both are rotten (iii) at least one is good.','ആകെ ജോടികൾ 40 × 25 = 1000. നല്ലത്: 32, 20.<br>(i) 32 × 20 = 640 → {640/1000} = {16/25}.<br>(ii) 8 × 5 = 40 → {40/1000} = {1/25}.<br>(iii) 1 − {1/25} = {24/25}.','Total pairs 40 × 25 = 1000. Good: 32 and 20.<br>(i) 32 × 20 = 640 → {640/1000} = {16/25}.<br>(ii) 8 × 5 = 40 → {40/1000} = {1/25}.<br>(iii) 1 − {1/25} = {24/25}.'],
+ ['(4 സ്കോർ) 10 A യിൽ 24 ആൺകുട്ടികളും 16 പെൺകുട്ടികളും, 10 B യിൽ 20 ആൺകുട്ടികളും 20 പെൺകുട്ടികളുമുണ്ട്. ഓരോ ക്ലാസിൽ നിന്നും ഒരാളെ തിരഞ്ഞെടുക്കുന്നു. (i) രണ്ടും പെൺകുട്ടികൾ (ii) രണ്ടും ആൺകുട്ടികൾ (iii) ഒരാൾ ആൺ, ഒരാൾ പെൺ (iv) ഒരാളെങ്കിലും പെൺകുട്ടി – സാധ്യത?','(4 marks) 10 A has 24 boys and 16 girls; 10 B has 20 boys and 20 girls. One student is chosen from each class. Chance of (i) both girls (ii) both boys (iii) one boy and one girl (iv) at least one girl?','ആകെ 40 × 40 = 1600.<br>(i) 16 × 20 = 320 → {320/1600} = {1/5}.<br>(ii) 24 × 20 = 480 → {480/1600} = {3/10}.<br>(iii) 24×20 + 16×20 = 480 + 320 = 800 → {1/2}.<br>(iv) 1 − {3/10} = {7/10}.<br>പരിശോധന: 320 + 480 + 800 = 1600 ✓','Total 40 × 40 = 1600.<br>(i) 16 × 20 = 320 → {320/1600} = {1/5}.<br>(ii) 24 × 20 = 480 → {480/1600} = {3/10}.<br>(iii) 24×20 + 16×20 = 480 + 320 = 800 → {1/2}.<br>(iv) 1 − {3/10} = {7/10}.<br>Check: 320 + 480 + 800 = 1600 ✓'],
+ ['(3 സ്കോർ) 1, 2, 3, 4 അക്കങ്ങൾ ഉപയോഗിച്ച് (അക്കങ്ങൾ ആവർത്തിക്കാം) രണ്ടക്കസംഖ്യകളെഴുതുന്നു. ഒരു സംഖ്യയെടുത്താൽ (i) അക്കങ്ങളുടെ തുക 5 (ii) രണ്ടക്കങ്ങളും തുല്യം (iii) സംഖ്യ 30 ൽ കൂടുതൽ – സാധ്യത?','(3 marks) Two-digit numbers are written using digits 1, 2, 3, 4 (repetition allowed). One is taken. Chance that (i) digit sum is 5 (ii) both digits are equal (iii) the number is greater than 30?','ആകെ 4 × 4 = 16.<br>(i) 14, 23, 32, 41 → {4/16} = {1/4}.<br>(ii) 11, 22, 33, 44 → {1/4}.<br>(iii) 31–34, 41–44 → 8 → {8/16} = {1/2}.','Total 4 × 4 = 16.<br>(i) 14, 23, 32, 41 → {4/16} = {1/4}.<br>(ii) 11, 22, 33, 44 → {1/4}.<br>(iii) 31–34, 41–44 → 8 → {8/16} = {1/2}.'],
+ ['(3 സ്കോർ) ചക്രം A യിൽ 1 മുതൽ 6 വരെയും ചക്രം B യിൽ 1 മുതൽ 4 വരെയും സംഖ്യകളുണ്ട്. രണ്ടും ഒരിക്കൽ വീതം കറക്കുമ്പോൾ (i) ഗുണനഫലം ഇരട്ടസംഖ്യ (ii) തുക 5 – സാധ്യത?','(3 marks) Wheel A is numbered 1 to 6 and wheel B 1 to 4. Each is spun once. Chance that (i) the product is even (ii) the sum is 5?','ആകെ 6 × 4 = 24.<br>(i) ഗുണനഫലം ഒറ്റ: 3 × 2 = 6. ഇരട്ട = 24 − 6 = 18 → {18/24} = {3/4}.<br>(ii) (1,4), (2,3), (3,2), (4,1) → {4/24} = {1/6}.','Total 6 × 4 = 24.<br>(i) Product odd: 3 × 2 = 6. Even = 24 − 6 = 18 → {18/24} = {3/4}.<br>(ii) (1,4), (2,3), (3,2), (4,1) → {4/24} = {1/6}.'],
+ ['(3 സ്കോർ) 20 സെ.മീ വശമുള്ള സമചതുരബോർഡിൽ അതിനകത്ത് കൃത്യമായി ചേർന്നുള്ള ഒരു വൃത്തം വരച്ചിരിക്കുന്നു. കണ്ണടച്ച് കുത്തിട്ടാൽ (i) വൃത്തത്തിനകത്ത് (ii) വൃത്തത്തിനു പുറത്ത് – സാധ്യത? (π ≈ 3.14)','(3 marks) A square board of side 20 cm has a circle drawn exactly inside it. A dot is dropped blindly. Chance it lands (i) inside the circle (ii) outside the circle? (π ≈ 3.14)','വൃത്തത്തിന്റെ ആരം 10 സെ.മീ.<br>(i) {π × 10²/20²} = {π/4} ≈ 0.785.<br>(ii) 1 − {π/4} ≈ 1 − 0.785 = 0.215.','Radius of the circle is 10 cm.<br>(i) {π × 10²/20²} = {π/4} ≈ 0.785.<br>(ii) 1 − {π/4} ≈ 1 − 0.785 = 0.215.'],
+ ['(3 സ്കോർ) സമഷഡ്ഭുജത്തിന്റെ കേന്ദ്രത്തെ മൂലകളുമായി യോജിപ്പിച്ച് 6 തുല്യ ത്രികോണങ്ങളാക്കി. അവയിൽ 4 എണ്ണത്തിന് ചായം പൂശി. ഹെക്സഗണിൽ കുത്തിട്ടാൽ ചായമുള്ള ഭാഗത്താകാനുള്ള സാധ്യത എത്ര? ഒന്നിടവിട്ട മൂലകൾ ചേർത്ത ത്രികോണത്തിനകത്താകാനുള്ള സാധ്യത എത്ര?','(3 marks) The centre of a regular hexagon is joined to its vertices making 6 equal triangles; 4 of them are painted. Chance a dot lands on the painted part? Chance it lands inside the triangle joining alternate vertices?','{4/6} = {2/3}.<br>ഒന്നിടവിട്ട മൂലകൾ ചേർത്ത ത്രികോണം ഷഡ്ഭുജത്തിന്റെ പകുതി → {1/2}.','{4/6} = {2/3}.<br>The triangle on alternate vertices is half of the hexagon → {1/2}.'],
+ ['(3 സ്കോർ) തെറ്റ് കണ്ടെത്തുക: "രണ്ടു പകിട ഉരുട്ടുമ്പോൾ തുക 2 മുതൽ 12 വരെ 11 സാധ്യതകളുണ്ട്, അതിനാൽ തുക 12 കിട്ടാനുള്ള സാധ്യത {1/11}." ശരിയുത്തരം എഴുതുക. തുക 7 കിട്ടാനുള്ള സാധ്യതയും കണ്ടെത്തുക.','(3 marks) Find the error: "Two dice give sums 2 to 12, which is 11 possibilities, so the chance of sum 12 is {1/11}." Write the correct answer. Also find the chance of sum 7.','11 തുകകൾ ഉണ്ടെങ്കിലും എല്ലാറ്റിനും തുല്യസാധ്യതയില്ല. തുല്യസാധ്യതയുള്ളത് 6 × 6 = 36 ജോടികൾക്കാണ്.<br>തുക 12 → (6,6) മാത്രം → {1/36}.<br>തുക 7 → 6 ജോടികൾ → {6/36} = {1/6}.','Although there are 11 sums, they are not equally likely. The equally likely outcomes are the 6 × 6 = 36 pairs.<br>Sum 12 → only (6,6) → {1/36}.<br>Sum 7 → 6 pairs → {6/36} = {1/6}.'],
+ ['(4 സ്കോർ) ഒരു പെട്ടിയിൽ 1 മുതൽ 12 വരെയും മറ്റൊരു പെട്ടിയിൽ 1 മുതൽ 4 വരെയും എഴുതിയ കടലാസുകളുണ്ട്. ഓരോന്നിൽ നിന്നും ഒന്നെടുത്താൽ (i) രണ്ടും ഒറ്റസംഖ്യ (ii) ഗുണനഫലം ഇരട്ടസംഖ്യ (iii) രണ്ടും ഒരേ സംഖ്യ – സാധ്യത?','(4 marks) One box has slips 1 to 12 and another 1 to 4. One slip from each. Chance that (i) both are odd (ii) the product is even (iii) both numbers are the same?','ആകെ 12 × 4 = 48.<br>(i) 6 × 2 = 12 → {12/48} = {1/4}.<br>(ii) ഗുണനഫലം ഒറ്റ = രണ്ടും ഒറ്റ = 12. ഇരട്ട = 48 − 12 = 36 → {36/48} = {3/4}.<br>(iii) (1,1), (2,2), (3,3), (4,4) → 4 → {4/48} = {1/12}.','Total 12 × 4 = 48.<br>(i) 6 × 2 = 12 → {12/48} = {1/4}.<br>(ii) Product odd = both odd = 12. Even = 48 − 12 = 36 → {36/48} = {3/4}.<br>(iii) (1,1), (2,2), (3,3), (4,4) → 4 → {4/48} = {1/12}.']]}
+];
+var ph='<h2>'+B('പരിശീലന ചോദ്യങ്ങൾ','Practice questions')+'</h2>'+P('Step 1 ൽ തുടങ്ങി Step 3 വരെ പോകുക. ഓരോ ചോദ്യത്തിനും സ്വയം ഉത്തരമെഴുതിയ ശേഷം ഉത്തരം പരിശോധിക്കുക.','Start at Step 1 and move through to Step 3. Write your own answer first, then check.');
+PR.forEach(function(s){
+  ph+='<div class="card"><h3><span class="tag">'+s.id.toUpperCase().replace('S','Step ')+'</span> '+B(s.h[0].replace(/^Step \d – /,''),s.h[1].replace(/^Step \d – /,''))+'</h3>'+P(s.sub[0],s.sub[1]);
+  s.qs.forEach(function(q,i){
+    var mk=s.mk?'<span class="mk">'+s.mk+' mark'+(s.mk>1?'s':'')+'</span>':'';
+    ph+='<div class="q"><div class="qh"><span class="qn">'+(i+1)+'</span><div class="qt">'+B(q[0],q[1])+mk+'</div></div><details class="ans"><summary>Show answer</summary><div class="a">'+B(q[2],q[3])+'</div></details></div>';
+  });
+  ph+='</div>';
+});
+document.getElementById('p-practice').innerHTML=ph;
+
+/* ============ 20-MARK TEST ============ */
+var TOPICS={a:['അടിസ്ഥാനാശയവും താരതമ്യവും','Basic idea & comparing'],b:['സംഖ്യാസാധ്യത','Probability with numbers'],c:['ജ്യാമിതീയസാധ്യത','Geometric probability'],d:['ജോടികൾ','Pairs & "at least one"']};
+var QZ=[
+{t:'a',q:['ഒരു ചെപ്പിൽ 3 ചുവന്ന മുത്തും 7 നീല മുത്തുമുണ്ട്. നോക്കാതെ ഒരു മുത്തെടുത്താൽ അത് ചുവപ്പാകാനുള്ള സാധ്യത എത്ര?','A bag has 3 red and 7 blue beads. One bead is taken without looking. What is the chance that it is red?'],o:['{3/7}','{3/10}','{7/10}','{1/3}'],a:1,e:['ചുവപ്പ് 3, ആകെ 3 + 7 = 10 → {3/10}.','Red = 3, total = 3 + 7 = 10 → {3/10}.']},
+{t:'a',q:['ചെപ്പ് A യിൽ 6 കറുത്തതും 5 വെളുത്തതും, ചെപ്പ് B യിൽ 5 കറുത്തതും 4 വെളുത്തതുമായ മുത്തുകളുണ്ട്. കറുത്ത മുത്ത് കിട്ടാൻ കൂടുതൽ സാധ്യത ഏത് ചെപ്പിൽ നിന്നെടുക്കുമ്പോൾ?','Bag A has 6 black and 5 white beads; bag B has 5 black and 4 white. From which bag is a black bead more likely?'],o:[['ചെപ്പ് A','Bag A'],['ചെപ്പ് B','Bag B'],['രണ്ടിലും തുല്യം','Equal in both'],['പറയാൻ കഴിയില്ല','Cannot say']],a:1,e:['A: {6/11}, B: {5/9}. 6×9 = 54 , 5×11 = 55 → {5/9} വലുത്.','A: {6/11}, B: {5/9}. 6×9 = 54 , 5×11 = 55 → {5/9} is bigger.']},
+{t:'a',q:['മുകളിലെ ചെപ്പ് B യിൽ (5 കറുപ്പ്, 4 വെളുപ്പ്) നിന്ന് വെളുത്ത മുത്ത് കിട്ടാനുള്ള സാധ്യത?','From bag B above (5 black, 4 white), what is the chance of a white bead?'],o:['{5/9}','{4/5}','{4/9}','{1/9}'],a:2,e:['വെളുപ്പ് 4, ആകെ 9 → {4/9}.','White = 4, total = 9 → {4/9}.']},
+{t:'b',q:['1 മുതൽ 25 വരെ സംഖ്യകളെഴുതിയ കടലാസുകളിൽ നിന്ന് ഒന്നെടുത്താൽ അത് ഇരട്ടസംഖ്യയാകാനുള്ള സാധ്യത?','One slip is drawn from slips numbered 1 to 25. Chance that it is an even number?'],o:['{13/25}','{12/25}','{1/2}','{12/13}'],a:1,e:['2, 4, …, 24 → 12 ഇരട്ടസംഖ്യകൾ → {12/25}.','2, 4, …, 24 → 12 even numbers → {12/25}.']},
+{t:'b',q:['1, 2, 3, …, 100 ൽ നിന്ന് ഒരു സംഖ്യയെടുത്താൽ അത് രണ്ടക്കസംഖ്യയാകാനുള്ള സാധ്യത?','One number is taken from 1, 2, 3, …, 100. Chance that it is a two-digit number?'],o:['{1/10}','{99/100}','{9/10}','{89/100}'],a:2,e:['രണ്ടക്കസംഖ്യകൾ 10 മുതൽ 99 വരെ = 90 → {90/100} = {9/10}.','Two-digit numbers: 10 to 99 = 90 → {90/100} = {9/10}.']},
+{t:'b',q:['1, 2, 3, …, 10 ൽ നിന്ന് ഒന്നെടുത്താൽ അത് അഭാജ്യസംഖ്യയാകാനുള്ള സാധ്യത?','One number is taken from 1, 2, 3, …, 10. Chance that it is a prime number?'],o:['{2/5}','{1/2}','{3/10}','{1/5}'],a:0,e:['2, 3, 5, 7 → 4 → {4/10} = {2/5}.','2, 3, 5, 7 → 4 → {4/10} = {2/5}.']},
+{t:'b',q:['1000 = 2³ × 5³ ആണ്. 1000 ന് ആകെ എത്ര ഘടകങ്ങളുണ്ട്?','1000 = 2³ × 5³. How many factors does 1000 have in all?'],o:['6','8','12','16'],a:3,e:['(3 + 1) × (3 + 1) = 16.','(3 + 1) × (3 + 1) = 16.']},
+{t:'b',q:['ഒരു സാധ്യത {2/125} ആണ്. ഇതിനെ ശതമാനമായി എഴുതിയാൽ?','A probability is {2/125}. Written as a percentage it is:'],o:['12.5%','16%','1.6%','0.16%'],a:2,e:['{2/125} = 0.016 ; 0.016 × 100 = 1.6%.','{2/125} = 0.016 ; 0.016 × 100 = 1.6%.']},
+{t:'b',q:['എല്ലാ മൂന്നക്കസംഖ്യകളും ഓരോ കടലാസിലെഴുതി ഒന്നെടുത്താൽ അത് ഇരുവഴി (palindrome) സംഖ്യയാകാനുള്ള സാധ്യത?','All three-digit numbers are written on slips and one is drawn. Chance that it is a palindrome (reads the same both ways)?'],o:['{1/100}','{9/100}','{1/9}','{1/10}'],a:3,e:['ഇരുവഴി സംഖ്യകൾ 9 × 10 = 90 ; മൂന്നക്കസംഖ്യകൾ 900 → {90/900} = {1/10}.','Palindromes: 9 × 10 = 90 ; three-digit numbers: 900 → {90/900} = {1/10}.']},
+{t:'b',q:['രണ്ടക്കസംഖ്യകളിൽ നിന്ന് ഒന്നെടുത്താൽ അത് പൂർണ്ണവർഗ്ഗമാകാനുള്ള സാധ്യത?','One number is taken from the two-digit numbers. Chance that it is a perfect square?'],o:['{1/10}','{1/15}','{1/9}','{6/100}'],a:1,e:['16, 25, 36, 49, 64, 81 → 6 ; ആകെ 90 → {6/90} = {1/15}.','16, 25, 36, 49, 64, 81 → 6 ; total 90 → {6/90} = {1/15}.']},
+{t:'c',q:['8 തുല്യ ഭാഗങ്ങളുള്ള ഒരു വട്ടത്തിൽ 3 ഭാഗം മഞ്ഞയാണ്. കറക്കി നിർത്തുമ്പോൾ അമ്പടയാളം മഞ്ഞയ്ക്ക് നേരെ വരാനുള്ള സാധ്യത?','A disc has 8 equal parts and 3 of them are yellow. Chance that the arrow stops on yellow?'],o:['{3/5}','{5/8}','{1/3}','{3/8}'],a:3,e:['3 അനുകൂലഭാഗം, ആകെ 8 → {3/8}.','3 favourable parts out of 8 → {3/8}.']},
+{t:'c',q:['ഒരു ചതുരത്തിനകത്ത്, ചതുരത്തിന്റെ അതേ പാദവും അതേ ഉയരവുമുള്ള ഒരു ത്രികോണം വരച്ചിരിക്കുന്നു. ചതുരത്തിൽ കണ്ണടച്ച് കുത്തിട്ടാൽ അത് ത്രികോണത്തിനകത്താകാനുള്ള സാധ്യത?','A triangle with the same base and height as a rectangle is drawn inside it. A dot is dropped blindly on the rectangle. Chance that it lands inside the triangle?'],o:['{1/3}','{1/4}','{1/2}','{2/3}'],a:2,e:['ത്രികോണത്തിന്റെ പരപ്പളവ് ചതുരത്തിന്റെ പകുതി → {1/2}.','Area of the triangle is half the area of the rectangle → {1/2}.']},
+{t:'c',q:['ഒരു സമചതുരത്തിന്റെ വശങ്ങളുടെ മധ്യബിന്ദുക്കൾ യോജിപ്പിച്ച് ഒരു സമചതുരം വരച്ചു. വലിയ സമചതുരത്തിൽ കുത്തിട്ടാൽ അത് ചെറിയ സമചതുരത്തിനകത്താകാനുള്ള സാധ്യത?','A square is drawn by joining the midpoints of the sides of a square. A dot is dropped on the big square. Chance that it lands inside the small square?'],o:['{1/2}','{1/4}','{1/3}','{3/4}'],a:0,e:['ചെറിയ സമചതുരത്തിന്റെ പരപ്പളവ് വലിയതിന്റെ പകുതിയാണ് → {1/2}.','The inner square has half the area of the outer one → {1/2}.']},
+{t:'c',q:['ഒരു സമചതുരത്തിനകത്ത് കൃത്യമായി ചേർന്നിരിക്കുന്ന ഒരു വൃത്തം വരച്ചിരിക്കുന്നു. സമചതുരത്തിൽ കുത്തിട്ടാൽ വൃത്തത്തിനകത്താകാനുള്ള സാധ്യത?','A circle fits exactly inside a square. A dot is dropped on the square. Chance that it lands inside the circle?'],o:['{1/2}','{π/4}','{4/π}','{2/π}'],a:1,e:['ആരം r → വൃത്തം πr², സമചതുരം (2r)² = 4r² → {π/4}.','Radius r → circle πr², square (2r)² = 4r² → {π/4}.']},
+{t:'d',q:['ജോണിക്ക് ചുവപ്പ്, പച്ച, നീല നിറങ്ങളിൽ 3 ഷർട്ടുകളും നീല, പച്ച നിറങ്ങളിൽ 2 പാന്റ്സുകളുമുണ്ട്. ഒരു ഷർട്ടും ഒരു പാന്റ്സുമെടുത്താൽ രണ്ടും ഒരേ നിറമാകാനുള്ള സാധ്യത?','Johnny has red, green and blue shirts and blue and green trousers. He picks one shirt and one pair of trousers. Chance that both are the same colour?'],o:['{1/6}','{1/2}','{1/3}','{2/3}'],a:2,e:['ആകെ 3 × 2 = 6 ; ഒരേ നിറം (പച്ച-പച്ച, നീല-നീല) 2 → {2/6} = {1/3}.','Total 3 × 2 = 6 ; same colour (green-green, blue-blue) 2 → {2/6} = {1/3}.']},
+{t:'d',q:['ഒരു പെട്ടിയിൽ 1, 2, 3, 4 എന്നെഴുതിയ 4 കടലാസുകളും മറ്റൊരു പെട്ടിയിൽ 1, 2 എന്നെഴുതിയ 2 കടലാസുകളുമുണ്ട്. ഓരോന്നിൽ നിന്നും ഓരോന്നെടുത്താൽ ആകെ എത്ര സംഖ്യാജോടികൾ കിട്ടും?','Box 1 has slips 1, 2, 3, 4 and box 2 has slips 1, 2. One slip is taken from each. How many number pairs are possible in all?'],o:['8','4','6','12'],a:0,e:['4 × 2 = 8.','4 × 2 = 8.']},
+{t:'d',q:['മുകളിലെ പെട്ടികളിൽ നിന്ന് ഓരോ കടലാസെടുത്താൽ രണ്ടും ഒറ്റസംഖ്യയാകാനുള്ള സാധ്യത?','From the same two boxes, one slip from each. Chance that both are odd?'],o:['{1/2}','{1/8}','{3/8}','{1/4}'],a:3,e:['(1,1), (3,1) → 2 ; ആകെ 8 → {2/8} = {1/4}.','(1,1), (3,1) → 2 ; total 8 → {2/8} = {1/4}.']},
+{t:'d',q:['ഒരു പെട്ടിയിൽ 1 മുതൽ 10 വരെയും മറ്റൊന്നിൽ 1 മുതൽ 5 വരെയും എഴുതിയ കടലാസുകളുണ്ട്. ഓരോന്നിൽ നിന്നും ഒന്നെടുത്താൽ രണ്ടും ഒറ്റസംഖ്യയാകാനുള്ള സാധ്യത?','One box has slips 1 to 10 and another has 1 to 5. One slip from each. Chance that both are odd?'],o:['{3/10}','{1/4}','{1/2}','{3/5}'],a:0,e:['ഒറ്റ: 5 × 3 = 15 ; ആകെ 10 × 5 = 50 → {15/50} = {3/10}.','Odd: 5 × 3 = 15 ; total 10 × 5 = 50 → {15/50} = {3/10}.']},
+{t:'d',q:['ഒരു കുട്ടയിൽ 50 മാങ്ങ, അതിൽ 20 പഴുത്തിട്ടില്ല. മറ്റൊരു കുട്ടയിൽ 40 മാങ്ങ, അതിൽ 15 പഴുത്തിട്ടില്ല. ഓരോന്നിൽ നിന്നും ഒരു മാങ്ങയെടുത്താൽ രണ്ടും പഴുത്തതാകാനുള്ള സാധ്യത?','One basket has 50 mangoes of which 20 are unripe; another has 40 mangoes of which 15 are unripe. One mango from each. Chance that both are ripe?'],o:['{5/8}','{3/20}','{3/8}','{17/20}'],a:2,e:['പഴുത്തത് 30, 25 → 30 × 25 = 750 ; ആകെ 2000 → {750/2000} = {3/8}.','Ripe: 30 and 25 → 30 × 25 = 750 ; total 2000 → {750/2000} = {3/8}.']},
+{t:'d',q:['10 A യിൽ 30 ആൺകുട്ടികളും 20 പെൺകുട്ടികളും; 10 B യിൽ 15 ആൺകുട്ടികളും 25 പെൺകുട്ടികളും. ഓരോ ക്ലാസിൽ നിന്നും ഒരാളെ തിരഞ്ഞെടുത്താൽ ഒരാളെങ്കിലും ആൺകുട്ടിയാകാനുള്ള സാധ്യത?','10 A has 30 boys and 20 girls; 10 B has 15 boys and 25 girls. One student from each class. Chance that at least one is a boy?'],o:['{9/40}','{21/40}','{1/4}','{3/4}'],a:3,e:['രണ്ടും പെൺകുട്ടികൾ: 20 × 25 = 500 → {500/2000} = {1/4}. ഒരാളെങ്കിലും ആൺ = 1 − {1/4} = {3/4}.','Both girls: 20 × 25 = 500 → {500/2000} = {1/4}. At least one boy = 1 − {1/4} = {3/4}.']}
+];
+function renderQuiz(){
+  document.getElementById('p-test').innerHTML='<h2>'+B('20 സ്കോർ ഒബ്ജക്ടീവ് ടെസ്റ്റ്','20-Mark Objective Test')+'</h2>'+
+  '<div class="card"><p>'+B('ഈ അധ്യായത്തിലെ പ്രധാന ആശയങ്ങൾ എത്രത്തോളം മനസ്സിലായി എന്ന് കണ്ടെത്താനുള്ള 20 ചോദ്യങ്ങൾ. ക്വിസ് പ്രത്യേക പേജിൽ ഒരു സമയം ഒരു ചോദ്യം വീതം വരും; അവസാനം ഫലവും ചോദ്യങ്ങളും ശരിയുത്തരങ്ങളും കാണാം.','20 questions to find out how well the main ideas of the chapter are understood. The quiz opens on its own page, one question at a time; at the end it shows the result along with every question and its correct answer.')+'</p>'+
+  '<div class="row"><a class="btn org" style="text-decoration:none" href="maths10-unit4-quiz.html" target="_blank" rel="noopener">Start quiz →</a><button class="btn alt" onclick="printTest(false)">Print question paper</button><button class="btn alt" onclick="printTest(true)">Print answer key</button></div></div>';
+}
+function printTest(key){
+  var ml=document.body.className==='lang-ml',i2=ml?0:1;
+  var css='body{font-family:"Noto Sans Malayalam",Arial,sans-serif;margin:24px;color:#000;line-height:1.6;font-size:14px}h1{font-size:19px;text-align:center;margin:0}h2{font-size:14px;text-align:center;margin:2px 0 10px;font-weight:normal}.meta{display:flex;justify-content:space-between;border:1px solid #000;padding:6px 10px;margin:8px 0}.q{margin:8px 0;page-break-inside:avoid}.o{display:inline-block;width:23%;vertical-align:top}.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.1;margin:0 2px}.fr .n{border-bottom:1px solid #000;padding:0 3px}.fr .d{padding:0 3px}table{border-collapse:collapse}td,th{border:1px solid #000;padding:4px 8px;text-align:center}.bub{display:inline-block;width:18px;height:18px;border:1.3px solid #000;border-radius:50%;margin:0 3px;font-size:10px;line-height:16px;text-align:center}';
+  var h='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>'+(key?'Answer Key':'Question Paper')+'</title><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam&display=swap" rel="stylesheet"><style>'+css+'</style></head><body>';
+  h+='<h1>ABACUS ACADEMY</h1><h2>Class X Mathematics · '+(ml?'സാധ്യതകളുടെ ഗണിതം':'Mathematics of Chances')+' · '+(key?'Answer Key':'Objective Test')+' · 20 marks · 20 minutes</h2>';
+  if(!key){
+    h+='<div class="meta"><span>Name: ____________________________</span><span>Class/Div: ________</span><span>Roll No: ______</span></div>';
+    h+='<p><i>'+(ml?'ഓരോ ചോദ്യത്തിനും ശരിയുത്തരം തിരഞ്ഞെടുത്ത് ഉത്തരപ്പട്ടികയിൽ അടയാളപ്പെടുത്തുക.':'Choose the correct answer for each question and mark it in the answer grid.')+'</i></p>';
+    QZ.forEach(function(q,i){
+      h+='<div class="q"><b>'+(i+1)+'.</b> '+fx(q.q[i2])+'<br>';
+      q.o.forEach(function(o,j){var t=typeof o==='string'?o:o[i2];h+='<span class="o">('+'ABCD'[j]+') '+fx(t)+'</span>';});
+      h+='</div>';
+    });
+    h+='<h3 style="margin-top:18px">'+(ml?'ഉത്തരപ്പട്ടിക':'Answer grid')+'</h3><table><tr>';
+    for(var k=0;k<20;k++){if(k===10)h+='</tr><tr>';h+='<td><b>'+(k+1)+'</b><br>'+['A','B','C','D'].map(function(l){return '<span class="bub">'+l+'</span>';}).join('')+'</td>';}
+    h+='</tr></table>';
+  }else{
+    h+='<table style="width:100%"><tr><th>No.</th><th>Ans.</th><th>Topic</th><th style="text-align:left">'+(ml?'വിശദീകരണം':'Explanation')+'</th></tr>';
+    QZ.forEach(function(q,i){var o=q.o[q.a];var t=typeof o==='string'?o:o[i2];h+='<tr><td>'+(i+1)+'</td><td><b>'+'ABCD'[q.a]+'</b> '+fx(t)+'</td><td>'+TOPICS[q.t][i2]+'</td><td style="text-align:left">'+fx(q.e[i2])+'</td></tr>';});
+    h+='</table>';
+  }
+  h+='</body></html>';
+  var w=window.open('','_blank');if(!w){alert('Please allow pop-ups to print.');return;}
+  w.document.open();w.document.write(h);w.document.close();setTimeout(function(){w.focus();w.print();},700);
+}
+renderQuiz();
+
+/* ============ TEACHER CORNER ============ */
+var key=QZ.map(function(q,i){return (i+1)+'-'+'ABCD'[q.a];}).join(' , ');
+document.getElementById('p-teacher').innerHTML=
+'<h2>'+B('അധ്യാപക സഹായി','Teacher Corner')+'</h2>'+
+'<div class="card"><h3>'+B('അധ്യായത്തിന്റെ വിശകലനം','Chapter analysis')+'</h3>'+LI([
+['അടിസ്ഥാനാശയം ഒന്നു മാത്രം: സാധ്യത = {അനുകൂലം/ആകെ} (തുല്യസാധ്യതയുള്ള ഫലങ്ങൾ). ബാക്കിയെല്ലാം ഇതിന്റെ വിവിധ രൂപങ്ങൾ: എണ്ണൽ, പരപ്പളവ്, ജോടികൾ.','There is just one core idea: probability = {favourable/total} (for equally likely outcomes). Everything else is a version of it: counting, area, pairs.'],
+['മുൻപഠനം: ഭിന്നസംഖ്യകൾ താരതമ്യം ചെയ്യൽ (6-ാം ക്ലാസ്), ഘടകങ്ങൾ (7-ാം ക്ലാസ്), ഇരുവഴി സംഖ്യകൾ (5-ാം ക്ലാസ്), ദശാംശം/ശതമാനം, പരപ്പളവ്.','Prerequisites: comparing fractions (Class 6), factors (Class 7), palindromes (Class 5), decimals and percentages, area.'],
+['പാഠത്തിലെ പ്രധാന കഴിവുകൾ: എണ്ണൽ കൃത്യമായി ചെയ്യൽ, ഭിന്നസംഖ്യ താരതമ്യം, രൂപമാറ്റം, അംശബന്ധം (പരപ്പളവ്), ഗുണനതത്വം, "ഒന്നെങ്കിലും" = 1 − "ഒന്നുമില്ല".','Key skills: careful counting, comparing fractions, converting forms, ratio of areas, multiplication principle, "at least one" = 1 − "none".'],
+['പരീക്ഷയ്ക്ക് സാധാരണ വരുന്ന രൂപങ്ങൾ: സംഖ്യാസാധ്യത (1–2 സ്കോർ), ജ്യാമിതീയസാധ്യത (2–3 സ്കോർ), രണ്ടു പെട്ടികൾ/ക്ലാസുകൾ/കൊട്ടകൾ ജോടികൾ (3–4 സ്കോർ).','Typical exam forms: number probability (1–2 marks), geometric probability (2–3 marks), pairs from two boxes/classes/baskets (3–4 marks).']
+])+'</div>'+
+'<div class="card"><h3>'+B('നിർദ്ദേശിക്കുന്ന പീരിയഡ് ക്രമം (7 പീരിയഡ്)','Suggested period plan (7 periods)')+'</h3><div class="scroll"><table class="t" style="text-align:left"><tr><th>#</th><th>'+B('ഭാഗം','Part')+'</th><th>'+B('പ്രവർത്തനം','Activity')+'</th></tr>'+
+'<tr><td>1</td><td>'+B('സാധ്യതകളും സംഖ്യകളും','Chances and numbers')+'</td><td>'+B('ചെപ്പും മുത്തും കളി (Explore 1); രണ്ടു ചെപ്പുകൾ താരതമ്യം','Bag and beads game (Explore 1); comparing two bags')+'</td></tr>'+
+'<tr><td>2</td><td>'+B('സംഖ്യാസാധ്യത','Number probability')+'</td><td>'+B('കടലാസുകഷണങ്ങൾ; ഘടകങ്ങളുടെ എണ്ണം; ഭിന്നം → ദശാംശം → ശതമാനം','Number slips; counting factors; fraction → decimal → percentage')+'</td></tr>'+
+'<tr><td>3</td><td>'+B('സംഖ്യാസാധ്യത (തുടർച്ച)','Number probability (contd.)')+'</td><td>'+B('പാഠപുസ്തകത്തിലെ പേജ് 76 ചോദ്യങ്ങൾ; ഇരുവഴി സംഖ്യകൾ, പൂർണ്ണവർഗ്ഗം എണ്ണൽ','Page 76 questions; counting palindromes and perfect squares')+'</td></tr>'+
+'<tr><td>4</td><td>'+B('ജ്യാമിതീയസാധ്യത','Geometric probability')+'</td><td>'+B('വട്ടം കറക്കൽ (Explore 2); കുത്തിടൽ (Explore 4); GeoGebra പ്രവർത്തനങ്ങൾ','Spinner (Explore 2); dot dropping (Explore 4); GeoGebra activities')+'</td></tr>'+
+'<tr><td>5</td><td>'+B('ജോടികൾ','Pairs')+'</td><td>'+B('ജോണിയുടെ വസ്ത്രങ്ങൾ; പെട്ടികളിലെ ജോടി പട്ടിക (Explore 3); ഗുണനതത്വം','Johnny\'s clothes; pair table (Explore 3); multiplication principle')+'</td></tr>'+
+'<tr><td>6</td><td>'+B('കൂടുതൽ ജോടികൾ','More pairs')+'</td><td>'+B('മാങ്ങക്കൊട്ട; "ഒന്നെങ്കിലും" രണ്ടു വഴികൾ; പേജ് 84 ചോദ്യങ്ങൾ','Mango baskets; two ways for "at least one"; page 84 questions')+'</td></tr>'+
+'<tr><td>7</td><td>'+B('ഉറപ്പിക്കലും വിലയിരുത്തലും','Consolidation and assessment')+'</td><td>'+B('20 സ്കോർ ടെസ്റ്റ്; ഫലം നോക്കി ആവശ്യമുള്ള ഭാഗം വീണ്ടും','20-mark test; revisit parts based on topic-wise results')+'</td></tr></table></div></div>'+
+'<div class="card"><h3>'+B('ക്ലാസ് മുറിയിലെ പ്രവർത്തനങ്ങൾ','Classroom activities')+'</h3>'+LI([
+['<b>യഥാർത്ഥ ചെപ്പ്:</b> ഒരു സഞ്ചിയിൽ 6 കറുത്തതും 5 വെളുത്തതും ബട്ടണുകളിട്ട് ഓരോ കുട്ടിയും 10 തവണ (എടുത്ത ശേഷം തിരിച്ചിട്ട്) എടുത്ത് കണക്ക് ബോർഡിൽ ചേർക്കുക. ക്ലാസിലെ ആകെ കണക്ക് {6/11} നോട് അടുക്കുന്നത് കാണിക്കുക.','<b>A real bag:</b> Put 6 black and 5 white buttons in a pouch. Each child draws 10 times (replacing each time) and adds the tally to the board. Show how the class total approaches {6/11}.'],
+['<b>പകിടകൾ:</b> ജോഡി പകിടകൾ 36 തവണ ഉരുട്ടി തുകകൾ രേഖപ്പെടുത്തുക; 7 ന് എന്ത് സംഭവിക്കുന്നു എന്ന് ചർച്ച ചെയ്യുക.','<b>Dice:</b> Roll a pair of dice 36 times and record the sums; discuss what happens with 7.'],
+['<b>നാണയം:</b> 10, 100 തവണ എറിഞ്ഞ് തലയുടെ അംശം പട്ടികയാക്കുക (പേജ് 81 ലെ പെട്ടിയുമായി ഒത്തുനോക്കാം).','<b>Coin:</b> Toss 10 and 100 times and tabulate the fraction of heads (compare with the box on page 81).'],
+['<b>GeoGebra (പേജ് 77, 78):</b> Polygon tool ഉപയോഗിച്ച് വൃത്തത്തിനകത്ത് ത്രികോണം വരച്ച്, Input Bar ൽ Area(t1)/Area(c) നൽകി അനുപാതം കാണുക. മൂലകൾ നീക്കി സാധ്യത ഏറ്റവും കൂടുന്നതും കുറയുന്നതും എപ്പോൾ എന്ന് കണ്ടെത്തിക്കുക.','<b>GeoGebra (pages 77, 78):</b> Draw a triangle inside a circle with the Polygon tool, type Area(t1)/Area(c) in the Input Bar and read the ratio. Move the vertices and ask when the chance is largest or smallest.']
+])+'</div>'+
+'<div class="card"><h3>'+B('കുട്ടികൾക്ക് പറ്റുന്ന സാധാരണ തെറ്റുകൾ','Common mistakes to watch for')+'</h3><div class="grid">'+
+'<div class="mini">'+P('<b>{6/5} എന്ന് എഴുതുന്നത്:</b> കറുപ്പ് : വെളുപ്പ് അംശബന്ധം എടുക്കുന്നു. ശരി: {6/11} (ആകെ മുത്തുകൾ ഛേദത്തിൽ).','<b>Writing {6/5}:</b> uses black : white ratio. Correct: {6/11} (total in the denominator).')+'</div>'+
+'<div class="mini">'+P('<b>എണ്ണൽ തെറ്റുന്നത്:</b> 1–100 ൽ രണ്ടക്കസംഖ്യകൾ 90 എന്നതിനു പകരം 100, 89 എന്നൊക്കെ എടുക്കുന്നു.','<b>Counting slips:</b> taking 100 or 89 instead of 90 two-digit numbers in 1–100.')+'</div>'+
+'<div class="mini">'+P('<b>ജോടികൾ കൂട്ടുന്നത്:</b> ആകെ ജോടികൾ 50 + 40 എന്ന് കൂട്ടുന്നു. ശരി: 50 × 40.','<b>Adding pair counts:</b> total pairs 50 + 40. Correct: 50 × 40.')+'</div>'+
+'<div class="mini">'+P('<b>"ഒന്നെങ്കിലും":</b> രണ്ടും വേണം എന്ന് വായിക്കുന്നു; അല്ലെങ്കിൽ 1 − P(ഒന്നുമില്ല) ഉപയോഗിക്കാൻ മറക്കുന്നു.','<b>"At least one":</b> read as "both"; or forgetting 1 − P(none).')+'</div>'+
+'<div class="mini">'+P('<b>രൂപമാറ്റം:</b> ദശാംശത്തെ ശതമാനമാക്കാൻ ×100 മറക്കുന്നു; {16/1000} = 1.6 എന്നെഴുതുന്നു.','<b>Conversion:</b> forgetting ×100; writing {16/1000} = 1.6 instead of 1.6%.')+'</div>'+
+'<div class="mini">'+P('<b>തുല്യസാധ്യത മറക്കുന്നത്:</b> പകിടയുടെ തുക 2 മുതൽ 12 വരെ 11 ഫലങ്ങൾ → {1/11}. ശരി: 36 ജോടികൾ.','<b>Equal likelihood ignored:</b> 11 sums → {1/11}. Correct: 36 pairs.')+'</div>'+
+'</div></div>'+
+'<div class="card"><h3>'+B('20 സ്കോർ ടെസ്റ്റ് – ഉപയോഗക്രമം','20-mark test – how to use')+'</h3>'+LI([
+['<b>20 Mark Test</b> ടാബിൽ നിന്ന് "Print question paper" എടുത്ത് ക്ലാസിൽ 20 മിനിറ്റ് നൽകാം; ഉത്തരപ്പട്ടികയിൽ കുട്ടികൾ അടയാളപ്പെടുത്തണം. "Print answer key" ൽ ഉത്തരവും ചെറിയ വിശദീകരണവുമുണ്ട്.','From the <b>20 Mark Test</b> tab print the question paper, give 20 minutes, and let children mark the answer grid. "Print answer key" has answers with short explanations.'],
+['പോർട്ടലിൽ നേരിട്ട് എഴുതിയാൽ ഫലത്തോടൊപ്പം നാല് ഭാഗങ്ങൾ തിരിച്ചുള്ള സ്കോർ കിട്ടും (അടിസ്ഥാനാശയം 3, സംഖ്യാസാധ്യത 7, ജ്യാമിതീയസാധ്യത 4, ജോടികൾ 6). "Copy result for teacher" / WhatsApp ബട്ടൺ ഉപയോഗിച്ച് ഫലം അയയ്ക്കാം.','If written on the portal, the result shows the score in four topics (basic idea 3, number probability 7, geometric probability 4, pairs 6). Use "Copy result for teacher" or the WhatsApp button to send it.'],
+['പോർട്ടലിൽ ഫലം സൂക്ഷിക്കുന്നില്ല; ഓരോ കുട്ടിയും പുറത്ത് കാണിക്കുന്ന സംഗ്രഹം പങ്കുവയ്ക്കണം.','The portal does not store results; each student shares the summary shown after submission.']
+])+
+'<h4>'+B('ഉത്തരസൂചിക','Answer key')+'</h4><div class="formula" style="font-size:15px;font-family:Poppins">'+key+'</div></div>';
+drawWheel();spinShow();bagSet();dartReset();pairDraw();
+</script>
+</body>
+</html>
