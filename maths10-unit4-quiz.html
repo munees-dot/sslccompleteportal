@@ -64,6 +64,23 @@ const client=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const QUIZ_SUBJECT='Maths';
 const QUIZ_CHAPTER='Probability';
 const QUIZ_NAME='Maths Unit 4 Quiz';
+const OPEN_HOUR=21, OPEN_MIN=0;
+const CLOSE_HOUR=22, CLOSE_MIN=0;
+
+function quizIsOpen(){
+  const now=new Date();
+  const minutes=now.getHours()*60+now.getMinutes();
+  return minutes >= (OPEN_HOUR*60+OPEN_MIN) && minutes < (CLOSE_HOUR*60+CLOSE_MIN);
+}
+function showClosed(){
+  app.innerHTML='<div class="card"><h2>'+B('ക്വിസ് ഇപ്പോൾ അടച്ചിരിക്കുന്നു','Quiz is currently closed')+'</h2>'+
+    '<div class="warn">'+B('ഈ ക്വിസ് രാത്രി 9:00 മുതൽ 10:00 വരെ മാത്രമേ ലഭ്യമാകൂ. രാത്രി 9:00 മണിക്ക് വീണ്ടും ശ്രമിക്കുക.','This quiz is available only from 9:00 PM to 10:00 PM. Please come back at 9:00 PM.')+'</div></div>';
+}
+function checkQuizTime(){
+  if(!quizIsOpen()){showClosed();return false;}
+  return true;
+}
+
 let verifiedStudent=null, saving=false;
 
 async function verifyAdmission(admissionNo){
@@ -120,6 +137,7 @@ var QZ=[
 var cur=0,ans=QZ.map(function(){return null;}),stu={name:'',div:''},app=document.getElementById('app'),LET='ABCD';
 
 function start(){
+  if(!checkQuizTime()) return;
   cur=0;ans=QZ.map(function(){return null;});verifiedStudent=null;saving=false;
   app.innerHTML='<div class="card"><h2>'+B('20 സ്കോർ ഒബ്ജക്ടീവ് ക്വിസ്','20-Mark Objective Quiz')+'</h2>'+
   '<p>'+B('ഒരു സമയം ഒരു ചോദ്യം മാത്രം കാണിക്കും. ശരിയുത്തരം തിരഞ്ഞെടുത്ത് <b>Next</b> അമർത്തുക. ഉത്തരം മാറ്റാൻ Previous അല്ലെങ്കിൽ താഴെയുള്ള നമ്പറുകൾ ഉപയോഗിക്കാം. അവസാനം ഫലവും ഓരോ ചോദ്യത്തിന്റെ ശരിയുത്തരവും കാണാം.','One question is shown at a time. Pick the correct answer and press <b>Next</b>. You can change answers with Previous or the numbers below. At the end you will see your result and the correct answer to every question.')+'</p>'+
@@ -129,6 +147,7 @@ function start(){
   '<button class="btn grn" id="startBtn" onclick="begin()">Verify & Start Quiz</button></div>';
 }
 async function begin(){
+  if(!checkQuizTime()) return;
   var btn=document.getElementById('startBtn'),msg=document.getElementById('verifyMsg');
   btn.disabled=true;msg.textContent='Verifying student...';
   try{
@@ -146,6 +165,7 @@ function go(d){cur=Math.max(0,Math.min(QZ.length-1,cur+d));showQ();}
 function jump(i){cur=i;showQ();}
 
 function showQ(){
+  if(!checkQuizTime()) return;
   var q=QZ[cur],n=ans.filter(function(x){return x!==null;}).length;
   var h='<div class="card"><div class="qno"><span>Question '+(cur+1)+' / '+QZ.length+'</span><span>Answered '+n+'</span></div>'+
   '<div class="bar"><i style="width:'+((cur+1)/QZ.length*100)+'%"></i></div>'+
@@ -160,6 +180,7 @@ function showQ(){
 }
 
 async function finish(){
+  if(!checkQuizTime()) return;
   var un=ans.filter(function(x){return x===null;}).length;
   if(un&&!confirm(un+' question(s) not answered. Submit anyway?'))return;
   if(!verifiedStudent){alert('Student verification is missing. Please restart the quiz.');return;}
@@ -220,6 +241,12 @@ function filt(onlyWrong){
   document.getElementById('rvlist').innerHTML=h||'<div class="card note">'+B('എല്ലാ ഉത്തരങ്ങളും ശരിയാണ്! 🎉','All answers are correct! 🎉')+'</div>';
 }
 function copySum(){try{navigator.clipboard.writeText(window._sum);alert('Copied');}catch(e){prompt('Copy:',window._sum);}}
+setInterval(function(){
+  if(!quizIsOpen() && !document.getElementById('rvlist')){
+    showClosed();
+  }
+},10000);
+
 start();
 </script>
 </body>
