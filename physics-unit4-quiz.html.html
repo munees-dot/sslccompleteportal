@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quiz · Magnetic Effect of Electric Current</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#f1f5fb;--card:#fff;--ink:#0f1c2e;--mut:#56657a;--line:#d7e0ec;--n:#e0483a;--s:#2457b8;--teal:#12b5a2;--amb:#f2a516;--vio:#7a4fd6;--hl:#fff3c4;--ok:#16895a;--bad:#c7342b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1320;--card:#14202f;--ink:#e9f0f8;--mut:#a2b2c4;--line:#27374a;--n:#ff7b6c;--s:#7fb0ff;--hl:#3b3512;--ok:#5fd09a;--bad:#ff8b82}}
+:root[data-theme="dark"]{--bg:#0a1320;--card:#14202f;--ink:#e9f0f8;--mut:#a2b2c4;--line:#27374a;--n:#ff7b6c;--s:#7fb0ff;--hl:#3b3512;--ok:#5fd09a;--bad:#ff8b82}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "Noto Sans Malayalam",system-ui,sans-serif}
+[data-l]{display:none}html[data-lang=en] [data-l=en],html[data-lang=ml] [data-l=ml]{display:revert}
+h1,h2,h3{font-family:"Bricolage Grotesque","Noto Sans Malayalam",sans-serif;line-height:1.25;margin:0 0 .5em}
+.hero{background:linear-gradient(135deg,#071a33,#17408f 60%,#12b5a2);color:#fff;position:relative;overflow:hidden;padding:max(22px,env(safe-area-inset-top,0px)) 20px 70px}
+.hero svg.f{position:absolute;right:-60px;top:10px;width:520px;max-width:90%;opacity:.35}
+.top{max-width:900px;margin:auto;display:flex;justify-content:space-between;align-items:center;position:relative;gap:10px}
+.top b{font-family:"Bricolage Grotesque",sans-serif;font-size:.95rem;opacity:.85}
+.lang{display:flex;background:rgba(255,255,255,.16);border-radius:999px;padding:3px}
+.lang button{border:0;background:none;color:#fff;padding:7px 15px;border-radius:999px;font:600 .9rem "Noto Sans Malayalam",sans-serif;cursor:pointer}
+.lang button[aria-pressed=true]{background:#fff;color:#17408f}
+.hw{max-width:900px;margin:34px auto 0;position:relative}
+.hero h1{font-size:clamp(1.9rem,6vw,3.2rem);font-weight:800;margin:0 0 10px}
+.hero p{margin:0;max-width:560px;opacity:.9}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.chips span{background:rgba(255,255,255,.16);padding:4px 12px;border-radius:999px;font-size:.85rem}
+nav{max-width:900px;margin:-30px auto 18px;padding:0 16px;position:sticky;top:env(safe-area-inset-top,0px);z-index:3}
+.tabs{display:flex;gap:4px;background:var(--card);border-radius:16px;padding:6px;box-shadow:0 6px 22px rgba(15,28,46,.16);overflow-x:auto}
+.tabs button{flex:1;white-space:nowrap;border:0;background:none;color:var(--mut);padding:10px 12px;border-radius:11px;font:600 .92rem "Noto Sans Malayalam",sans-serif;cursor:pointer}
+.tabs button[aria-selected=true]{background:linear-gradient(135deg,var(--s),var(--teal));color:#fff}
+button:focus-visible{outline:3px solid var(--amb);outline-offset:2px}
+main{max-width:900px;margin:auto;padding:0 16px 56px}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border-radius:16px;padding:22px;margin-bottom:18px;border-top:5px solid var(--c,var(--teal));box-shadow:0 2px 12px rgba(15,28,46,.07)}
+.card:nth-child(2){--c:var(--amb)}.card:nth-child(3){--c:var(--vio)}.card:nth-child(4){--c:var(--n)}
+.card h2{font-size:1.3rem;display:flex;gap:10px;align-items:center}.ic{font-size:1.5rem}
+.rule{background:var(--hl);border-radius:10px;padding:12px 16px;margin:12px 0;border-left:5px solid var(--amb)}
+ul{padding-left:20px;margin:.4em 0}li{margin:.2em 0}
+.mut{color:var(--mut);font-size:.92rem}
+table{border-collapse:separate;border-spacing:0;width:100%;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+td,th{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line)}th{background:color-mix(in srgb,var(--s) 14%,var(--card))}
+.demo{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.stage{background:radial-gradient(circle at 50% 60%,#16315a,#071426);border-radius:16px;padding:8px;flex:none;width:280px;max-width:100%}
+.stage svg{width:100%;display:block;color:#fff}
+.btn{background:linear-gradient(135deg,var(--s),var(--teal));color:#fff;border:0;padding:11px 20px;border-radius:12px;font:600 1rem "Noto Sans Malayalam",sans-serif;cursor:pointer}
+.btn.alt{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.qh{display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.pill{background:color-mix(in srgb,var(--teal) 20%,var(--card));padding:3px 12px;border-radius:999px;font-size:.9rem}
+.bar{height:8px;background:var(--line);border-radius:4px;margin:10px 0 20px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--s),var(--teal));transition:width .3s}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;margin:9px 0;padding:13px 14px;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;font:inherit;cursor:pointer}
+.opt i{flex:none;width:28px;height:28px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font:700 .85rem "Bricolage Grotesque",sans-serif;font-style:normal}
+.opt:hover:not(:disabled){border-color:var(--s)}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 15%,var(--card))}
+.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 15%,var(--card))}
+.fb{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--hl)}
+.big{font:800 4rem "Bricolage Grotesque",sans-serif;margin:0;background:linear-gradient(135deg,var(--s),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+@media(prefers-reduced-motion:no-preference){.hero svg.f{animation:sp 40s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}}
+</style></head><body>
+<div class="hero" style="padding-bottom:60px"><div class="top"><a id="back" style="color:#fff;font-weight:600;text-decoration:none"><span data-l="en">← Study notes</span><span data-l="ml">← പഠനക്കുറിപ്പുകൾ</span></a>
+<div class="lang" role="group" aria-label="Medium"><button data-g="ml">മലയാളം</button><button data-g="en">English</button></div></div>
+<div class="hw" style="margin-top:22px"><h1><span data-l="en">Quiz: Magnetic Effect of Electric Current</span><span data-l="ml">ക്വിസ്: വൈദ്യുതിയുടെ കാന്തികഫലം</span></h1><p data-l="en">20 questions. Pick an answer to see the explanation.</p><p data-l="ml">20 ചോദ്യങ്ങൾ. ഉത്തരം തിരഞ്ഞെടുത്താൽ വിശദീകരണം കാണാം.</p></div></div>
+<main style="margin-top:-34px;position:relative"><div class="card" id="qbox"></div></main>
+<script>
+const PORTAL="index.html";
+const $=s=>document.querySelector(s),R=document.documentElement;
+const lang=()=>R.dataset.lang,pk=(e,m)=>lang()==='ml'?m:e;
+function setLang(l){R.dataset.lang=l;R.lang=l;document.querySelectorAll('[data-g]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.g===l));try{localStorage.setItem('lang',l)}catch(e){}$('#back').href=PORTAL+'?lang='+l;show()}
+document.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>setLang(b.dataset.g));
+const Q=[["Who discovered that a current-carrying conductor produces a magnetic field?","വൈദ്യുതി പ്രവഹിക്കുന്ന ചാലകത്തിനു ചുറ്റും കാന്തികമണ്ഡലമുണ്ടെന്ന് കണ്ടെത്തിയതാര്?",["Faraday","Ampere","Fleming","Ørsted"],
+["ഫാരഡെ","ആംപിയർ","ഫ്ലെമിങ്","ഈഴ്സ്റ്റഡ്"],3,"Ørsted's 1820 experiment linked electricity and magnetism."],
+["Which observation shows that a current-carrying wire creates a magnetic field?","വൈദ്യുതി പ്രവഹിക്കുന്ന കമ്പിക്ക് ചുറ്റും കാന്തികമണ്ഡലമുണ്ടെന്ന് തെളിയിക്കുന്നത് ഏതാണ്?",["A compass needle near it deflects when current flows","The wire becomes hot","The wire gets longer","The battery gets charged"],
+["കറന്റ് ഉള്ളപ്പോൾ കമ്പിക്ക് സമീപത്തെ കാന്തസൂചി വിഭ്രംശിക്കുന്നു","കമ്പി ചൂടാകുന്നു","കമ്പിയുടെ നീളം കൂടുന്നു","ബാറ്ററി ചാർജ് ആകുന്നു"],0,"A deflecting compass shows a magnetic field exists while current flows."],
+["If the current in a wire above a compass is reversed, the needle:","കാന്തസൂചിക്ക് മുകളിലെ കമ്പിയിലെ കറന്റ് വിപരീതമാക്കിയാൽ സൂചി:",["Stays put","Spins forever","Deflects the opposite way","Loses magnetism"],
+["ചലിക്കില്ല","നിരന്തരം കറങ്ങും","എതിർദിശയിൽ വിഭ്രംശിക്കും","കാന്തികത നഷ്ടപ്പെടും"],2,"Reversing the current reverses the field, so the deflection reverses."],
+["Which rule gives the field direction around a current-carrying wire?","ചാലകത്തിനു ചുറ്റുമുള്ള കാന്തികമണ്ഡലദിശ കണ്ടെത്താനുള്ള നിയമം?",["Right-hand thumb rule","Fleming's left-hand rule","Lenz's law","Ohm's law"],
+["വലതുകൈ പെരുവിരൽ നിയമം","ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമം","ലെൻസ് നിയമം","ഓം നിയമം"],0,"Thumb along the current; curled fingers show the field."],
+["Current in a loop is clockwise as you face it. That face is a:","ചാലകവലയത്തിൽ കറന്റ് ക്ലോക്ക്‌വൈസ് ആയി കാണുന്ന വശം:",["North pole","South pole","No pole","Both poles"],
+["നോർത്ത്‌പോൾ","സൗത്ത്‌പോൾ","ധ്രുവമില്ല","രണ്ടും"],1,"Clockwise current gives a South pole face."],
+["A solenoid end where the current is anticlockwise is the:","കറന്റ് ആന്റിക്ലോക്ക്‌വൈസ് ആയ സോളിനോയ്ഡ് അഗ്രം:",["South pole","Alternating","Neither","North pole"],
+["സൗത്ത്‌പോൾ","മാറിമാറി വരും","ഒന്നുമല്ല","നോർത്ത്‌പോൾ"],3,"Anticlockwise gives a North pole."],
+["What strengthens a solenoid's field?","സോളിനോയ്ഡിന്റെ കാന്തശക്തി കൂട്ടുന്നത്:",["Fewer turns per unit length","More turns per unit length","Less current","Removing the core"],
+["ചുറ്റുകൾ കുറയ്ക്കുക","യൂണിറ്റ് നീളത്തിലെ ചുറ്റുകൾ കൂട്ടുക","കറന്റ് കുറയ്ക്കുക","കോർ മാറ്റുക"],1,"More turns, more current and a soft-iron core all help."],
+["What happens to a solenoid's magnetic field when the switch is turned off?","സ്വിച്ച് ഓഫ് ചെയ്യുമ്പോൾ സോളിനോയ്ഡിന്റെ കാന്തികമണ്ഡലത്തിന് എന്ത് സംഭവിക്കും?",["It doubles","It becomes permanent","It disappears","It reverses"],
+["ഇരട്ടിയാകും","സ്ഥിരമാകും","ഇല്ലാതാകും","വിപരീതമാകും"],2,"The field exists only while current flows."],
+["True only for a solenoid, not a bar magnet:","ബാർമാഗ്നറ്റിനില്ലാത്ത, സോളിനോയ്ഡിനുള്ള സവിശേഷത:",["Has two poles","Has a field","Attracts iron","Polarity can be changed"],
+["രണ്ട് ധ്രുവങ്ങൾ","കാന്തികമണ്ഡലം ഉണ്ട്","ഇരുമ്പിനെ ആകർഷിക്കും","ധ്രുവത മാറ്റാം"],3,"Reversing the current reverses a solenoid's poles."],
+["Why are metal items removed before an MRI scan?","MRI സ്കാനിങ്ങിനു മുമ്പ് ലോഹവസ്തുക്കൾ മാറ്റുന്നത് എന്തുകൊണ്ട്?",["Metal blocks the scan","The strong field attracts magnetic objects","Metal melts","Hygiene"],
+["ലോഹം സ്കാൻ തടയും","ശക്തമായ കാന്തികമണ്ഡലം കാന്തികവസ്തുക്കളെ ആകർഷിക്കും","ലോഹം ഉരുകും","ശുചിത്വത്തിന്"],1,"It can attract metal dangerously and spoil the report."],
+["In Fleming's left-hand rule the thumb shows:","ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമത്തിൽ പെരുവിരൽ സൂചിപ്പിക്കുന്നത്:",["Force","Current","Field","Resistance"],
+["ബലം","കറന്റ്","കാന്തികമണ്ഡലം","പ്രതിരോധം"],0,"First finger: field. Second finger: current. Thumb: force."],
+["Field, current and force directions are:","കാന്തികമണ്ഡലം, കറന്റ്, ബലം എന്നിവയുടെ ദിശകൾ:",["Parallel","Opposite","Mutually perpendicular","Random"],
+["സമാന്തരം","വിപരീതം","പരസ്പരം ലംബം","ക്രമരഹിതം"],2,"They are mutually perpendicular."],
+["If both current and field are reversed, the conductor:","കറന്റും കാന്തികമണ്ഡലവും ഒരുമിച്ച് വിപരീതമാക്കിയാൽ ചാലകം:",["Moves the same way","Moves opposite","Stops","Rotates"],
+["അതേ ദിശയിൽ ചലിക്കും","എതിർദിശയിൽ ചലിക്കും","നിശ്ചലമാകും","കറങ്ങും"],0,"The two reversals cancel."],
+["The motor principle states:","മോട്ടോർ തത്വം:",["A moving magnet induces current","Like poles repel","Current ∝ voltage","A current-carrying conductor free to move in a field tends to move"],
+["ചലിക്കുന്ന കാന്തം കറന്റ് ഉണ്ടാക്കുന്നു","സജാതീയ ധ്രുവങ്ങൾ വികർഷിക്കുന്നു","കറന്റ് വോൾട്ടേജിന് ആനുപാതികം","കാന്തികമണ്ഡലത്തിൽ ചലിക്കാവുന്ന വൈദ്യുതവാഹി ചാലകം വിഭ്രംശിക്കാൻ പ്രവണത കാണിക്കുന്നു"],3,"That is the motor principle."],
+["An electric motor converts:","വൈദ്യുതമോട്ടോർ മാറ്റുന്നത്:",["Mechanical → electrical","Electrical → mechanical","Heat → electrical","Sound → electrical"],
+["യാന്ത്രികം → വൈദ്യുതം","വൈദ്യുതം → യാന്ത്രികോർജ്ജം","താപം → വൈദ്യുതം","ശബ്ദം → വൈദ്യുതം"],1,"Electrical energy becomes rotation."],
+["The split-ring commutator:","സ്പ്ലിറ്റ് റിങ് കമ്മ്യൂട്ടേറ്ററിന്റെ ധർമം:",["Raises voltage","Cools the coil","Reverses armature current every half turn","Stores charge"],
+["വോൾട്ടേജ് കൂട്ടുക","കോയിൽ തണുപ്പിക്കുക","ഓരോ അർധഭ്രമണത്തിലും ആർമെച്ചറിലെ കറന്റിന്റെ ദിശ മാറ്റുക","ചാർജ് സംഭരിക്കുക"],2,"This keeps the armature turning one way."],
+["Brushes in a simple DC motor are made of:","ലളിതമായ DC മോട്ടോറിലെ ബ്രഷുകൾ നിർമ്മിക്കുന്നത്:",["Iron","Aluminium","Rubber","Graphite"],
+["ഇരുമ്പ്","അലുമിനിയം","റബ്ബർ","ഗ്രാഫൈറ്റ്"],3,"Graphite brushes press on the split rings."],
+["A BLDC motor differs because it:","BLDC മോട്ടോറിന്റെ പ്രത്യേകത:",["Uses an electronic switch, no brushes/rings","Has no magnet","Works on AC only","Uses more power"],
+["ബ്രഷും റിങ്ങുമില്ല, ഇലക്ട്രോണിക് സ്വിച്ച് ഉപയോഗിക്കുന്നു","കാന്തം ഇല്ല","AC-യിൽ മാത്രം","കൂടുതൽ വൈദ്യുതി ഉപയോഗിക്കുന്നു"],0,"BLDC fans save up to 60% electricity."],
+["In a moving-coil loudspeaker the voice coil sits:","ലൗഡ്സ്പീക്കറിൽ വോയ്സ് കോയിൽ സ്ഥിതി ചെയ്യുന്നത്:",["Outside the speaker","In the field of the field magnet","Far from the diaphragm","In water"],
+["സ്പീക്കറിന് പുറത്ത്","ഫീൽഡ് കാന്തത്തിന്റെ കാന്തികമണ്ഡലത്തിൽ","ഡയഫ്രത്തിൽ നിന്ന് അകലെ","വെള്ളത്തിൽ"],1,"The coil feels a force that follows the signal current."],
+["Energy change in a loudspeaker:","ലൗഡ്സ്പീക്കറിലെ ഊർജമാറ്റം:",["Sound → electrical","Heat → light","Electrical → sound","Light → sound"],
+["ശബ്ദം → വൈദ്യുതം","താപം → പ്രകാശം","വൈദ്യുതം → ശബ്ദം","പ്രകാശം → ശബ്ദം"],2,"Audio current vibrates the diaphragm to make sound."]];
+const EM=["1820-ലെ ഈഴ്സ്റ്റഡിന്റെ പരീക്ഷണം വൈദ്യുതിയെയും കാന്തികതയെയും ബന്ധിപ്പിച്ചു.", "കറന്റ് ഉള്ളപ്പോൾ മാത്രം കാന്തസൂചി വിഭ്രംശിക്കുന്നത് കാന്തികമണ്ഡലത്തിന്റെ തെളിവാണ്.", "കറന്റ് വിപരീതമാകുമ്പോൾ കാന്തികമണ്ഡലദിശയും അതിനാൽ വിഭ്രംശവും വിപരീതമാകും.", "പെരുവിരൽ കറന്റിന്റെ ദിശയിൽ; ചുറ്റിയ വിരലുകൾ കാന്തികമണ്ഡലദിശ കാണിക്കും.", "ക്ലോക്ക്‌വൈസ് കറന്റ് ആയ വശം സൗത്ത്‌പോൾ ആണ്.", "ആന്റിക്ലോക്ക്‌വൈസ് കറന്റ് ആയ അഗ്രം നോർത്ത്‌പോൾ ആണ്.", "ചുറ്റുകൾ, കറന്റ്, പച്ചിരുമ്പ് കോർ എന്നിവ കൂട്ടിയാൽ കാന്തശക്തി കൂടും.", "കറന്റ് ഉള്ളപ്പോൾ മാത്രമേ കാന്തികമണ്ഡലം ഉണ്ടാകൂ.", "കറന്റ് വിപരീതമാക്കി സോളിനോയ്ഡിന്റെ ധ്രുവത മാറ്റാം.", "കാന്തികവസ്തുക്കൾ ശക്തമായി ആകർഷിക്കപ്പെട്ട് അപകടമുണ്ടാകും; റിപ്പോർട്ടും തെറ്റും.", "ചൂണ്ടുവിരൽ: കാന്തികമണ്ഡലം, നടുവിരൽ: കറന്റ്, പെരുവിരൽ: ബലം.", "മൂന്നും പരസ്പരം ലംബമാണ്.", "രണ്ട് വിപരീതമാക്കലുകൾ പരസ്പരം റദ്ദാകുന്നു.", "ഇതാണ് മോട്ടോർ തത്വം.", "വൈദ്യുതോർജ്ജം ഭ്രമണം എന്ന യാന്ത്രികോർജ്ജമാകുന്നു.", "ഇത് ആർമെച്ചറിനെ ഒരേ ദിശയിൽ കറക്കിക്കൊണ്ടിരിക്കുന്നു.", "ഗ്രാഫൈറ്റ് ബ്രഷുകൾ സ്പ്ലിറ്റ് റിങ്ങുകളിൽ അമർന്നിരിക്കുന്നു.", "BLDC ഫാനുകൾ 60% വരെ വൈദ്യുതി ലാഭിക്കുന്നു.", "കോയിലിൽ സിഗ്നൽ കറന്റിനനുസരിച്ചുള്ള ബലം അനുഭവപ്പെടുന്നു.", "ഓഡിയോ കറന്റ് ഡയഫ്രത്തെ കമ്പനം ചെയ്യിച്ച് ശബ്ദമുണ്ടാക്കുന്നു."];
+let i=0,sc=0,an=[];
+function quizDisplay(){const b=$('#qbox');
+if(i>=20){const w=Q.map((q,k)=>an[k]!==q[4]?`<li>${k+1}. ${pk(q[2],q[3])[q[4]]}</li>`:'').join('');
+b.innerHTML=`<p class="big">${sc}/20</p><h2>${pk(sc>=16?'Excellent work!':sc>=10?'Good effort!':'Keep practising!',sc>=16?'മികച്ച പ്രകടനം!':sc>=10?'നല്ല ശ്രമം!':'വീണ്ടും പരിശീലിക്കൂ!')}</h2>${w?`<h3>${pk('Correct answers to the ones you missed','തെറ്റിയ ചോദ്യങ്ങളുടെ ശരിയുത്തരങ്ങൾ')}</h3><ul>${w}</ul>`:''}<div class="row"><button class="btn" id="re">${pk('Retake quiz','വീണ്ടും ശ്രമിക്കുക')}</button></div>`;
+$('#re').onclick=()=>{i=0;sc=0;an=[];quizDisplay()};return}
+const q=Q[i],o=pk(q[2],q[3]);
+b.innerHTML=`<div class="qh"><span>${pk('Question','ചോദ്യം')} ${i+1}/20</span><span class="pill">${pk('Score','സ്കോർ')} ${sc}</span></div><div class="bar"><i style="width:${i*5}%"></i></div><h3>${pk(q[0],q[1])}</h3>`+o.map((t,k)=>`<button class="opt" data-k="${k}"><i>${'ABCD'[k]}</i><span>${t}</span></button>`).join('')+'<div id="f"></div>';
+b.querySelectorAll('.opt').forEach(el=>el.onclick=()=>{const k=+el.dataset.k;if(an[i]!==undefined)return;an[i]=k;const r=k===q[4];if(r)sc++;
+b.querySelectorAll('.opt').forEach((y,j)=>{y.disabled=true;if(j===q[4])y.classList.add('ok');else if(j===k)y.classList.add('bad')});
+$('#f').innerHTML=`<div class="fb"><b>${r?pk('Correct!','ശരി!'):pk('Not quite.','ശരിയല്ല.')}</b> ${lang()==='en'?q[5]:((r?'':'ശരിയുത്തരം: '+o[q[4]]+'. ')+EM[i])}</div><div class="row"><button class="btn" id="nx">${i<19?pk('Next question','അടുത്ത ചോദ്യം'):pk('See result','ഫലം കാണുക')}</button></div>`;
+$('#nx').onclick=()=>{i++;quizDisplay()};$('#nx').focus()})}
+
+const SUPABASE_URL='https://wrzssivgxituefcwobbr.supabase.co';
+const SUPABASE_KEY='sb_publishable_3mi5iJCxekZfiyXojUFtQg_gDASyEWm';
+const client=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+const QUIZ_SUBJECT='Physics';
+const QUIZ_CHAPTER='Magnetic Effect of Electric Current';
+const QUIZ_NAME='Physics Magnetic Effect of Electric Current Quiz';
+const OPEN_HOUR=21, CLOSE_HOUR=22;
+
+let verifiedStudent=null;
+let saving=false;
+
+function quizIsOpen(){
+  const n=new Date(), mins=n.getHours()*60+n.getMinutes();
+  return mins>=OPEN_HOUR*60 && mins<CLOSE_HOUR*60;
+}
+function showClosed(){
+  $('#qbox').innerHTML='<h2>'+pk('Quiz is currently closed','ക്വിസ് ഇപ്പോൾ അടച്ചിരിക്കുന്നു')+'</h2>'+
+    '<div class="fb">'+pk('This quiz is available only from 9:00 PM to 10:00 PM.','ഈ ക്വിസ് രാത്രി 9:00 മുതൽ 10:00 വരെ മാത്രമേ ലഭ്യമാകൂ.')+'</div>';
+}
+async function verifyStudent(no){
+  const {data,error}=await client.rpc('verify_student',{p_admission_no:Number(no)});
+  if(error) throw new Error(error.message);
+  if(!data || !data.length) throw new Error('Admission Number not found.');
+  return data[0];
+}
+async function saveQuizResult(){
+  const answers=Q.map((q,k)=>({
+    question_no:k+1,
+    selected_answer:an[k]===undefined?null:an[k],
+    correct_answer:q[4],
+    is_correct:an[k]===q[4]
+  }));
+  const {data,error}=await client.rpc('submit_quiz',{
+    p_admission_no:Number(verifiedStudent.admission_no),
+    p_subject:QUIZ_SUBJECT,
+    p_chapter:QUIZ_CHAPTER,
+    p_quiz_name:QUIZ_NAME,
+    p_score:sc,
+    p_total:20,
+    p_percentage:Number((sc/20*100).toFixed(2)),
+    p_answers:answers
+  });
+  if(error) throw new Error(error.message);
+  return data;
+}
+function startScreen(){
+  if(!quizIsOpen()){showClosed();return;}
+  $('#qbox').innerHTML='<h2>'+pk('20 Question Quiz','20 ചോദ്യങ്ങളുള്ള ക്വിസ്')+'</h2>'+
+    '<p>'+pk('Enter your Admission Number. Your student details will be verified automatically.','Admission Number നൽകുക. നിങ്ങളുടെ വിദ്യാർത്ഥി വിവരങ്ങൾ സ്വയം പരിശോധിക്കും.')+'</p>'+
+    '<label>'+pk('Admission Number','Admission Number')+'</label>'+
+    '<input id="adno" inputmode="numeric" autocomplete="off" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit;margin-top:6px">'+
+    '<div id="vmsg" class="fb" style="display:none"></div>'+
+    '<div class="row"><button class="btn" id="startBtn">'+pk('Verify & Start Quiz','പരിശോധിച്ച് ക്വിസ് ആരംഭിക്കുക')+'</button></div>';
+  $('#startBtn').onclick=async()=>{
+    if(!quizIsOpen()){showClosed();return;}
+    const btn=$('#startBtn'),msg=$('#vmsg');
+    btn.disabled=true;msg.style.display='block';msg.textContent=pk('Verifying...','പരിശോധിക്കുന്നു...');
+    try{
+      verifiedStudent=await verifyStudent($('#adno').value.trim());
+      msg.textContent=pk('Verified: ','പരിശോധിച്ചു: ')+verifiedStudent.student_name+' | '+(verifiedStudent.class||'')+' | '+(verifiedStudent.centre||'');
+      i=0;sc=0;an=[];setTimeout(quizDisplay,200);
+    }catch(e){
+      msg.textContent='VERIFY ERROR: '+(e.message||e);btn.disabled=false;
+    }
+  };
+}
+async function show(){
+  if(!quizIsOpen()){if(!saving)showClosed();return;}
+  if(!verifiedStudent){startScreen();return;}
+  if(i<20){quizDisplay();return;}
+  if(saving)return;
+  saving=true;
+  $('#qbox').innerHTML='<h2>'+pk('Saving result...','ഫലം സംരക്ഷിക്കുന്നു...')+'</h2>'+
+    '<div class="fb">'+pk('Please wait. Your result is being saved to the ABACUS ACADEMY database.','ദയവായി കാത്തിരിക്കുക. നിങ്ങളുടെ ഫലം ABACUS ACADEMY ഡാറ്റാബേസിൽ സേവ് ചെയ്യുകയാണ്.')+'</div>';
+  try{
+    await saveQuizResult();
+    const wrong=Q.map((q,k)=>an[k]!==q[4]?'<li>'+(k+1)+'. '+pk(q[2],q[3])[q[4]]+'</li>':'').join('');
+    $('#qbox').innerHTML='<p class="big">'+sc+'/20</p>'+
+      '<h2>'+pk(sc>=16?'Excellent work!':sc>=10?'Good effort!':'Keep practising!',sc>=16?'മികച്ച പ്രകടനം!':sc>=10?'നല്ല ശ്രമം!':'വീണ്ടും പരിശീലിക്കൂ!')+'</h2>'+
+      '<div class="fb">'+pk('Result saved successfully to the database.','ഫലം ഡാറ്റാബേസിൽ വിജയകരമായി സേവ് ചെയ്തു.')+'</div>'+
+      '<p><b>'+verifiedStudent.student_name+'</b><br>'+verifiedStudent.admission_no+' | '+(verifiedStudent.class||'')+' | '+(verifiedStudent.centre||'')+'</p>'+
+      (wrong?'<h3>'+pk('Correct answers to the ones you missed','തെറ്റിയ ചോദ്യങ്ങളുടെ ശരിയുത്തരങ്ങൾ')+'</h3><ul>'+wrong+'</ul>':'');
+  }catch(e){
+    $('#qbox').innerHTML='<h2>'+pk('Could not save result','ഫലം സേവ് ചെയ്യാൻ കഴിഞ്ഞില്ല')+'</h2>'+
+      '<div class="fb">'+(e.message||e)+'</div>'+
+      '<div class="row"><button class="btn" id="retrySave">'+pk('Try again','വീണ്ടും ശ്രമിക്കുക')+'</button></div>';
+    $('#retrySave').onclick=()=>show();
+  }
+  saving=false;
+}
+
+let sv='en';try{sv=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')||'en'}catch(e){}
+setLang(sv==='ml'?'ml':'en');startScreen();setInterval(function(){if(!quizIsOpen()&&!saving)startScreen()},10000);
+</script></body></html>

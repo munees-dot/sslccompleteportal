@@ -1,1217 +1,223 @@
 <!DOCTYPE html>
-<html lang="ml">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>വൈദ്യുതിയുടെ കാന്തികഫലം | Magnetic Effects of Electric Current — Class 10 Physics</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<html lang="en" data-lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Magnetic Effect of Electric Current · വൈദ്യുതിയുടെ കാന്തികഫലം</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#16202e; --ink-soft:#48566a; --paper:#eceee8; --card:#ffffff;
-    --wave:#d9480f; --wave-deep:#a8330a; --amp:#0d6efd; --reso:#0d9488;
-    --line:#d6d9d1; --good:#108a5b; --bad:#c0392b;
-    --shadow:0 1px 0 rgba(22,32,46,.04), 0 8px 24px -16px rgba(22,32,46,.35);
-    --r:14px;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{margin:0;background:var(--paper);color:var(--ink);
-    font-family:"Noto Sans Malayalam",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
-  .mono{font-family:"Space Mono","Noto Sans Malayalam",monospace;}
-  .wrap{max-width:900px;margin:0 auto;padding:0 18px;}
-
-  /* ===== BILINGUAL SWITCH ===== */
-  .t-en{display:none;}
-  body.lang-en .t-ml{display:none;}
-  body.lang-en .t-en{display:revert;}
-
-  /* ---------- header ---------- */
-  header{background:var(--ink);color:#eef2f6;position:relative;overflow:hidden;border-bottom:3px solid var(--wave);}
-  .scope{position:absolute;inset:0;width:100%;height:100%;opacity:.55;}
-  .scope .fld{fill:none;stroke:var(--wave);stroke-width:1.6;}
-  .scope .fld.glow{stroke:#fdba74;stroke-width:1;opacity:.7;}
-  .scope .wire{stroke:#8ea0b2;stroke-width:3;stroke-linecap:round;}
-  .scope .dot{fill:#fdba74;}
-  @keyframes drift{from{transform:translateX(0);}to{transform:translateX(-220px);}}
-  .scope #scopeG{animation:drift 7s linear infinite;}
-  .hero{position:relative;z-index:2;padding:40px 18px 30px;max-width:900px;margin:0 auto;}
-  .eyebrow{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:12px;letter-spacing:2px;
-    text-transform:uppercase;color:#fdba74;margin:0 0 8px;}
-  .hero h1{font-weight:800;font-size:clamp(30px,6.4vw,54px);margin:0;line-height:1.1;letter-spacing:-.5px;}
-  .hero .sub{margin:10px 0 0;color:#aebccb;font-size:15px;max-width:560px;}
-  .hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
-  .pill{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:11px;letter-spacing:.5px;
-    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
-    color:#ffe0c2;padding:5px 11px;border-radius:30px;}
-
-  /* language toggle */
-  .langbar{position:absolute;top:16px;right:18px;z-index:5;display:flex;
-    background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:30px;padding:3px;}
-  .langbar button{border:none;background:none;cursor:pointer;color:#cfe0ec;
-    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:12.5px;
-    padding:6px 14px;border-radius:30px;transition:.15s;}
-  .langbar button.on{background:var(--wave);color:#fff;}
-
-  /* ---------- tabs ---------- */
-  nav.tabs{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--line);}
-  .tabwrap{max-width:900px;margin:0 auto;display:flex;gap:2px;overflow-x:auto;padding:0 10px;}
-  .tab{flex:0 0 auto;border:none;background:none;cursor:pointer;
-    font-family:"Noto Sans Malayalam",sans-serif;font-weight:600;font-size:14.5px;
-    color:var(--ink-soft);padding:14px 16px;border-bottom:3px solid transparent;white-space:nowrap;transition:color .15s;}
-  .tab:hover{color:var(--ink);}
-  .tab.active{color:var(--wave-deep);border-bottom-color:var(--wave);}
-
-  /* ---------- panels ---------- */
-  .panel{display:none;padding:26px 0 60px;}
-  .panel.active{display:block;animation:fade .25s ease;}
-  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
-  .lead{color:var(--ink-soft);font-size:15px;margin:0 0 22px;}
-
-  details.topic{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
-    margin:0 0 12px;box-shadow:var(--shadow);overflow:hidden;}
-  summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:12px;}
-  summary::-webkit-details-marker{display:none;}
-  .tnum{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-weight:700;font-size:13px;
-    color:#fff;background:var(--wave);min-width:30px;height:30px;border-radius:8px;
-    display:grid;place-items:center;flex:0 0 auto;}
-  details[open] .tnum{background:var(--amp);}
-  .ttitle{font-weight:700;font-size:18px;flex:1;line-height:1.25;}
-  .chev{transition:transform .2s;color:var(--ink-soft);font-size:13px;}
-  details[open] .chev{transform:rotate(90deg);}
-  .tbody{padding:2px 18px 20px 18px;border-top:1px solid var(--line);}
-  .tbody p{margin:14px 0 0;}
-  .tbody ul{margin:12px 0 0;padding-left:0;list-style:none;}
-  .tbody li{position:relative;padding-left:22px;margin:7px 0;}
-  .tbody li::before{content:"";position:absolute;left:4px;top:12px;width:8px;height:8px;border-radius:50%;background:var(--wave);}
-  .def{background:#fdf1ea;border-left:4px solid var(--wave);border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0 0;}
-  .def b{color:var(--wave-deep);}
-  .note{font-size:13.5px;color:var(--ink-soft);}
-  .mini-tbl{width:100%;border-collapse:collapse;margin:14px 0 0;font-size:14px;}
-  .mini-tbl th,.mini-tbl td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
-  .mini-tbl th{background:#fdf1ea;color:var(--wave-deep);font-weight:700;}
-  .mini-tbl td:first-child{background:#faf7f3;font-weight:600;}
-
-  .fgrid{display:grid;grid-template-columns:1fr;gap:16px;}
-  .fcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow);}
-  .fcard .fname{font-weight:600;font-size:16px;color:var(--ink-soft);margin:0 0 12px;}
-  .formula{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-weight:700;
-    font-size:clamp(18px,4.2vw,26px);color:var(--wave-deep);background:#fdf1ea;
-    border:1px dashed var(--wave);border-radius:10px;padding:14px 18px;text-align:center;letter-spacing:.5px;}
-  .where{margin-top:14px;display:grid;gap:6px;}
-  .where div{font-size:14.5px;}
-  .where .sym{font-family:"Space Mono","Noto Sans Malayalam",monospace;color:var(--amp);font-weight:700;}
-
-  .fcwrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
-  .flip{perspective:1200px;height:180px;cursor:pointer;}
-  .flip-inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d;}
-  .flip.on .flip-inner{transform:rotateY(180deg);}
-  .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);
-    display:flex;flex-direction:column;justify-content:center;align-items:center;
-    padding:18px;text-align:center;box-shadow:var(--shadow);}
-  .face.front{background:var(--card);border:1px solid var(--line);}
-  .face.front .term{font-weight:700;font-size:19px;color:var(--ink);}
-  .face.front .sec{font-size:12.5px;color:var(--ink-soft);margin-top:6px;font-style:italic;}
-  .face.front .hint{position:absolute;bottom:10px;font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:10px;color:var(--wave);letter-spacing:1px;}
-  .face.back{background:var(--wave-deep);color:#fff3ea;transform:rotateY(180deg);
-    border:1px solid var(--wave-deep);font-size:14px;line-height:1.55;}
-
-  /* share bar */
-  .sharebar{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:0 0 18px;}
-  .sbtn{border:none;cursor:pointer;text-decoration:none;display:inline-block;
-    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;
-    font-size:13.5px;padding:10px 18px;border-radius:10px;transition:.15s;}
-  .sbtn.open{background:var(--wave);color:#fff;}
-  .sbtn.open:hover{background:var(--wave-deep);}
-  .sbtn.share{background:var(--reso);color:#fff;}
-  .sbtn.share:hover{background:#0b7a6b;}
-  .sbtn.wa{background:#1f9e50;color:#fff;}
-  .sbtn.wa:hover{background:#177d3e;}
-  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
-    background:var(--ink);color:#eef2f6;padding:11px 20px;border-radius:30px;font-size:13.5px;
-    opacity:0;pointer-events:none;transition:.25s;z-index:99;box-shadow:0 8px 24px -8px rgba(0,0,0,.5);}
-  .toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
-
-  .quiz-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
-    box-shadow:var(--shadow);padding:24px;max-width:680px;margin:0 auto;}
-  .qmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-  .qcount,.qscore{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:12px;letter-spacing:1px;}
-  .qcount{color:var(--ink-soft);} .qscore{color:var(--amp);font-weight:700;}
-  .qbar{height:6px;background:#e7eae3;border-radius:6px;overflow:hidden;margin-bottom:18px;}
-  .qbar i{display:block;height:100%;background:var(--wave);transition:width .3s;}
-  .qtext{font-weight:600;font-size:19px;line-height:1.4;margin:0 0 18px;}
-  .opt{display:block;width:100%;text-align:left;background:#f6f8f3;border:2px solid var(--line);
-    border-radius:11px;padding:13px 16px;margin:9px 0;cursor:pointer;
-    font-family:"Noto Sans Malayalam",sans-serif;font-size:15.5px;color:var(--ink);transition:all .15s;}
-  .opt:hover:not(:disabled){border-color:var(--wave);background:#fdf1ea;}
-  .opt:disabled{cursor:default;}
-  .opt.correct{border-color:var(--good);background:#e7f6ee;color:#0a5e3d;font-weight:600;}
-  .opt.wrong{border-color:var(--bad);background:#fbecea;color:#8e2118;}
-  .qfb{margin-top:14px;padding:12px 15px;border-radius:10px;font-size:14.5px;display:none;}
-  .qfb.show{display:block;}
-  .qfb.ok{background:#e7f6ee;color:#0a5e3d;border-left:4px solid var(--good);}
-  .qfb.no{background:#fbecea;color:#8e2118;border-left:4px solid var(--bad);}
-  .qnext{margin-top:18px;width:100%;border:none;cursor:pointer;background:var(--wave);color:#fff;
-    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:16px;padding:13px;border-radius:11px;transition:background .15s;}
-  .qnext:hover{background:var(--wave-deep);}
-  .qnext[disabled]{background:#aeb8c2;cursor:not-allowed;}
-  .result{text-align:center;padding:14px 0;}
-  .result .big{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-weight:700;font-size:54px;color:var(--wave-deep);line-height:1;}
-  .result .lbl{font-weight:600;font-size:20px;margin-top:8px;}
-  .result .msg{color:var(--ink-soft);margin-top:6px;}
-  .retry{margin-top:20px;background:var(--amp);color:#fff;border:none;cursor:pointer;
-    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:15px;padding:11px 26px;border-radius:10px;}
-
-  .gsearch{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:11px;
-    font-family:"Noto Sans Malayalam",sans-serif;font-size:15px;margin-bottom:18px;background:var(--card);}
-  .gsearch:focus{outline:none;border-color:var(--wave);}
-  table.gloss{width:100%;border-collapse:collapse;background:var(--card);
-    border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);}
-  .gloss th{background:var(--ink);color:#dfe7ee;font-weight:600;text-align:left;padding:12px 16px;font-size:14px;}
-  .gloss td{padding:11px 16px;border-top:1px solid var(--line);font-size:15px;vertical-align:top;}
-  .gloss td.gen{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:13px;color:var(--wave-deep);}
-  .gloss tr:hover td{background:#f6f8f3;}
-
-  .qb-tools{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px;}
-  .qb-btn{border:none;cursor:pointer;font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;
-    font-size:14px;padding:10px 18px;border-radius:10px;}
-  .qb-btn.show{background:var(--wave);color:#fff;}
-  .qb-btn.show:hover{background:var(--wave-deep);}
-  .qb-btn.prn{background:var(--reso);color:#fff;}
-  .qb-sec{margin:0 0 30px;}
-  .qb-head{display:flex;align-items:center;gap:12px;margin:0 0 4px;border-bottom:2px solid var(--wave);padding-bottom:8px;}
-  .qb-head .sl{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-weight:700;font-size:13px;color:#fff;
-    background:var(--wave-deep);padding:4px 11px;border-radius:7px;flex:0 0 auto;}
-  .qb-head h3{font-weight:800;font-size:19px;margin:0;flex:1;line-height:1.2;}
-  .qb-head .mk{font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:12px;color:var(--amp);font-weight:700;}
-  .qb-item{background:var(--card);border:1px solid var(--line);border-radius:12px;
-    padding:14px 16px;margin:12px 0;box-shadow:var(--shadow);}
-  .qb-q{display:flex;gap:10px;font-size:16px;font-weight:600;line-height:1.5;}
-  .qb-q .n{font-family:"Space Mono","Noto Sans Malayalam",monospace;color:var(--amp);font-weight:700;flex:0 0 auto;}
-  .qb-opts{list-style:none;padding:0;margin:10px 0 0 26px;display:grid;gap:5px;}
-  .qb-opts li{font-size:15px;color:var(--ink-soft);}
-  .qb-opts li b{color:var(--wave-deep);font-family:"Space Mono","Noto Sans Malayalam",monospace;margin-right:6px;}
-  .qb-ans{margin:12px 0 0;padding:11px 14px;border-radius:9px;background:#e7f6ee;
-    border-left:4px solid var(--good);color:#0a5e3d;font-size:14.5px;line-height:1.6;display:none;}
-  .qb-ans.on{display:block;}
-  body.lang-en .qb-ans.on .t-ml{display:none;}
-  .qb-ans b{color:#084d33;}
-  .qb-rev{margin-top:10px;background:none;border:1px dashed var(--good);color:var(--good);cursor:pointer;
-    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:12.5px;padding:5px 12px;border-radius:8px;}
-  .qb-rev:hover{background:#eafaf1;}
-
-  .sn-paper{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:26px 28px;}
-  .sn-paper h2{font-weight:800;font-size:22px;text-align:center;margin:0 0 4px;color:var(--ink);}
-  .sn-paper .sn-sub{text-align:center;color:var(--ink-soft);font-size:13px;margin:0 0 20px;
-    font-family:"Space Mono","Noto Sans Malayalam",monospace;letter-spacing:1px;}
-  .sn-block{margin:0 0 18px;break-inside:avoid;}
-  .sn-block h4{font-weight:800;font-size:15.5px;margin:0 0 7px;color:var(--wave-deep);display:flex;align-items:center;gap:8px;}
-  .sn-block h4 .dot{width:9px;height:9px;border-radius:50%;background:var(--amp);flex:0 0 auto;}
-  .sn-block ul{list-style:none;padding:0;margin:0;}
-  .sn-block li{position:relative;padding-left:16px;margin:4px 0;font-size:14px;line-height:1.55;}
-  .sn-block li::before{content:"▸";position:absolute;left:0;color:var(--wave);font-size:11px;top:2px;}
-  .sn-block li b{color:var(--ink);}
-  .sn-key{background:#fdf1ea;border:1px dashed var(--wave);border-radius:9px;padding:10px 14px;margin:4px 0;
-    font-family:"Space Mono","Noto Sans Malayalam",monospace;font-size:14px;color:var(--wave-deep);font-weight:700;}
-  .sn-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 18px;}
-  .sn-grid .sn-key{margin:0;}
-  @media(max-width:560px){.sn-grid{grid-template-columns:1fr;}}
-
-  .prnbtn{background:var(--reso);color:#fff;border:none;cursor:pointer;
-    font-family:"Noto Sans Malayalam",sans-serif;font-weight:700;font-size:15px;padding:11px 28px;border-radius:11px;}
-
-  footer{background:var(--ink);color:#8ea0b2;text-align:center;padding:26px 18px;font-size:13px;}
-  footer b{color:#cfe0ec;}
-
-  @media print{
-    nav.tabs,.scope,.hero .meta,.langbar,footer,.qnext,.retry,.gsearch,.flip .hint,
-    .qb-tools,.qb-rev,.no-print,.prnbtn{display:none!important;}
-    .panel{display:block!important;page-break-before:always;padding:0;}
-    body{background:#fff;}
-    details.topic{break-inside:avoid;border:1px solid #ccc;}
-    summary{pointer-events:none;}
-    .flip-inner{transform:none!important;}
-    .face.back{position:relative;transform:none;}
-    .qb-item,.sn-block{break-inside:avoid;}
-    body.print-one .panel{display:none!important;page-break-before:auto;}
-    body.print-one .panel.print-me{display:block!important;page-break-before:auto;}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .scope #scopeG{animation:none;} .panel.active{animation:none;} .flip-inner{transition:none;}
-  }
-  @media (max-width:560px){
-    .hero{padding:56px 18px 24px;} .ttitle{font-size:16px;}
-    .langbar{top:12px;right:12px;}
-  }
-</style>
-</head>
-<body>
-
-<header>
-  <svg class="scope" id="scope" viewBox="0 0 900 240" preserveAspectRatio="none" aria-hidden="true">
-    <g id="scopeG"></g>
-  </svg>
-
-  <div class="langbar">
-    <button id="btnML" class="on">മലയാളം</button>
-    <button id="btnEN">English</button>
-  </div>
-
-  <div class="hero">
-    <p class="eyebrow">Class 10 · Physics · Unit 4</p>
-    <h1><span class="t-ml">വൈദ്യുതിയുടെ കാന്തികഫലം</span><span class="t-en">Magnetic Effects of Electric Current</span></h1>
-    <p class="sub">
-      <span class="t-ml">ഓർസ്റ്റഡിന്റെ കണ്ടെത്തൽ മുതൽ ഇലക്ട്രിക് മോട്ടോർ വരെ — കുറിപ്പുകൾ, നിയമങ്ങൾ, ഫ്ലാഷ്കാർഡ്, ക്വിസ് എല്ലാം ഒരിടത്ത്.</span>
-      <span class="t-en">From Oersted's discovery to the electric motor — notes, rules, flashcards and quizzes, all in one place.</span>
-    </p>
-    <div class="meta">
-      <span class="pill">Right-hand thumb rule</span>
-      <span class="pill">Fleming's left hand rule</span>
-      <span class="pill">Motor principle</span>
-      <span class="pill">SCERT 2025</span>
-    </div>
-  </div>
-</header>
-
-<nav class="tabs">
-  <div class="tabwrap">
-    <button class="tab active" data-p="notes"><span class="t-ml">കുറിപ്പുകൾ</span><span class="t-en">Notes</span></button>
-    <button class="tab" data-p="formula"><span class="t-ml">നിയമങ്ങൾ</span><span class="t-en">Rules</span></button>
-    <button class="tab" data-p="flash"><span class="t-ml">ഫ്ലാഷ്കാർഡ്</span><span class="t-en">Flashcards</span></button>
-    <button class="tab" data-p="quiz"><span class="t-ml">ക്വിസ്</span><span class="t-en">Quiz</span></button>
-    <button class="tab" data-p="qbank"><span class="t-ml">ചോദ്യബാങ്ക്</span><span class="t-en">Question Bank</span></button>
-    <button class="tab" data-p="short"><span class="t-ml">ഷോർട്ട് നോട്ട്</span><span class="t-en">Short Note</span></button>
-    <button class="tab" data-p="gloss"><span class="t-ml">പദാവലി</span><span class="t-en">Glossary</span></button>
-  </div>
-</nav>
-
-<main class="wrap">
-
-<!-- ================= NOTES ================= -->
-<section class="panel active" id="notes">
-  <p class="lead">
-    <span class="t-ml">ഓരോ ടൈറ്റിലിലും ക്ലിക്ക് ചെയ്ത് ആ ഭാഗം തുറക്കാം. പ്രധാന നിർവചനങ്ങൾ <b style="color:var(--wave-deep)">ഓറഞ്ച് ബോക്സിൽ</b> അടയാളപ്പെടുത്തിയിരിക്കുന്നു.</span>
-    <span class="t-en">Click any title to open that section. Key definitions are marked in <b style="color:var(--wave-deep)">orange boxes</b>.</span>
-  </p>
-
-  <details class="topic" open>
-    <summary><span class="tnum">1</span><span class="ttitle"><span class="t-ml">കാന്തവും കാന്തികമണ്ഡലവും</span><span class="t-en">Magnet and Magnetic Field</span></span><span class="chev">▶</span></summary>
-    <div class="tbody">
-      <p>
-        <span class="t-ml">സ്വതന്ത്രമായി തിരിയാൻ കഴിയുന്ന ഒരു കാന്തസൂചിക്ക് സമീപം മറ്റൊരു കാന്തം കൊണ്ടുവന്നാൽ അത് വിഭ്രംശിക്കുന്നു (ചലിക്കുന്നു). ഇത് രണ്ട് കാന്തികധ്രുവങ്ങൾ തമ്മിലുള്ള ആകർഷണം/വികർഷണം മൂലമാണ്.</span>
-        <span class="t-en">A freely suspended magnetic needle deflects when another magnet is brought near it — because of the attraction/repulsion between magnetic poles.</span>
-      </p>
-      <div class="def">
-        <span class="t-ml"><b>കാന്തികമണ്ഡലം (Magnetic field):</b> ഒരു കാന്തത്തിന് ചുറ്റുമുള്ള, കാന്തികബലം അനുഭവപ്പെടുന്ന മേഖല.</span>
-        <span class="t-en"><b>Magnetic field:</b> The region around a magnet within which its magnetic force can be felt.</span>
-      </div>
-      <div class="def">
-        <span class="t-ml"><b>കാന്തികമണ്ഡലരേഖകൾ / ഫ്ലക്സ് രേഖകൾ:</b> കാന്തികമണ്ഡലത്തെ ദൃശ്യവൽക്കരിക്കാൻ ഉപയോഗിക്കുന്ന സാങ്കല്പിക രേഖകൾ. ഇവ കാന്തത്തിന് പുറത്ത് N-ൽ നിന്ന് S-ലേക്കും ആണ്.</span>
-        <span class="t-en"><b>Magnetic field lines / flux lines:</b> Imaginary lines used to visualise a magnetic field. Outside a magnet they run from N to S.</span>
-      </div>
-      <p class="note">
-        <span class="t-ml"><b>ഓർക്കുക:</b> ഒരു ബാർമാഗ്നറ്റിന്റെയും വൈദ്യുതി പ്രവഹിക്കുന്ന ചാലകത്തിന്റെയും ചുറ്റും ഉണ്ടാകുന്ന കാന്തികമണ്ഡലരേഖകളുടെ വിന്യാസം സമാനമായിരിക്കാം.</span>
-        <span class="t-en"><b>Remember:</b> The pattern of magnetic field lines around a bar magnet and around a current-carrying conductor can look similar.</span>
-      </p>
-    </div>
-  </details>
-
-  <details class="topic">
-    <summary><span class="tnum">2</span><span class="ttitle"><span class="t-ml">വൈദ്യുതവാഹിയായ ചാലകവും കാന്തികമണ്ഡലവും</span><span class="t-en">Current-Carrying Conductor and Magnetic Field</span></span><span class="chev">▶</span></summary>
-    <div class="tbody">
-      <p>
-        <span class="t-ml">1820-ൽ <b>ഹാൻസ് ക്രിസ്ത്യൻ ഈഴ്സ്റ്റഡ്</b> (ഡെന്മാർക്ക്) നടത്തിയ പരീക്ഷണം വൈദ്യുതിയും കാന്തികതയും തമ്മിലുള്ള ബന്ധം തെളിയിച്ചു.</span>
-        <span class="t-en">In 1820, <b>Hans Christian Ørsted</b> (Denmark) performed an experiment that revealed the connection between electricity and magnetism.</span>
-      </p>
-      <p>
-        <span class="t-ml">പിവറ്റ് ചെയ്യപ്പെട്ട കാന്തസൂചിക്ക് സമീപം സമാന്തരമായി വച്ചിരിക്കുന്ന ചാലകത്തിലൂടെ കറന്റ് കടത്തിവിടുമ്പോൾ കാന്തസൂചി വിഭ്രംശിക്കുന്നു. കറന്റ് ഇല്ലാതാക്കുമ്പോൾ വിഭ്രംശം ഇല്ലാതാകുന്നു.</span>
-        <span class="t-en">When current flows through a conductor placed parallel to a pivoted compass needle, the needle deflects. When the current is switched off, the deflection disappears.</span>
-      </p>
-      <div class="def">
-        <span class="t-ml"><b>നിഗമനം:</b> വൈദ്യുതി പ്രവഹിക്കുന്ന ഒരു ചാലകത്തിന് ചുറ്റും കാന്തികമണ്ഡലം രൂപപ്പെടുന്നു. ഈ കാന്തികമണ്ഡലത്തിന് ഒരു കാന്തസൂചിയിൽ ബലം പ്രയോഗിക്കാൻ കഴിയും. ഇതാണ് <b>വൈദ്യുതിയുടെ കാന്തികഫലം</b>.</span>
-        <span class="t-en"><b>Conclusion:</b> A magnetic field is set up around a current-carrying conductor. This field can exert a force on a magnetic needle. This is the <b>magnetic effect of electric current</b>.</span>
-      </div>
-      <ul>
-        <li><span class="t-ml">കറന്റിന്റെ ദിശ വിപരീതമാക്കിയാൽ കാന്തസൂചിയുടെ വിഭ്രംശദിശയും വിപരീതമാകുന്നു.</span>
-            <span class="t-en">Reversing the direction of the current reverses the direction of the needle's deflection.</span></li>
-        <li><span class="t-ml">ചാലകം കാന്തസൂചിയുടെ താഴെയായി ക്രമീകരിച്ചാൽ വിഭ്രംശദിശ വിപരീതമാകുന്നു.</span>
-            <span class="t-en">Placing the conductor below the needle instead of above reverses the direction of deflection.</span></li>
-      </ul>
-    </div>
-  </details>
-
-  <details class="topic">
-    <summary><span class="tnum">3</span><span class="ttitle"><span class="t-ml">വലതുകൈ പെരുവിരൽ നിയമം</span><span class="t-en">Right-Hand Thumb Rule</span></span><span class="chev">▶</span></summary>
-    <div class="tbody">
-      <p>
-        <span class="t-ml">ഒരു നേർചാലകത്തിന് ചുറ്റുമുള്ള കാന്തികമണ്ഡലരേഖകൾ ചാലകത്തെ കേന്ദ്രീകരിച്ചുള്ള കേന്ദ്രീകൃത വൃത്തങ്ങളാണ്. ഈ വൃത്തങ്ങളുടെ ദിശ കണ്ടെത്താൻ ഉപയോഗിക്കുന്നതാണ് വലതുകൈ പെരുവിരൽ നിയമം.</span>
-        <span class="t-en">The magnetic field lines around a straight current-carrying conductor form concentric circles centred on the conductor. The direction of these circles is found using the right-hand thumb rule.</span>
-      </p>
-      <div class="def">
-        <span class="t-ml"><b>വലതുകൈ പെരുവിരൽ നിയമം:</b> വൈദ്യുതപ്രവാഹ ദിശയിൽ പെരുവിരൽ വരത്തക്ക രീതിയിൽ ചാലകത്തെ വലതുകൈ കൊണ്ട് ചുറ്റിപ്പിടിക്കുന്നതായി സങ്കല്പിച്ചാൽ ചാലകത്തെ ചുറ്റിപ്പിടിച്ച വിരലുകൾ കാന്തികമണ്ഡലത്തിന്റെ ദിശയെ സൂചിപ്പിക്കും.</span>
-        <span class="t-en"><b>Right-hand thumb rule:</b> Imagine gripping the conductor with the right hand so the thumb points in the direction of the current — the curled fingers then show the direction of the magnetic field.</span>
-      </div>
-      <p class="note">
-        <span class="t-ml"><b>ബദൽ പേര്:</b> ഇത് ആംപിയറുടെ നീന്തൽ നിയമം (Ampere's swimming rule) എന്നും അറിയപ്പെടുന്നു — കറന്റ് പ്രവഹിക്കുന്ന ദിശയിൽ ചാലകക്കമ്പിയെ നോക്കിക്കൊണ്ട് നീന്തുന്നതായി സങ്കല്പിച്ചാൽ, അയാളുടെ ഇടതു കൈയ്ക്ക് നേരെ കാന്തസൂചിയുടെ നോർത്ത്‌പോൾ വിഭ്രംശിക്കും.</span>
-        <span class="t-en"><b>Also known as:</b> Ampère's swimming rule — imagine swimming along the wire facing the current direction; the north pole of a compass below the wire deflects toward your left hand.</span>
-      </p>
-      <div class="def">
-        <span class="t-ml"><b>പ്രധാന നിഗമനം:</b> ചാലകവലയത്തിലെ കറന്റ് ക്ലോക്ക്‌വൈസ് ദിശയിലാണെങ്കിൽ ഫ്ലക്സ് രേഖകൾ പുറത്തുനിന്ന് ഉള്ളിലേക്ക് ആയിരിക്കും. ആന്റിക്ലോക്ക്‌വൈസ് ദിശയിലാണെങ്കിൽ ഫ്ലക്സ് രേഖകൾ ഉള്ളിൽ നിന്ന് പുറത്തേക്ക് ആയിരിക്കും.</span>
-        <span class="t-en"><b>Key result:</b> In a current loop, if the current is clockwise (as seen from a given face), the flux lines on that face point inward; if anticlockwise, they point outward.</span>
-      </div>
-    </div>
-  </details>
-
-  <details class="topic">
-    <summary><span class="tnum">4</span><span class="ttitle"><span class="t-ml">സോളിനോയ്ഡ് (Solenoid)</span><span class="t-en">Solenoid</span></span><span class="chev">▶</span></summary>
-    <div class="tbody">
-      <div class="def">
-        <span class="t-ml"><b>സോളിനോയ്ഡ്:</b> ഒരു സ്പ്രിങ്ങിന്റെ ആകൃതിയിൽ, ഒരേ നേർരേഖയിൽ കേന്ദ്രങ്ങളുള്ള ചുറ്റുകളായി ചുറ്റിയെടുത്ത കവചിത ചാലകമാണ് സോളിനോയ്ഡ്.</span>
-        <span class="t-en"><b>Solenoid:</b> An insulated conducting wire wound into closely-spaced turns, like a spring, all with centres on the same straight line.</span>
-      </div>
-      <ul>
-        <li><span class="t-ml">ചാലകച്ചുറ്റുകളുടെ എണ്ണം വർധിപ്പിക്കുന്തോറും കാന്തശക്തി വർധിക്കുന്നു (ഒരേ കറന്റിന്).</span>
-            <span class="t-en">Increasing the number of turns increases the magnetic strength (for the same current).</span></li>
-        <li><span class="t-ml">കറന്റ് വർധിപ്പിച്ചാലും കാന്തശക്തി വർധിക്കുന്നു.</span>
-            <span class="t-en">Increasing the current also increases the magnetic strength.</span></li>
-        <li><span class="t-ml">ചാലകക്കമ്പിയുരുളിന് ചുറ്റുമുള്ള കാന്തികമണ്ഡലത്തിന്റെ ശക്തി/തീവ്രത സ്വാധീനിക്കുന്ന ഘടകങ്ങൾ: <b>യൂണിറ്റ് നീളത്തിലുള്ള ചാലകച്ചുറ്റുകളുടെ എണ്ണം</b>, <b>കറന്റിന്റെ അളവ്</b>, <b>കോറിന്റെ സ്വഭാവം</b> (ഇരുമ്പ് ഉള്ളപ്പോൾ ശക്തി കൂടുതൽ).</span>
-            <span class="t-en">Factors that affect the strength of the field around a coil: <b>number of turns per unit length</b>, <b>the amount of current</b>, and <b>the nature of the core</b> (an iron core increases the strength).</span></li>
-      </ul>
-      <div class="def">
-        <span class="t-ml"><b>സോളിനോയ്ഡിന്റെ ധ്രുവം കണ്ടെത്താൻ (വലതുകൈ പെരുവിരൽ നിയമം):</b> കറന്റിന്റെ ദിശയിൽ നാല് വിരലുകൾ വരത്തക്കവിധം ഒരു സോളിനോയ്ഡിനെ വലതുകൈ കൊണ്ട് പിടിക്കുന്നതായി സങ്കല്പിച്ചാൽ, വലതുകൈയുടെ പെരുവിരൽ സൂചിപ്പിക്കുന്ന ദിശയിലായിരിക്കും സോളിനോയ്ഡിന്റെ നോർത്ത്‌പോൾ (N).</span>
-        <span class="t-en"><b>Finding a solenoid's poles (right-hand thumb rule):</b> Curl the fingers of the right hand in the direction of the current around the solenoid — the thumb then points toward the solenoid's north pole (N).</span>
-      </div>
-      <p><b><span class="t-ml">ബാർമാഗ്നറ്റും വൈദ്യുതവാഹിയായ സോളിനോയ്ഡും — താരതമ്യം</span><span class="t-en">Bar magnet vs. current-carrying solenoid</span></b></p>
-      <table class="mini-tbl t-ml">
-        <tr><th>ബാർമാഗ്നറ്റ്</th><th>വൈദ്യുതവാഹിയായ സോളിനോയ്ഡ്</th></tr>
-        <tr><td>കാന്തികമണ്ഡലരേഖകളുടെ വിന്യാസം സമാനം</td><td>കാന്തികമണ്ഡലരേഖകളുടെ വിന്യാസം സമാനം</td></tr>
-        <tr><td>കാന്തശക്തി സ്ഥിരമാണ്</td><td>കാന്തശക്തി വ്യത്യാസപ്പെടുത്താൻ കഴിയും (കറന്റ്/ചുറ്റുകൾ മാറ്റി)</td></tr>
-        <tr><td>കാന്തിക ധ്രുവത മാറ്റാൻ സാധിക്കുകയില്ല</td><td>കറന്റിന്റെ ദിശ മാറ്റി ധ്രുവത മാറ്റാം</td></tr>
-      </table>
-      <table class="mini-tbl t-en">
-        <tr><th>Bar magnet</th><th>Current-carrying solenoid</th></tr>
-        <tr><td>Similar arrangement of field lines</td><td>Similar arrangement of field lines</td></tr>
-        <tr><td>Magnetic strength is fixed</td><td>Strength can be varied (change current/turns)</td></tr>
-        <tr><td>Polarity cannot be changed</td><td>Polarity can be reversed by reversing the current</td></tr>
-      </table>
-    </div>
-  </details>
-
-  <details class="topic">
-    <summary><span class="tnum">5</span><span class="ttitle"><span class="t-ml">വൈദ്യുതകാന്തങ്ങൾ (Electromagnets)</span><span class="t-en">Electromagnets</span></span><span class="chev">▶</span></summary>
-    <div class="tbody">
-      <div class="def">
-        <span class="t-ml"><b>വൈദ്യുതകാന്തം (Electromagnet):</b> വൈദ്യുതി ഉപയോഗിച്ച് കാന്തികമണ്ഡലം സൃഷ്ടിക്കുന്ന സംവിധാനം — സാധാരണയായി ഇരുമ്പ് കോർ ഉള്ള ഒരു സോളിനോയ്ഡ്.</span>
-        <span class="t-en"><b>Electromagnet:</b> A device that uses electricity to create a magnetic field — usually a solenoid with an iron core.</span>
-      </div>
-      <ul>
-        <li><span class="t-ml">ഇരുമ്പ് കോർ ഉപയോഗിച്ചാൽ കാന്തശക്തി വളരെയധികം വർധിക്കുന്നു.</span>
-            <span class="t-en">Using an iron core greatly increases the magnetic strength.</span></li>
-        <li><span class="t-ml">ശക്തി കൂടിയ വൈദ്യുതകാന്തങ്ങൾക്ക് ചുറ്റുപാടുമുള്ള കാന്തികവസ്തുക്കളെ ശക്തിയോടെ ആകർഷിക്കാൻ കഴിയും.</span>
-            <span class="t-en">Powerful electromagnets can strongly attract nearby magnetic materials.</span></li>
-      </ul>
-      <p><b><span class="t-ml">ഉപയോഗങ്ങൾ:</span><span class="t-en">Applications:</span></b></p>
-      <ul>
-        <li><span class="t-ml">ഇലക്ട്രോമാഗ്നറ്റിക് ക്രെയിൻ — സ്ക്രാപ്പ് ഇരുമ്പ് ഉയർത്താൻ</span><span class="t-en">Electromagnetic crane — to lift scrap iron</span></li>
-        <li><span class="t-ml">മാഗ്‌ലെവ് ട്രെയിൻ — കാന്തികശക്തി ഉപയോഗിച്ച് ട്രാക്കിന് മുകളിലൂടെ ഉയർന്ന് സഞ്ചരിക്കുന്നു</span><span class="t-en">Maglev train — floats and travels above the track using magnetic force</span></li>
-        <li><span class="t-ml">MRI സ്കാനർ — ശക്തിയേറിയ വൈദ്യുതകാന്തിക മണ്ഡലം ഉപയോഗിക്കുന്നു</span><span class="t-en">MRI scanner — uses a very strong electromagnetic field</span></li>
-        <li><span class="t-ml">വൈദ്യുത മോട്ടോർ</span><span class="t-en">Electric motor</span></li>
-      </ul>
-      <p class="note">
-        <span class="t-ml"><b>⚠️ ശ്രദ്ധിക്കുക:</b> MRI സ്കാനറിന് വിധേയമാകുന്നതിന് മുൻപ് രോഗിയോട് അണിഞ്ഞിരിക്കുന്ന ലോഹ ആഭരണങ്ങൾ എല്ലാം മാറ്റിവയ്ക്കാൻ ആവശ്യപ്പെടുന്നത് കാന്തികമണ്ഡലത്തിന്റെ വളരെ ഉയർന്ന ശക്തി മൂലം അപകടം ഒഴിവാക്കാനാണ്. ഇരുമ്പ് കൊണ്ടുള്ള ഒരു കാന്തിക ഷീൽഡിങ് ഉപയോഗിച്ചാൽ ഫ്ലക്സ് രേഖകൾ പുറത്തുവരാതെ തടയാം.</span>
-        <span class="t-en"><b>⚠️ Note:</b> Patients must remove all metal jewellery before an MRI scan because of the field's very high strength. An iron magnetic shield can prevent the flux lines from leaking outward.</span>
-      </p>
-    </div>
-  </details>
-
-  <details class="topic">
-    <summary><span class="tnum">6</span><span class="ttitle"><span class="t-ml">മോട്ടോർ തത്വവും ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമവും</span><span class="t-en">Motor Principle and Fleming's Left Hand Rule</span></span><span class="chev">▶</span></summary>
-    <div class="tbody">
-      <p>
-        <span class="t-ml">കാന്തികമണ്ഡലത്തിൽ സ്ഥിതി ചെയ്യുന്ന, വൈദ്യുതി പ്രവഹിക്കുന്ന ഒരു ചാലകത്തിന് ബലം അനുഭവപ്പെടും. കാന്തത്തിന്റെ ധ്രുവങ്ങൾക്കിടയിൽ സ്വതന്ത്രമായി ചലിക്കാൻ കഴിയുന്ന ചാലകത്തിലൂടെ കറന്റ് കടത്തിവിട്ടാൽ അത് ചലിക്കുന്നു.</span>
-        <span class="t-en">A current-carrying conductor placed in a magnetic field experiences a force. If such a conductor is free to move between the poles of a magnet, passing current through it makes it move.</span>
-      </p>
-      <div class="def">
-        <span class="t-ml"><b>മോട്ടോർ തത്വം (Motor principle):</b> കാന്തികമണ്ഡലത്തിൽ സ്ഥിതിചെയ്യുന്ന, സ്വതന്ത്രമായി ചലിക്കാൻ കഴിയുന്ന ചാലകത്തിലൂടെ വൈദ്യുതി പ്രവഹിക്കുമ്പോൾ ചാലകം വിഭ്രംശിക്കാനുള്ള പ്രവണത ഉളവാക്കുന്നു.</span>
-        <span class="t-en"><b>Motor principle:</b> When current flows through a conductor that is free to move and lies in a magnetic field, a force tends to make the conductor move.</span>
-      </div>
-      <ul>
-        <li><span class="t-ml">വൈദ്യുതിയുടെയോ കാന്തികമണ്ഡലത്തിന്റെയോ ദിശ വിപരീതമാക്കിയാൽ ചാലകത്തിന്റെ ചലനദിശയും വിപരീതമാകും.</span>
-            <span class="t-en">Reversing either the current or the magnetic field direction reverses the direction of motion.</span></li>
-        <li><span class="t-ml">വൈദ്യുതിയുടെയും കാന്തികമണ്ഡലത്തിന്റെയും ദിശ ഒരുമിച്ച് വിപരീതമാക്കിയാൽ ചാലകം ആദ്യം ചലിച്ച അതേ ദിശയിൽത്തന്നെ ചലിക്കും.</span>
-            <span class="t-en">Reversing both together brings back the original direction of motion.</span></li>
-      </ul>
-      <div class="def">
-        <span class="t-ml"><b>ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമം:</b> ഇടതുകൈയുടെ പെരുവിരൽ, ചൂണ്ടുവിരൽ, നടുവിരൽ എന്നിവ പരസ്പരം ലംബമായി പിടിക്കുക. ചൂണ്ടുവിരൽ (First finger) കാന്തികമണ്ഡലത്തിന്റെ ദിശയിലും നടുവിരൽ (seCond finger) വൈദ്യുതപ്രവാഹദിശയിലുമായാൽ പെരുവിരൽ (thuMb) സൂചിപ്പിക്കുന്നത് ചാലകത്തിൽ അനുഭവപ്പെടുന്ന ബലത്തിന്റെ ദിശ ആയിരിക്കും.</span>
-        <span class="t-en"><b>Fleming's left hand rule:</b> Hold the thumb, first finger and second finger of the left hand mutually perpendicular. If the first finger points along the magnetic field and the second finger along the current, the thumb points in the direction of the force on the conductor.</span>
-      </div>
-      <p class="note">
-        <span class="t-ml">ബലത്തിന്റെ ദിശ, കാന്തികമണ്ഡലദിശ, വൈദ്യുതപ്രവാഹദിശ — ഇവ മൂന്നും പരസ്പരം ലംബമാണ്. ബന്ധം കണ്ടെത്തിയത് ജോൺ ആംബ്രോസ് ഫ്ലെമിങ് ആണ്.</span>
-        <span class="t-en">The direction of force, the magnetic field, and the current are all mutually perpendicular. This relationship was discovered by John Ambrose Fleming.</span>
-      </p>
-    </div>
-  </details>
-
-  <details class="topic">
-    <summary><span class="tnum">7</span><span class="ttitle"><span class="t-ml">വൈദ്യുതമോട്ടോർ (Electric Motor)</span><span class="t-en">Electric Motor</span></span><span class="chev">▶</span></summary>
-    <div class="tbody">
-      <p>
-        <span class="t-ml">മോട്ടോർ തത്വത്തെ അടിസ്ഥാനമാക്കി വൈദ്യുതോർജ്ജത്തെ യാന്ത്രികോർജ്ജമാക്കി മാറ്റുന്ന സംവിധാനമാണ് വൈദ്യുത മോട്ടോർ.</span>
-        <span class="t-en">An electric motor is a device based on the motor principle that converts electrical energy into mechanical energy.</span>
-      </p>
-      <p><b><span class="t-ml">പ്രധാന ഭാഗങ്ങൾ:</span><span class="t-en">Main parts:</span></b></p>
-      <ul>
-        <li><span class="t-ml"><b>ആർമെച്ചർ (ABCD):</b> അനുയോജ്യമായ കോറിന് ചുറ്റും ചുറ്റിയെടുത്ത കവചിത ചാലകച്ചുരുൾ. ഭ്രമണ അക്ഷം (PQ) ഇതിനെ ദൃഢമായി ബന്ധിപ്പിച്ചിരിക്കുന്നു.</span>
-            <span class="t-en"><b>Armature (ABCD):</b> a coil of insulated wire wound around a suitable core. The axle (PQ) is rigidly fixed to it.</span></li>
-        <li><span class="t-ml"><b>N, S ധ്രുവങ്ങൾ:</b> ആർമെച്ചർ ചലിക്കുന്ന കാന്തികമണ്ഡലം സൃഷ്ടിക്കുന്ന ശക്തിയേറിയ കാന്തം.</span>
-            <span class="t-en"><b>N, S poles:</b> the strong magnet that creates the magnetic field in which the armature turns.</span></li>
-        <li><span class="t-ml"><b>സ്പ്ലിറ്റ് റിങ് കമ്യൂട്ടേറ്റർ (R₁, R₂):</b> ഓരോ അർധഭ്രമണത്തിനും ശേഷം ആർമെച്ചറിലെ കറന്റിന്റെ ദിശ വിപരീതമാക്കുന്ന ഘടകം.</span>
-            <span class="t-en"><b>Split ring commutator (R₁, R₂):</b> reverses the direction of the current in the armature after every half rotation.</span></li>
-        <li><span class="t-ml"><b>ഗ്രാഫൈറ്റ് ബ്രഷുകൾ (B₁, B₂):</b> ബാറ്ററിയിൽ നിന്ന് സ്പ്ലിറ്റ് റിങ്ങിലേക്ക് കറന്റ് കടത്തിവിടുന്ന നിശ്ചല സ്പർശകങ്ങൾ.</span>
-            <span class="t-en"><b>Graphite brushes (B₁, B₂):</b> stationary contacts that pass current from the battery to the split rings.</span></li>
-      </ul>
-      <div class="def">
-        <span class="t-ml"><b>പ്രവർത്തനം:</b> AB, CD എന്നീ വശങ്ങളിലൂടെ വിപരീത ദിശകളിൽ കറന്റ് പ്രവഹിക്കുന്നു. കാന്തികമണ്ഡലം ഒരേ ദിശയിലായതിനാൽ ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമപ്രകാരം AB, CD എന്നിവയിൽ വിപരീത ദിശയിലുള്ള ബലങ്ങൾ അനുഭവപ്പെടുന്നു — ഇത് ആർമെച്ചറിനെ തുടർച്ചയായി ഒരേ ദിശയിൽ ഭ്രമണം ചെയ്യിക്കുന്നു.</span>
-        <span class="t-en"><b>Working:</b> Current flows in opposite directions along sides AB and CD. Since the magnetic field direction is the same, by Fleming's left hand rule, AB and CD experience forces in opposite directions — this keeps the armature rotating continuously in one direction.</span>
-      </div>
-      <p class="note">
-        <span class="t-ml">ഓരോ അർധഭ്രമണത്തിനുശേഷവും AB, CD എന്നിവയിലെ കറന്റിന്റെ ദിശയിൽ വ്യത്യാസം വരുത്തുന്നത് സ്പ്ലിറ്റ് റിങ് കമ്യൂട്ടേറ്ററാണ് — ഇതില്ലായിരുന്നെങ്കിൽ ബലത്തിന്റെ ദിശ ഓരോ അർധഭ്രമണത്തിലും വിപരീതമായി മോട്ടോർ ആടിക്കൊണ്ടിരിക്കും.</span>
-        <span class="t-en">The split-ring commutator reverses the current in AB and CD after every half rotation — without it, the force direction would reverse each half-turn and the motor would only oscillate.</span>
-      </p>
-      <p><b><span class="t-ml">പ്രയോഗങ്ങൾ:</span><span class="t-en">Applications:</span></b> <span class="t-ml">ഫാൻ, മിക്സി, ഗ്രൈൻഡർ തുടങ്ങിയ ഉപകരണങ്ങൾ ഈ തത്വത്തിലാണ് പ്രവർത്തിക്കുന്നത്.</span><span class="t-en">Fans, mixies and grinders all work on this principle.</span></p>
-    </div>
-  </details>
-
-  <details class="topic">
-    <summary><span class="tnum">8</span><span class="ttitle"><span class="t-ml">ബ്രഷ്‌ലെസ്സ് ഡയറക്ട് കറന്റ് (BLDC) മോട്ടോർ</span><span class="t-en">BLDC Motor</span></span><span class="chev">▶</span></summary>
-    <div class="tbody">
-      <div class="def">
-        <span class="t-ml"><b>BLDC മോട്ടോർ:</b> സാധാരണ DC മോട്ടോറുകളിലേതുപോലെ ബ്രഷുകളും സ്പ്ലിറ്റ് റിങ്ങുകളും ഇല്ലാതെ പ്രവർത്തിക്കുന്ന മോട്ടോർ. ആർമെച്ചർ കറങ്ങുന്നതിനുപകരം ഇലക്ട്രോണിക് സ്വിച്ച് ഉപയോഗിച്ച് വൈദ്യുതിയുടെ ദിശ ആവശ്യാനുസരണം മാറ്റുന്നു.</span>
-        <span class="t-en"><b>BLDC motor:</b> works without brushes and split rings, unlike ordinary DC motors. Instead of a rotating armature, an electronic switch changes the direction of the current as needed.</span>
-      </div>
-      <ul>
-        <li><span class="t-ml">സാധാരണ ഫാനുകളിൽ ഉപയോഗിക്കുന്നത് ഇൻഡക്ഷൻ മോട്ടോറാണ്.</span>
-            <span class="t-en">Ordinary fans use an induction motor.</span></li>
-        <li><span class="t-ml">BLDC ഫാനുകൾ വൈദ്യുതിയുടെ ഉപഭോഗം 60% വരെ കുറയ്ക്കുന്നു — അതിനാൽ ഇവയെ ഊർജ്ജസംരക്ഷണ ഫാനുകൾ എന്ന് അറിയപ്പെടുന്നു.</span>
-            <span class="t-en">BLDC fans reduce power consumption by up to 60% — hence they are known as energy-saving fans.</span></li>
-      </ul>
-    </div>
-  </details>
-
-  <details class="topic">
-    <summary><span class="tnum">9</span><span class="ttitle"><span class="t-ml">ചലിക്കുംചുരുൾ ലൗഡ്സ്പീക്കർ (Moving Coil Loudspeaker)</span><span class="t-en">Moving Coil Loudspeaker</span></span><span class="chev">▶</span></summary>
-    <div class="tbody">
-      <p><b><span class="t-ml">പ്രധാന ഭാഗങ്ങൾ:</span><span class="t-en">Main parts:</span></b></p>
-      <ul>
-        <li><span class="t-ml"><b>വോയ്‌സ് കോയിൽ:</b> ഫീൽഡ്‌കാന്തത്തിന്റെ കാന്തികമണ്ഡലത്തിൽ സ്ഥിതി ചെയ്യുന്ന ചലിക്കാൻ കഴിയുന്ന ചാലകച്ചുരുൾ.</span>
-            <span class="t-en"><b>Voice coil:</b> a moveable coil placed within the magnetic field of the field magnet.</span></li>
-        <li><span class="t-ml"><b>ഫീൽഡ് കാന്തം:</b> ശക്തിയേറിയ സ്ഥിരകാന്തം, കാന്തികമണ്ഡലം സൃഷ്ടിക്കുന്നു.</span>
-            <span class="t-en"><b>Field magnet:</b> a strong permanent magnet that produces the magnetic field.</span></li>
-        <li><span class="t-ml"><b>പേപ്പർ ഡയഫ്രം:</b> വോയ്‌സ് കോയിലിനോട് ബന്ധിപ്പിച്ചിരിക്കുന്ന കോൺ ആകൃതിയിലുള്ള കടലാസ്.</span>
-            <span class="t-en"><b>Paper diaphragm:</b> a cone-shaped paper sheet connected to the voice coil.</span></li>
-      </ul>
-      <div class="def">
-        <span class="t-ml"><b>പ്രവർത്തനം:</b> മൈക്രോഫോണിൽ നിന്ന് ലഭിക്കുന്ന ഓഡിയോസിഗ്നലുകൾ (വൈദ്യുത സിഗ്നലുകൾ) ആംപ്ലിഫയർ ഉപയോഗിച്ച് ശക്തിപ്പെടുത്തി വോയ്‌സ് കോയിലിലൂടെ കടത്തിവിടുന്നു. കാന്തികമണ്ഡലത്തിൽ സ്ഥിതി ചെയ്യുന്ന ഈ കോയിലിന് ബലം അനുഭവപ്പെടുകയും, കറന്റിന് അനുസരിച്ച് കോയിൽ കമ്പനം ചെയ്യുകയും ചെയ്യുന്നു. ഇത് ഡയഫ്രത്തെ കമ്പനം ചെയ്യിക്കുന്നു — അങ്ങനെ ശബ്ദം പുനഃസൃഷ്ടിക്കപ്പെടുന്നു.</span>
-        <span class="t-en"><b>Working:</b> The audio signals from a microphone (electrical signals), strengthened by an amplifier, are passed through the voice coil. As the coil lies in the magnetic field, it experiences a force and vibrates according to the current. This makes the diaphragm vibrate — reproducing sound.</span>
-      </div>
-      <p class="note">
-        <span class="t-ml"><b>ഊർജ്ജമാറ്റം:</b> വൈദ്യുതോർജ്ജം → യാന്ത്രികോർജ്ജം (ശബ്ദോർജ്ജം).</span>
-        <span class="t-en"><b>Energy transformation:</b> electrical energy → mechanical energy (sound energy).</span>
-      </p>
-    </div>
-  </details>
-
-  <p style="text-align:center;margin-top:26px">
-    <button class="prnbtn" onclick="printPanel('notes')">🖨️ <span class="t-ml">കുറിപ്പുകൾ പ്രിന്റ് ചെയ്യാം</span><span class="t-en">Print notes</span></button>
-  </p>
-</section>
-
-<!-- ================= RULES ================= -->
-<section class="panel" id="formula">
-  <p class="lead">
-    <span class="t-ml">ഈ യൂണിറ്റിലെ പ്രധാന നിയമങ്ങളും (ഫോർമുലകൾക്ക് പകരം ദിശാ-നിയമങ്ങൾ) അവ എപ്പോൾ ഉപയോഗിക്കണം എന്നും.</span>
-    <span class="t-en">The key rules in this unit (direction-rules rather than numeric formulas) and when to use each.</span>
-  </p>
-  <div class="fgrid">
-    <div class="fcard">
-      <p class="fname"><span class="t-ml">വലതുകൈ പെരുവിരൽ നിയമം</span><span class="t-en">Right-hand thumb rule</span></p>
-      <div class="formula" style="font-size:16px"><span class="t-ml">കറന്റ് ദിശ → പെരുവിരൽ · കാന്തികമണ്ഡലദിശ → ചുറ്റിയ വിരലുകൾ</span><span class="t-en">Current → thumb · Field → curled fingers</span></div>
-      <div class="where">
-        <div><span class="t-ml"><b>ഉപയോഗം:</b> നേർചാലകത്തിനും സോളിനോയ്ഡിനും ചുറ്റുമുള്ള കാന്തികമണ്ഡലദിശ കണ്ടെത്താൻ.</span><span class="t-en"><b>Use:</b> to find the magnetic field direction around a straight conductor or a solenoid.</span></div>
-        <div class="note"><span class="t-ml">⤷ സോളിനോയ്ഡിൽ: നാല് വിരലുകൾ കറന്റ് ദിശയിൽ → പെരുവിരൽ N ധ്രുവം കാണിക്കും</span><span class="t-en">⤷ For a solenoid: fingers curl with current → thumb points to the N pole</span></div>
-      </div>
-    </div>
-    <div class="fcard">
-      <p class="fname"><span class="t-ml">ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമം</span><span class="t-en">Fleming's left hand rule</span></p>
-      <div class="formula" style="font-size:15px"><span class="t-ml">ചൂണ്ടുവിരൽ: മണ്ഡലം · നടുവിരൽ: കറന്റ് · പെരുവിരൽ: ബലം</span><span class="t-en">First: Field · seCond: Current · thuMb: Motion/Force</span></div>
-      <div class="where">
-        <div><span class="t-ml"><b>ഉപയോഗം:</b> കാന്തികമണ്ഡലത്തിൽ സ്ഥിതി ചെയ്യുന്ന വൈദ്യുതവാഹിയായ ചാലകത്തിൽ അനുഭവപ്പെടുന്ന ബലത്തിന്റെ ദിശ കണ്ടെത്താൻ (മോട്ടോർ).</span><span class="t-en"><b>Use:</b> to find the direction of the force on a current-carrying conductor in a magnetic field (motors).</span></div>
-        <div class="note"><span class="t-ml">⤷ മൂന്നും പരസ്പരം ലംബം</span><span class="t-en">⤷ All three are mutually perpendicular</span></div>
-      </div>
-    </div>
-    <div class="fcard" style="background:#eef7f6;border-color:#a7e0d8;">
-      <p class="fname" style="color:var(--reso)"><span class="t-ml">ദിശ വിപരീതമാക്കൽ — പൊതു നിയമം</span><span class="t-en">Reversing direction — general rule</span></p>
-      <div class="where" style="margin-top:0">
-        <div><span class="t-ml">കറന്റ് അല്ലെങ്കിൽ കാന്തികമണ്ഡലം <b>ഒന്ന് മാത്രം</b> വിപരീതമാക്കിയാൽ → ചലനദിശയും ബലദിശയും വിപരീതമാകും</span><span class="t-en">Reverse <b>either</b> current or field alone → direction of force/motion reverses</span></div>
-        <div><span class="t-ml"><b>രണ്ടും ഒരുമിച്ച്</b> വിപരീതമാക്കിയാൽ → ചലനദിശ <b>മാറില്ല</b></span><span class="t-en">Reverse <b>both together</b> → direction of motion stays <b>unchanged</b></span></div>
-      </div>
-    </div>
-    <div class="fcard" style="background:#f4f0fb;border-color:#d9c9f5;">
-      <p class="fname" style="color:#6d28d9"><span class="t-ml">ഓർത്തിരിക്കാൻ — സ്ഥിര വസ്തുതകൾ</span><span class="t-en">Facts worth memorising</span></p>
-      <div class="where" style="margin-top:0">
-        <div><span class="t-ml">കാന്തിക ഫ്ലക്സ് രേഖകൾ കാന്തത്തിന് പുറത്ത് <span class="sym">N → S</span></span><span class="t-en">Outside a magnet, flux lines run <span class="sym">N → S</span></span></div>
-        <div><span class="t-ml">സോളിനോയ്ഡിന്റെ കാന്തശക്തി കൂട്ടാൻ: <span class="sym">ചുറ്റുകൾ ↑, കറന്റ് ↑, ഇരുമ്പ് കോർ</span></span><span class="t-en">To increase a solenoid's strength: <span class="sym">more turns, more current, iron core</span></span></div>
-        <div><span class="t-ml">സ്പ്ലിറ്റ് റിങ് കമ്യൂട്ടേറ്റർ → <span class="sym">ഓരോ അർധഭ്രമണത്തിലും കറന്റ് ദിശ മാറ്റുന്നു</span></span><span class="t-en">Split-ring commutator → <span class="sym">reverses current every half rotation</span></span></div>
-        <div><span class="t-ml">മോട്ടോർ: <span class="sym">വൈദ്യുതി → യന്ത്രചലനം</span> · ലൗഡ്സ്പീക്കർ: <span class="sym">വൈദ്യുതി → ശബ്ദം</span></span><span class="t-en">Motor: <span class="sym">electrical → mechanical</span> · Loudspeaker: <span class="sym">electrical → sound</span></span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= FLASHCARDS ================= -->
-<section class="panel" id="flash">
-  <p class="lead">
-    <span class="t-ml">ഓരോ കാർഡിലും ടാപ്പ് ചെയ്ത് ഉത്തരം നോക്കാം. റിവിഷന് ഉത്തമം!</span>
-    <span class="t-en">Tap any card to reveal the answer. Great for revision!</span>
-  </p>
-  <div class="fcwrap" id="fcwrap"></div>
-</section>
-
-<!-- ================= QUIZ ================= -->
-<section class="panel" id="quiz">
-  <p class="lead">
-    <span class="t-ml">ഓരോ ചോദ്യത്തിനും ഉത്തരം തിരഞ്ഞെടുക്കൂ — ഉടനെ ശരി/തെറ്റ് അറിയാം.</span>
-    <span class="t-en">Choose an answer for each question — you'll see instantly whether it's right or wrong.</span>
-  </p>
-
-  <div class="sharebar no-print">
-    <a class="sbtn open" href="unit4-quiz.html" target="_blank" rel="noopener">
-      🚀 <span class="t-ml">ക്വിസ് പേജ് തുറക്കുക</span><span class="t-en">Open quiz page</span></a>
-    <button class="sbtn share" id="shareBtn">
-      🔗 <span class="t-ml">ക്വിസ് ലിങ്ക് പകർത്തുക</span><span class="t-en">Copy quiz link</span></button>
-    <button class="sbtn wa" id="waBtn">
-      📲 <span class="t-ml">WhatsApp-ൽ അയക്കുക</span><span class="t-en">Send on WhatsApp</span></button>
-  </div>
-  <p class="lead" style="text-align:center;font-size:13px;margin:-10px 0 22px">
-    <span class="t-ml">ലിങ്ക് പങ്കിട്ടാൽ കുട്ടികൾക്ക് ക്വിസ് മാത്രമുള്ള പ്രത്യേക പേജ് തുറക്കും.</span>
-    <span class="t-en">Sharing the link opens a separate, quiz-only page for students.</span>
-  </p>
-
-  <div class="quiz-card" id="quizCard"></div>
-</section>
-
-<!-- ================= QUESTION BANK ================= -->
-<section class="panel" id="qbank">
-  <p class="lead">
-    <span class="t-ml">പരീക്ഷയ്ക്കുള്ള ചോദ്യബാങ്ക്. ഓരോ ചോദ്യത്തിനും താഴെ <b style="color:var(--good)">ഉത്തരം കാണിക്കുക</b> അമർത്തി ഉത്തരം പരിശോധിക്കാം.</span>
-    <span class="t-en">Exam question bank. Press <b style="color:var(--good)">Show answer</b> below each question to check your answer.</span>
-  </p>
-
-  <div class="qb-tools no-print">
-    <button class="qb-btn show" id="qbToggleAll">📖 <span class="t-ml">എല്ലാ ഉത്തരങ്ങളും കാണിക്കുക</span><span class="t-en">Show all answers</span></button>
-    <button class="qb-btn prn" onclick="printPanel('qbank')">🖨️ <span class="t-ml">ചോദ്യപ്പേപ്പർ പ്രിന്റ് ചെയ്യാം</span><span class="t-en">Print question paper</span></button>
-  </div>
-
-  <div class="qb-sec">
-    <div class="qb-head"><span class="sl">A</span><h3><span class="t-ml">ശരിയുത്തരം തിരഞ്ഞെടുക്കുക</span><span class="t-en">Choose the correct answer</span></h3><span class="mk">1 × 6 = 6</span></div>
-
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">1.</span><span><span class="t-ml">വൈദ്യുതിയും കാന്തികതയും തമ്മിലുള്ള ബന്ധം ആദ്യമായി കണ്ടെത്തിയത് ആരാണ്?</span><span class="t-en">Who first discovered the connection between electricity and magnetism?</span></span></div>
-      <ul class="qb-opts">
-        <li><b>a)</b> <span class="t-ml">മൈക്കിൾ ഫാരഡെ</span><span class="t-en">Michael Faraday</span></li>
-        <li><b>b)</b> <span class="t-ml">ഹാൻസ് ക്രിസ്ത്യൻ ഈഴ്സ്റ്റഡ്</span><span class="t-en">Hans Christian Ørsted</span></li>
-        <li><b>c)</b> <span class="t-ml">ജോൺ ആംബ്രോസ് ഫ്ലെമിങ്</span><span class="t-en">John Ambrose Fleming</span></li>
-        <li><b>d)</b> <span class="t-ml">ഐസക് ന്യൂട്ടൺ</span><span class="t-en">Isaac Newton</span></li>
-      </ul>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: b) ഹാൻസ് ക്രിസ്ത്യൻ ഈഴ്സ്റ്റഡ്</b> — 1820-ൽ ഡെന്മാർക്കിൽ.</span><span class="t-en"><b>Answer: b) Hans Christian Ørsted</b> — in 1820, in Denmark.</span></div>
-    </div>
-
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">2.</span><span><span class="t-ml">വൈദ്യുതി പ്രവഹിക്കുന്ന ഒരു ചാലകത്തിന് ചുറ്റും എന്താണ് ഉണ്ടാകുന്നത്?</span><span class="t-en">What is set up around a current-carrying conductor?</span></span></div>
-      <ul class="qb-opts">
-        <li><b>a)</b> <span class="t-ml">വൈദ്യുതമണ്ഡലം</span><span class="t-en">Electric field</span></li>
-        <li><b>b)</b> <span class="t-ml">കാന്തികമണ്ഡലം</span><span class="t-en">Magnetic field</span></li>
-        <li><b>c)</b> <span class="t-ml">ഗുരുത്വാകർഷണമണ്ഡലം</span><span class="t-en">Gravitational field</span></li>
-        <li><b>d)</b> <span class="t-ml">ഒന്നും ഉണ്ടാകില്ല</span><span class="t-en">Nothing</span></li>
-      </ul>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: b) കാന്തികമണ്ഡലം</b></span><span class="t-en"><b>Answer: b) Magnetic field</b></span></div>
-    </div>
-
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">3.</span><span><span class="t-ml">ഒരു നേർചാലകത്തിന് ചുറ്റുമുള്ള കാന്തികമണ്ഡലരേഖകളുടെ ദിശ കണ്ടെത്താൻ ഉപയോഗിക്കുന്ന നിയമം ഏതാണ്?</span><span class="t-en">Which rule is used to find the direction of the magnetic field around a straight conductor?</span></span></div>
-      <ul class="qb-opts">
-        <li><b>a)</b> <span class="t-ml">ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമം</span><span class="t-en">Fleming's left hand rule</span></li>
-        <li><b>b)</b> <span class="t-ml">വലതുകൈ പെരുവിരൽ നിയമം</span><span class="t-en">Right-hand thumb rule</span></li>
-        <li><b>c)</b> <span class="t-ml">ലെൻസ് സമവാക്യം</span><span class="t-en">Lens equation</span></li>
-        <li><b>d)</b> <span class="t-ml">ഓമിന്റെ നിയമം</span><span class="t-en">Ohm's law</span></li>
-      </ul>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: b)</b> വലതുകൈ പെരുവിരൽ നിയമം.</span><span class="t-en"><b>Answer: b)</b> Right-hand thumb rule.</span></div>
-    </div>
-
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">4.</span><span><span class="t-ml">സ്പ്രിങ്ങിന്റെ ആകൃതിയിൽ ചുറ്റിയെടുത്ത കവചിത ചാലകത്തെ എന്ത് വിളിക്കുന്നു?</span><span class="t-en">What is a spring-shaped coil of insulated wire called?</span></span></div>
-      <ul class="qb-opts">
-        <li><b>a)</b> <span class="t-ml">ആർമെച്ചർ</span><span class="t-en">Armature</span></li>
-        <li><b>b)</b> <span class="t-ml">സോളിനോയ്ഡ്</span><span class="t-en">Solenoid</span></li>
-        <li><b>c)</b> <span class="t-ml">കമ്യൂട്ടേറ്റർ</span><span class="t-en">Commutator</span></li>
-        <li><b>d)</b> <span class="t-ml">ബ്രഷ്</span><span class="t-en">Brush</span></li>
-      </ul>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: b) സോളിനോയ്ഡ്</b></span><span class="t-en"><b>Answer: b) Solenoid</b></span></div>
-    </div>
-
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">5.</span><span><span class="t-ml">വൈദ്യുതമോട്ടോറിൽ ഓരോ അർധഭ്രമണത്തിനുശേഷവും കറന്റിന്റെ ദിശ മാറ്റുന്നത് എന്താണ്?</span><span class="t-en">What reverses the current direction in an electric motor after every half rotation?</span></span></div>
-      <ul class="qb-opts">
-        <li><b>a)</b> <span class="t-ml">ആർമെച്ചർ</span><span class="t-en">Armature</span></li>
-        <li><b>b)</b> <span class="t-ml">ഫീൽഡ്‌കാന്തം</span><span class="t-en">Field magnet</span></li>
-        <li><b>c)</b> <span class="t-ml">സ്പ്ലിറ്റ് റിങ് കമ്യൂട്ടേറ്റർ</span><span class="t-en">Split ring commutator</span></li>
-        <li><b>d)</b> <span class="t-ml">വോയ്‌സ് കോയിൽ</span><span class="t-en">Voice coil</span></li>
-      </ul>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: c) സ്പ്ലിറ്റ് റിങ് കമ്യൂട്ടേറ്റർ</b></span><span class="t-en"><b>Answer: c) Split ring commutator</b></span></div>
-    </div>
-
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">6.</span><span><span class="t-ml">ചലിക്കുംചുരുൾ ലൗഡ്സ്പീക്കറിൽ ഏത് ഊർജ്ജമാറ്റമാണ് നടക്കുന്നത്?</span><span class="t-en">What energy transformation takes place in a moving-coil loudspeaker?</span></span></div>
-      <ul class="qb-opts">
-        <li><b>a)</b> <span class="t-ml">യാന്ത്രികം → വൈദ്യുതി</span><span class="t-en">Mechanical → electrical</span></li>
-        <li><b>b)</b> <span class="t-ml">വൈദ്യുതി → യാന്ത്രികം (ശബ്ദം)</span><span class="t-en">Electrical → mechanical (sound)</span></li>
-        <li><b>c)</b> <span class="t-ml">താപം → വൈദ്യുതി</span><span class="t-en">Heat → electrical</span></li>
-        <li><b>d)</b> <span class="t-ml">പ്രകാശം → വൈദ്യുതി</span><span class="t-en">Light → electrical</span></li>
-      </ul>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml"><b>ഉത്തരം: b)</b> വൈദ്യുതോർജ്ജം ശബ്ദോർജ്ജമായി മാറുന്നു.</span><span class="t-en"><b>Answer: b)</b> Electrical energy becomes sound (mechanical) energy.</span></div>
-    </div>
-  </div>
-
-  <div class="qb-sec">
-    <div class="qb-head"><span class="sl">B</span><h3><span class="t-ml">ഒറ്റ വാക്കിൽ / ഒരു വാക്യത്തിൽ ഉത്തരം</span><span class="t-en">Answer in one word / one sentence</span></h3><span class="mk">1 × 6 = 6</span></div>
-
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">7.</span><span><span class="t-ml">കാന്തികമണ്ഡലത്തെ ദൃശ്യവൽക്കരിക്കാൻ ഉപയോഗിക്കുന്ന സാങ്കല്പിക രേഖകൾ ഏതെന്ന് അറിയപ്പെടുന്നു?</span><span class="t-en">What are the imaginary lines used to visualise a magnetic field called?</span></span></div>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml"><b>കാന്തികമണ്ഡലരേഖകൾ / ഫ്ലക്സ് രേഖകൾ</b></span><span class="t-en"><b>Magnetic field lines / flux lines</b></span></div>
-    </div>
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">8.</span><span><span class="t-ml">വലതുകൈ പെരുവിരൽ നിയമത്തിന്റെ മറ്റൊരു പേര് എന്ത്?</span><span class="t-en">What is another name for the right-hand thumb rule?</span></span></div>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml"><b>ആംപിയറുടെ നീന്തൽ നിയമം</b></span><span class="t-en"><b>Ampère's swimming rule</b></span></div>
-    </div>
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">9.</span><span><span class="t-ml">ബാറ്ററിയിൽ നിന്ന് സ്പ്ലിറ്റ് റിങ്ങിലേക്ക് കറന്റ് കടത്തിവിടുന്ന ഭാഗം ഏത്?</span><span class="t-en">Which part passes current from the battery to the split ring?</span></span></div>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml"><b>ഗ്രാഫൈറ്റ് ബ്രഷുകൾ</b></span><span class="t-en"><b>Graphite brushes</b></span></div>
-    </div>
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">10.</span><span><span class="t-ml">BLDC എന്നാൽ എന്താണ്?</span><span class="t-en">What does BLDC stand for?</span></span></div>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml"><b>ബ്രഷ്‌ലെസ്സ് ഡയറക്ട് കറന്റ് മോട്ടോർ</b></span><span class="t-en"><b>Brushless Direct Current Motor</b></span></div>
-    </div>
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">11.</span><span><span class="t-ml">ലൗഡ്സ്പീക്കറിൽ കാന്തികമണ്ഡലത്തിൽ സ്ഥിതി ചെയ്യുന്ന ചലിക്കാൻ കഴിയുന്ന ചുരുൾ ഏത്?</span><span class="t-en">In a loudspeaker, which moveable coil sits within the magnetic field?</span></span></div>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml"><b>വോയ്‌സ് കോയിൽ</b></span><span class="t-en"><b>Voice coil</b></span></div>
-    </div>
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">12.</span><span><span class="t-ml">വൈദ്യുതി ഉപയോഗിച്ച് കാന്തികമണ്ഡലം സൃഷ്ടിക്കുന്ന സംവിധാനത്തിന്റെ പേര്?</span><span class="t-en">What is a device that uses electricity to create a magnetic field called?</span></span></div>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml"><b>വൈദ്യുതകാന്തം (Electromagnet)</b></span><span class="t-en"><b>Electromagnet</b></span></div>
-    </div>
-  </div>
-
-  <div class="qb-sec">
-    <div class="qb-head"><span class="sl">C</span><h3><span class="t-ml">ചെറിയ ഉത്തരം</span><span class="t-en">Short answer</span></h3><span class="mk">2 × 4 = 8</span></div>
-
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">13.</span><span><span class="t-ml">ഈഴ്സ്റ്റഡിന്റെ പരീക്ഷണം എന്താണ് തെളിയിച്ചത്?</span><span class="t-en">What did Ørsted's experiment prove?</span></span></div>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml">കാന്തസൂചിക്ക് സമീപം കടത്തിവിട്ട ചാലകത്തിലൂടെ കറന്റ് പ്രവഹിക്കുമ്പോൾ സൂചി വിഭ്രംശിക്കുന്നു — അതായത് വൈദ്യുതി പ്രവഹിക്കുന്ന ചാലകത്തിന് ചുറ്റും <b>കാന്തികമണ്ഡലം</b> ഉണ്ടാകുന്നു.</span><span class="t-en">A compass needle deflects when current flows through a nearby conductor — showing that a <b>magnetic field</b> is set up around a current-carrying conductor.</span></div>
-    </div>
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">14.</span><span><span class="t-ml">സോളിനോയ്ഡിലെ കാന്തശക്തി വർധിപ്പിക്കാനുള്ള രണ്ട് വഴികൾ എഴുതുക.</span><span class="t-en">Write two ways to increase the magnetic strength of a solenoid.</span></span></div>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml">① ചാലകച്ചുറ്റുകളുടെ എണ്ണം കൂട്ടുക. ② പ്രവഹിക്കുന്ന കറന്റിന്റെ അളവ് കൂട്ടുക. (③ ഇരുമ്പ് കോർ ഉപയോഗിക്കുക.)</span><span class="t-en">① Increase the number of turns. ② Increase the current. (③ Use an iron core.)</span></div>
-    </div>
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">15.</span><span><span class="t-ml">ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമം പ്രസ്താവിക്കുക.</span><span class="t-en">State Fleming's left hand rule.</span></span></div>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml">ഇടതുകൈയുടെ പെരുവിരൽ, ചൂണ്ടുവിരൽ, നടുവിരൽ പരസ്പരം ലംബമായി പിടിക്കുക. ചൂണ്ടുവിരൽ കാന്തികമണ്ഡലദിശയിലും നടുവിരൽ കറന്റ് ദിശയിലുമായാൽ പെരുവിരൽ ബലത്തിന്റെ ദിശ സൂചിപ്പിക്കും.</span><span class="t-en">Hold the thumb, first and second fingers of the left hand mutually perpendicular. If the first finger points along the field and the second along the current, the thumb shows the direction of the force.</span></div>
-    </div>
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">16.</span><span><span class="t-ml">MRI സ്കാനറിന് മുൻപ് ലോഹ ആഭരണങ്ങൾ മാറ്റാൻ പറയുന്നത് എന്തുകൊണ്ട്?</span><span class="t-en">Why are patients asked to remove metal jewellery before an MRI scan?</span></span></div>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml">MRI സ്കാനറിന്റെ കാന്തികമണ്ഡലം വളരെ ശക്തിയേറിയതായതിനാൽ ലോഹ വസ്തുക്കൾ ശക്തമായി ആകർഷിക്കപ്പെട്ട് അപകടം ഉണ്ടാക്കാം.</span><span class="t-en">Because the MRI's magnetic field is extremely strong, metal objects can be strongly attracted and cause injury.</span></div>
-    </div>
-  </div>
-
-  <div class="qb-sec">
-    <div class="qb-head"><span class="sl">D</span><h3><span class="t-ml">പ്രയോഗാധിഷ്ഠിത ചോദ്യങ്ങൾ</span><span class="t-en">Application-based questions</span></h3><span class="mk">3 × 4 = 12</span></div>
-
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">17.</span><span><span class="t-ml">ഒരു നേർചാലകത്തിലൂടെ A യിൽ നിന്ന് B യിലേക്ക് കറന്റ് പ്രവഹിക്കുന്നു. വലതുകൈ പെരുവിരൽ നിയമം ഉപയോഗിച്ച് ചാലകത്തിന് ചുറ്റുമുള്ള കാന്തികമണ്ഡലത്തിന്റെ ദിശ എങ്ങനെ കണ്ടെത്താം എന്ന് വിശദമാക്കുക.</span><span class="t-en">Current flows from A to B through a straight conductor. Explain how the right-hand thumb rule is used to find the direction of the magnetic field around it.</span></span></div>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml">വലതുകൈ കൊണ്ട് ചാലകത്തെ പെരുവിരൽ A-യിൽ നിന്ന് B-യിലേക്ക് (കറന്റ് ദിശയിൽ) വരത്തക്കവിധം ചുറ്റിപ്പിടിക്കുന്നതായി സങ്കല്പിക്കുക. ചുറ്റിപ്പിടിച്ച വിരലുകൾ ചൂണ്ടിക്കാണിക്കുന്ന ദിശയായിരിക്കും ആ ബിന്ദുവിലെ കാന്തികമണ്ഡലത്തിന്റെ ദിശ.</span><span class="t-en">Imagine gripping the conductor with the right hand so the thumb points from A to B (the current direction). The direction the curled fingers point in is the direction of the magnetic field at that point.</span></div>
-    </div>
-
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">18.</span><span><span class="t-ml">ഒരു സോളിനോയ്ഡിന്റെ ഒരു അഗ്രത്ത് കറന്റ് ആന്റിക്ലോക്ക്‌വൈസ് ദിശയിൽ ആണെങ്കിൽ ആ അഗ്രത്തിന്റെ ധ്രുവത കണ്ടെത്തുക. കാരണം വിശദമാക്കുക.</span><span class="t-en">If the current at one end of a solenoid is anticlockwise, find the polarity of that end and explain why.</span></span></div>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml">ആ അഗ്രം <b>നോർത്ത്‌പോൾ (N)</b> ആയിരിക്കും. കാരണം: കറന്റ് ആന്റിക്ലോക്ക്‌വൈസ് ദിശയിലാകുമ്പോൾ ഫ്ലക്സ് രേഖകൾ ഉള്ളിൽ നിന്ന് പുറത്തേക്ക് വരും — ഇത് N ധ്രുവത്തിന്റെ സവിശേഷതയാണ്.</span><span class="t-en">That end is the <b>North pole (N)</b>. Reason: when the current is anticlockwise, the flux lines emerge outward from that face — which is characteristic of an N pole.</span></div>
-    </div>
-
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">19.</span><span><span class="t-ml">വൈദ്യുതമോട്ടോറിൽ ബാറ്ററിയുടെ ധ്രുവങ്ങൾ മാറ്റി ഘടിപ്പിച്ചാൽ ആർമെച്ചറിന്റെ ഭ്രമണദിശയ്ക്ക് എന്ത് സംഭവിക്കും? കാരണം എഴുതുക.</span><span class="t-en">If the battery terminals in an electric motor are reversed, what happens to the direction of the armature's rotation? Explain why.</span></span></div>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml">ഭ്രമണദിശ <b>വിപരീതമാകും</b>. കാരണം: ബാറ്ററിയുടെ ധ്രുവങ്ങൾ മാറ്റുന്നത് ആർമെച്ചറിലെ കറന്റിന്റെ ദിശ വിപരീതമാക്കുന്നു; കാന്തികമണ്ഡലദിശ അതേപടി നിലനിൽക്കുന്നതിനാൽ ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമപ്രകാരം ബലദിശയും വിപരീതമാകുന്നു.</span><span class="t-en">The direction of rotation <b>reverses</b>. Reason: reversing the battery terminals reverses the current direction in the armature; since the field direction stays the same, by Fleming's left hand rule the force direction also reverses.</span></div>
-    </div>
-
-    <div class="qb-item">
-      <div class="qb-q"><span class="n">20.</span><span><span class="t-ml">വൈദ്യുതമോട്ടോറിൽ സ്പ്ലിറ്റ് റിങ് കമ്യൂട്ടേറ്റർ നീക്കം ചെയ്താൽ എന്ത് സംഭവിക്കും?</span><span class="t-en">What would happen to an electric motor if the split ring commutator were removed?</span></span></div>
-      <button class="qb-rev no-print"><span class="t-ml">ഉത്തരം കാണിക്കുക ▾</span><span class="t-en">Show answer ▾</span></button>
-      <div class="qb-ans"><span class="t-ml">ആർമെച്ചറിലെ കറന്റിന്റെ ദിശ ഓരോ അർധഭ്രമണത്തിലും മാറ്റപ്പെടാതെ വരും. ഇതുമൂലം ബലത്തിന്റെ ദിശ ഓരോ അർധഭ്രമണത്തിലും വിപരീതമായി, ആർമെച്ചർ തുടർച്ചയായി ഭ്രമണം ചെയ്യാതെ <b>മുന്നോട്ടും പിന്നോട്ടും ആടിക്കൊണ്ടിരിക്കും</b>.</span><span class="t-en">The current direction in the armature would not be reversed after each half rotation. This causes the force direction to flip every half turn, so instead of continuous rotation the armature would just <b>oscillate back and forth</b>.</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= SHORT NOTE ================= -->
-<section class="panel" id="short">
-  <p class="lead">
-    <span class="t-ml">ഒറ്റനോട്ടത്തിൽ പഠിക്കാൻ — ഏറ്റവും ചുരുക്കിയ പതിപ്പ്.</span>
-    <span class="t-en">A quick, condensed version for last-minute revision.</span>
-  </p>
-  <div class="sn-paper">
-    <h2><span class="t-ml">വൈദ്യുതിയുടെ കാന്തികഫലം — ഷോർട്ട് നോട്ട്</span><span class="t-en">Magnetic Effects of Electric Current — Short Note</span></h2>
-    <p class="sn-sub">CLASS 10 · PHYSICS · UNIT 4</p>
-
-    <div class="sn-block">
-      <h4><span class="dot"></span><span class="t-ml">1. അടിസ്ഥാന ആശയം</span><span class="t-en">1. Basic idea</span></h4>
-      <ul class="t-ml">
-        <li>കാന്തികമണ്ഡലം: കാന്തിക ബലം അനുഭവപ്പെടുന്ന മേഖല. ഫ്ലക്സ് രേഖകൾ പുറത്ത് N → S.</li>
-        <li>ഈഴ്സ്റ്റഡിന്റെ പരീക്ഷണം (1820): കറന്റ് പ്രവഹിക്കുന്ന ചാലകത്തിന് ചുറ്റും കാന്തികമണ്ഡലം.</li>
-      </ul>
-      <ul class="t-en">
-        <li>Magnetic field: the region where magnetic force is felt. Flux lines outside run N → S.</li>
-        <li>Ørsted's experiment (1820): a magnetic field surrounds a current-carrying conductor.</li>
-      </ul>
-    </div>
-
-    <div class="sn-block">
-      <h4><span class="dot"></span><span class="t-ml">2. നിയമങ്ങൾ</span><span class="t-en">2. Rules</span></h4>
-      <div class="sn-key t-ml">വലതുകൈ പെരുവിരൽ നിയമം → കാന്തികമണ്ഡലദിശ</div>
-      <div class="sn-key t-en">Right-hand thumb rule → magnetic field direction</div>
-      <div class="sn-key t-ml">ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമം → ബലത്തിന്റെ ദിശ</div>
-      <div class="sn-key t-en">Fleming's left hand rule → direction of force</div>
-    </div>
-
-    <div class="sn-block">
-      <h4><span class="dot"></span><span class="t-ml">3. സോളിനോയ്ഡും വൈദ്യുതകാന്തവും</span><span class="t-en">3. Solenoid and electromagnet</span></h4>
-      <ul class="t-ml">
-        <li>ചുറ്റുകൾ ↑, കറന്റ് ↑, ഇരുമ്പ് കോർ → കാന്തശക്തി ↑</li>
-        <li>ഉപയോഗം: ക്രെയിൻ, MRI, മാഗ്‌ലെവ് ട്രെയിൻ, മോട്ടോർ</li>
-      </ul>
-      <ul class="t-en">
-        <li>More turns, more current, iron core → stronger field</li>
-        <li>Uses: crane, MRI, maglev train, motor</li>
-      </ul>
-    </div>
-
-    <div class="sn-block">
-      <h4><span class="dot"></span><span class="t-ml">4. മോട്ടോർ തത്വം</span><span class="t-en">4. Motor principle</span></h4>
-      <ul class="t-ml">
-        <li>കാന്തികമണ്ഡലത്തിലെ കറന്റ് പ്രവഹിക്കുന്ന സ്വതന്ത്ര ചാലകം ചലിക്കാൻ പ്രവണത കാണിക്കുന്നു.</li>
-        <li>ഒന്ന് വിപരീതമാക്കിയാൽ ചലനം വിപരീതം; രണ്ടും വിപരീതമാക്കിയാൽ ചലനം അതേപടി.</li>
-      </ul>
-      <ul class="t-en">
-        <li>A free, current-carrying conductor in a magnetic field tends to move.</li>
-        <li>Reverse one → motion reverses; reverse both → motion unchanged.</li>
-      </ul>
-    </div>
-
-    <div class="sn-block">
-      <h4><span class="dot"></span><span class="t-ml">5. വൈദ്യുതമോട്ടോർ ഭാഗങ്ങൾ</span><span class="t-en">5. Electric motor parts</span></h4>
-      <div class="sn-grid t-ml">
-        <div class="sn-key">ആർമെച്ചർ (ABCD)</div>
-        <div class="sn-key">N, S ധ്രുവങ്ങൾ</div>
-        <div class="sn-key">സ്പ്ലിറ്റ് റിങ് (R₁,R₂)</div>
-        <div class="sn-key">ബ്രഷുകൾ (B₁,B₂)</div>
-      </div>
-      <div class="sn-grid t-en">
-        <div class="sn-key">Armature (ABCD)</div>
-        <div class="sn-key">N, S poles</div>
-        <div class="sn-key">Split ring (R₁,R₂)</div>
-        <div class="sn-key">Brushes (B₁,B₂)</div>
-      </div>
-    </div>
-
-    <div class="sn-block">
-      <h4><span class="dot"></span><span class="t-ml">6. BLDC & ലൗഡ്സ്പീക്കർ</span><span class="t-en">6. BLDC & loudspeaker</span></h4>
-      <ul class="t-ml">
-        <li>BLDC: ബ്രഷ്/സ്പ്ലിറ്റ് റിങ് ഇല്ല; ഇലക്ട്രോണിക് സ്വിച്ചിങ്; 60% വരെ ഊർജ്ജലാഭം.</li>
-        <li>ലൗഡ്സ്പീക്കർ: വോയ്‌സ് കോയിൽ + ഫീൽഡ്‌കാന്തം + ഡയഫ്രം → വൈദ്യുതി → ശബ്ദം.</li>
-      </ul>
-      <ul class="t-en">
-        <li>BLDC: no brushes/split ring; electronic switching; up to 60% energy saving.</li>
-        <li>Loudspeaker: voice coil + field magnet + diaphragm → electrical → sound.</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ================= GLOSSARY ================= -->
-<section class="panel" id="gloss">
-  <p class="lead">
-    <span class="t-ml">ഇംഗ്ലീഷ് — മലയാളം പദങ്ങൾ. തിരയാൻ ടൈപ്പ് ചെയ്യൂ.</span>
-    <span class="t-en">English — Malayalam terms with meanings. Type to search.</span>
-  </p>
-  <input class="gsearch" id="gsearch" placeholder="🔍 solenoid, armature, കാന്തികമണ്ഡലം...">
-  <table class="gloss">
-    <thead><tr>
-      <th style="width:30%"><span class="t-ml">മലയാളം</span><span class="t-en">Malayalam</span></th>
-      <th style="width:26%">English</th>
-      <th><span class="t-ml">അർഥം</span><span class="t-en">Meaning</span></th>
-    </tr></thead>
-    <tbody id="glossBody"></tbody>
-  </table>
-</section>
-
-</main>
-
-<footer>
-  <b><span class="t-ml">വൈദ്യുതിയുടെ കാന്തികഫലം</span><span class="t-en">Magnetic Effects of Electric Current</span></b> · Class 10 Physics (SCERT Kerala, 2025)<br>
-  <span class="t-ml">പഠനസഹായി — കുറിപ്പുകൾ · നിയമങ്ങൾ · ഫ്ലാഷ്കാർഡ് · ക്വിസ് · ചോദ്യബാങ്ക് · ഷോർട്ട് നോട്ട്</span>
-  <span class="t-en">Study portal — notes · rules · flashcards · quiz · question bank · short note</span>
-</footer>
-
-<div class="toast" id="toast"></div>
-
+:root{--bg:#f1f5fb;--card:#fff;--ink:#0f1c2e;--mut:#56657a;--line:#d7e0ec;--n:#e0483a;--s:#2457b8;--teal:#12b5a2;--amb:#f2a516;--vio:#7a4fd6;--hl:#fff3c4;--ok:#16895a;--bad:#c7342b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1320;--card:#14202f;--ink:#e9f0f8;--mut:#a2b2c4;--line:#27374a;--n:#ff7b6c;--s:#7fb0ff;--hl:#3b3512;--ok:#5fd09a;--bad:#ff8b82}}
+:root[data-theme="dark"]{--bg:#0a1320;--card:#14202f;--ink:#e9f0f8;--mut:#a2b2c4;--line:#27374a;--n:#ff7b6c;--s:#7fb0ff;--hl:#3b3512;--ok:#5fd09a;--bad:#ff8b82}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "Noto Sans Malayalam",system-ui,sans-serif}
+[data-l]{display:none}html[data-lang=en] [data-l=en],html[data-lang=ml] [data-l=ml]{display:revert}
+h1,h2,h3{font-family:"Bricolage Grotesque","Noto Sans Malayalam",sans-serif;line-height:1.25;margin:0 0 .5em}
+.hero{background:linear-gradient(135deg,#071a33,#17408f 60%,#12b5a2);color:#fff;position:relative;overflow:hidden;padding:max(22px,env(safe-area-inset-top,0px)) 20px 70px}
+.hero svg.f{position:absolute;right:-60px;top:10px;width:520px;max-width:90%;opacity:.35}
+.top{max-width:900px;margin:auto;display:flex;justify-content:space-between;align-items:center;position:relative;gap:10px}
+.top b{font-family:"Bricolage Grotesque",sans-serif;font-size:.95rem;opacity:.85}
+.lang{display:flex;background:rgba(255,255,255,.16);border-radius:999px;padding:3px}
+.lang button{border:0;background:none;color:#fff;padding:7px 15px;border-radius:999px;font:600 .9rem "Noto Sans Malayalam",sans-serif;cursor:pointer}
+.lang button[aria-pressed=true]{background:#fff;color:#17408f}
+.hw{max-width:900px;margin:34px auto 0;position:relative}
+.hero h1{font-size:clamp(1.9rem,6vw,3.2rem);font-weight:800;margin:0 0 10px}
+.hero p{margin:0;max-width:560px;opacity:.9}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.chips span{background:rgba(255,255,255,.16);padding:4px 12px;border-radius:999px;font-size:.85rem}
+nav{max-width:900px;margin:-30px auto 18px;padding:0 16px;position:sticky;top:env(safe-area-inset-top,0px);z-index:3}
+.tabs{display:flex;gap:4px;background:var(--card);border-radius:16px;padding:6px;box-shadow:0 6px 22px rgba(15,28,46,.16);overflow-x:auto}
+.tabs button{flex:1;white-space:nowrap;border:0;background:none;color:var(--mut);padding:10px 12px;border-radius:11px;font:600 .92rem "Noto Sans Malayalam",sans-serif;cursor:pointer}
+.tabs button[aria-selected=true]{background:linear-gradient(135deg,var(--s),var(--teal));color:#fff}
+button:focus-visible{outline:3px solid var(--amb);outline-offset:2px}
+main{max-width:900px;margin:auto;padding:0 16px 56px}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border-radius:16px;padding:22px;margin-bottom:18px;border-top:5px solid var(--c,var(--teal));box-shadow:0 2px 12px rgba(15,28,46,.07)}
+.card:nth-child(2){--c:var(--amb)}.card:nth-child(3){--c:var(--vio)}.card:nth-child(4){--c:var(--n)}
+.card h2{font-size:1.3rem;display:flex;gap:10px;align-items:center}.ic{font-size:1.5rem}
+.rule{background:var(--hl);border-radius:10px;padding:12px 16px;margin:12px 0;border-left:5px solid var(--amb)}
+ul{padding-left:20px;margin:.4em 0}li{margin:.2em 0}
+.mut{color:var(--mut);font-size:.92rem}
+table{border-collapse:separate;border-spacing:0;width:100%;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+td,th{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line)}th{background:color-mix(in srgb,var(--s) 14%,var(--card))}
+.demo{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.stage{background:radial-gradient(circle at 50% 60%,#16315a,#071426);border-radius:16px;padding:8px;flex:none;width:280px;max-width:100%}
+.stage svg{width:100%;display:block;color:#fff}
+.btn{background:linear-gradient(135deg,var(--s),var(--teal));color:#fff;border:0;padding:11px 20px;border-radius:12px;font:600 1rem "Noto Sans Malayalam",sans-serif;cursor:pointer}
+.btn.alt{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.qh{display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.pill{background:color-mix(in srgb,var(--teal) 20%,var(--card));padding:3px 12px;border-radius:999px;font-size:.9rem}
+.bar{height:8px;background:var(--line);border-radius:4px;margin:10px 0 20px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--s),var(--teal));transition:width .3s}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;margin:9px 0;padding:13px 14px;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;font:inherit;cursor:pointer}
+.opt i{flex:none;width:28px;height:28px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font:700 .85rem "Bricolage Grotesque",sans-serif;font-style:normal}
+.opt:hover:not(:disabled){border-color:var(--s)}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 15%,var(--card))}
+.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 15%,var(--card))}
+.fb{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--hl)}
+.big{font:800 4rem "Bricolage Grotesque",sans-serif;margin:0;background:linear-gradient(135deg,var(--s),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+@media(prefers-reduced-motion:no-preference){.hero svg.f{animation:sp 40s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}}
+</style></head><body>
+<div class="hero">
+<svg class="f" viewBox="-200 -200 400 400" fill="none" stroke="#fff" stroke-width="2"><ellipse rx="80" ry="40"/><ellipse rx="120" ry="75"/><ellipse rx="160" ry="115"/><ellipse rx="195" ry="160"/></svg>
+<div class="top"><b><span data-l="en">Physics · Std X · Unit 4</span><span data-l="ml">ഭൗതികശാസ്ത്രം · സ്റ്റാൻഡേർഡ് X · യൂണിറ്റ് 4</span></b>
+<div class="lang" role="group" aria-label="Medium"><button data-g="ml">മലയാളം</button><button data-g="en">English</button></div></div>
+<div class="hw"><h1><span data-l="en">Magnetic Effect of Electric Current</span><span data-l="ml">വൈദ്യുതിയുടെ കാന്തികഫലം</span></h1>
+<p data-l="en">Learn the ideas, play with the compass experiment, then test yourself with a 20-question quiz.</p>
+<p data-l="ml">ആശയങ്ങൾ പഠിക്കൂ, കാന്തസൂചി പരീക്ഷണം ചെയ്തുനോക്കൂ, 20 ചോദ്യങ്ങളുള്ള ക്വിസിൽ സ്വയം വിലയിരുത്തൂ.</p>
+<div class="chips"><span>🧲 <i data-l="en" style="font-style:normal">Ørsted</i><i data-l="ml" style="font-style:normal">ഈഴ്സ്റ്റഡ്</i></span><span>🖐 <i data-l="en" style="font-style:normal">Fleming</i><i data-l="ml" style="font-style:normal">ഫ്ലെമിങ്</i></span><span>⚙ <i data-l="en" style="font-style:normal">Motor</i><i data-l="ml" style="font-style:normal">മോട്ടോർ</i></span><span>🔊 <i data-l="en" style="font-style:normal">Speaker</i><i data-l="ml" style="font-style:normal">സ്പീക്കർ</i></span></div></div></div>
+<nav><div class="tabs" role="tablist" id="tabs"></div></nav>
+<main><section id="learn" class="on"></section><section id="notes"></section><section id="demo"></section><section id="motor"></section><section id="quiz"><div class="card"><h2><span class="ic">📝</span><span data-l="en">Quiz (20 questions)</span><span data-l="ml">ക്വിസ് (20 ചോദ്യങ്ങൾ)</span></h2><p data-l="en">The quiz is on its own page. Finish the notes, then test yourself.</p><p data-l="ml">ക്വിസ് പ്രത്യേക പേജിലാണ്. കുറിപ്പുകൾ പഠിച്ചശേഷം സ്വയം പരീക്ഷിക്കൂ.</p><a class="btn" id="ql" style="display:inline-block;text-decoration:none"><span data-l="en">Open quiz page</span><span data-l="ml">ക്വിസ് പേജ് തുറക്കുക</span></a> <button class="btn alt" id="sh"><span data-l="en">Share quiz link</span><span data-l="ml">ക്വിസ് ലിങ്ക് ഷെയർ ചെയ്യുക</span></button> <a class="btn alt" id="wa" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">WhatsApp</a> <button class="btn alt" id="cp"><span data-l="en">Copy link</span><span data-l="ml">ലിങ്ക് കോപ്പി ചെയ്യുക</span></button><p id="shm" class="mut"></p></div></section></main>
 <script>
-/* ---------- header current-loop field motif ---------- */
-(function(){
-  const g=document.getElementById('scopeG'); if(!g)return;
-  const ys=[60,120,180], W=220; let svg='';
-  for(let X=-220;X<=1100;X+=W){
-    const wx=X+110;
-    svg+=`<line class="wire" x1="${wx}" y1="10" x2="${wx}" y2="230"/>`;
-    ys.forEach((y,i)=>{
-      const rx=26+i*20, ry=(26+i*20)*0.9;
-      svg+=`<ellipse class="fld ${i%2?'glow':''}" cx="${wx}" cy="120" rx="${rx}" ry="${ry}"/>`;
-    });
-    svg+=`<circle class="dot" cx="${wx}" cy="120" r="4"/>`;
-  }
-  g.innerHTML=svg;
-})();
+const $=s=>document.querySelector(s),R=document.documentElement;
+const x=(e,m)=>`<span data-l="en">${e}</span><span data-l="ml">${m}</span>`;
+const bl=(t,e,m,c='')=>`<${t} data-l="en" class="${c}">${e}</${t}><${t} data-l="ml" class="${c}">${m}</${t}>`;
+const ul=(e,m)=>bl('ul',e.map(i=>`<li>${i}</li>`).join(''),m.map(i=>`<li>${i}</li>`).join(''));
+const card=(ic,e,m,body)=>`<div class="card"><h2><span class="ic">${ic}</span>${x(e,m)}</h2>${body}</div>`;
+const lang=()=>R.dataset.lang,pk=(e,m)=>lang()==='ml'?m:e;
+// tabs
+const TB=[['learn','Learn','പഠിക്കാം'],['notes','Full notes','സമ്പൂർണ്ണ കുറിപ്പുകൾ'],['demo','Experiment','പരീക്ഷണം'],['motor','Motor & Speaker','മോട്ടോർ & സ്പീക്കർ'],['quiz','Quiz','ക്വിസ്']];
+$('#tabs').innerHTML=TB.map((t,i)=>`<button role="tab" data-t="${t[0]}" aria-selected="${!i}">${x(t[1],t[2])}</button>`).join('');
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#tabs button').forEach(y=>y.setAttribute('aria-selected',y===b));document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===b.dataset.t));$('#tabs').scrollIntoView({block:'start'})});
+// language
+function setLang(l){R.dataset.lang=l;R.lang=l;document.querySelectorAll('[data-g]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.g===l));try{localStorage.setItem('lang',l)}catch(e){}upd();ql()}
+document.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>setLang(b.dataset.g));
+// content
+$('#learn').innerHTML=
+card('🧭','Oersted\'s discovery','ഈഴ്സ്റ്റഡിന്റെ കണ്ടെത്തൽ',
+bl('p','In 1820 Hans Christian Ørsted found that a wire carrying current deflects a nearby compass needle: a <b>current-carrying conductor has a magnetic field around it</b>. The CGS unit of field strength, the oersted, is named after him.','1820-ൽ ഹാൻസ് ക്രിസ്റ്റ്യൻ ഈഴ്സ്റ്റഡ്, വൈദ്യുതി പ്രവഹിക്കുന്ന ചാലകത്തിനു ചുറ്റും <b>കാന്തികമണ്ഡലം ഉണ്ടാകുമെന്ന്</b> കണ്ടെത്തി. കാന്തികമണ്ഡലതീവ്രതയുടെ CGS യൂണിറ്റിന് ഈഴ്സ്റ്റഡ് എന്ന പേര് നൽകി.')+
+ul(['Reverse the current → the needle deflects the opposite way.','The field exists only while current flows.'],['കറന്റിന്റെ ദിശ വിപരീതമാക്കിയാൽ കാന്തസൂചി എതിർദിശയിൽ വിഭ്രംശിക്കും.','കറന്റ് ഉള്ളപ്പോൾ മാത്രമേ കാന്തികമണ്ഡലം ഉണ്ടാകൂ.']))+
+card('🖐','Right-hand thumb rule','വലതുകൈ പെരുവിരൽ നിയമം',
+bl('div','Imagine gripping the conductor with your right hand, thumb along the current. The curled fingers show the direction of the magnetic field.','വൈദ്യുതപ്രവാഹദിശയിൽ പെരുവിരൽ വരത്തക്കവിധം ചാലകത്തെ വലതുകൈ കൊണ്ട് ചുറ്റിപ്പിടിക്കുന്നതായി സങ്കൽപ്പിച്ചാൽ, ചുറ്റിപ്പിടിച്ച വിരലുകൾ കാന്തികമണ്ഡലത്തിന്റെ ദിശയെ സൂചിപ്പിക്കും.','rule')+
+bl('p','<b>Circular loop:</b> current clockwise as you face it → that face is a <b>South pole</b>; anticlockwise → <b>North pole</b>.','<b>ചാലകവലയം:</b> നിങ്ങൾ അഭിമുഖീകരിക്കുന്ന വശത്ത് കറന്റ് ക്ലോക്ക്‌വൈസ് ആണെങ്കിൽ അത് <b>സൗത്ത്‌പോൾ</b>; ആന്റിക്ലോക്ക്‌വൈസ് ആണെങ്കിൽ <b>നോർത്ത്‌പോൾ</b>.'))+
+card('🌀','Solenoid & electromagnet','സോളിനോയ്ഡ് & വൈദ്യുതകാന്തം',
+bl('p','A solenoid is insulated copper wire wound as a helix. Grip it with your right hand, fingers along the current: the thumb points to the <b>North pole</b>. Its field looks like a bar magnet\'s.','കവചിത ചെമ്പ് കമ്പി സർപ്പിളാകൃതിയിൽ ചുറ്റിയതാണ് സോളിനോയ്ഡ്. കറന്റിന്റെ ദിശയിൽ നാല് വിരലുകൾ വരത്തക്കവിധം വലതുകൈ കൊണ്ട് പിടിച്ചാൽ പെരുവിരൽ <b>നോർത്ത്‌പോളിനെ</b> സൂചിപ്പിക്കും. ബാർമാഗ്നറ്റിന്റേതിന് സമാനമാണ് ഇതിന്റെ കാന്തികമണ്ഡലം.')+
+bl('div','Stronger with: more turns per unit length, more current, and a soft-iron core. An <b>electromagnet</b> uses electricity to create a magnetic field.','കാന്തശക്തി കൂട്ടാൻ: യൂണിറ്റ് നീളത്തിലെ ചുറ്റുകളുടെ എണ്ണം, കറന്റ്, പച്ചിരുമ്പ് കോർ. വൈദ്യുതി ഉപയോഗിച്ച് കാന്തികമണ്ഡലം സൃഷ്ടിക്കുന്ന സംവിധാനമാണ് <b>വൈദ്യുതകാന്തം</b>.','rule')+
+`<table><tr><th>${x('Bar magnet','ബാർമാഗ്നറ്റ്')}</th><th>${x('Solenoid','സോളിനോയ്ഡ്')}</th></tr><tr><td>${x('Constant strength','കാന്തശക്തി സ്ഥിരം')}</td><td>${x('Strength can be changed','ശക്തി മാറ്റാം')}</td></tr><tr><td>${x('Polarity fixed','ധ്രുവത മാറ്റാനാവില്ല')}</td><td>${x('Polarity can be reversed','ധ്രുവത മാറ്റാം')}</td></tr></table>`+
+bl('p','Used in cranes, maglev trains, MRI scanners and motors. Metal ornaments are removed before an MRI because its field is very strong.','ക്രെയ്ൻ, മാഗ്ലെവ് ട്രെയിൻ, MRI സ്കാനർ, മോട്ടോർ എന്നിവയിൽ ഉപയോഗിക്കുന്നു. MRI-യുടെ കാന്തികമണ്ഡലം വളരെ ശക്തമായതിനാൽ ലോഹാഭരണങ്ങൾ മാറ്റണം.','mut'))+
+card('👈','Fleming\'s left-hand rule & motor principle','ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമം & മോട്ടോർ തത്വം',
+bl('div','Hold the first finger, second finger and thumb mutually perpendicular. <b>First finger</b> = magnetic field, <b>second finger</b> = current, <b>thumb</b> = force on the conductor.','ചൂണ്ടുവിരൽ, നടുവിരൽ, പെരുവിരൽ എന്നിവ പരസ്പരം ലംബമായി പിടിക്കുക. <b>ചൂണ്ടുവിരൽ</b> = കാന്തികമണ്ഡലം, <b>നടുവിരൽ</b> = വൈദ്യുതപ്രവാഹദിശ, <b>പെരുവിരൽ</b> = ചാലകത്തിലെ ബലത്തിന്റെ ദിശ.','rule')+
+bl('p','Reverse the current or the field and the motion reverses; reverse both and it stays the same. <b>Motor principle:</b> a current-carrying conductor free to move in a magnetic field tends to move.','കറന്റോ കാന്തികമണ്ഡലമോ വിപരീതമാക്കിയാൽ ചലനദിശ വിപരീതമാകും; രണ്ടും വിപരീതമാക്കിയാൽ ദിശ മാറില്ല. <b>മോട്ടോർ തത്വം:</b> കാന്തികമണ്ഡലത്തിൽ സ്വതന്ത്രമായി ചലിക്കാവുന്ന വൈദ്യുതവാഹിയായ ചാലകത്തിന് വിഭ്രംശിക്കാൻ പ്രവണതയുണ്ടാകും.'));
+$('#demo').innerHTML=card('🧪','Oersted experiment','ഈഴ്സ്റ്റഡ് പരീക്ഷണം',
+bl('p','Top view: the wire runs parallel to the needle, just above it. Switch on, then reverse the current.','മുകളിൽ നിന്നുള്ള ദൃശ്യം: കമ്പി കാന്തസൂചിക്ക് മുകളിൽ സമാന്തരമായി വച്ചിരിക്കുന്നു. സ്വിച്ച് ഓൺ ചെയ്ത് കറന്റിന്റെ ദിശ വിപരീതമാക്കൂ.')+
+`<div class="demo"><div class="stage"><svg viewBox="0 0 260 200" role="img" aria-label="Compass under a wire"><line x1="20" y1="42" x2="240" y2="42" stroke="#e29a52" stroke-width="9" stroke-linecap="round"/><text x="8" y="30" fill="currentColor" font-size="14">A</text><text x="242" y="30" fill="currentColor" font-size="14">B</text><path id="arr" d="M110 25 L150 25 M142 19 L150 25 L142 31" stroke="#ffd166" stroke-width="3" fill="none" opacity="0"/><circle cx="130" cy="125" r="62" fill="#0d213f" stroke="#5f7aa3" stroke-width="3"/><g id="nd" style="transition:transform .7s;transform-origin:130px 125px"><polygon points="130,118 198,125 130,132" fill="#ff5a4a"/><polygon points="130,118 62,125 130,132" fill="#5b8cff"/><circle cx="130" cy="125" r="4" fill="#fff"/></g><text x="204" y="130" font-size="13" fill="#ff5a4a">N</text><text x="46" y="130" font-size="13" fill="#5b8cff">S</text></svg></div>
+<div><p><b>${x('Switch','സ്വിച്ച്')}:</b> <span id="sw"></span><br><b>${x('Current','കറന്റ്')}:</b> <span id="dr"></span></p><div class="row"><button class="btn" id="tg"></button><button class="btn alt" id="fl">${x('Reverse current','കറന്റ് വിപരീതമാക്കുക')}</button></div><p id="say" class="mut"></p></div></div>`);
+const hd=(e,m)=>`<h3 style="margin-top:1.1em">${x(e,m)}</h3>`;
+const tx=(e,m,at)=>`<text ${at} data-l="en">${e}</text><text ${at} data-l="ml">${m}</text>`;
+const lg=r=>`<table><tr><th>${x('Label','അടയാളം')}</th><th>${x('Part','ഭാഗം')}</th><th>${x('Role','ധർമ്മം')}</th></tr>`+r.map(a=>`<tr><td><b>${a[0]}</b></td><td>${x(a[1],a[2])}</td><td>${x(a[3],a[4])}</td></tr>`).join('')+'</table>';
+const mSvg=`<div class="stage" style="width:100%;max-width:440px"><svg viewBox="0 0 360 275" role="img" aria-label="Electric motor diagram" font-family="sans-serif" font-size="14" fill="#fff">
+<rect x="14" y="70" width="64" height="100" rx="6" fill="#ff5a4a"/><text x="46" y="128" text-anchor="middle" font-size="22" font-weight="700">N</text>
+<rect x="282" y="70" width="64" height="100" rx="6" fill="#5b8cff"/><text x="314" y="128" text-anchor="middle" font-size="22" font-weight="700">S</text>
+<path d="M90 48H262M254 42L262 48L254 54" stroke="#7fe3d4" stroke-width="2" fill="none"/>${tx('magnetic field','കാന്തികമണ്ഡലം','x="130" y="40" font-size="12" fill="#7fe3d4"')}
+<line x1="180" y1="62" x2="180" y2="226" stroke="#ccd" stroke-dasharray="5 4"/>
+<polygon points="115,160 115,80 245,80 245,160" fill="rgba(226,154,82,.2)" stroke="#e29a52" stroke-width="5" stroke-linejoin="round"/>
+<rect x="166" y="174" width="13" height="24" fill="#ffd166"/><rect x="182" y="174" width="13" height="24" fill="#f0b429"/>
+<rect x="146" y="180" width="20" height="10" fill="#9aa5b5"/><rect x="195" y="180" width="20" height="10" fill="#9aa5b5"/>
+<path d="M146 185H122V258H166M215 185H238V258H195" stroke="#ccd" stroke-width="2" fill="none"/><line x1="166" y1="248" x2="166" y2="268" stroke="#fff" stroke-width="3"/><line x1="176" y1="253" x2="176" y2="263" stroke="#fff" stroke-width="3"/>
+<g fill="#ffd166" font-weight="700"><text x="98" y="172">A</text><text x="98" y="86">B</text><text x="252" y="86">C</text><text x="252" y="172">D</text><text x="186" y="74">P</text><text x="186" y="238">Q</text><text x="148" y="212">R₁</text><text x="190" y="212">R₂</text><text x="118" y="178">B₁</text><text x="218" y="178">B₂</text></g>
+${tx('Battery','ബാറ്ററി','x="184" y="272" font-size="12"')}</svg></div>`;
+const sSvg=`<div class="stage" style="width:100%;max-width:440px"><svg viewBox="0 0 360 250" role="img" aria-label="Loudspeaker diagram" font-family="sans-serif" font-size="14" fill="#fff">
+<polygon points="20,30 130,150 230,150 340,30 330,26 226,138 134,138 30,26" fill="#d9c9a3" stroke="#a8956a"/>
+<path d="M118 238V152H128V228H232V152H242V238Z" fill="#8a97a8"/>
+<rect x="150" y="150" width="60" height="38" fill="#ff5a4a"/><rect x="150" y="188" width="60" height="38" fill="#5b8cff"/>
+<rect x="138" y="124" width="10" height="46" fill="#e29a52"/><rect x="212" y="124" width="10" height="46" fill="#e29a52"/>
+<path d="M42 48C60 110 100 100 138 140" stroke="#ffd166" stroke-width="3" fill="none"/>
+<g stroke="#ffd166" stroke-width="1.5"><line x1="283" y1="84" x2="294" y2="102"/><line x1="222" y1="158" x2="262" y2="190"/><line x1="210" y1="210" x2="262" y2="226"/><line x1="118" y1="200" x2="84" y2="222"/><line x1="42" y1="56" x2="32" y2="66"/></g>
+<g fill="#ffd166" font-weight="700" font-size="16"><text x="296" y="118">B</text><text x="266" y="198">A</text><text x="266" y="234">C</text><text x="68" y="232">E</text><text x="20" y="80">D</text></g></svg></div>`;
+$('#motor').innerHTML=card('⚙️','Electric motor','വൈദ്യുതമോട്ടോർ',
+hd('Working principle','പ്രവർത്തനതത്വം')+bl('p','The <b>motor principle</b>: a current-carrying conductor that is free to move in a magnetic field tends to be deflected. The direction of the force is found by Fleming\'s left-hand rule.','<b>മോട്ടോർ തത്വം:</b> കാന്തികമണ്ഡലത്തിൽ സ്വതന്ത്രമായി ചലിക്കാൻ കഴിയുന്ന, വൈദ്യുതി പ്രവഹിക്കുന്ന ചാലകത്തിന് വിഭ്രംശിക്കാനുള്ള പ്രവണതയുണ്ടാകും. ബലത്തിന്റെ ദിശ ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമം ഉപയോഗിച്ച് കണ്ടെത്താം.')+
+hd('Energy change','ഊർജമാറ്റം')+bl('div','Electrical energy → Mechanical energy','വൈദ്യുതോർജ്ജം → യാന്ത്രികോർജ്ജം','rule')+
+hd('Diagram and part labelling','ചിത്രവും ഭാഗങ്ങളുടെ അടയാളപ്പെടുത്തലും')+mSvg+
+lg([['N, S','Field magnet poles','കാന്തികധ്രുവങ്ങൾ','Give the magnetic field','കാന്തികമണ്ഡലം നൽകുന്നു'],['ABCD','Armature','ആർമെച്ചർ','Insulated copper coil on a soft-iron core; it rotates','പച്ചിരുമ്പ് കോറിൽ ചുറ്റിയ കവചിത ചെമ്പ് കമ്പി; കറങ്ങുന്നു'],['PQ','Axle','ഭ്രമണഅക്ഷം','Armature is fixed on it and turns freely','ആർമെച്ചർ ഉറപ്പിച്ച അക്ഷം; സ്വതന്ത്രമായി കറങ്ങുന്നു'],['R₁, R₂','Split rings (commutator)','സ്പ്ലിറ്റ് റിങ്ങുകൾ','Reverse the current every half turn','ഓരോ അർധഭ്രമണത്തിലും കറന്റിന്റെ ദിശ മാറ്റുന്നു'],['B₁, B₂','Graphite brushes','ഗ്രാഫൈറ്റ് ബ്രഷുകൾ','Fixed; touch the rings and carry current','ഉറപ്പിച്ചവ; റിങ്ങുകളെ സ്പർശിച്ച് കറന്റ് എത്തിക്കുന്നു']])+
+hd('Working steps','പ്രവർത്തനഘട്ടങ്ങൾ')+bl('ol',['Current from the battery flows through brush B₁, ring R₁, the armature, ring R₂ and brush B₂.','AB and CD carry current in opposite directions in the same field, so by Fleming\'s left-hand rule the forces on them are opposite.','These two forces make a turning effect and the armature rotates.','After a half turn (180°) AB and CD exchange positions.','Now the contacts are B₁R₂ and B₂R₁, so the current in the coil reverses. The side in front of the N pole always carries current in the same direction.','The turning effect keeps the same sense and the armature rotates continuously in one direction.'].map(i=>`<li>${i}</li>`).join(''),['ബാറ്ററിയിൽ നിന്നുള്ള കറന്റ് ബ്രഷ് B₁, റിങ് R₁, ആർമെച്ചർ, റിങ് R₂, ബ്രഷ് B₂ എന്നിവയിലൂടെ പ്രവഹിക്കുന്നു.','AB, CD വശങ്ങളിൽ ഒരേ കാന്തികമണ്ഡലത്തിൽ കറന്റ് വിപരീതദിശയിലായതിനാൽ ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമപ്രകാരം അവയിലെ ബലങ്ങൾ വിപരീതദിശയിലാണ്.','ഈ രണ്ട് ബലങ്ങളും ചേർന്ന് ഭ്രമണഫലമുണ്ടാക്കുകയും ആർമെച്ചർ കറങ്ങുകയും ചെയ്യുന്നു.','അർധഭ്രമണത്തിനു (180°) ശേഷം AB, CD വശങ്ങൾ സ്ഥാനം പരസ്പരം മാറുന്നു.','അപ്പോൾ ബ്രഷ്–റിങ് ബന്ധം B₁R₂, B₂R₁ ആകുന്നതിനാൽ കോയിലിലെ കറന്റ് വിപരീതമാകുന്നു. നോർത്ത്‌പോളിനു മുന്നിലെത്തുന്ന വശത്ത് കറന്റ് എപ്പോഴും ഒരേ ദിശയിലായിരിക്കും.','അതിനാൽ ഭ്രമണഫലം ഒരേ ദിശയിൽ തുടരുകയും ആർമെച്ചർ തുടർച്ചയായി ഒരേ ദിശയിൽ കറങ്ങുകയും ചെയ്യുന്നു.'].map(i=>`<li>${i}</li>`).join(''))+
+bl('p','BLDC motors have no brushes or split rings; an electronic switch changes the current direction. BLDC fans use up to 60% less electricity.','BLDC മോട്ടോറിൽ ബ്രഷും റിങ്ങും ഇല്ല; ഇലക്ട്രോണിക് സ്വിച്ച് കറന്റിന്റെ ദിശ മാറ്റുന്നു. BLDC ഫാനുകൾ 60% വരെ വൈദ്യുതി ലാഭിക്കുന്നു.','mut'))+
+card('🔊','Moving-coil loudspeaker','ചലിക്കുംചുരുൾ ലൗഡ്സ്പീക്കർ',
+hd('Working principle','പ്രവർത്തനതത്വം')+bl('p','It works on the motor principle: the voice coil carrying audio-signal current sits in the field of the field magnet, so it feels a force that changes with the current.','ഇത് മോട്ടോർ തത്വത്തിൽ പ്രവർത്തിക്കുന്നു: ഓഡിയോസിഗ്നൽ കറന്റ് കടന്നുപോകുന്ന വോയ്സ് കോയിൽ ഫീൽഡ് കാന്തത്തിന്റെ കാന്തികമണ്ഡലത്തിലായതിനാൽ, കറന്റിനനുസരിച്ച് മാറുന്ന ബലം അതിൽ അനുഭവപ്പെടുന്നു.')+
+hd('Energy change','ഊർജമാറ്റം')+bl('div','Electrical energy → Sound energy','വൈദ്യുതോർജ്ജം → ശബ്ദോർജ്ജം','rule')+
+hd('Diagram and part labelling','ചിത്രവും ഭാഗങ്ങളുടെ അടയാളപ്പെടുത്തലും')+sSvg+
+lg([['A','Voice coil','വോയ്സ് കോയിൽ','Carries audio current; vibrates in the field','ഓഡിയോ കറന്റ് കടത്തിവിടുന്നു; കാന്തികമണ്ഡലത്തിൽ കമ്പനം ചെയ്യുന്നു'],['B','Paper diaphragm','പേപ്പർ ഡയഫ്രം','Attached to the coil; vibrates to make sound','കോയിലുമായി ബന്ധിപ്പിച്ചത്; കമ്പനം ചെയ്ത് ശബ്ദമുണ്ടാക്കുന്നു'],['C','Field magnet','ഫീൽഡ് കാന്തം','Provides the magnetic field','കാന്തികമണ്ഡലം നൽകുന്നു'],['D','Connecting wire','കണക്ടിങ് വയർ','Brings signal current to the coil','സിഗ്നൽ കറന്റ് കോയിലിലെത്തിക്കുന്നു'],['E','Soft-iron cover','പച്ചിരുമ്പ് കവചം','Holds the magnet and guides the field','കാന്തത്തെ പൊതിഞ്ഞ് കാന്തികമണ്ഡലത്തെ നയിക്കുന്നു']])+
+hd('Working steps','പ്രവർത്തനഘട്ടങ്ങൾ')+bl('ol',['A microphone changes sound into weak electrical (audio) signals.','An amplifier strengthens these signals.','The signals pass through the voice coil, which is in the magnetic field.','The coil feels a force that varies with the current, so it vibrates.','The diaphragm attached to it vibrates, and sound is reproduced.'].map(i=>`<li>${i}</li>`).join(''),['മൈക്രോഫോൺ ശബ്ദത്തെ ദുർബലമായ വൈദ്യുതസിഗ്നലുകളാക്കി (ഓഡിയോ സിഗ്നൽ) മാറ്റുന്നു.','ആംപ്ലിഫയർ ഈ സിഗ്നലുകളെ ശക്തിപ്പെടുത്തുന്നു.','സിഗ്നലുകൾ കാന്തികമണ്ഡലത്തിലുള്ള വോയ്സ് കോയിലിലൂടെ കടന്നുപോകുന്നു.','കറന്റിനനുസരിച്ച് മാറുന്ന ബലം അനുഭവപ്പെടുന്നതിനാൽ കോയിൽ കമ്പനം ചെയ്യുന്നു.','കോയിലുമായി ബന്ധിപ്പിച്ച ഡയഫ്രവും കമ്പനം ചെയ്ത് ശബ്ദം പുനഃസൃഷ്ടിക്കപ്പെടുന്നു.'].map(i=>`<li>${i}</li>`).join('')));
 
-/* ---------- language state ---------- */
-let LANG='ml';
-const btnML=document.getElementById('btnML'), btnEN=document.getElementById('btnEN');
-function setLang(l){
-  LANG=l;
-  document.body.classList.toggle('lang-en', l==='en');
-  document.documentElement.lang = l;
-  btnML.classList.toggle('on', l==='ml');
-  btnEN.classList.toggle('on', l==='en');
-  buildFlash(); buildGloss(); renderQ();
-  document.getElementById('gsearch').value='';
-}
-btnML.addEventListener('click',()=>setLang('ml'));
-btnEN.addEventListener('click',()=>setLang('en'));
+const S=(t)=>`<h3 style="margin-top:1em">${t}</h3>`;
+$('#notes').innerHTML=`<div data-l="ml" class="rule">എല്ലാ ഭാഗങ്ങളും മലയാളത്തിൽ.</div>`+
+card('1️⃣','Magnetic field & flux lines','കാന്തികമണ്ഡലം & ഫ്ലക്സ് രേഖകൾ',`
+<p>A magnet is surrounded by a <b>magnetic field</b> (കാന്തികമണ്ഡലം). If you bring a magnet near a freely pivoted compass needle, the needle deflects, because the poles of the magnet attract or repel the poles of the needle. This tells us that <b>any magnetic field created near a compass makes it deflect</b>.</p>
+<p>The field is drawn using <b>flux lines</b> (ഫ്ലക്സ് രേഖകൾ), imaginary lines that only help us visualise the field.</p>
+<ul><li>Outside the magnet, flux lines go from the <b>North pole to the South pole</b>.</li><li>Inside the magnet, they go from South to North, so each line is a closed loop.</li><li>Lines are closer together where the field is stronger (near the poles).</li><li>You can trace them with a magnetic compass, or see them with iron filings on a sheet above the magnet.</li></ul>`)+
+card('2️⃣','Current produces a magnetic field','വൈദ്യുതിയുടെ കാന്തികഫലം',`
+${S('Activity: does current affect a compass?')}
+<ol><li>Connect a copper wire, a 9 V cell and a switch in a circuit.</li><li>Keep a pivoted compass needle near the wire. With the switch OFF, note the needle's direction (it points north–south).</li><li>Switch ON. The needle deflects.</li><li>Switch OFF. The needle returns to its original position.</li></ol>
+<div class="rule"><b>Conclusion:</b> a magnetic field forms around a conductor carrying current. It can exert a force on a magnetic needle. This is the <b>magnetic effect of electric current</b> (വൈദ്യുതിയുടെ കാന്തികഫലം). The field exists <b>only while current flows</b>.</div>
+${S('Does the direction of deflection depend on the current direction?')}
+<p>Place conductor AB parallel to and just above the needle (needle along the wire). Switch on and note which way the N pole moves (clockwise or anticlockwise as seen from above). Now <b>reverse the current</b>: the N pole moves the <b>opposite</b> way. Place the wire <b>below</b> the needle and the deflection is again opposite.</p>
+<p><b>Reason:</b> reversing the current reverses the direction of the field around the conductor, so the force on the needle reverses. The deflection direction therefore depends on the <b>direction of current</b> and on whether the wire is above or below the needle. This experiment by <b>Hans Christian Ørsted</b> (1777–1851, Denmark) in 1820 showed the link between electricity and magnetism. The CGS unit of field intensity, the <b>oersted</b>, honours him.</p>`)+
+card('3️⃣','Direction of the field: rules','ദിശ കണ്ടെത്താനുള്ള നിയമങ്ങൾ',`
+${S('Activity: field around a straight conductor')}
+<p>Pass a copper wire vertically through a cardboard, perpendicular to its plane. Place small compasses in a circle around the wire, connect a 9 V battery and switch, and switch on. The compass needles line up along a <b>circle around the wire</b>. Mark the N-pole directions on the card, then remove the compasses and draw the field lines: they are <b>concentric circles</b> around the wire. When the current is reversed, the circles reverse.</p>
+<div class="rule"><b>Right-hand thumb rule</b> (വലതുകൈ പെരുവിരൽ നിയമം): imagine holding the conductor in your right hand with the <b>thumb along the current</b>. The curled fingers show the <b>direction of the magnetic field</b>.</div>
+<p><b>Ampere's swimming rule</b> (ആംപിയറുടെ നീന്തൽ നിയമം): imagine a swimmer swimming along the current, <b>facing the compass</b>. The N pole of the needle deflects towards the swimmer's <b>left hand</b>.</p>
+${S('Circular loop (Activity 4.8)')}
+<p>Pass a wire through two holes in a card to form a loop, half above and half below the card. Place compasses near the wire at points A and B and switch on. Field lines are circles around the wire at both places, and inside the loop they all point the same way, so the loop acts like a flat magnet.</p>
+<ul><li>Face where current is <b>clockwise</b> (as you look at it): flux lines go <b>into</b> the loop, so it is a <b>South pole</b>.</li><li>Face where current is <b>anticlockwise</b>: flux lines come <b>out</b> of the loop, so it is a <b>North pole</b>.</li><li>Switch off, and the field disappears. The magnetism from a coil is temporary (only while current flows).</li></ul>
+<table><tr><th>Current seen from the front</th><th>Flux lines</th><th>Pole facing you</th></tr><tr><td>Clockwise</td><td>Into the loop</td><td>South</td></tr><tr><td>Anticlockwise</td><td>Out of the loop</td><td>North</td></tr></table>
+${S('Can we increase the magnetism of a loop?')}
+<p>Make the wire into several turns and pass the same current: the needle deflects <b>more</b>. Replace a 1.5 V cell with a 3 V battery (more current): the deflection is again <b>more</b>. So the strength of the field depends on the <b>number of turns</b> and the <b>current</b>. (Adding turns raises the field strength, not the flux of a single loop.)</p>`)+
+card('4️⃣','Solenoid & electromagnet','സോളിനോയ്ഡ് & വൈദ്യുതകാന്തം',`
+<p>Wind about 2 m of insulated (enamelled) copper wire (gauge 26) on a PVC pipe 10 cm long and 4 cm in diameter, then slide the coil off without changing its shape. It looks like a <b>spring (helix)</b>. A wire wound like this is a <b>solenoid</b>; the centres of all its turns lie on one straight line.</p>
+${S('Activity: what controls the strength?')}
+<ol><li>Place magnetic compasses around the first solenoid and connect a 9 V battery and switch. Switch on: the needles deflect.</li><li>Repeat with a second solenoid made from <b>4 m</b> of wire on the same pipe length. It has more turns per unit length, and the deflection is <b>greater</b>.</li><li>Increase the current through the solenoid: the deflection <b>increases</b>.</li><li>Insert a <b>soft-iron rod</b> as a core: the deflection increases a lot. Use an iron rod of <b>larger cross-section</b>: it increases further.</li></ol>
+<div class="rule"><b>Factors affecting the strength of a solenoid's field:</b> (1) number of turns per unit length, (2) current through it, (3) a soft-iron core (and its cross-section).</div>
+${S('Poles of a solenoid')}
+<p>Current clockwise at an end → that end is <b>South</b>. Anticlockwise → <b>North</b>. <b>Right-hand rule for a solenoid</b>: hold it with the four fingers curled along the current direction; the <b>thumb points to the North pole</b>. The field pattern (checked with iron filings) is the <b>same as that of a bar magnet</b>.</p>
+<div class="rule"><b>Electromagnet</b> (വൈദ്യുതകാന്തം): a device that creates a magnetic field using electricity, usually a solenoid with a soft-iron core. To make a <b>stronger electromagnet</b>: add more turns per unit length, increase the current, and use a larger soft-iron core.</div>
+<table><tr><th>Property</th><th>Bar magnet</th><th>Current-carrying solenoid</th></tr><tr><td>Strength</td><td>Constant</td><td>Can be varied (current, turns, core)</td></tr><tr><td>Polarity</td><td>Cannot be changed</td><td>Can be reversed by reversing the current</td></tr><tr><td>Field</td><td>Permanent</td><td>Only while current flows</td></tr></table>
+${S('Uses of strong magnetic fields')}
+<ul><li><b>Crane</b> with an electromagnet to lift scrap iron (switch off to drop it).</li><li><b>Maglev train</b> (levitated by magnetic fields).</li><li><b>MRI scanner</b> (Magnetic Resonance Imaging): uses very strong fields, so patients must remove all metal items; magnetic objects would be pulled violently and other metal spoils the report. An iron magnetic shield (as in motors) stops flux from leaking out.</li><li><b>Electric motor</b>.</li></ul>`)+
+card('5️⃣','Force on a current-carrying conductor','ചാലകത്തിൽ അനുഭവപ്പെടുന്ന ബലം',`
+${S('Activity (Fig 4.22)')}
+<p>Place a ring magnet with its N pole up on a table, put a clear acrylic sheet over it, and lay two parallel 20 cm copper rods on the sheet over the magnet. Rest a third copper rod AB across them. Connect the rods to a 12 V battery through a switch. Switch on: <b>AB rolls</b> toward P or Q.</p>
+<ul><li>Reverse the battery: AB rolls the <b>opposite</b> way.</li><li>Turn the magnet so S is up (reverse the field): AB moves the opposite way.</li><li>Reverse <b>both</b> the field and the current: AB moves the <b>same</b> way as at the start.</li></ul>
+<p><b>Why does AB move?</b> A conductor carrying current in a magnetic field experiences a force. Its direction depends on (1) the direction of the <b>current</b> and (2) the direction of the <b>magnetic field</b>.</p>
+<div class="rule"><b>Fleming's left-hand rule</b> (ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമം): stretch the thumb, first finger and second finger of the left hand <b>mutually perpendicular</b>. <b>First</b> finger → field, se<b>C</b>ond finger → current, thu<b>M</b>b → force (direction of motion).<br>Memory aid: <b>First = Field, seCond = Current, thuMb = Motion</b>.</div>
+<p>Tip: first fix the field direction with the first finger, then rotate your hand so the second finger points along the current; the thumb then shows the motion.</p>
+<div class="rule"><b>Motor principle:</b> a current-carrying conductor free to move in a magnetic field tends to move (is deflected).</div>`)+
+card('6️⃣','How the electric motor works','മോട്ടോറിന്റെ പ്രവർത്തനം',`
+<p>A motor converts <b>electrical energy to mechanical energy</b> on the basis of the motor principle. Used in fans, mixers and grinders.</p>
+<table><tr><th>Part</th><th>Description and role</th></tr><tr><td>Field magnet (N, S)</td><td>Gives the magnetic field</td></tr><tr><td>Armature ABCD</td><td>Insulated copper coil wound on a soft-iron core of suitable shape; fixed on axle PQ so it can rotate freely</td></tr><tr><td>Split rings R₁, R₂ (commutator)</td><td>Two halves of a ring fixed to the coil ends; they rotate with the armature</td></tr><tr><td>Graphite brushes B₁, B₂</td><td>Fixed, touch the split rings and carry current from the battery</td></tr></table>
+${S('Working, step by step')}
+<ol><li>Current flows from the battery through brush B₁, ring R₁, the coil A→B→C→D, ring R₂ and brush B₂ back to the battery.</li><li>Sides AB and CD lie in the field. By Fleming's left-hand rule the forces on AB and CD are in <b>opposite directions</b>, because the current in them is opposite while the field is the same.</li><li>These two forces form a turning effect, so the armature rotates.</li><li>After a <b>half rotation (180°)</b> the sides swap places: CD faces the N pole and AB the S pole.</li><li>Now R₁ touches B₂ and R₂ touches B₁, so the <b>current in the coil reverses</b>. The side in front of the N pole again carries current in the same direction as before, and the same for the side in front of the S pole.</li><li>Forces keep acting in the same turning sense, and the armature <b>rotates continuously in one direction</b>.</li></ol>
+<div class="rule">The <b>split-ring commutator</b> reverses the current in the armature after every half rotation. Without it, the coil would stop after half a turn (the forces would then oppose the motion).</div>
+<p><b>BLDC motor</b> (Brushless DC): no brushes or split rings. An <b>electronic switch</b> changes the current direction as needed. BLDC fans use up to <b>60% less electricity</b> than ordinary ones, so they are called energy-saving fans. Ordinary fans use induction motors.</p>`)+
+card('7️⃣','Moving-coil loudspeaker','ചലിക്കുംചുരുൾ ലൗഡ്സ്പീക്കർ',`
+<p>It also works on the motor principle.</p>
+<table><tr><th>Label</th><th>Part</th></tr><tr><td>A</td><td>Voice coil (വോയ്സ് കോയിൽ)</td></tr><tr><td>B</td><td>Paper diaphragm (പേപ്പർ ഡയഫ്രം)</td></tr><tr><td>C</td><td>Field magnet (ഫീൽഡ് കാന്തം)</td></tr><tr><td>D</td><td>Connecting wire</td></tr><tr><td>E</td><td>Soft-iron cover (പച്ചിരുമ്പ് കവചം)</td></tr></table>
+<ol><li>A microphone converts sound to weak electrical (audio) signals; an <b>amplifier</b> makes them stronger.</li><li>The audio signal current flows through the <b>voice coil</b>, which sits in the field of the field magnet.</li><li>The coil feels a force that changes with the current, so it <b>vibrates</b> (moves back and forth).</li><li>The <b>diaphragm</b> attached to it vibrates too, and sound is reproduced.</li></ol>
+<div class="rule">Energy change: <b>electrical energy → (mechanical) → sound energy</b>.</div>`)+
+card('8️⃣','Key terms & quick revision','പ്രധാന പദങ്ങൾ',`
+<table><tr><th>English</th><th>മലയാളം</th></tr><tr><td>Magnetic effect of current</td><td>വൈദ്യുതിയുടെ കാന്തികഫലം</td></tr><tr><td>Flux lines</td><td>ഫ്ലക്സ് രേഖകൾ</td></tr><tr><td>Clockwise / Anticlockwise</td><td>ക്ലോക്ക്‌വൈസ് / ആന്റിക്ലോക്ക്‌വൈസ്</td></tr><tr><td>Solenoid</td><td>സോളിനോയ്ഡ്</td></tr><tr><td>Electromagnet</td><td>വൈദ്യുതകാന്തം</td></tr><tr><td>Armature</td><td>ആർമെച്ചർ</td></tr><tr><td>Split-ring commutator</td><td>സ്പ്ലിറ്റ് റിങ് കമ്മ്യൂട്ടേറ്റർ</td></tr><tr><td>Brush</td><td>ബ്രഷ്</td></tr><tr><td>Voice coil / Diaphragm</td><td>വോയ്സ് കോയിൽ / ഡയഫ്രം</td></tr></table>
+<ul><li>Current → magnetic field (Ørsted). Reverse current → reverse field.</li><li>Field direction around a wire: <b>right-hand thumb rule</b>. Solenoid N pole: thumb of right hand.</li><li>Force on a conductor: <b>Fleming's left-hand rule</b>; field, current and force are mutually perpendicular.</li><li>Motor: electrical → mechanical; commutator reverses current each half turn.</li><li>Loudspeaker: electrical signal → vibration of voice coil and diaphragm → sound.</li></ul>
+${S('Common mistakes')}
+<ul><li>Using the left hand for field direction, or the right hand for force. <b>Right hand = field around current; left hand = force.</b></li><li>Mixing up pole and current direction in a loop: <b>clockwise = South, anticlockwise = North</b>.</li><li>Saying a bar magnet's strength can be changed. It cannot; a solenoid's can.</li></ul>
+${S('Textbook exercise hints')}
+<ul><li><b>Q3:</b> clockwise end is South, anticlockwise end is North, so option (c) is correct.</li><li><b>Q5:</b> the diaphragm vibrates and converts the coil's mechanical vibration into sound waves, option (b).</li><li><b>Q6:</b> the compass deflects because the wire's current creates a magnetic field. To reverse the deflection: reverse the current, or place the wire below the compass.</li></ul>`);
 
-/* ---------- tabs ---------- */
-const tabs=document.querySelectorAll('.tab'), panels=document.querySelectorAll('.panel');
-tabs.forEach(t=>t.addEventListener('click',()=>{
-  tabs.forEach(x=>x.classList.remove('active'));
-  panels.forEach(x=>x.classList.remove('active'));
-  t.classList.add('active');
-  document.getElementById(t.dataset.p).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-}));
-
-/* ---------- bilingual term data ---------- */
-const cards=[
-  {ml:"കാന്തികമണ്ഡലം",en:"Magnetic field",
-   bml:"ഒരു കാന്തത്തിന് ചുറ്റുമുള്ള, കാന്തികബലം അനുഭവപ്പെടുന്ന മേഖല.",
-   ben:"The region around a magnet within which its magnetic force can be felt."},
-  {ml:"കാന്തികമണ്ഡലരേഖകൾ / ഫ്ലക്സ് രേഖകൾ",en:"Magnetic field lines / flux lines",
-   bml:"കാന്തികമണ്ഡലത്തെ ദൃശ്യവൽക്കരിക്കാൻ ഉപയോഗിക്കുന്ന സാങ്കല്പിക രേഖകൾ. പുറത്ത് N → S.",
-   ben:"Imaginary lines used to visualise a magnetic field. Outside a magnet they run N → S."},
-  {ml:"ഈഴ്സ്റ്റഡിന്റെ പരീക്ഷണം",en:"Ørsted's experiment",
-   bml:"1820-ൽ നടത്തിയ പരീക്ഷണം — വൈദ്യുതിയും കാന്തികതയും തമ്മിലുള്ള ബന്ധം തെളിയിച്ചു.",
-   ben:"The 1820 experiment that revealed the connection between electricity and magnetism."},
-  {ml:"വലതുകൈ പെരുവിരൽ നിയമം",en:"Right-hand thumb rule",
-   bml:"പെരുവിരൽ കറന്റ് ദിശയിലും ചുറ്റിയ വിരലുകൾ കാന്തികമണ്ഡലദിശയിലും ആയിരിക്കും.",
-   ben:"The thumb points along the current; the curled fingers show the magnetic field direction."},
-  {ml:"ആംപിയറുടെ നീന്തൽ നിയമം",en:"Ampère's swimming rule",
-   bml:"കറന്റ് ദിശയിൽ നീന്തുന്നതായി സങ്കല്പിച്ചാൽ, ഇടതു കൈയ്ക്ക് നേരെ N ധ്രുവം വിഭ്രംശിക്കും.",
-   ben:"Imagine swimming along the current direction; the N pole of a needle deflects toward the left hand."},
-  {ml:"സോളിനോയ്ഡ്",en:"Solenoid",
-   bml:"സ്പ്രിങ്ങിന്റെ ആകൃതിയിൽ ചുറ്റിയെടുത്ത കവചിത ചാലകം.",
-   ben:"A spring-shaped coil of insulated conducting wire."},
-  {ml:"വൈദ്യുതകാന്തം",en:"Electromagnet",
-   bml:"വൈദ്യുതി ഉപയോഗിച്ച് കാന്തികമണ്ഡലം സൃഷ്ടിക്കുന്ന സംവിധാനം — സാധാരണയായി ഇരുമ്പ് കോർ ഉള്ള സോളിനോയ്ഡ്.",
-   ben:"A device that uses electricity to create a magnetic field — usually a solenoid with an iron core."},
-  {ml:"മോട്ടോർ തത്വം",en:"Motor principle",
-   bml:"കാന്തികമണ്ഡലത്തിൽ സ്ഥിതി ചെയ്യുന്ന, സ്വതന്ത്രമായി ചലിക്കാൻ കഴിയുന്ന ചാലകത്തിലൂടെ കറന്റ് കടത്തിവിടുമ്പോൾ ചാലകം വിഭ്രംശിക്കാനുള്ള പ്രവണത.",
-   ben:"The tendency of a free, current-carrying conductor in a magnetic field to move."},
-  {ml:"ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമം",en:"Fleming's left hand rule",
-   bml:"ചൂണ്ടുവിരൽ മണ്ഡലദിശയിലും നടുവിരൽ കറന്റ് ദിശയിലുമായാൽ പെരുവിരൽ ബലദിശ കാണിക്കും.",
-   ben:"If the first finger shows the field and the second the current, the thumb shows the force direction."},
-  {ml:"ആർമെച്ചർ",en:"Armature",
-   bml:"മോട്ടോറിലെ കോറിന് ചുറ്റും ചുറ്റിയെടുത്ത കവചിത ചാലകച്ചുരുൾ — ഭ്രമണം ചെയ്യുന്ന ഭാഗം.",
-   ben:"The coil of insulated wire wound around a core in a motor — the part that rotates."},
-  {ml:"സ്പ്ലിറ്റ് റിങ് കമ്യൂട്ടേറ്റർ",en:"Split ring commutator",
-   bml:"ഓരോ അർധഭ്രമണത്തിനും ശേഷം ആർമെച്ചറിലെ കറന്റിന്റെ ദിശ വിപരീതമാക്കുന്ന ഭാഗം.",
-   ben:"The part that reverses the current direction in the armature after every half rotation."},
-  {ml:"ഗ്രാഫൈറ്റ് ബ്രഷുകൾ",en:"Graphite brushes",
-   bml:"ബാറ്ററിയിൽ നിന്ന് സ്പ്ലിറ്റ് റിങ്ങിലേക്ക് കറന്റ് കടത്തിവിടുന്ന നിശ്ചല സ്പർശകങ്ങൾ.",
-   ben:"Stationary contacts that pass current from the battery to the split rings."},
-  {ml:"BLDC മോട്ടോർ",en:"BLDC motor",
-   bml:"ബ്രഷുകളും സ്പ്ലിറ്റ് റിങ്ങുകളും ഇല്ലാതെ, ഇലക്ട്രോണിക് സ്വിച്ച് ഉപയോഗിച്ച് പ്രവർത്തിക്കുന്ന മോട്ടോർ.",
-   ben:"A motor that works without brushes or split rings, using an electronic switch instead."},
-  {ml:"വോയ്‌സ് കോയിൽ",en:"Voice coil",
-   bml:"ലൗഡ്സ്പീക്കറിൽ ഫീൽഡ്‌കാന്തത്തിന്റെ മണ്ഡലത്തിൽ സ്ഥിതി ചെയ്യുന്ന ചലിക്കാൻ കഴിയുന്ന ചാലകച്ചുരുൾ.",
-   ben:"A moveable coil placed within the field of the field magnet in a loudspeaker."},
-  {ml:"ഫീൽഡ് കാന്തം",en:"Field magnet",
-   bml:"ലൗഡ്സ്പീക്കറിൽ കാന്തികമണ്ഡലം സൃഷ്ടിക്കുന്ന ശക്തിയേറിയ സ്ഥിരകാന്തം.",
-   ben:"The strong permanent magnet that produces the magnetic field in a loudspeaker."},
-  {ml:"പേപ്പർ ഡയഫ്രം",en:"Paper diaphragm",
-   bml:"ലൗഡ്സ്പീക്കറിൽ വോയ്‌സ് കോയിലിനോട് ബന്ധിപ്പിച്ചിരിക്കുന്ന കോൺ ആകൃതിയിലുള്ള കടലാസ്.",
-   ben:"The cone-shaped paper sheet connected to the voice coil in a loudspeaker."},
-  {ml:"ഇലക്ട്രോമാഗ്നറ്റിക് ക്രെയിൻ",en:"Electromagnetic crane",
-   bml:"സ്ക്രാപ്പ് ഇരുമ്പ് ഉയർത്താൻ ശക്തിയേറിയ വൈദ്യുതകാന്തം ഉപയോഗിക്കുന്ന ഉപകരണം.",
-   ben:"A device that uses a powerful electromagnet to lift scrap iron."},
-  {ml:"മാഗ്‌ലെവ് ട്രെയിൻ",en:"Maglev train",
-   bml:"കാന്തികശക്തി ഉപയോഗിച്ച് ട്രാക്കിന് മുകളിലൂടെ ഉയർന്ന് സഞ്ചരിക്കുന്ന ട്രെയിൻ.",
-   ben:"A train that floats and travels above its track using magnetic force."},
-  {ml:"MRI സ്കാനർ",en:"MRI scanner",
-   bml:"ശക്തിയേറിയ വൈദ്യുതകാന്തിക മണ്ഡലം ഉപയോഗിച്ച് ശരീരത്തിന്റെ ഉൾഭാഗ ചിത്രങ്ങൾ എടുക്കുന്ന ഉപകരണം.",
-   ben:"A device that uses a very strong electromagnetic field to image the inside of the body."},
-  {ml:"കാന്തിക ഷീൽഡിങ്",en:"Magnetic shielding",
-   bml:"ഇരുമ്പ് പോലുള്ള വസ്തുക്കൾ ഉപയോഗിച്ച് ഫ്ലക്സ് രേഖകൾ പുറത്തുവരാതെ തടയുന്ന രീതി.",
-   ben:"Using materials like iron to prevent flux lines from leaking out of a region."}
-];
-
-/* ---------- flashcards ---------- */
-const fcwrap=document.getElementById('fcwrap');
-function buildFlash(){
-  fcwrap.innerHTML='';
-  cards.forEach(c=>{
-    const front = LANG==='ml' ? c.ml : c.en;
-    const sec   = LANG==='ml' ? c.en : c.ml;
-    const back  = LANG==='ml' ? c.bml : c.ben;
-    const hint  = LANG==='ml' ? 'ടാപ്പ് ▸' : 'TAP ▸';
-    const d=document.createElement('div');
-    d.className='flip';
-    d.innerHTML=`<div class="flip-inner">
-      <div class="face front"><div class="term">${front}</div><div class="sec">${sec}</div><div class="hint">${hint}</div></div>
-      <div class="face back">${back}</div></div>`;
-    d.addEventListener('click',()=>d.classList.toggle('on'));
-    fcwrap.appendChild(d);
-  });
-}
-
-/* ---------- glossary ---------- */
-const glossBody=document.getElementById('glossBody');
-function buildGloss(){
-  glossBody.innerHTML='';
-  cards.slice().sort((a,b)=>a.en.localeCompare(b.en)).forEach(c=>{
-    const meaning = LANG==='ml' ? c.bml : c.ben;
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${c.ml}</td><td class="gen">${c.en}</td><td>${meaning}</td>`;
-    tr.dataset.s=(c.ml+' '+c.en+' '+meaning).toLowerCase();
-    glossBody.appendChild(tr);
-  });
-}
-document.getElementById('gsearch').addEventListener('input',e=>{
-  const q=e.target.value.toLowerCase().trim();
-  glossBody.querySelectorAll('tr').forEach(tr=>{ tr.style.display=tr.dataset.s.includes(q)?'':'none'; });
-});
-
-/* ---------- bilingual quiz ---------- */
-const quiz=[
-  {qml:"വൈദ്യുതിയും കാന്തികതയും തമ്മിലുള്ള ബന്ധം ആദ്യമായി കണ്ടെത്തിയത് ആരാണ്?", qen:"Who first discovered the connection between electricity and magnetism?",
-   oml:["മൈക്കിൾ ഫാരഡെ","ഹാൻസ് ക്രിസ്ത്യൻ ഈഴ്സ്റ്റഡ്","ജോൺ ആംബ്രോസ് ഫ്ലെമിങ്","ഐസക് ന്യൂട്ടൺ"],
-   oen:["Michael Faraday","Hans Christian Ørsted","John Ambrose Fleming","Isaac Newton"], a:1,
-   fml:"1820-ൽ ഹാൻസ് ക്രിസ്ത്യൻ ഈഴ്സ്റ്റഡ് ഈ ബന്ധം കണ്ടെത്തി.",
-   fen:"Hans Christian Ørsted discovered this connection in 1820."},
-  {qml:"വൈദ്യുതി പ്രവഹിക്കുന്ന ചാലകത്തിന് ചുറ്റും ഉണ്ടാകുന്നത് എന്താണ്?", qen:"What is set up around a current-carrying conductor?",
-   oml:["വൈദ്യുതമണ്ഡലം","കാന്തികമണ്ഡലം","ഗുരുത്വാകർഷണമണ്ഡലം","ഒന്നും ഉണ്ടാകില്ല"],
-   oen:["Electric field","Magnetic field","Gravitational field","Nothing"], a:1,
-   fml:"കറന്റ് പ്രവഹിക്കുന്ന ചാലകത്തിന് ചുറ്റും കാന്തികമണ്ഡലം ഉണ്ടാകുന്നു.",
-   fen:"A magnetic field is set up around a current-carrying conductor."},
-  {qml:"ഒരു ചാലകത്തിന് ചുറ്റുമുള്ള കാന്തികമണ്ഡലദിശ കണ്ടെത്താൻ ഉപയോഗിക്കുന്ന നിയമം ഏതാണ്?", qen:"Which rule finds the magnetic field direction around a conductor?",
-   oml:["ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമം","വലതുകൈ പെരുവിരൽ നിയമം","ഓമിന്റെ നിയമം","ന്യൂട്ടന്റെ നിയമം"],
-   oen:["Fleming's left hand rule","Right-hand thumb rule","Ohm's law","Newton's law"], a:1,
-   fml:"വലതുകൈ പെരുവിരൽ നിയമം ഉപയോഗിക്കുന്നു.", fen:"The right-hand thumb rule is used."},
-  {qml:"സോളിനോയ്ഡിന്റെ കാന്തശക്തി കൂട്ടാൻ കഴിയാത്ത മാർഗം ഏതാണ്?", qen:"Which does NOT increase a solenoid's magnetic strength?",
-   oml:["ചുറ്റുകൾ കൂട്ടുക","കറന്റ് കൂട്ടുക","ഇരുമ്പ് കോർ ഉപയോഗിക്കുക","ചാലകക്കമ്പി കനം കുറയ്ക്കുക"],
-   oen:["Increase turns","Increase current","Use an iron core","Reduce wire thickness"], a:3,
-   fml:"ചാലകക്കമ്പിയുടെ കനം കാന്തശക്തിയെ നേരിട്ട് ബാധിക്കുന്നില്ല.",
-   fen:"Wire thickness does not directly affect the magnetic strength."},
-  {qml:"ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമത്തിൽ പെരുവിരൽ എന്ത് സൂചിപ്പിക്കുന്നു?", qen:"In Fleming's left hand rule, what does the thumb indicate?",
-   oml:["കറന്റ് ദിശ","കാന്തികമണ്ഡലദിശ","ബലത്തിന്റെ ദിശ","ഒന്നും ഇല്ല"],
-   oen:["Current direction","Magnetic field direction","Direction of force","None"], a:2,
-   fml:"പെരുവിരൽ ചാലകത്തിൽ അനുഭവപ്പെടുന്ന ബലത്തിന്റെ ദിശ കാണിക്കുന്നു.",
-   fen:"The thumb shows the direction of the force on the conductor."},
-  {qml:"വൈദ്യുതമോട്ടോറിൽ ഓരോ അർധഭ്രമണത്തിനും ശേഷം കറന്റിന്റെ ദിശ മാറ്റുന്ന ഭാഗം ഏത്?", qen:"Which part reverses the current every half rotation in a motor?",
-   oml:["ആർമെച്ചർ","ഫീൽഡ്‌കാന്തം","സ്പ്ലിറ്റ് റിങ് കമ്യൂട്ടേറ്റർ","വോയ്‌സ് കോയിൽ"],
-   oen:["Armature","Field magnet","Split ring commutator","Voice coil"], a:2,
-   fml:"സ്പ്ലിറ്റ് റിങ് കമ്യൂട്ടേറ്ററാണ് ഇത് ചെയ്യുന്നത്.", fen:"The split ring commutator does this."},
-  {qml:"BLDC മോട്ടോറിന്റെ പ്രധാന ഗുണം എന്താണ്?", qen:"What is the main advantage of a BLDC motor?",
-   oml:["വളരെ ഭാരം കുറവ്","ഊർജ്ജ ഉപഭോഗം 60% വരെ കുറയ്ക്കുന്നു","ശബ്ദം കൂടുതൽ","വില വളരെ കുറവ്"],
-   oen:["Very light weight","Reduces power use by up to 60%","Louder sound","Very cheap"], a:1,
-   fml:"BLDC ഫാനുകൾ ഊർജ്ജ ഉപഭോഗം 60% വരെ കുറയ്ക്കുന്നു.",
-   fen:"BLDC fans reduce power consumption by up to 60%."},
-  {qml:"ചലിക്കുംചുരുൾ ലൗഡ്സ്പീക്കറിൽ ഏത് ഊർജ്ജമാറ്റം സംഭവിക്കുന്നു?", qen:"What energy transformation happens in a moving-coil loudspeaker?",
-   oml:["വൈദ്യുതി → ശബ്ദം","ശബ്ദം → വൈദ്യുതി","താപം → പ്രകാശം","പ്രകാശം → വൈദ്യുതി"],
-   oen:["Electrical → sound","Sound → electrical","Heat → light","Light → electrical"], a:0,
-   fml:"വൈദ്യുതോർജ്ജം യാന്ത്രിക/ശബ്ദ ഊർജ്ജമായി മാറുന്നു.",
-   fen:"Electrical energy is converted into mechanical/sound energy."},
-  {qml:"ഒരു കാന്തത്തിന് പുറത്ത് കാന്തികമണ്ഡലരേഖകളുടെ ദിശ എപ്രകാരമാണ്?", qen:"Outside a magnet, in which direction do the field lines run?",
-   oml:["S-ൽ നിന്ന് N-ലേക്ക്","N-ൽ നിന്ന് S-ലേക്ക്","ഇരു ധ്രുവങ്ങളിലേക്കും","ദിശ ഇല്ല"],
-   oen:["From S to N","From N to S","Toward both poles","No direction"], a:1,
-   fml:"പുറത്ത് ഫ്ലക്സ് രേഖകൾ N-ൽ നിന്ന് S-ലേക്കാണ്.",
-   fen:"Outside the magnet, flux lines run from N to S."},
-  {qml:"MRI സ്കാനറിന് മുൻപ് ലോഹ ആഭരണങ്ങൾ മാറ്റാൻ പറയുന്നത് എന്തുകൊണ്ട്?", qen:"Why must patients remove metal jewellery before an MRI?",
-   oml:["ചിത്രത്തിന്റെ നിറം മാറാൻ","കാന്തികമണ്ഡലം ലോഹത്തെ ശക്തമായി ആകർഷിക്കും","സ്കാനർ ചൂടാകാൻ","ചെലവ് കുറയ്ക്കാൻ"],
-   oen:["To change image colour","The magnetic field strongly attracts metal","To heat the scanner","To reduce cost"], a:1,
-   fml:"MRI-യുടെ ശക്തിയേറിയ കാന്തികമണ്ഡലം ലോഹവസ്തുക്കളെ അപകടകരമായി ആകർഷിക്കും.",
-   fen:"The MRI's very strong magnetic field can dangerously attract metal objects."}
-];
-
-const T={
-  ml:{q:"ചോദ്യം",score:"സ്കോർ",next:"അടുത്ത ചോദ്യം ▸",result:"ഫലം കാണാം ▸",correct:"ശരി",retry:"വീണ്ടും ശ്രമിക്കാം ↻",
-      good:"മികച്ചത്! നന്നായി പഠിച്ചു 🌟",mid:"നന്നായി വരുന്നു — ഒന്നു കൂടി റിവിഷൻ ചെയ്യാം 👍",low:"കുറിപ്പുകൾ ഒന്നുകൂടി വായിച്ച് വീണ്ടും ശ്രമിക്കാം 📘",
-      showAll:"📖 എല്ലാ ഉത്തരങ്ങളും കാണിക്കുക",hideAll:"🙈 എല്ലാ ഉത്തരങ്ങളും മറയ്ക്കുക",
-      showOne:"ഉത്തരം കാണിക്കുക ▾",hideOne:"ഉത്തരം മറയ്ക്കുക ▴"},
-  en:{q:"Question",score:"Score",next:"Next question ▸",result:"See result ▸",correct:"correct",retry:"Try again ↻",
-      good:"Excellent! Well studied 🌟",mid:"Coming along nicely — one more revision 👍",low:"Read the notes once more and try again 📘",
-      showAll:"📖 Show all answers",hideAll:"🙈 Hide all answers",
-      showOne:"Show answer ▾",hideOne:"Hide answer ▴"}
-};
-
-let qi=0,score=0,answered=false;
-const qc=document.getElementById('quizCard');
-function renderQ(){
-  answered=false; qi=Math.min(qi,quiz.length-1);
-  const t=T[LANG], item=quiz[qi];
-  const qtext = LANG==='ml'?item.qml:item.qen;
-  const opts  = LANG==='ml'?item.oml:item.oen;
-  qc.innerHTML=`
-    <div class="qmeta">
-      <span class="qcount">${t.q} ${qi+1} / ${quiz.length}</span>
-      <span class="qscore">${t.score}: ${score}</span>
-    </div>
-    <div class="qbar"><i style="width:${qi/quiz.length*100}%"></i></div>
-    <p class="qtext">${qtext}</p>
-    <div id="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div>
-    <div class="qfb" id="qfb"></div>
-    <button class="qnext" id="qnext" disabled>${qi===quiz.length-1?t.result:t.next}</button>`;
-  qc.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',pick));
-  document.getElementById('qnext').addEventListener('click',()=>{qi++;qi<quiz.length?renderQ():showResult();});
-}
-function pick(e){
-  if(answered)return; answered=true;
-  const t=T[LANG], chosen=+e.currentTarget.dataset.i, correct=quiz[qi].a;
-  qc.querySelectorAll('.opt').forEach((b,i)=>{
-    b.disabled=true;
-    if(i===correct)b.classList.add('correct');
-    if(i===chosen&&chosen!==correct)b.classList.add('wrong');
-  });
-  const fb=document.getElementById('qfb');
-  const expl = LANG==='ml'?quiz[qi].fml:quiz[qi].fen;
-  if(chosen===correct){score++;fb.className='qfb show ok';fb.innerHTML='✓ '+expl;}
-  else{fb.className='qfb show no';fb.innerHTML='✗ '+expl;}
-  document.querySelector('.qscore').textContent=t.score+': '+score;
-  document.getElementById('qnext').disabled=false;
-}
-function showResult(){
-  const t=T[LANG], pct=Math.round(score/quiz.length*100);
-  const msg = pct>=80?t.good : pct>=50?t.mid : t.low;
-  qc.innerHTML=`<div class="result">
-    <div class="big">${score}<span style="font-size:24px;color:var(--ink-soft)">/${quiz.length}</span></div>
-    <div class="lbl">${pct}% ${t.correct}</div>
-    <div class="msg">${msg}</div>
-    <button class="retry" id="retry">${t.retry}</button>
-  </div>`;
-  document.getElementById('retry').addEventListener('click',()=>{qi=0;score=0;renderQ();});
-}
-
-/* ---------- question bank reveal ---------- */
-document.querySelectorAll('#qbank .qb-rev').forEach(btn=>{
-  btn.addEventListener('click',()=>{ btn.nextElementSibling.classList.toggle('on'); });
-});
-const qbToggleAll=document.getElementById('qbToggleAll');
-let qbAllOn=false;
-qbToggleAll.addEventListener('click',()=>{
-  qbAllOn=!qbAllOn;
-  document.querySelectorAll('#qbank .qb-ans').forEach(a=>a.classList.toggle('on',qbAllOn));
-  qbToggleAll.innerHTML = qbAllOn
-    ? `🙈 <span class="t-ml">എല്ലാ ഉത്തരങ്ങളും മറയ്ക്കുക</span><span class="t-en">Hide all answers</span>`
-    : `📖 <span class="t-ml">എല്ലാ ഉത്തരങ്ങളും കാണിക്കുക</span><span class="t-en">Show all answers</span>`;
-});
-
-/* ---------- targeted single-panel print ---------- */
-function printPanel(id){
-  const el=document.getElementById(id);
-  document.body.classList.add('print-one');
-  el.classList.add('print-me');
-  const wasClosed=[...el.querySelectorAll('details:not([open])')];
-  wasClosed.forEach(d=>d.open=true);
-  const cleanup=()=>{
-    document.body.classList.remove('print-one');
-    el.classList.remove('print-me');
-    wasClosed.forEach(d=>d.open=false);
-    window.removeEventListener('afterprint',cleanup);
-  };
-  window.addEventListener('afterprint',cleanup);
-  window.print();
-  setTimeout(cleanup,800);
-}
-
-/* ---------- share the standalone quiz page ---------- */
-const toastEl=document.getElementById('toast');
-let toastT;
-function toast(msg){
-  toastEl.textContent=msg; toastEl.classList.add('on');
-  clearTimeout(toastT); toastT=setTimeout(()=>toastEl.classList.remove('on'),2200);
-}
-function quizURL(){
-  const base=window.location.href.split('#')[0].split('?')[0];
-  return base.replace(/[^/]*$/, 'unit4-quiz.html');
-}
-async function copyQuizLink(){
-  const url=quizURL();
-  const title = LANG==='ml' ? 'വൈദ്യുതിയുടെ കാന്തികഫലം — ക്വിസ് (Class 10 Physics)' : 'Magnetic Effects of Electric Current — Quiz (Class 10 Physics)';
-  if(navigator.share){
-    try{ await navigator.share({title, text:title, url}); return; }catch(e){ if(e.name==='AbortError')return; }
-  }
-  try{
-    await navigator.clipboard.writeText(url);
-    toast(LANG==='ml'?'ക്വിസ് ലിങ്ക് കോപ്പി ചെയ്തു ✓':'Quiz link copied ✓');
-  }catch(e){
-    const ta=document.createElement('textarea');
-    ta.value=url; ta.style.position='fixed'; ta.style.opacity='0';
-    document.body.appendChild(ta); ta.select();
-    try{ document.execCommand('copy'); toast(LANG==='ml'?'ക്വിസ് ലിങ്ക് കോപ്പി ചെയ്തു ✓':'Quiz link copied ✓'); }
-    catch(_){ toast(url); }
-    document.body.removeChild(ta);
-  }
-}
-document.getElementById('shareBtn').addEventListener('click',copyQuizLink);
-document.getElementById('waBtn').addEventListener('click',()=>{
-  const msg = (LANG==='ml'
-    ? 'വൈദ്യുതിയുടെ കാന്തികഫലം (Class 10 Physics) ക്വിസ് — ഇവിടെ ചെയ്യാം:\n'
-    : 'Magnetic Effects of Electric Current (Class 10 Physics) quiz — try it here:\n') + quizURL();
-  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank','noopener');
-});
-
-/* ---------- init ---------- */
-setLang('ml');
-</script>
-</body>
-</html>
+const MN={0:`<p>ഒരു കാന്തത്തിനു ചുറ്റും <b>കാന്തികമണ്ഡലം</b> ഉണ്ട്. സ്വതന്ത്രമായി തിരിയുന്ന കാന്തസൂചിക്ക് സമീപം ഒരു കാന്തം കൊണ്ടുവന്നാൽ, കാന്തധ്രുവങ്ങളുടെ ആകർഷണ–വികർഷണം മൂലം സൂചി വിഭ്രംശിക്കും. അതായത് <b>കാന്തസൂചിക്ക് സമീപം സൃഷ്ടിക്കപ്പെടുന്ന ഏതു കാന്തികമണ്ഡലവും സൂചിയെ വിഭ്രംശിപ്പിക്കും</b>.</p><p>കാന്തികമണ്ഡലത്തെ ദൃശ്യവൽക്കരിക്കാൻ ഉപയോഗിക്കുന്ന സാങ്കൽപ്പിക രേഖകളാണ് <b>ഫ്ലക്സ് രേഖകൾ</b>.</p><ul><li>കാന്തത്തിനു പുറത്ത് ഫ്ലക്സ് രേഖകൾ <b>നോർത്ത്‌പോളിൽ നിന്ന് സൗത്ത്‌പോളിലേക്ക്</b> ആണ്.</li><li>കാന്തത്തിനകത്ത് സൗത്തിൽ നിന്ന് നോർത്തിലേക്ക്; അതിനാൽ ഓരോ രേഖയും അടഞ്ഞ വലയമാണ്.</li><li>കാന്തികമണ്ഡലം ശക്തമായ ഇടങ്ങളിൽ (ധ്രുവങ്ങൾക്കടുത്ത്) രേഖകൾ അടുത്തടുത്തായിരിക്കും.</li><li>മാഗ്നറ്റിക് കോമ്പസ് ഉപയോഗിച്ചോ കാന്തത്തിനു മുകളിലെ ഷീറ്റിൽ ഇരുമ്പുപൊടി വിതറിയോ ഇവ കാണാം.</li></ul>`,
+1:`<h3>പ്രവർത്തനം: വൈദ്യുതി കാന്തസൂചിയെ സ്വാധീനിക്കുമോ?</h3><ol><li>ചാലകക്കമ്പി, 9 V സെൽ, സ്വിച്ച് എന്നിവ ഉപയോഗിച്ച് സെർക്കീട്ട് നിർമ്മിക്കുക.</li><li>കമ്പിക്ക് സമീപം പിവറ്റ് ചെയ്ത കാന്തസൂചി വയ്ക്കുക; സ്വിച്ച് ഓഫ് ആയിരിക്കുമ്പോൾ സൂചി വടക്ക്–തെക്ക് ദിശയിൽ നിൽക്കും.</li><li>സ്വിച്ച് ഓൺ ചെയ്യുമ്പോൾ സൂചി വിഭ്രംശിക്കുന്നു.</li><li>സ്വിച്ച് ഓഫ് ചെയ്താൽ സൂചി പഴയ സ്ഥാനത്തേക്ക് മടങ്ങുന്നു.</li></ol><div class="rule"><b>നിഗമനം:</b> വൈദ്യുതി പ്രവഹിക്കുന്ന ചാലകത്തിനു ചുറ്റും കാന്തികമണ്ഡലം രൂപപ്പെടുന്നു; ഇതിന് കാന്തസൂചിയിൽ ബലം പ്രയോഗിക്കാൻ കഴിയും. ഇതാണ് <b>വൈദ്യുതിയുടെ കാന്തികഫലം</b>. കറന്റ് ഉള്ളപ്പോൾ മാത്രമേ കാന്തികമണ്ഡലം ഉണ്ടാകൂ.</div><h3>വിഭ്രംശദിശ കറന്റിന്റെ ദിശയെ ആശ്രയിക്കുമോ?</h3><p>AB എന്ന ചാലകം കാന്തസൂചിക്ക് മുകളിൽ സമാന്തരമായി വയ്ക്കുക. സ്വിച്ച് ഓൺ ചെയ്ത് നോർത്ത്‌പോൾ ഏത് ദിശയിൽ വിഭ്രംശിക്കുന്നു എന്ന് നോക്കുക. <b>കറന്റ് വിപരീതമാക്കിയാൽ</b> നോർത്ത്‌പോൾ <b>എതിർദിശയിൽ</b> വിഭ്രംശിക്കും; ചാലകം സൂചിയുടെ താഴെ വച്ചാലും ദിശ വിപരീതമാകും.</p><p><b>കാരണം:</b> കറന്റ് വിപരീതമാക്കുമ്പോൾ ചാലകത്തിനു ചുറ്റുമുള്ള കാന്തികമണ്ഡലത്തിന്റെ ദിശയും വിപരീതമാകുന്നു. 1820-ൽ <b>ഹാൻസ് ക്രിസ്റ്റ്യൻ ഈഴ്സ്റ്റഡ്</b> (1777–1851, ഡെന്മാർക്ക്) ഈ പരീക്ഷണത്തിലൂടെ വൈദ്യുതിയും കാന്തികതയും തമ്മിലുള്ള ബന്ധം കണ്ടെത്തി. കാന്തികമണ്ഡലതീവ്രതയുടെ CGS യൂണിറ്റിന് <b>ഈഴ്സ്റ്റഡ്</b> എന്ന പേര് നൽകി.</p>`,
+2:`<h3>പ്രവർത്തനം: നേർത്ത ചാലകത്തിനു ചുറ്റുമുള്ള കാന്തികമണ്ഡലം</h3><p>ഒരു കാർഡ്ബോർഡിലൂടെ ചെമ്പുകമ്പി പ്രതലത്തിന് ലംബമായി കടത്തുക. കമ്പിക്കു ചുറ്റും കാർഡിൽ ചെറിയ മാഗ്നറ്റിക് കോമ്പസുകൾ വലയാകൃതിയിൽ വയ്ക്കുക. 9 V ബാറ്ററിയും സ്വിച്ചും ശ്രേണിയിൽ ഘടിപ്പിച്ച് സ്വിച്ച് ഓൺ ചെയ്യുക. കാന്തസൂചികൾ <b>കമ്പിക്കു ചുറ്റും ഒരു വൃത്തത്തിന്റെ ദിശയിൽ</b> വിന്യസിക്കുന്നു. നോർത്ത്‌പോളുകളുടെ ദിശ കാർഡിൽ അടയാളപ്പെടുത്തി കോമ്പസുകൾ മാറ്റിയശേഷം ഫ്ലക്സ് രേഖകൾ വരയ്ക്കുക: അവ കമ്പിക്കു ചുറ്റുമുള്ള <b>ഏകകേന്ദ്രവൃത്തങ്ങൾ</b> ആണ്. കറന്റ് വിപരീതമാക്കിയാൽ വൃത്തങ്ങളുടെ ദിശയും വിപരീതമാകും.</p><div class="rule"><b>വലതുകൈ പെരുവിരൽ നിയമം:</b> വൈദ്യുതപ്രവാഹദിശയിൽ <b>പെരുവിരൽ</b> വരത്തക്കവിധം ചാലകത്തെ വലതുകൈ കൊണ്ട് ചുറ്റിപ്പിടിക്കുന്നതായി സങ്കൽപ്പിക്കുക. ചുറ്റിപ്പിടിച്ച വിരലുകൾ <b>കാന്തികമണ്ഡലത്തിന്റെ ദിശ</b> സൂചിപ്പിക്കും.</div><p><b>ആംപിയറുടെ നീന്തൽ നിയമം:</b> വൈദ്യുതപ്രവാഹദിശയിൽ, കാന്തസൂചിയെ നോക്കിക്കൊണ്ട് ഒരാൾ നീന്തുന്നതായി സങ്കൽപ്പിച്ചാൽ സൂചിയുടെ നോർത്ത്‌പോൾ അയാളുടെ <b>ഇടതുവശത്തേക്ക്</b> വിഭ്രംശിക്കും.</p><h3>ചാലകവലയം (പ്രവർത്തനം 4.8)</h3><p>ഒരു കാർഡ്ബോർഡിലെ രണ്ട് സുഷിരങ്ങളിലൂടെ കമ്പി കടത്തി വലയമാക്കുക; വലയത്തിന്റെ പകുതി കാർഡിനു മുകളിലും പകുതി താഴെയുമായിരിക്കണം. A, B എന്നീ ഭാഗങ്ങൾക്ക് സമീപം കോമ്പസുകൾ വച്ച് സ്വിച്ച് ഓൺ ചെയ്യുക. രണ്ടിടത്തും ഫ്ലക്സ് രേഖകൾ കമ്പിക്കു ചുറ്റുമുള്ള വൃത്തങ്ങളാണ്; വലയത്തിനുള്ളിൽ എല്ലാ രേഖകളും ഒരേ ദിശയിലായതിനാൽ വലയം ഒരു പരന്ന കാന്തം പോലെ പ്രവർത്തിക്കുന്നു.</p><ul><li>നിങ്ങൾ നോക്കുന്ന വശത്ത് കറന്റ് <b>ക്ലോക്ക്‌വൈസ്</b> ആണെങ്കിൽ ഫ്ലക്സ് രേഖകൾ വലയത്തിനുള്ളിലേക്ക് ആയിരിക്കും; ആ വശം <b>സൗത്ത്‌പോൾ</b>.</li><li>കറന്റ് <b>ആന്റിക്ലോക്ക്‌വൈസ്</b> ആണെങ്കിൽ ഫ്ലക്സ് രേഖകൾ വലയത്തിൽ നിന്ന് പുറത്തേക്ക്; ആ വശം <b>നോർത്ത്‌പോൾ</b>.</li><li>സ്വിച്ച് ഓഫ് ചെയ്താൽ കാന്തികമണ്ഡലം ഇല്ലാതാകും; കോയിലിൽ നിന്നുള്ള കാന്തികത താൽക്കാലികമാണ് (കറന്റ് ഉള്ളപ്പോൾ മാത്രം).</li></ul><table><tr><th>മുന്നിൽ നിന്ന് കാണുന്ന കറന്റ്</th><th>ഫ്ലക്സ് രേഖകൾ</th><th>നിങ്ങൾക്കഭിമുഖമായ ധ്രുവം</th></tr><tr><td>ക്ലോക്ക്‌വൈസ്</td><td>വലയത്തിനുള്ളിലേക്ക്</td><td>സൗത്ത്</td></tr><tr><td>ആന്റിക്ലോക്ക്‌വൈസ്</td><td>വലയത്തിൽ നിന്ന് പുറത്തേക്ക്</td><td>നോർത്ത്</td></tr></table><h3>ചാലകവലയത്തിലെ കാന്തശക്തി വർദ്ധിപ്പിക്കാൻ കഴിയുമോ?</h3><p>കമ്പി പല ചുറ്റുകളുള്ള വലയമാക്കി അതേ കറന്റ് കടത്തിവിട്ടാൽ സൂചിയുടെ വിഭ്രംശം <b>കൂടുന്നു</b>. 1.5 V സെല്ലിനു പകരം 3 V ബാറ്ററി (കൂടുതൽ കറന്റ്) ഉപയോഗിച്ചാലും വിഭ്രംശം <b>കൂടുന്നു</b>. അതിനാൽ കാന്തികമണ്ഡലത്തിന്റെ ശക്തി <b>ചുറ്റുകളുടെ എണ്ണത്തെയും</b> <b>കറന്റിനെയും</b> ആശ്രയിക്കുന്നു.</p>`,
+3:`<p>ഏകദേശം 2 m നീളമുള്ള കവചിത ചെമ്പുകമ്പി (ഗേജ് 26) 10 cm നീളവും 4 cm വ്യാസവുമുള്ള PVC പൈപ്പിൽ ചുറ്റിയെടുത്ത് ആകൃതി മാറാതെ വേർപെടുത്തുക. ഇത് <b>സ്പ്രിങ് (സർപ്പിളം)</b> പോലെ കാണപ്പെടും. ഇങ്ങനെ ചുറ്റിയ കവചിത ചാലകമാണ് <b>സോളിനോയ്ഡ്</b>; ഇതിലെ എല്ലാ ചുറ്റുകളുടെയും കേന്ദ്രങ്ങൾ ഒരേ നേർരേഖയിലായിരിക്കും.</p><h3>പ്രവർത്തനം: കാന്തശക്തിയെ സ്വാധീനിക്കുന്ന ഘടകങ്ങൾ</h3><ol><li>സോളിനോയ്ഡിനു ചുറ്റും മാഗ്നറ്റിക് കോമ്പസുകൾ വച്ച് 9 V ബാറ്ററി, സ്വിച്ച് എന്നിവ ഘടിപ്പിച്ച് സ്വിച്ച് ഓൺ ചെയ്യുക: സൂചികൾ വിഭ്രംശിക്കുന്നു.</li><li>അതേ പൈപ്പിൽ <b>4 m</b> കമ്പി ചുറ്റിയ രണ്ടാമത്തെ സോളിനോയ്ഡ് ഉപയോഗിക്കുക. യൂണിറ്റ് നീളത്തിലെ ചുറ്റുകൾ കൂടുതലായതിനാൽ വിഭ്രംശം <b>കൂടുതലാണ്</b>.</li><li>കറന്റ് വർദ്ധിപ്പിച്ചാൽ വിഭ്രംശം <b>കൂടും</b>.</li><li>കോർ ആയി <b>പച്ചിരുമ്പ് ദണ്ഡ്</b> വച്ചാൽ വിഭ്രംശം വളരെ കൂടും; <b>ഛേദതല പരപ്പളവ് കൂടിയ</b> ദണ്ഡ് ആണെങ്കിൽ ഇനിയും കൂടും.</li></ol><div class="rule"><b>സോളിനോയ്ഡിന്റെ കാന്തശക്തിയെ സ്വാധീനിക്കുന്ന ഘടകങ്ങൾ:</b> (1) യൂണിറ്റ് നീളത്തിലുള്ള ചുറ്റുകളുടെ എണ്ണം, (2) കറന്റ്, (3) പച്ചിരുമ്പ് കോർ (അതിന്റെ ഛേദതല പരപ്പളവും).</div><h3>സോളിനോയ്ഡിന്റെ ധ്രുവങ്ങൾ</h3><p>ഒരു അഗ്രത്ത് കറന്റ് ക്ലോക്ക്‌വൈസ് ആണെങ്കിൽ ആ അഗ്രം <b>സൗത്ത്‌പോൾ</b>; ആന്റിക്ലോക്ക്‌വൈസ് ആണെങ്കിൽ <b>നോർത്ത്‌പോൾ</b>. <b>വലതുകൈ നിയമം:</b> കറന്റിന്റെ ദിശയിൽ നാല് വിരലുകൾ വരത്തക്കവിധം വലതുകൈ കൊണ്ട് പിടിച്ചാൽ <b>പെരുവിരൽ നോർത്ത്‌പോളിനെ</b> സൂചിപ്പിക്കും. ഇരുമ്പുപൊടി ഉപയോഗിച്ച് നോക്കിയാൽ കാന്തികമണ്ഡലം <b>ബാർമാഗ്നറ്റിന്റേതിന് സമാനമാണ്</b>.</p><div class="rule"><b>വൈദ്യുതകാന്തം:</b> വൈദ്യുതി ഉപയോഗിച്ച് കാന്തികമണ്ഡലം സൃഷ്ടിക്കുന്ന സംവിധാനം (സാധാരണയായി പച്ചിരുമ്പ് കോറുള്ള സോളിനോയ്ഡ്). ശക്തി കൂടിയ വൈദ്യുതകാന്തത്തിന്: യൂണിറ്റ് നീളത്തിലെ ചുറ്റുകൾ കൂട്ടുക, കറന്റ് കൂട്ടുക, ഛേദതല പരപ്പളവ് കൂടിയ പച്ചിരുമ്പ് കോർ ഉപയോഗിക്കുക.</div><table><tr><th>സവിശേഷത</th><th>ബാർമാഗ്നറ്റ്</th><th>വൈദ്യുതവാഹിയായ സോളിനോയ്ഡ്</th></tr><tr><td>കാന്തശക്തി</td><td>സ്ഥിരം</td><td>മാറ്റാം (കറന്റ്, ചുറ്റുകൾ, കോർ)</td></tr><tr><td>ധ്രുവത</td><td>മാറ്റാൻ കഴിയില്ല</td><td>കറന്റ് വിപരീതമാക്കി മാറ്റാം</td></tr><tr><td>കാന്തികമണ്ഡലം</td><td>സ്ഥിരം</td><td>കറന്റ് ഉള്ളപ്പോൾ മാത്രം</td></tr></table><h3>ശക്തിയേറിയ കാന്തികമണ്ഡലത്തിന്റെ ഉപയോഗങ്ങൾ</h3><ul><li>സ്ക്രാപ്പ് ഇരുമ്പ് ഉയർത്തുന്ന <b>വൈദ്യുതകാന്ത ക്രെയ്ൻ</b> (സ്വിച്ച് ഓഫ് ചെയ്താൽ ഇരുമ്പ് വീഴും).</li><li><b>മാഗ്ലെവ് ട്രെയിൻ</b>.</li><li><b>MRI സ്കാനർ:</b> വളരെ ശക്തമായ കാന്തികമണ്ഡലം ഉപയോഗിക്കുന്നതിനാൽ രോഗി ലോഹാഭരണങ്ങൾ എല്ലാം മാറ്റണം; കാന്തികവസ്തുക്കൾ ശക്തമായി ആകർഷിക്കപ്പെട്ട് അപകടമുണ്ടാകുകയും മറ്റു ലോഹങ്ങൾ സ്കാനിങ് റിപ്പോർട്ടിനെ ബാധിക്കുകയും ചെയ്യും. ഇരുമ്പുകൊണ്ടുള്ള കാന്തിക ഷീൽഡിങ് ഫ്ലക്സ് പുറത്തുവരുന്നത് തടയും.</li><li><b>വൈദ്യുതമോട്ടോർ</b>.</li></ul>`,
+4:`<h3>പ്രവർത്തനം (ചിത്രം 4.22)</h3><p>ഒരു റിങ് മാഗ്നറ്റ് നോർത്ത്‌പോൾ മുകളിൽ വരത്തക്കവിധം മേശപ്പുറത്ത് വയ്ക്കുക. അതിനു മുകളിൽ അക്രിലിക് ഷീറ്റും, അതിൽ 20 cm നീളമുള്ള രണ്ട് ചെമ്പുകമ്പികൾ സമാന്തരമായും വയ്ക്കുക. ഇവയ്ക്ക് കുറുകെ മൂന്നാമത്തെ ചെമ്പുകമ്പി AB വയ്ക്കുക. കമ്പികളെ സ്വിച്ച് വഴി 12 V ബാറ്ററിയുമായി ഘടിപ്പിക്കുക. സ്വിച്ച് ഓൺ ചെയ്യുമ്പോൾ AB, P യിലേക്കോ Q വിലേക്കോ <b>ഉരുളുന്നു</b>.</p><ul><li>ബാറ്ററി മാറ്റി ഘടിപ്പിച്ചാൽ AB <b>എതിർദിശയിൽ</b> ഉരുളും.</li><li>കാന്തത്തിന്റെ സൗത്ത്‌പോൾ മുകളിൽ വരത്തക്കവിധം വച്ചാൽ (കാന്തികമണ്ഡലദിശ വിപരീതം) ചലനം എതിർദിശയിലാകും.</li><li>കറന്റും കാന്തികമണ്ഡലവും <b>ഒരുമിച്ച്</b> വിപരീതമാക്കിയാൽ AB ആദ്യത്തെ <b>അതേ ദിശയിൽ</b> ചലിക്കും.</li></ul><p><b>AB ചലിക്കാൻ കാരണം:</b> കാന്തികമണ്ഡലത്തിലുള്ള വൈദ്യുതവാഹിയായ ചാലകത്തിൽ ബലം അനുഭവപ്പെടും. ബലത്തിന്റെ ദിശ (1) <b>വൈദ്യുതപ്രവാഹദിശ</b>, (2) <b>കാന്തികമണ്ഡലദിശ</b> എന്നിവയെ ആശ്രയിക്കുന്നു.</p><div class="rule"><b>ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമം:</b> ഇടതുകൈയുടെ പെരുവിരൽ, ചൂണ്ടുവിരൽ, നടുവിരൽ എന്നിവ പരസ്പരം <b>ലംബമായി</b> പിടിക്കുക. <b>ചൂണ്ടുവിരൽ</b> = കാന്തികമണ്ഡലദിശ, <b>നടുവിരൽ</b> = വൈദ്യുതപ്രവാഹദിശ, <b>പെരുവിരൽ</b> = ചാലകത്തിലെ ബലത്തിന്റെ (ചലനത്തിന്റെ) ദിശ.</div><p>ആദ്യം ചൂണ്ടുവിരൽ കാന്തികമണ്ഡലദിശയിൽ ഉറപ്പിക്കുക; തുടർന്ന് നടുവിരൽ കറന്റിന്റെ ദിശയിൽ വരത്തക്കവിധം കൈ തിരിക്കുക; അപ്പോൾ പെരുവിരൽ ചലനദിശ കാണിക്കും.</p><div class="rule"><b>മോട്ടോർ തത്വം:</b> കാന്തികമണ്ഡലത്തിൽ സ്വതന്ത്രമായി ചലിക്കാൻ കഴിയുന്ന വൈദ്യുതവാഹിയായ ചാലകത്തിന് വിഭ്രംശിക്കാനുള്ള പ്രവണതയുണ്ടാകും.</div>`,
+5:1,6:1,
+7:`<h3>ഓർത്തിരിക്കേണ്ടവ</h3><ul><li>കറന്റ് → കാന്തികമണ്ഡലം (ഈഴ്സ്റ്റഡ്). കറന്റ് വിപരീതമായാൽ കാന്തികമണ്ഡലവും വിപരീതമാകും.</li><li>ചാലകത്തിനു ചുറ്റുമുള്ള കാന്തികമണ്ഡലദിശ: വലതുകൈ പെരുവിരൽ നിയമം. സോളിനോയ്ഡിന്റെ നോർത്ത്‌പോൾ: വലതുകൈയുടെ പെരുവിരൽ.</li><li>ചാലകത്തിലെ ബലം: ഫ്ലെമിങ്ങിന്റെ ഇടതുകൈ നിയമം; കാന്തികമണ്ഡലം, കറന്റ്, ബലം എന്നിവ പരസ്പരം ലംബം.</li><li>മോട്ടോർ: വൈദ്യുതോർജ്ജം → യാന്ത്രികോർജ്ജം; കമ്മ്യൂട്ടേറ്റർ ഓരോ അർധഭ്രമണത്തിലും കറന്റ് വിപരീതമാക്കുന്നു.</li><li>ലൗഡ്സ്പീക്കർ: വൈദ്യുതസിഗ്നൽ → വോയ്സ് കോയിലിന്റെയും ഡയഫ്രത്തിന്റെയും കമ്പനം → ശബ്ദം.</li></ul><h3>സാധാരണ തെറ്റുകൾ</h3><ul><li>കാന്തികമണ്ഡലദിശയ്ക്ക് ഇടതുകൈയും ബലദിശയ്ക്ക് വലതുകൈയും ഉപയോഗിക്കുന്നത്. <b>വലതുകൈ = കറന്റിനു ചുറ്റുമുള്ള കാന്തികമണ്ഡലം; ഇടതുകൈ = ബലം.</b></li><li>ചാലകവലയത്തിലെ ധ്രുവം: <b>ക്ലോക്ക്‌വൈസ് = സൗത്ത്, ആന്റിക്ലോക്ക്‌വൈസ് = നോർത്ത്</b>.</li><li>ബാർമാഗ്നറ്റിന്റെ ശക്തി മാറ്റാം എന്ന് പറയുന്നത്; സോളിനോയ്ഡിന്റേത് മാത്രമേ മാറ്റാൻ കഴിയൂ.</li></ul><h3>പാഠപുസ്തക ചോദ്യങ്ങൾക്കുള്ള സൂചനകൾ</h3><ul><li><b>ചോദ്യം 3:</b> ക്ലോക്ക്‌വൈസ് അഗ്രം സൗത്ത്, ആന്റിക്ലോക്ക്‌വൈസ് അഗ്രം നോർത്ത്; ശരിയുത്തരം (c).</li><li><b>ചോദ്യം 5:</b> കോയിലിന്റെ കമ്പനത്തിനനുസരിച്ച് ഡയഫ്രം വിറച്ച് ശബ്ദതരംഗങ്ങൾ ഉണ്ടാക്കുന്നു; ഉത്തരം (b).</li><li><b>ചോദ്യം 6:</b> ചാലകത്തിലെ കറന്റ് കാന്തികമണ്ഡലം സൃഷ്ടിക്കുന്നതിനാലാണ് സൂചി വിഭ്രംശിക്കുന്നത്. ദിശ മാറ്റാൻ: കറന്റ് വിപരീതമാക്കുക, അല്ലെങ്കിൽ ചാലകം സൂചിയുടെ താഴെ വയ്ക്കുക.</li></ul>`};
+document.querySelectorAll('#notes .card').forEach((c,k)=>{if(!MN[k])return;const h=c.querySelector('h2'),w=document.createElement('div');w.dataset.l='en';while(h.nextSibling)w.appendChild(h.nextSibling);c.appendChild(w);const m=document.createElement('div');m.dataset.l='ml';m.innerHTML=MN[k]===1?[...document.querySelectorAll('#motor .card')[k-5].children].filter(e=>e.tagName!='H2').map(e=>e.outerHTML).join(''):MN[k];c.appendChild(m)});
+// demo logic
+let on=false,ab=true;
+function upd(){$('#sw').innerHTML=on?x('ON','ഓൺ'):x('OFF','ഓഫ്');$('#dr').textContent=ab?'A → B':'B → A';$('#tg').innerHTML=on?x('Switch off','സ്വിച്ച് ഓഫ്'):x('Switch on','സ്വിച്ച് ഓൺ');
+$('#arr').setAttribute('opacity',on?1:0);$('#arr').setAttribute('transform',ab?'':'translate(260 0) scale(-1 1)');
+$('#nd').style.transform=on?`rotate(${ab?-35:35}deg)`:'none';
+$('#say').innerHTML=on?(ab?x('Current A→B: the N pole deflects anticlockwise (seen from above).','A→B ദിശയിൽ കറന്റ്: നോർത്ത്‌പോൾ ആന്റിക്ലോക്ക്‌വൈസ് ദിശയിൽ വിഭ്രംശിക്കുന്നു.'):x('Current B→A: the N pole deflects clockwise.','B→A ദിശയിൽ കറന്റ്: നോർത്ത്‌പോൾ ക്ലോക്ക്‌വൈസ് ദിശയിൽ വിഭ്രംശിക്കുന്നു.')):x('Switch off: no field, the needle stays at rest.','സ്വിച്ച് ഓഫ്: കാന്തികമണ്ഡലമില്ല, സൂചി നിശ്ചലം.')}
+$('#tg').onclick=()=>{on=!on;upd()};$('#fl').onclick=()=>{ab=!ab;upd()};
+const QURL="physics-unit4-quiz.html";const full=()=>new URL(QURL,location.href).href.split("?")[0]+"?lang="+lang();
+const ql=()=>{$("#ql").href=QURL+"?lang="+lang();$("#wa").href="https://wa.me/?text="+encodeURIComponent(pk("Physics quiz: Magnetic Effect of Electric Current","ഭൗതികശാസ്ത്ര ക്വിസ്: വൈദ്യുതിയുടെ കാന്തികഫലം")+" "+full())};
+async function cpy(){const u=full();try{await navigator.clipboard.writeText(u);$("#shm").textContent=pk("Link copied.","ലിങ്ക് കോപ്പി ചെയ്തു.")}catch(e){$("#shm").innerHTML=pk("Copy this link:","ഈ ലിങ്ക് കോപ്പി ചെയ്യുക:")+' <input readonly style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--line)" value="'+u+'" onfocus="this.select()">'}}
+$("#cp").onclick=cpy;
+$("#sh").onclick=async()=>{const t=pk("Physics quiz: Magnetic Effect of Electric Current","ഭൗതികശാസ്ത്ര ക്വിസ്: വൈദ്യുതിയുടെ കാന്തികഫലം");if(navigator.share){try{await navigator.share({title:t,text:t,url:full()});return}catch(e){if(e.name==="AbortError")return}}cpy()};
+let sv='en';try{sv=new URLSearchParams(location.search).get('lang')||localStorage.getItem('lang')||'en'}catch(e){}
+setLang(sv);
+</script></body></html>
