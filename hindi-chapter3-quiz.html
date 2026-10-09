@@ -101,20 +101,26 @@ function updateTimeNotice(){}
 function renderClosed(){}
 function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 $('#admissionNo').addEventListener('input',()=>{
-  clearTimeout(lookupTimer);verifiedStudent=null;$('#verifyStart').disabled=false;
+  clearTimeout(lookupTimer); verifiedStudent=null;
   const val=$('#admissionNo').value.trim();
-  $('#studentPreview').textContent=val?'Searching student…':'Enter your Admission Number.';
-  if(!val){$('#studentPreview').className='rule';return;}
-  if(!/^\d+$/.test(val)){ $('#studentPreview').textContent='Admission Number must contain digits only.';return; }
+  const preview=$('#studentPreview');
+  preview.className='rule';
+  if(!val){preview.textContent='Enter your Admission Number.';return;}
+  if(!/^\d+$/.test(val)){preview.textContent='Admission Number must contain digits only.';return;}
+  preview.textContent='Searching student…';
   lookupTimer=setTimeout(async()=>{
-    const {data,error}=await supabase.rpc('verify_student',{p_admission_no:val});
-    if($('#admissionNo').value.trim()!==val)return;
-    const st=Array.isArray(data)?data[0]:data;
-    if(error||!st||!st.admission_no){$('#studentPreview').className='rule';$('#studentPreview').textContent='Student not found. Check the Admission Number.';return;}
-    verifiedStudent=st;
-    $('#studentPreview').className='rule';
-    $('#studentPreview').innerHTML='<strong>Student:</strong> '+escapeHtml(st.student_name)+'<br><strong>Class:</strong> '+escapeHtml(st.class||'—')+'<br><strong>Centre:</strong> '+escapeHtml(st.centre||'—');
-  },350);
+    try {
+      const {data,error}=await supabase.rpc('verify_student',{p_admission_no:Number(val)});
+      if($('#admissionNo').value.trim()!==val)return;
+      if(error){preview.textContent='Student lookup failed: '+error.message;return;}
+      const st=Array.isArray(data)?data[0]:data;
+      if(!st || st.admission_no==null){preview.textContent='Student not found. Check the Admission Number.';return;}
+      verifiedStudent=st;
+      preview.innerHTML='<strong>Student:</strong> '+escapeHtml(st.student_name)+'<br><strong>Class:</strong> '+escapeHtml(st.class||'—')+'<br><strong>Centre:</strong> '+escapeHtml(st.centre||'—');
+    } catch(e) {
+      if($('#admissionNo').value.trim()===val) preview.textContent='Connection error: '+(e.message||'Please check your internet connection and try again.');
+    }
+  },250);
 });
 $('#verifyStart').addEventListener('click',async()=>{
   updateTimeNotice();
@@ -122,7 +128,7 @@ $('#verifyStart').addEventListener('click',async()=>{
   const val=$('#admissionNo').value.trim();
   if(!val){$('#studentPreview').textContent='Please enter Admission Number.';return;}
   $('#verifyStart').disabled=true;
-  const {data,error}=await supabase.rpc('verify_student',{p_admission_no:val});
+  const {data,error}=await supabase.rpc('verify_student',{p_admission_no:Number(val)});
   const st=Array.isArray(data)?data[0]:data;
   if(error||!st||!st.admission_no){verifiedStudent=null;$('#studentPreview').textContent='Student verification failed. Check the Admission Number.';$('#verifyStart').disabled=false;return;}
   verifiedStudent=st;submitted=false;
