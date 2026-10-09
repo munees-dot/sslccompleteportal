@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ml"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quiz · रैन बसेरे में…</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Malayalam:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef4f3;--card:#fff;--ink:#12242a;--mut:#51666d;--line:#d3e0de;--t:#0b6b7a;--o:#e8801c;--hl:#fff1c9;--ok:#16895a;--bad:#c7342b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b161a;--card:#13242a;--ink:#e8f1f2;--mut:#a1b5ba;--line:#243a41;--t:#59c6d6;--o:#ffb15c;--hl:#3b3412;--ok:#5fd09a;--bad:#ff8b82}}
+:root[data-theme="dark"]{--bg:#0b161a;--card:#13242a;--ink:#e8f1f2;--mut:#a1b5ba;--line:#243a41;--t:#59c6d6;--o:#ffb15c;--hl:#3b3412;--ok:#5fd09a;--bad:#ff8b82}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "Noto Sans Devanagari","Noto Sans Malayalam",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","Noto Sans Devanagari",sans-serif;line-height:1.3;margin:0 0 .5em}
+.hero{background:linear-gradient(135deg,#06323b,#0b6b7a 60%,#e8801c);color:#fff;padding:max(26px,env(safe-area-inset-top,0px)) 20px 70px;position:relative;overflow:hidden}
+.hero svg{position:absolute;bottom:-2px;left:0;width:100%;height:46px;opacity:.25}
+.hw{max-width:900px;margin:auto}.hero h1{font-size:clamp(2rem,7vw,3.4rem);font-weight:800;margin:6px 0}.hero p{margin:0;opacity:.92;max-width:600px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.chips span{background:rgba(255,255,255,.18);padding:3px 12px;border-radius:999px;font-size:.85rem}
+nav{max-width:900px;margin:-30px auto 18px;padding:0 16px;position:sticky;top:env(safe-area-inset-top,0px);z-index:3}
+.tabs{display:flex;gap:4px;background:var(--card);border-radius:16px;padding:6px;box-shadow:0 6px 22px rgba(10,40,48,.18);overflow-x:auto}
+.tabs button{flex:1;white-space:nowrap;border:0;background:none;color:var(--mut);padding:10px 12px;border-radius:11px;font:600 .92rem inherit;font-family:inherit;cursor:pointer}
+.tabs button[aria-selected=true]{background:linear-gradient(135deg,var(--t),var(--o));color:#fff}
+button:focus-visible,input:focus-visible{outline:3px solid var(--o);outline-offset:2px}
+main{max-width:900px;margin:auto;padding:0 16px 56px}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border-radius:16px;padding:22px;margin-bottom:18px;border-top:5px solid var(--c,var(--t));box-shadow:0 2px 12px rgba(10,40,48,.07)}
+.card:nth-child(even){--c:var(--o)}
+.rule{background:var(--hl);border-left:5px solid var(--o);border-radius:10px;padding:12px 16px;margin:12px 0}
+.mut{color:var(--mut);font-size:.92rem}ul,ol{padding-left:22px}li{margin:.3em 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:520px}td,th{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{background:color-mix(in srgb,var(--t) 14%,var(--card))}
+input[type=search]{width:100%;padding:11px 14px;border:2px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font:inherit;margin-bottom:12px}
+.btn{background:linear-gradient(135deg,var(--t),var(--o));color:#fff;border:0;padding:11px 20px;border-radius:12px;font:600 1rem inherit;font-family:inherit;cursor:pointer}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.qh{display:flex;justify-content:space-between;font-weight:600}.pill{background:color-mix(in srgb,var(--t) 18%,var(--card));padding:2px 12px;border-radius:999px}
+.bar{height:8px;background:var(--line);border-radius:4px;margin:10px 0 18px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--t),var(--o));transition:width .3s}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;margin:9px 0;padding:12px 14px;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;font:inherit;cursor:pointer}
+.opt b{flex:none;width:28px;height:28px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-size:.85rem}
+.opt:hover:not(:disabled){border-color:var(--t)}.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 15%,var(--card))}.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 15%,var(--card))}
+.fb{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--hl)}
+.big{font:800 4rem "Bricolage Grotesque",sans-serif;margin:0;color:var(--t)}
+</style></head><body>
+<div class="hero" style="padding-bottom:60px"><div class="hw">
+<h1 style="margin-top:14px">Quiz: रैन बसेरे में…</h1><p>20 प्रश्न · ഉത്തരം തിരഞ്ഞെടുത്താൽ വിശദീകരണം കാണാം.</p></div></div>
+<main style="margin-top:-34px;position:relative">
+<div class="card" id="studentCard">
+<h2>Student Verification / വിദ്യാർത്ഥി പരിശോധന</h2>
+<p class="mut">Admission Number ടൈപ്പ് ചെയ്യുക. Verify ചെയ്യുന്നതിന് മുമ്പ് തന്നെ പേര് കാണിക്കും.</p>
+<label for="admissionNo">Admission Number</label>
+<input id="admissionNo" type="search" inputmode="numeric" autocomplete="off" placeholder="Admission Number" aria-label="Admission Number">
+<div id="studentPreview" class="rule" aria-live="polite">Enter your Admission Number.</div>
+
+<div class="row"><button class="btn" id="verifyStart">Verify & Start Quiz</button></div>
+</div>
+<div class="card" id="qb"><p>Verify your Admission Number to begin the quiz.</p></div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL='https://wrzssivgxituefcwobbr.supabase.co';
+const SUPABASE_KEY='sb_publishable_3mi5iJCxekZfiyXojUFtQg_gDASyEWm';
+const supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const QUIZ_SUBJECT='Hindi';
+const QUIZ_CHAPTER='रैन बसेरे में…';
+const QUIZ_NAME='Hindi Chapter 3 Quiz - रैन बसेरे में…';
+const QUIZ_ALWAYS_OPEN=true;
+let verifiedStudent=null, submitted=false, lookupTimer=null;
+const $=s=>document.querySelector(s);
+const Q=[["“रैन बसेरे में…” के लेखक कौन हैं?","अमृतलाल वेगड़",["प्रेमचंद","महादेवी वर्मा","हरिशंकर परसाई"],"വേഗഡ് നർമദാ പദയാത്രികനും ചിത്രകാരനും എഴുത്തുകാരനുമാണ്."],
+["यह पाठ किस विधा का है?","यात्रावृत्त",["कहानी","जीवनी","नाटक"],"കാൽനടയായി നടത്തിയ യാത്രയുടെ വിവരണമാണിത്."],
+["वेगड़ जी की नर्मदा पदयात्राओं का वृत्तांत किस कृति में है?","तीरे-तीरे नर्मदा",["सौंदर्य की नदी नर्मदा","अमृतस्य नर्मदा","शांतिनिकेतन डायरी"],"‘तीरे-तीरे नर्मदा’ യാത്രകളുടെ വിവരണമാണ്."],
+["इस पदयात्रा की तिथि क्या थी?","11 अक्टूबर 1997",["11 अक्टूबर 1977","3 अक्टूबर 1928","6 जुलाई 2018"],"ആമുഖത്തിൽ 1997 ഒക്ടോബർ 11 എന്നാണ്."],
+["लेखक के सहायक का नाम क्या था?","छोटू",["रामू","मंदिर का पुजारी","पड़ोस का युवक"],"ഛോട്ടു ആയിരുന്നു സഹായി."],
+["1977 में पहली पदयात्रा के समय लेखक की आयु कितनी थी?","पचास वर्ष",["तीस वर्ष","चालीस वर्ष","साठ वर्ष"],"ആമുഖം: അൻപതാം വയസ്സിൽ."],
+["उस रात तारे खुलकर क्यों दिख रहे थे?","चाँद नहीं था",["पूर्णिमा की रात थी","अभी बारिश हुई थी","आकाश में बादल थे"],"ചന്ദ്രൻ ഇല്ലാത്തതിനാൽ നക്ഷത്രങ്ങൾ തെളിഞ്ഞു."],
+["“सूरज चलता है अकेला, तारे चलते हैं जमात में” का आशय क्या है?","सूरज अकेला चलता है और तारे समूह में",["सूरज तारों से तेज़ चलता है","तारे सूरज के पीछे चलते हैं","चाँद तारों के साथ चलता है"],"‘जमात’ എന്നാൽ കൂട്ടം."],
+["यात्रियों को पथोड़ा गाँव में क्यों रुकना पड़ा?","बारिश के डर से",["पुलिस ने रोका","छोटू बीमार हो गया","मंज़िल आ गई थी"],"പതിവിന്റെ പകുതി ദൂരം നടന്നശേഷം മഴയെ പേടിച്ച് നിന്നു."],
+["पगडंडी खतरनाक क्यों हो गई?","वह पतली होकर लुप्त हो गई; चूके तो सीधे पानी में",["साँपों से भरी थी","बर्फ से ढकी थी","बाड़ से बंद थी"],"പാത നേർത്ത് മറഞ്ഞു; തെറ്റിയാൽ വെള്ളത്തിൽ."],
+["रात को डराने वाला व्यक्ति कौन था?","पड़ोस के युवक के पिता",["मंदिर का पुजारी","एक सहयात्री","छोटू के चाचा"],"യുവാവ്: “वे मेरे पिता हैं।”"],
+["वह व्यक्ति सामान्यतः कहाँ रहता है?","मंडीदीप में अपने बेटों के पास",["पथोड़ा के मंदिर में","खेत पर","लेखक के शहर में"],"“मंडीदीप में मेरे भाइयों के पास रहते हैं।”"],
+["युवक मदद के लिए क्यों नहीं आया?","वह सोयाबीन कटाई के समय खेत पर सोया था",["वह डर गया था","वह गाँव से बाहर था","वह नाराज़ था"],"“मैं खेत पर सोया था। सोयाबीन कट रहा है।”"],
+["लेखक की मुट्ठी में क्या था?","बीस पैसे का सिक्का",["दस रुपये का नोट","एक चाबी","मंदिर की घंटी"],"മുഷ്ടി തുറന്നപ്പോൾ ഇരുപത് പൈസയുടെ നാണയം."],
+["पागल आदमी का व्यवहार अचानक क्यों बदल गया?","उसे पता चला कि लेखक शिक्षक हैं; गुरु का आदर उसके संस्कारों में था",["छोटू ने उसे डाँटा","वह थक गया था","उसे पुलिस का डर था"],"സംസ്കാരം ഭ്രാന്തിനെ മറികടന്നു."],
+["“गुत्थी सुलझने लगी” का अर्थ है:","समस्या हल होने लगी",["धागा उलझ गया","बारिश रुक गई","रास्ता साफ़ हो गया"],"गुत्थी എന്നാൽ പ്രശ്നം."],
+["लेखक उस सम्मान को ‘अपूर्व’ क्यों कहते हैं?","वह भय की रात में पागल व्यक्ति से अनपेक्षित रूप में मिला",["उसके साथ पुरस्कार मिला","वह भीड़ के सामने मिला","वह सरकार ने दिया"],"ഒരിക്കലും പ്രതീക്ഷിക്കാത്ത രൂപത്തിലായിരുന്നു."],
+["अगली सुबह उस व्यक्ति ने क्या किया?","झुककर लेखक के पाँव छुए और माफ़ी माँगी",["भाग गया","खाना लाया","छोटू को मारा"],"“गुरुदेव! बहुत शर्मिंदा हूँ।”"],
+["‘उद्दंड’ का क्या अर्थ है?","उग्र, किसी का कहना न मानने वाला",["विनम्र","कमज़ोर","शांत"],"പദാവലി: ഉഗ്രൻ, പറയുന്നത് കേൾക്കാത്തവൻ."],
+["छोटू ने कहा “उसने हमारी कानी कौड़ी तक नहीं ली।” इसका अर्थ है:","उसने हमारा कुछ भी नहीं लिया",["उसने हमें सिक्का दिया","उसने पिट्ठू चुराया","उसने पैसे माँगे"],"कानी कौड़ी എന്നാൽ വിലയില്ലാത്ത ചില്ലിക്കാശ്."]];
+const sh=a=>{a=a.slice();for(let n=a.length-1;n>0;n--){const m=Math.floor(Math.random()*(n+1));[a[n],a[m]]=[a[m],a[n]]}return a};
+// random but balanced: A, B, C and D each hold the correct answer 5 times, in a new random order every attempt
+const build=()=>{const T=sh(Array.from({length:20},(_,n)=>n%4));return Q.map((q,n)=>{const o=sh(q[2]);o.splice(T[n],0,q[1]);return{q:q[0],o,a:T[n],e:q[3],sourceIndex:n}})};
+let K=build(),i=0,sc=0,an=[];
+function show(){const b=$('#qb');
+if(i>=20){const w=K.map((k,j)=>an[j]!==k.a?`<li>${j+1}. ${k.o[k.a]}</li>`:'').join('');
+b.innerHTML=`<p class="big">${sc}/20</p><h2>${sc>=16?'മികച്ച പ്രകടനം!':sc>=10?'നല്ല ശ്രമം!':'വീണ്ടും പരിശീലിക്കൂ!'}</h2>${w?`<h3>തെറ്റിയവയുടെ ശരിയുത്തരങ്ങൾ</h3><ul>${w}</ul>`:''}<div class="row"><button class="btn" id="re">വീണ്ടും ശ്രമിക്കുക</button></div>`;
+$('#re').onclick=()=>{K=build();i=0;sc=0;an=[];show()};return}
+const k=K[i];
+b.innerHTML=`<div class="qh"><span>प्रश्न ${i+1}/20</span><span class="pill">സ്കോർ ${sc}</span></div><div class="bar"><i style="width:${i*5}%"></i></div><h3>${k.q}</h3>`+k.o.map((t,j)=>`<button class="opt" data-k="${j}"><b>${'ABCD'[j]}</b><span>${t}</span></button>`).join('')+'<div id="f"></div>';
+b.querySelectorAll('.opt').forEach(el=>el.onclick=()=>{if(!isQuizOpen()){renderClosed();return;}const j=+el.dataset.k;if(an[i]!==undefined)return;an[i]=j;const r=j===k.a;if(r)sc++;
+b.querySelectorAll('.opt').forEach((y,n)=>{y.disabled=true;if(n===k.a)y.classList.add('ok');else if(n===j)y.classList.add('bad')});
+$('#f').innerHTML=`<div class="fb"><b>${r?'ശരി!':'ശരിയല്ല.'}</b> ${k.e}</div><div class="row"><button class="btn" id="nx">${i<19?'അടുത്ത ചോദ്യം':'ഫലം കാണുക'}</button></div>`;
+$('#nx').onclick=()=>{i++;show()};$('#nx').focus()})}
+function isQuizOpen(){return true;}
+function updateTimeNotice(){}
+function renderClosed(){}
+function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+$('#admissionNo').addEventListener('input',()=>{
+  clearTimeout(lookupTimer);verifiedStudent=null;$('#verifyStart').disabled=false;
+  const val=$('#admissionNo').value.trim();
+  $('#studentPreview').textContent=val?'Searching student…':'Enter your Admission Number.';
+  if(!val){$('#studentPreview').className='rule';return;}
+  if(!/^\d+$/.test(val)){ $('#studentPreview').textContent='Admission Number must contain digits only.';return; }
+  lookupTimer=setTimeout(async()=>{
+    const {data,error}=await supabase.rpc('verify_student',{p_admission_no:val});
+    if($('#admissionNo').value.trim()!==val)return;
+    const st=Array.isArray(data)?data[0]:data;
+    if(error||!st||!st.admission_no){$('#studentPreview').className='rule';$('#studentPreview').textContent='Student not found. Check the Admission Number.';return;}
+    verifiedStudent=st;
+    $('#studentPreview').className='rule';
+    $('#studentPreview').innerHTML='<strong>Student:</strong> '+escapeHtml(st.student_name)+'<br><strong>Class:</strong> '+escapeHtml(st.class||'—')+'<br><strong>Centre:</strong> '+escapeHtml(st.centre||'—');
+  },350);
+});
+$('#verifyStart').addEventListener('click',async()=>{
+  updateTimeNotice();
+  if(!isQuizOpen()){renderClosed();return;}
+  const val=$('#admissionNo').value.trim();
+  if(!val){$('#studentPreview').textContent='Please enter Admission Number.';return;}
+  $('#verifyStart').disabled=true;
+  const {data,error}=await supabase.rpc('verify_student',{p_admission_no:val});
+  const st=Array.isArray(data)?data[0]:data;
+  if(error||!st||!st.admission_no){verifiedStudent=null;$('#studentPreview').textContent='Student verification failed. Check the Admission Number.';$('#verifyStart').disabled=false;return;}
+  verifiedStudent=st;submitted=false;
+  $('#studentPreview').innerHTML='<strong>Student:</strong> '+escapeHtml(st.student_name)+'<br><strong>Class:</strong> '+escapeHtml(st.class||'—')+'<br><strong>Centre:</strong> '+escapeHtml(st.centre||'—');
+  $('#studentCard').innerHTML='<h2>Verified Student</h2><p><strong>'+escapeHtml(st.student_name)+'</strong></p><p>Admission No: '+escapeHtml(st.admission_no)+' · Class: '+escapeHtml(st.class||'—')+' · Centre: '+escapeHtml(st.centre||'—')+'</p><p class="mut">Quiz started. Your result will be saved automatically.</p>';
+  $('#verifyStart').disabled=false;
+  show();
+});
+async function saveQuizResult(){
+  if(submitted||!verifiedStudent)return;submitted=true;
+  const answers=K.map((k,n)=>({question_no:n+1,selected_answer:an[n]===undefined?null:k.o[an[n]],correct_answer:k.o[k.a],is_correct:an[n]===k.a}));
+  const {data,error}=await supabase.rpc('submit_quiz',{
+    p_admission_no:verifiedStudent.admission_no,
+    p_subject:QUIZ_SUBJECT,
+    p_chapter:QUIZ_CHAPTER,
+    p_quiz_name:QUIZ_NAME,
+    p_score:sc,
+    p_total:20,
+    p_percentage:sc*5,
+    p_answers:answers
+  });
+  const note=document.createElement('div');note.className='rule';
+  note.textContent=error?'Result could not be saved: '+error.message:(data&&data.error?'Result not saved: '+data.error:'Result saved successfully.');
+  $('#qb').appendChild(note);
+}
+const originalShow=show;
+show=function(){
+  if(!verifiedStudent){$('#qb').innerHTML='<p>Verify your Admission Number to begin the quiz.</p>';return;}
+  if(!isQuizOpen()){renderClosed();return;}
+  originalShow();
+  if(i>=20)saveQuizResult();
+};
+// Ensure time restriction applies to answer clicks as well as quiz start.
+const originalBuild=build;
+const __initialShow=show;
+updateTimeNotice();
+
+</script></body></html>
