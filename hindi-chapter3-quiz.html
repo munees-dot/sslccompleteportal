@@ -100,10 +100,10 @@ function isQuizOpen(){return true;}
 function updateTimeNotice(){}
 function renderClosed(){}
 function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+let lookupSeq=0, savingResult=false;
 $('#admissionNo').addEventListener('input',()=>{
-  clearTimeout(lookupTimer); verifiedStudent=null;
-  const val=$('#admissionNo').value.trim();
-  const preview=$('#studentPreview');
+  clearTimeout(lookupTimer); const seq=++lookupSeq; verifiedStudent=null;
+  const val=$('#admissionNo').value.trim(), preview=$('#studentPreview');
   preview.className='rule';
   if(!val){preview.textContent='Enter your Admission Number.';return;}
   if(!/^\d+$/.test(val)){preview.textContent='Admission Number must contain digits only.';return;}
@@ -111,48 +111,63 @@ $('#admissionNo').addEventListener('input',()=>{
   lookupTimer=setTimeout(async()=>{
     try {
       const {data,error}=await supabase.rpc('verify_student',{p_admission_no:Number(val)});
-      if($('#admissionNo').value.trim()!==val)return;
+      if(seq!==lookupSeq || $('#admissionNo').value.trim()!==val)return;
       if(error){preview.textContent='Student lookup failed: '+error.message;return;}
       const st=Array.isArray(data)?data[0]:data;
       if(!st || st.admission_no==null){preview.textContent='Student not found. Check the Admission Number.';return;}
       verifiedStudent=st;
       preview.innerHTML='<strong>Student:</strong> '+escapeHtml(st.student_name)+'<br><strong>Class:</strong> '+escapeHtml(st.class||'—')+'<br><strong>Centre:</strong> '+escapeHtml(st.centre||'—');
     } catch(e) {
-      if($('#admissionNo').value.trim()===val) preview.textContent='Connection error: '+(e.message||'Please check your internet connection and try again.');
+      if(seq===lookupSeq && $('#admissionNo').value.trim()===val) preview.textContent='Connection error: '+(e.message||'Please check your internet connection and try again.');
     }
-  },250);
+  },300);
 });
 $('#verifyStart').addEventListener('click',async()=>{
   updateTimeNotice();
   if(!isQuizOpen()){renderClosed();return;}
-  const val=$('#admissionNo').value.trim();
-  if(!val){$('#studentPreview').textContent='Please enter Admission Number.';return;}
-  $('#verifyStart').disabled=true;
-  const {data,error}=await supabase.rpc('verify_student',{p_admission_no:Number(val)});
-  const st=Array.isArray(data)?data[0]:data;
-  if(error||!st||!st.admission_no){verifiedStudent=null;$('#studentPreview').textContent='Student verification failed. Check the Admission Number.';$('#verifyStart').disabled=false;return;}
-  verifiedStudent=st;submitted=false;
-  $('#studentPreview').innerHTML='<strong>Student:</strong> '+escapeHtml(st.student_name)+'<br><strong>Class:</strong> '+escapeHtml(st.class||'—')+'<br><strong>Centre:</strong> '+escapeHtml(st.centre||'—');
-  $('#studentCard').innerHTML='<h2>Verified Student</h2><p><strong>'+escapeHtml(st.student_name)+'</strong></p><p>Admission No: '+escapeHtml(st.admission_no)+' · Class: '+escapeHtml(st.class||'—')+' · Centre: '+escapeHtml(st.centre||'—')+'</p><p class="mut">Quiz started. Your result will be saved automatically.</p>';
-  $('#verifyStart').disabled=false;
-  show();
+  const val=$('#admissionNo').value.trim(), btn=$('#verifyStart'), preview=$('#studentPreview');
+  if(!val){preview.textContent='Please enter Admission Number.';return;}
+  if(!/^\d+$/.test(val)){preview.textContent='Admission Number must contain digits only.';return;}
+  btn.disabled=true; preview.textContent='Verifying student…';
+  try{
+    let st=verifiedStudent;
+    if(!st || String(st.admission_no)!==String(val)){
+      const result=await supabase.rpc('verify_student',{p_admission_no:Number(val)});
+      if(result.error)throw new Error(result.error.message);
+      st=Array.isArray(result.data)?result.data[0]:result.data;
+    }
+    if(!st || st.admission_no==null)throw new Error('Admission Number not found.');
+    verifiedStudent=st; submitted=false; savingResult=false;
+    $('#studentCard').innerHTML='<h2>Verified Student</h2><p><strong>'+escapeHtml(st.student_name)+'</strong></p><p>Admission No: '+escapeHtml(st.admission_no)+' · Class: '+escapeHtml(st.class||'—')+' · Centre: '+escapeHtml(st.centre||'—')+'</p><p class="mut">Quiz started. Your result will be saved automatically.</p>';
+    i=0;sc=0;an=[];K=build();show();
+  }catch(e){verifiedStudent=null;preview.textContent='Verification failed: '+(e.message||e);}
+  finally{btn.disabled=false;}
 });
 async function saveQuizResult(){
-  if(submitted||!verifiedStudent)return;submitted=true;
-  const answers=K.map((k,n)=>({question_no:n+1,selected_answer:an[n]===undefined?null:k.o[an[n]],correct_answer:k.o[k.a],is_correct:an[n]===k.a}));
-  const {data,error}=await supabase.rpc('submit_quiz',{
-    p_admission_no:verifiedStudent.admission_no,
-    p_subject:QUIZ_SUBJECT,
-    p_chapter:QUIZ_CHAPTER,
-    p_quiz_name:QUIZ_NAME,
-    p_score:sc,
-    p_total:20,
-    p_percentage:sc*5,
-    p_answers:answers
-  });
-  const note=document.createElement('div');note.className='rule';
-  note.textContent=error?'Result could not be saved: '+error.message:(data&&data.error?'Result not saved: '+data.error:'Result saved successfully.');
-  $('#qb').appendChild(note);
+  if(submitted || savingResult || !verifiedStudent)return;
+  savingResult=true;
+  const answers=K.map((k,n)=>({question_no:n+1,selected_answer:an[n]===undefined?null:String(k.o[an[n]]),correct_answer:String(k.o[k.a]),is_correct:an[n]===k.a}));
+  const note=document.createElement('div');note.className='rule';note.textContent='Saving your result…';$('#qb').appendChild(note);
+  try{
+    const {data,error}=await supabase.rpc('submit_quiz',{
+      p_admission_no:Number(verifiedStudent.admission_no),
+      p_subject:QUIZ_SUBJECT,
+      p_chapter:QUIZ_CHAPTER,
+      p_quiz_name:QUIZ_NAME,
+      p_score:sc,
+      p_total:20,
+      p_percentage:Number((sc/20*100).toFixed(2)),
+      p_answers:answers
+    });
+    if(error)throw new Error(error.message);
+    if(data && data.error)throw new Error(data.error);
+    submitted=true;
+    note.textContent='Result saved successfully.';
+  }catch(e){
+    note.textContent='Result could not be saved: '+(e.message||e)+'. Please contact your teacher; do not retake unless instructed.';
+    const retry=document.createElement('button');retry.className='btn';retry.textContent='Retry saving result';retry.onclick=()=>{savingResult=false;note.remove();saveQuizResult();};
+    const row=document.createElement('div');row.className='row';row.appendChild(retry);$('#qb').appendChild(row);
+  }finally{savingResult=false;}
 }
 const originalShow=show;
 show=function(){
@@ -161,9 +176,6 @@ show=function(){
   originalShow();
   if(i>=20)saveQuizResult();
 };
-// Ensure time restriction applies to answer clicks as well as quiz start.
-const originalBuild=build;
-const __initialShow=show;
 updateTimeNotice();
 
 </script></body></html>
