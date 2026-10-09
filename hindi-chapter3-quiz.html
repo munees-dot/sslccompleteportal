@@ -55,6 +55,7 @@ input[type=search]{width:100%;padding:11px 14px;border:2px solid var(--line);bor
 <script>
 const SUPABASE_URL='https://wrzssivgxituefcwobbr.supabase.co';
 const SUPABASE_KEY='sb_publishable_3mi5iJCxekZfiyXojUFtQg_gDASyEWm';
+if(!window.supabase || !window.supabase.createClient){document.body.innerHTML='<main style="padding:24px;font:16px sans-serif"><h2>Quiz connection error</h2><p>Supabase client library did not load. Check your internet connection and reopen this page.</p></main>';throw new Error('Supabase client library failed to load');}
 const supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const QUIZ_SUBJECT='Hindi';
 const QUIZ_CHAPTER='रैन बसेरे में…';
@@ -100,6 +101,16 @@ function isQuizOpen(){return true;}
 function updateTimeNotice(){}
 function renderClosed(){}
 function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function normalizeStudent(data){
+  let st=Array.isArray(data)?data[0]:data;
+  if(st && st.data) st=Array.isArray(st.data)?st.data[0]:st.data;
+  if(st && st.student && !st.student_name) st=st.student;
+  if(!st || typeof st!=='object') return null;
+  const admission=st.admission_no ?? st.admission_number ?? st.admissionNo;
+  const name=st.student_name ?? st.name ?? st.full_name;
+  if(admission==null || !name) return null;
+  return {...st,admission_no:admission,student_name:name, class:st.class ?? st.class_name ?? st.standard, centre:st.centre ?? st.centre_name};
+}
 let lookupSeq=0, savingResult=false;
 $('#admissionNo').addEventListener('input',()=>{
   clearTimeout(lookupTimer); const seq=++lookupSeq; verifiedStudent=null;
@@ -113,8 +124,8 @@ $('#admissionNo').addEventListener('input',()=>{
       const {data,error}=await supabase.rpc('verify_student',{p_admission_no:Number(val)});
       if(seq!==lookupSeq || $('#admissionNo').value.trim()!==val)return;
       if(error){preview.textContent='Student lookup failed: '+error.message;return;}
-      const st=Array.isArray(data)?data[0]:data;
-      if(!st || st.admission_no==null){preview.textContent='Student not found. Check the Admission Number.';return;}
+      const st=normalizeStudent(data);
+      if(!st){preview.textContent='Student not found or verify_student returned unexpected data. Check the Admission Number and Supabase RPC.';return;}
       verifiedStudent=st;
       preview.innerHTML='<strong>Student:</strong> '+escapeHtml(st.student_name)+'<br><strong>Class:</strong> '+escapeHtml(st.class||'—')+'<br><strong>Centre:</strong> '+escapeHtml(st.centre||'—');
     } catch(e) {
@@ -134,9 +145,9 @@ $('#verifyStart').addEventListener('click',async()=>{
     if(!st || String(st.admission_no)!==String(val)){
       const result=await supabase.rpc('verify_student',{p_admission_no:Number(val)});
       if(result.error)throw new Error(result.error.message);
-      st=Array.isArray(result.data)?result.data[0]:result.data;
+      st=normalizeStudent(result.data);
     }
-    if(!st || st.admission_no==null)throw new Error('Admission Number not found.');
+    if(!st || st.admission_no==null)throw new Error('Admission Number not found, or verify_student returned no student record.');
     verifiedStudent=st; submitted=false; savingResult=false;
     $('#studentCard').innerHTML='<h2>Verified Student</h2><p><strong>'+escapeHtml(st.student_name)+'</strong></p><p>Admission No: '+escapeHtml(st.admission_no)+' · Class: '+escapeHtml(st.class||'—')+' · Centre: '+escapeHtml(st.centre||'—')+'</p><p class="mut">Quiz started. Your result will be saved automatically.</p>';
     i=0;sc=0;an=[];K=build();show();
