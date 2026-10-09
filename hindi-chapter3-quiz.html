@@ -37,31 +37,10 @@ input[type=search]{width:100%;padding:11px 14px;border:2px solid var(--line);bor
 .fb{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--hl)}
 .big{font:800 4rem "Bricolage Grotesque",sans-serif;margin:0;color:var(--t)}
 </style></head><body>
-<div class="hero" style="padding-bottom:60px"><div class="hw">
+<div class="hero" style="padding-bottom:60px"><div class="hw"><a href="hindi-chapter3.html" style="color:#fff;font-weight:600;text-decoration:none">← Study guide</a>
 <h1 style="margin-top:14px">Quiz: रैन बसेरे में…</h1><p>20 प्रश्न · ഉത്തരം തിരഞ്ഞെടുത്താൽ വിശദീകരണം കാണാം.</p></div></div>
-<main style="margin-top:-34px;position:relative">
-<div class="card" id="studentCard">
-<h2>Student Verification / വിദ്യാർത്ഥി പരിശോധന</h2>
-<p class="mut">Admission Number ടൈപ്പ് ചെയ്യുക. Verify ചെയ്യുന്നതിന് മുമ്പ് തന്നെ പേര് കാണിക്കും.</p>
-<label for="admissionNo">Admission Number</label>
-<input id="admissionNo" type="search" inputmode="numeric" autocomplete="off" placeholder="Admission Number" aria-label="Admission Number">
-<div id="studentPreview" class="rule" aria-live="polite">Enter your Admission Number.</div>
-
-<div class="row"><button class="btn" id="verifyStart">Verify & Start Quiz</button></div>
-</div>
-<div class="card" id="qb"><p>Verify your Admission Number to begin the quiz.</p></div>
-</main>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<main style="margin-top:-34px;position:relative"><div class="card" id="qb"></div></main>
 <script>
-const SUPABASE_URL='https://wrzssivgxituefcwobbr.supabase.co';
-const SUPABASE_KEY='sb_publishable_3mi5iJCxekZfiyXojUFtQg_gDASyEWm';
-if(!window.supabase || !window.supabase.createClient){document.body.innerHTML='<main style="padding:24px;font:16px sans-serif"><h2>Quiz connection error</h2><p>Supabase client library did not load. Check your internet connection and reopen this page.</p></main>';throw new Error('Supabase client library failed to load');}
-const supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-const QUIZ_SUBJECT='Hindi';
-const QUIZ_CHAPTER='रैन बसेरे में…';
-const QUIZ_NAME='Hindi Chapter 3 Quiz - रैन बसेरे में…';
-const QUIZ_ALWAYS_OPEN=true;
-let verifiedStudent=null, submitted=false, lookupTimer=null;
 const $=s=>document.querySelector(s);
 const Q=[["“रैन बसेरे में…” के लेखक कौन हैं?","अमृतलाल वेगड़",["प्रेमचंद","महादेवी वर्मा","हरिशंकर परसाई"],"വേഗഡ് നർമദാ പദയാത്രികനും ചിത്രകാരനും എഴുത്തുകാരനുമാണ്."],
 ["यह पाठ किस विधा का है?","यात्रावृत्त",["कहानी","जीवनी","नाटक"],"കാൽനടയായി നടത്തിയ യാത്രയുടെ വിവരണമാണിത്."],
@@ -85,108 +64,36 @@ const Q=[["“रैन बसेरे में…” के लेखक क�
 ["छोटू ने कहा “उसने हमारी कानी कौड़ी तक नहीं ली।” इसका अर्थ है:","उसने हमारा कुछ भी नहीं लिया",["उसने हमें सिक्का दिया","उसने पिट्ठू चुराया","उसने पैसे माँगे"],"कानी कौड़ी എന്നാൽ വിലയില്ലാത്ത ചില്ലിക്കാശ്."]];
 const sh=a=>{a=a.slice();for(let n=a.length-1;n>0;n--){const m=Math.floor(Math.random()*(n+1));[a[n],a[m]]=[a[m],a[n]]}return a};
 // random but balanced: A, B, C and D each hold the correct answer 5 times, in a new random order every attempt
-const build=()=>{const T=sh(Array.from({length:20},(_,n)=>n%4));return Q.map((q,n)=>{const o=sh(q[2]);o.splice(T[n],0,q[1]);return{q:q[0],o,a:T[n],e:q[3],sourceIndex:n}})};
+const build=()=>{const T=sh(Array.from({length:20},(_,n)=>n%4));return Q.map((q,n)=>{const o=sh(q[2]);o.splice(T[n],0,q[1]);return{q:q[0],o,a:T[n],e:q[3]}})};
+const OPEN=1260,CLOSE=1320; // 9:00 PM and 10:00 PM, in minutes after midnight (India time)
+let off=0,synced=false,started=false,done=false,shown='';
+async function sync(){try{const r=await fetch(location.href,{method:'HEAD',cache:'no-store'});const d=r.headers.get('date');if(d){off=new Date(d).getTime()-Date.now();synced=true}}catch(e){}} // use the web server's clock when available
+const ist=()=>{const d=new Date(Date.now()+off+19800000);return d.getUTCHours()*60+d.getUTCMinutes()+d.getUTCSeconds()/60};
+const state=()=>{const t=ist();return t<OPEN?'before':t<CLOSE?'open':'closed'};
+const secs=t=>Math.max(0,Math.ceil((t-ist())*60));
+const mm=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+const hh=s=>Math.floor(s/3600)+':'+mm(s%3600);
+const note=()=>synced?'':'<p class="mut">Using this device’s clock.</p>';
+function gate(){const b=$('#qb'),s=state();shown=s;
+if(s==='before')b.innerHTML=`<h2>Quiz will open at 9:00 PM.</h2><p>ക്വിസ് രാത്രി 9:00-ന് തുറക്കും.</p><p class="big" id="cd" style="font-size:2.4rem">${hh(secs(OPEN))}</p><p class="mut">Open daily 9:00 PM – 10:00 PM (IST)</p>${note()}`;
+else if(s==='open'){b.innerHTML=`<h2>रैन बसेरे में… ക്വിസ്</h2><p>20 questions · closes at 10:00 PM.<br>20 ചോദ്യങ്ങൾ · രാത്രി 10:00-ന് ക്വിസ് അടയ്ക്കും.</p><div class="row"><button class="btn" id="st">Start quiz · ക്വിസ് തുടങ്ങുക</button></div>${note()}`;
+$('#st').onclick=async()=>{await sync();if(state()==='open'){started=true;show()}else gate()}}
+else b.innerHTML=`<h2>Quiz is closed.</h2><p>ക്വിസ് അടച്ചിരിക്കുന്നു. ദിവസവും രാത്രി 9:00 മുതൽ 10:00 വരെ മാത്രം.</p><p class="mut">Open daily 9:00 PM – 10:00 PM (IST)</p>${note()}`}
+function timeUp(){started=false;shown='closed';$('#qb').innerHTML=`<h2>Time is over. The quiz closed at 10:00 PM.</h2><p>സമയം കഴിഞ്ഞു. ക്വിസ് 10:00 PM-ന് അടച്ചു; ഉത്തരങ്ങൾ സമർപ്പിച്ചിട്ടില്ല.</p>`}
+setInterval(()=>{const s=state();
+if(started&&!done&&s!=='open'){timeUp();return}
+if(!started){if(s!==shown)gate();else if(s==='before'&&$('#cd'))$('#cd').textContent=hh(secs(OPEN))}
+else if($('#tl'))$('#tl').textContent='⏱ '+mm(secs(CLOSE))},1000);
 let K=build(),i=0,sc=0,an=[];
-function show(){const b=$('#qb');
-if(i>=20){const w=K.map((k,j)=>an[j]!==k.a?`<li>${j+1}. ${k.o[k.a]}</li>`:'').join('');
+function show(){const b=$('#qb');if(!done&&state()!=='open'){timeUp();return}
+if(i>=20){done=true;const w=K.map((k,j)=>an[j]!==k.a?`<li>${j+1}. ${k.o[k.a]}</li>`:'').join('');
 b.innerHTML=`<p class="big">${sc}/20</p><h2>${sc>=16?'മികച്ച പ്രകടനം!':sc>=10?'നല്ല ശ്രമം!':'വീണ്ടും പരിശീലിക്കൂ!'}</h2>${w?`<h3>തെറ്റിയവയുടെ ശരിയുത്തരങ്ങൾ</h3><ul>${w}</ul>`:''}<div class="row"><button class="btn" id="re">വീണ്ടും ശ്രമിക്കുക</button></div>`;
-$('#re').onclick=()=>{K=build();i=0;sc=0;an=[];show()};return}
+$('#re').onclick=()=>{K=build();i=0;sc=0;an=[];done=false;started=state()==='open';started?show():gate()};return}
 const k=K[i];
-b.innerHTML=`<div class="qh"><span>प्रश्न ${i+1}/20</span><span class="pill">സ്കോർ ${sc}</span></div><div class="bar"><i style="width:${i*5}%"></i></div><h3>${k.q}</h3>`+k.o.map((t,j)=>`<button class="opt" data-k="${j}"><b>${'ABCD'[j]}</b><span>${t}</span></button>`).join('')+'<div id="f"></div>';
-b.querySelectorAll('.opt').forEach(el=>el.onclick=()=>{if(!isQuizOpen()){renderClosed();return;}const j=+el.dataset.k;if(an[i]!==undefined)return;an[i]=j;const r=j===k.a;if(r)sc++;
+b.innerHTML=`<div class="qh"><span>प्रश्न ${i+1}/20</span><span class="pill">സ്കോർ ${sc}</span><span class="pill" id="tl">⏱ ${mm(secs(CLOSE))}</span></div><div class="bar"><i style="width:${i*5}%"></i></div><h3>${k.q}</h3>`+k.o.map((t,j)=>`<button class="opt" data-k="${j}"><b>${'ABCD'[j]}</b><span>${t}</span></button>`).join('')+'<div id="f"></div>';
+b.querySelectorAll('.opt').forEach(el=>el.onclick=()=>{const j=+el.dataset.k;if(an[i]!==undefined)return;an[i]=j;const r=j===k.a;if(r)sc++;
 b.querySelectorAll('.opt').forEach((y,n)=>{y.disabled=true;if(n===k.a)y.classList.add('ok');else if(n===j)y.classList.add('bad')});
 $('#f').innerHTML=`<div class="fb"><b>${r?'ശരി!':'ശരിയല്ല.'}</b> ${k.e}</div><div class="row"><button class="btn" id="nx">${i<19?'അടുത്ത ചോദ്യം':'ഫലം കാണുക'}</button></div>`;
 $('#nx').onclick=()=>{i++;show()};$('#nx').focus()})}
-function isQuizOpen(){return true;}
-function updateTimeNotice(){}
-function renderClosed(){}
-function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function normalizeStudent(data){
-  let st=Array.isArray(data)?data[0]:data;
-  if(st && st.data) st=Array.isArray(st.data)?st.data[0]:st.data;
-  if(st && st.student && !st.student_name) st=st.student;
-  if(!st || typeof st!=='object') return null;
-  const admission=st.admission_no ?? st.admission_number ?? st.admissionNo;
-  const name=st.student_name ?? st.name ?? st.full_name;
-  if(admission==null || !name) return null;
-  return {...st,admission_no:admission,student_name:name, class:st.class ?? st.class_name ?? st.standard, centre:st.centre ?? st.centre_name};
-}
-let lookupSeq=0, savingResult=false;
-$('#admissionNo').addEventListener('input',()=>{
-  clearTimeout(lookupTimer); const seq=++lookupSeq; verifiedStudent=null;
-  const val=$('#admissionNo').value.trim(), preview=$('#studentPreview');
-  preview.className='rule';
-  if(!val){preview.textContent='Enter your Admission Number.';return;}
-  if(!/^\d+$/.test(val)){preview.textContent='Admission Number must contain digits only.';return;}
-  preview.textContent='Searching student…';
-  lookupTimer=setTimeout(async()=>{
-    try {
-      const {data,error}=await supabase.rpc('verify_student',{p_admission_no:Number(val)});
-      if(seq!==lookupSeq || $('#admissionNo').value.trim()!==val)return;
-      if(error){preview.textContent='Student lookup failed: '+error.message;return;}
-      const st=normalizeStudent(data);
-      if(!st){preview.textContent='Student not found or verify_student returned unexpected data. Check the Admission Number and Supabase RPC.';return;}
-      verifiedStudent=st;
-      preview.innerHTML='<strong>Student:</strong> '+escapeHtml(st.student_name)+'<br><strong>Class:</strong> '+escapeHtml(st.class||'—')+'<br><strong>Centre:</strong> '+escapeHtml(st.centre||'—');
-    } catch(e) {
-      if(seq===lookupSeq && $('#admissionNo').value.trim()===val) preview.textContent='Connection error: '+(e.message||'Please check your internet connection and try again.');
-    }
-  },300);
-});
-$('#verifyStart').addEventListener('click',async()=>{
-  updateTimeNotice();
-  if(!isQuizOpen()){renderClosed();return;}
-  const val=$('#admissionNo').value.trim(), btn=$('#verifyStart'), preview=$('#studentPreview');
-  if(!val){preview.textContent='Please enter Admission Number.';return;}
-  if(!/^\d+$/.test(val)){preview.textContent='Admission Number must contain digits only.';return;}
-  btn.disabled=true; preview.textContent='Verifying student…';
-  try{
-    let st=verifiedStudent;
-    if(!st || String(st.admission_no)!==String(val)){
-      const result=await supabase.rpc('verify_student',{p_admission_no:Number(val)});
-      if(result.error)throw new Error(result.error.message);
-      st=normalizeStudent(result.data);
-    }
-    if(!st || st.admission_no==null)throw new Error('Admission Number not found, or verify_student returned no student record.');
-    verifiedStudent=st; submitted=false; savingResult=false;
-    $('#studentCard').innerHTML='<h2>Verified Student</h2><p><strong>'+escapeHtml(st.student_name)+'</strong></p><p>Admission No: '+escapeHtml(st.admission_no)+' · Class: '+escapeHtml(st.class||'—')+' · Centre: '+escapeHtml(st.centre||'—')+'</p><p class="mut">Quiz started. Your result will be saved automatically.</p>';
-    i=0;sc=0;an=[];K=build();show();
-  }catch(e){verifiedStudent=null;preview.textContent='Verification failed: '+(e.message||e);}
-  finally{btn.disabled=false;}
-});
-async function saveQuizResult(){
-  if(submitted || savingResult || !verifiedStudent)return;
-  savingResult=true;
-  const answers=K.map((k,n)=>({question_no:n+1,selected_answer:an[n]===undefined?null:String(k.o[an[n]]),correct_answer:String(k.o[k.a]),is_correct:an[n]===k.a}));
-  const note=document.createElement('div');note.className='rule';note.textContent='Saving your result…';$('#qb').appendChild(note);
-  try{
-    const {data,error}=await supabase.rpc('submit_quiz',{
-      p_admission_no:Number(verifiedStudent.admission_no),
-      p_subject:QUIZ_SUBJECT,
-      p_chapter:QUIZ_CHAPTER,
-      p_quiz_name:QUIZ_NAME,
-      p_score:sc,
-      p_total:20,
-      p_percentage:Number((sc/20*100).toFixed(2)),
-      p_answers:answers
-    });
-    if(error)throw new Error(error.message);
-    if(data && data.error)throw new Error(data.error);
-    submitted=true;
-    note.textContent='Result saved successfully.';
-  }catch(e){
-    note.textContent='Result could not be saved: '+(e.message||e)+'. Please contact your teacher; do not retake unless instructed.';
-    const retry=document.createElement('button');retry.className='btn';retry.textContent='Retry saving result';retry.onclick=()=>{savingResult=false;note.remove();saveQuizResult();};
-    const row=document.createElement('div');row.className='row';row.appendChild(retry);$('#qb').appendChild(row);
-  }finally{savingResult=false;}
-}
-const originalShow=show;
-show=function(){
-  if(!verifiedStudent){$('#qb').innerHTML='<p>Verify your Admission Number to begin the quiz.</p>';return;}
-  if(!isQuizOpen()){renderClosed();return;}
-  originalShow();
-  if(i>=20)saveQuizResult();
-};
-updateTimeNotice();
-
+(async()=>{await sync();gate()})();
 </script></body></html>
